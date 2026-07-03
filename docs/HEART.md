@@ -1,3 +1,8 @@
+> *This document is intentionally unfinished.*
+>
+> *It grows as Weave AI grows.*
+
+
 # HEART
 
 Every creation begins as a dream.
