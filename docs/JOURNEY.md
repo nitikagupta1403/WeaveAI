@@ -1,6 +1,6 @@
 # The Journey
 
-![Currie](../assets/images/Currie.jpg)
+![Currie](../assets/images/currie-first-day.jpeg)
 
 > *"Every meaningful journey begins with curiosity. Mine began with a pair of mesmerizing eyes."*
 
