@@ -1,0 +1,14 @@
+### Research Question
+
+Should Weave AI use dynamic cross-attention where different decoder stages
+attend to different modalities?
+
+Example:
+
+- Garment structure → Sketch + Body
+- Fabric drape → Fabric + Body
+- Texture and appearance → Fabric
+- Personal styling → Preferences + Occasion
+
+Instead of treating all modalities equally, the decoder may learn
+which modality is most informative for each generation step.
