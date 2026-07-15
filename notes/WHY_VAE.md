@@ -210,3 +210,95 @@ A garment can have multiple realistic variations due to
 - viewing angle
 
 Representing designs as latent probability distributions enables controlled sampling of these variations while remaining trainable using gradient-based optimization.nto a differentiable computation that automatic differentiation can optimize.
+
+
+# RQ3 — Why isn't reconstruction loss enough?
+
+## Problem
+
+Suppose the VAE is trained using only reconstruction loss.
+
+```python
+total_loss = reconstruction_loss
+```
+
+The encoder and decoder now have only one objective:
+
+> Reconstruct the input image as accurately as possible.
+
+Nothing in the objective encourages the latent space to have any particular structure.
+
+---
+
+## What happens?
+
+The encoder is free to place images anywhere in the latent space as long as the decoder can reconstruct them.
+
+For example,
+
+```
+Image 1 → z = [1000, -200]
+
+Image 2 → z = [-750, 430]
+
+Image 3 → z = [5200, 80]
+```
+
+These latent vectors may appear completely arbitrary.
+
+The optimizer does not care because reconstruction remains accurate.
+
+---
+
+## Why is this a problem?
+
+During inference we generate new samples by drawing
+
+```python
+z = tf.random.normal(...)
+```
+
+which assumes that latent vectors follow a standard normal distribution.
+
+However, if training never encouraged such a distribution, the sampled latent vectors may lie in regions the decoder has never seen before.
+
+As a result,
+
+- reconstruction during training may be excellent,
+- but generation during inference becomes unreliable.
+
+---
+
+## The Insight
+
+Reconstruction loss teaches the decoder **how to reconstruct**.
+
+It does **not** teach the encoder **how to organize the latent space**.
+
+A second objective is therefore required to shape the latent representations into a distribution that can be sampled reliably.
+
+This motivation naturally leads to the KL divergence term.
+
+---
+
+## Code
+
+Without KL
+
+```python
+total_loss = reconstruction_loss
+```
+
+With KL
+
+```python
+total_loss = reconstruction_loss + kl_loss
+```
+
+---
+
+## One-line Takeaway
+
+Reconstruction loss learns **how to reconstruct images**.
+
+KL divergence learns **how to organize the latent space for generation**.
