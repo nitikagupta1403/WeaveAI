@@ -18,7 +18,8 @@ Instead of predicting a single latent point, predict the parameters of a Gaussia
 mu = Dense(latent_dim)(x)
 logvar = Dense(latent_dim)(x)
 
-# RQ2 — Why can't we directly sample from the latent distribution?
+'''
+## # RQ2 — Why can't we directly sample from the latent distribution?
 
 ## The Problem
 
@@ -28,13 +29,12 @@ A natural implementation would be:
 
 ```python
 z = sample(mu, sigma)
-```
+'''
 
 However, sampling behaves like a black box. The sampled value is produced, but the computation connecting it to μ and σ is hidden.
 
 As a result, GradientTape cannot determine how changes in μ or σ affect the sampled latent vector.
 
----
 
 ## The Insight
 
