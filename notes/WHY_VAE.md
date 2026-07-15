@@ -18,14 +18,11 @@ Instead of predicting a single latent point, predict the parameters of a Gaussia
 mu = Dense(latent_dim)(x)
 logvar = Dense(latent_dim)(x)
 
-# RQ2: Why can't we directly sample from a Gaussian?
+# RQ2 — Why can't we directly sample from the latent distribution?
 
-## Problem
+## The Problem
 
-After introducing a probabilistic latent space, each input image is no longer represented by a single latent vector. Instead, the encoder predicts the parameters of a Gaussian distribution:
-
-- Mean (μ)
-- Variance (σ²)
+The encoder predicts a Gaussian distribution using its mean (μ) and variance (σ²).
 
 A natural implementation would be:
 
@@ -33,109 +30,43 @@ A natural implementation would be:
 z = sample(mu, sigma)
 ```
 
-However, this creates a problem during training.
+However, sampling behaves like a black box. The sampled value is produced, but the computation connecting it to μ and σ is hidden.
+
+As a result, GradientTape cannot determine how changes in μ or σ affect the sampled latent vector.
 
 ---
 
-## Why does direct sampling fail?
-
-The Gaussian probability density function is differentiable with respect to μ and σ.
-
-The **sampling operation is not**.
-
-When we write
-
-```python
-z = sample(mu, sigma)
-```
-
-the computation of `z` is hidden inside a sampling function.
-
-From the perspective of automatic differentiation, the computation graph becomes
-
-```
-μ, σ
-  │
-  ▼
- sample()
-  │
-  ▼
-  z
-```
-
-GradientTape cannot trace how the sampled value `z` depends on `μ` and `σ`.
-
-Without this computational path, gradients cannot flow back to the encoder.
-
----
-
-## The Reparameterization Trick
+## The Insight
 
 Instead of sampling `z` directly, separate the randomness from the learnable parameters.
 
-First sample from a fixed standard normal distribution
-
 ```python
-epsilon = tf.random.normal(tf.shape(mu))
-```
+epsilon = N(0,1)
 
-Then construct the latent vector as
-
-```python
 z = mu + sigma * epsilon
 ```
 
-Now the computation graph becomes
-
-```
-μ ───────────────┐
-                 │
-σ ──► × ε ───────┤
-                 ▼
-                 +
-                 ▼
-                 z
-```
-
-The dependency of `z` on `μ` and `σ` is now explicit.
+The randomness now comes entirely from ε, while μ and σ remain inside an explicit mathematical expression.
 
 ---
 
-## Why does this work?
+## Why it Works
 
-During each forward pass:
-
-- `μ` is produced by the encoder.
-- `σ` is produced by the encoder.
-- `ε` is sampled once and remains fixed for that forward pass.
+During one forward pass, ε is fixed.
 
 GradientTape therefore differentiates
 
 ```
-z = μ + σ × (constant)
+z = μ + σ × constant
 ```
 
-which gives
+which allows gradients to flow back through μ and σ.
 
-```
-∂z/∂μ = 1
-
-∂z/∂σ = ε
-```
-
-Since `μ` and `σ` are part of the computational graph, gradients can flow normally back through the encoder.
+The model remains stochastic while still being trainable using backpropagation.
 
 ---
 
-## Key Insight
-
-The reparameterization trick does **not** remove randomness.
-
-Instead, it **moves the randomness outside the learnable parameters**, exposing an explicit differentiable computation that automatic differentiation can optimize.
-
----
-
-## Implementation
+## Code
 
 ```python
 std = tf.exp(0.5 * logvar)
@@ -147,26 +78,8 @@ z = mu + std * epsilon
 
 ---
 
-## Relation to Weave AI
+## One-line Takeaway
 
-Future garment generation should not produce identical outputs for the same design.
+The reparameterization trick does not remove randomness.
 
-Different fabric drape, wrinkles, lighting conditions, and body poses should all be plausible variations of the same garment.
-
-Representing each design as a latent probability distribution allows controlled sampling of these variations while still enabling end-to-end training through backpropagation.
-
----
-
-## Personal Understanding
-
-Initially, I thought the Gaussian itself was the issue.
-
-The actual challenge is that **sampling is a black-box operation**.
-
-By rewriting the sampled latent vector as
-
-```
-z = μ + σ ε
-```
-
-the dependency of `z` on the encoder outputs becomes explicit, allowing GradientTape to trace gradients back through the network.
+It rewrites the sampling process into a differentiable computation that automatic differentiation can optimize.
