@@ -302,3 +302,106 @@ total_loss = reconstruction_loss + kl_loss
 Reconstruction loss learns **how to reconstruct images**.
 
 KL divergence learns **how to organize the latent space for generation**.
+
+
+# RQ4 — Why is KL Divergence the right objective for the latent space?
+
+## Problem
+
+Reconstruction loss teaches the decoder how to reconstruct images.
+
+However, it does not encourage the encoder's latent distribution to match the desired prior.
+
+We therefore need an objective that compares two probability distributions.
+
+---
+
+## Building the idea
+
+A probability distribution can be viewed in terms of the uncertainty of the events it generates.
+
+### Surprise
+
+For one event,
+
+```
+Surprise = -log(P)
+```
+
+Rare events are more surprising than common events.
+
+---
+
+### Entropy
+
+Entropy is the expected surprise of the true distribution.
+
+```
+H(P)
+=
+-\sum P(x)\log P(x)
+```
+
+---
+
+### Cross Entropy
+
+Suppose Nature generates data according to P, but our model predicts Q.
+
+The model experiences surprise according to its own probabilities.
+
+```
+H(P,Q)
+=
+-\sum P(x)\log Q(x)
+```
+
+---
+
+### KL Divergence
+
+Subtracting entropy from cross entropy gives
+
+```
+D_KL(P||Q)
+
+=
+H(P,Q)-H(P)
+
+=
+\sum P(x)\log\frac{P(x)}{Q(x)}
+```
+
+KL divergence therefore measures the **extra surprise** introduced by using the model distribution instead of the true distribution.
+
+---
+
+## Applying this to the VAE
+
+Encoder:
+
+```
+q(z|x)
+```
+
+Desired prior:
+
+```
+p(z)=N(0,I)
+```
+
+The KL loss minimizes
+
+```
+D_KL(q(z|x)||p(z))
+```
+
+forcing the encoder's latent distribution to resemble the standard Gaussian.
+
+---
+
+## One-line Takeaway
+
+KL divergence does not simply compare two distributions.
+
+It measures the extra information (or surprise) incurred when the encoder's latent distribution differs from the desired prior.
