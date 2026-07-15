@@ -1,58 +1,157 @@
 # WHY VAE?
 
+> Reverse engineering the Variational Autoencoder by understanding the engineering problems it was designed to solve.
+
 ---
 
-## RQ1: Why represent an image as a distribution instead of a single latent point?
+# RQ1 — Why represent an image as a distribution instead of a single latent point?
 
-### Problem
+## Problem
 
-A deterministic autoencoder maps every image to one fixed latent vector.
+A traditional autoencoder maps every input image to a **single deterministic latent vector**.
 
-This makes the latent space rigid. Similar images do not naturally occupy regions of the latent space, making interpolation and generation unreliable.
+```
+Image
+   │
+Encoder
+   │
+   ▼
+Latent Point (z)
+```
 
-### Idea
+This representation is rigid.
 
-Instead of predicting a single latent point, predict the parameters of a Gaussian distribution.
+Even though similar images may have similar meanings, the latent space is not explicitly structured. As a result:
+
+- Similar images are not guaranteed to occupy nearby regions.
+- Sampling arbitrary latent vectors often produces meaningless outputs.
+- The model cannot naturally represent uncertainty or multiple plausible latent representations.
+
+---
+
+## The Idea
+
+Instead of predicting one latent point, let the encoder predict the parameters of a Gaussian distribution.
 
 ```python
 mu = Dense(latent_dim)(x)
 logvar = Dense(latent_dim)(x)
+```
 
-'''
-## # RQ2 — Why can't we directly sample from the latent distribution?
+Each image is now represented by
 
-## The Problem
+- **μ** — the center (mean) of the latent distribution.
+- **logσ²** — the variance of the latent distribution.
 
-The encoder predicts a Gaussian distribution using its mean (μ) and variance (σ²).
+Together they define
 
-A natural implementation would be:
+\[
+q(z|x)=\mathcal N(\mu,\sigma^2)
+\]
+
+rather than a single point.
+
+---
+
+## Why this helps
+
+Representing images as distributions makes the latent space smoother and more meaningful.
+
+Instead of encoding
+
+```
+Image → Point
+```
+
+the encoder learns
+
+```
+Image → Region
+```
+
+This allows:
+
+- smooth interpolation
+- meaningful sampling
+- multiple plausible latent representations
+- improved generative capability
+
+---
+
+## Code
+
+```python
+mu = Dense(latent_dim)(x)
+logvar = Dense(latent_dim)(x)
+```
+
+---
+
+## One-line Takeaway
+
+A VAE represents every image as a **probability distribution** instead of a **single deterministic point**.
+
+---
+
+# RQ2 — Why can't we directly sample from the latent distribution?
+
+## Problem
+
+After predicting a Gaussian distribution, the most natural implementation seems to be
 
 ```python
 z = sample(mu, sigma)
-'''
+```
 
-However, sampling behaves like a black box. The sampled value is produced, but the computation connecting it to μ and σ is hidden.
+However, this introduces a training problem.
 
-As a result, GradientTape cannot determine how changes in μ or σ affect the sampled latent vector.
+Although the Gaussian probability distribution is differentiable, the **sampling operation itself behaves like a black box**.
 
+The sampled latent vector is produced, but the computation connecting it to **μ** and **σ** is hidden.
+
+```
+μ, σ
+   │
+   ▼
+ sample()
+   │
+   ▼
+   z
+```
+
+GradientTape cannot trace how the sampled value depends on the encoder outputs.
+
+Without this computational path, gradients cannot flow back to update the encoder.
+
+---
 
 ## The Insight
 
-Instead of sampling `z` directly, separate the randomness from the learnable parameters.
+Separate the randomness from the learnable parameters.
+
+Instead of sampling directly,
+
+sample only from a fixed standard normal distribution.
 
 ```python
-epsilon = N(0,1)
+epsilon = tf.random.normal(tf.shape(mu))
 
 z = mu + sigma * epsilon
 ```
 
-The randomness now comes entirely from ε, while μ and σ remain inside an explicit mathematical expression.
+The randomness now comes entirely from **ε**.
+
+The learnable parameters **μ** and **σ** remain inside an explicit mathematical expression.
 
 ---
 
 ## Why it Works
 
-During one forward pass, ε is fixed.
+During one forward pass,
+
+- μ is fixed.
+- σ is fixed.
+- ε is sampled once and then remains constant for that forward pass.
 
 GradientTape therefore differentiates
 
@@ -60,9 +159,21 @@ GradientTape therefore differentiates
 z = μ + σ × constant
 ```
 
-which allows gradients to flow back through μ and σ.
+instead of differentiating an opaque sampling operation.
 
-The model remains stochastic while still being trainable using backpropagation.
+This creates a complete computational graph.
+
+```
+μ ───────────────┐
+                 │
+σ ──► × ε ───────┤
+                 ▼
+                 +
+                 ▼
+                 z
+```
+
+Gradients now flow naturally back through μ and σ while preserving stochastic sampling.
 
 ---
 
@@ -80,6 +191,22 @@ z = mu + std * epsilon
 
 ## One-line Takeaway
 
-The reparameterization trick does not remove randomness.
+The reparameterization trick does **not remove randomness**.
 
-It rewrites the sampling process into a differentiable computation that automatic differentiation can optimize.
+It rewrites sampling into a differentiable computation that backpropagation can optimize.
+
+---
+
+## Relation to Weave AI
+
+Future garment generation should not produce one fixed output for a given design.
+
+A garment can have multiple realistic variations due to
+
+- fabric drape
+- body pose
+- wrinkles
+- lighting
+- viewing angle
+
+Representing designs as latent probability distributions enables controlled sampling of these variations while remaining trainable using gradient-based optimization.nto a differentiable computation that automatic differentiation can optimize.
