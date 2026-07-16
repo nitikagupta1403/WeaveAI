@@ -1,6 +1,5 @@
 # WHY VAE?
 
-# WHY VAE
 
 This repository is not a summary of the VAE paper.
 
