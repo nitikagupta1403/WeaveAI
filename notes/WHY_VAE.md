@@ -1,5 +1,81 @@
 # WHY VAE?
 
+# WHY VAE
+
+This repository is not a summary of the VAE paper.
+
+It is a reconstruction of the reasoning that leads to the Variational Autoencoder.
+
+Instead of asking *"What is the equation?"*, every section asks *"Why does this equation appear?"*
+
+---
+
+# The Journey
+
+Want to maximize
+
+log P(x)
+
+        │
+        ▼
+
+Need to integrate over every latent vector
+
+        │
+        ▼
+
+Integral is intractable
+
+        │
+        ▼
+
+Need posterior P(z|x)
+
+        │
+        ▼
+
+Posterior also depends on P(x)
+
+        │
+        ▼
+
+Approximate posterior using q(z|x)
+
+        │
+        ▼
+
+Need to measure approximation quality
+
+        │
+        ▼
+
+KL Divergence
+
+        │
+        ▼
+
+Bayes' theorem
+
+        │
+        ▼
+
+ELBO
+
+        │
+        ▼
+
+Negative ELBO becomes the VAE loss
+
+
+
+## Research Questions
+
+- RQ1 — Why represent images as distributions?
+- RQ2 — Why reparameterization?
+- RQ3 — Why KL regularization?
+- RQ4 — Deriving the Gaussian KL.
+- RQ5 — Why ELBO?
+
 > Reverse engineering the Variational Autoencoder by understanding the engineering problems it was designed to solve.
 
 ---
