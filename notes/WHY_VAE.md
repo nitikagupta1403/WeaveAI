@@ -406,7 +406,6 @@ KL divergence does not simply compare two distributions.
 
 It measures the extra information (or surprise) incurred when the encoder's latent distribution differs from the desired prior.
 
-
 # RQ5 — Why do we optimize the ELBO instead of directly maximizing log P(x)?
 
 ---
