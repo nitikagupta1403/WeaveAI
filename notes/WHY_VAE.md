@@ -405,3 +405,201 @@ forcing the encoder's latent distribution to resemble the standard Gaussian.
 KL divergence does not simply compare two distributions.
 
 It measures the extra information (or surprise) incurred when the encoder's latent distribution differs from the desired prior.
+
+
+# RQ5 — Why do we optimize the ELBO instead of directly maximizing log P(x)?
+
+---
+
+## The Goal
+
+A generative model should assign a high probability to the observed data.
+
+Therefore, the ideal objective is
+
+\[
+\log p(x)
+\]
+
+where \(x\) is an observed image.
+
+---
+
+## The Problem
+
+A latent variable model assumes every image is generated from an unknown latent variable \(z\).
+
+The probability of an image is therefore
+
+\[
+p(x)
+=
+\int p(x|z)p(z)\,dz.
+\]
+
+This requires integrating over **every possible latent vector**.
+
+For high-dimensional continuous latent spaces, this integral is computationally intractable.
+
+Therefore, we cannot directly optimize
+
+\[
+\log p(x).
+\]
+
+---
+
+## Can we infer only the relevant latent vectors?
+
+Instead of considering every latent vector, we would prefer to know
+
+\[
+p(z|x),
+\]
+
+the posterior distribution over latent variables given the image.
+
+Using Bayes' theorem,
+
+\[
+p(z|x)
+=
+\frac{p(x|z)p(z)}
+{p(x)}.
+\]
+
+Unfortunately,
+
+\[
+p(x)
+=
+\int p(x|z)p(z)\,dz,
+\]
+
+which is exactly the intractable quantity we were trying to avoid.
+
+Therefore the true posterior is also intractable.
+
+---
+
+## The Idea
+
+Instead of computing the true posterior,
+
+approximate it with a neural network
+
+\[
+q_\phi(z|x).
+\]
+
+The encoder predicts the parameters of a Gaussian distribution
+
+\[
+q_\phi(z|x)
+=
+\mathcal N(\mu,\sigma^2).
+\]
+
+Notice that we are **not** assuming the true posterior is Gaussian.
+
+We only assume that our approximation belongs to the Gaussian family.
+
+---
+
+## Measuring the Approximation
+
+To compare
+
+\[
+q_\phi(z|x)
+\]
+
+with
+
+\[
+p(z|x),
+\]
+
+we use
+
+\[
+D_{KL}(q_\phi(z|x)\;||\;p(z|x)).
+\]
+
+Applying Bayes' theorem gives
+
+\[
+\log p(x)
+=
+\mathcal L(x)
++
+D_{KL}(q_\phi(z|x)\;||\;p(z|x)).
+\]
+
+where
+
+\[
+\mathcal L(x)
+=
+E_{q_\phi}
+[\log p(x|z)]
+-
+D_{KL}(q_\phi(z|x)\;||\;p(z)).
+\]
+
+This quantity is called the **Evidence Lower Bound (ELBO).**
+
+---
+
+## Why is it called a Lower Bound?
+
+KL divergence is always non-negative.
+
+Therefore
+
+\[
+D_{KL}
+\ge
+0.
+\]
+
+Hence
+
+\[
+\boxed{
+\mathcal L(x)
+\le
+\log p(x)
+}
+\]
+
+The ELBO is therefore a lower bound on the true data likelihood.
+
+---
+
+## Final Training Objective
+
+Machine learning libraries minimize losses.
+
+Therefore we minimize the negative ELBO,
+
+which becomes
+
+```python
+total_loss =
+reconstruction_loss +
+kl_loss
+```
+
+where
+
+- Reconstruction loss maximizes the likelihood of reconstructing the image.
+- KL loss keeps the encoder's approximate posterior close to the chosen Gaussian prior.
+
+---
+
+## One-line Takeaway
+
+The ELBO was not introduced as an arbitrary objective.
+
+It naturally emerges when approximating an intractable posterior using variational inference. Maximizing the ELBO simultaneously improves reconstruction quality while learning a structured, sampleable latent space.
