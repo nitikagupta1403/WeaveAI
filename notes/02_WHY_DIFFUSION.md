@@ -1,22 +1,30 @@
-# RQ9 — Why does DDPM predict Gaussian noise instead of the clean image?
+# RQ9 — Why Does DDPM Predict Gaussian Noise Instead of the Clean Image?
 
 ## Motivation
 
-In the previous chapter, we established that a neural network is required because the clean image \(x_0\) is unknown during inference.
+In the previous chapter, we discovered why a neural network is necessary.
 
-A natural question now arises.
+Although the reverse diffusion posterior
 
-If we are already using a neural network, what exactly should it predict?
+\[
+q(x_{t-1}\mid x_t,x_0)
+\]
 
-Several possibilities seem reasonable.
+is mathematically known, it cannot be evaluated during inference because the clean image \(x_0\) is unknown.
 
-It could predict
+This naturally leads to the next question.
 
-- the previous image \(x_{t-1}\),
+> **If we already need a neural network, what should it learn?**
+
+At first glance, several choices seem reasonable.
+
+The network could predict
+
+- the previous noisy image \(x_{t-1}\),
 - the original clean image \(x_0\),
 - or the Gaussian noise \(\epsilon\).
 
-Surprisingly, DDPM chooses to predict the added Gaussian noise.
+Surprisingly, DDPM chooses the third option.
 
 Why?
 
@@ -24,69 +32,101 @@ Why?
 
 # Candidate 1 — Predict the Previous Image
 
-One possible approach is to learn
+One possibility is to train the network to predict
 
 \[
 f_\theta(x_t,t)=x_{t-1}.
 \]
 
-Although intuitive, the target changes at every timestep because the appearance of \(x_{t-1}\) depends on how much noise remains in the image.
+This seems intuitive because reverse diffusion removes noise one step at a time.
 
-The learning problem therefore changes continuously throughout the diffusion process.
+However, the target changes at every timestep.
+
+At early timesteps, \(x_{t-1}\) is almost identical to the clean image.
+
+At later timesteps, it is almost pure noise.
+
+The network therefore has to solve a different prediction problem at every timestep.
 
 ---
 
 # Candidate 2 — Predict the Clean Image
 
-Another possibility is to directly predict
+Another possibility is to predict
 
 \[
 f_\theta(x_t,t)=x_0.
 \]
 
-This also appears reasonable because the clean image is ultimately what we want to generate.
+This is attractive because the final goal of diffusion is to recover the clean image.
 
 However, the distribution of clean images is extremely complex.
 
-It contains countless objects, textures, lighting conditions, shapes, and semantic structures.
+Natural images contain
 
-Learning this distribution directly is a challenging task.
+- people,
+- animals,
+- buildings,
+- landscapes,
+- medical images,
+- textures,
+- fabrics,
+
+and infinitely many other visual patterns.
+
+Learning this entire distribution directly is a difficult task.
 
 ---
 
 # Candidate 3 — Predict the Gaussian Noise
 
-Instead, DDPM predicts
+Instead, DDPM predicts the noise
 
 \[
 \epsilon_\theta(x_t,t)=\hat{\epsilon}.
 \]
 
-The key observation is that the added noise is always sampled from
+At first, this choice seems strange.
+
+After all, we ultimately care about generating images—not noise.
+
+The key insight is that the added noise is always sampled from
 
 \[
 \epsilon \sim \mathcal N(0,I).
 \]
 
-Unlike clean images, the target distribution never changes.
+Unlike images, this distribution never changes.
 
-Regardless of whether the original image contains
+Whether the original image is
 
 - a cat,
 - a dog,
-- a human face,
-- a medical scan,
+- a flower,
+- an MRI scan,
 - or a dress,
 
 the added noise is always Gaussian.
 
-The network therefore learns a much simpler and more consistent prediction task.
+The learning target therefore remains simple and consistent throughout training.
 
 ---
 
-# Why Is This Easier?
+# Comparing the Three Choices
 
-The forward diffusion process is
+| Prediction Target | Target Distribution | Learning Difficulty |
+|-------------------|---------------------|---------------------|
+| \(x_{t-1}\) | Changes at every timestep | High |
+| \(x_0\) | Complex natural image distribution | High |
+| \(\epsilon\) | Standard Gaussian \(\mathcal N(0,I)\) | Lower |
+
+From a learning perspective, Gaussian noise is the simplest target.
+
+---
+
+# Why This Works
+
+Recall the forward diffusion process
 
 \[
 x_t
@@ -96,28 +136,20 @@ x_t
 \sqrt{1-\bar{\alpha}_t}\epsilon.
 \]
 
-The noisy image is simply a combination of
+The noisy image is simply a mixture of
 
-- the underlying signal,
+- the clean image,
 - and Gaussian noise.
 
-Instead of learning the enormous distribution of natural images, the neural network learns to identify the particular Gaussian noise sample that produced the observed noisy image.
-
-This is a considerably simpler learning problem.
-
----
-
-# Recovering the Clean Image
-
-Predicting the noise does not mean we lose the clean image.
-
-Once the network predicts
+If the network can estimate the noise,
 
 \[
 \hat{\epsilon},
 \]
 
-the clean image can be recovered directly by rearranging the forward diffusion equation.
+then the clean image can be recovered using algebra alone.
+
+Rearranging the forward diffusion equation gives
 
 \[
 \boxed{
@@ -132,27 +164,54 @@ x_t
 }
 \]
 
-Thus, predicting the noise automatically provides an estimate of the clean image.
+Thus, predicting the noise is enough to recover an estimate of the original image.
+
+The neural network never needs to learn this equation—it follows directly from the mathematics of the forward diffusion process.
+
+---
+
+# The Bigger Picture
+
+An important lesson from DDPM is that machine learning is not only about designing powerful neural networks.
+
+It is also about choosing the right learning target.
+
+Although predicting
+
+- \(x_{t-1}\),
+- \(x_0\),
+- and \(\epsilon\)
+
+are mathematically related, they are not equally easy to learn.
+
+DDPM chooses the target that is simplest and most consistent across all timesteps.
+
+This design decision significantly simplifies optimization while preserving the ability to reconstruct the clean image.
 
 ---
 
 # Key Insight
 
-The choice of predicting Gaussian noise is **not mathematically required**.
+The neural network is **not** trained to generate images directly.
 
-It is a design choice.
+Instead, it learns to identify the Gaussian noise hidden inside a noisy image.
 
-Among several equivalent parameterizations of the reverse diffusion process, predicting Gaussian noise provides the simplest and most consistent learning target.
+Once that noise is known, the clean image follows directly from the diffusion equations.
+
+In other words,
+
+> **The neural network learns the unknown; mathematics computes everything else.**
 
 ---
 
 # Takeaways
 
-- A neural network could predict \(x_{t-1}\), \(x_0\), or the noise.
-- DDPM predicts Gaussian noise because it follows a simple, fixed distribution.
-- Natural images come from a highly complex data distribution.
-- Predicting Gaussian noise simplifies the learning problem.
-- Once the noise is predicted, the clean image can be recovered analytically using the forward diffusion equation.
+- A neural network could predict \(x_{t-1}\), \(x_0\), or the added noise.
+- Predicting \(x_{t-1}\) leads to a target that changes throughout the diffusion process.
+- Predicting \(x_0\) requires learning the highly complex distribution of natural images.
+- Predicting Gaussian noise provides a simple and consistent learning target.
+- Once the noise is predicted, the clean image can be recovered analytically.
+- DDPM's success comes not only from its neural network, but also from choosing the right prediction target.
 
 ---
 
