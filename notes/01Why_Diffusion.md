@@ -214,6 +214,16 @@ During image generation, we only observe the noisy image \(x_t\).
 
 This naturally motivates the next research question.
 
+## Takeaways
+
+- The reverse distribution q(x_{t-1}|x_t) is intractable.
+- Conditioning on x₀ makes the posterior analytically solvable.
+- Bayes' theorem converts the problem into known Gaussian distributions.
+- Completing the square reveals that the posterior is Gaussian.
+- The posterior mean and variance have closed-form expressions.
+- The posterior depends on x₀, which is unavailable during inference.
+- This limitation motivates learning an approximate reverse process using a neural network.
+
 ---
 
 # Next Research Question
