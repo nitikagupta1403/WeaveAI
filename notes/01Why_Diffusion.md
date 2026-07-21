@@ -228,4 +228,153 @@ This naturally motivates the next research question.
 
 # Next Research Question
 
-> **RQ8 — If we know the exact reverse diffusion process, why do we still need a neural network?**
+# RQ8 — If we know the exact reverse diffusion process, why do we still need a neural network?
+
+## Motivation
+
+In the previous chapter, we derived the exact reverse diffusion posterior
+
+\[
+q(x_{t-1}\mid x_t,x_0).
+\]
+
+This result is mathematically exact and follows directly from Bayes' theorem and the forward diffusion process.
+
+At first glance, it appears that the problem is solved.
+
+So why does DDPM introduce a neural network?
+
+---
+
+# The Hidden Problem
+
+Although the reverse posterior is known, it depends on the clean image \(x_0\):
+
+\[
+q(x_{t-1}\mid x_t,x_0).
+\]
+
+During **training**, this is not an issue because the original clean image is available.
+
+```text
+Training
+
+Known:
+✓ x₀
+✓ xₜ
+
+Can compute:
+✓ q(xₜ₋₁ | xₜ, x₀)
+```
+
+However, image generation begins from pure Gaussian noise.
+
+At inference time, we only observe
+
+\[
+x_t.
+\]
+
+The clean image is unknown.
+
+```text
+Inference
+
+Known:
+✗ x₀
+✓ xₜ
+```
+
+As a result, we cannot evaluate the exact posterior.
+
+---
+
+# The Role of the Neural Network
+
+The neural network is introduced to estimate the missing information.
+
+Instead of requiring the true clean image \(x_0\), we learn an approximation from the noisy image.
+
+The network receives
+
+\[
+(x_t,t)
+\]
+
+as input and predicts the Gaussian noise
+
+\[
+\hat{\epsilon}
+=
+\epsilon_\theta(x_t,t).
+\]
+
+Using this predicted noise, we reconstruct an estimate of the clean image
+
+\[
+\hat{x}_0
+=
+\frac{
+x_t
+-
+\sqrt{1-\bar{\alpha}_t}\,
+\hat{\epsilon}
+}
+{\sqrt{\bar{\alpha}_t}}.
+\]
+
+This estimated clean image is then used to approximate the reverse diffusion process.
+
+---
+
+# Why Predict Noise?
+
+The neural network could have been trained to predict
+
+- the previous image \(x_{t-1}\),
+- the clean image \(x_0\),
+- or the added noise \(\epsilon\).
+
+DDPM chooses to predict the noise because the noise always follows the same simple Gaussian distribution
+
+\[
+\epsilon \sim \mathcal N(0,I),
+\]
+
+regardless of the image content.
+
+In contrast, clean images come from a highly complex data distribution containing countless objects, textures, and structures.
+
+Learning to predict a simple, consistent Gaussian target is generally easier than directly modeling the entire image distribution.
+
+---
+
+# Key Insight
+
+The neural network does **not** replace the mathematics behind diffusion.
+
+Probability theory still provides
+
+- the forward diffusion process,
+- Bayes' theorem,
+- the reverse posterior,
+- and the equation relating \(x_t\), \(x_0\), and the noise.
+
+The neural network learns only the one quantity that mathematics cannot provide during inference—the unknown noise (or equivalently, the unknown clean image).
+
+---
+
+# Takeaways
+
+- The exact reverse posterior depends on the unknown clean image \(x_0\).
+- During inference, only the noisy image \(x_t\) is available.
+- Therefore, the exact reverse posterior cannot be evaluated directly.
+- A neural network is trained to estimate the missing information.
+- DDPM predicts Gaussian noise rather than the clean image because it is a simpler and more consistent learning target.
+- Once the noise is predicted, the clean image and the reverse diffusion step follow directly from the diffusion equations.
+
+---
+
+# Next Research Question
+
+> **RQ9 — Why is predicting Gaussian noise easier than predicting the clean image directly?**
