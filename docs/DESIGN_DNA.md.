@@ -1,0 +1,158 @@
+# Design DNA
+
+## Towards a Computational Representation of Creative Intent in Fashion
+
+## Introduction
+
+The previous chapters established that current AI systems excel at generating, visualising, and simulating fashion but provide limited support for reasoning about garments before they exist.
+
+The identified research gap suggests that this limitation arises not solely from deficiencies in image generation, but from the absence of a structured computational representation capable of preserving and reasoning about a designer's creative intent throughout the design process.
+
+This document introduces **Design DNA**, the central research hypothesis of the Weave AI project.
+
+Design DNA is proposed as a computational representation that captures the essential elements of fashion design and the relationships between them, enabling intelligent systems to reason about design rather than simply generate images.
+
+---
+
+# Vision
+
+A designer rarely thinks in isolated attributes such as colour or fabric alone.
+
+Instead, designers reason through interconnected concepts including:
+
+- silhouette
+- balance
+- proportion
+- structure
+- movement
+- craftsmanship
+- material behaviour
+- aesthetics
+- functionality
+- cultural influences
+- personal expression
+
+These concepts influence one another throughout the design process.
+
+The goal of Design DNA is to represent these relationships in a structured and computationally meaningful form.
+
+---
+
+# Design Philosophy
+
+Design DNA is founded on five guiding principles.
+
+## 1. Representation Before Generation
+
+A system should first understand a design before attempting to generate one.
+
+---
+
+## 2. Relationships Over Attributes
+
+Fashion is not a collection of independent features.
+
+The meaning of a garment emerges from the relationships between construction, materials, aesthetics, function, and human interpretation.
+
+---
+
+## 3. Explainable Design Reasoning
+
+Every recommendation should be explainable.
+
+The system should be able to communicate why a particular suggestion aligns with the designer's intent.
+
+---
+
+## 4. Human-Centred Creativity
+
+Design DNA is intended to augment human creativity rather than replace it.
+
+The designer remains the primary creative decision-maker.
+
+---
+
+## 5. Continuous Learning
+
+Creative identity evolves.
+
+The computational representation should therefore adapt as designers explore new styles, techniques, and ideas over time.
+
+---
+
+# Conceptual Structure
+
+Although the exact computational implementation remains an open research question, Design DNA is expected to represent information across several interconnected dimensions.
+
+Possible dimensions include:
+
+- Designer Intent
+- Garment Structure
+- Silhouette
+- Construction
+- Materials
+- Fabric Behaviour
+- Decorative Elements
+- Body Morphology
+- Personalisation
+- Functional Requirements
+- Cultural Context
+- Design Constraints
+
+These dimensions should not be interpreted as isolated variables but as interconnected components of a unified design representation.
+
+---
+
+# Research Objectives
+
+The Design DNA framework seeks to investigate whether a computational representation can:
+
+- preserve creative intent
+- support design reasoning
+- improve customer communication
+- assist personalisation
+- enable explainable AI
+- reduce uncertainty before manufacturing
+
+---
+
+# Open Research Questions
+
+Several fundamental questions remain unanswered.
+
+- What information should Design DNA contain?
+- Which relationships are most important?
+- How should creative intent be represented computationally?
+- Can Design DNA be learned from existing fashion data?
+- Can designers explicitly edit or refine their Design DNA?
+- How should multiple designers or collaborative teams be represented?
+- How should Design DNA evolve over time?
+
+These questions will guide future stages of the Weave AI research programme.
+
+---
+
+# Future Work
+
+The current document defines Design DNA as a research hypothesis rather than a completed framework.
+
+Subsequent research will investigate:
+
+- computational representations
+- knowledge graphs
+- multimodal embeddings
+- fashion ontologies
+- reasoning algorithms
+- evaluation methodologies
+
+to determine how Design DNA can be implemented in practice.
+
+---
+
+# Summary
+
+Design DNA represents the central hypothesis of the Weave AI research programme.
+
+Rather than viewing fashion as an image generation problem, Design DNA proposes that fashion design can be understood as a structured system of creative knowledge and relationships.
+
+By developing computational methods capable of representing this knowledge, Weave AI aims to enable intelligent systems that assist designers and customers during the earliest stages of garment creation while preserving individuality, craftsmanship, and human creativity.
