@@ -24,3 +24,27 @@ def detect_boundaries(binary):
         right.append((xs.max(), y))
 
     return np.array(left), np.array(right)
+
+def moving_average(values, window=7):
+
+    kernel = np.ones(window) / window
+
+    return np.convolve(values, kernel, mode="same")
+
+def ssa(binary):
+
+    left_pts, right_pts = detect_boundaries(binary)
+
+    left_x = moving_average(left_pts[:,0])
+
+    right_x = moving_average(right_pts[:,0])
+
+    left_boundary = np.column_stack(
+        (left_x, left_pts[:,1])
+    )
+
+    right_boundary = np.column_stack(
+        (right_x, right_pts[:,1])
+    )
+
+    return left_boundary, right_boundary
