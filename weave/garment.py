@@ -1,18 +1,46 @@
+from .geometry import Geometry
 from .silhouette import ssa
 from .signature import width_signature
 from .visualization import plot_width_signature
 
 
 class Garment:
+    """
+    Represents one garment sketch and all geometric
+    information derived from it.
+    """
 
     def __init__(self, binary):
 
+        # Original binary sketch
         self.binary = binary
 
+        # -----------------------------
+        # Global Geometry
+        # -----------------------------
+        self.geometry = Geometry()
+
+        # -----------------------------
+        # Silhouette
+        # -----------------------------
         self.left_boundary = None
         self.right_boundary = None
 
+        # -----------------------------
+        # Width Signature
+        # -----------------------------
         self.signature = None
+
+    # ===================================================
+    # Geometry
+    # ===================================================
+
+    def compute_geometry(self):
+        self.geometry.compute(self.binary)
+
+    # ===================================================
+    # Silhouette
+    # ===================================================
 
     def compute_ssa(self):
 
@@ -20,7 +48,9 @@ class Garment:
             self.binary
         )
 
-        return self
+    # ===================================================
+    # Width Signature
+    # ===================================================
 
     def compute_signature(self):
 
@@ -32,7 +62,9 @@ class Garment:
             self.right_boundary
         )
 
-        return self
+    # ===================================================
+    # Visualization
+    # ===================================================
 
     def plot_signature(self):
 
@@ -40,5 +72,3 @@ class Garment:
             self.compute_signature()
 
         plot_width_signature(self.signature)
-
-        return self
