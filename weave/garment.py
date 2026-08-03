@@ -4,11 +4,9 @@ from .visualization import plot_width_signature
 
 
 class Garment:
-    """
-    Represents one garment sketch and its derived features.
-    """
 
     def __init__(self, binary):
+
         self.binary = binary
 
         self.left_boundary = None
@@ -17,9 +15,15 @@ class Garment:
         self.signature = None
 
     def compute_ssa(self):
-        self.left_boundary, self.right_boundary = ssa(self.binary)
+
+        self.left_boundary, self.right_boundary = ssa(
+            self.binary
+        )
+
+        return self
 
     def compute_signature(self):
+
         if self.left_boundary is None:
             self.compute_ssa()
 
@@ -28,8 +32,13 @@ class Garment:
             self.right_boundary
         )
 
+        return self
+
     def plot_signature(self):
+
         if self.signature is None:
             self.compute_signature()
 
         plot_width_signature(self.signature)
+
+        return self
