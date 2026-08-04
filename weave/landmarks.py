@@ -29,7 +29,10 @@ class LandmarkDetector:
             self.signature
         ).analyze()
 
-        self.landmarks = {}
+        detector = LandmarkDetector(self.signature)
+
+        self.landmark_detector = detector
+        self.landmarks = detector.detect()
 
     # =====================================================
     # Generic geometric queries
