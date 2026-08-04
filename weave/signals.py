@@ -48,18 +48,18 @@ class SignalAnalyzer:
 
         return self.second_derivative
 
-        def local_maxima(self):
+    def local_maxima(self):
 
         maxima = []
-
+    
         for i in range(1, len(self.signal)-1):
-
+    
             if (
                 self.signal[i] >= self.signal[i-1]
                 and
                 self.signal[i] >= self.signal[i+1]
             ):
-
+    
                 maxima.append(i)
 
         return maxima
@@ -106,5 +106,16 @@ class SignalAnalyzer:
         )
     
         return self.signal
+
+    def analyze(self):
+        """
+        Complete analysis pipeline.
+        """
+
+        self.smooth()
+        self.compute_gradient()
+        self.compute_second_derivative()
+
+        return self
 
     
