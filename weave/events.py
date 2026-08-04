@@ -1,3 +1,14 @@
+"""
+GeometryEvent is the atomic unit of the
+WeaveAI geometric representation.
+
+Every higher-level concept
+(landmarks, regions, descriptors, grammar,
+garment semantics) must be expressible as
+combinations of GeometryEvents.
+"""
+
+
 import numpy as np
 
 @dataclass
