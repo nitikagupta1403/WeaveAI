@@ -30,3 +30,36 @@ class SignalAnalyzer:
       )
 
       return self.signal
+
+    def compute_gradient(self):
+
+        self.gradient = np.gradient(self.signal)
+    
+        return self.gradient
+
+        def compute_second_derivative(self):
+
+        if self.gradient is None:
+            self.compute_gradient()
+
+        self.second_derivative = np.gradient(
+            self.gradient
+        )
+
+        return self.second_derivative
+
+        def local_maxima(self):
+
+        maxima = []
+
+        for i in range(1, len(self.signal)-1):
+
+            if (
+                self.signal[i] >= self.signal[i-1]
+                and
+                self.signal[i] >= self.signal[i+1]
+            ):
+
+                maxima.append(i)
+
+        return maxima
