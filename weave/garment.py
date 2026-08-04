@@ -2,6 +2,7 @@ from .geometry import Geometry
 from .silhouette import ssa
 from .signature import width_signature
 from .visualization import plot_width_signature
+from .landmarks import LandmarkDetector
 
 
 class Garment:
@@ -30,6 +31,8 @@ class Garment:
         # Width Signature
         # -----------------------------
         self.signature = None
+
+        self.landmarks = None
 
     # ===================================================
     # Geometry
@@ -61,6 +64,15 @@ class Garment:
             self.left_boundary,
             self.right_boundary
         )
+
+        def compute_landmarks(self):
+
+            if self.signature is None:
+                self.compute_signature()
+        
+            detector = LandmarkDetector(self.signature)
+        
+            self.landmarks = detector.detect()
 
     # ===================================================
     # Visualization
