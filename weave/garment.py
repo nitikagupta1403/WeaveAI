@@ -138,9 +138,13 @@ class Garment:
 
             return
 
-    def plot_landmarks(
-        signal,
-        landmarks,
-        analyzer=None,
-        regions=None
-        ):
+    def plot_landmarks(self):
+
+        if self.landmarks is None:
+            self.compute_landmarks()
+    
+        plot_landmarks(
+            self.signature,
+            self.landmarks,
+            regions=self.regions
+        )
