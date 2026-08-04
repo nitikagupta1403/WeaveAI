@@ -160,7 +160,7 @@ class SignalAnalyzer:
         distance=DEFAULT_DISTANCE
     ):
 
-        sself.smooth(window)
+        self.smooth(window)
 
         self.compute_gradient()
         
