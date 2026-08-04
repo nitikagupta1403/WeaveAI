@@ -3,7 +3,7 @@ from .silhouette import ssa
 from .signature import width_signature
 
 from .landmarks import LandmarkDetector
-from .regions import RegionDetector
+from .segmentation import RegionDetector
 
 from .visualization import (
     plot_width_signature,
