@@ -65,14 +65,14 @@ class Garment:
             self.right_boundary
         )
 
-        def compute_landmarks(self):
+    def compute_landmarks(self):
 
-            if self.signature is None:
-                self.compute_signature()
-        
-            detector = LandmarkDetector(self.signature)
-        
-            self.landmarks = detector.detect()
+        if self.signature is None:
+            self.compute_signature()
+    
+        detector = LandmarkDetector(self.signature)
+    
+        self.landmarks = detector.detect()
 
     # ===================================================
     # Visualization
