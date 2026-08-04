@@ -63,3 +63,48 @@ class SignalAnalyzer:
                 maxima.append(i)
 
         return maxima
+
+    def local_minima(self):
+
+        minima = []
+    
+        for i in range(1, len(self.signal)-1):
+    
+            if (
+                self.signal[i] <= self.signal[i-1]
+                and
+                self.signal[i] <= self.signal[i+1]
+            ):
+    
+                minima.append(i)
+    
+        return minima
+
+    def zero_crossings(self):
+
+        if self.gradient is None:
+            self.compute_gradient()
+
+        zeros = []
+
+        for i in range(len(self.gradient)-1):
+
+            if self.gradient[i] * self.gradient[i+1] < 0:
+
+                zeros.append(i)
+
+        return zeros
+
+    def normalize(self):
+
+        s = self.signal
+    
+        self.signal = (
+            s - s.min()
+        ) / (
+            s.max() - s.min()
+        )
+    
+        return self.signal
+
+    
