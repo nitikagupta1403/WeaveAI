@@ -73,4 +73,4 @@ class LandmarkDetector:
     
         self.hem()
     
-    return self.landmarks
+        return self.landmarks
