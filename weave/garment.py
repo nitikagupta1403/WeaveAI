@@ -1,8 +1,13 @@
 from .geometry import Geometry
 from .silhouette import ssa
 from .signature import width_signature
-from .visualization import plot_width_signature
+
 from .landmarks import LandmarkDetector
+
+from .visualization import (
+    plot_width_signature,
+    plot_landmarks,
+)
 
 
 class Garment:
@@ -13,37 +18,44 @@ class Garment:
 
     def __init__(self, binary):
 
-        # Original binary sketch
+        # -----------------------------------------
+        # Original sketch
+        # -----------------------------------------
         self.binary = binary
 
-        # -----------------------------
-        # Global Geometry
-        # -----------------------------
+        # -----------------------------------------
+        # Global geometry
+        # -----------------------------------------
         self.geometry = Geometry()
 
-        # -----------------------------
+        # -----------------------------------------
         # Silhouette
-        # -----------------------------
+        # -----------------------------------------
         self.left_boundary = None
         self.right_boundary = None
 
-        # -----------------------------
-        # Width Signature
-        # -----------------------------
+        # -----------------------------------------
+        # Width signature
+        # -----------------------------------------
         self.signature = None
 
+        # -----------------------------------------
+        # Landmark analysis
+        # -----------------------------------------
+        self.landmark_detector = None
         self.landmarks = None
 
-    # ===================================================
+    # ==================================================
     # Geometry
-    # ===================================================
+    # ==================================================
 
     def compute_geometry(self):
+
         self.geometry.compute(self.binary)
 
-    # ===================================================
+    # ==================================================
     # Silhouette
-    # ===================================================
+    # ==================================================
 
     def compute_ssa(self):
 
@@ -51,9 +63,9 @@ class Garment:
             self.binary
         )
 
-    # ===================================================
+    # ==================================================
     # Width Signature
-    # ===================================================
+    # ==================================================
 
     def compute_signature(self):
 
@@ -65,28 +77,40 @@ class Garment:
             self.right_boundary
         )
 
+    # ==================================================
+    # Landmarks
+    # ==================================================
+
     def compute_landmarks(self):
 
         if self.signature is None:
             self.compute_signature()
-    
-        detector = LandmarkDetector(self.signature)
-    
-        self.landmarks = detector.detect()
 
-    # ===================================================
+        self.landmark_detector = LandmarkDetector(
+            self.signature
+        )
+
+        self.landmarks = (
+            self.landmark_detector.detect()
+        )
+
+    # ==================================================
     # Visualization
-    # ===================================================
-
+    # ==================================================
 
     def plot_signature(self):
 
         if self.signature is None:
             self.compute_signature()
-    
+
         if self.landmarks is None:
-            plot_width_signature(self.signature)
+
+            plot_width_signature(
+                self.signature
+            )
+
         else:
+
             plot_landmarks(
                 self.signature,
                 self.landmarks,
