@@ -1,4 +1,3 @@
-from .geometry import Geometry
 from .silhouette import ssa
 from .signature import width_signature
 from .visualization import plot_width_signature
