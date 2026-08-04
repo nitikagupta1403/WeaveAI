@@ -24,15 +24,12 @@ class LandmarkDetector:
     def __init__(self, signature):
 
         self.signature = np.asarray(signature)
-
+    
         self.signals = SignalAnalyzer(
             self.signature
         ).analyze()
-
-        detector = LandmarkDetector(self.signature)
-
-        self.landmark_detector = detector
-        self.landmarks = detector.detect()
+    
+        self.landmarks = {}
 
     # =====================================================
     # Generic geometric queries
