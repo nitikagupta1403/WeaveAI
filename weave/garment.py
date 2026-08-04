@@ -138,9 +138,9 @@ class Garment:
 
             return
 
-        def plot_landmarks(
-            signal,
-            landmarks,
-            analyzer=None,
-            regions=None
-        ):
+    def plot_landmarks(
+        signal,
+        landmarks,
+        analyzer=None,
+        regions=None
+    ):
