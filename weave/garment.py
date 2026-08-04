@@ -78,9 +78,17 @@ class Garment:
     # Visualization
     # ===================================================
 
+
     def plot_signature(self):
 
         if self.signature is None:
             self.compute_signature()
-
-        plot_width_signature(self.signature)
+    
+        if self.landmarks is None:
+            plot_width_signature(self.signature)
+        else:
+            plot_landmarks(
+                self.signature,
+                self.landmarks,
+                analyzer=self.landmark_detector.signals
+            )
