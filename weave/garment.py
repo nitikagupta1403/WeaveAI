@@ -19,36 +19,41 @@ class Garment:
 
     def __init__(self, binary):
 
-        # -----------------------------------------
-        # Original sketch
-        # -----------------------------------------
+        # ==================================================
+        # Original Sketch
+        # ==================================================
+
         self.binary = binary
 
-        # -----------------------------------------
-        # Global geometry
-        # -----------------------------------------
+        # ==================================================
+        # Global Geometry
+        # ==================================================
+
         self.geometry = Geometry()
 
-        # -----------------------------------------
+        # ==================================================
         # Silhouette
-        # -----------------------------------------
+        # ==================================================
+
         self.left_boundary = None
         self.right_boundary = None
 
-        # -----------------------------------------
-        # Width signature
-        # -----------------------------------------
+        # ==================================================
+        # Width Signature
+        # ==================================================
+
         self.signature = None
 
-        # -----------------------------------------
-        # Landmark analysis
-        # -----------------------------------------
+        # ==================================================
+        # Landmarks
+        # ==================================================
+
         self.landmark_detector = None
         self.landmarks = None
 
-        # -----------------------------------------
-        # Region Detector
-        # -----------------------------------------
+        # ==================================================
+        # Regions
+        # ==================================================
 
         self.region_detector = None
         self.regions = None
@@ -98,28 +103,23 @@ class Garment:
             self.signature
         )
 
-        self.landmarks = (
-            self.landmark_detector.detect()
-        )
+        self.landmarks = self.landmark_detector.detect()
 
     # ==================================================
     # Regions
     # ==================================================
 
-
     def compute_regions(self):
 
         if self.landmarks is None:
             self.compute_landmarks()
-    
-        detector = RegionDetector(
+
+        self.region_detector = RegionDetector(
             self.signature,
             self.landmarks
         )
-    
-        self.region_detector = detector
-    
-        self.regions = detector.detect()
+
+        self.regions = self.region_detector.detect()
 
     # ==================================================
     # Visualization
@@ -136,10 +136,11 @@ class Garment:
                 self.signature
             )
 
-        else:
+            return
 
-            plot_landmarks(
-                self.signature,
-                self.landmarks,
-                analyzer=self.landmark_detector.signals
-            )
+        plot_landmarks(
+            self.signature,
+            self.landmarks,
+            analyzer=self.landmark_detector.signals,
+            regions=self.regions
+        )
