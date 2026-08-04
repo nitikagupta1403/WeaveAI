@@ -36,27 +36,28 @@ class GeometryParser:
             )
 
         return sequence
+        
       def find_boundaries(self):
 
-        gradient = self.gradient
-    
-        boundaries = [0]
-    
-        for i in range(len(gradient)-1):
-    
-            if np.sign(
-                gradient[i]
-            ) != np.sign(
-                gradient[i+1]
-            ):
-    
-                boundaries.append(i)
-    
-        boundaries.append(
-            len(self.signal)-1
-        )
-    
-        return boundaries
+            gradient = self.gradient
+        
+            boundaries = [0]
+        
+            for i in range(len(gradient)-1):
+        
+                if np.sign(
+                    gradient[i]
+                ) != np.sign(
+                    gradient[i+1]
+                ):
+        
+                    boundaries.append(i)
+        
+            boundaries.append(
+                len(self.signal)-1
+            )
+        
+            return boundaries
 
       def build_event(
           self,
@@ -84,7 +85,7 @@ class GeometryParser:
       
               kind = "plateau"
       
-          return GeometryEvent(
+      return GeometryEvent(
       
               kind=kind,
       
