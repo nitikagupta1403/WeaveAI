@@ -1,21 +1,26 @@
 import numpy as np
 
+@dataclass
+class GeometryEvent:
 
-class EventDetector:
-    """
-    Detect primitive geometric events
-    from a 1D geometric signal.
-    """
+    kind: str
 
-    def __init__(self, signal):
+    start: int
+    end: int
 
-        self.signal = np.asarray(signal)
+    length: int
 
-        self.gradient = np.gradient(self.signal)
+    amplitude: float
 
-        self.curvature = np.gradient(self.gradient)
+    mean_gradient: float
 
-        self.events = []
+    max_gradient: float
+
+    curvature: float
+
+    scale: int
+
+    confidence: float = 1.0
 
     def detect(self):
 
