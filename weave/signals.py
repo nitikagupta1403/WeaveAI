@@ -179,3 +179,13 @@ class SignalAnalyzer:
         self.detect_zero_crossings()
         
         return self
+
+    def summary(self):
+
+        print("Signal Length :", len(self.signal))
+    
+        print("Local Maxima  :", len(self.local_maxima))
+    
+        print("Local Minima  :", len(self.local_minima))
+    
+        print("Zero Crossings:", len(self.zero_crossings))
