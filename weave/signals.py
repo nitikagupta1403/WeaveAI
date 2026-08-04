@@ -37,7 +37,7 @@ class SignalAnalyzer:
     
         return self.gradient
 
-        def compute_second_derivative(self):
+    def compute_second_derivative(self):
 
         if self.gradient is None:
             self.compute_gradient()
