@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.signal import find_peaks
 
 
 class SignalAnalyzer:
@@ -7,115 +8,170 @@ class SignalAnalyzer:
 
     Examples
     --------
-    Width signal
-    Curvature signal
-    Boundary angle signal
+    - Width signal
+    - Curvature signal
+    - Boundary angle signal
     """
 
     def __init__(self, signal):
 
+        # Original signal
         self.signal = np.asarray(signal, dtype=float)
 
+        # Processed signal
+        self.smoothed = None
+
+        # Derivatives
         self.gradient = None
-        self.second_derivative = None
+        self.curvature = None
+
+        # Features
+        self.local_maxima = None
+        self.local_minima = None
+        self.zero_crossings = None
+
+    # =====================================================
+    # Smoothing
+    # =====================================================
 
     def smooth(self, window=7):
 
-      kernel = np.ones(window) / window
+        kernel = np.ones(window) / window
 
-      self.signal = np.convolve(
-          self.signal,
-          kernel,
-          mode="same"
-      )
+        self.smoothed = np.convolve(
+            self.signal,
+            kernel,
+            mode="same"
+        )
 
-      return self.signal
+        return self.smoothed
+
+    # =====================================================
+    # First Derivative
+    # =====================================================
 
     def compute_gradient(self):
 
-        self.gradient = np.gradient(self.signal)
-    
+        if self.smoothed is None:
+            self.smooth()
+
+        self.gradient = np.gradient(self.smoothed)
+
         return self.gradient
 
-    def compute_second_derivative(self):
+    # =====================================================
+    # Second Derivative (Curvature)
+    # =====================================================
+
+    def compute_curvature(self):
 
         if self.gradient is None:
             self.compute_gradient()
 
-        self.second_derivative = np.gradient(
-            self.gradient
+        self.curvature = np.gradient(self.gradient)
+
+        return self.curvature
+
+    # =====================================================
+    # Peak Detection
+    # =====================================================
+
+    def detect_local_maxima(
+        self,
+        prominence=10,
+        distance=40
+    ):
+
+        if self.smoothed is None:
+            self.smooth()
+
+        peaks, _ = find_peaks(
+            self.smoothed,
+            prominence=prominence,
+            distance=distance
         )
 
-        return self.second_derivative
+        self.local_maxima = peaks
 
-    def local_maxima(self):
+        return peaks
 
-        maxima = []
-    
-        for i in range(1, len(self.signal)-1):
-    
-            if (
-                self.signal[i] >= self.signal[i-1]
-                and
-                self.signal[i] >= self.signal[i+1]
-            ):
-    
-                maxima.append(i)
+    def detect_local_minima(
+        self,
+        prominence=10,
+        distance=40
+    ):
 
-        return maxima
+        if self.smoothed is None:
+            self.smooth()
 
-    def local_minima(self):
+        valleys, _ = find_peaks(
+            -self.smoothed,
+            prominence=prominence,
+            distance=distance
+        )
 
-        minima = []
-    
-        for i in range(1, len(self.signal)-1):
-    
-            if (
-                self.signal[i] <= self.signal[i-1]
-                and
-                self.signal[i] <= self.signal[i+1]
-            ):
-    
-                minima.append(i)
-    
-        return minima
+        self.local_minima = valleys
 
-    def zero_crossings(self):
+        return valleys
+
+    # =====================================================
+    # Zero Crossings
+    # =====================================================
+
+    def detect_zero_crossings(self):
 
         if self.gradient is None:
             self.compute_gradient()
 
-        zeros = []
+        self.zero_crossings = np.where(
+            np.diff(np.sign(self.gradient))
+        )[0]
 
-        for i in range(len(self.gradient)-1):
+        return self.zero_crossings
 
-            if self.gradient[i] * self.gradient[i+1] < 0:
-
-                zeros.append(i)
-
-        return zeros
+    # =====================================================
+    # Normalize
+    # =====================================================
 
     def normalize(self):
 
         s = self.signal
-    
+
         self.signal = (
             s - s.min()
         ) / (
             s.max() - s.min()
         )
-    
+
         return self.signal
 
-    def analyze(self):
-        """
-        Complete analysis pipeline.
-        """
+    # =====================================================
+    # Complete Analysis
+    # =====================================================
 
-        self.smooth()
+    def analyze(
+        self,
+        window=7,
+        prominence=10,
+        distance=40
+    ):
+
+        self.smooth(window)
+
         self.compute_gradient()
-        self.compute_second_derivative()
+
+        self.compute_curvature()
+
+        self.detect_local_maxima(
+            prominence,
+            distance
+        )
+
+        self.detect_local_minima(
+            prominence,
+            distance
+        )
+
+        self.detect_zero_crossings()
 
         return self
-
-    
