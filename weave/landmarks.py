@@ -1,76 +1,111 @@
 from dataclasses import dataclass
+
 import numpy as np
+
+from .signals import SignalAnalyzer
+
 
 @dataclass
 class Landmark:
+
     name: str
+
     x: float
-    y: float
+    y: int
+
     width: float
-  
 
 
 class LandmarkDetector:
+    """
+    Detect semantic garment landmarks from
+    geometric signals.
+    """
 
     def __init__(self, signature):
 
         self.signature = np.asarray(signature)
 
-        self.dy = np.gradient(self.signature)
-
-        self.d2y = np.gradient(self.dy)
+        self.signals = SignalAnalyzer(
+            self.signature
+        ).analyze()
 
         self.landmarks = {}
 
-    def shoulder(self):
-  
-      n = len(self.signature)
-  
-      search = self.signature[:int(0.25*n)]
-  
-      y = np.argmax(search)
-  
-      self.landmarks["shoulder"] = Landmark(
-          "shoulder",
-          self.signature[y],
-          y,
-          self.signature[y]
-      )
-
-    def waist(self):
-
-        n = len(self.signature)
-    
-        start = int(0.20*n)
-    
-        end = int(0.50*n)
-    
-        y = start + np.argmin(self.signature[start:end])
-    
-        self.landmarks["waist"] = Landmark(
-            "waist",
-            self.signature[y],
-            y,
-            self.signature[y]
-        )
-
-    def hem(self):
-
-        y = np.argmax(self.signature)
-    
-        self.landmarks["hem"] = Landmark(
-            "hem",
-            self.signature[y],
-            y,
-            self.signature[y]
-        )
-
     def detect(self):
 
-        self.shoulder()
-    
-        self.waist()
-    
-        self.hem()
-    
+        width = self.signals.signal
+
+        shoulder = self.detect_shoulder(width)
+
+        waist = self.detect_waist(width)
+
+        hem = self.detect_hem(width)
+
+        self.landmarks = {
+
+            "shoulder": shoulder,
+
+            "waist": waist,
+
+            "hem": hem
+
+        }
+
         return self.landmarks
+
+    def detect_shoulder(self, width):
+
+        search = width[: len(width)//3]
+
+        y = np.argmax(search)
+
+        return Landmark(
+
+            name="shoulder",
+
+            x=width[y],
+
+            y=y,
+
+            width=width[y]
+
+        )
+
+    def detect_waist(self, width):
+
+        shoulder = self.detect_shoulder(width)
+
+        search = width[shoulder.y:]
+
+        y = shoulder.y + np.argmin(search)
+
+        return Landmark(
+
+            name="waist",
+
+            x=width[y],
+
+            y=y,
+
+            width=width[y]
+
+        )
+
+    def detect_hem(self, width):
+
+        search = width[len(width)//2:]
+
+        y = len(width)//2 + np.argmax(search)
+
+        return Landmark(
+
+            name="hem",
+
+            x=width[y],
+
+            y=y,
+
+            width=width[y]
+
+        )
