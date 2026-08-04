@@ -39,38 +39,38 @@ class LandmarkDetector:
 
     def waist(self):
 
-    n = len(self.signature)
-
-    start = int(0.20*n)
-
-    end = int(0.50*n)
-
-    y = start + np.argmin(self.signature[start:end])
-
-    self.landmarks["waist"] = Landmark(
-        "waist",
-        self.signature[y],
-        y,
-        self.signature[y]
-    )
+        n = len(self.signature)
+    
+        start = int(0.20*n)
+    
+        end = int(0.50*n)
+    
+        y = start + np.argmin(self.signature[start:end])
+    
+        self.landmarks["waist"] = Landmark(
+            "waist",
+            self.signature[y],
+            y,
+            self.signature[y]
+        )
 
     def hem(self):
 
-    y = np.argmax(self.signature)
-
-    self.landmarks["hem"] = Landmark(
-        "hem",
-        self.signature[y],
-        y,
-        self.signature[y]
-    )
+        y = np.argmax(self.signature)
+    
+        self.landmarks["hem"] = Landmark(
+            "hem",
+            self.signature[y],
+            y,
+            self.signature[y]
+        )
 
     def detect(self):
 
-    self.shoulder()
-
-    self.waist()
-
-    self.hem()
-
+        self.shoulder()
+    
+        self.waist()
+    
+        self.hem()
+    
     return self.landmarks
