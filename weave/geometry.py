@@ -1,92 +1,51 @@
-from .silhouette import ssa
-from .signature import width_signature
-from .visualization import plot_width_signature
-from .landmarks import LandmarkDetector
+import numpy as np
 
 
-class Garment:
+class Geometry:
+
     """
-    Represents one garment sketch and all geometric
-    information derived from it.
+    Stores global geometric properties of a garment.
     """
 
-    def __init__(self, binary):
+    def __init__(self):
 
-        # Original binary sketch
-        self.binary = binary
+        self.xmin = None
+        self.xmax = None
 
-        # -----------------------------
-        # Global Geometry
-        # -----------------------------
-        self.geometry = Geometry()
+        self.ymin = None
+        self.ymax = None
 
-        # -----------------------------
-        # Silhouette
-        # -----------------------------
-        self.left_boundary = None
-        self.right_boundary = None
+        self.width = None
+        self.height = None
 
-        # -----------------------------
-        # Width Signature
-        # -----------------------------
-        self.signature = None
+        self.area = None
 
-        # -----------------------------
-        # Landmarks
-        # -----------------------------
-        self.landmarks = None
+        self.aspect_ratio = None
 
-    # ===================================================
-    # Geometry
-    # ===================================================
+        self.centroid = None
 
-    def compute_geometry(self):
-        self.geometry.compute(self.binary)
+        self.edge_pixels = None
 
-    # ===================================================
-    # Silhouette
-    # ===================================================
+    def compute(self, binary):
 
-    def compute_ssa(self):
+        ys, xs = np.where(binary > 0)
 
-        self.left_boundary, self.right_boundary = ssa(
-            self.binary
+        self.xmin = int(xs.min())
+        self.xmax = int(xs.max())
+
+        self.ymin = int(ys.min())
+        self.ymax = int(ys.max())
+
+        self.width = self.xmax - self.xmin
+        self.height = self.ymax - self.ymin
+
+        self.area = self.width * self.height
+
+        self.aspect_ratio = self.width / self.height
+
+        self.centroid = (
+            float(xs.mean()),
+            float(ys.mean())
         )
 
-    # ===================================================
-    # Width Signature
-    # ===================================================
-
-    def compute_signature(self):
-
-        if self.left_boundary is None:
-            self.compute_ssa()
-
-        self.signature = width_signature(
-            self.left_boundary,
-            self.right_boundary
-        )
-
-    # ===================================================
-    # Landmarks
-    # ===================================================
-
-    def compute_landmarks(self):
-
-        if self.signature is None:
-            self.compute_signature()
-
-        detector = LandmarkDetector(self.signature)
-
-        self.landmarks = detector.detect()
-
-    # ===================================================
-    # Visualization
-    # ===================================================
-
-    def plot_signature(self):
-
-        if self.signature is None:
-            self.compute_signature()
-
-        plot_width_signature(self.signature)
+        self.edge_pixels = len(xs)
