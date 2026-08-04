@@ -3,6 +3,7 @@ from .silhouette import ssa
 from .signature import width_signature
 
 from .landmarks import LandmarkDetector
+from .regions import RegionDetector
 
 from .visualization import (
     plot_width_signature,
@@ -44,6 +45,13 @@ class Garment:
         # -----------------------------------------
         self.landmark_detector = None
         self.landmarks = None
+
+        # -----------------------------------------
+        # Region Detector
+        # -----------------------------------------
+
+        self.region_detector = None
+        self.regions = None
 
     # ==================================================
     # Geometry
@@ -93,6 +101,25 @@ class Garment:
         self.landmarks = (
             self.landmark_detector.detect()
         )
+
+    # ==================================================
+    # Regions
+    # ==================================================
+
+
+    def compute_regions(self):
+
+        if self.landmarks is None:
+            self.compute_landmarks()
+    
+        detector = RegionDetector(
+            self.signature,
+            self.landmarks
+        )
+    
+        self.region_detector = detector
+    
+        self.regions = detector.detect()
 
     # ==================================================
     # Visualization
