@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.signal import find_peaks
-
+DEFAULT_WINDOW = 7
+DEFAULT_PROMINENCE = 10
+DEFAULT_DISTANCE = 40
 
 class SignalAnalyzer:
     """
@@ -9,7 +11,7 @@ class SignalAnalyzer:
     Examples
     --------
     - Width signal
-    - Curvature signal
+    - second_derivative signal
     - Boundary angle signal
     """
 
@@ -23,18 +25,20 @@ class SignalAnalyzer:
 
         # Derivatives
         self.gradient = None
-        self.curvature = None
+        self.second_derivative = None
 
         # Features
         self.local_maxima = None
         self.local_minima = None
         self.zero_crossings = None
 
+        self.normalized = None
+
     # =====================================================
     # Smoothing
     # =====================================================
 
-    def smooth(self, window=7):
+    def smooth(self, window=DEFAULT_WINDOW):
 
         kernel = np.ones(window) / window
 
@@ -60,17 +64,17 @@ class SignalAnalyzer:
         return self.gradient
 
     # =====================================================
-    # Second Derivative (Curvature)
+    # Second Derivative (second_derivative)
     # =====================================================
 
-    def compute_curvature(self):
+    def compute_second_derivative(self):
 
         if self.gradient is None:
             self.compute_gradient()
 
-        self.curvature = np.gradient(self.gradient)
+        self.second_derivative = np.gradient(self.gradient)
 
-        return self.curvature
+        return self.second_derivative
 
     # =====================================================
     # Peak Detection
@@ -78,8 +82,8 @@ class SignalAnalyzer:
 
     def detect_local_maxima(
         self,
-        prominence=10,
-        distance=40
+        prominence=DEFAULT_PROMINENCE,
+        distance=DEFAULT_DISTANCE
     ):
 
         if self.smoothed is None:
@@ -97,8 +101,8 @@ class SignalAnalyzer:
 
     def detect_local_minima(
         self,
-        prominence=10,
-        distance=40
+        prominence=DEFAULT_PROMINENCE,
+        distance=DEFAULT_DISTANCE
     ):
 
         if self.smoothed is None:
@@ -136,14 +140,14 @@ class SignalAnalyzer:
     def normalize(self):
 
         s = self.signal
-
-        self.signal = (
+    
+        self.normalized = (
             s - s.min()
         ) / (
             s.max() - s.min()
         )
-
-        return self.signal
+    
+        return self.normalized
 
     # =====================================================
     # Complete Analysis
@@ -151,27 +155,27 @@ class SignalAnalyzer:
 
     def analyze(
         self,
-        window=7,
-        prominence=10,
-        distance=40
+        window=DEFAULT_WINDOW,
+        prominence=DEFAULT_PROMINENCE,
+        distance=DEFAULT_DISTANCE
     ):
 
-        self.smooth(window)
+        sself.smooth(window)
 
         self.compute_gradient()
-
-        self.compute_curvature()
-
+        
+        self.compute_second_derivative()
+        
         self.detect_local_maxima(
-            prominence,
-            distance
+            prominence=prominence,
+            distance=distance
         )
-
+        
         self.detect_local_minima(
-            prominence,
-            distance
+            prominence=prominence,
+            distance=distance
         )
-
+        
         self.detect_zero_crossings()
-
+        
         return self
