@@ -143,4 +143,4 @@ class Garment:
         landmarks,
         analyzer=None,
         regions=None
-    ):
+        ):
