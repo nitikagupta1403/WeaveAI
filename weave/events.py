@@ -1,9 +1,6 @@
 """
 Core geometric data structures for WeaveAI.
 
-The Sketch Graph is constructed progressively
-through three levels of abstraction.
-
 Signal
     ↓
 CandidateEvent
@@ -12,19 +9,12 @@ GeometryEvent
     ↓
 GeometrySequence
 
-CandidateEvents are temporary geometric
-segments extracted directly from a signal.
-
-GeometryEvents are persistent geometric
-primitives that survive persistence analysis.
-
 GeometrySequence is the symbolic intermediate
-representation (IR) used by all higher-level
-modules such as statistics, grammar,
-semantics and garment reasoning.
+representation (IR) used throughout WeaveAI.
 """
 
 from dataclasses import dataclass, field
+from typing import Optional
 
 
 # =====================================================
@@ -43,13 +33,11 @@ PLATEAU = "plateau"
 @dataclass(frozen=True)
 class CandidateEvent:
     """
-    Raw geometric segment extracted directly
-    from a one-dimensional signal.
+    Temporary geometric segment extracted directly
+    from the signal.
 
-    CandidateEvents intentionally over-segment
-    the geometry. They are temporary objects
-    that are later validated, merged or removed
-    by the PersistenceAnalyzer.
+    CandidateEvents intentionally over-segment the
+    signal before persistence filtering.
     """
 
     # -----------------------------------------
@@ -59,22 +47,14 @@ class CandidateEvent:
     kind: str
 
     # -----------------------------------------
-    # Location
+    # Geometry
     # -----------------------------------------
 
     start: int
     end: int
 
-    # -----------------------------------------
-    # Geometry
-    # -----------------------------------------
-
     length: int
     amplitude: float
-
-    # -----------------------------------------
-    # Differential Geometry
-    # -----------------------------------------
 
     mean_gradient: float
     max_gradient: float
@@ -86,40 +66,28 @@ class CandidateEvent:
 
     @property
     def center(self):
-        """Center of the event."""
         return (self.start + self.end) // 2
 
     @property
     def duration(self):
-        """Alias for event length."""
         return self.length
 
     @property
     def feature_vector(self):
-        """
-        Numerical representation of the event.
-        """
-
         return [
 
             self.length,
-
             self.amplitude,
 
             self.mean_gradient,
-
             self.max_gradient,
 
             self.mean_curvature,
-
             self.max_curvature
 
         ]
 
     def as_dict(self):
-        """
-        Dictionary representation.
-        """
 
         return {
 
@@ -127,6 +95,8 @@ class CandidateEvent:
 
             "start": self.start,
             "end": self.end,
+
+            "center": self.center,
 
             "length": self.length,
 
@@ -142,24 +112,23 @@ class CandidateEvent:
 
     def __repr__(self):
 
-        return (
-            f"{self.kind}"
-            f"[{self.start}:{self.end}]"
-        )
+        return f"{self.kind}[{self.start}:{self.end}]"
 
 
 # =====================================================
 # Geometry Event
 # =====================================================
 
-@dataclass(frozen=True)
+@dataclass
 class GeometryEvent(CandidateEvent):
     """
     Persistent geometric primitive.
 
-    GeometryEvents are CandidateEvents that
-    survive persistence analysis and become
-    part of the Sketch Graph.
+    These objects survive persistence analysis and
+    become nodes of the Sketch Graph.
+
+    They also carry symbolic information learned
+    later by statistics, clustering and grammar.
     """
 
     # -----------------------------------------
@@ -167,16 +136,36 @@ class GeometryEvent(CandidateEvent):
     # -----------------------------------------
 
     persistence: float = 1.0
-
     strength: float = 1.0
-
     confidence: float = 1.0
 
     # -----------------------------------------
-    # Multi-scale Geometry
+    # Scale
     # -----------------------------------------
 
     scale: int = 0
+
+    # -----------------------------------------
+    # Symbolic Representation
+    # -----------------------------------------
+
+    primitive: Optional[int] = None
+
+    primitive_family: Optional[str] = None
+
+    prototype: Optional[int] = None
+
+    grammar_role: Optional[str] = None
+
+    # =================================================
+
+    @property
+    def primitive_name(self):
+
+        if self.primitive is None:
+            return None
+
+        return f"P{self.primitive}"
 
     # =================================================
 
@@ -192,7 +181,15 @@ class GeometryEvent(CandidateEvent):
 
             "confidence": self.confidence,
 
-            "scale": self.scale
+            "scale": self.scale,
+
+            "primitive": self.primitive,
+
+            "primitive_family": self.primitive_family,
+
+            "prototype": self.prototype,
+
+            "grammar_role": self.grammar_role
 
         })
 
@@ -200,16 +197,19 @@ class GeometryEvent(CandidateEvent):
 
     def __repr__(self):
 
+        label = self.primitive_name
+
+        if label is None:
+
+            return (
+                f"{self.kind}"
+                f"[{self.start}:{self.end}]"
+            )
+
         return (
-
+            f"{label} "
             f"{self.kind}"
-
             f"[{self.start}:{self.end}]"
-
-            f""
-
-            f"(p={self.persistence:.2f})"
-
         )
 
 
@@ -220,40 +220,22 @@ class GeometryEvent(CandidateEvent):
 @dataclass
 class GeometrySequence:
     """
-    Ordered collection of GeometryEvents.
-
-    GeometrySequence forms the symbolic
-    intermediate representation (IR)
-    of garment geometry.
-
-    Every higher-level module operates
-    on GeometrySequence rather than
-    directly on signals.
+    Ordered symbolic representation of garment geometry.
     """
 
-    events: list[GeometryEvent] = field(
-        default_factory=list
-    )
+    garment: Optional[str] = None
+
+    events: list[GeometryEvent] = field(default_factory=list)
 
     # =================================================
 
-    def append(
-        self,
-        event: GeometryEvent
-    ):
+    def append(self, event):
 
         self.events.append(event)
 
-    def extend(
-        self,
-        events
-    ):
+    def extend(self, events):
 
         self.events.extend(events)
-
-    def clear(self):
-
-        self.events.clear()
 
     # =================================================
 
@@ -274,22 +256,36 @@ class GeometrySequence:
     @property
     def kinds(self):
 
+        return [e.kind for e in self.events]
+
+    @property
+    def primitives(self):
+
+        return [e.primitive for e in self.events]
+
+    @property
+    def primitive_sentence(self):
+
         return [
 
-            event.kind
+            e.primitive_name
 
-            for event in self.events
+            for e in self.events
+
+            if e.primitive is not None
 
         ]
 
     @property
-    def centers(self):
+    def family_sentence(self):
 
         return [
 
-            event.center
+            e.primitive_family
 
-            for event in self.events
+            for e in self.events
+
+            if e.primitive_family is not None
 
         ]
 
@@ -298,25 +294,25 @@ class GeometrySequence:
 
         return [
 
-            event.feature_vector
+            e.feature_vector
 
-            for event in self.events
+            for e in self.events
 
         ]
 
     @property
     def positions(self):
 
-        if len(self.events) == 0:
+        if not self.events:
             return []
 
         total = self.events[-1].end
 
         return [
 
-            event.center / total
+            e.center / total
 
-            for event in self.events
+            for e in self.events
 
         ]
 
@@ -324,21 +320,12 @@ class GeometrySequence:
 
     def summary(self):
 
-        print("Geometry Sequence")
-        print("-----------------")
+        print(f"Geometry Sequence ({len(self.events)} events)")
 
         for event in self.events:
 
             print(event)
 
-    # =================================================
-
     def __repr__(self):
 
-        return (
-
-            f"GeometrySequence("
-
-            f"{len(self.events)} events)"
-
-        )
+        return f"GeometrySequence({len(self.events)} events)"
