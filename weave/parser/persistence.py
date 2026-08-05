@@ -36,3 +36,70 @@ class PersistenceAnalyzer:
         events = self.merge_same_kind(events)
 
         return GeometrySequence(events)
+
+    def filter_short(
+        self,
+        events,
+        min_length=5
+    ):
+        """
+        Remove tiny geometric fragments.
+    
+        They usually arise from numerical
+        differentiation rather than
+        meaningful geometry.
+        """
+    
+        filtered = []
+    
+        for e in events:
+    
+            if e.length >= min_length:
+    
+                filtered.append(e)
+    
+        return filtered
+
+    def filter_small(
+        self,
+        events,
+        min_amplitude=3
+    ):
+    
+        filtered = []
+    
+        for e in events:
+    
+            if abs(e.amplitude) >= min_amplitude:
+    
+                filtered.append(e)
+    
+        return filtered
+
+    def merge_same_kind(
+        self,
+        events
+    ):
+    
+        if not events:
+            return []
+    
+        merged = [events[0]]
+    
+        for event in events[1:]:
+    
+            last = merged[-1]
+    
+            if event.kind == last.kind:
+    
+                last.end = event.end
+    
+                last.length = last.end - last.start
+    
+                last.amplitude += event.amplitude
+    
+            else:
+    
+                merged.append(event)
+    
+        return merged
