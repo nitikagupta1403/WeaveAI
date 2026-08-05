@@ -21,7 +21,11 @@ Geometry
 
 from dataclasses import replace
 
-from .geometry import Geometry
+from collections import Counter
+
+import networkx as nx
+
+from .events import GeometrySequence
 
 from .silhouette import ssa
 from .signature import width_signature
