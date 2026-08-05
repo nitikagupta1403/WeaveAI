@@ -2,14 +2,22 @@ import numpy as np
 
 from .events import (
     GeometryEvent,
-    GeometrySequence
+    GeometrySequence,
+    RISE,
+    FALL,
+    PLATEAU
 )
 
 
 class GeometryParser:
     """
     Converts a continuous geometric signal
-    into a sequence of GeometryEvents.
+    into a GeometrySequence.
+
+    Parser v1 partitions the signal using
+    gradient sign changes. It serves as a
+    baseline implementation for future
+    persistence-based parsing.
     """
 
     def __init__(self, signal):
@@ -19,6 +27,10 @@ class GeometryParser:
         self.gradient = np.gradient(self.signal)
 
         self.curvature = np.gradient(self.gradient)
+
+    # =====================================================
+    # Main API
+    # =====================================================
 
     def parse(self):
 
@@ -31,21 +43,34 @@ class GeometryParser:
             boundaries[1:]
         ):
 
-            sequence.append(
-                self.build_event(start, end)
-            )
+            if end <= start:
+                continue
+
+            event = self.build_event(start, end)
+
+            sequence.append(event)
 
         return sequence
 
-    def find_boundaries(self):
+    # =====================================================
+    # Boundary Detection
+    # =====================================================
 
-        gradient = self.gradient
+    def find_boundaries(self):
+        """
+        Detect candidate boundaries by
+        observing changes in gradient sign.
+
+        This is a simple baseline method.
+        Future versions will replace this
+        with persistence-based partitioning.
+        """
 
         boundaries = [0]
 
-        for i in range(len(gradient) - 1):
+        for i in range(len(self.gradient) - 1):
 
-            if np.sign(gradient[i]) != np.sign(gradient[i + 1]):
+            if np.sign(self.gradient[i]) != np.sign(self.gradient[i + 1]):
 
                 boundaries.append(i)
 
@@ -53,31 +78,45 @@ class GeometryParser:
 
         return boundaries
 
-    def build_event(
-        self,
-        start,
-        end
-    ):
+    # =====================================================
+    # Event Construction
+    # =====================================================
 
-        g = self.gradient[start:end + 1]
+    def build_event(self, start, end):
+        """
+        Construct one GeometryEvent from
+        a signal interval.
+        """
 
-        c = self.curvature[start:end + 1]
+        signal = self.signal[start:end + 1]
 
-        s = self.signal[start:end + 1]
+        gradient = self.gradient[start:end + 1]
 
-        mean_gradient = np.mean(g)
+        curvature = self.curvature[start:end + 1]
 
-        if mean_gradient > 0:
+        mean_gradient = float(np.mean(gradient))
 
-            kind = "rise"
+        # ----------------------------------------
+        # Event Type
+        # ----------------------------------------
 
-        elif mean_gradient < 0:
+        eps = 1e-6
 
-            kind = "fall"
+        if mean_gradient > eps:
+
+            kind = RISE
+
+        elif mean_gradient < -eps:
+
+            kind = FALL
 
         else:
 
-            kind = "plateau"
+            kind = PLATEAU
+
+        # ----------------------------------------
+        # Build Event
+        # ----------------------------------------
 
         return GeometryEvent(
 
@@ -87,25 +126,19 @@ class GeometryParser:
 
             end=end,
 
-            length=end - start,
+            amplitude=float(signal[-1] - signal[0]),
 
-            amplitude=float(
-                s[-1] - s[0]
-            ),
-
-            mean_gradient=float(
-                np.mean(g)
-            ),
+            mean_gradient=mean_gradient,
 
             max_gradient=float(
-                np.max(np.abs(g))
+                np.max(np.abs(gradient))
             ),
 
             mean_curvature=float(
-                np.mean(c)
+                np.mean(curvature)
             ),
 
             max_curvature=float(
-                np.max(np.abs(c))
+                np.max(np.abs(curvature))
             )
         )
