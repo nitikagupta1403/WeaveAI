@@ -1,16 +1,25 @@
 """
-Corpus-level statistics for the
-WeaveAI Sketch Graph.
+Corpus-level statistics for the WeaveAI Sketch Graph.
 
-StatisticsAnalyzer aggregates GeometrySequences
-from many garments and constructs the statistical
-foundation used for
+Signal
+    ↓
+CandidateEvent
+    ↓
+GeometryEvent
+    ↓
+GeometrySequence
+    ↓
+EventStatistics
 
-• descriptive statistics
-• event visualization
-• clustering
-• grammar discovery
-• semantic learning
+This module aggregates GeometrySequences from
+many garments and constructs the statistical
+corpus used for
+
+    • descriptive statistics
+    • visualization
+    • clustering
+    • grammar discovery
+    • semantic learning
 """
 
 from collections import Counter
@@ -19,214 +28,194 @@ import numpy as np
 import pandas as pd
 
 from .events import (
+    GeometryEvent,
     GeometrySequence,
-    GeometryEvent
 )
 
 
 # =====================================================
-# Statistics Analyzer
+# Event Statistics
 # =====================================================
 
-class StatisticsAnalyzer:
+class EventStatistics:
     """
-    Analyze persistent GeometryEvents across
-    an entire garment corpus.
+    Collect corpus-level statistics from
+    GeometrySequences.
+
+    Each GeometryEvent becomes one row
+    in the statistical corpus.
     """
 
     def __init__(self):
 
-        self.records = []
+        self.signatures = []
+        self.sequences = []
+        self.garment_names = []
 
         self.df = None
 
     # =================================================
+    # Add one garment
+    # =================================================
 
     def add(
         self,
-        garment_id,
-        sequence: GeometrySequence
+        garment_name,
+        signature,
+        sequence
     ):
-        """
-        Add one GeometrySequence to the corpus.
-        """
 
-        if len(sequence) == 0:
-            return
+        self.garment_names.append(garment_name)
+        self.signatures.append(signature)
+        self.sequences.append(sequence)
 
-        total_length = sequence[-1].end
-
-        if total_length == 0:
-            total_length = 1
-
-        for index, event in enumerate(sequence):
-
-            row = event.as_dict()
-
-            row["garment"] = garment_id
-
-            row["event_index"] = index
-
-            row["center"] = event.center
-
-            row["relative_position"] = (
-                event.center / total_length
-            )
-
-            self.records.append(row)
-
+    # =================================================
+    # Build dataframe
     # =================================================
 
     def build(self):
-        """
-        Build the event dataframe.
-        """
 
-        self.df = pd.DataFrame(
-            self.records
-        )
+        records = []
+
+        for garment_name, signature, sequence in zip(
+            self.garment_names,
+            self.signatures,
+            self.sequences
+        ):
+
+            garment_height = len(signature)
+
+            for event_index, event in enumerate(sequence):
+
+                records.append({
+
+                    # ---------------------------------
+                    # Identity
+                    # ---------------------------------
+
+                    "garment": garment_name,
+                    "event_index": event_index,
+                    "kind": event.kind,
+
+                    # ---------------------------------
+                    # Position
+                    # ---------------------------------
+
+                    "start": event.start,
+                    "end": event.end,
+                    "center": event.center,
+
+                    "relative_position":
+                        event.center / garment_height,
+
+                    # ---------------------------------
+                    # Geometry
+                    # ---------------------------------
+
+                    "length": event.length,
+
+                    "length_ratio":
+                        event.length / garment_height,
+
+                    "amplitude":
+                        event.amplitude,
+
+                    # ---------------------------------
+                    # Differential Geometry
+                    # ---------------------------------
+
+                    "mean_gradient":
+                        event.mean_gradient,
+
+                    "max_gradient":
+                        event.max_gradient,
+
+                    "mean_curvature":
+                        event.mean_curvature,
+
+                    "max_curvature":
+                        event.max_curvature,
+
+                    # ---------------------------------
+                    # Persistence
+                    # ---------------------------------
+
+                    "persistence":
+                        event.persistence,
+
+                    "strength":
+                        event.strength,
+
+                    "confidence":
+                        event.confidence,
+
+                    "scale":
+                        event.scale,
+
+                })
+
+        self.df = pd.DataFrame(records)
 
         return self.df
 
     # =================================================
-
-    @property
-    def dataframe(self):
-
-        if self.df is None:
-
-            self.build()
-
-        return self.df
-
+    # Summary
     # =================================================
 
-    @property
+    def summary(self):
+
+        return self.df.describe()
+
+    # =================================================
+    # Event Counts
+    # =================================================
+
+    def event_counts(self):
+
+        return Counter(self.df["kind"])
+
+    # =================================================
+    # Transition Counts
+    # =================================================
+
+    def transition_counts(self):
+
+        transitions = Counter()
+
+        for sequence in self.sequences:
+
+            kinds = sequence.kinds
+
+            for a, b in zip(kinds[:-1], kinds[1:]):
+
+                transitions[(a, b)] += 1
+
+        return transitions
+
+    # =================================================
+    # Feature Matrix
+    # =================================================
+
     def feature_columns(self):
 
         return [
 
-            "length",
-
+            "length_ratio",
+            "relative_position",
             "amplitude",
-
             "mean_gradient",
-
             "max_gradient",
-
             "mean_curvature",
-
             "max_curvature",
-
-            "relative_position"
+            "persistence",
+            "strength",
+            "confidence",
+            "scale",
 
         ]
 
-    # =================================================
-
     def feature_matrix(self):
-        """
-        Event feature matrix used by
-        PCA and clustering.
-        """
 
-        return self.dataframe[
-            self.feature_columns
+        return self.df[
+            self.feature_columns()
         ].to_numpy()
-
-    # =================================================
-
-    def summary(self):
-        """
-        Descriptive statistics.
-        """
-
-        return self.dataframe.describe()
-
-    # =================================================
-
-    def event_counts(self):
-        """
-        Frequency of each event type.
-        """
-
-        return Counter(
-            self.dataframe["kind"]
-        )
-
-    # =================================================
-
-    def transition_counts(self):
-        """
-        Frequency of event transitions.
-        """
-
-        counter = Counter()
-
-        for garment in self.dataframe[
-            "garment"
-        ].unique():
-
-            df = self.dataframe[
-                self.dataframe["garment"]
-                == garment
-            ]
-
-            kinds = df["kind"].tolist()
-
-            for a, b in zip(
-                kinds[:-1],
-                kinds[1:]
-            ):
-
-                counter[(a, b)] += 1
-
-        return counter
-
-    # =================================================
-
-    def histogram(
-        self,
-        column,
-        bins=20
-    ):
-        """
-        Histogram values.
-        """
-
-        return np.histogram(
-
-            self.dataframe[column],
-
-            bins=bins
-
-        )
-
-    # =================================================
-
-    def correlation(self):
-        """
-        Feature correlation matrix.
-        """
-
-        return self.dataframe[
-            self.feature_columns
-        ].corr()
-
-    # =================================================
-
-    def export_csv(
-        self,
-        filename="events.csv"
-    ):
-        """
-        Save corpus.
-        """
-
-        self.dataframe.to_csv(
-
-            filename,
-
-            index=False
-
-        )
