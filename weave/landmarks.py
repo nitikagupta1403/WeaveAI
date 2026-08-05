@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .signals import SignalAnalyzer
+from .signals.statistics import analyze
 
 
 @dataclass
@@ -28,9 +28,9 @@ class LandmarkDetector:
         self.signature = np.asarray(signature, dtype=float)
 
         # Analyze the signal once
-        self.signals = SignalAnalyzer(
+        self.signals = analyze(
             self.signature
-        ).analyze()
+        )
 
         self.landmarks = {}
 
