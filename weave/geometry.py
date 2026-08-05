@@ -2,75 +2,81 @@
 Symbolic geometry representation for WeaveAI.
 
 Signal
-   ↓
+    ↓
 Width Signature
-   ↓
+    ↓
 Candidate Events
-   ↓
+    ↓
 Persistent Geometry Events
-   ↓
+    ↓
 Geometry Sequence
-   ↓
+    ↓
 Primitive Sentence
-   ↓
+    ↓
 Primitive Families
-   ↓
+    ↓
 Transition Graph
-   ↓
+    ↓
 Sketch Graph
 
 Geometry is the symbolic intermediate
-representation (IR) used by all higher-level
-reasoning modules.
+representation (IR) used throughout WeaveAI.
 """
 
 from collections import Counter
+
 import networkx as nx
 
 from .events import GeometrySequence
 
 
 class Geometry:
+    """
+    Symbolic representation of one garment.
+
+    Geometry owns the GeometrySequence and all
+    higher-level symbolic structures derived from it.
+    """
 
     def __init__(self):
 
-        # ==========================================
+        # =================================================
         # Signal
-        # ==========================================
+        # =================================================
 
         self.signature = None
 
-        # ==========================================
-        # Geometry
-        # ==========================================
+        # =================================================
+        # Symbolic Geometry
+        # =================================================
 
         self.sequence = GeometrySequence()
 
-        # ==========================================
+        # =================================================
         # Learned Representation
-        # ==========================================
+        # =================================================
 
         self.prototype_curves = None
 
-        # ==========================================
+        # =================================================
         # Grammar
-        # ==========================================
+        # =================================================
 
-        self.transition_matrix = None
         self.transition_graph = nx.DiGraph()
 
-        # ==========================================
-        # Higher-Level Representation
-        # ==========================================
+        # =================================================
+        # Sketch Graph
+        # =================================================
 
         self.sketch_graph = nx.DiGraph()
 
-    # ==================================================
+    # =================================================
     # Convenience Properties
-    # ==================================================
+    # =================================================
 
     @property
     def events(self):
+
         return self.sequence.events
 
     @property
@@ -84,6 +90,11 @@ class Geometry:
         return self.sequence.family_sentence
 
     @property
+    def grammar_sentence(self):
+
+        return self.sequence.grammar_sentence
+
+    @property
     def primitive_counts(self):
 
         return Counter(self.primitive_sentence)
@@ -93,76 +104,105 @@ class Geometry:
 
         return Counter(self.family_sentence)
 
-    # ==================================================
+    @property
+    def feature_matrix(self):
+
+        return self.sequence.feature_matrix
+
+    # =================================================
     # Graph Construction
-    # ==================================================
+    # =================================================
 
     def build_transition_graph(self):
+        """
+        Build a primitive transition graph.
+
+        Call only after primitives have been assigned.
+        """
 
         G = nx.DiGraph()
 
-        sentence = self.primitive_sentence
-
-        for a, b in zip(sentence[:-1], sentence[1:]):
+        for a, b in self.sequence.transitions:
 
             if G.has_edge(a, b):
+
                 G[a][b]["weight"] += 1
+
             else:
+
                 G.add_edge(a, b, weight=1)
 
         self.transition_graph = G
 
         return G
 
-    # ==================================================
-    # Sketch Graph
-    # ==================================================
+    # =================================================
 
     def build_sketch_graph(self):
+        """
+        Build an event-level sketch graph.
+
+        Call only after event IDs have been assigned.
+        """
 
         G = nx.DiGraph()
 
-        for event in self.events:
+        for i, event in enumerate(self.events):
 
             node = event.event_id
+
+            if node is None:
+                node = f"E{i}"
 
             G.add_node(
 
                 node,
 
+                kind=event.kind,
+
                 primitive=event.primitive,
 
                 family=event.primitive_family,
-
-                kind=event.kind,
 
                 start=event.start,
 
                 end=event.end,
 
+                center=event.center,
+
+                length=event.length,
+
+                amplitude=event.amplitude,
+
             )
 
-        for a, b in zip(self.events[:-1], self.events[1:]):
+        for i in range(len(self.events) - 1):
 
-            G.add_edge(a.event_id, b.event_id)
+            a = self.events[i]
+            b = self.events[i + 1]
+
+            source = a.event_id if a.event_id is not None else f"E{i}"
+            target = b.event_id if b.event_id is not None else f"E{i+1}"
+
+            G.add_edge(source, target)
 
         self.sketch_graph = G
 
         return G
 
-    # ==================================================
+    # =================================================
     # Summary
-    # ==================================================
+    # =================================================
 
     def summary(self):
 
         print("Geometry")
         print("--------------------")
-        print("Events      :", len(self.events))
-        print("Primitives  :", self.primitive_sentence)
-        print("Families    :", self.family_sentence)
+        print(f"Events      : {len(self.events)}")
+        print(f"Primitives  : {len(self.primitive_counts)}")
+        print(f"Families    : {len(self.family_counts)}")
 
-    # ==================================================
+    # =================================================
 
     def __len__(self):
 
@@ -172,11 +212,12 @@ class Geometry:
 
         return iter(self.sequence)
 
-    def __getitem__(self, i):
+    def __getitem__(self, index):
 
-        return self.sequence[i]
+        return self.sequence[index]
+
+    # =================================================
 
     def __repr__(self):
 
         return f"Geometry({len(self.sequence)} events)"
-        
