@@ -44,13 +44,15 @@ class Garment:
     lazily and cached.
     """
 
-    def __init__(self, binary):
+    def __init__(self, binary, name=None,):
 
         # ============================================
         # Original Sketch
         # ============================================
 
+
         self.binary = binary
+        self.name = name
 
         # ============================================
         # Silhouette
