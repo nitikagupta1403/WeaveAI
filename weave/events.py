@@ -1,5 +1,5 @@
 """
-Core geometric data structures for WeaveAI.
+Core symbolic data structures for WeaveAI.
 
 Signal
     ↓
@@ -13,8 +13,11 @@ GeometrySequence is the symbolic intermediate
 representation (IR) used throughout WeaveAI.
 """
 
+from collections import Counter
 from dataclasses import dataclass, field
 from typing import Optional
+
+import numpy as np
 
 
 # =====================================================
@@ -30,7 +33,7 @@ PLATEAU = "plateau"
 # Candidate Event
 # =====================================================
 
-@dataclass
+@dataclass(frozen=True)
 class CandidateEvent:
     """
     Temporary geometric segment extracted directly
@@ -70,27 +73,35 @@ class CandidateEvent:
 
     @property
     def center(self):
+
         return (self.start + self.end) // 2
 
     @property
     def duration(self):
+
         return self.length
 
     @property
     def feature_vector(self):
 
-        return [
+        return np.array(
 
-            self.length,
-            self.amplitude,
+            [
 
-            self.mean_gradient,
-            self.max_gradient,
+                self.length,
+                self.amplitude,
 
-            self.mean_curvature,
-            self.max_curvature
+                self.mean_gradient,
+                self.max_gradient,
 
-        ]
+                self.mean_curvature,
+                self.max_curvature,
+
+            ],
+
+            dtype=float,
+
+        )
 
     def as_dict(self):
 
@@ -111,7 +122,7 @@ class CandidateEvent:
             "max_gradient": self.max_gradient,
 
             "mean_curvature": self.mean_curvature,
-            "max_curvature": self.max_curvature
+            "max_curvature": self.max_curvature,
 
         }
 
@@ -127,13 +138,13 @@ class CandidateEvent:
 # Geometry Event
 # =====================================================
 
-@dataclass
+@dataclass(frozen=True)
 class GeometryEvent(CandidateEvent):
     """
     Persistent geometric primitive.
 
     GeometryEvents survive persistence analysis
-    and become nodes of the Sketch Graph.
+    and become the symbolic atoms of WeaveAI.
     """
 
     # -------------------------------------------------
@@ -177,6 +188,16 @@ class GeometryEvent(CandidateEvent):
 
         return f"P{self.primitive}"
 
+    @property
+    def family_name(self):
+
+        return self.primitive_family
+
+    @property
+    def grammar_symbol(self):
+
+        return self.grammar_role
+
     def as_dict(self):
 
         data = super().as_dict()
@@ -195,7 +216,8 @@ class GeometryEvent(CandidateEvent):
             "primitive": self.primitive,
             "primitive_family": self.primitive_family,
             "prototype": self.prototype,
-            "grammar_role": self.grammar_role
+
+            "grammar_role": self.grammar_role,
 
         })
 
@@ -212,10 +234,23 @@ class GeometryEvent(CandidateEvent):
                 f"[{self.start}:{self.end}]"
             )
 
+        if self.family_name is None:
+
+            return (
+                f"{label} "
+                f"{self.kind}"
+                f"[{self.start}:{self.end}]"
+            )
+
         return (
-            f"{label} "
+
+            f"{label}"
+            f"({self.family_name}) "
+
             f"{self.kind}"
+
             f"[{self.start}:{self.end}]"
+
         )
 
 
@@ -226,8 +261,7 @@ class GeometryEvent(CandidateEvent):
 @dataclass
 class GeometrySequence:
     """
-    Ordered symbolic representation of
-    one garment.
+    Ordered symbolic representation of one garment.
     """
 
     garment: Optional[str] = None
@@ -238,7 +272,7 @@ class GeometrySequence:
 
     # =================================================
 
-    def append(self, event):
+    def append(self, event: GeometryEvent):
 
         self.events.append(event)
 
@@ -265,16 +299,32 @@ class GeometrySequence:
         return self.events[index]
 
     # =================================================
+    # Event Properties
+    # =================================================
 
     @property
     def kinds(self):
 
-        return [e.kind for e in self.events]
+        return [
+
+            e.kind
+
+            for e in self.events
+
+        ]
 
     @property
     def primitives(self):
 
-        return [e.primitive for e in self.events]
+        return [
+
+            e.primitive
+
+            for e in self.events
+
+            if e.primitive is not None
+
+        ]
 
     @property
     def primitive_sentence(self):
@@ -285,7 +335,7 @@ class GeometrySequence:
 
             for e in self.events
 
-            if e.primitive is not None
+            if e.primitive_name is not None
 
         ]
 
@@ -294,32 +344,52 @@ class GeometrySequence:
 
         return [
 
-            e.primitive_family
+            e.family_name
 
             for e in self.events
 
-            if e.primitive_family is not None
+            if e.family_name is not None
 
         ]
 
     @property
-    def feature_matrix(self):
+    def grammar_sentence(self):
 
         return [
 
-            e.feature_vector
+            e.grammar_symbol
+
+            for e in self.events
+
+            if e.grammar_symbol is not None
+
+        ]
+
+    @property
+    def event_ids(self):
+
+        return [
+
+            e.event_id
 
             for e in self.events
 
         ]
+
+    # =================================================
+    # Geometry
+    # =================================================
 
     @property
     def positions(self):
 
-        if not self.events:
+        if len(self.events) == 0:
             return []
 
         total = self.events[-1].end
+
+        if total == 0:
+            return [0.0] * len(self.events)
 
         return [
 
@@ -328,6 +398,62 @@ class GeometrySequence:
             for e in self.events
 
         ]
+
+    @property
+    def feature_matrix(self):
+
+        if len(self.events) == 0:
+
+            return np.empty((0, 6))
+
+        return np.stack(
+
+            [
+
+                e.feature_vector
+
+                for e in self.events
+
+            ]
+
+        )
+
+    # =================================================
+    # Grammar
+    # =================================================
+
+    @property
+    def transitions(self):
+
+        return list(
+
+            zip(
+
+                self.primitive_sentence[:-1],
+
+                self.primitive_sentence[1:]
+
+            )
+
+        )
+
+    @property
+    def primitive_counts(self):
+
+        return Counter(
+
+            self.primitive_sentence
+
+        )
+
+    @property
+    def family_counts(self):
+
+        return Counter(
+
+            self.family_sentence
+
+        )
 
     # =================================================
 
@@ -340,6 +466,8 @@ class GeometrySequence:
         for event in self.events:
 
             print(event)
+
+    # =================================================
 
     def __repr__(self):
 
