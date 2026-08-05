@@ -19,7 +19,6 @@ GeometrySequence
 Geometry
 """
 
-
 from .geometry import Geometry
 
 from .silhouette import ssa
@@ -38,13 +37,31 @@ from .visualization import (
 
 
 class Garment:
+    """
+    Represents a single garment sketch.
+
+    All derived geometric information is computed
+    lazily and cached.
+    """
 
     def __init__(self, binary):
 
+        # ============================================
+        # Original Sketch
+        # ============================================
+
         self.binary = binary
+
+        # ============================================
+        # Silhouette
+        # ============================================
 
         self.left_boundary = None
         self.right_boundary = None
+
+        # ============================================
+        # Cached Representations
+        # ============================================
 
         self._signature = None
         self._geometry = None
@@ -77,7 +94,7 @@ class Garment:
             self._signature = width_signature(
 
                 self.left_boundary,
-                self.right_boundary
+                self.right_boundary,
 
             )
 
@@ -94,31 +111,37 @@ class Garment:
 
     def compute_geometry(self):
 
-        if self._geometry is None:
+        if self._geometry is not None:
 
-            detector = CandidateDetector(
-                self.signature
-            )
+            return self._geometry
 
-            candidates = detector.detect()
+        geometry = Geometry()
 
-            analyzer = PersistenceAnalyzer(
-                candidates
-            )
+        geometry.signature = self.signature
 
-            sequence = analyzer.analyze()
+        # --------------------------------------------
+        # Candidate Detection
+        # --------------------------------------------
 
-            geometry = Geometry()
+        detector = CandidateDetector(
+            self.signature
+        )
 
-            geometry.signature = self.signature
-            geometry.sequence = sequence
+        candidates = detector.detect()
 
-            geometry.build_transition_graph()
-            geometry.build_sketch_graph()
+        # --------------------------------------------
+        # Persistence Analysis
+        # --------------------------------------------
 
-            self._geometry = geometry
+        analyzer = PersistenceAnalyzer(
+            candidates
+        )
 
-        return self._geometry
+        geometry.sequence = analyzer.analyze()
+
+        self._geometry = geometry
+
+        return geometry
 
     @property
     def geometry(self):
@@ -199,7 +222,7 @@ class Garment:
     def summary(self):
 
         print("Garment")
-        print("---------------------")
+        print("----------------------")
         print(f"Signature Length : {len(self.signature)}")
         print(f"Events           : {len(self.geometry)}")
         print(f"Landmarks        : {len(self.landmarks)}")
