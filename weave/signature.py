@@ -1,16 +1,38 @@
+from scipy.interpolate import interp1d
 import numpy as np
 
 
-def width_signature(left_boundary,
-                    right_boundary):
+def normalize_signature(
+    signature,
+    n_samples=1024
+):
+    """
+    Parameterize a width signature onto a
+    common geometric domain.
 
-    signature = []
+    Every garment is represented by the same
+    number of samples irrespective of its
+    image resolution.
+    """
 
-    for left, right in zip(left_boundary,
-                           right_boundary):
+    signature = np.asarray(signature)
 
-        signature.append(
-            right[0]-left[0]
-        )
+    x_old = np.linspace(
+        0,
+        1,
+        len(signature)
+    )
 
-    return np.array(signature)
+    x_new = np.linspace(
+        0,
+        1,
+        n_samples
+    )
+
+    f = interp1d(
+        x_old,
+        signature,
+        kind="cubic"
+    )
+
+    return f(x_new)
