@@ -30,7 +30,7 @@ PLATEAU = "plateau"
 # Candidate Event
 # =====================================================
 
-@dataclass(frozen=True)
+@dataclass
 class CandidateEvent:
     """
     Temporary geometric segment extracted directly
@@ -40,21 +40,25 @@ class CandidateEvent:
     signal before persistence filtering.
     """
 
-    # -----------------------------------------
+    # -------------------------------------------------
     # Identity
-    # -----------------------------------------
+    # -------------------------------------------------
 
     kind: str
 
-    # -----------------------------------------
+    # -------------------------------------------------
     # Geometry
-    # -----------------------------------------
+    # -------------------------------------------------
 
     start: int
     end: int
 
     length: int
     amplitude: float
+
+    # -------------------------------------------------
+    # Differential Geometry
+    # -------------------------------------------------
 
     mean_gradient: float
     max_gradient: float
@@ -74,6 +78,7 @@ class CandidateEvent:
 
     @property
     def feature_vector(self):
+
         return [
 
             self.length,
@@ -112,7 +117,10 @@ class CandidateEvent:
 
     def __repr__(self):
 
-        return f"{self.kind}[{self.start}:{self.end}]"
+        return (
+            f"{self.kind}"
+            f"[{self.start}:{self.end}]"
+        )
 
 
 # =====================================================
@@ -124,35 +132,37 @@ class GeometryEvent(CandidateEvent):
     """
     Persistent geometric primitive.
 
-    These objects survive persistence analysis and
-    become nodes of the Sketch Graph.
-
-    They also carry symbolic information learned
-    later by statistics, clustering and grammar.
+    GeometryEvents survive persistence analysis
+    and become nodes of the Sketch Graph.
     """
 
-    # -----------------------------------------
+    # -------------------------------------------------
+    # Identity
+    # -------------------------------------------------
+
+    event_id: Optional[str] = None
+    garment_id: Optional[str] = None
+
+    # -------------------------------------------------
     # Persistence
-    # -----------------------------------------
+    # -------------------------------------------------
 
     persistence: float = 1.0
     strength: float = 1.0
     confidence: float = 1.0
 
-    # -----------------------------------------
-    # Scale
-    # -----------------------------------------
+    # -------------------------------------------------
+    # Multi-scale
+    # -------------------------------------------------
 
     scale: int = 0
 
-    # -----------------------------------------
-    # Symbolic Representation
-    # -----------------------------------------
+    # -------------------------------------------------
+    # Learned Representation
+    # -------------------------------------------------
 
     primitive: Optional[int] = None
-
     primitive_family: Optional[str] = None
-
     prototype: Optional[int] = None
 
     grammar_role: Optional[str] = None
@@ -167,28 +177,24 @@ class GeometryEvent(CandidateEvent):
 
         return f"P{self.primitive}"
 
-    # =================================================
-
     def as_dict(self):
 
         data = super().as_dict()
 
         data.update({
 
+            "event_id": self.event_id,
+            "garment_id": self.garment_id,
+
             "persistence": self.persistence,
-
             "strength": self.strength,
-
             "confidence": self.confidence,
 
             "scale": self.scale,
 
             "primitive": self.primitive,
-
             "primitive_family": self.primitive_family,
-
             "prototype": self.prototype,
-
             "grammar_role": self.grammar_role
 
         })
@@ -220,12 +226,15 @@ class GeometryEvent(CandidateEvent):
 @dataclass
 class GeometrySequence:
     """
-    Ordered symbolic representation of garment geometry.
+    Ordered symbolic representation of
+    one garment.
     """
 
     garment: Optional[str] = None
 
-    events: list[GeometryEvent] = field(default_factory=list)
+    events: list[GeometryEvent] = field(
+        default_factory=list
+    )
 
     # =================================================
 
@@ -236,6 +245,10 @@ class GeometrySequence:
     def extend(self, events):
 
         self.events.extend(events)
+
+    def clear(self):
+
+        self.events.clear()
 
     # =================================================
 
@@ -320,7 +333,9 @@ class GeometrySequence:
 
     def summary(self):
 
-        print(f"Geometry Sequence ({len(self.events)} events)")
+        print(
+            f"Geometry Sequence ({len(self.events)} events)"
+        )
 
         for event in self.events:
 
@@ -328,4 +343,6 @@ class GeometrySequence:
 
     def __repr__(self):
 
-        return f"GeometrySequence({len(self.events)} events)"
+        return (
+            f"GeometrySequence({len(self.events)} events)"
+        )
