@@ -27,10 +27,7 @@ from collections import Counter
 import numpy as np
 import pandas as pd
 
-from .events import (
-    GeometryEvent,
-    GeometrySequence,
-)
+from .events import GeometrySequence
 
 
 # =====================================================
@@ -39,18 +36,17 @@ from .events import (
 
 class EventStatistics:
     """
-    Collect corpus-level statistics from
-    GeometrySequences.
+    Build a statistical corpus from many garments.
 
-    Each GeometryEvent becomes one row
-    in the statistical corpus.
+    Each GeometryEvent becomes one row of the
+    event dataframe.
     """
 
     def __init__(self):
 
+        self.garment_names = []
         self.signatures = []
         self.sequences = []
-        self.garment_names = []
 
         self.df = None
 
@@ -62,7 +58,7 @@ class EventStatistics:
         self,
         garment_name,
         signature,
-        sequence
+        sequence: GeometrySequence,
     ):
 
         self.garment_names.append(garment_name)
@@ -78,74 +74,98 @@ class EventStatistics:
         records = []
 
         for garment_name, signature, sequence in zip(
+
             self.garment_names,
             self.signatures,
-            self.sequences
+            self.sequences,
+
         ):
 
             garment_height = len(signature)
-            garment_width = np.max(signature)
+
+            garment_width = float(np.max(np.abs(signature)))
 
             if garment_width == 0:
-                garment_width = 1
+                garment_width = 1.0
 
             for event_index, event in enumerate(sequence):
 
                 records.append({
 
-        # ==================================================
-        # Identity
-        # ==================================================
-    
-        "event_id": f"{garment_name}_{event_index}",
-    
-        "garment": garment_name,
-    
-        "event_index": event_index,
-    
-        # ==================================================
-        # Symbol
-        # ==================================================
-    
-        "kind": event.kind,
-    
-        # ==================================================
-        # Geometry
-        # ==================================================
-    
-        "start": event.start,
-        "end": event.end,
-    
-        "length": event.length,
+                    # ---------------------------------
+                    # Identity
+                    # ---------------------------------
 
-        "center": event.center,
-        
-        "relative_position":
-        event.center / garment_height,
-        
-        "length_ratio":
-        event.length / garment_height,
-        
-        "amplitude_ratio":
-        event.amplitude / garment_width,
-    
-        # ==================================================
-        # Differential Geometry
-        # ==================================================
-    
-        "mean_gradient": event.mean_gradient,
-        "max_gradient": event.max_gradient,
-    
-        "mean_curvature": event.mean_curvature,
-        "max_curvature": event.max_curvature,
-    
-        # ==================================================
-        # Position
-        # ==================================================
-    
-        "relative_position": event.center / garment_height,
-    }) 
-                
+                    "event_id":
+                        f"{garment_name}_{event_index}",
+
+                    "garment":
+                        garment_name,
+
+                    "event_index":
+                        event_index,
+
+                    # ---------------------------------
+                    # Symbol
+                    # ---------------------------------
+
+                    "kind":
+                        event.kind,
+
+                    # ---------------------------------
+                    # Position
+                    # ---------------------------------
+
+                    "start":
+                        event.start,
+
+                    "end":
+                        event.end,
+
+                    "center":
+                        event.center,
+
+                    "relative_position":
+                        event.center / garment_height,
+
+                    # ---------------------------------
+                    # Geometry
+                    # ---------------------------------
+
+                    "length":
+                        event.length,
+
+                    "length_ratio":
+                        event.length / garment_height,
+
+                    "amplitude":
+                        event.amplitude,
+
+                    "amplitude_ratio":
+                        abs(event.amplitude) / garment_width,
+
+                    # ---------------------------------
+                    # Differential Geometry
+                    # ---------------------------------
+
+                    "mean_gradient":
+                        event.mean_gradient,
+
+                    "max_gradient":
+                        event.max_gradient,
+
+                    "mean_curvature":
+                        event.mean_curvature,
+
+                    "max_curvature":
+                        event.max_curvature,
+
+                })
+
+        self.df = pd.DataFrame(records)
+
+        return self.df
+
     # =================================================
     # Summary
     # =================================================
@@ -172,9 +192,10 @@ class EventStatistics:
 
         for sequence in self.sequences:
 
-            kinds = sequence.kinds
-
-            for a, b in zip(kinds[:-1], kinds[1:]):
+            for a, b in zip(
+                sequence.kinds[:-1],
+                sequence.kinds[1:]
+            ):
 
                 transitions[(a, b)] += 1
 
@@ -189,16 +210,14 @@ class EventStatistics:
         return [
 
             "length_ratio",
+            "amplitude_ratio",
             "relative_position",
-            "amplitude",
+
             "mean_gradient",
             "max_gradient",
+
             "mean_curvature",
             "max_curvature",
-            "persistence",
-            "strength",
-            "confidence",
-            "scale",
 
         ]
 
@@ -207,3 +226,14 @@ class EventStatistics:
         return self.df[
             self.feature_columns()
         ].to_numpy()
+
+    # =================================================
+    # Export
+    # =================================================
+
+    def export_csv(self, filename):
+
+        self.df.to_csv(
+            filename,
+            index=False,
+        )
