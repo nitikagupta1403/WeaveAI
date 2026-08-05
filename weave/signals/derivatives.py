@@ -1,0 +1,5 @@
+gradient()
+
+curvature()
+
+angle()
