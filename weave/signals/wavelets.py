@@ -1,0 +1,7 @@
+decompose()
+
+reconstruct()
+
+energy()
+
+entropy()
