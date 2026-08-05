@@ -42,16 +42,15 @@ class Garment:
     """
     Represents a single garment sketch.
 
-    All derived geometric information is computed
+    All derived representations are computed
     lazily and cached.
     """
 
-    def __init__(self, binary, name=None,):
+    def __init__(self, binary, name=None):
 
         # ============================================
         # Original Sketch
         # ============================================
-
 
         self.binary = binary
         self.name = name
@@ -116,7 +115,6 @@ class Garment:
     def compute_geometry(self):
 
         if self._geometry is not None:
-
             return self._geometry
 
         geometry = Geometry()
@@ -143,16 +141,26 @@ class Garment:
 
         geometry.sequence = analyzer.analyze()
 
-        from dataclasses import replace
+        # --------------------------------------------
+        # Assign event IDs
+        # --------------------------------------------
+
+        garment_name = self.name or "garment"
+
+        geometry.sequence.garment = garment_name
 
         geometry.sequence.events = [
-        
+
             replace(
+
                 event,
-                garment_id=self.name,
-                event_id=f"{self.name}_{i}",
+
+                garment_id=garment_name,
+
+                event_id=f"{garment_name}_{i}",
+
             )
-        
+
             for i, event in enumerate(geometry.sequence)
 
         ]
@@ -241,6 +249,7 @@ class Garment:
 
         print("Garment")
         print("----------------------")
+        print(f"Name             : {self.name}")
         print(f"Signature Length : {len(self.signature)}")
         print(f"Events           : {len(self.geometry)}")
         print(f"Landmarks        : {len(self.landmarks)}")
