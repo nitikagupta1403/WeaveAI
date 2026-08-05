@@ -1,22 +1,26 @@
 """
-Garment abstraction for WeaveAI.
+Symbolic geometry representation for WeaveAI.
 
-Garment orchestrates the complete symbolic
-geometry pipeline.
-
-Binary
-    ↓
-Silhouette
+Signal
     ↓
 Width Signature
     ↓
 Candidate Events
     ↓
-Persistence Analysis
+Persistent Geometry Events
     ↓
-GeometrySequence
+Geometry Sequence
     ↓
-Geometry
+Primitive Sentence
+    ↓
+Primitive Families
+    ↓
+Transition Graph
+    ↓
+Sketch Graph
+
+Geometry is the symbolic intermediate
+representation (IR) used throughout WeaveAI.
 """
 
 from collections import Counter
@@ -27,192 +31,147 @@ from .events import GeometrySequence
 
 
 class Geometry:
-    ...
     """
-    Represents one garment sketch.
+    Symbolic representation of one garment.
 
-    All derived symbolic representations are
-    computed lazily and cached.
+    Geometry owns the GeometrySequence and all
+    higher-level symbolic structures derived from it.
     """
 
-    def __init__(self, binary, name=None):
+    def __init__(self):
 
-        self.binary = binary
-        self.name = name
+        # =================================================
+        # Signal
+        # =================================================
 
-        # ==========================================
-        # Silhouette
-        # ==========================================
+        self.signature = None
 
-        self.left_boundary = None
-        self.right_boundary = None
+        # =================================================
+        # Symbolic Geometry
+        # =================================================
 
-        # ==========================================
-        # Cached representations
-        # ==========================================
+        self.sequence = GeometrySequence()
 
-        self._signature = None
-        self._geometry = None
+        # =================================================
+        # Learned Representation
+        # =================================================
 
-        self._landmarks = None
-        self._regions = None
+        self.prototype_curves = None
 
-    # =================================================
-    # Silhouette
-    # =================================================
+        # =================================================
+        # Grammar
+        # =================================================
 
-    def compute_ssa(self):
+        self.transition_graph = nx.DiGraph()
 
-        if self.left_boundary is None:
+        # =================================================
+        # Sketch Graph
+        # =================================================
 
-            self.left_boundary, self.right_boundary = ssa(
-                self.binary
-            )
+        self.sketch_graph = nx.DiGraph()
 
     # =================================================
-    # Width Signature
+    # Convenience Properties
     # =================================================
-
-    def compute_signature(self):
-
-        if self._signature is None:
-
-            self.compute_ssa()
-
-            self._signature = width_signature(
-                self.left_boundary,
-                self.right_boundary,
-            )
-
-        return self._signature
 
     @property
-    def signature(self):
+    def events(self):
 
-        return self.compute_signature()
+        return self.sequence.events
+
+    @property
+    def primitive_sentence(self):
+
+        return self.sequence.primitive_sentence
+
+    @property
+    def family_sentence(self):
+
+        return self.sequence.family_sentence
+
+    @property
+    def grammar_sentence(self):
+
+        return self.sequence.grammar_sentence
+
+    @property
+    def primitive_counts(self):
+
+        return Counter(self.primitive_sentence)
+
+    @property
+    def family_counts(self):
+
+        return Counter(self.family_sentence)
+
+    @property
+    def feature_matrix(self):
+
+        return self.sequence.feature_matrix
 
     # =================================================
-    # Symbolic Geometry
+    # Graph Construction
     # =================================================
 
-    def compute_geometry(self):
+    def build_transition_graph(self):
+        """
+        Build a primitive transition graph.
+        """
 
-        if self._geometry is not None:
-            return self._geometry
+        G = nx.DiGraph()
 
-        geometry = Geometry()
+        for a, b in self.sequence.transitions:
 
-        geometry.signature = self.signature
+            if G.has_edge(a, b):
 
-        # ------------------------------------------
-        # Candidate Detection
-        # ------------------------------------------
+                G[a][b]["weight"] += 1
 
-        candidates = CandidateDetector(
-            self.signature
-        ).detect()
+            else:
 
-        # ------------------------------------------
-        # Persistence Analysis
-        # ------------------------------------------
+                G.add_edge(a, b, weight=1)
 
-        sequence = PersistenceAnalyzer(
-            candidates
-        ).analyze()
+        self.transition_graph = G
 
-        # ------------------------------------------
-        # Assign garment + event ids
-        # ------------------------------------------
+        return G
 
-        sequence.garment = self.name
+    # =================================================
 
-        sequence.events = [
+    def build_sketch_graph(self):
+        """
+        Build an event-level sketch graph.
+        """
 
-            replace(
+        G = nx.DiGraph()
 
-                event,
+        for i, event in enumerate(self.events):
 
-                garment_id=self.name,
+            node = event.event_id or f"E{i}"
 
-                event_id=f"{self.name}_{i}"
+            G.add_node(
+
+                node,
+
+                kind=event.kind,
+                primitive=event.primitive,
+                family=event.primitive_family,
+                grammar_role=event.grammar_role,
+
+                start=event.start,
+                end=event.end,
+                center=event.center,
+
+                length=event.length,
+                amplitude=event.amplitude,
 
             )
 
-            for i, event in enumerate(sequence)
+        for a, b in zip(self.events[:-1], self.events[1:]):
 
-        ]
+            G.add_edge(a.event_id, b.event_id)
 
-        geometry.sequence = sequence
+        self.sketch_graph = G
 
-        self._geometry = geometry
-
-        return geometry
-
-    @property
-    def geometry(self):
-
-        return self.compute_geometry()
-
-    # =================================================
-    # Landmarks
-    # =================================================
-
-    def compute_landmarks(self):
-
-        if self._landmarks is None:
-
-            detector = LandmarkDetector(
-                self.signature
-            )
-
-            self._landmarks = detector.detect()
-
-        return self._landmarks
-
-    @property
-    def landmarks(self):
-
-        return self.compute_landmarks()
-
-    # =================================================
-    # Regions
-    # =================================================
-
-    def compute_regions(self):
-
-        if self._regions is None:
-
-            detector = RegionDetector(
-                self.signature,
-                self.landmarks,
-            )
-
-            self._regions = detector.detect()
-
-        return self._regions
-
-    @property
-    def regions(self):
-
-        return self.compute_regions()
-
-    # =================================================
-    # Visualization
-    # =================================================
-
-    def plot_signature(self):
-
-        plot_width_signature(
-            self.signature
-        )
-
-    def plot_landmarks(self):
-
-        plot_landmarks(
-            self.signature,
-            self.landmarks,
-            regions=self.regions,
-        )
+        return G
 
     # =================================================
     # Summary
@@ -220,10 +179,28 @@ class Geometry:
 
     def summary(self):
 
-        print("Garment")
-        print("----------------------")
-        print(f"Name             : {self.name}")
-        print(f"Signature Length : {len(self.signature)}")
-        print(f"Events           : {len(self.geometry)}")
-        print(f"Landmarks        : {len(self.landmarks)}")
-        print(f"Regions          : {len(self.regions)}")
+        print("Geometry")
+        print("--------------------")
+        print(f"Events      : {len(self.events)}")
+        print(f"Primitives  : {len(self.primitive_counts)}")
+        print(f"Families    : {len(self.family_counts)}")
+
+    # =================================================
+
+    def __len__(self):
+
+        return len(self.sequence)
+
+    def __iter__(self):
+
+        return iter(self.sequence)
+
+    def __getitem__(self, index):
+
+        return self.sequence[index]
+
+    # =================================================
+
+    def __repr__(self):
+
+        return f"Geometry({len(self.sequence)} events)"
