@@ -68,8 +68,7 @@ class PersistenceAnalyzer:
     ) -> GeometryEvent:
 
         return GeometryEvent(
-
-            event_id=f"E{index}",
+            event_id=None,
 
             garment_id=self.garment,
 
