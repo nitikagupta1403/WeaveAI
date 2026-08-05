@@ -40,31 +40,27 @@ from .visualization import (
 
 class Garment:
     """
-    Represents a single garment sketch.
+    Represents one garment sketch.
 
-    All derived representations are computed
-    lazily and cached.
+    All derived symbolic representations are
+    computed lazily and cached.
     """
 
     def __init__(self, binary, name=None):
 
-        # ============================================
-        # Original Sketch
-        # ============================================
-
         self.binary = binary
         self.name = name
 
-        # ============================================
+        # ==========================================
         # Silhouette
-        # ============================================
+        # ==========================================
 
         self.left_boundary = None
         self.right_boundary = None
 
-        # ============================================
-        # Cached Representations
-        # ============================================
+        # ==========================================
+        # Cached representations
+        # ==========================================
 
         self._signature = None
         self._geometry = None
@@ -95,10 +91,8 @@ class Garment:
             self.compute_ssa()
 
             self._signature = width_signature(
-
                 self.left_boundary,
                 self.right_boundary,
-
             )
 
         return self._signature
@@ -121,35 +115,19 @@ class Garment:
 
         geometry.signature = self.signature
 
-        # --------------------------------------------
-        # Candidate Detection
-        # --------------------------------------------
-
-        detector = CandidateDetector(
+        candidates = CandidateDetector(
             self.signature
-        )
+        ).detect()
 
-        candidates = detector.detect()
-
-        # --------------------------------------------
-        # Persistence Analysis
-        # --------------------------------------------
-
-        analyzer = PersistenceAnalyzer(
+        sequence = PersistenceAnalyzer(
             candidates
-        )
-
-        geometry.sequence = analyzer.analyze()
-
-        # --------------------------------------------
-        # Assign event IDs
-        # --------------------------------------------
+        ).analyze()
 
         garment_name = self.name or "garment"
 
-        geometry.sequence.garment = garment_name
+        sequence.garment = garment_name
 
-        geometry.sequence.events = [
+        sequence.events = [
 
             replace(
 
@@ -161,9 +139,11 @@ class Garment:
 
             )
 
-            for i, event in enumerate(geometry.sequence)
+            for i, event in enumerate(sequence)
 
         ]
+
+        geometry.sequence = sequence
 
         self._geometry = geometry
 
@@ -204,10 +184,8 @@ class Garment:
         if self._regions is None:
 
             detector = RegionDetector(
-
                 self.signature,
                 self.landmarks,
-
             )
 
             self._regions = detector.detect()
@@ -232,13 +210,9 @@ class Garment:
     def plot_landmarks(self):
 
         plot_landmarks(
-
             self.signature,
-
             self.landmarks,
-
             regions=self.regions,
-
         )
 
     # =================================================
