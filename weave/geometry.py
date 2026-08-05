@@ -19,30 +19,15 @@ GeometrySequence
 Geometry
 """
 
-from dataclasses import replace
-
 from collections import Counter
 
 import networkx as nx
 
 from .events import GeometrySequence
 
-from .silhouette import ssa
-from .signature import width_signature
 
-from .parser.candidate import CandidateDetector
-from .parser.persistence import PersistenceAnalyzer
-
-from .landmarks import LandmarkDetector
-from .segmentation import RegionDetector
-
-from .visualization import (
-    plot_width_signature,
-    plot_landmarks,
-)
-
-
-class Garment:
+class Geometry:
+    ...
     """
     Represents one garment sketch.
 
