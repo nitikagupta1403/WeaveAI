@@ -9,10 +9,12 @@ GeometryEvent
     ↓
 GeometrySequence
     ↓
+Geometry
+    ↓
 EventStatistics
 
-This module aggregates GeometrySequences from
-many garments and constructs the statistical
+This module aggregates symbolic Geometry objects
+from many garments and constructs the statistical
 corpus used for
 
     • descriptive statistics
@@ -27,7 +29,7 @@ from collections import Counter
 import numpy as np
 import pandas as pd
 
-from .events import GeometrySequence
+from .geometry import Geometry
 
 
 # =====================================================
@@ -45,8 +47,7 @@ class EventStatistics:
     def __init__(self):
 
         self.garment_names = []
-        self.signatures = []
-        self.sequences = []
+        self.geometries = []
 
         self.df = None
 
@@ -56,14 +57,12 @@ class EventStatistics:
 
     def add(
         self,
-        garment_name,
-        signature,
-        sequence: GeometrySequence,
+        garment_name: str,
+        geometry: Geometry,
     ):
 
         self.garment_names.append(garment_name)
-        self.signatures.append(signature)
-        self.sequences.append(sequence)
+        self.geometries.append(geometry)
 
     # =================================================
     # Build dataframe
@@ -73,17 +72,21 @@ class EventStatistics:
 
         records = []
 
-        for garment_name, signature, sequence in zip(
+        for garment_name, geometry in zip(
 
             self.garment_names,
-            self.signatures,
-            self.sequences,
+            self.geometries,
 
         ):
 
+            signature = geometry.signature
+            sequence = geometry.sequence
+
             garment_height = len(signature)
 
-            garment_width = float(np.max(np.abs(signature)))
+            garment_width = float(
+                np.max(np.abs(signature))
+            )
 
             if garment_width == 0:
                 garment_width = 1.0
@@ -106,11 +109,20 @@ class EventStatistics:
                         event_index,
 
                     # ---------------------------------
-                    # Symbol
+                    # Symbolic
                     # ---------------------------------
 
                     "kind":
                         event.kind,
+
+                    "primitive":
+                        event.primitive,
+
+                    "primitive_family":
+                        event.primitive_family,
+
+                    "grammar_role":
+                        event.grammar_role,
 
                     # ---------------------------------
                     # Position
@@ -160,6 +172,22 @@ class EventStatistics:
                     "max_curvature":
                         event.max_curvature,
 
+                    # ---------------------------------
+                    # Persistence
+                    # ---------------------------------
+
+                    "persistence":
+                        event.persistence,
+
+                    "strength":
+                        event.strength,
+
+                    "confidence":
+                        event.confidence,
+
+                    "scale":
+                        event.scale,
+
                 })
 
         self.df = pd.DataFrame(records)
@@ -175,29 +203,40 @@ class EventStatistics:
         return self.df.describe()
 
     # =================================================
-    # Event Counts
+    # Counts
     # =================================================
 
     def event_counts(self):
 
-        return Counter(self.df["kind"])
+        return Counter(
+            self.df["kind"]
+        )
+
+    def primitive_counts(self):
+
+        return Counter(
+            self.df["primitive"]
+        )
+
+    def family_counts(self):
+
+        return Counter(
+            self.df["primitive_family"]
+        )
 
     # =================================================
-    # Transition Counts
+    # Grammar Statistics
     # =================================================
 
     def transition_counts(self):
 
         transitions = Counter()
 
-        for sequence in self.sequences:
+        for geometry in self.geometries:
 
-            for a, b in zip(
-                sequence.kinds[:-1],
-                sequence.kinds[1:]
-            ):
+            for transition in geometry.sequence.transitions:
 
-                transitions[(a, b)] += 1
+                transitions[transition] += 1
 
         return transitions
 
@@ -205,7 +244,8 @@ class EventStatistics:
     # Feature Matrix
     # =================================================
 
-    def feature_columns(self):
+    @staticmethod
+    def feature_columns():
 
         return [
 
@@ -228,10 +268,25 @@ class EventStatistics:
         ].to_numpy()
 
     # =================================================
+    # Convenience
+    # =================================================
+
+    def primitives(self):
+
+        return self.df["primitive"].to_numpy()
+
+    def families(self):
+
+        return self.df["primitive_family"].to_numpy()
+
+    # =================================================
     # Export
     # =================================================
 
-    def export_csv(self, filename):
+    def export_csv(
+        self,
+        filename,
+    ):
 
         self.df.to_csv(
             filename,
