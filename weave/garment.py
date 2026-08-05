@@ -19,13 +19,14 @@ GeometrySequence
 Geometry
 """
 
+
 from .geometry import Geometry
 
 from .silhouette import ssa
 from .signature import width_signature
 
-from .candidate import CandidateDetector
-from .persistence import PersistenceAnalyzer
+from .parser.candidate import CandidateDetector
+from .parser.persistence import PersistenceAnalyzer
 
 from .landmarks import LandmarkDetector
 from .segmentation import RegionDetector
