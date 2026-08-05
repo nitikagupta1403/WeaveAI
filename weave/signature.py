@@ -14,6 +14,18 @@ import numpy as np
 
 from scipy.interpolate import interp1d
 
+# =====================================================
+#Boundary points Conversion
+# =====================================================
+
+def boundary_x(boundary):
+    """
+    Convert boundary points (x,y)
+    into a 1D x-coordinate signal.
+    """
+    boundary = np.asarray(boundary)
+    return boundary[:, 0]
+
 
 # =====================================================
 # Width Signature
