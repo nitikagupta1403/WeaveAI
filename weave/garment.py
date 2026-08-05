@@ -1,3 +1,13 @@
+"""
+Garment abstraction for WeaveAI.
+
+Garment is responsible for orchestrating the
+complete geometric pipeline while exposing
+a simple API to notebooks.
+
+Nothing is computed until it is first needed.
+"""
+
 from .geometry import Geometry
 from .silhouette import ssa
 from .signature import width_signature
@@ -13,58 +23,45 @@ from .visualization import (
 
 class Garment:
     """
-    Represents one garment sketch and all geometric
-    information derived from it.
+    Represents one garment sketch.
+
+    The garment owns the binary image and lazily
+    computes all derived geometric information.
+
+    Binary
+        ↓
+    Silhouette
+        ↓
+    Width Signature
+        ↓
+    Geometry
+        ↓
+    Landmarks
+        ↓
+    Regions
     """
 
     def __init__(self, binary):
 
-        # ==================================================
-        # Original Sketch
-        # ==================================================
+        # ============================================
+        # Original sketch
+        # ============================================
 
         self.binary = binary
 
-        # ==================================================
-        # Global Geometry
-        # ==================================================
+        # ============================================
+        # Cached geometry
+        # ============================================
 
-        self.geometry = Geometry()
-
-        # ==================================================
-        # Silhouette
-        # ==================================================
+        self._geometry = None
 
         self.left_boundary = None
         self.right_boundary = None
 
-        # ==================================================
-        # Width Signature
-        # ==================================================
+        self._signature = None
 
-        self.signature = None
-
-        # ==================================================
-        # Landmarks
-        # ==================================================
-
-        self.landmark_detector = None
-        self.landmarks = None
-
-        # ==================================================
-        # Regions
-        # ==================================================
-
-        self.region_detector = None
-        self.regions = None
-
-    # ==================================================
-    # Geometry
-    # ==================================================
-
-    def compute_geometry(self):
-
-        self.geometry.compute(self.binary)
+        self._landmarks = None
+        self._regions = None
 
     # ==================================================
     # Silhouette
@@ -72,23 +69,54 @@ class Garment:
 
     def compute_ssa(self):
 
-        self.left_boundary, self.right_boundary = ssa(
-            self.binary
-        )
+        if self.left_boundary is None:
+
+            self.left_boundary, self.right_boundary = ssa(
+                self.binary
+            )
 
     # ==================================================
-    # Width Signature
+    # Signature
     # ==================================================
 
     def compute_signature(self):
 
-        if self.left_boundary is None:
+        if self._signature is None:
+
             self.compute_ssa()
 
-        self.signature = width_signature(
-            self.left_boundary,
-            self.right_boundary
-        )
+            self._signature = width_signature(
+                self.left_boundary,
+                self.right_boundary
+            )
+
+        return self._signature
+
+    @property
+    def signature(self):
+
+        return self.compute_signature()
+
+    # ==================================================
+    # Geometry
+    # ==================================================
+
+    def compute_geometry(self):
+
+        if self._geometry is None:
+
+            geometry = Geometry()
+
+            geometry.compute(self.binary)
+
+            self._geometry = geometry
+
+        return self._geometry
+
+    @property
+    def geometry(self):
+
+        return self.compute_geometry()
 
     # ==================================================
     # Landmarks
@@ -96,14 +124,20 @@ class Garment:
 
     def compute_landmarks(self):
 
-        if self.signature is None:
-            self.compute_signature()
+        if self._landmarks is None:
 
-        self.landmark_detector = LandmarkDetector(
-            self.signature
-        )
+            detector = LandmarkDetector(
+                self.signature
+            )
 
-        self.landmarks = self.landmark_detector.detect()
+            self._landmarks = detector.detect()
+
+        return self._landmarks
+
+    @property
+    def landmarks(self):
+
+        return self.compute_landmarks()
 
     # ==================================================
     # Regions
@@ -111,15 +145,21 @@ class Garment:
 
     def compute_regions(self):
 
-        if self.landmarks is None:
-            self.compute_landmarks()
+        if self._regions is None:
 
-        self.region_detector = RegionDetector(
-            self.signature,
-            self.landmarks
-        )
+            detector = RegionDetector(
+                self.signature,
+                self.landmarks,
+            )
 
-        self.regions = self.region_detector.detect()
+            self._regions = detector.detect()
+
+        return self._regions
+
+    @property
+    def regions(self):
+
+        return self.compute_regions()
 
     # ==================================================
     # Visualization
@@ -127,24 +167,27 @@ class Garment:
 
     def plot_signature(self):
 
-        if self.signature is None:
-            self.compute_signature()
-
-        if self.landmarks is None:
-
-            plot_width_signature(
-                self.signature
-            )
-
-            return
+        plot_width_signature(
+            self.signature
+        )
 
     def plot_landmarks(self):
 
-        if self.landmarks is None:
-            self.compute_landmarks()
-    
         plot_landmarks(
             self.signature,
             self.landmarks,
-            regions=self.regions
+            regions=self.regions,
         )
+
+    # ==================================================
+    # Summary
+    # ==================================================
+
+    def summary(self):
+
+        print("Garment")
+        print("-------")
+        print(f"Signature Length : {len(self.signature)}")
+        print(f"Events           : {len(self.geometry.sequence)}")
+        print(f"Landmarks        : {len(self.landmarks)}")
+        print(f"Regions          : {len(self.regions)}")
