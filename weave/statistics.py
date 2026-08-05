@@ -84,6 +84,10 @@ class EventStatistics:
         ):
 
             garment_height = len(signature)
+            garment_width = np.max(signature)
+
+            if garment_width == 0:
+                garment_width = 1
 
             for event_index, event in enumerate(sequence):
 
@@ -112,13 +116,18 @@ class EventStatistics:
         "start": event.start,
         "end": event.end,
     
-        "center": event.center,
-    
         "length": event.length,
-    
-        "length_ratio": event.length / garment_height,
-    
-        "amplitude": event.amplitude,
+
+        "center": event.center,
+        
+        "relative_position":
+        event.center / garment_height,
+        
+        "length_ratio":
+        event.length / garment_height,
+        
+        "amplitude_ratio":
+        event.amplitude / garment_width,
     
         # ==================================================
         # Differential Geometry
