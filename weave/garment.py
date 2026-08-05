@@ -139,6 +139,20 @@ class Garment:
 
         geometry.sequence = analyzer.analyze()
 
+        from dataclasses import replace
+
+        geometry.sequence.events = [
+        
+            replace(
+                event,
+                garment_id=self.name,
+                event_id=f"{self.name}_{i}",
+            )
+        
+            for i, event in enumerate(geometry.sequence)
+
+        ]
+
         self._geometry = geometry
 
         return geometry
