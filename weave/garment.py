@@ -1,16 +1,31 @@
 """
 Garment abstraction for WeaveAI.
 
-Garment is responsible for orchestrating the
-complete geometric pipeline while exposing
-a simple API to notebooks.
+Garment orchestrates the complete symbolic
+geometry pipeline.
 
-Nothing is computed until it is first needed.
+Binary
+    ↓
+Silhouette
+    ↓
+Width Signature
+    ↓
+Candidate Events
+    ↓
+Persistence Analysis
+    ↓
+GeometrySequence
+    ↓
+Geometry
 """
 
 from .geometry import Geometry
+
 from .silhouette import ssa
 from .signature import width_signature
+
+from .candidate import CandidateDetector
+from .persistence import PersistenceAnalyzer
 
 from .landmarks import LandmarkDetector
 from .segmentation import RegionDetector
@@ -22,50 +37,23 @@ from .visualization import (
 
 
 class Garment:
-    """
-    Represents one garment sketch.
-
-    The garment owns the binary image and lazily
-    computes all derived geometric information.
-
-    Binary
-        ↓
-    Silhouette
-        ↓
-    Width Signature
-        ↓
-    Geometry
-        ↓
-    Landmarks
-        ↓
-    Regions
-    """
 
     def __init__(self, binary):
 
-        # ============================================
-        # Original sketch
-        # ============================================
-
         self.binary = binary
-
-        # ============================================
-        # Cached geometry
-        # ============================================
-
-        self._geometry = None
 
         self.left_boundary = None
         self.right_boundary = None
 
         self._signature = None
+        self._geometry = None
 
         self._landmarks = None
         self._regions = None
 
-    # ==================================================
+    # =================================================
     # Silhouette
-    # ==================================================
+    # =================================================
 
     def compute_ssa(self):
 
@@ -75,9 +63,9 @@ class Garment:
                 self.binary
             )
 
-    # ==================================================
-    # Signature
-    # ==================================================
+    # =================================================
+    # Width Signature
+    # =================================================
 
     def compute_signature(self):
 
@@ -86,8 +74,10 @@ class Garment:
             self.compute_ssa()
 
             self._signature = width_signature(
+
                 self.left_boundary,
                 self.right_boundary
+
             )
 
         return self._signature
@@ -97,17 +87,33 @@ class Garment:
 
         return self.compute_signature()
 
-    # ==================================================
-    # Geometry
-    # ==================================================
+    # =================================================
+    # Symbolic Geometry
+    # =================================================
 
     def compute_geometry(self):
 
         if self._geometry is None:
 
+            detector = CandidateDetector(
+                self.signature
+            )
+
+            candidates = detector.detect()
+
+            analyzer = PersistenceAnalyzer(
+                candidates
+            )
+
+            sequence = analyzer.analyze()
+
             geometry = Geometry()
 
-            geometry.compute(self.binary)
+            geometry.signature = self.signature
+            geometry.sequence = sequence
+
+            geometry.build_transition_graph()
+            geometry.build_sketch_graph()
 
             self._geometry = geometry
 
@@ -118,9 +124,9 @@ class Garment:
 
         return self.compute_geometry()
 
-    # ==================================================
+    # =================================================
     # Landmarks
-    # ==================================================
+    # =================================================
 
     def compute_landmarks(self):
 
@@ -139,17 +145,19 @@ class Garment:
 
         return self.compute_landmarks()
 
-    # ==================================================
+    # =================================================
     # Regions
-    # ==================================================
+    # =================================================
 
     def compute_regions(self):
 
         if self._regions is None:
 
             detector = RegionDetector(
+
                 self.signature,
                 self.landmarks,
+
             )
 
             self._regions = detector.detect()
@@ -161,9 +169,9 @@ class Garment:
 
         return self.compute_regions()
 
-    # ==================================================
+    # =================================================
     # Visualization
-    # ==================================================
+    # =================================================
 
     def plot_signature(self):
 
@@ -174,20 +182,24 @@ class Garment:
     def plot_landmarks(self):
 
         plot_landmarks(
+
             self.signature,
+
             self.landmarks,
+
             regions=self.regions,
+
         )
 
-    # ==================================================
+    # =================================================
     # Summary
-    # ==================================================
+    # =================================================
 
     def summary(self):
 
         print("Garment")
-        print("-------")
+        print("---------------------")
         print(f"Signature Length : {len(self.signature)}")
-        print(f"Events           : {len(self.geometry.sequence)}")
+        print(f"Events           : {len(self.geometry)}")
         print(f"Landmarks        : {len(self.landmarks)}")
         print(f"Regions          : {len(self.regions)}")
