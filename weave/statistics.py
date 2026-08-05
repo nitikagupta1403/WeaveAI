@@ -89,75 +89,54 @@ class EventStatistics:
 
                 records.append({
 
-                    # ---------------------------------
-                    # Identity
-                    # ---------------------------------
-
-                    "garment": garment_name,
-                    "event_index": event_index,
-                    "kind": event.kind,
-
-                    # ---------------------------------
-                    # Position
-                    # ---------------------------------
-
-                    "start": event.start,
-                    "end": event.end,
-                    "center": event.center,
-
-                    "relative_position":
-                        event.center / garment_height,
-
-                    # ---------------------------------
-                    # Geometry
-                    # ---------------------------------
-
-                    "length": event.length,
-
-                    "length_ratio":
-                        event.length / garment_height,
-
-                    "amplitude":
-                        event.amplitude,
-
-                    # ---------------------------------
-                    # Differential Geometry
-                    # ---------------------------------
-
-                    "mean_gradient":
-                        event.mean_gradient,
-
-                    "max_gradient":
-                        event.max_gradient,
-
-                    "mean_curvature":
-                        event.mean_curvature,
-
-                    "max_curvature":
-                        event.max_curvature,
-
-                    # ---------------------------------
-                    # Persistence
-                    # ---------------------------------
-
-                    "persistence":
-                        event.persistence,
-
-                    "strength":
-                        event.strength,
-
-                    "confidence":
-                        event.confidence,
-
-                    "scale":
-                        event.scale,
-
-                })
-
-        self.df = pd.DataFrame(records)
-
-        return self.df
-
+        # ==================================================
+        # Identity
+        # ==================================================
+    
+        "event_id": f"{garment_name}_{event_index}",
+    
+        "garment": garment_name,
+    
+        "event_index": event_index,
+    
+        # ==================================================
+        # Symbol
+        # ==================================================
+    
+        "kind": event.kind,
+    
+        # ==================================================
+        # Geometry
+        # ==================================================
+    
+        "start": event.start,
+        "end": event.end,
+    
+        "center": event.center,
+    
+        "length": event.length,
+    
+        "length_ratio": event.length / garment_height,
+    
+        "amplitude": event.amplitude,
+    
+        # ==================================================
+        # Differential Geometry
+        # ==================================================
+    
+        "mean_gradient": event.mean_gradient,
+        "max_gradient": event.max_gradient,
+    
+        "mean_curvature": event.mean_curvature,
+        "max_curvature": event.max_curvature,
+    
+        # ==================================================
+        # Position
+        # ==================================================
+    
+        "relative_position": event.center / garment_height,
+    }) 
+                
     # =================================================
     # Summary
     # =================================================
