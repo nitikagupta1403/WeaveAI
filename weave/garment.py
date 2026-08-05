@@ -19,6 +19,8 @@ GeometrySequence
 Geometry
 """
 
+from dataclasses import replace
+
 from .geometry import Geometry
 
 from .silhouette import ssa
