@@ -1,12 +1,13 @@
 """
-Corpus-level statistics for persistent
-geometric events.
+Corpus-level statistics for the
+WeaveAI Sketch Graph.
 
-This module aggregates GeometrySequences
-from many garments and computes the
-statistical foundation used for
+StatisticsAnalyzer aggregates GeometrySequences
+from many garments and constructs the statistical
+foundation used for
 
-• event analysis
+• descriptive statistics
+• event visualization
 • clustering
 • grammar discovery
 • semantic learning
@@ -18,30 +19,33 @@ import numpy as np
 import pandas as pd
 
 from .events import (
-    GeometryEvent,
     GeometrySequence,
+    GeometryEvent
 )
 
 
+# =====================================================
+# Statistics Analyzer
+# =====================================================
+
 class StatisticsAnalyzer:
     """
-    Analyze persistent geometric events
-    across an entire garment corpus.
+    Analyze persistent GeometryEvents across
+    an entire garment corpus.
     """
 
     def __init__(self):
 
         self.records = []
+
         self.df = None
 
-    # ==================================================
-    # Add one garment
-    # ==================================================
+    # =================================================
 
     def add(
         self,
         garment_id,
-        sequence
+        sequence: GeometrySequence
     ):
         """
         Add one GeometrySequence to the corpus.
@@ -52,138 +56,55 @@ class StatisticsAnalyzer:
 
         total_length = sequence[-1].end
 
-        for i, event in enumerate(sequence):
+        if total_length == 0:
+            total_length = 1
 
-            self.records.append({
+        for index, event in enumerate(sequence):
 
-                "garment": garment_id,
+            row = event.as_dict()
 
-                "event_index": i,
+            row["garment"] = garment_id
 
-                "kind": event.kind,
+            row["event_index"] = index
 
-                "start": event.start,
+            row["center"] = event.center
 
-                "end": event.end,
+            row["relative_position"] = (
+                event.center / total_length
+            )
 
-                "center": event.center,
+            self.records.append(row)
 
-                "relative_position":
-                    event.center / total_length,
-
-                "length": event.length,
-
-                "amplitude":
-                    event.amplitude,
-
-                "mean_gradient":
-                    event.mean_gradient,
-
-                "max_gradient":
-                    event.max_gradient,
-
-                "mean_curvature":
-                    event.mean_curvature,
-
-                "max_curvature":
-                    event.max_curvature
-
-            })
-
-    # ==================================================
-    # Build DataFrame
-    # ==================================================
+    # =================================================
 
     def build(self):
+        """
+        Build the event dataframe.
+        """
 
-        self.df = pd.DataFrame(self.records)
+        self.df = pd.DataFrame(
+            self.records
+        )
 
         return self.df
 
-    # ==================================================
-    # Summary Statistics
-    # ==================================================
+    # =================================================
 
-    def summary(self):
-
-        if self.df is None:
-            self.build()
-
-        return self.df.describe()
-
-    # ==================================================
-    # Event Counts
-    # ==================================================
-
-    def event_counts(self):
+    @property
+    def dataframe(self):
 
         if self.df is None:
+
             self.build()
 
-        return Counter(
-            self.df["kind"]
-        )
+        return self.df
 
-    # ==================================================
-    # Grammar Sentence Counts
-    # ==================================================
+    # =================================================
 
-    def sentence_counts(
-        self,
-        sequences
-    ):
+    @property
+    def feature_columns(self):
 
-        counter = Counter()
-
-        for seq in sequences:
-
-            sentence = tuple(
-                event.kind
-                for event in seq
-            )
-
-            counter[sentence] += 1
-
-        return counter
-
-    # ==================================================
-    # Transition Statistics
-    # ==================================================
-
-    def transition_counts(self):
-
-        if self.df is None:
-            self.build()
-
-        counter = Counter()
-
-        for garment in self.df["garment"].unique():
-
-            df = self.df[
-                self.df["garment"] == garment
-            ]
-
-            kinds = df["kind"].tolist()
-
-            for a, b in zip(
-                kinds[:-1],
-                kinds[1:]
-            ):
-
-                counter[(a, b)] += 1
-
-        return counter
-
-    # ==================================================
-    # Feature Matrix
-    # ==================================================
-
-    def feature_matrix(self):
-
-        if self.df is None:
-            self.build()
-
-        columns = [
+        return [
 
             "length",
 
@@ -201,6 +122,111 @@ class StatisticsAnalyzer:
 
         ]
 
-        return self.df[
-            columns
-        ].to_numpy() 
+    # =================================================
+
+    def feature_matrix(self):
+        """
+        Event feature matrix used by
+        PCA and clustering.
+        """
+
+        return self.dataframe[
+            self.feature_columns
+        ].to_numpy()
+
+    # =================================================
+
+    def summary(self):
+        """
+        Descriptive statistics.
+        """
+
+        return self.dataframe.describe()
+
+    # =================================================
+
+    def event_counts(self):
+        """
+        Frequency of each event type.
+        """
+
+        return Counter(
+            self.dataframe["kind"]
+        )
+
+    # =================================================
+
+    def transition_counts(self):
+        """
+        Frequency of event transitions.
+        """
+
+        counter = Counter()
+
+        for garment in self.dataframe[
+            "garment"
+        ].unique():
+
+            df = self.dataframe[
+                self.dataframe["garment"]
+                == garment
+            ]
+
+            kinds = df["kind"].tolist()
+
+            for a, b in zip(
+                kinds[:-1],
+                kinds[1:]
+            ):
+
+                counter[(a, b)] += 1
+
+        return counter
+
+    # =================================================
+
+    def histogram(
+        self,
+        column,
+        bins=20
+    ):
+        """
+        Histogram values.
+        """
+
+        return np.histogram(
+
+            self.dataframe[column],
+
+            bins=bins
+
+        )
+
+    # =================================================
+
+    def correlation(self):
+        """
+        Feature correlation matrix.
+        """
+
+        return self.dataframe[
+            self.feature_columns
+        ].corr()
+
+    # =================================================
+
+    def export_csv(
+        self,
+        filename="events.csv"
+    ):
+        """
+        Save corpus.
+        """
+
+        self.dataframe.to_csv(
+
+            filename,
+
+            index=False
+
+        )
