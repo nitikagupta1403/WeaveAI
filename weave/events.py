@@ -11,7 +11,7 @@ combinations of GeometryEvents.
 # =====================================================
 # Candidate Event
 # =====================================================
-
+from dataclasses import dataclass
 @dataclass
 class CandidateEvent:
     """
