@@ -1,6 +1,41 @@
-from scipy.interpolate import interp1d
+"""
+Width signature utilities.
+
+This module provides functions for
+
+1. Computing the width signature from
+   left and right garment boundaries.
+
+2. Parameterizing (normalizing) the
+   signature onto a common geometric domain.
+"""
+
 import numpy as np
 
+from scipy.interpolate import interp1d
+
+
+# =====================================================
+# Width Signature
+# =====================================================
+
+def width_signature(
+    left_boundary,
+    right_boundary
+):
+    """
+    Compute garment width at every row.
+    """
+
+    left_boundary = np.asarray(left_boundary)
+    right_boundary = np.asarray(right_boundary)
+
+    return right_boundary - left_boundary
+
+
+# =====================================================
+# Signature Normalization
+# =====================================================
 
 def normalize_signature(
     signature,
@@ -11,8 +46,8 @@ def normalize_signature(
     common geometric domain.
 
     Every garment is represented by the same
-    number of samples irrespective of its
-    image resolution.
+    number of samples irrespective of image
+    resolution.
     """
 
     signature = np.asarray(signature)
@@ -29,10 +64,10 @@ def normalize_signature(
         n_samples
     )
 
-    f = interp1d(
+    interpolator = interp1d(
         x_old,
         signature,
         kind="cubic"
     )
 
-    return f(x_new)
+    return interpolator(x_new)
