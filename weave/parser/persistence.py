@@ -1,76 +1,115 @@
 import numpy as np
 
 from ..events import (
+
     CandidateEvent,
+    GeometryEvent,
     GeometrySequence,
+
 )
 
 
 class PersistenceAnalyzer:
+
     """
-    Removes unstable candidate events and
-    constructs a persistent GeometrySequence.
+    Converts temporary CandidateEvents into
+    persistent GeometryEvents.
     """
 
     def __init__(
+
         self,
+
         candidates,
+
         min_length=8,
+
         min_amplitude=3.0,
+
     ):
 
         self.candidates = candidates
+
         self.min_length = min_length
         self.min_amplitude = min_amplitude
 
-    # =====================================================
-    # Main API
-    # =====================================================
+    # =================================================
 
     def analyze(self):
 
         events = self.filter_small(
+
             self.candidates
+
         )
 
         events = self.merge_same_kind(
+
             events
+
         )
 
-        return GeometrySequence(events)
+        persistent = []
 
-    # =====================================================
-    # Stage 1
+        for event in events:
+
+            persistent.append(
+
+                GeometryEvent(
+
+                    kind=event.kind,
+
+                    start=event.start,
+                    end=event.end,
+
+                    length=event.length,
+                    amplitude=event.amplitude,
+
+                    mean_gradient=event.mean_gradient,
+                    max_gradient=event.max_gradient,
+
+                    mean_curvature=event.mean_curvature,
+                    max_curvature=event.max_curvature,
+
+                )
+
+            )
+
+        return GeometrySequence(
+
+            events=persistent
+
+        )
+
+    # =================================================
     # Remove insignificant events
-    # =====================================================
+    # =================================================
 
-    def filter_small(
-        self,
-        events
-    ):
+    def filter_small(self, events):
 
         persistent = []
 
         for event in events:
 
             if (
+
                 event.length >= self.min_length
+
                 and
+
                 abs(event.amplitude) >= self.min_amplitude
+
             ):
+
                 persistent.append(event)
 
         return persistent
 
-    # =====================================================
-    # Stage 2
+    # =================================================
     # Merge neighbouring events
-    # =====================================================
+    # =================================================
 
-    def merge_same_kind(
-        self,
-        events
-    ):
+    def merge_same_kind(self, events):
 
         if len(events) == 0:
             return []
@@ -94,29 +133,34 @@ class PersistenceAnalyzer:
 
                     amplitude=last.amplitude + event.amplitude,
 
-                    mean_gradient=np.mean(
-                        [
-                            last.mean_gradient,
-                            event.mean_gradient,
-                        ]
-                    ),
+                    mean_gradient=np.mean([
+
+                        last.mean_gradient,
+                        event.mean_gradient
+
+                    ]),
 
                     max_gradient=max(
+
                         last.max_gradient,
                         event.max_gradient,
+
                     ),
 
-                    mean_curvature=np.mean(
-                        [
-                            last.mean_curvature,
-                            event.mean_curvature,
-                        ]
-                    ),
+                    mean_curvature=np.mean([
+
+                        last.mean_curvature,
+                        event.mean_curvature,
+
+                    ]),
 
                     max_curvature=max(
+
                         last.max_curvature,
                         event.max_curvature,
+
                     ),
+
                 )
 
             else:
