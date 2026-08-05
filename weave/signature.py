@@ -11,19 +11,21 @@ This module provides functions for
 """
 
 import numpy as np
-
 from scipy.interpolate import interp1d
 
+
 # =====================================================
-#Boundary points Conversion
+# Boundary Projection
 # =====================================================
 
-def boundary_x(boundary):
+def boundary_to_signal(boundary):
     """
-    Convert boundary points (x,y)
+    Convert boundary points (x, y)
     into a 1D x-coordinate signal.
     """
+
     boundary = np.asarray(boundary)
+
     return boundary[:, 0]
 
 
@@ -39,10 +41,15 @@ def width_signature(
     Compute garment width at every row.
     """
 
-    left_boundary = np.asarray(left_boundary)
-    right_boundary = np.asarray(right_boundary)
+    left_signal = boundary_to_signal(
+        left_boundary
+    )
 
-    return right_boundary - left_boundary
+    right_signal = boundary_to_signal(
+        right_boundary
+    )
+
+    return right_signal - left_signal
 
 
 # =====================================================
@@ -54,12 +61,8 @@ def normalize_signature(
     n_samples=1024
 ):
     """
-    Parameterize a width signature onto a
-    common geometric domain.
-
-    Every garment is represented by the same
-    number of samples irrespective of image
-    resolution.
+    Parameterize a width signature onto
+    a common geometric domain.
     """
 
     signature = np.asarray(signature)
