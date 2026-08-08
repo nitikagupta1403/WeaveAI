@@ -52,3 +52,24 @@ Layer1
 Layer2
 Layer3
 Layer4
+
+
+
+
+
+### PCA Embedding Analysis
+
+**Method**
+- Extracted 2048-dimensional embeddings from a pretrained ResNet-50.
+- Sample: 32 sketches (2 randomly selected from each garment category).
+- Reduced dimensionality using PCA.
+
+**Observations**
+- The first two principal components explain approximately 20% of the embedding variance.
+- No clear category-wise clustering is observed.
+- Several local neighborhoods suggest visually similar sketches produce similar embeddings.
+- A few sketches appear as isolated outliers and will be investigated in later experiments.
+- The embedding space appears to remain highly high-dimensional.
+
+**Conclusion**
+A pretrained ImageNet ResNet-50 captures meaningful visual information from fashion sketches, but the representation is not naturally organized into well-separated garment categories. This motivates further analysis using Grad-CAM, perturbation studies, and sketch-specific representation learning.
