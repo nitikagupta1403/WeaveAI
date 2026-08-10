@@ -106,3 +106,55 @@ Accordingly, the first research question addressed in this section is:
 **Reviewed:** 10 August 2026
 
 **Next Section:** 3.1.2 Definition 1 (Geometry Event)
+
+### 3.1.2 Definition 1 (Geometry Event)
+
+Continuous garment contours exhibit geometric variations at multiple spatial scales. While some variations correspond to meaningful structural changes in garment geometry, others arise from minor drawing fluctuations, digitization artifacts, or stylistic differences between sketches. Consequently, constructing stable computational representations requires distinguishing persistent structural changes from transient local irregularities.
+
+The objective of this stage is therefore to identify localized geometric changes that consistently characterize the structural organization of garment contours. These localized geometric changes constitute the fundamental observations from which higher-level geometric representations are subsequently learned.
+
+#### Definition 1 (Geometry Event)
+
+A **geometry event** is defined as a persistent localized change in garment contour geometry identified through variations in local geometric properties of the contour.
+
+Unlike semantic garment components, geometry events are purely geometric entities. They are determined solely by the local organization of the garment contour and remain independent of predefined garment-part labels.
+
+Formally, let
+
+$$
+C=\{c_1,c_2,\ldots,c_n\}
+$$
+
+denote the ordered sequence of contour points representing a garment sketch.
+
+Let
+
+$$
+G(c_i)
+$$
+
+denote the local geometric descriptor evaluated at contour point
+
+$$
+c_i.
+$$
+
+A geometry event is identified by the mapping
+
+$$
+E_i=\Phi(G(c_i)),
+$$
+
+where
+
+- \(E_i\) denotes the geometry event associated with contour location \(c_i\),
+- \(G(\cdot)\) represents the local geometric descriptor, and
+- \(\Phi(\cdot)\) denotes the event identification operator that determines whether the observed geometric variation satisfies the persistence criteria required to constitute a geometry event.
+
+#### Scientific Interpretation
+
+A geometry event represents a localized structural observation rather than an isolated geometric measurement. By requiring geometric changes to satisfy persistence criteria, the proposed framework suppresses transient local irregularities while preserving stable geometric organization that recurs across garment sketches.
+
+Geometry events therefore constitute the first computational representation learned directly from garment geometry. Rather than representing complete garment parts, they provide localized geometric observations from which progressively richer representations are subsequently constructed.
+
+The collection of geometry events identifies where meaningful geometric changes occur within a garment contour. However, individual geometry events remain localized observations and do not yet constitute reusable structural units. The next stage therefore investigates whether recurring geometry events observed across multiple garment sketches can be organized into a finite set of reusable geometry primitives.
