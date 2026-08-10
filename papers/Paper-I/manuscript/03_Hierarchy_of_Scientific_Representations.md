@@ -96,8 +96,9 @@ The objective of this stage is therefore to determine whether continuous garment
 Accordingly, the first research question addressed in this section is:
 
 > **Can continuous garment sketches be discretized into reusable computational units that preserve recurring geometric organization while remaining independent of predefined garment semantics?**
->
-> ---
+
+---
+
 **Development Status:** 🔒 Locked
 
 **Manuscript Version:** 1.0
@@ -105,4 +106,3 @@ Accordingly, the first research question addressed in this section is:
 **Reviewed:** 10 August 2026
 
 **Next Section:** 3.1.2 Definition 1 (Geometry Event)
----
