@@ -85,3 +85,22 @@ Figure 3.1 illustrates the hierarchy of scientific representations proposed in t
 ---
 
 ## 3.1 Geometry-Derived Primitive Representation
+
+
+## Notation
+
+| Symbol | Description |
+|---------|-------------|
+| G | Garment sketch |
+| C | Garment contour |
+| E | Geometry event |
+| P | Geometry primitive |
+| V | Primitive vocabulary |
+| S | Garment sentence |
+| R | Learned sequential organization |
+| G_v | Visual grammar |
+| Π | Primitive prototype |
+| M | Primitive morphology |
+| Σ | Semantic representation |
+| K | Knowledge graph |
+| Ω | Semantic reasoning operator |
