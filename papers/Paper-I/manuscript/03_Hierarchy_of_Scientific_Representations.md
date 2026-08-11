@@ -971,13 +971,11 @@ $$
 
 its geometric variation relative to the prototype is represented as
 
-$$
 \[
 \Delta_i
 =
 \rho(E_i,\Pi_k),
 \]
-$$
 
 where
 
@@ -993,11 +991,9 @@ $$
 
 is therefore represented as
 
-$$
 M_k
 =
 \{\Delta_1,\Delta_2,\ldots,\Delta_m\},
-$$
 
 describing the structured variability surrounding the canonical prototype.
 
@@ -1046,20 +1042,17 @@ denote its local grammatical context within the Visual Grammar.
 
 The context-dependent morphology of the primitive is represented as
 
-$$
 \[
 M_k^{(\Gamma)}
 =
 \rho_\Gamma(P_k,\Gamma_k),
 \]
-$$
 
 where
 
 - \(\rho_\Gamma(\cdot)\) denotes the context-dependent morphology estimation operator.
 - $P_k$ denotes the corresponding geometry primitive,
 - $\Gamma_k$ denotes the associated grammatical context, and
-- \(\rho_\Gamma(\cdot)\) denotes the context-dependent morphology estimation operator.
 
 Accordingly, the geometric realization of a primitive may vary systematically across grammatical contexts while preserving the identity of the underlying geometry primitive.
 
@@ -1082,10 +1075,6 @@ The preceding representations progressively describe garment sketches through co
 Although these representations collectively provide a comprehensive geometric and structural description of garment sketches, they remain fundamentally descriptive. They characterize the identity, organization, variability, and contextual realization of geometry primitives without explicitly representing higher-order semantic relationships. The framework therefore treats semantic organization as a higher-order computational construction derived from the interaction among these complementary representations.
 
 The proposed framework introduces the Semantic Representation, which integrates the complementary information provided by the learned geometric, structural, and morphological representations into a unified computational representation of higher-order semantic organization.
-
-Human interpretation of garment sketches extends beyond recognizing individual geometric structures or their sequential organization. Designers naturally interpret combinations of geometric identity, structural organization, geometric variation, and contextual relationships as meaningful garment characteristics. Semantic interpretation cannot be attributed to any single representation in isolation; it is constructed from the interaction among multiple complementary representations.
-
-The proposed framework therefore introduces the **Semantic Representation**, which integrates the complementary information provided by the learned geometric and structural representations into a unified computational representation capable of describing the semantic organization of garment sketches.
 
 ### 3.6.2 Definition 9 (Semantic Representation)
 
@@ -1221,7 +1210,7 @@ The proposed framework therefore introduces **Semantic Reasoning**, the final st
 
 Semantic Reasoning applies inference over the relational structure encoded in the Knowledge Graph. Let \(\Omega=\Phi_r(\mathcal{K})\) denote the resulting higher-order semantic knowledge derived from the graph. The reasoning layer therefore combines and traverses relationships represented in \(\mathcal{K}\) to derive higher-order inferences that remain traceable to the underlying learned structure.
 
-These inferences should be interpreted as computational conclusions over the learned representation rather than independently validated semantic knowledge or human-equivalent design reasoning.
+These inferences should be interpreted as computational conclusions over the learned representation rather than independently validated semantic knowledge or human-equivalent design reasoning
 
 #### Mathematical Representation
 
