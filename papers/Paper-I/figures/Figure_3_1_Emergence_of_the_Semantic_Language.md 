@@ -1,0 +1,236 @@
+# Figure 3.1
+
+## Title
+
+Emergence of the Semantic Language of Fashion Sketches
+
+---
+
+## Purpose
+
+Illustrate the hierarchy of progressively learned scientific representations proposed in WeaveAI, demonstrating how semantic understanding emerges from continuous garment geometry through successive representational abstractions.
+
+The figure should communicate the complete scientific philosophy of the paper in a single visual.
+
+---
+
+## Figure Type
+
+Scientific Framework Figure
+
+(Not a pipeline)
+
+(Not an algorithm)
+
+(Not a workflow)
+
+A hierarchy of learned representations.
+
+---
+
+## Layout
+
+Vertical
+
+Top → Bottom
+
+Centered
+
+One primary flow
+
+No crossing arrows
+
+Minimalistic
+
+Journal-ready
+
+---
+
+## Starting Representation
+
+Continuous Garment Geometry
+
+Represents the original garment contour.
+
+---
+
+## Representation Hierarchy
+
+1. Geometry Events
+
+Question:
+Where do meaningful geometric changes occur?
+
+↓
+
+2. Geometry Primitives
+
+Question:
+Which observations recur?
+
+↓
+
+3. Geometric Primitive Vocabulary
+
+Question:
+What reusable symbols exist?
+
+↓
+
+4. Garment Sentence
+
+Question:
+How is an individual garment represented?
+
+↓
+
+5. Learned Sequential Organization
+
+Question:
+What sequential regularities emerge?
+
+↓
+
+6. Visual Grammar
+
+Question:
+What structural principles organize garments?
+
+↓
+
+7. Primitive Prototype
+
+Question:
+What is the canonical identity?
+
+↓
+
+8. Primitive Morphology
+
+Question:
+How can a primitive vary?
+
+↓
+
+9. Context-Dependent Primitive Morphology
+
+Question:
+How does grammatical context influence variation?
+
+↓
+
+10. Semantic Representation
+
+Question:
+How does semantic meaning emerge?
+
+↓
+
+11. Knowledge Graph Representation
+
+Question:
+How are semantic entities organized?
+
+↓
+
+12. Semantic Reasoning
+
+Question:
+What higher-order knowledge can be inferred?
+
+---
+
+## Visual Structure
+
+Continuous Garment Geometry
+
+↓
+
+Geometry Events
+
+↓
+
+Geometry Primitives
+
+↓
+
+Geometric Primitive Vocabulary
+
+↓
+
+Garment Sentence
+
+↓
+
+Learned Sequential Organization
+
+↓
+
+Visual Grammar
+
+↓
+
+Primitive Prototype
+
+↓
+
+Primitive Morphology
+
+↓
+
+Context-Dependent Primitive Morphology
+
+↓
+
+Semantic Representation
+
+↓
+
+Knowledge Graph Representation
+
+↓
+
+Semantic Reasoning
+
+---
+
+## Scientific Principle
+
+Each representation is introduced only when the preceding representation becomes insufficient to answer the next scientific question.
+
+Semantic understanding therefore emerges progressively rather than being explicitly imposed.
+
+---
+
+## Figure Caption (Draft)
+
+Figure 3.1. Emergence of the Semantic Language of Fashion Sketches. The proposed framework progressively transforms continuous garment geometry into increasingly expressive scientific representations. Each representation addresses a distinct scientific question while preserving explicit traceability to the underlying garment geometry. Semantic understanding emerges through the interaction of learned geometric, structural, morphological, contextual, and semantic representations rather than through predefined semantic annotations.
+
+---
+
+## Design Philosophy
+
+Minimal
+
+Elegant
+
+Scientific
+
+No decorative icons
+
+Monochrome-friendly
+
+Readable when printed in grayscale
+
+Suitable for Computers & Graphics
+
+---
+
+## Status
+
+Version: 0.1
+
+Status: Blueprint Complete
+
+Next Step:
+Create publication-quality vector figure (SVG/PDF).
