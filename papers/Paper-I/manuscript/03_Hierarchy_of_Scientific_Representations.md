@@ -141,13 +141,13 @@ denote the local geometric descriptor evaluated at contour point \(c_i\).
 A geometry event is identified through the mapping
 
 $$
-E_i=\Phi(G(c_i)),
+E_i=\Phi(D(c_i)),
 $$
 
 where
 
 - \(E_i\) denotes the geometry event associated with contour location \(c_i\),
-- \(G(\cdot)\) represents the local geometric descriptor, and
+- \(D(\cdot)\) represents the local geometric descriptor, and
 - \(\Phi(\cdot)\) denotes the event identification operator that determines whether the observed geometric behavior satisfies the criteria required to constitute a geometry event.
 
 #### Scientific Interpretation
