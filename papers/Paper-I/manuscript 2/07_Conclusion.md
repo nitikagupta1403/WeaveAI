@@ -1,0 +1,9 @@
+## 5. Conclusion
+
+Fashion sketches contain recurring geometric structure that can be represented computationally as a learned vocabulary of reusable primitives. Starting from continuous sketch geometry, the framework identified **12 recurring geometry primitives across 333 garment sketches** and characterized their morphological realization, positional organization, sequential relationships, and occurrence within complete garment sequences.
+
+The learned primitives exhibited distinct geometric profiles and characteristic positional distributions within garment representations. Their sequential organization was further examined through corpus-level transition frequencies and within-garment permutation analysis. A subset of observed primitive transitions occurred more frequently or less frequently than expected under randomized within-garment ordering, providing evidence that primitive ordering contains non-random sequential structure.
+
+Complete garments could subsequently be represented as ordered sequences drawn from the shared primitive vocabulary. Across the corpus, all 12 primitives were represented, while individual garments typically used only a subset of this vocabulary. This provides a geometry-derived intermediate representation linking local geometric events to recurring primitive units, sequential organization, and complete garment-level structural representations.
+
+The findings therefore support interpreting the observed sequential regularities as a **corpus-derived, grammar-like organization of garment geometry**. This interpretation remains deliberately narrower than a claim of a complete or universal language of fashion design. The evidence establishes computational organization within the learned representation, while the human semantic validity, cross-dataset generality, and relationship to independent design knowledge remain open questions.
