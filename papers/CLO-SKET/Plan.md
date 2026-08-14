@@ -1,34 +1,21 @@
-STEP 1
-Claim–Evidence Matrix
-        ↓
-STEP 2
-Methods ↔ Results consistency audit
-        ↓
-STEP 3
-Parameter / researcher-degree-of-freedom audit
-        ↓
-STEP 4
-Circularity / leakage audit
-        ↓
-STEP 5
-Statistical / null-model audit
-        ↓
-STEP 6
-KDE + density-landscape technical audit
-        ↓
-STEP 7
-Generalization / robustness audit
-        ↓
-STEP 8
-Title + abstract + novelty audit
-        ↓
-STEP 9
-Figures + tables
-        ↓
-STEP 10
-Reviewer-2 attack simulation
-        ↓
-STEP 11
-Final manuscript
-        ↓
-SUBMIT 🚀
+REVIEWER-2 AUDIT
+       ↓
+1. Same-region retention null
+       ↓
+2. Cross-scale profile-correlation null
+       ↓
+3. Check KDE / density methodology
+       ↓
+4. Audit “continuous” wording
+       ↓
+5. Replace “generalization” → “cross-scale reproducibility”
+       ↓
+6. Demote feature-order shuffling
+       ↓
+7. Lock claim hierarchy
+       ↓
+8. THEN rewrite Abstract / Introduction / Discussion
+       ↓
+9. Figures + tables
+       ↓
+10. Final Reviewer-2 simulation
