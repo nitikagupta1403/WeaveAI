@@ -19,3 +19,23 @@ REVIEWER-2 AUDIT
 9. Figures + tables
        ↓
 10. Final Reviewer-2 simulation
+
+             PAPER I
+                │
+       ┌────────┴────────┐
+       ↓                 ↓
+ Existing literature   Our evidence
+       │                 │
+       └────────┬────────┘
+                ↓
+       REPRESENTATION TEST
+                ↓
+     morphology vs baselines
+                ↓
+       NULL GEOMETRY TEST
+                ↓
+       category comparison
+                ↓
+        reviewer attack
+                ↓
+          final paper
