@@ -39,3 +39,90 @@ REVIEWER-2 AUDIT
         reviewer attack
                 ↓
           final paper
+
+| Priority | Paper                                                  | Role                                          |
+| -------- | ------------------------------------------------------ | --------------------------------------------- |
+| ⭐⭐⭐⭐⭐    | **P03 Sketch-a-Net**                                   | Sketch-specific representation foundation     |
+| ⭐⭐⭐⭐⭐    | **P10 Clothing Sketch Component Segmentation**         | Closest geometric clothing-sketch precedent   |
+| ⭐⭐⭐⭐⭐    | **P05 SketchGNN**                                      | Structured point/stroke/graph representation  |
+| ⭐⭐⭐⭐     | **P04 Abstracting Sketches through Simple Primitives** | Geometric abstraction / primitive precedent   |
+| ⭐⭐⭐⭐     | **P12 Fashion Transfer**                               | Fashion-sketch morphology / shape / folds     |
+| ⭐⭐⭐⭐     | **P06/P09 Context-Aware Garment Modeling**             | Geometric interpretation/context              |
+| ⭐⭐⭐      | **P02 Fashionpedia**                                   | Predefined semantic ontology contrast         |
+| ⭐⭐⭐      | **P13 GarmentSketch**                                  | Recent fashion-sketch computational landscape |
+
+Then:
+
+P01, P08, P14, P15, P16 → bibliography/supporting citations.
+
+P07 → mainly Weave downstream context.
+
+Deep Self-Supervised Representation Learning for Free-Hand Sketch — Xu et al., 2020
+DCR: Disentangled Component Representation for Sketch Generation — Cao et al., 2021
+SSR-GNNs: Stroke-Based Sketch Representation With Graph Neural Networks — 2022 workshop paper
+
+And I would keep:
+
+Sketch-RNN / A Neural Representation of Sketch Drawings — foundational background, but not a core novelty paper.
+
+
+automatic extraction of flat-sketch design elements from clothing images.
+
+GarmentSketch is a genuinely recent large-scale resource: 26,249 fashion sketches across 21 garment categories, paired with detailed text descriptions.
+
+
+                         SKETCH UNDERSTANDING
+                                  │
+          ┌───────────────────────┼────────────────────────┐
+          ↓                       ↓                        ↓
+   REPRESENTATION            STRUCTURAL                 SEMANTIC
+          │                   ORGANIZATION             INTERPRETATION
+          │                       │                        │
+   Sketch-a-Net                  │                 SketchGNN
+   Sketch-RNN                    │                 Clothing CRF
+   Self-supervised              │                 DCR
+   SSR-GNN                       │                 Fashionpedia
+          │                       │                        │
+          └───────────────────────┼────────────────────────┘
+                                  ↓
+                         OUR SCIENTIFIC GAP
+                                  │
+                                  ↓
+                    quantitative morphology
+                                  ↓
+                    population-level organization
+                                  ↓
+                    local / connected geometry
+                                  ↓
+                    recurring density structure
+                                  ↓
+                    regional morphology profiles
+                                  ↓
+                    null + cross-scale validation
+                                  ↓
+                         SEMANTIC MEANING?
+                                  │
+                                  ↓
+                         WE DO NOT KNOW YET
+
+DCR — Disentangled Component Representation for Sketch Generation
+
+P17 — Deep Self-Supervised Representation Learning for Free-Hand Sketch
+
+P18 — DCR: Disentangled Component Representation for Sketch Generation
+
+P19 — SSR-GNNs: Stroke-Based Sketch Representation With Graph Neural Networks
+
+📚 Add as foundational/background
+
+P20 — A Neural Representation of Sketch Drawings (Sketch-RNN)
+
+Supporting only
+
+Automatic extraction of flat sketch design elements from clothing images
+
+Recent landscape, not core
+
+GarmentSketch
+
+SKTNet

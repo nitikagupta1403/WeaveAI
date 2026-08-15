@@ -1332,7 +1332,7 @@ rather than:
         or
     morphology grammar.
 
-    
+
 ## 3.10 Cross-Scale Generalization of Regional Morphology Profiles
 
 The reproducibility of regional morphology organization was
