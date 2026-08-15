@@ -981,248 +981,358 @@ assigning semantic meanings to regions or individual features.
 ## 3.9 Permutation-Based Null Validation
 
 The quantitative regional morphology differences identified in
-Section 3.8 were evaluated against a size-matched permutation null
-model. The purpose of this analysis was to determine whether the
-observed association between density-region membership and
-morphology features exceeded that expected from arbitrary
-partitioning of the same observations into regions of the same
-sizes.
+Section 3.8 were evaluated against a size-preserving permutation
+null model. The purpose of this analysis was to determine whether
+the observed association between density-region membership and
+local morphology organization exceeded that expected from arbitrary
+assignment of observations to regions having the same size
+distribution.
 
 The analysis used the frozen canonical morphology representation:
 
     X_source ∈ R^(2300 × 135)
 
-and the density-basin assignments obtained independently in M06.
-Neither the morphology representation nor the observed basin
-assignments were modified during null construction.
+and the density-basin assignments obtained independently from the
+multiscale density analysis. Neither the morphology representation
+nor the observed basin assignments were modified during null
+construction.
 
-### Size-Matched Null Design
+### 3.9.1 Size-Preserving Null Design
 
-For each observational scale, the observed basin-size
-distribution was preserved exactly. Observation-to-basin
-membership was then randomly permuted while maintaining the number
-of observations assigned to every basin.
+For each observational scale, the observed basin-size distribution
+was preserved exactly. Observation-to-basin membership was then
+randomly permuted while maintaining the number of observations
+assigned to every basin.
 
-The resulting null therefore preserved:
+Region identity was represented using the actual unique basin
+identifiers. Region counts and region sizes were therefore computed
+using unique identifiers and their observed frequencies rather than
+assuming that basin identifiers were contiguous integers.
+
+The resulting null preserved:
 
     • total number of observations
     • number of density regions
     • size of every region
-    • overall distribution of morphology features
+    • complete region-size distribution
+    • frozen morphology geometry
+    • global feature-value distributions
 
 while destroying:
 
     • the observed association between morphology
       and density-region membership.
 
-This construction provides a size-matched arbitrary-partition
-null. It tests whether regional morphology discrimination can be
-explained by region size alone rather than by the observed
-relationship between morphology and density organization.
+This construction therefore tests whether the observed relationship
+between local morphology geometry and density-region membership can
+be explained by region-size structure alone.
 
-### Permutation Statistic
+### 3.9.2 Same-Region Neighbour Retention
 
-For each observational scale, regional feature discrimination was
-calculated using the same procedure applied to the observed basin
-assignments. The primary summary statistic was the mean
-feature-level regional discrimination.
+The primary statistic in Audit 01 was same-region nearest-neighbour
+retention.
 
-Median and maximum feature discrimination were retained as
-additional descriptive summaries.
+For each observation, the ten nearest neighbours were identified
+in the frozen 73-dimensional PCA-derived morphology geometry space.
+The retention statistic was defined as the fraction of these
+neighbours belonging to the same density-defined region as the
+observation.
 
-The identical statistic was calculated for every permutation
-replicate. The statistic was specified before comparison with the
-null distribution and was not selected after inspection of the
-permutation results.
+For each density scale, the observed retention was compared with
+200 independently generated size-preserving permutation
+assignments.
 
-The permutation procedure was repeated independently for each of
-the six observational scales.
-
-### Observed Regional Discrimination
-
-The observed mean regional feature-discrimination values were:
+The observed mean same-region retention was:
 
     scale = 4.707252
-        0.309747
+        0.755000
 
     scale = 5.416895
-        0.310943
+        0.774261
 
     scale = 6.248407
-        0.303514
+        0.803522
 
     scale = 7.596034
-        0.301466
+        0.803913
 
     scale = 10.640832
-        0.300478
+        0.843348
 
     scale = 16.568532
-        0.298850
+        0.844652
 
-These values were compared directly with the corresponding
-size-matched permutation distributions.
+The corresponding permutation-null means ranged from approximately
+0.534 to 0.720.
 
-### Feature-Level Null Analysis
+Across all six scales, observed retention exceeded the
+size-preserving null. The empirical upper-tail probability for each
+scale was 0.004975, corresponding to the smallest resolvable
+upper-tail probability with 200 permutations under the
+plus-one empirical-p convention.
 
-The null comparison was additionally performed at the level of
-individual canonical morphology features.
+The observed-minus-null differences ranged from approximately
+0.125 to 0.221, while the observed retention was approximately
+1.17–1.41 times the corresponding null mean.
 
-For each feature, its observed regional discrimination was compared
-with the corresponding permutation distribution. Standardized
-feature-level differences from the null distribution were used to
-characterize the strength and recurrence of regional association.
+These results indicate that local morphology neighbours are retained
+within the same density-defined region more frequently than expected
+under arbitrary region assignment with identical region sizes.
 
-Several features exhibited recurring evidence of regional
-association across multiple observational scales. Among the
-strongest consistently associated measurements were:
+### 3.9.3 Interpretation of Audit 01
 
-    bbox_width
-    aspect_ratio
-    centroid_x
-    horizontal_occupancy_61
-    vertical_occupancy_04
+The same-region retention result supports a limited conclusion:
 
-Other recurring signals included:
+    density-region membership is associated with local
+    morphology geometry beyond the expectation generated
+    by size-preserving random assignment.
 
-    symmetry
-    horizontal_occupancy_22
-    horizontal_occupancy_35
-    vertical_occupancy_03
-    foreground_fraction
+The result does not imply that the density regions are discrete
+semantic categories. The regions remain overlapping quantitative
+structures in morphology space, as established by the regional
+distance and silhouette analyses in Section 3.8.
 
-These measurements were retained as quantitative morphology
-properties. No semantic interpretation was assigned to them.
+The null therefore provides evidence for non-random local
+morphology–region association rather than evidence for semantic
+classification.
 
-For example, the strongest recurring feature-level signals
-included approximately:
+In particular:
 
-    bbox_width
-        median z ≈ 6.96
-        significant across all six scales
+    same-region neighbour retention
+        ≠
+    semantic category coherence
 
-    aspect_ratio
-        median z ≈ 4.61
-        significant across five scales
+and:
 
-    centroid_x
-        median z ≈ 4.45
-        significant across all six scales
+    density region
+        ≠
+    morphology primitive.
 
-    horizontal_occupancy_61
-        median z ≈ 3.45
-        significant across all six scales
+### 3.9.4 Cross-Scale Profile-Correlation Null
 
-    vertical_occupancy_04
-        median z ≈ 3.34
-        significant across all six scales
+A second permutation analysis evaluated whether quantitative
+regional morphology profiles were reproducible across density
+scales beyond arbitrary size-preserving region assignment.
 
-These results were interpreted as evidence of reproducible
-quantitative feature-level regional association rather than as
-evidence for semantic primitives.
+For each density scale, regional feature discrimination was
+calculated in the canonical 135-dimensional morphology space.
 
-### Feature-Block Null Structure
+For each feature, regional discrimination was defined as:
 
-Regional null separation was additionally summarized across the
-three canonical feature blocks:
+    max regional feature mean
+    -
+    min regional feature mean.
 
-    global descriptors
-    horizontal occupancy
-    vertical occupancy
+This produced one 135-dimensional quantitative regional
+discrimination profile for each density scale.
 
-The observed mean median-z values were approximately:
+Cross-scale agreement was then quantified using Spearman correlation
+between the 135-dimensional profiles of two scales.
 
-    global descriptors
-        3.91
+Basin identities were not matched across scales. Numerical basin
+identifiers were treated as scale-specific labels, and
+cross-scale reproducibility was evaluated from the quantitative
+feature-discrimination profiles.
 
-    horizontal occupancy
-        1.31
+For each scale pair, the observation-to-region membership of each
+scale was independently permuted while preserving the complete
+region-size distribution. Two hundred permutations were generated
+for the null distribution.
 
-    vertical occupancy
-        0.98
+The observed cross-scale correlations were:
 
-The stronger signal associated with the global-descriptor block
-indicates that regional discrimination is distributed unevenly
-across the canonical morphology representation. This does not
-imply that the occupancy measurements are uninformative; rather,
-their regional association is weaker on average under the tested
-null framework.
+    4.707252 → 5.416895
+        ρ = 0.980743
 
-### Scale Dependence
+    4.707252 → 6.248407
+        ρ = 0.849220
 
-The six observational scales were treated as a family of
-observational scales rather than as six independent claims of
-universal significance.
+    4.707252 → 7.596034
+        ρ = 0.753053
 
-Regional feature discrimination exceeded the size-matched
-permutation null at several lower and intermediate observational
-scales, whereas the separation from the null became weaker at
-larger scales.
+    4.707252 → 10.640832
+        ρ = 0.705677
 
-This scale dependence was retained as part of the result rather
-than used to select a preferred density scale.
+    4.707252 → 16.568532
+        ρ = 0.688894
 
-Accordingly, the null analysis does not support the statement that
-regional feature profiles are significant at every observational
-scale.
+    5.416895 → 6.248407
+        ρ = 0.865038
 
-The defensible interpretation is that density-region membership
-has a non-random quantitative relationship with morphology
-features at multiple portions of the observational scale range,
-with weaker evidence at larger scales.
+    5.416895 → 7.596034
+        ρ = 0.771559
 
-### Discovery–Null Separation
+    5.416895 → 10.640832
+        ρ = 0.721647
 
-The density regions were discovered independently from morphology
-geometry in M06.
+    5.416895 → 16.568532
+        ρ = 0.704585
 
-The permutation analysis does not rediscover, optimize, or
-redefine those regions. Instead, it preserves the observed
-region-size structure while destroying only the relationship
-between individual observations and density-region membership.
+    6.248407 → 7.596034
+        ρ = 0.913023
+
+    6.248407 → 10.640832
+        ρ = 0.868745
+
+    6.248407 → 16.568532
+        ρ = 0.849571
+
+    7.596034 → 10.640832
+        ρ = 0.966023
+
+    7.596034 → 16.568532
+        ρ = 0.949810
+
+    10.640832 → 16.568532
+        ρ = 0.968964
+
+The mean observed pairwise correlation across all fifteen scale
+pairs was:
+
+    observed mean ρ = 0.837103
+
+The corresponding size-preserving permutation null was:
+
+    null mean ρ = 0.106945
+    null SD     = 0.048700
+    null Q05    = 0.031239
+    null Q95    = 0.182886
+
+The observed mean exceeded the null mean by:
+
+    observed − null = 0.730159
+
+with:
+
+    empirical upper-tail p = 0.004975
+    z-score              = 14.992948.
+
+All fifteen observed scale-pair correlations exceeded their
+corresponding permutation-null distributions, with empirical
+upper-tail probabilities of 0.004975.
+
+### 3.9.5 Interpretation of the Cross-Scale Null
+
+The cross-scale permutation result supports the reproducibility of
+quantitative regional morphology profiles across independently
+constructed density landscapes beyond arbitrary region assignment
+with preserved region sizes.
+
+This result is stronger than simply observing high correlations
+between profiles. The corresponding size-preserving null asks
+whether such agreement could arise when observations are randomly
+assigned to regions while retaining the same region-size structure.
+
+The observed correlations substantially exceeded this null.
+
+The result is therefore interpreted as evidence for:
+
+    reproducible quantitative regional morphology
+    organization across observational scales.
+
+It is not interpreted as evidence for:
+
+    • persistent semantic morphology categories
+    • persistent semantic primitives
+    • a morphology grammar
+    • identical basin identities across scales
+    • a preferred density scale
+    • exact manifold dimensionality.
+
+### 3.9.6 Relationship Between the Two Null Tests
+
+The two permutation analyses address complementary questions.
+
+Audit 01 asks:
+
+    Do local morphology neighbours remain within the same
+    density-defined region more often than expected under
+    size-preserving random assignment?
+
+Audit 02 asks:
+
+    Are quantitative regional morphology-discrimination
+    profiles reproducible across density scales more strongly
+    than expected under independently randomized,
+    size-preserving region assignment?
+
+Thus:
+
+    Audit 01
+        →
+    local morphology–region association
+
+    Audit 02
+        →
+    cross-scale reproducibility of regional
+    morphology profiles
+
+The two analyses use the same frozen morphology representation
+and observed density-region assignments but test different
+properties of the morphology–region relationship.
+
+They are therefore interpreted as complementary diagnostics rather
+than statistically independent experiments.
+
+### 3.9.7 Discovery–Validation Separation
+
+The density regions were discovered independently from the frozen
+morphology geometry.
+
+The permutation analyses did not rediscover, optimize, or redefine
+the density regions. Instead, they preserved the observed region-size
+structure while randomizing observation-to-region membership.
 
 Thus:
 
     density-region discovery
         =
-    morphology geometry
+    morphology-derived density organization
 
 whereas:
 
-    null validation
+    permutation validation
         =
-    size-matched random regional membership.
+    size-preserving randomized region membership.
 
-This separation ensures that the null test evaluates whether the
-observed regional feature association is stronger than expected
-from arbitrary partitioning while leaving the original density
-discovery procedure unchanged.
+The distinction prevents the null procedure from altering the
+discovered density landscape.
 
-### Interpretation Boundary
+### 3.9.8 Interpretation Boundary
 
-The permutation analysis supports a limited conclusion:
+The combined permutation evidence supports the following limited
+claim:
 
-    quantitative morphology differences associated
-    with independently discovered density regions
-    exceed those expected under arbitrary
-    size-matched regional assignment at several
-    observational scales.
+> Quantitative morphology associations with independently derived
+> density regions are stronger than expected under size-preserving
+> random assignment, and quantitative regional morphology profiles
+> remain reproducible across independently constructed density
+> scales.
 
-It does not establish:
+The analysis does not establish:
 
-    morphology categories
-    semantic morphology states
-    semantic primitives
-    morphology grammar
-    causal relationships
-    a preferred density scale
-    a preferred number of morphology modes.
+    • semantic morphology categories
+    • semantic morphology primitives
+    • morphology states
+    • morphology grammar
+    • causal morphology structure
+    • exact manifold dimensionality.
 
-The null analysis therefore strengthens the evidence for
-non-random quantitative regional organization without changing
-the interpretation of density regions from geometric structures
-to semantic categories.
+The appropriate interpretation therefore remains:
 
+    quantitative morphology organization
+        +
+    non-random regional association
+        +
+    cross-scale reproducibility
+
+rather than:
+
+    semantic morphology categories
+        or
+    morphology grammar.
+
+    
 ## 3.10 Cross-Scale Generalization of Regional Morphology Profiles
 
 The reproducibility of regional morphology organization was

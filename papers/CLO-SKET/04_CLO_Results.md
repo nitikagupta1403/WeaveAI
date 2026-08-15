@@ -28,17 +28,35 @@ Therefore, the local geometry provides evidence for smooth neighborhood growth b
 
 ## 4.3 The morphology geometry is globally connected
 
-A 10-nearest-neighbor graph constructed from the frozen 73-dimensional morphology representation contained all 2,300 observations within a single connected component.
+A 10-nearest-neighbor graph constructed from the frozen 73-dimensional
+morphology representation contained all 2,300 observations within a
+single connected component.
 
-The graph contained 39,068 edges, and the reachable fraction was 1.000 for the mean, median, and minimum measures. Thus, every observation was reachable from every other observation through the local morphology graph.
+The symmetrized graph contained 19,534 undirected edges, and the
+reachable fraction was 1.000 for the mean, median, and minimum
+measures. Thus, every observation was reachable from every other
+observation through the local morphology graph.
 
-Graph-geodesic distances were moderately larger than direct Euclidean distances. The median geodesic-to-Euclidean stretch was approximately 1.902, while the mean was approximately 1.911.
+Graph-geodesic distances were moderately larger than direct
+Euclidean distances. The median geodesic-to-Euclidean stretch was
+approximately 1.902, while the mean was approximately 1.911.
 
-Despite this path stretch, Euclidean and graph-geodesic distances retained strong rank correspondence. The median Spearman correlation was approximately 0.903, with a mean of approximately 0.869.
+Despite this path stretch, Euclidean and graph-geodesic distances
+retained strong rank correspondence. Across 250 shortest-path
+sources, the median Spearman correlation was approximately 0.903,
+with a mean of approximately 0.869.
 
-These results indicate that the local morphology relationships form a connected and traversable geometry rather than a collection of disconnected morphology islands.
+These results indicate that the local morphology relationships form
+a connected and traversable quantitative geometry rather than a
+collection of disconnected morphology islands.
 
----
+The graph analysis does not establish a mathematical manifold,
+low-dimensional manifold structure, semantic morphology states, or
+directed morphology trajectories. It establishes only that the
+observed local morphology relationships are globally connected and
+graph-traversable under the tested k = 10 neighborhood graph.---
+
+
 
 ## 4.4 Recurring density organization emerges across observational scales
 
@@ -75,40 +93,16 @@ These results indicate recurring density organization within the morphology geom
 ---
 
 ## 4.5 Density regions are not compact morphology clusters
-
-The density-derived regions were next evaluated for global morphological compactness.
-
-Across all six observational scales, within-region morphology distances were not smaller than between-region distances. The observed within/between distance ratios were:
-
-    1.070
-    1.057
-    1.043
-    1.046
-    1.040
-    1.075
-
-Thus, the density-derived regions did not exhibit strong global compactness under the tested morphology-distance measure.
-
-A complementary local-neighborhood analysis showed substantial same-region retention. Mean local-neighbor retention increased across the six scales from:
-
-    0.755
-    0.774
-    0.804
-    0.804
-    0.843
-    0.845
-
-These results distinguish local regional coherence from global compactness. Density regions captured substantial local neighborhood structure while retaining considerable morphology variation internally.
-
-The regions therefore should not be interpreted as conventional discrete morphology clusters. Instead, they represent recurring regions embedded within a broader continuous morphology geometry.
-
----
-
 ## 4.6 Density regions exhibit reproducible quantitative morphology profiles
 
-Although the density-derived regions did not exhibit strong global compactness, they showed reproducible quantitative differences in morphology profiles.
+Although the density-derived regions did not exhibit strong global
+compactness, they showed measurable quantitative differences in
+morphology profiles.
 
-Regional profiles were constructed from the canonical 135-dimensional morphology representation, including horizontal occupancy, vertical occupancy, centroid geometry, bounding-box geometry, aspect ratio, symmetry, and foreground fraction.
+Regional profiles were constructed from the canonical 135-dimensional
+morphology representation, including horizontal occupancy, vertical
+occupancy, centroid geometry, bounding-box geometry, aspect ratio,
+symmetry, and foreground fraction.
 
 The strongest regional discriminators included:
 
@@ -120,83 +114,191 @@ The strongest regional discriminators included:
 
 together with multiple horizontal and vertical occupancy features.
 
-However, regional profiles were not cleanly separated as compact feature-space clusters. Silhouette values were negative at all six observational scales, ranging from approximately -0.132 to -0.216.
+However, regional profiles were not cleanly separated as compact
+feature-space clusters. Silhouette values were negative at all six
+observational scales, ranging from approximately -0.132 to -0.216.
+Between/within profile-distance ratios ranged from approximately
+0.550 to 0.568.
 
-Between/within profile-distance ratios ranged from approximately 0.550 to 0.568.
+Thus, regional profiles substantially overlapped despite showing
+measurable quantitative differences.
 
-Thus, regional profiles substantially overlapped despite showing measurable quantitative differences.
+The regional feature-block discrimination was approximately:
 
-The regional feature-block discrimination was:
+    global descriptors      = 0.518
+    horizontal occupancy   = 0.313
+    vertical occupancy     = 0.264
 
-    global descriptors      ≈ 0.518
-    horizontal occupancy   ≈ 0.313
-    vertical occupancy     ≈ 0.264
+These results indicate that the density-derived regions possess
+measurable quantitative morphology differences without forming
+compact, discretely separated morphology categories.
 
-The reproducibility of regional profile structure across scales was high. Adjacent-scale profile correlations were:
+Importantly, the regional profiles are treated as quantitative
+descriptions of density-defined regions. The discriminating
+features are not interpreted as semantic morphology primitives, and
+the regions are not interpreted as semantic morphology categories.
 
-    4.707252 → 5.416895       rho = 0.987665
-    5.416895 → 6.248407       rho = 0.901663
-    6.248407 → 7.596034       rho = 0.919744
-    7.596034 → 10.640832      rho = 0.970510
-    10.640832 → 16.568532     rho = 0.964808
+## 4.7 Regional morphology associations exceed a size-preserving permutation null
 
-These results indicate reproducible quantitative regional organization without evidence for cleanly separated discrete morphology profiles.
+A size-preserving permutation analysis was used to determine whether
+the observed association between density-region membership and
+quantitative morphology could arise from arbitrary assignment of
+observations to regions having the same size distribution as the
+observed density regions.
 
----
+For each density scale, the observed region sizes were preserved
+exactly while observation-to-region membership was randomly
+permuted. Two hundred permutations were generated at each scale.
 
-## 4.7 Regional morphology associations exceed a size-matched permutation null
+The first null analysis evaluated same-region nearest-neighbor
+retention in the frozen 73-dimensional morphology geometry.
 
-A size-matched permutation analysis was used to determine whether the observed regional morphology associations could arise from arbitrary assignment of observations to regions having the same size distribution as the observed density regions.
+Observed mean retention across the six observational scales was:
 
-At the three finest observational scales, observed regional feature discrimination exceeded the permutation null:
+    4.707252     0.755000
+    5.416895     0.774261
+    6.248407     0.803522
+    7.596034     0.803913
+    10.640832    0.843348
+    16.568532    0.844652
 
-| Scale | Observed discrimination | Null mean | Empirical p | z |
-|---:|---:|---:|---:|---:|
-| 4.707252 | 0.309747 | 0.164513 | 0.004975 | 6.138 |
-| 5.416895 | 0.310943 | 0.158761 | 0.009950 | 4.703 |
-| 6.248407 | 0.303514 | 0.116115 | 0.004975 | 8.615 |
+The corresponding permutation-null means ranged from approximately
+0.534 to 0.720.
 
-At scale 7.596034, the association was weaker and borderline (p = 0.054726). At the two coarsest scales, the observed associations were not clearly separated from the permutation null (p = 0.134328 and 0.169154).
+Observed retention exceeded the permutation null at every scale.
+The empirical upper-tail probability was 0.004975 at each scale,
+with observed-minus-null differences ranging from approximately
+0.125 to 0.221.
 
-Thus, at finer observational scales, the regional morphology associations were substantially greater than expected from arbitrary size-matched partitioning.
+Thus, morphology neighbours were retained within the same
+density-defined region substantially more often than expected from
+random assignment of observations to regions with identical region
+sizes.
 
-The result provides evidence for a non-random relationship between density-region organization and quantitative morphology properties, with the strength of the relationship depending on observational scale.
+A second null analysis tested whether quantitative regional
+morphology profiles were reproducible across observational scales
+beyond arbitrary region assignment.
 
----
+For each scale, regional feature discrimination was defined for each
+of the 135 morphology features as:
 
-## 4.8 Regional morphology profiles generalize across observational scales
+    maximum regional feature mean
+    -
+    minimum regional feature mean.
 
-The persistence of quantitative regional morphology structure was evaluated across the six observational scales without assuming that individual basin identities persisted between scales.
+This produced one 135-dimensional regional-discrimination profile
+for each observational scale. Basin identities were not matched
+across scales.
 
-Mean feature-profile correlations between observational scales ranged from approximately:
+The observed Spearman correlations between the fifteen pairs of
+regional-discrimination profiles ranged from:
 
-    rho = 0.9979 – 1.0000
+    rho = 0.688894
+    to
+    rho = 0.980743.
 
-Representative comparisons with the finest scale were:
+The mean observed cross-scale correlation was:
 
-    4.707252 → 5.416895       rho = 0.999893
-    4.707252 → 6.248407       rho = 0.999812
-    4.707252 → 7.596034       rho = 0.999867
-    4.707252 → 10.640832      rho = 0.999668
-    4.707252 → 16.568532      rho = 0.999331
+    mean rho = 0.837103.
 
-Cross-scale consistency was maintained across all three canonical feature blocks:
+Under the independently permuted, size-preserving null:
 
-    Global descriptors
-        mean rho = 1.000000
+    null mean rho = 0.106945
+    null SD       = 0.048700
+    null Q05      = 0.031239
+    null Q95      = 0.182886
 
-    Horizontal occupancy
-        mean rho = 1.000000
+The observed mean exceeded the null mean by 0.730159, with:
 
-    Vertical occupancy
-        mean rho = 0.999074
-        minimum rho = 0.985611
+    empirical p = 0.004975
+    z = 14.992948.
 
-Thus, quantitative regional morphology profiles remained highly reproducible when the observational scale used to construct the density landscape was changed.
+All fifteen scale-pair comparisons exceeded their corresponding
+permutation-null distributions.
 
-This persistence concerns quantitative profile structure rather than the identity of individual density basins.
+Together, the two null analyses provide complementary evidence:
 
----
+    local same-region retention
+        +
+    cross-scale regional-profile reproducibility
+
+both exceed expectations under size-preserving randomized
+region membership.
+
+These results support a non-random association between density-defined
+regional organization and quantitative morphology, as well as
+reproducibility of regional morphology profiles across observational
+scales.
+
+The results do not establish semantic morphology categories,
+semantic primitives, morphology states, or a morphology grammar.
+
+## 4.8 Regional morphology profiles are reproducible across observational scales
+
+The quantitative regional morphology structure was evaluated across
+the six observational scales without assuming that individual basin
+identities persisted between scales.
+
+Rather than matching basin identifiers directly, each scale was
+represented by a 135-dimensional regional feature-discrimination
+profile. For each morphology feature, the profile value was defined
+as the difference between the maximum and minimum regional feature
+means at that scale.
+
+The observed cross-scale Spearman correlations were:
+
+    4.707252 → 5.416895       rho = 0.980743
+    4.707252 → 6.248407       rho = 0.849220
+    4.707252 → 7.596034       rho = 0.753053
+    4.707252 → 10.640832      rho = 0.705677
+    4.707252 → 16.568532      rho = 0.688894
+
+    5.416895 → 6.248407       rho = 0.865038
+    5.416895 → 7.596034       rho = 0.771559
+    5.416895 → 10.640832      rho = 0.721647
+    5.416895 → 16.568532      rho = 0.704585
+
+    6.248407 → 7.596034       rho = 0.913023
+    6.248407 → 10.640832      rho = 0.868745
+    6.248407 → 16.568532      rho = 0.849571
+
+    7.596034 → 10.640832      rho = 0.966023
+    7.596034 → 16.568532      rho = 0.949810
+
+    10.640832 → 16.568532     rho = 0.968964
+
+The overall mean correlation was:
+
+    mean rho = 0.837103.
+
+The corresponding size-preserving permutation null had a mean
+correlation of 0.106945.
+
+Thus, the observed regional feature-discrimination profiles were
+substantially more reproducible across observational scales than
+expected when observation-to-region membership was independently
+randomized while preserving region-size distributions.
+
+The strength of profile correspondence was not identical across all
+scale pairs. Correlations were generally highest between nearby or
+later observational scales and lower for some comparisons involving
+the finest and coarsest scales. This variation indicates that the
+quantitative regional organization is reproducible but not invariant
+to observational scale.
+
+The appropriate interpretation is therefore:
+
+    cross-scale quantitative reproducibility
+
+rather than:
+
+    scale-invariant morphology categories
+    or
+    persistent semantic states.
+
+This result does not require, and does not establish, correspondence
+between individual density basins across scales.
+
 
 ## 4.9 The morphology representation contains complementary feature structure
 
@@ -253,33 +355,82 @@ These results indicate that the morphology geometry is not dominated by a small 
 
 ---
 
-## 4.11 Explicit occupancy-feature ordering does not measurably affect the tested geometry
+## 4.11 Ordered occupancy coordinates exhibit measurable spatial locality
 
-A feature-order perturbation analysis tested whether explicit ordering of the occupancy measurements contributed independently to the observed nearest-neighbor geometry.
+Because the horizontal and vertical occupancy features encode
+ordered spatial coordinates, their adjacency structure was examined
+separately from the seven global morphology descriptors.
 
-The reference nearest-neighbor overlap was:
+For horizontal occupancy, the observed adjacent-coordinate statistics
+were:
 
-    0.863217
+    mean adjacent difference     = 0.271227
+    median adjacent difference   = 0.078850
+    Q90 adjacent difference      = 0.686674
+    adjacent correlation         = 0.772648
 
-After independently shuffling the horizontal occupancy order, vertical occupancy order, or both:
+For vertical occupancy:
 
-    Original:
-        0.863217
+    mean adjacent difference     = 0.308013
+    median adjacent difference   = 0.085282
+    Q90 adjacent difference      = 0.814516
+    adjacent correlation         = 0.743219
 
-    H order shuffled:
-        0.863217
+A spatial-order permutation null was then constructed independently
+for every observation. Occupancy values were retained exactly while
+their coordinate order was randomly permuted.
 
-    V order shuffled:
-        0.863217
+Thus, the null preserved:
 
-    H + V order shuffled:
-        0.863217
+    • each observation's occupancy-value multiset
+    • feature-value distributions
+    • number of observations
+    • number of spatial coordinates
 
-Repeated perturbations produced approximately zero variation in the overlap measure.
+while destroying:
 
-Thus, under the tested perturbation, explicit feature ordering did not measurably affect the nearest-neighbor geometry.
+    • the original spatial ordering
+    • local coordinate adjacency.
 
-This result does not imply that spatial morphology is irrelevant. Rather, it indicates that the tested geometry was sensitive to occupancy values but not detectably sensitive to their explicit ordering within the present representation.
+Under the null, mean adjacent differences increased to:
+
+    horizontal occupancy   = 0.725399
+    vertical occupancy     = 0.700187
+
+while adjacent correlations decreased to:
+
+    horizontal occupancy   = 0.205014
+    vertical occupancy     = 0.231671.
+
+The observed reductions in adjacent difference relative to the null
+were:
+
+    horizontal occupancy   = 0.626100
+    vertical occupancy     = 0.560099
+
+and the corresponding gains in adjacent correlation were:
+
+    horizontal occupancy   = 0.567633
+    vertical occupancy     = 0.511548.
+
+Both effects were significant under the 200-permutation null
+(empirical p = 0.004975 for each block).
+
+These results support reproducible local spatial structure in the
+ordered occupancy profiles.
+
+Importantly, this evidence concerns spatial locality of explicitly
+ordered quantitative measurements. It does not establish that the
+occupancy coordinates are semantic primitives, that their ordering
+defines morphology categories, or that the ordering constitutes a
+morphology grammar.
+
+The separate nearest-neighbor geometry perturbation showed that
+shuffling occupancy-feature order did not change the particular
+nearest-neighbor overlap statistic. Therefore, spatial locality
+should be interpreted as a property of the ordered occupancy
+profiles rather than as evidence that coordinate order is required
+for the global nearest-neighbor geometry used in the present study.
 
 ---
 
@@ -409,18 +560,51 @@ No semantic interpretation is assigned to the participating features.
 
 ## 4.16 Integrated morphology geometry
 
-Taken together, the analyses provide convergent evidence that the 2,300 Clo-Sket garment sketches occupy a continuous and connected quantitative morphology geometry containing recurring density-organized regions.
+Taken together, the analyses provide convergent evidence that the
+2,300 Clo-Sket garment sketches occupy a structured, connected
+quantitative morphology geometry containing recurring
+density-associated regions.
 
-The morphology representation exhibits concentrated spectral structure, smooth local neighborhood growth, connected graph organization, and relatively gradual local transitions. Within this geometry, independently derived density landscapes reveal recurring regions across observational scales.
+The morphology representation exhibits concentrated spectral
+structure, smooth quantitative neighborhood growth, connected graph
+organization, and relatively gradual local transitions. Within this
+geometry, independently derived density landscapes reveal recurring
+density organization across multiple observational scales.
 
-These regions do not behave as conventional compact clusters: within-region distances are not substantially smaller than between-region distances. Nevertheless, they exhibit substantial local neighborhood retention, reproducible quantitative morphology profiles, and, at finer observational scales, regional feature associations exceeding a size-matched permutation null.
+These regions do not behave as conventional compact clusters:
+within-region distances are not substantially smaller than
+between-region distances. Nevertheless, they exhibit substantial
+local same-region neighborhood retention, measurable quantitative
+regional morphology differences, and cross-scale reproducibility
+that exceeds a size-preserving permutation null.
 
-Feature-block complementarity and perturbation analyses further demonstrate that the observed geometry is distributed across multiple quantitative feature families. The quantitative properties associated with continuous morphology variation also overlap with those distinguishing the recurring density regions.
+Feature-block complementarity and perturbation analyses further
+demonstrate that the observed geometry is distributed across
+multiple quantitative feature families. Ordered occupancy profiles
+also exhibit reproducible spatial locality, although coordinate
+ordering did not measurably alter the tested nearest-neighbor overlap
+statistic.
 
 The resulting empirical characterization is therefore:
 
-> **Clo-Sket garment sketches exhibit a continuous and connected quantitative morphology geometry containing recurring density-organized regions whose quantitative morphology profiles are reproducible across observational scales, while remaining embedded within rather than separable from the broader continuous morphology space.**
+> **Clo-Sket garment sketches exhibit a structured and connected
+> quantitative morphology geometry containing recurring
+> density-associated regions whose quantitative morphology profiles
+> are reproducible across observational scales, while remaining
+> embedded within rather than cleanly separable from the broader
+> morphology space.**
 
-These findings do not establish discrete morphology categories, semantic morphology states, semantic morphology primitives, morphology grammar, causal morphology structure, or exact mathematical manifold dimensionality.
+Here, "continuous morphology geometry" refers to the continuous-valued
+quantitative representation and its observed local variation. It does
+not imply a mathematical manifold, a globally directed trajectory,
+or formally continuous semantic dimensions.
 
-The final semantic relationship between measurable morphology properties and putative semantic primitives therefore remains an empirical question beyond the present geometry evidence.
+The findings do not establish discrete morphology categories,
+semantic morphology states, semantic morphology primitives,
+morphology grammar, causal morphology structure, or exact
+mathematical manifold dimensionality.
+
+The relationship between these measurable quantitative structures
+and higher-level semantic organization therefore remains an
+independent empirical question.
+
