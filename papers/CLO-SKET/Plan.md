@@ -126,3 +126,102 @@ Recent landscape, not core
 GarmentSketch
 
 SKTNet
+
+
+                 CLO-SKET
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+   135-D MORPHOLOGY      RADIAL–ANGULAR
+      REPRESENTATION       GEOMETRY
+          │                   │
+      PCA / M1-M2        F₂ + α₂ + circular
+          │                   │
+   unsupervised structure  interpretable geometry
+          │                   │
+          └─────────┬─────────┘
+                    │
+              CROSS-VALIDATION
+                    │
+             CATEGORY TESTING
+
+
+| Relationship                                                             | Current evidence     | Status |
+| ------------------------------------------------------------------------ | -------------------- | ------ |
+| Both detect non-semantic quantitative structure                          | Yes                  | 🟢     |
+| Both contain category-discriminative information                         | Yes                  | 🟢     |
+| Radial-angular representation is a component of the 135-D representation | Not established      | 🔴     |
+| Morphology-space distances agree with radial-angular distances           | Not tested           | 🟡     |
+| Morphology regions differ in radial-angular geometry                     | Not tested           | 🟡     |
+| Morphology position predicts radial-angular recovery                     | Not tested           | 🟡     |
+| Radial-angular branch explains morphology regions                        | Not demonstrated     | 🔴     |
+| Radial-angular branch validates morphology-space organization            | Not demonstrated yet | 🔴     |
+| Radial-angular branch extends morphology analysis                        | **Yes**              | 🟢     |
+
+
+The next thing I'd do before writing a single sentence of the paper is a brutal reviewer audit: What exactly is novel here compared with prior computational fashion-sketch representation papers? That is the question that determines whether this is merely publishable or genuinely strong.
+
+CURRENT FASHION-AI LANDSCAPE
+
+        SEMANTIC / GENERATIVE SIDE
+                    │
+     ┌──────────────┼────────────────┐
+     │              │                │
+   sketch →      sketch →          sketch →
+   text          image            pattern/3D
+     │              │                │
+   MLLM          diffusion        geometry
+     │              │                │
+     └──────────────┼────────────────┘
+                    │
+                    │
+              CLO-SKET
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ quantitative morphology│
+        │       BEFORE semantics │
+        └───────────────────────┘
+                    │
+            135-D morphology
+                    │
+                   PCA
+                    │
+          structured morphology
+                    │
+                    ▼
+          independent radial-
+             angular geometry
+                    │
+                    ▼
+             complementary
+               information
+CLO-SKET/
+│
+├── README.md
+│
+├── paper/
+│   ├── 00_RESEARCH_QUESTION.md
+│   ├── 01_CONTRIBUTION.md
+│   ├── 02_LITERATURE_POSITIONING.md
+│   ├── 03_METHODS.md
+│   ├── 04_RESULTS.md
+│   ├── 05_DISCUSSION.md
+│   ├── 06_LIMITATIONS.md
+│   └── 07_REVIEWER_ATTACK.md
+│
+├── evidence/
+│   ├── evidence_ledger.csv
+│   ├── claim_evidence_matrix.md
+│   └── cell_results/
+│
+├── experiments/
+│   ├── morphology_135D/
+│   └── radial_angular/
+│
+├── reviewer/
+│   ├── novelty_matrix.md
+│   └── reviewer_questions.md
+│
+└── frozen/
+    └── checkpoints/
