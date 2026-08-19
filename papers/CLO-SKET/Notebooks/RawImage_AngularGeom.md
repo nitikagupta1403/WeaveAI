@@ -20030,3 +20030,155 @@ R_2(r)
 \text{Empirical characterization of radial-angular organization in garment sketches}
 }
 \]
+
+# CELL 30R — EXHAUSTIVE PRIOR-ART / NOVELTY VERIFICATION
+
+## Primary Question
+
+Has prior work already reported anything substantially equivalent to the
+strongest CLO-SKET scientific findings?
+
+Specifically test:
+
+### Kill Test 1
+Has prior work measured:
+
+    observed vs learned radial-angular recovery
+
+in garment sketches or closely related sketch representations?
+
+### Kill Test 2
+Has prior work shown that:
+
+    circular / directional organization strength
+        ↓
+    predicts orientation-recovery reliability?
+
+### Kill Test 3
+Has prior work used an equivalent joint representation of:
+
+    F₂ radial magnitude
+    +
+    α₂ axial orientation
+    +
+    R₂ circular concentration
+
+for garment sketches?
+
+### Kill Test 4
+Has prior work explicitly separated:
+
+    orientation recovery failure
+
+from:
+
+    circular-strength recovery failure?
+
+### Kill Test 5
+Has prior work reported heterogeneous recovery regimes including:
+
+    strong-signal orientation failures?
+
+---
+
+## Search Domains
+
+Search systematically across:
+
+- garment sketch understanding
+- fashion sketch analysis
+- sketch recognition
+- sketch retrieval
+- contour / silhouette descriptors
+- polar Fourier descriptors
+- radial-angular shape representation
+- circular statistics in image analysis
+- orientation-field learning
+- directional feature recovery
+- shape representation reliability
+- Fourier harmonic shape descriptors
+- learned geometric representations
+- interpretable fashion representations
+
+---
+
+## Evidence Classification
+
+Every relevant paper should be classified as:
+
+### DIRECT OVERLAP
+Equivalent scientific question or representation.
+
+### PARTIAL OVERLAP
+Uses similar mathematics but asks a different scientific question.
+
+### METHODOLOGICAL PRECEDENT
+Establishes one of the underlying tools.
+
+### DOMAIN PRECEDENT
+Studies garment/fashion sketches but not CLO-SKET's recovery question.
+
+### NO MATERIAL OVERLAP
+Does not threaten the candidate contribution.
+
+---
+
+## Required Output
+
+Create a literature matrix with columns:
+
+| Paper | Year | Domain | Representation | Task | F₂-like? | Axial orientation? | R₂-like? | Recovery analysis? | Reliability analysis? | Failure regimes? | CLO-SKET overlap | Novelty threat |
+|---|---:|---|---|---|---|---|---|---|---|---|---|---|
+
+---
+
+## Decision Rule
+
+The objective is NOT to prove novelty.
+
+The objective is to try to destroy the proposed contribution.
+
+If close prior art exists:
+
+    narrow the claim.
+
+If only generic Fourier / polar / circular methods exist:
+
+    mathematical novelty remains rejected,
+
+but:
+
+    the empirical recovery contribution survives.
+
+---
+
+## Current Candidate Core Contribution Under Test
+
+> CLO-SKET empirically characterizes radial-angular organization
+> in garment sketches and demonstrates that recovery reliability
+> varies systematically with observed circular organization.
+
+Secondary candidate:
+
+> Angular orientation recovery and circular-strength recovery
+> exhibit partially distinct empirical failure behavior.
+
+---
+
+## IMPORTANT
+
+Do not modify:
+
+    Cells 20–30Q
+    canonical representation
+    classifier
+    feature set
+    radial domain
+    statistical results
+
+CELL 30R is literature verification only.
+
+No new experiment.
+No new feature.
+No new classifier.
+No claim inflation.
