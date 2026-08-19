@@ -1,651 +1,322 @@
-# CLO-SKET — Literature Positioning
+# 2. Related Work
 
-## 1. Purpose of This Document
+## 2.1 Computational Representations of Fashion Sketches
 
-This document defines how the CLO-SKET study is positioned relative to
-existing literature.
+Computational analysis of fashion sketches has developed along several distinct objectives, including garment reconstruction, design assistance, shape description, classification, and multimodal garment modeling. Across these studies, the sketch is generally treated as a geometric or visual input from which another computational representation is constructed, rather than as a population of morphological observations in its own right.
 
-The purpose is not to claim that no previous work has used similar
-features or mathematical tools.
+Geometry-driven approaches have demonstrated that substantial garment structure can be extracted directly from 2D sketches. Robson et al. interpreted garment silhouettes, boundaries, characteristic curves, and folds in the context of a 3D mannequin to construct plausible 3D garments. Their formulation introduced geometric constraints such as a spatially varying tightness field, thereby interpreting the sketch as a specification for garment geometry rather than as a conventional image-classification input.
 
-Instead, the objective is to distinguish:
+Similarly, Yasseen et al. treated a garment sketch primarily as a geometric specification for constructing a quadrilateral mesh. Their method converts sketched garment boundaries into computationally useful mesh topology for subsequent garment simulation. The representation is therefore concerned with geometric construction and mesh connectivity rather than with learning a population-level representation of garment morphology.
 
-1. established methodological components;
-2. existing research questions;
-3. closely related computational representations;
-4. the specific gap addressed by this study; and
-5. claims for which novelty remains provisional until a more exhaustive
-   literature search is completed.
+Fondevilla et al. extended this geometric interpretation toward style transfer between 2D sketches and 3D garments. Their method decomposes sketch-derived style into proportionality, fit, silhouette shape, and fold appearance, and uses these geometric characteristics to construct garments on characters with different poses and morphologies. The resulting system demonstrates that meaningful garment-style information can be extracted from a single stylized sketch, but its objective remains 2D-to-3D garment generation rather than statistical analysis of variation across a sketch population.
 
-The manuscript should avoid absolute statements such as:
+A related multimodal formulation was proposed by Wang et al., who learned a shared latent space linking 2D sketches, garment and body parameters, and simulated 3D draped garments. Their synthetic dataset contains paired representations of the same garment-design instance, allowing mappings between these modalities to be learned jointly. Importantly, however, the PCA used in this work is applied to simulated 3D garment meshes as a compact representation of 3D geometry; the sketch itself is represented through DenseNet features. The resulting latent space therefore serves multimodal garment design and retargeting rather than population-level discovery of sketch morphology.
 
-> "No previous work has studied this."
+These approaches establish an important precedent:
 
-unless such a claim is supported by a sufficiently comprehensive
-literature review.
+\[
+\boxed{
+\text{2D fashion sketches contain computationally recoverable geometric information}
+}
+\]
+
+However, they largely formulate the sketch as an input to a downstream task---reconstruction, simulation, design, transfer, or multimodal prediction. They do not primarily ask whether the geometry of a collection of sketches itself possesses an organized morphology.
 
 ---
 
-# 2. Broad Fashion Computer-Vision Landscape
+## 2.2 Explicit Geometric Representations of Fashion Flats
 
-Fashion computer vision is a mature and broad research area.
+Fashion-flat research provides an additional line of evidence that garment drawings can be represented explicitly in terms of geometric structure.
 
-A major survey of more than 200 fashion-related studies organized the
-field into four broad areas:
+An and Li developed a Wavelet Fourier Descriptor (WFD) for fashion-flat-sketch classification. Their method converts garment contours into centroid-distance signals and combines wavelet and Fourier analysis to obtain a transformation-invariant shape descriptor. The resulting descriptor is used for multiclass classification.
 
-- fashion detection;
-- fashion analysis;
-- fashion synthesis; and
-- fashion recommendation.
+This work is particularly relevant because it establishes that fashion-flat contours can be converted into mathematically defined quantitative shape representations. However, the scientific role of the representation is discriminative: the descriptor functions as a shape signature for classification. The study does not investigate whether a population of fashion flats forms a continuous morphological space or whether independent geometric descriptions recover common population structure.
 
-Fashion detection includes tasks such as landmark detection, fashion
-parsing, and item retrieval.
+Lee and Kim provide another explicit geometric formulation through modular representation of fashion flats. Their system decomposes flats into reusable garment components such as bodices, sleeves, collars, cuffs, and pockets, and automatically aligns and assembles these modules.
 
-Fashion analysis includes attribute recognition, style learning, and
-popularity prediction.
+The geometric transformations in this framework---including translation, rotation, and scaling---should be distinguished from statistical coordinate transformations such as PCA. Module alignment physically transforms a garment component in object space, whereas PCA changes the coordinate basis in which variation across observations is expressed.
 
-Fashion synthesis includes style transfer, pose transformation, and
-physical simulation.
+Thus, existing fashion-flat research already establishes two important capabilities:
 
-Fashion recommendation includes compatibility, outfit matching, and
-related recommendation tasks.
+\[
+\boxed{
+\text{fashion flat}
+\rightarrow
+\text{quantitative contour representation}
+}
+\]
 
-This literature establishes that computational analysis of fashion
-imagery is well developed.
+and
 
-However, these task-oriented formulations generally evaluate
-representations according to downstream objectives rather than
-treating quantitative garment morphology itself as the primary object
-of investigation.
+\[
+\boxed{
+\text{fashion flat}
+\rightarrow
+\text{explicit garment modules}
+}
+\]
 
----
-
-# 3. Position of the Present Study
-
-The present study occupies a narrower research space:
-
-> quantitative morphology of garment sketches independent of
-> predefined semantic categories.
-
-The distinction is important.
-
-The study does not primarily ask:
-
-- Can a sketch be classified?
-- Can a sketch retrieve a photograph?
-- Can a garment be generated from a sketch?
-- Can garment parts be semantically parsed?
-- Can a sketch be translated into text?
-- Can a sketch be converted into a realistic garment image?
-
-Instead, it asks:
-
-> What measurable quantitative geometric organization exists within
-> garment sketches before semantic categories are imposed?
-
-This is therefore a representation-analysis question rather than a
-conventional task-performance question.
+What remains different is the scientific question. These representations are used for classification or design assembly, rather than for investigating the statistical organization of morphology across a population of flats or sketches.
 
 ---
 
-# 4. Fashion Sketch Research
+## 2.3 Quantitative Shape and Geometric Morphometrics
 
-Sketch-based computer vision has an extensive literature involving
-recognition, retrieval, cross-domain matching, and related tasks.
+The methodological foundation for treating visual forms as quantitative morphological objects comes from geometric morphometrics.
 
-General sketch-recognition literature similarly emphasizes sketch
-classification, sketch-based image retrieval, fine-grained retrieval,
-and related recognition problems.
+Bookstein introduced a framework for analyzing outlines that lack conventional anatomical landmarks through semilandmarks. Because arbitrary positions along a curve do not necessarily correspond to meaningful morphological locations, semilandmarks can slide along the tangent direction to reduce variation attributable to arbitrary point placement.
 
-The present study differs in its primary object of analysis.
+This establishes a fundamental methodological principle:
 
-Rather than treating the sketch as a query or classifiable object, we
-treat the sketch as an observation from which quantitative morphology
-can be measured and its geometric organization investigated.
+\[
+\boxed{
+\text{geometric representation}
+\neq
+\text{meaningful morphology automatically}
+}
+\]
 
----
+The correspondence criterion used to construct the representation therefore matters. Later methodological analysis by Mitteroecker and Schaefer emphasizes that bending-energy minimization and Procrustes-distance minimization optimize different mathematical objectives, and that geometric correspondence cannot automatically be equated with biological homology.
 
-# 5. Clo-Sket and Its Original Role
+More generally, their review emphasizes that a mathematically valid representation does not automatically constitute a biologically meaningful representation. Interpretation must remain connected to the scientific question, the structure being measured, and the relevant notion of correspondence.
 
-Clo-Sket contains 2300 clothing sketches generated from six broad
-clothing categories and 23 subcategories.
-
-The dataset was designed for applications including:
-
-- cross-domain photo/sketch matching;
-- image retrieval;
-- classification; and
-- machine-learning/deep-learning evaluation.
-
-The present study uses the same sketch population for a different
-scientific purpose.
-
-The sketches are treated as a population of morphological observations
-rather than primarily as classification or retrieval examples.
-
-This distinction should be stated explicitly.
-
-The study therefore does not claim novelty for creating the Clo-Sket
-dataset.
-
-The contribution is the new analytical use of the dataset to
-characterize quantitative morphology.
+For the present study, this distinction is important. The goal is not simply to construct a mathematically convenient feature vector. The representation must be evaluated according to whether its dimensions capture reproducible and interpretable variation in garment drawings.
 
 ---
 
-# 6. Explicit Image-Derived Morphology
+## 2.4 From Individual Outlines to Population Shape Spaces
 
-## Existing methodological background
+McCane provides a methodological bridge from individual outline representation to population-level shape analysis.
 
-Explicit shape and image descriptors are well established throughout
-computer vision.
+Rather than requiring a fixed set of corresponding points on every outline, McCane formulates a distance between complete outlines. For a population of shapes
 
-Occupancy profiles, projections, geometric descriptors, Fourier
-representations, moments, contour descriptors, and related shape
-measurements are established methodological tools.
+\[
+S_1,\ldots,S_N,
+\]
 
-Therefore:
+the pairwise distances
 
-> the use of horizontal occupancy, vertical occupancy, and global
-> geometric descriptors is not itself claimed as algorithmic novelty.
+\[
+d(S_i,S_j)
+\]
 
-## Present contribution
+define a distance matrix describing the geometry of the population. This matrix can subsequently be embedded into a lower-dimensional Euclidean representation, allowing population-level variation to be visualized and analyzed.
 
-The novelty question is instead whether these explicit measurements
-can serve as a quantitative coordinate system for investigating the
-organization of garment-sketch morphology independently of semantic
-labels.
+The conceptual transition is therefore:
 
-The study therefore treats the representation as an analytical
-morphology space rather than merely as an input feature vector for a
-classifier.
+\[
+\boxed{
+\text{individual outline}
+\rightarrow
+\text{shape distance}
+\rightarrow
+\text{population geometry}
+}
+\]
 
----
+This differs fundamentally from using shape merely as a feature for classification. In McCane's formulation, the population geometry itself becomes the object of scientific analysis.
 
-# 7. PCA and Dimensionality Reduction
+Nevertheless, this framework is developed for general biological/morphological outlines and does not establish garment-specific morphology, fashion-sketch semantics, garment primitives, or semantic relationships between garment components.
 
-PCA is an established dimensionality-reduction method.
-
-The present study does not claim novelty for PCA.
-
-PCA is used to:
-
-- reduce the dimensionality of the standardized morphology
-  representation;
-- characterize variance structure; and
-- provide a tractable coordinate system for subsequent geometric
-  analyses.
-
-Importantly:
-
-> PCA is a methodological component, not the scientific hypothesis.
-
-The study therefore should not state:
-
-> "We propose PCA-based fashion morphology."
-
-Instead:
-
-> "PCA was used to obtain a variance-preserving coordinate
-> representation for subsequent analysis of morphology organization."
+McCane therefore establishes the methodological legitimacy of studying a population of outlines through their shape relationships, but does not answer whether 2D fashion sketches constitute such a morphological population.
 
 ---
 
-# 8. Quantitative Morphology as an Object of Analysis
+## 2.5 Quantitative Morphology Has Already Reached Fashion Silhouettes
 
-This is the central literature gap being investigated.
+Importantly, the literature also identifies direct precedent for population-level quantitative analysis within fashion itself.
 
-The relevant distinction is between:
+Tsuru et al. analyzed 223 garment images from luxury fashion collections, representing each garment using 11 standardized measurements corresponding to garment-design locations such as neck, shoulder, waist, hips, hem, knee, and length. Multivariate analysis using multidimensional scaling and hierarchical clustering was then used to visualize and organize silhouette variation.
 
-### Task-oriented representation
+Thus, a genuine fashion morphology pipeline already exists:
 
-A representation is constructed because it improves:
+\[
+\boxed{
+\text{garment population}
+\rightarrow
+\text{geometric measurements}
+\rightarrow
+\text{multivariate analysis}
+\rightarrow
+\text{silhouette space}
+}
+\]
 
-- classification;
-- retrieval;
-- recognition;
-- generation;
-- parsing; or
-- another downstream task.
+Indrie et al. provide a more recent related study. Their analysis includes 29 dress silhouettes, 40 skirt silhouettes, and 19 neckline silhouettes. Each silhouette is converted into explicit geometric descriptors, including measurements of axes, perimeter, area, and related form factors, followed by feature selection and PCA.
 
-and:
+The resulting representation is explicitly constructed before statistical analysis:
 
-### Morphology-oriented analysis
+\[
+\boxed{
+\text{silhouette image}
+\rightarrow
+\text{geometric measurements}
+\rightarrow
+\text{form coefficients}
+\rightarrow
+\text{PCA}
+}
+\]
 
-The representation itself becomes the object of study.
+rather than directly learning an embedding from image pixels.
 
-The present work belongs primarily to the second category.
+This literature therefore closes an important potential gap. It would no longer be defensible to state that quantitative morphological analysis has not been applied to fashion. It clearly has.
 
-The study asks whether the population of garment sketches exhibits
-reproducible quantitative geometric organization independent of
-predefined semantic categories.
+The relevant distinction is instead the nature of the observational population.
 
-This distinction should form a major part of the Introduction.
-
----
-
-# 9. Semantic Representations vs Quantitative Morphology
-
-Modern fashion datasets increasingly incorporate semantic,
-multimodal, or textual annotations.
-
-These representations are useful for:
-
-- garment description;
-- semantic retrieval;
-- multimodal learning;
-- generation;
-- design assistance; and
-- attribute recognition.
-
-The present work intentionally operates at a different layer.
-
-It does not attempt to infer semantic garment concepts from the
-morphology representation.
-
-Instead, it establishes a quantitative geometric layer that can
-potentially serve as a substrate for later semantic investigations.
-
-This distinction should be preserved throughout the manuscript.
+Tsuru et al. analyze photographed garments, while Indrie et al. analyze predefined silhouette representations collected from the literature. Neither study, as represented in the reviewed material, establishes a population of raw or technical 2D fashion sketches/flats as the primary morphological observations.
 
 ---
 
-# 10. Radial–Angular Representation
+## 2.6 The Remaining Gap
 
-## Literature position
+Taken together, the literature reveals a progression:
 
-Radial and angular representations are established mathematical
-descriptions of spatial structure.
+\[
+\boxed{
+\text{fashion sketch}
+\rightarrow
+\text{geometric representation}
+}
+\]
 
-Likewise, Fourier and frequency-domain representations are established
-tools in image and shape analysis.
+has been established;
 
-Therefore the present study does not claim novelty for:
+\[
+\boxed{
+\text{fashion contour}
+\rightarrow
+\text{quantitative descriptor}
+\rightarrow
+\text{classification}
+}
+\]
 
-- polar coordinates;
-- radial sampling;
-- angular sampling;
-- Fourier transforms;
-- radial spectra; or
-- circular statistics as mathematical operations.
+has been established;
 
-## What is being tested
+\[
+\boxed{
+\text{fashion silhouette population}
+\rightarrow
+\text{geometric measurements}
+\rightarrow
+\text{statistical morphology}
+}
+\]
 
-The scientific question is whether an independently derived
-radial–angular description provides a useful geometric representation
-of garment sketches that is:
+has also been established;
 
-1. reproducibly associated with the explicit morphology
-   representation;
-2. recoverable from morphology at the sketch level; and
-3. complementary to morphology in a downstream task.
+and general geometric-morphometric research has established:
 
-The novelty is therefore empirical and analytical rather than
-mathematical.
+\[
+\boxed{
+\text{outline population}
+\rightarrow
+\text{shape space}
+\rightarrow
+\text{morphological variation}
+}
+\]
 
----
+as a principled methodological framework.
 
-# 11. Relationship Between the Two Representations
+What is less established in the reviewed literature is the intersection of these lines:
 
-The two representations are deliberately treated as distinct
-coordinate descriptions.
+\[
+\boxed{
+\textbf{
+\text{population of 2D fashion sketches/flats}
+\rightarrow
+\text{explicit geometric morphology}
+\rightarrow
+\text{statistical population structure}
+}
+}
+\]
 
-### Morphology representation
+In particular, the reviewed studies do not establish whether a heterogeneous population of 2D fashion sketches can be treated directly as morphological observations without first imposing predefined silhouette categories, nor whether independently constructed geometric representations of the same sketches recover corresponding population structure.
 
-The 135-D representation describes:
+This distinction is critical because it changes the scientific question from:
 
-- horizontal occupancy;
-- vertical occupancy; and
-- global geometric descriptors.
+> *Can fashion sketches be classified or represented?*
 
-It is fundamentally a canonical Cartesian/spatial occupancy
-description.
+to:
 
-### Radial–angular representation
+> **Does the geometry of fashion sketches itself contain a reproducible morphological organization?**
 
-The 28-D representation describes geometric organization using
-radial, angular, circular, and relational quantities.
-
-The study asks whether these coordinate systems:
-
-> overlap in the information they encode while also exposing
-> complementary structure.
-
-This is tested rather than assumed.
-
----
-
-# 12. Cross-Representation Correspondence
-
-The study adds a specific validation step that is important for the
-literature positioning.
-
-The radial–angular representation is not simply appended to morphology
-and evaluated once.
-
-Instead, the study evaluates:
-
-1. feature-wise association;
-2. cross-validated morphology-to-radial-angular recovery;
-3. row-permutation correspondence;
-4. downstream complementarity;
-5. dimension-matched control; and
-6. descriptor-level ablation.
-
-This creates an evidence chain from association to functional utility.
-
-The study therefore avoids equating statistical correlation with
-complementarity.
+The latter is a question about the structure of the observation population rather than the performance of a downstream classifier or generator.
 
 ---
 
-# 13. Complementarity vs Redundancy
+## 2.7 Relation to the Present Study
 
-A central literature-positioning distinction is:
+The present study therefore builds on several established methodological traditions while combining them at a different analytical level.
 
-> association is not the same as complementarity.
+First, geometric-morphometric research provides the conceptual basis for treating shape as a quantitative object and emphasizes the need to justify correspondence and representation choices.
 
-If morphology predicts radial–angular measurements, the two
-representations may contain shared information.
+Second, outline-shape methods demonstrate how populations of curves can be represented through pairwise shape relationships and embedded into low-dimensional shape spaces.
 
-That does not establish that radial–angular geometry contributes
-something additional.
+Third, fashion research demonstrates that garment contours and silhouettes can be converted into explicit geometric descriptors and statistically analyzed.
 
-Conversely, if radial–angular descriptors improve a downstream task,
-the improvement could potentially be caused simply by adding more
-dimensions.
+Finally, fashion-flat and sketch-based computational systems demonstrate that garment drawings contain structured geometric information that can support classification, module assembly, 3D reconstruction, and multimodal garment modeling.
 
-The present study therefore separates:
+The present study asks whether these ideas can be brought together to investigate the morphological organization of a population of 2D fashion sketches themselves.
 
-### Association
+The distinction can be summarized as:
 
-Cells 3–4.
+\[
+\boxed{
+\begin{array}{c}
+\text{Prior fashion-CV work}\\
+\downarrow\\
+\text{representation for a task}
+\end{array}
+}
+\]
 
-### Sketch-level correspondence
+versus
 
-Cell 6.
+\[
+\boxed{
+\begin{array}{c}
+\text{Present study}\\
+\downarrow\\
+\text{representation as an object of morphological investigation}
+\end{array}
+}
+\]
 
-### Downstream complementarity
-
-Cells 8–9.
-
-### Dimensionality control
-
-Cell 10.
-
-### Descriptor ablation
-
-Cell 11.
-
-This layered structure is a methodological strength of the study.
-
----
-
-# 14. Dimension-Matched Control
-
-The most direct alternative explanation for the downstream improvement
-is:
-
-> additional features improve classification regardless of what they
-> represent.
-
-The dimension-matched control addresses this possibility by preserving
-the dimensionality of the added representation while destroying its
-true sketch-level correspondence.
-
-Therefore the relevant comparison is not simply:
-
-    135 dimensions
-        vs
-    163 dimensions
-
-but:
-
-    135-D morphology
-        +
-    correctly aligned 28-D radial-angular geometry
-
-versus:
-
-    135-D morphology
-        +
-    dimension-matched but misaligned radial-angular geometry.
-
-This provides stronger evidence that the observed gain depends on the
-geometric correspondence rather than dimensionality alone.
+The study therefore does not claim novelty for individual descriptors, PCA, geometric measurements, or the underlying sketch dataset. Rather, its scientific question concerns whether these explicit measurements can provide a reproducible coordinate system in which morphological organization of garment sketches emerges independently of predefined semantic categories.
 
 ---
 
-# 15. Descriptor Ablation
+## 2.8 Literature Gap and Hypothesis
 
-A second alternative explanation is:
+The literature therefore supports a specific rather than absolute gap:
 
-> one particular radial-angular descriptor is responsible for the
-> entire improvement.
+> **Existing work has demonstrated quantitative representations of fashion contours, modular geometric representations of fashion flats, and population-level statistical analysis of garment silhouettes. However, the reviewed literature does not establish whether a heterogeneous population of 2D fashion sketches or technical flats can itself be treated as a morphological population in which geometric organization emerges directly from sketch geometry, independent of predefined semantic categories.**
 
-The descriptor-level ablation addresses this possibility.
+This leads to the central hypothesis of the present study:
 
-The full 28-D representation produces a larger downstream improvement
-than any individual descriptor block.
+\[
+\boxed{
+\textbf{
+2D fashion sketches contain a reproducible geometric organization
+that can be characterized as a morphological population.
+}
+}
+\]
 
-Therefore the observed utility is not adequately reduced to a single
-radial-angular component.
+A stronger version of the hypothesis can then be tested through representation correspondence:
 
-However, the ablation does not establish that every block is
-independently significant.
+\[
+\boxed{
+\text{independent geometric representations}
+\rightarrow
+\text{corresponding population structure}
+}
+\]
 
----
+If independently constructed representations recover similar relationships among sketches, the resulting structure is less likely to be an artifact of a particular feature encoding.
 
-# 16. What We Can Safely Claim About the Literature Gap
-
-The safest current formulation is:
-
-> Existing computational fashion and sketch research has extensively
-> addressed recognition, retrieval, matching, semantic analysis,
-> generation, and related downstream tasks. In contrast, the present
-> study investigates quantitative morphology of garment sketches as an
-> object of analysis independent of predefined semantic categories,
-> and evaluates its relationship to an independently derived
-> radial–angular geometric representation.
-
-This is preferable to:
-
-> "No previous work has studied fashion-sketch morphology."
-
-The latter is an absolute negative claim and requires a much more
-exhaustive literature search.
-
----
-
-# 17. Provisional Novelty Matrix
-
-| Research area | Established in literature? | Present study | Novelty status |
-|---|---|---|---|
-| Fashion image recognition | Yes | Not primary objective | Not claimed |
-| Fashion retrieval | Yes | Not primary objective | Not claimed |
-| Fashion parsing | Yes | Not primary objective | Not claimed |
-| Fashion generation | Yes | Not primary objective | Not claimed |
-| Sketch recognition | Yes | Used only as downstream context | Not claimed |
-| Explicit image descriptors | Yes | Used for morphology representation | Not algorithmically novel |
-| PCA | Yes | Used for dimensional reduction | Not novel |
-| Radial/polar geometry | Yes | Used as independent representation | Not mathematically novel |
-| Quantitative morphology organization of garment sketches | Less directly represented in the task literature identified so far | Primary objective | **Candidate contribution** |
-| Cross-branch morphology ↔ radial-angular correspondence | No direct precedent established yet | Explicitly tested | **Candidate contribution** |
-| Downstream complementarity between morphology and RA | No direct precedent established yet | Explicitly tested | **Candidate contribution** |
-| Dimension-matched validation of that complementarity | No direct precedent established yet | Explicitly tested | **Candidate methodological contribution** |
-
-The final three rows must remain labelled **candidate contributions**
-until the dedicated systematic literature search is completed.
-
----
-
-# 18. Literature Search Requirement Before Submission
-
-Before making a definitive novelty claim, the literature review should
-specifically search for studies involving combinations of:
-
-### Fashion sketch morphology
-
-- garment sketch shape representation;
-- garment sketch morphology;
-- fashion sketch shape analysis;
-- fashion illustration shape analysis;
-- quantitative fashion sketch descriptors.
-
-### Explicit geometric representations
-
-- fashion sketch occupancy profiles;
-- garment silhouette descriptors;
-- garment shape descriptors;
-- garment contour representations;
-- fashion sketch Fourier descriptors;
-- fashion sketch radial descriptors;
-- garment polar representations.
-
-### Unsupervised morphology organization
-
-- unsupervised garment shape spaces;
-- garment morphology spaces;
-- fashion shape manifolds;
-- garment silhouette spaces;
-- sketch morphology clustering;
-- quantitative garment shape variation.
-
-### Cross-representation geometry
-
-- fashion sketch multi-representation;
-- garment shape complementary representations;
-- polar/cartesian garment representation;
-- radial-angular fashion shape;
-- complementary shape descriptors in fashion sketches.
-
-The purpose of this search is not to find papers that use the same
-mathematics.
-
-The purpose is to determine whether the same **scientific question**
-has already been answered.
-
----
-
-# 19. Important Positioning Rule
-
-Similarity of mathematical tools does not automatically invalidate
-the contribution.
-
-For example:
-
-> Another paper using PCA does not invalidate this work.
-
-Likewise:
-
-> Another paper using Fourier descriptors does not invalidate this
-> work.
-
-The relevant question is whether prior work has already established
-the same empirical claim:
-
-> garment sketches exhibit reproducible quantitative morphology
-> organization that can be characterized without semantic supervision
-> and independently validated through complementary radial–angular
-> geometry.
-
-This should be the standard used when assessing novelty.
-
----
-
-# 20. Current Literature-Based Position
-
-Based on the literature reviewed so far:
-
-### Established
-
-- computational fashion vision is extensive;
-- sketch recognition and retrieval are established;
-- explicit image/shape descriptors are established;
-- PCA and geometric transformations are established;
-- radial/Fourier representations are established.
-
-### Less directly addressed by the literature reviewed so far
-
-- treating garment sketches themselves as a quantitative morphology
-  population;
-- characterizing their geometric organization independently of
-  semantic labels;
-- testing an independently derived radial–angular representation
-  against that morphology space;
-- evaluating representation complementarity rather than only
-  downstream task accuracy.
-
-These points are therefore the current candidate research gap.
-
-They should be verified through a targeted systematic search before
-being stated as definitive novelty claims.
-
----
-
-# 21. Recommended Introduction Positioning
-
-The Introduction should progress approximately as follows:
-
-### Paragraph 1
-
-Garment sketches are an important design representation.
-
-### Paragraph 2
-
-Computational fashion research has predominantly emphasized
-recognition, retrieval, parsing, synthesis, recommendation, and
-semantic/multimodal tasks.
-
-### Paragraph 3
-
-These approaches establish what can be predicted from fashion images
-and sketches, but they do not necessarily characterize the quantitative
-morphological organization of the sketch population itself.
-
-### Paragraph 4
-
-We therefore ask whether garment sketches occupy a structured
-quantitative morphology space that can be characterized without
-predefined semantic categories.
-
-### Paragraph 5
-
-We introduce an explicit morphology representation and evaluate its
-geometric organization.
-
-### Paragraph 6
-
-We independently construct a radial–angular representation and test
-whether it is associated with, recoverable from, and complementary to
-the morphology representation.
-
-### Paragraph 7
-
-We state the contribution and explicitly limit the semantic claims.
-
----
-
-# 22. Final Literature Positioning Statement
-
-The paper should be positioned neither as:
-
-> a new generic image descriptor,
-
-nor as:
-
-> a new fashion classifier,
-
-nor as:
-
-> a semantic understanding system.
-
-It should be positioned as:
-
-> **an empirical study of quantitative morphology organization in
-> garment sketches, together with an independent geometric
-> radial–angular validation and complementarity analysis.**
-
-The novelty claim is therefore primarily about the **scientific object,
-experimental framing, and evidence chain**, rather than the novelty of
-individual mathematical operations.
+This moves the study beyond the question of whether a descriptor is useful for classification and toward the more fundamental question of whether fashion sketch geometry exhibits an underlying, reproducible organization that can serve as a basis for computational morphological analysis.
