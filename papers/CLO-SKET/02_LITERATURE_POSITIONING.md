@@ -1,48 +1,60 @@
 # 2. Related Work
 
-## 2.1 Computational Representations of Fashion Sketches
+## 2.1 Computational Analysis of Fashion Sketches
 
-Computational analysis of fashion sketches has developed along several distinct objectives, including garment reconstruction, design assistance, shape description, classification, and multimodal garment modeling. Across these studies, the sketch is generally treated as a geometric or visual input from which another computational representation is constructed, rather than as a population of morphological observations in its own right.
+Computational research on fashion sketches has addressed several related problems, including geometric garment reconstruction, sketch-based garment modeling, garment-style transfer, classification, and multimodal representation learning. These studies establish that 2D garment drawings contain structured geometric information that can be computationally extracted and used for downstream garment analysis or synthesis.
 
-Geometry-driven approaches have demonstrated that substantial garment structure can be extracted directly from 2D sketches. Robson et al. interpreted garment silhouettes, boundaries, characteristic curves, and folds in the context of a 3D mannequin to construct plausible 3D garments. Their formulation introduced geometric constraints such as a spatially varying tightness field, thereby interpreting the sketch as a specification for garment geometry rather than as a conventional image-classification input.
+Geometry-driven approaches interpret the sketch directly as a specification of garment structure. Robson et al. use garment silhouettes, boundaries, characteristic curves, and folds to construct plausible 3D garments, demonstrating that geometric constraints extracted from a sketch can determine substantial aspects of garment form. Yasseen et al. similarly convert sketched garment boundaries into quadrilateral mesh structures suitable for subsequent garment simulation. These approaches establish that sketch geometry can serve as a direct computational representation of garment form, but their objective is reconstruction rather than population-level analysis of sketch morphology.
 
-Similarly, Yasseen et al. treated a garment sketch primarily as a geometric specification for constructing a quadrilateral mesh. Their method converts sketched garment boundaries into computationally useful mesh topology for subsequent garment simulation. The representation is therefore concerned with geometric construction and mesh connectivity rather than with learning a population-level representation of garment morphology.
+Fondevilla et al. extend this geometric interpretation to the transfer of garment style from a 2D fashion sketch to 3D characters. Their representation separates sketch-derived information into proportionality, fit, overall garment shape, and fold structure. The extracted geometric information is subsequently used to synthesize garments for characters with different poses and body morphologies. The work therefore demonstrates that meaningful geometric style information can be recovered from a single fashion sketch, but it does not investigate whether geometric variation across a population of sketches forms a reproducible morphological organization.
 
-Fondevilla et al. extended this geometric interpretation toward style transfer between 2D sketches and 3D garments. Their method decomposes sketch-derived style into proportionality, fit, silhouette shape, and fold appearance, and uses these geometric characteristics to construct garments on characters with different poses and morphologies. The resulting system demonstrates that meaningful garment-style information can be extracted from a single stylized sketch, but its objective remains 2D-to-3D garment generation rather than statistical analysis of variation across a sketch population.
+Wang et al. approach the problem through multimodal representation learning, linking 2D fashion sketches with garment and body parameters and simulated 3D garments. Their framework learns mappings between these modalities in a shared latent representation for garment reconstruction and retargeting. This differs fundamentally from an explicit morphology representation: the sketch is encoded using learned image features, while PCA is applied to the simulated 3D garment representation rather than being used to characterize the population of 2D sketches themselves.
 
-A related multimodal formulation was proposed by Wang et al., who learned a shared latent space linking 2D sketches, garment and body parameters, and simulated 3D draped garments. Their synthetic dataset contains paired representations of the same garment-design instance, allowing mappings between these modalities to be learned jointly. Importantly, however, the PCA used in this work is applied to simulated 3D garment meshes as a compact representation of 3D geometry; the sketch itself is represented through DenseNet features. The resulting latent space therefore serves multimodal garment design and retargeting rather than population-level discovery of sketch morphology.
-
-These approaches establish an important precedent:
+Taken together, these studies establish that:
 
 \[
 \boxed{
-\text{2D fashion sketches contain computationally recoverable geometric information}
+\text{2D garment sketches contain computationally recoverable geometric information}
 }
 \]
 
-However, they largely formulate the sketch as an input to a downstream task---reconstruction, simulation, design, transfer, or multimodal prediction. They do not primarily ask whether the geometry of a collection of sketches itself possesses an organized morphology.
+However, their primary objectives are reconstruction, transfer, classification, or multimodal prediction. The sketch is generally treated as an input to a downstream task rather than as the primary observational unit of a population-level morphological analysis.
 
 ---
 
-## 2.2 Explicit Geometric Representations of Fashion Flats
+## 2.2 Quantitative Representations of Fashion Flats
 
-Fashion-flat research provides an additional line of evidence that garment drawings can be represented explicitly in terms of geometric structure.
+A second body of work has developed explicit quantitative representations for fashion flats and garment contours.
 
-An and Li developed a Wavelet Fourier Descriptor (WFD) for fashion-flat-sketch classification. Their method converts garment contours into centroid-distance signals and combines wavelet and Fourier analysis to obtain a transformation-invariant shape descriptor. The resulting descriptor is used for multiclass classification.
+An and Li proposed an integrated approach for fashion-flat-sketch classification based on a Wavelet Fourier Descriptor (WFD), followed by Linear Discriminant Analysis (LDA) and an Extreme Learning Machine classifier. Their method extracts contour shape information using wavelet and Fourier transforms and uses the resulting representation for multiclass classification. The study therefore provides direct evidence that fashion-flat contours can be transformed into mathematically defined shape descriptors. However, the representation is constructed to distinguish predefined classes rather than to characterize the geometry of a sketch population as a morphological space.
 
-This work is particularly relevant because it establishes that fashion-flat contours can be converted into mathematically defined quantitative shape representations. However, the scientific role of the representation is discriminative: the descriptor functions as a shape signature for classification. The study does not investigate whether a population of fashion flats forms a continuous morphological space or whether independent geometric descriptions recover common population structure.
+This distinction is important because dimensionality reduction used for classification should not automatically be interpreted as population morphology. In An and Li, LDA is supervised by the classification problem. The resulting representation therefore answers the question:
 
-Lee and Kim provide another explicit geometric formulation through modular representation of fashion flats. Their system decomposes flats into reusable garment components such as bodices, sleeves, collars, cuffs, and pockets, and automatically aligns and assembles these modules.
+\[
+\boxed{
+\text{Can shape descriptors discriminate predefined fashion-flat classes?}
+}
+\]
 
-The geometric transformations in this framework---including translation, rotation, and scaling---should be distinguished from statistical coordinate transformations such as PCA. Module alignment physically transforms a garment component in object space, whereas PCA changes the coordinate basis in which variation across observations is expressed.
+rather than:
 
-Thus, existing fashion-flat research already establishes two important capabilities:
+\[
+\boxed{
+\text{How is geometric variation organized across a population of fashion flats?}
+}
+\]
+
+Lee and Kim provide another explicit geometric representation of fashion flats through garment modularization. Their system decomposes fashion flats into components such as bodices, sleeves, collars, cuffs, and pockets and uses geometric alignment to assemble these components into new designs. The transformations used for module alignment include translation, rotation, and scaling.
+
+These geometric transformations should be distinguished from statistical transformations such as PCA. Geometric alignment changes the spatial configuration of an object, whereas PCA changes the coordinate basis used to represent variation across observations.
+
+Thus, prior fashion-flat research establishes that:
 
 \[
 \boxed{
 \text{fashion flat}
 \rightarrow
-\text{quantitative contour representation}
+\text{quantitative geometric representation}
 }
 \]
 
@@ -52,21 +64,33 @@ and
 \boxed{
 \text{fashion flat}
 \rightarrow
-\text{explicit garment modules}
+\text{explicit structural components}
 }
 \]
 
-What remains different is the scientific question. These representations are used for classification or design assembly, rather than for investigating the statistical organization of morphology across a population of flats or sketches.
+but these representations have primarily been developed for classification or design construction rather than for investigating population-level morphological organization.
 
 ---
 
-## 2.3 Quantitative Shape and Geometric Morphometrics
+## 2.3 Geometric Morphometrics and Quantitative Shape
 
-The methodological foundation for treating visual forms as quantitative morphological objects comes from geometric morphometrics.
+The methodological basis for treating visual form as a quantitative morphological object is provided by geometric morphometrics.
 
-Bookstein introduced a framework for analyzing outlines that lack conventional anatomical landmarks through semilandmarks. Because arbitrary positions along a curve do not necessarily correspond to meaningful morphological locations, semilandmarks can slide along the tangent direction to reduce variation attributable to arbitrary point placement.
+Bookstein introduced methods for analyzing outlines without conventional landmarks through the use of semilandmarks. Because arbitrary positions along a curve need not correspond across observations, semilandmarks can slide along the tangent direction, reducing variation caused by arbitrary sampling position. The resulting representation permits quantitative comparison of outline shape.
 
-This establishes a fundamental methodological principle:
+The general principle is:
+
+\[
+\boxed{
+\text{outline}
+\rightarrow
+\text{correspondence}
+\rightarrow
+\text{quantitative shape}
+}
+\]
+
+This establishes an important methodological distinction:
 
 \[
 \boxed{
@@ -76,33 +100,23 @@ This establishes a fundamental methodological principle:
 }
 \]
 
-The correspondence criterion used to construct the representation therefore matters. Later methodological analysis by Mitteroecker and Schaefer emphasizes that bending-energy minimization and Procrustes-distance minimization optimize different mathematical objectives, and that geometric correspondence cannot automatically be equated with biological homology.
+The mathematical representation must be appropriate to the scientific question and to the form of variation being investigated.
 
-More generally, their review emphasizes that a mathematically valid representation does not automatically constitute a biologically meaningful representation. Interpretation must remain connected to the scientific question, the structure being measured, and the relevant notion of correspondence.
-
-For the present study, this distinction is important. The goal is not simply to construct a mathematically convenient feature vector. The representation must be evaluated according to whether its dimensions capture reproducible and interpretable variation in garment drawings.
-
----
-
-## 2.4 From Individual Outlines to Population Shape Spaces
-
-McCane provides a methodological bridge from individual outline representation to population-level shape analysis.
-
-Rather than requiring a fixed set of corresponding points on every outline, McCane formulates a distance between complete outlines. For a population of shapes
+McCane extends this perspective toward population-level analysis of outlines by defining distances between complete shapes rather than requiring a fixed set of corresponding landmarks. For a population of shapes
 
 \[
-S_1,\ldots,S_N,
+S_1,S_2,\ldots,S_N,
 \]
 
-the pairwise distances
+pairwise distances
 
 \[
 d(S_i,S_j)
 \]
 
-define a distance matrix describing the geometry of the population. This matrix can subsequently be embedded into a lower-dimensional Euclidean representation, allowing population-level variation to be visualized and analyzed.
+can be used to construct a distance matrix and subsequently a low-dimensional representation of the population.
 
-The conceptual transition is therefore:
+The conceptual progression is therefore:
 
 \[
 \boxed{
@@ -114,21 +128,19 @@ The conceptual transition is therefore:
 }
 \]
 
-This differs fundamentally from using shape merely as a feature for classification. In McCane's formulation, the population geometry itself becomes the object of scientific analysis.
+This is particularly relevant to the present work because it establishes that shape analysis can move beyond describing individual forms toward characterizing the organization of an entire population.
 
-Nevertheless, this framework is developed for general biological/morphological outlines and does not establish garment-specific morphology, fashion-sketch semantics, garment primitives, or semantic relationships between garment components.
-
-McCane therefore establishes the methodological legitimacy of studying a population of outlines through their shape relationships, but does not answer whether 2D fashion sketches constitute such a morphological population.
+However, these geometric-morphometric methods are general methodological frameworks and do not provide a garment-specific representation or establish that 2D fashion sketches form a morphological population.
 
 ---
 
-## 2.5 Quantitative Morphology Has Already Reached Fashion Silhouettes
+## 2.4 Quantitative Morphology in Fashion
 
-Importantly, the literature also identifies direct precedent for population-level quantitative analysis within fashion itself.
+Importantly, quantitative population-level morphology is not absent from fashion research.
 
-Tsuru et al. analyzed 223 garment images from luxury fashion collections, representing each garment using 11 standardized measurements corresponding to garment-design locations such as neck, shoulder, waist, hips, hem, knee, and length. Multivariate analysis using multidimensional scaling and hierarchical clustering was then used to visualize and organize silhouette variation.
+Tsuru et al. analyzed a population of garments from luxury fashion collections using standardized geometric measurements corresponding to garment locations such as the neck, shoulder, waist, hip, hem, knee, and garment length. Multivariate analysis, including multidimensional scaling and clustering, was then used to investigate the organization of garment silhouettes.
 
-Thus, a genuine fashion morphology pipeline already exists:
+Their work establishes the following pipeline:
 
 \[
 \boxed{
@@ -138,185 +150,405 @@ Thus, a genuine fashion morphology pipeline already exists:
 \rightarrow
 \text{multivariate analysis}
 \rightarrow
-\text{silhouette space}
+\text{silhouette organization}
 }
 \]
 
-Indrie et al. provide a more recent related study. Their analysis includes 29 dress silhouettes, 40 skirt silhouettes, and 19 neckline silhouettes. Each silhouette is converted into explicit geometric descriptors, including measurements of axes, perimeter, area, and related form factors, followed by feature selection and PCA.
+Thus, it would not be accurate to claim that quantitative population morphology has not previously been applied to fashion.
 
-The resulting representation is explicitly constructed before statistical analysis:
+Indrie et al. provide a more recent example using collections of dress and skirt silhouettes. Their study analyzes 29 dress silhouettes and 40 skirt silhouettes using explicitly defined geometric form coefficients derived from measurements such as axes, perimeter, and area. Feature selection is followed by PCA, producing a low-dimensional representation in which groups of dress and skirt silhouettes can be identified.
+
+The resulting pipeline is:
 
 \[
 \boxed{
-\text{silhouette image}
+\text{silhouette}
 \rightarrow
-\text{geometric measurements}
+\text{geometric form coefficients}
 \rightarrow
-\text{form coefficients}
+\text{feature selection}
 \rightarrow
 \text{PCA}
+\rightarrow
+\text{silhouette groups}
 }
 \]
 
-rather than directly learning an embedding from image pixels.
+This establishes strong precedent for the statistical analysis of garment morphology and, specifically, for the use of PCA to organize fashion-silhouette variation.
 
-This literature therefore closes an important potential gap. It would no longer be defensible to state that quantitative morphological analysis has not been applied to fashion. It clearly has.
-
-The relevant distinction is instead the nature of the observational population.
-
-Tsuru et al. analyze photographed garments, while Indrie et al. analyze predefined silhouette representations collected from the literature. Neither study, as represented in the reviewed material, establishes a population of raw or technical 2D fashion sketches/flats as the primary morphological observations.
+Consequently, neither geometric garment descriptors nor PCA-based analysis of fashion morphology constitute the novelty of the present study.
 
 ---
 
-## 2.6 The Remaining Gap
+## 2.5 Distinguishing Garment Morphology from Sketch Morphology
 
-Taken together, the literature reveals a progression:
+The existing literature nevertheless differs in the nature of the objects used as observations.
+
+Fashion morphology studies such as Tsuru et al. analyze photographs or representations of physical garments, while Indrie et al. analyze predefined garment-silhouette representations collected from existing literature. These studies therefore investigate the geometry of garments or recognized silhouette types.
+
+In contrast, computational fashion-sketch studies generally use drawings as inputs to downstream tasks such as classification, reconstruction, module assembly, or transfer.
+
+This creates an important distinction between two questions:
 
 \[
 \boxed{
-\text{fashion sketch}
+\text{How is the morphology of garments organized?}
+}
+\]
+
+and
+
+\[
+\boxed{
+\text{How is the morphology expressed in a population of 2D garment sketches organized?}
+}
+\]
+
+The first question has clear precedent in fashion research.
+
+The second is less established in the literature reviewed here.
+
+In particular, the reviewed studies do not establish a general framework in which a heterogeneous population of 2D garment sketches or technical flats is treated directly as the primary morphological population, using explicit image-derived measurements without first defining the population through semantic silhouette categories.
+
+---
+
+# 2.6 The Remaining Gap
+
+The literature therefore establishes four important capabilities.
+
+First:
+
+\[
+\boxed{
+\text{fashion sketches}
 \rightarrow
 \text{geometric representation}
 }
 \]
 
-has been established;
+has been demonstrated.
+
+Second:
 
 \[
 \boxed{
-\text{fashion contour}
+\text{fashion flats}
 \rightarrow
-\text{quantitative descriptor}
-\rightarrow
-\text{classification}
+\text{quantitative shape descriptors}
 }
 \]
 
-has been established;
+has been demonstrated.
+
+Third:
 
 \[
 \boxed{
-\text{fashion silhouette population}
-\rightarrow
-\text{geometric measurements}
+\text{fashion garment population}
 \rightarrow
 \text{statistical morphology}
 }
 \]
 
-has also been established;
+has been demonstrated.
 
-and general geometric-morphometric research has established:
+Fourth:
 
 \[
 \boxed{
-\text{outline population}
+\text{general outline population}
 \rightarrow
-\text{shape space}
-\rightarrow
-\text{morphological variation}
+\text{quantitative shape space}
 }
 \]
 
-as a principled methodological framework.
+has been established in geometric-morphometric methodology.
 
-What is less established in the reviewed literature is the intersection of these lines:
+The less-established intersection is therefore:
 
 \[
 \boxed{
 \textbf{
-\text{population of 2D fashion sketches/flats}
+\text{2D garment-sketch population}
 \rightarrow
-\text{explicit geometric morphology}
+\text{explicit image-derived morphology}
 \rightarrow
-\text{statistical population structure}
+\text{population-level organization}
 }
 }
 \]
 
-In particular, the reviewed studies do not establish whether a heterogeneous population of 2D fashion sketches can be treated directly as morphological observations without first imposing predefined silhouette categories, nor whether independently constructed geometric representations of the same sketches recover corresponding population structure.
+The distinction is not that previous work lacked shape descriptors, PCA, clustering, or garment morphology. Rather, the unresolved question concerns whether the geometry of a heterogeneous collection of 2D garment sketches itself exhibits a reproducible population-level organization when the representation is constructed directly from the images without predefined semantic categories.
 
-This distinction is critical because it changes the scientific question from:
+This leads to a more precise scientific question:
 
-> *Can fashion sketches be classified or represented?*
-
-to:
-
-> **Does the geometry of fashion sketches itself contain a reproducible morphological organization?**
-
-The latter is a question about the structure of the observation population rather than the performance of a downstream classifier or generator.
+> **Can a population of 2D garment sketches be characterized as a quantitatively organized morphological population using explicit image-derived measurements without semantic supervision?**
 
 ---
 
-## 2.7 Relation to the Present Study
+# 2.7 Independent Representation as a Second Test of Morphology
 
-The present study therefore builds on several established methodological traditions while combining them at a different analytical level.
+A second limitation of relying on a single representation is that population structure may depend on the particular choice of descriptors.
 
-First, geometric-morphometric research provides the conceptual basis for treating shape as a quantitative object and emphasizes the need to justify correspondence and representation choices.
+A low-dimensional organization observed in one feature system could arise from properties specific to that representation. Consequently, agreement between independently constructed representations provides a stronger test than the existence of structure in a single coordinate system.
 
-Second, outline-shape methods demonstrate how populations of curves can be represented through pairwise shape relationships and embedded into low-dimensional shape spaces.
+The present study therefore introduces a second geometric description based on radial-angular measurements.
 
-Third, fashion research demonstrates that garment contours and silhouettes can be converted into explicit geometric descriptors and statistically analyzed.
+The two representations are conceptually distinct:
 
-Finally, fashion-flat and sketch-based computational systems demonstrate that garment drawings contain structured geometric information that can support classification, module assembly, 3D reconstruction, and multimodal garment modeling.
+\[
+\mathbf{x}_i\in\mathbb{R}^{135}
+\]
 
-The present study asks whether these ideas can be brought together to investigate the morphological organization of a population of 2D fashion sketches themselves.
+for the explicit morphology representation, and
 
-The distinction can be summarized as:
+\[
+\mathbf{r}_i\in\mathbb{R}^{28}
+\]
+
+for the radial-angular representation.
+
+The scientific question is not whether the two representations are mathematically identical. Rather, it is whether they recover reproducible information about the same underlying sketches:
+
+\[
+\boxed{
+\mathbf{x}_i
+\longleftrightarrow
+\mathbf{r}_i
+}
+\]
+
+relative to a row-permuted null:
+
+\[
+\boxed{
+\mathbf{x}_i
+\longleftrightarrow
+\mathbf{r}_{\pi(i)}
+}
+\]
+
+This provides a test of sketch-level correspondence between independently derived geometric descriptions.
+
+---
+
+# 2.8 From Correspondence to Complementarity
+
+Correspondence alone does not imply that the two representations contain identical information.
+
+If the radial-angular representation captures aspects of sketch geometry that are not fully represented by the morphology coordinates, it may provide additional predictive information in a downstream task.
+
+The present study therefore distinguishes:
+
+\[
+\boxed{
+\text{association}
+}
+\]
+
+from
+
+\[
+\boxed{
+\text{individual-sketch correspondence}
+}
+\]
+
+and from
+
+\[
+\boxed{
+\text{complementary utility}
+}
+\]
+
+These are tested separately.
+
+The downstream comparison is formulated as:
+
+\[
+\Delta M
+=
+M(\mathbf{X},\mathbf{R})
+-
+M(\mathbf{X}),
+\]
+
+where \(M\) denotes the chosen downstream performance measure.
+
+Because adding dimensions alone can improve performance, dimensionality-matched controls are required before interpreting a positive \(\Delta M\) as evidence of complementary geometric information. Descriptor-block ablations provide a further test of whether any observed improvement is concentrated in a particular component of the radial-angular representation.
+
+Thus, the contribution is not simply the introduction of another feature vector. It is the empirical testing of whether independently derived geometric descriptions agree and whether one provides additional information beyond the other.
+
+---
+
+# 2.9 Position of the Present Study
+
+The present work therefore occupies the intersection of three established research traditions:
 
 \[
 \boxed{
 \begin{array}{c}
-\text{Prior fashion-CV work}\\
-\downarrow\\
-\text{representation for a task}
+\text{Geometric morphometrics}\\
+\text{Fashion sketch geometry}\\
+\text{Quantitative fashion morphology}
 \end{array}
 }
 \]
 
-versus
+The first provides the methodological principle that shape can be represented and analyzed quantitatively.
+
+The second demonstrates that fashion sketches and flats contain recoverable geometric structure.
+
+The third demonstrates that garment populations can exhibit statistically measurable morphological organization.
+
+The present study combines these perspectives by treating a population of 2D garment sketches as the primary observational population and constructing an explicit image-derived morphology representation for its analysis.
+
+It then introduces an independently derived radial-angular representation to test whether the observed organization is reproducible across geometric descriptions and whether the second representation contributes complementary information under a downstream task.
+
+The resulting scientific logic is:
 
 \[
 \boxed{
-\begin{array}{c}
-\text{Present study}\\
-\downarrow\\
-\text{representation as an object of morphological investigation}
-\end{array}
+\text{2D garment sketches}
+\rightarrow
+\text{explicit morphology}
+\rightarrow
+\text{population organization}
 }
 \]
 
-The study therefore does not claim novelty for individual descriptors, PCA, geometric measurements, or the underlying sketch dataset. Rather, its scientific question concerns whether these explicit measurements can provide a reproducible coordinate system in which morphological organization of garment sketches emerges independently of predefined semantic categories.
+followed by:
+
+\[
+\boxed{
+\text{independent radial-angular representation}
+\rightarrow
+\text{cross-representation correspondence}
+}
+\]
+
+and finally:
+
+\[
+\boxed{
+\text{combined representation}
+\rightarrow
+\text{complementary downstream utility}
+}
+\]
 
 ---
 
-## 2.8 Literature Gap and Hypothesis
+# 2.10 Literature Gap and Research Questions
 
-The literature therefore supports a specific rather than absolute gap:
+Based on the literature reviewed above, the gap addressed here is deliberately narrower than a claim that quantitative garment morphology is unexplored.
 
-> **Existing work has demonstrated quantitative representations of fashion contours, modular geometric representations of fashion flats, and population-level statistical analysis of garment silhouettes. However, the reviewed literature does not establish whether a heterogeneous population of 2D fashion sketches or technical flats can itself be treated as a morphological population in which geometric organization emerges directly from sketch geometry, independent of predefined semantic categories.**
+Existing work has already established:
 
-This leads to the central hypothesis of the present study:
+- quantitative representations of fashion-flat contours;
+- explicit geometric representations of garment sketches;
+- statistical analysis of garment and silhouette populations;
+- PCA and other dimensionality-reduction methods for fashion morphology;
+- learned multimodal representations linking sketches to garment parameters and 3D garments.
+
+What remains less established is whether a heterogeneous population of 2D garment sketches or technical flats can itself be treated as a morphological population in which geometric organization emerges directly from image-derived measurements without predefined semantic categories.
+
+The present study therefore asks:
+
+### Primary Research Question
+
+> **Do garment sketches exhibit reproducible quantitative morphology organization that can be characterized directly from explicit image-derived morphology measurements without predefined semantic categories?**
+
+### Secondary Research Question
+
+> **Does an independently derived radial-angular representation capture geometric structure that is reproducibly associated with the morphology representation, recoverable from morphology at the sketch level, and complementary to morphology in a downstream discrimination task?**
+
+The corresponding hypotheses are deliberately empirical rather than semantic:
+
+\[
+\boxed{
+H_1:
+\text{The 135-D morphology representation exhibits reproducible population-level organization.}
+}
+\]
+
+\[
+\boxed{
+H_2:
+\text{The independently derived radial-angular representation is associated with morphology at the population and sketch levels.}
+}
+\]
+
+\[
+\boxed{
+H_3:
+\text{The radial-angular representation provides complementary information beyond morphology under the tested downstream task.}
+}
+\]
+
+The study does not interpret these findings as evidence for a universal semantic vocabulary, a compositional grammar, a mathematical manifold, causal mechanisms, or human-like visual understanding.
+
+Instead, the intended contribution is narrower:
 
 \[
 \boxed{
 \textbf{
-2D fashion sketches contain a reproducible geometric organization
-that can be characterized as a morphological population.
+an empirical quantitative geometric layer for characterizing
+the morphology of 2D garment sketches.
 }
 }
 \]
 
-A stronger version of the hypothesis can then be tested through representation correspondence:
+---
+
+# 2.11 Summary of the Gap
+
+The literature can therefore be summarized as:
 
 \[
 \boxed{
-\text{independent geometric representations}
+\begin{array}{lll}
+\text{Bookstein / McCane}
+&
 \rightarrow
-\text{corresponding population structure}
+&
+\text{quantitative shape and population geometry}
+\\[4pt]
+\text{Robson / Yasseen / Fondevilla / Wang}
+&
+\rightarrow
+&
+\text{computational geometry of fashion sketches}
+\\[4pt]
+\text{An \& Li / Lee \& Kim}
+&
+\rightarrow
+&
+\text{quantitative representations of fashion flats}
+\\[4pt]
+\text{Tsuru / Indrie}
+&
+\rightarrow
+&
+\text{population-level quantitative fashion morphology}
+\\[4pt]
+\hline
+\text{Present study}
+&
+\rightarrow
+&
+\textbf{2D garment-sketch morphology population}
+\\
+&
+&
+\textbf{+ independent representation correspondence}
+\\
+&
+&
+\textbf{+ complementary-utility testing}
+\end{array}
 }
 \]
 
-If independently constructed representations recover similar relationships among sketches, the resulting structure is less likely to be an artifact of a particular feature encoding.
-
-This moves the study beyond the question of whether a descriptor is useful for classification and toward the more fundamental question of whether fashion sketch geometry exhibits an underlying, reproducible organization that can serve as a basis for computational morphological analysis.
+Thus, the contribution is positioned not as the first use of geometric descriptors, PCA, or quantitative morphology in fashion, but as an empirical investigation of whether **2D garment sketches themselves exhibit reproducible quantitative morphological organization**, together with an independent test of that organization using a second geometric representation.
