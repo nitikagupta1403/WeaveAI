@@ -1,53 +1,103 @@
 # 2. Related Work
 
-## 2.1 Computational geometry of garment sketches
+## 2.1 Garment sketches as computational geometry
 
-Garment sketches have been used as geometric inputs to several computational design problems. Sketch-based modelling systems recover garment boundaries or construction geometry from drawn contours and transform them into representations suitable for three-dimensional modelling or simulation. For example, Yasseen et al. (2013) generated quadrilateral garment meshes from contours sketched on a mannequin, demonstrating that sparse drawn geometry can constrain a simulation-ready garment representation. Fondevilla et al. (2021) used annotated fashion drawings to transfer garment style to three-dimensional characters, incorporating silhouette, borders, folds, pose, and body morphology. These studies establish that fashion drawings contain computationally recoverable information about garment form.
+Garment drawings have long served as geometric inputs to computational design systems. Yasseen et al. (2013) used contours sketched on a mannequin to construct quadrilateral garment meshes, while Fondevilla et al. (2021) transferred garment style from annotated fashion drawings to three-dimensional characters. Wang et al. (2018) learned a shared space connecting sketched fold patterns, sewing-pattern parameters, body shape, and simulated garments. Together, these studies show that sparse fashion drawings contain recoverable information about garment form.
 
-Learning-based work has extended this relationship across multiple garment modalities. Wang et al. (2018), for example, learned a shared latent space linking sketched fold patterns, body shape, sewing-pattern parameters, and simulated three-dimensional garments. Such methods enable reconstruction, editing, or retargeting across modalities, but their principal objective is task-oriented garment design. The sketch is encoded as an input to a predictive or generative system rather than treated as the primary observational unit of a population-level morphology analysis.
+Their main objective, however, is reconstruction, transfer, editing, or generation. The sketch is typically an input to a task-oriented model. CLO-SKET instead treats each sketch as an observational unit and asks a narrower measurement question: can its foreground geometry be summarized by an explicit radial–angular representation whose construction, dependencies, and limits are auditable?
 
-The present study addresses a different question. Instead of asking how a sketch can be transformed into a garment model, it asks whether geometric variation across a sketch population can be represented explicitly, examined as a quantitative space, and related to an independently constructed geometric coordinate system.
+## 2.2 Explicit garment-shape descriptors
 
-## 2.2 Explicit representations of fashion flats and silhouettes
+Fashion-flat and silhouette research provides direct precedent for quantitative garment-shape representation. An and Li (2014) combined a wavelet Fourier descriptor with supervised dimensionality reduction and classification of fashion flats. Tsuru et al. (2021) used standardized silhouette measurements with multidimensional scaling and clustering to examine designer collections. These studies establish that garment outlines can be mapped to explicit numerical descriptors and analysed statistically.
 
-Fashion-flat research provides direct precedent for mathematically defined contour representations. An and Li (2014) combined a wavelet Fourier descriptor with supervised dimensionality reduction and classification to discriminate fashion-flat categories. This work demonstrates that fashion-flat contours can be transformed into quantitative shape descriptors. However, a representation optimized to separate predefined classes answers a different question from an unsupervised characterization of how morphology varies across a sketch population.
+More generally, Fourier descriptors encode periodic shape signals through harmonic coefficients (Zahn and Roskies, 1972), while geometric morphometrics offers alternative ways to compare curves and outlines (Bookstein, 1997; McCane, 2013). CLO-SKET does not claim novelty for Fourier analysis, outline measurement, polar coordinates, or population-level shape analysis individually. It also does not use a conventional landmark or semilandmark morphometric model. Its contribution is the audited combination of polar occupancy, a conditional angular distribution, and an axial second-harmonic summary for garment sketches.
 
-Quantitative analysis of garment silhouettes also predates the present study. Tsuru et al. (2021) used standardized geometric measurements with multidimensional scaling and cluster analysis to classify clothing silhouettes. This establishes that fashion-silhouette populations can be analysed statistically using explicit geometric measurements. Accordingly, neither geometric garment descriptors nor multivariate shape organization is claimed here as novel in isolation.
+## 2.3 Radial–angular representation and axial orientation
 
-The distinction lies in the observational object and evaluation design. Existing silhouette studies generally analyse physical garments, collection imagery, or predefined silhouette classes, whereas many sketch studies use drawings as inputs to reconstruction, transfer, or classification. The less-established intersection is the treatment of a heterogeneous population of two-dimensional garment sketches as the primary morphological population, using explicit image-derived measurements without defining the representation through semantic categories.
+A centroid-referenced polar representation describes each retained foreground location by radius and angle,
 
-## 2.3 Geometric morphometrics and population-level shape
+\[
+r=\sqrt{(x-c_x)^2+(y-c_y)^2},
+\qquad
+\theta=\operatorname{atan2}(y-c_y,x-c_x).
+\]
 
-Geometric morphometrics provides a broader methodological foundation for treating visual form as quantitative data. Bookstein's (1997) sliding-semilandmark framework enabled curves without dense homologous landmarks to be incorporated into statistical shape analysis. McCane (2013) subsequently proposed a distance for outline shapes that does not require extraction of fixed discrete points along each curve and used the resulting distances to embed shape samples in a low-dimensional Euclidean space.
+This coordinate system separates distance from the sketch centroid from angular occupancy around it. Polar parameterizations also have garment-pattern precedent, although for a different task and representation (Oh and Kim, 2026).
 
-These approaches establish a general progression from individual outline representation to population-level shape geometry. They also emphasize that a numerical encoding does not automatically constitute a scientifically meaningful morphology: the representation, correspondence assumptions, distance, and inferential procedure must be appropriate to the object being studied.
+For radial shell \(r_k\), CLO-SKET forms the observed conditional angular distribution
 
-The morphology representation used here is not presented as a conventional landmark-based morphometric model. Rather, geometric morphometrics motivates the underlying principle that explicitly measured form can be analysed at the population level while keeping representation assumptions and claim boundaries visible.
+\[
+p(\theta_j\mid r_k)
+=
+\frac{H(r_k,\theta_j)}
+{\sum_{j'}H(r_k,\theta_{j'})},
+\]
 
-## 2.4 Alternative representations and cross-representation evidence
+where \(H(r_k,\theta_j)\) is foreground occupancy in radial bin \(k\) and angular bin \(j\). The axial second harmonic is then
 
-Any organization observed in one feature system may partly reflect the coordinate system used to describe the data. Agreement between independently constructed representations therefore provides a stronger test than structure observed in one representation alone. In the present study, each sketch is described both by a 135-dimensional occupancy-based morphology representation and by a 28-dimensional radial–angular representation derived independently from centroid-referenced radial and circular geometry.
+\[
+F_2(r_k)
+=
+\sum_j p(\theta_j\mid r_k)e^{i2\theta_j}
+=
+C_2(r_k)+iS_2(r_k).
+\]
 
-The scientific question is not whether these representations are identical or statistically independent. Instead, we test whether they capture reproducibly related information about the same sketches. This distinction is evaluated at two levels. Feature-wise association and cross-validated recovery measure shared quantitative structure, while downstream classification tests whether radial–angular descriptors provide additional task-relevant information when combined with morphology.
+The doubled angle is standard for axial data because orientations separated by \(\pi\) represent the same undirected axis (Jammalamadaka and SenGupta, 2001). The resultant magnitude and axial orientation are
 
-Cross-representation association does not imply complementarity. Two representations may be strongly related yet contribute little incremental predictive information, or they may share broad structure while retaining task-relevant differences. Complementarity must therefore be evaluated directly by comparing morphology alone, radial–angular descriptors alone, and their integration under identical held-out observations.
+\[
+R_2(r_k)=|F_2(r_k)|
+=\sqrt{C_2(r_k)^2+S_2(r_k)^2},
+\qquad
+\mu_2(r_k)
+=
+\tfrac12\operatorname{atan2}\!\left(S_2(r_k),C_2(r_k)\right)
+\pmod{\pi}.
+\]
 
-## 2.5 Identity-aware evaluation of sketch representations
+Thus \(R_2\in[0,1]\) quantifies second-harmonic axial concentration, while \(\mu_2\) gives an orientation modulo \(180^\circ\). These are deterministic summaries of the observed histogram. No von Mises distribution is fitted, no likelihood-based concentration parameter is estimated, and the full angular density is not reconstructed from \(F_2\).
 
-Sketch datasets may contain multiple drawings derived from the same source garment. Conventional image-level cross-validation can then place drawings of one source identity in both training and testing. Such a design measures performance on unseen sketches but does not establish generalization to unseen garment identities.
+## 2.4 Auditable representation and reconstruction
 
-This distinction is central to the present work. Historical image-level results are retained as reproduction analyses, whereas primary downstream and recovery results use source-identity-grouped folds that withhold complete garments. Each grouped fold preserves all garment categories, preventing the evaluation from conflating missing-category effects with source-identity separation. Identity-aware bootstrap resampling and repeated grouped partitions further distinguish uncertainty across source garments from sensitivity to a particular fold allocation.
+The final primary representation is the exact 14-dimensional vector
 
-The same logic constrains mechanistic interpretation of representation complementarity. A gain from concatenated features does not by itself show that performance depends on exact sketch-level alignment. We therefore use a within-category alignment control that preserves garment-category membership and category-level radial–angular distributions while disrupting exact held-out sketch pairing. This separates evidence for complementary category-discriminative information from the stronger claim that integration requires exact morphology–radial–angular correspondence for each sketch.
+\[
+\mathbf{x}
+=
+\left[
+\mathbf{x}_{F_2}^{(8)},
+\mathbf{x}_{\alpha_2}^{(6)}
+\right]
+\in\mathbb{R}^{14},
+\]
 
-## 2.6 Research gap and questions
+with a locked column order and exact concatenation audit. The eight \(F_2\)-family features summarize radial second-harmonic magnitude behaviour; the six \(\alpha_2\)-family features summarize axial-orientation behaviour. This is the study's primary representation. There is no PCA stage and no historical 28-dimensional family assembly in the audited analysis.
 
-Prior work establishes that garment sketches contain recoverable geometric information, that fashion flats and silhouettes can be represented using explicit shape descriptors, that garment populations can be examined with multivariate methods, and that general outline populations can be analysed geometrically. What remains less established is an evidence chain in which a population of two-dimensional garment sketches is represented explicitly, related to an independently constructed geometric description, and evaluated for complementary utility under complete source-garment separation.
+The reconstruction analysis has a deliberately limited role. From predictors \((r,|F_2(r)|)\), two regressors estimate
 
-The study therefore addresses three research questions:
+\[
+\widehat C_2(r)=f_C(r,|F_2(r)|),
+\qquad
+\widehat S_2(r)=f_S(r,|F_2(r)|).
+\]
 
-1. **Does an explicit 135-dimensional morphology representation exhibit reproducible quantitative organization across the CLO-SKET sketch population?**
-2. **Are independently derived radial–angular measurements associated with morphology and recoverable for previously unseen source-garment identities?**
-3. **Does the radial–angular representation provide complementary category-discriminative information beyond morphology under unseen-source-identity evaluation?**
+These estimates imply \(\widehat R_2\) and \(\widehat\mu_2\) through the same vector identities used for the observations. Because the predictors and targets derive from the same observed angular field, this is a shared-source consistency diagnostic. It does not demonstrate semantic garment-part recognition, recover the full angular distribution, or establish a physical law.
 
-These questions are deliberately representation-focused. The study does not seek to learn semantic garment parts, establish a universal morphology vocabulary, identify discrete morphology states, or infer causal mechanisms. Its intended contribution is an empirically validated geometric layer for analysing garment-sketch morphology and testing the relationship between alternative explicit representations.
+## 2.5 Repeated sketches and identity-aware evaluation
+
+The CLO-SKET data contain repeated sketches associated with recovered garment identities. Image-level splitting can therefore place sketches of the same garment in both training and test sets. Such a split evaluates unseen files but not transfer to unseen garments.
+
+The audited design groups all sketches from a garment identity within the same fold. Five category-balanced folds each hold out two identities per category, and train/test garment-identity overlap is zero. Reconstruction is therefore evaluated out of fold on unseen recovered garment identities. For uncertainty estimation, complete garment identities—not individual sketches—are resampled. Confirmatory association tests first reduce each identity to medians and then permute within category strata. These choices address measured within-identity dependence, while inference remains conditional on the 230 recovered identities being mutually independent sampling units.
+
+## 2.6 Research gap and study position
+
+Prior work establishes that fashion drawings contain computationally useful geometry, garment contours can be represented explicitly, periodic shape signals admit harmonic summaries, and axial orientation requires circular rather than ordinary linear treatment. What remains less established is a complete evidence chain that keeps the representation, validation unit, algebraic dependencies, and claim boundary visible for a repeated-sketch garment dataset.
+
+The present study therefore asks:
+
+1. **Can CLO-SKET foreground geometry be encoded as an exact, interpretable 14-dimensional radial–angular vector without PCA or semantic labels?**
+2. **How accurately do \((r,|F_2|)\) reconstruct the observed second-harmonic components for unseen garment identities?**
+3. **How are observed peak-shell axial concentration and selected peak radius associated with axial reconstruction error after garment-level aggregation and category-stratified inference?**
+4. **Are descriptive low/high-error contrasts stable across prespecified angular-error thresholds?**
+
+The intended contribution is an auditable geometric measurement and validation framework. The study does not establish causality, semantic recognition, a physical radial law, a prospective reliability classifier, or human-like interpretation.
