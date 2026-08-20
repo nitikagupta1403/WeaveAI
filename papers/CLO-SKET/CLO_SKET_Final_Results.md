@@ -1,108 +1,143 @@
 # 4. Results
 
-## 4.1 Study population and frozen representations
+## 4.1 Population, radial-domain and representation locks
 
-The analysis comprised 2,300 garment sketches from 23 garment categories and 230 source-garment identities. Each category contained 10 source identities and 100 sketches. Replication was approximately balanced, but individual source identities contained 9–11 images because of irregularities in the filename-derived replicate records. All analyses retained the observed population without deleting or normalizing these records.
+The final analysis retained all 2,300 sketches. The conditional angular tensor had shape \(2300\times72\times72\), the second-harmonic magnitude field had shape \(2300\times72\), and the locked circular field had shape \(2300\times25\). All 25 circular shells lay in the prespecified radial domain from 3.50 to 27.50.
 
-Each sketch was represented by two independently constructed geometric descriptions. The frozen morphology representation contained 135 image-derived features: 64 horizontal occupancy coordinates, 64 vertical occupancy coordinates, and seven global descriptors. Exact reconstruction from the source TIFF images reproduced the stored contiguous `float32` matrix and its SHA-256 fingerprint (`66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee`).
+The primary representation was the exact concatenation of eight direct \(F_2\) radial descriptors and six axial-safe \(\alpha_2\) descriptors. The resulting matrix had shape \(2300\times14\), contained only finite values, reproduced the Cell 23C column order, and matched the independently concatenated \(8+6\) matrix exactly; the maximum absolute difference was 0.0. No historical 28-dimensional family assembly was asserted.
 
-The independently derived radial–angular representation contained 28 descriptors: nine F₂ radial features, seven α₂ features, three observed circular descriptors, four learned circular descriptors, and five relational descriptors. Both representations contained 2,300 finite rows. Their image-reference arrays contained 2,300 unique paths in identical order, establishing exact row-level correspondence between morphology and radial–angular measurements.
+The observed circular quantities \(C_2\), \(S_2\), \(R_2\), and \(\mu_2\), together with their reconstructed counterparts, each had shape \(2300\times25\). At the selected observed peak shell, the maximum absolute discrepancy between observed \(R_2\) and observed \(|F_2|\) was \(6.661\times10^{-16}\). This numerical result confirmed the expected identity \(R_2=|F_2|\); the two quantities were therefore not counted as independent evidence.
 
-## 4.2 Quantitative organization of morphology space
+## 4.2 File duplication and garment-identity structure
 
-After source-only standardization, 73 principal components retained approximately 95% of the variance in the 135-dimensional morphology representation. This is reported as a variance-retention result and not as evidence that the data possess a mathematical intrinsic dimension of 73.
+All 2,300 path strings were unique. SHA-256 hashing found no repeated raw-file pairs, and hashing of decoded pixel arrays found no repeated decoded-pixel pairs. The perceptual-hash screen identified 11 candidate pairs at Hamming distance 0, 39 at distance at most 2, and 248 at distance at most 4. These candidates were treated as an image-review screen rather than proof of duplication or shared lineage.
 
-The representation exhibited reproducible quantitative organization across neighborhood, graph-geodesic, transition, multiscale-density, and permutation analyses. The morphology graph was connected, and Euclidean and graph-based neighborhood orderings showed substantial agreement. Multiscale density analysis identified regions with different quantitative morphology profiles, while region-size-preserving permutation controls showed that same-region neighbor retention was greater than expected under the specified null. Cross-scale analyses further showed that feature-level regional discrimination profiles were more stable than expected under independently permuted, size-preserving assignments.
+Filename and category structure recovered 230 category-qualified garment identities, exactly 10 identities in each of the 23 categories. Garment identities contained 9–11 sketches and 9–11 distinct replicate identifiers. Eight identity–replicate combinations were repeated in the filename records. The recovered identity structure supplied a defensible cluster variable but did not prove mutual independence of the 230 garment identities.
 
-These findings support structured, density-associated organization in morphology space. They do not establish discrete morphology states, universal garment categories, or a garment grammar: within-region dispersion remained substantial, and the separation signal weakened across scale.
+## 4.3 Leakage audit and identity-disjoint fold lock
 
-## 4.3 Feature-level morphology–radial–angular associations
+The historical sketch-level out-of-fold design did not separate garment identities. In every one of its five folds, all 230 test identities also occurred in training; consequently, 100% of test sketches had their garment identity represented in the corresponding training partition. Historical reconstruction estimates were therefore retained only as development comparators.
 
-Feature-wise Spearman associations were evaluated between the 135 morphology coordinates and four radial–angular measurements: F₂ peak magnitude, F₂ peak radius, observed R₂ at the F₂ peak shell, and the magnitude of axial disagreement between observed and learned orientations. Benjamini–Hochberg correction was applied separately within each target.
+The replacement design used five category-balanced, identity-disjoint folds. Each test fold contained 46 complete garment identities—two from every category—and each training fold contained the remaining 184 identities. Test-fold sizes ranged from 459 to 461 sketches because identity-level replication was slightly unbalanced. Every sketch and every garment identity was tested exactly once, and train/test identity overlap was zero in every fold.
 
-F₂ peak magnitude exhibited the broadest and strongest associations. The largest absolute association was observed for horizontal occupancy coordinate 50 (ρ = −0.5469), while symmetry was the strongest associated global descriptor (ρ = 0.4840). Overall, 126 of 135 morphology coordinates were significant after false-discovery-rate correction; the median and maximum absolute correlations were 0.2173 and 0.5469, respectively.
+## 4.4 Identity-disjoint reconstruction of \(C_2\) and \(S_2\)
 
-F₂ peak radius showed weaker but distributed associations. Its strongest association was with horizontal occupancy coordinate 45 (ρ = 0.3537); 93 of 135 features were significant, with median and maximum absolute correlations of 0.0979 and 0.3537. Observed R₂ at the F₂ peak was most strongly associated with horizontal occupancy coordinate 44 (ρ = 0.3944); 106 features were significant, with median and maximum absolute correlations of 0.1315 and 0.3944. Axial-disagreement magnitude showed the weakest feature-level pattern: the strongest association was with vertical occupancy coordinate 32 (ρ = −0.2171), 90 features were significant, and the median absolute correlation was 0.0871.
+Two fixed `HistGradientBoostingRegressor` models reconstructed \(C_2\) and \(S_2\) from radius and observed \(|F_2(r)|\). Across the five identity-disjoint folds, \(C_2\) RMSE ranged from 0.210938 to 0.228147 and \(S_2\) RMSE ranged from 0.124814 to 0.131585 (Table 1). Garment-identity overlap was zero in every fit, and all 57,500 valid sketch-shell rows received exactly one out-of-fold prediction.
 
-The multiplicity-corrected associations demonstrate distributed cross-representation correspondence. Because the morphology coordinates are correlated, counts of significant features are treated as descriptive breadth rather than counts of independent effects.
+**Table 1. Identity-disjoint fold performance for component reconstruction.**
 
-## 4.4 Evaluation design and source-identity separation
+| Fold | Training identities | Test identities | Identity overlap | \(C_2\) RMSE | \(S_2\) RMSE |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 184 | 46 | 0 | 0.216957 | 0.124959 |
+| 1 | 184 | 46 | 0 | 0.213426 | 0.124814 |
+| 2 | 184 | 46 | 0 | 0.210938 | 0.127228 |
+| 3 | 184 | 46 | 0 | 0.228147 | 0.128320 |
+| 4 | 184 | 46 | 0 | 0.220904 | 0.131585 |
 
-The original downstream evaluation used five category-stratified image-level folds. Audit showed that every test sketch had a source-garment identity represented in its corresponding training set. The original analysis therefore measures performance on unseen sketches of previously observed source identities, not generalization to unseen garments.
+Across all held-out rows, the fold-local global baseline produced RMSEs of 0.300420 for \(C_2\) and 0.129034 for \(S_2\). The radius-only comparator produced RMSEs of 0.287288 and 0.128729, respectively. Adding \(|F_2|\) to radius reduced \(C_2\) RMSE to 0.218161, an absolute reduction of 0.069127 and a relative reduction of 24.06%. For \(S_2\), RMSE decreased to 0.127405, an absolute reduction of 0.001324 and a relative reduction of 1.03% (Table 2).
 
-For the primary validation, five exactly category-balanced grouped folds were constructed. Each fold withheld two complete source identities per category, producing 46 test identities across all 23 categories. No source identity crossed training and testing, every identity was tested exactly once, and every sketch received one out-of-fold prediction. Fold sizes ranged from 459 to 461 images because the observed identity-level replication was slightly unbalanced.
+**Table 2. Comparator performance and incremental contribution of \(|F_2|\).**
 
-## 4.5 Reproduction of the original image-level integration result
+| Model | \(C_2\) RMSE | \(S_2\) RMSE |
+|---|---:|---:|
+| Fold-local global baseline | 0.300420 | 0.129034 |
+| Radius only, identity OOF | 0.287288 | 0.128729 |
+| Radius + \(|F_2|\), identity OOF | **0.218161** | **0.127405** |
 
-Before grouped evaluation, the historical downstream result was reproduced with the frozen representations and original folds. Under the original fold-mean convention, morphology alone achieved a Macro-F1 of 0.3411 and balanced accuracy of 0.3422. Adding the 28-dimensional radial–angular representation increased Macro-F1 to 0.4123 and balanced accuracy to 0.4157, corresponding to gains of 0.0712 and 0.0735, respectively.
+The strongly asymmetric incremental gains indicate that the supplied magnitude was substantially informative for the cosine component but added little beyond radius for the sine component. Because \(|F_2|\), \(C_2\), and \(S_2\) were computed from the same conditional angular field, this remains a shared-source reconstruction diagnostic rather than recovery of an independent target.
 
-These results reproduce the original integration finding but retain its image-level interpretation because source identities were shared between training and test partitions.
+## 4.5 Impact of garment-identity leakage on reconstruction estimates
 
-## 4.6 Primary unseen-source-identity integration result
+Changing only the validation unit from sketch to garment identity produced little change in the aggregate point estimates. For the whole field, historical sketch-level out-of-fold reconstruction had \(R_2\) RMSE 0.145516, Pearson \(r=0.927269\), and mean reconstructed \(R_2=0.212319\). Identity-disjoint reconstruction had RMSE 0.145610, Pearson \(r=0.926390\), and mean reconstructed \(R_2=0.212487\).
 
-Under source-identity-grouped evaluation, morphology alone achieved a pooled Macro-F1 of 0.3068 and balanced accuracy of 0.3078. The integrated morphology–radial–angular representation achieved a Macro-F1 of 0.3414 and balanced accuracy of 0.3422. The improvements were therefore 0.0346 Macro-F1 and 0.0343 balanced accuracy (Table 1). The integrated representation outperformed morphology alone in all five grouped folds for both metrics and improved category-level F1 in 18 of the 23 categories.
+At the observed peak shell, the median observed \(R_2\) was 0.660428 under both validations. Historical sketch-level out-of-fold reconstruction produced median reconstructed \(R_2=0.557371\), median \(\Delta R_2=-0.091925\), RMSE 0.149218, Pearson \(r=0.807987\), and median axial error \(4.157680^\circ\). Identity-disjoint reconstruction produced median reconstructed \(R_2=0.566561\), median \(\Delta R_2=-0.084261\), RMSE 0.148303, Pearson \(r=0.810543\), and median axial error \(4.104118^\circ\).
 
-**Table 1. Classification performance under image-level and source-identity-grouped evaluation.**
+The high-error proportion above \(45^\circ\) was 15.70% in both analyses. The low-error proportion at or below \(15^\circ\) changed from 78.04% to 78.17%, and the intermediate proportion changed from 6.26% to 6.13%. Thus, the historical split was structurally leaky, but the practical change in this reconstruction diagnostic was small. Final reporting nevertheless used the identity-disjoint estimates because they evaluate transfer to unseen recovered garment identities.
 
-| Evaluation | Representation | Macro-F1 | Balanced accuracy |
-|---|---|---:|---:|
-| Original image-level folds | Morphology | 0.3411 | 0.3422 |
-| Original image-level folds | Morphology + radial–angular | 0.4123 | 0.4157 |
-| Source-identity-grouped folds | Radial–angular | 0.2653 | 0.2761 |
-| Source-identity-grouped folds | Morphology | 0.3068 | 0.3078 |
-| Source-identity-grouped folds | Morphology + radial–angular | **0.3414** | **0.3422** |
+## 4.6 Cluster-aware uncertainty for identity-OOF reconstruction
 
-Radial–angular descriptors alone were weaker than morphology alone, achieving a Macro-F1 of 0.2653 and balanced accuracy of 0.2761. The integrated representation exceeded the radial–angular-only representation by 0.0761 Macro-F1 and 0.0661 balanced accuracy and improved category-level F1 in 19 of 23 categories. Thus, radial–angular geometry was not a stronger standalone classifier; its downstream value emerged in combination with morphology.
+Garment-cluster bootstrap intervals were computed by resampling complete identities. Whole-field \(R_2\) RMSE was 0.145610 (95% CI 0.144271–0.146947), and whole-field Pearson correlation was 0.926390 (0.924356–0.928325). At the observed peak shell, \(R_2\) RMSE was 0.148303 (0.143363–0.153125), and Pearson correlation was 0.810543 (0.793049–0.827517).
 
-## 4.7 Identity-aware uncertainty and split robustness
+The median peak-shell magnitude difference was negative:
 
-Uncertainty in the primary grouped effect was assessed by resampling complete source identities within each category while holding the grouped out-of-fold predictions fixed. Across 5,000 replicates, the observed Macro-F1 gain of 0.0346 had a 95% interval of [0.0158, 0.0540]. The balanced-accuracy gain of 0.0343 had an interval of [0.0156, 0.0543]. Only 0.04% of replicates produced a non-positive effect for either metric.
+\[
+\operatorname{median}(\Delta R_2)=-0.084261
+\quad
+(95\%\ \mathrm{CI}\ -0.095655\ \text{to}\ -0.072696),
+\]
 
-Sensitivity to identity-to-fold allocation was assessed using ten independently generated, exactly category-balanced grouped partitions. The integrated representation improved pooled Macro-F1 and balanced accuracy in all ten partitions. The mean Macro-F1 gain was 0.0423 across partitions (SD = 0.0070; range, 0.0336–0.0529), and the mean balanced-accuracy gain was 0.0406 (SD = 0.0071; range, 0.0313–0.0517). At the individual-fold level, 49 of 50 effects were positive for each metric, and no convergence warnings occurred.
+indicating systematic peak-shell magnitude attenuation. This is a calibration-compression diagnostic, not evidence of semantic or physical failure.
 
-The bootstrap intervals quantify uncertainty across sampled source identities conditional on fixed grouped predictions. Variation across the repeated partitions is interpreted as descriptive split-robustness evidence rather than as an independent confidence interval.
+Median peak-shell axial error was \(4.104118^\circ\) (3.815065°–4.511576°). The low-error proportion was 78.17% (75.77%–80.60%), the intermediate proportion was 6.13% (5.13%–7.17%), and the high-error proportion was 15.70% (13.50%–17.95%).
 
-## 4.8 Within-category alignment control
+## 4.7 Peak-shell reconstruction across observed-\(R_2\) strata
 
-A within-category perturbation tested whether the integrated classification gain specifically depended on correct held-out sketch-level pairing. Within each grouped test fold, radial–angular rows were permuted among sketches from the same garment category, preserving category membership and category-level radial–angular distributions while disrupting exact morphology–radial–angular correspondence. The trained models, morphology rows, and grouped folds remained fixed.
+Observed peak-shell \(R_2\) quartiles were 0.5691, 0.6604, and 0.7314. Each quartile contained 575 sketches. Median axial error decreased monotonically from 8.59° in the weakest quartile to 4.41°, 3.51°, and 2.89° in successive quartiles. The corresponding high-error proportions were 24.87%, 15.65%, 12.00%, and 10.26%.
 
-Across 2,000 perturbations, the aligned model achieved a Macro-F1 of 0.3414, compared with a permuted mean of 0.3353. The aligned-minus-permuted difference was 0.0062, with an empirical probability of 0.1419. For balanced accuracy, the aligned value was 0.3422 and the permuted mean was 0.3353, giving a difference of 0.0068 and an empirical probability of 0.1229.
+Within-quartile Spearman correlations between observed \(R_2\) and axial error were small (−0.0739, −0.0521, −0.0466, and −0.1114). These range-restricted summaries do not contradict the population-level ordering. No inferential correlation was computed from the four quartile medians.
 
-Correct sketch-level alignment was slightly favorable on average, but the observed advantage was not sufficiently extreme relative to the within-category perturbation distribution to support an alignment-specific mechanism. The downstream result therefore supports complementary category-discriminative information in the radial–angular representation, but does not establish that the gain depends specifically on exact held-out sketch-level correspondence.
+Reconstructed peak-shell magnitude was lower than observed in 2,299 of 2,300 sketches. Median reconstructed \(R_2\) increased across the quartiles, but remained below the corresponding observed median in every stratum. Since quartiles were selected using observed \(R_2\), between-stratum \(\Delta R_2\) patterns are affected by mathematical coupling and regression to the mean.
 
-## 4.9 Recovery of radial–angular measurements from morphology
+## 4.8 Garment-level primary associations
 
-The historical recovery estimator was first reproduced exactly. It consisted of training-fold standardization followed by Ridge regression with α = 1, evaluated using shuffled five-fold cross-validation with random state 42. No category labels, feature selection, or hyperparameter search were used. All historical R², MAE, RMSE, and Spearman metrics were reproduced at their reported six-decimal precision.
+The confirmatory association analysis assigned equal weight to each garment identity by reducing its sketches to medians. Garment-level median observed peak-shell \(R_2\) was modestly negatively associated with garment-level median axial error:
 
-The identical fixed estimator was then evaluated with the source-identity-grouped folds. F₂ peak magnitude showed the strongest grouped recovery (R² = 0.3022; Spearman ρ = 0.6311). Observed R₂ at the F₂ peak remained recoverable (R² = 0.1910; ρ = 0.5216), as did axial-disagreement magnitude (R² = 0.2063; ρ = 0.4429). Identity-aware bootstrap intervals excluded zero for both R² and Spearman association for these three targets (Table 2).
+\[
+\rho=-0.355875,
+\qquad
+95\%\ \text{cluster-bootstrap CI}
+=-0.455749\ \text{to}\ -0.248336.
+\]
 
-**Table 2. Morphology-to-radial–angular recovery under unseen-source-identity evaluation.**
+The category-stratified permutation probability was \(p_{\mathrm{raw}}=0.000100\), and the Holm-adjusted value for the two primary hypotheses was \(p_{\mathrm{Holm}}=0.000200\).
 
-| Target | Historical image-level R² | Grouped R² | Grouped 95% interval | Grouped Spearman ρ | Spearman 95% interval |
+Garment-level median selected peak radius was also negatively associated with garment-level median axial error:
+
+\[
+\rho=-0.207675,
+\qquad
+95\%\ \text{cluster-bootstrap CI}
+=-0.322472\ \text{to}\ -0.095626,
+\]
+
+with category-stratified \(p_{\mathrm{raw}}=0.030097\) and \(p_{\mathrm{Holm}}=0.030097\) (Table 3).
+
+**Table 3. Primary garment-level monotonic associations (\(n=230\) identities).**
+
+| Quantity | Spearman \(\rho\) | 95% cluster-bootstrap CI | Raw permutation \(p\) | Holm \(p\) |
+|---|---:|---:|---:|---:|
+| Median observed peak-shell \(R_2\) vs median axial error | −0.355875 | [−0.455749, −0.248336] | 0.000100 | 0.000200 |
+| Median selected peak radius vs median axial error | −0.207675 | [−0.322472, −0.095626] | 0.030097 | 0.030097 |
+
+At the sketch level, the corresponding Spearman correlations were −0.253366 for observed peak-shell \(R_2\) and −0.271404 for selected peak radius. These pooled-sketch estimates were retained as descriptive summaries without inferential p-values.
+
+The peak-radius result describes sensitivity in this dataset. Peak radius is selected from 25 discrete, bounded shells and can be censored at the domain boundaries; the association does not establish a physical radial law.
+
+## 4.9 Outcome-defined bands and threshold sensitivity
+
+Using the primary 15°/45° definition, 1,798 sketches were in the low-error band, 141 in the intermediate band, and 361 in the high-error band. Median observed peak-shell \(R_2\) was 0.674442 in the low-error band and 0.609574 in the high-error band. Their median difference was 0.064868 (95% garment-cluster bootstrap CI 0.047036–0.084433), and Cliff's \(\delta\) was 0.269838 (0.188673–0.351032).
+
+The same direction persisted across all four prespecified threshold pairs (Table 4). Median differences ranged from 0.059442 to 0.072677 and Cliff's \(\delta\) ranged from 0.236987 to 0.300349. All cluster-bootstrap intervals remained above zero.
+
+**Table 4. Threshold sensitivity of the descriptive low/high observed-\(R_2\) contrast.**
+
+| Low/high thresholds | Low / middle / high \(n\) | Low median \(R_2\) | High median \(R_2\) | Median difference (95% CI) | Cliff's \(\delta\) (95% CI) |
 |---|---:|---:|---:|---:|---:|
-| F₂ peak magnitude | 0.2961 | **0.3022** | [0.2669, 0.3339] | 0.6311 | [0.6024, 0.6584] |
-| F₂ peak radius | 0.0594 | 0.0143 | [−0.0423, 0.0666] | 0.3249 | [0.2841, 0.3661] |
-| R₂ at F₂ peak | 0.2170 | **0.1910** | [0.1214, 0.2539] | 0.5216 | [0.4798, 0.5635] |
-| Axial-disagreement magnitude | 0.1979 | **0.2063** | [0.1482, 0.2601] | 0.4429 | [0.3963, 0.4884] |
+| 10° / 30° | 1665 / 239 / 396 | 0.679165 | 0.606488 | 0.072677 [0.055431, 0.093955] | 0.300349 [0.220369, 0.379317] |
+| 15° / 45° | 1798 / 141 / 361 | 0.674442 | 0.609574 | 0.064868 [0.047036, 0.084433] | 0.269838 [0.188673, 0.351032] |
+| 20° / 45° | 1853 / 86 / 361 | 0.672488 | 0.609574 | 0.062914 [0.044974, 0.083241] | 0.258506 [0.177205, 0.338632] |
+| 20° / 60° | 1853 / 125 / 322 | 0.672488 | 0.613045 | 0.059442 [0.038585, 0.079032] | 0.236987 [0.151712, 0.325826] |
 
-F₂ peak radius showed a different pattern. Its grouped R² was 0.0143, with an interval of [−0.0423, 0.0666], whereas its Spearman association remained positive (ρ = 0.3249; 95% interval, [0.2841, 0.3661]). Morphology therefore retained ordinal information about peak radius but did not reliably recover its precise metric value.
+For selected peak radius under the primary 15°/45° definition, the low- and high-error medians were 19.5 and 7.5 shell-coordinate units. Cliff's \(\delta\) was 0.435692 (95% CI 0.375745–0.494340).
 
-Overall, morphology contained identity-generalizable information about harmonic magnitude, angular coherence, and the magnitude of observed–learned axial disagreement. The fixed linear estimator is interpreted as an information probe and not as evidence of complete reconstruction or a causal relationship between the representations.
+These bands were defined after observing axial error and overlap strongly across threshold configurations. They are descriptive outcome groups, not independent replications, optimized thresholds, or validated prospective reliability classes. Accordingly, no band-comparison p-values were promoted.
 
-## 4.10 Supplementary direct axial-orientation sensitivity analysis
+## 4.10 Algebraically coupled calibration diagnostic
 
-The axial-disagreement target above is a scalar error magnitude rather than a direction. Direct recovery of observed axial orientation was therefore examined separately using the doubled-angle representation, predicting cos(2α) and sin(2α) from morphology under the same source-grouped folds. Predicted components were converted back to axial directions and evaluated using angular error on [0°, 90°]. A training-fold mean axial direction served as an internal no-morphology reference.
+The sketch-level Spearman correlation between observed peak-shell \(R_2\) and \(\Delta R_2=\widehat R_2-R_2\) was \(+0.1714\). Because \(\Delta R_2\) contains the observed value algebraically with a negative sign, this correlation is mathematically coupled. It was retained only as a diagnostic and received no p-value.
 
-The morphology model reduced mean axial error from 21.46° to 20.01°, an improvement of 1.45° (paired identity-bootstrap 95% interval, [0.43°, 2.53°]). Mean axial agreement increased by 0.048 (95% interval, [0.023, 0.075]), and accuracy within 30° increased by 1.78 percentage points (95% interval, [0.48, 3.18]).
+## 4.11 Integrated evidence and final claim boundary
 
-The result was not uniformly favorable. Median angular error was 7.49° for the morphology model and 6.14° for the mean-direction reference; the paired median difference consistently favored the reference. Accuracy within 10° was also 5.13 percentage points lower for the morphology model. Differences in R₂-weighted mean error and accuracy within 15° were inconclusive.
+The results establish four main points. First, the primary radial–angular representation is an exactly audited 14-dimensional vector containing eight direct \(F_2\) descriptors and six axial-safe \(\alpha_2\) descriptors. Second, the identity-disjoint reconstruction predicts every valid held-out shell without garment-identity overlap and yields similar aggregate performance to the historical, leaky sketch split. Third, lower observed peak-shell second-harmonic magnitude and smaller selected peak radius are associated with larger axial reconstruction error at the garment-identity level. Fourth, the low/high observed-\(R_2\) separation is directionally stable across four prespecified outcome-band definitions.
 
-Morphology therefore provided limited tail-sensitive directional information, reducing some larger angular errors, but did not improve typical high-precision orientation prediction beyond the dominant training-fold direction. This analysis is treated as supplementary sensitivity evidence rather than a central positive result.
-
-## 4.11 Integrated results and claim boundary
-
-The principal finding is that the independently derived radial–angular representation provided complementary downstream information beyond frozen morphology under strict unseen-source-garment evaluation. The integrated advantage was positive in all five primary grouped folds, all ten repeated grouped partitions, and most garment categories, with identity-aware intervals excluding zero.
-
-Morphology also retained identity-generalizable information about several radial–angular quantities. Recovery was strongest for F₂ peak magnitude and remained meaningful for angular coherence and axial-disagreement magnitude. Precise F₂ peak-radius recovery was weak, and direct axial-orientation recovery produced mixed results relative to a strong mean-direction reference.
-
-The results support quantitative organization in morphology space, distributed association between morphology and independently derived radial–angular measurements, and representation-level complementarity in the tested 23-category task. They do not establish discrete morphology states, a garment grammar, semantic garment primitives, causal mechanisms, information-theoretic independence, or a general dependence of downstream utility on exact sketch-level alignment.
+The evidence remains bounded. Observed \(R_2\) and \(|F_2|\) are identical by construction, reconstruction from \((r,|F_2|)\) is a shared-source consistency diagnostic, and outcome-defined bands are not prospective classes. The audit does not establish mutual independence of the 230 recovered garment identities. Therefore, cluster intervals and permutation results support population language only conditionally on that independence assumption. No result establishes causality, semantic garment-part recognition, human-like understanding, a physical radial law, von Mises fitting, or reconstruction of the complete angular density.
