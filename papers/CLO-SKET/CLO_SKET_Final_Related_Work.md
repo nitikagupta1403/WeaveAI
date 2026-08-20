@@ -38,9 +38,9 @@ where \(H(r_k,\theta_j)\) is foreground occupancy in radial bin \(k\) and angula
 \[
 F_2(r_k)
 =
-\sum_j p(\theta_j\mid r_k)e^{i2\theta_j}
+\sum_j p(\theta_j\mid r_k)e^{-\mathrm{i}2\theta_j}
 =
-C_2(r_k)+iS_2(r_k).
+C_2(r_k)-\mathrm{i}S_2(r_k).
 \]
 
 The doubled angle is standard for axial data because orientations separated by \(\pi\) represent the same undirected axis (Jammalamadaka and SenGupta, 2001). The resultant magnitude and axial orientation are
