@@ -8,7 +8,7 @@ The analytical sequence was: (1) reconstruction and integrity verification of th
 
 ## 3.2 Dataset and source-identity reconstruction
 
-The study used 2,300 TIFF garment sketches from the CLO-SKET dataset, comprising 23 predefined garment categories with 100 sketches per category. File paths were retained in the frozen radial–angular row order and were used to align all subsequent representations.
+The study used the CLO-SKET dataset (Arnia, 2020), which contains 2,300 garment sketches derived from 230 source clothing photographs: 23 predefined garment subcategories, 10 source photographs per subcategory, and 10 sketchers per source photograph. The present analysis used all 2,300 TIFF sketches. File paths were retained in the frozen radial–angular row order and were used to align all subsequent representations.
 
 Source identity was reconstructed from the filename convention, in which the first numeric token identified the source garment within a category and the second numeric token represented a replicate identifier. The observed separators (`-`, `_`, and one `+`) were audited rather than normalized in the source records. Source identity was defined as the combination of garment category and the first numeric token, because numeric source identifiers repeat across categories.
 
