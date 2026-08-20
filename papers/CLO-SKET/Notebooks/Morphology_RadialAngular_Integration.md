@@ -3442,3 +3442,5195 @@ Scaling
 Regularization
 Multi-output strategy
 Random state, if applicable
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 6 Scientific Audit — Permutation-Validated Cross-Branch Correspondence
+
+### Status
+
+**🟢 CELL 6 PASSED**
+
+This is a clean and scientifically meaningful result.
+
+Cell 6 fixes the conceptual problem identified in the previous
+morphology-PCA formulation.
+
+The experiment now tests:
+
+\[
+\text{Morphology}
+\rightarrow
+\text{Radial–Angular Quantity}
+\]
+
+where the targets are independently constructed radial–angular
+measurements rather than transformations of the morphology predictors.
+
+The permutation experiment further demonstrates that the observed
+cross-validated prediction is substantially stronger than expected after
+destroying sketch-level correspondence between the two branches.
+
+---
+
+# 1. Scientific Question
+
+Cell 6 asks:
+
+> Can the frozen 135-D morphology representation recover independently
+> measured radial–angular organization at the level of individual
+> sketches?
+
+The predictor is:
+
+`135-D frozen morphology`
+
+The four targets are:
+
+1. `F2_peak_magnitude`
+2. `F2_peak_radius`
+3. `R2_at_F2_peak`
+4. `axial_error`
+
+No category information enters the experiment.
+
+---
+
+# 2. Provenance and Domain Controls
+
+The experiment satisfies the essential cross-branch controls.
+
+### Row-level provenance
+
+**🟢 VERIFIED**
+
+For every sketch index \(i\):
+
+\[
+X_{\text{morphology}}[i]
+\leftrightarrow
+X_{\text{radial-angular}}[i]
+\]
+
+refers to the same source sketch.
+
+### Locked radial domain
+
+\[
+3.50 \rightarrow 27.50
+\]
+
+with:
+
+`25 circular shells`
+
+and:
+
+\[
+\text{maximum F₂ ↔ circular mismatch}=0
+\]
+
+Therefore the radial–angular targets are constructed using the same
+domain established in the preceding radial–angular analysis.
+
+---
+
+# 3. Observed Cross-Validated Correspondence
+
+| Target | CV R² | MAE | RMSE |
+|---|---:|---:|---:|
+| F₂ peak magnitude | **0.2961** | 0.01315 | 0.01710 |
+| F₂ peak radius | **0.0594** | 4.015 | 5.010 |
+| R₂ at F₂ peak | **0.2170** | 0.1258 | 0.1599 |
+| Axial error | **0.1979** | 20.15° | 26.46° |
+
+All four observed CV R² values are positive.
+
+However, their magnitudes differ substantially.
+
+This establishes a hierarchy of morphology recoverability.
+
+---
+
+# 4. Strongest Correspondence — F₂ Peak Magnitude
+
+The strongest cross-branch result is:
+
+\[
+R^2_{\mathrm{CV}} = 0.2961
+\]
+
+for F₂ peak magnitude.
+
+The permutation null is:
+
+\[
+\text{mean null }R^2=-0.0965
+\]
+
+with:
+
+\[
+95\%\,\text{null interval}
+=
+[-0.1284,-0.0702]
+\]
+
+The observed value:
+
+\[
+0.2961
+\]
+
+is completely separated from the sampled permutation distribution.
+
+Empirical permutation result:
+
+\[
+p=\frac{0+1}{100+1}=0.009901
+\]
+
+Thus:
+
+> The observed correspondence between morphology and F₂ peak magnitude is
+> substantially stronger than expected when sketch-level correspondence
+> is destroyed.
+
+---
+
+# 5. Observed Circular Strength R₂
+
+For observed R₂ at the matched F₂ shell:
+
+\[
+R^2_{\mathrm{CV}}=0.2170
+\]
+
+Permutation null:
+
+\[
+\text{mean}=-0.0956
+\]
+
+\[
+95\%\,\text{null interval}
+=
+[-0.1244,-0.0666]
+\]
+
+Empirical permutation result:
+
+\[
+p=0.009901
+\]
+
+This is particularly relevant to the radial–angular backbone.
+
+Earlier analysis established that observed R₂ is associated with axial
+recovery reliability.
+
+Cell 6 now establishes a different result:
+
+> observed R₂ itself also has reproducible correspondence with the frozen
+> morphology representation.
+
+Therefore the R₂ signal is neither completely disconnected from
+morphology nor completely recovered by morphology.
+
+The latter distinction follows from its moderate rather than near-perfect
+out-of-sample R².
+
+---
+
+# 6. Axial Recovery Error
+
+Axial recovery error gives:
+
+\[
+R^2_{\mathrm{CV}}=0.1979
+\]
+
+against a permutation null mean of:
+
+\[
+-0.0952
+\]
+
+with:
+
+\[
+95\%\,\text{null interval}
+=
+[-0.1309,-0.0622]
+\]
+
+and:
+
+\[
+p=0.009901
+\]
+
+Therefore recovery reliability itself has reproducible correspondence
+with morphology.
+
+This connects two previously separate parts of the analysis:
+
+**Morphology**
+
+↓
+
+**Radial–angular organization**
+
+↓
+
+**Angular recovery reliability**
+
+However, this remains an association/prediction result.
+
+It does not establish that morphology causes recovery success or failure.
+
+---
+
+# 7. F₂ Peak Radius Is Different
+
+F₂ peak radius produces:
+
+\[
+R^2_{\mathrm{CV}}=0.0594
+\]
+
+This is much weaker than the other three targets.
+
+Yet its permutation null is centered around:
+
+\[
+-0.0985
+\]
+
+with:
+
+\[
+95\%\,\text{null interval}
+=
+[-0.1324,-0.0699]
+\]
+
+and the observed value again exceeds all 100 permutation values.
+
+Therefore two statements must be separated.
+
+### Statistical correspondence
+
+**🟢 Supported**
+
+The result is stronger than the shuffled-correspondence null.
+
+### Predictive magnitude
+
+**Weak**
+
+Only approximately 5.9% of variance is recovered by the current
+morphology-only model.
+
+Thus:
+
+> statistical robustness does not imply large predictive effect.
+
+This distinction should remain explicit in the manuscript.
+
+---
+
+# 8. The Permutation Result Is Very Clean
+
+All four targets show:
+
+`observed percentile = 100%`
+
+meaning that none of the 100 sampled permutation values reached the
+observed CV R².
+
+| Target | Observed R² | Null mean R² | Null upper 97.5% | Empirical p |
+|---|---:|---:|---:|---:|
+| F₂ magnitude | **0.2961** | -0.0965 | -0.0702 | 0.009901 |
+| F₂ radius | **0.0594** | -0.0985 | -0.0699 | 0.009901 |
+| R₂ | **0.2170** | -0.0956 | -0.0666 | 0.009901 |
+| Axial error | **0.1979** | -0.0952 | -0.0622 | 0.009901 |
+
+Thus every observed target lies well outside its corresponding sampled
+null distribution.
+
+---
+
+# 9. Why Is the Permutation Null R² Negative?
+
+This is not a problem.
+
+Under permutation, morphology and target correspondence is destroyed.
+
+The fitted model can therefore generalize worse than simply predicting
+the held-out target mean.
+
+Because:
+
+\[
+R^2
+=
+1-
+\frac{\sum(y-\hat y)^2}
+{\sum(y-\bar y)^2}
+\]
+
+negative R² means:
+
+\[
+\sum(y-\hat y)^2
+>
+\sum(y-\bar y)^2
+\]
+
+Therefore the negative permutation null is perfectly possible.
+
+It should not be interpreted as a negative biological or geometric
+relationship.
+
+It simply indicates poor out-of-sample prediction under destroyed
+correspondence.
+
+---
+
+# 10. Important Limitation — 100 Permutations
+
+There is one thing I would strengthen before manuscript freeze.
+
+The current permutation count is:
+
+\[
+B=100
+\]
+
+Therefore the smallest attainable corrected empirical p-value is:
+
+\[
+\frac{1}{101}=0.009901
+\]
+
+which is exactly what all four tests achieved.
+
+Thus we currently know:
+
+> none of the 100 shuffled correspondences produced an R² as large as the
+> observed result.
+
+We do **not** yet know whether the permutation probability is:
+
+`0.009`
+
+or:
+
+`0.001`
+
+or:
+
+`<0.0001`.
+
+The present result is already sufficient to establish separation from
+this 100-permutation null sample.
+
+But for the final paper I would run:
+
+**1000 permutations minimum**
+
+which gives minimum attainable:
+
+\[
+p=\frac{1}{1001}=0.000999
+\]
+
+This also matches the permutation depth already used in the earlier
+category-discrimination analysis.
+
+---
+
+# 11. Another Statistical Detail — Four Targets
+
+Four radial–angular targets are tested.
+
+Because all four empirical p-values currently equal:
+
+\[
+0.009901
+\]
+
+even a conservative Bonferroni adjustment gives:
+
+\[
+0.009901 \times 4
+=
+0.039604
+\]
+
+so all four would still remain below 0.05.
+
+However, I would not make multiple-testing correction the centerpiece
+here.
+
+The stronger evidence is the combination of:
+
+- effect magnitude;
+- out-of-sample R²;
+- permutation-null separation;
+- consistency across related targets.
+
+With 1000 permutations, we can freeze the inferential reporting more
+cleanly.
+
+---
+
+# 12. Cell 3 → Cell 4 → Cell 6 Now Forms a Strong Chain
+
+We now have three complementary pieces of evidence.
+
+## CELL 3 — Coordinate-Level Association
+
+Individual morphology coordinates are associated with radial–angular
+measurements.
+
+↓
+
+## CELL 4 — Out-of-Sample Recoverability
+
+The complete morphology representation partially predicts radial–angular
+quantities on unseen sketches.
+
+↓
+
+## CELL 6 — Permutation Validation
+
+That out-of-sample recoverability disappears when sketch-level
+morphology ↔ radial–angular correspondence is destroyed.
+
+Together these establish:
+
+> **reproducible cross-branch correspondence between frozen morphology and
+> radial–angular organization.**
+
+That is now a defensible result.
+
+---
+
+# 13. But This Is NOT Complementarity Yet
+
+This boundary is critical.
+
+Cell 6 establishes:
+
+\[
+M \leftrightarrow R
+\]
+
+It does not establish:
+
+\[
+R \not\subseteq M
+\]
+
+nor does it establish:
+
+\[
+\text{Task}(M+R)>\text{Task}(M)
+\]
+
+Therefore:
+
+### Cross-branch correspondence
+
+**🟢 ESTABLISHED**
+
+### Partial predictability
+
+**🟢 ESTABLISHED**
+
+### Complete redundancy
+
+**⚪ NOT ESTABLISHED**
+
+### Complementarity
+
+**🟡 NOT YET ESTABLISHED**
+
+### Incremental downstream information
+
+**🟡 NOT YET TESTED**
+
+---
+
+# 14. Manuscript-Level Claim We Can Freeze
+
+A safe Results statement is:
+
+> **The frozen morphology representation exhibited reproducible
+> out-of-sample correspondence with radial–angular organization.
+> Morphology predicted F₂ peak magnitude (CV R² = 0.296), observed R₂ at
+> the matched F₂ shell (R² = 0.217), axial recovery error (R² = 0.198),
+> and, more weakly, F₂ peak radius (R² = 0.059). For all four targets,
+> observed prediction exceeded the complete 100-permutation null sample
+> (empirical p = 0.0099).**
+
+After the final 1000-permutation run, replace the permutation statistics
+accordingly.
+
+---
+
+# 15. Stronger Scientific Interpretation
+
+The most interesting interpretation is not:
+
+> “Morphology predicts radial–angular geometry.”
+
+That is true but incomplete.
+
+The stronger picture is:
+
+> **Morphological and radial–angular representations capture overlapping
+> aspects of sketch geometry, but the degree of correspondence differs
+> substantially across radial–angular quantities.**
+
+F₂ magnitude:
+
+**relatively strong overlap**
+
+Observed R₂:
+
+**moderate overlap**
+
+Axial recovery:
+
+**moderate overlap**
+
+F₂ radial localization:
+
+**weak overlap**
+
+This heterogeneous correspondence is itself informative.
+
+---
+
+# 16. What We Should NOT Say
+
+Do not write:
+
+> “29.6% of radial–angular information is contained in morphology.”
+
+R² is not an information-theoretic quantity.
+
+Do not write:
+
+> “94.1% of F₂ radius information is unique.”
+
+The unexplained variance could reflect nonlinear morphology structure,
+noise, measurement variation, or model limitation.
+
+Do not write:
+
+> “Permutation proves independence.”
+
+It does not.
+
+Do not write:
+
+> “Morphology causes radial–angular recovery.”
+
+Nothing here is causal.
+
+---
+
+# 17. Cell 7 — Useful but Keep It Small
+
+The proposed:
+
+**CELL 7 — CROSS-BRANCH EFFECT VISUALIZATION**
+
+is fine.
+
+But Cell 7 should introduce **no new analysis**.
+
+It should visualize only the frozen Cell 6 quantities.
+
+Recommended manuscript figures:
+
+### Figure A — Observed R² vs Permutation Null
+
+For each target:
+
+- permutation R² distribution;
+- observed R² marker.
+
+### Figure B — Cross-Branch Recoverability
+
+Four bars/points showing:
+
+- F₂ magnitude;
+- F₂ radius;
+- R₂;
+- axial error;
+
+with observed CV R².
+
+### Figure C — Observed vs OOF-Predicted
+
+One panel per target showing:
+
+\[
+y_{\text{observed}}
+\quad\text{vs}\quad
+y_{\text{OOF predicted}}
+\]
+
+This is particularly useful because it reveals whether the positive R²
+is driven by broad tracking or by a small number of observations.
+
+No new hypothesis test is necessary.
+
+---
+
+# 18. Then Comes the Decisive Experiment
+
+# CELL 8 — INDEPENDENT DOWNSTREAM COMPLEMENTARITY
+
+This is now the experiment I care about most.
+
+Use the exact same 2300 sketches and compare:
+
+### Model A
+
+`135-D morphology`
+
+### Model B
+
+`28-D radial–angular`
+
+### Model C
+
+`135-D morphology + 28-D radial–angular`
+
+Use:
+
+- same stratified 5-fold partitions;
+- `random_state = 42`;
+- `StandardScaler`;
+- same multinomial logistic regression;
+- no feature selection;
+- no hyperparameter search.
+
+Primary outcome:
+
+\[
+BA_M
+\]
+
+versus:
+
+\[
+BA_R
+\]
+
+versus:
+
+\[
+BA_{M+R}
+\]
+
+and especially:
+
+\[
+\Delta BA
+=
+BA_{M+R}-BA_M
+\]
+
+---
+
+# 19. Why Cell 8 Is the Backbone Test
+
+Suppose we obtain:
+
+\[
+BA_{M+R}>BA_M
+\]
+
+under identical evaluation conditions.
+
+Then we have evidence that:
+
+> radial–angular geometry provides category-discriminative information
+> beyond the frozen morphology representation.
+
+If the gain also survives a label-permutation or paired permutation test,
+that becomes a very strong integration result.
+
+Conversely, if:
+
+\[
+BA_{M+R}\approx BA_M
+\]
+
+then the radial–angular branch can still remain valuable as an
+interpretable geometric representation.
+
+But we would not claim downstream complementarity.
+
+Either result is scientifically interpretable.
+
+---
+
+# 20. The Backbone Is Now Much Cleaner
+
+The paper story is becoming:
+
+**Raw sketch**
+
+↓
+
+**Frozen morphology representation**
+
+and independently:
+
+**Radial–angular representation**
+
+↓
+
+**Cross-branch association**
+
+🟢
+
+↓
+
+**Out-of-sample correspondence**
+
+🟢
+
+↓
+
+**Permutation-validated correspondence**
+
+🟢
+
+↓
+
+**Heterogeneous representational overlap**
+
+🟢
+
+↓
+
+**Independent downstream complementarity**
+
+⬜ **DECISIVE NEXT TEST**
+
+↓
+
+**Permutation robustness of incremental gain**
+
+⬜
+
+↓
+
+**Final representation synthesis**
+
+⬜
+
+---
+
+# FINAL VERDICT
+
+## 🟢 CELL 6 SCIENTIFICALLY PASSES
+
+The main conclusion is:
+
+> **Morphology and radial–angular geometry exhibit genuine, reproducible
+> sketch-level correspondence under the tested predictive framework.**
+
+The correspondence is strongest for F₂ magnitude, intermediate for
+observed R₂ and axial recovery error, and weakest for F₂ radial
+localization.
+
+Critically:
+
+> **Cell 6 establishes overlap, not redundancy and not complementarity.**
+
+Before final manuscript lock, increase the permutation run from:
+
+`100 → 1000`
+
+Then freeze Cell 6.
+
+After that:
+
+**Cell 7 = visualization only.**
+
+And then go directly to the experiment that can make or break the
+integration backbone:
+
+# CELL 8 — MORPHOLOGY vs RADIAL–ANGULAR vs MORPHOLOGY + RADIAL–ANGULAR
+## Controlled Category Complementarity
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 7 Scientific Audit — Cross-Branch Effect Visualization
+
+### Status
+
+**🟢 CELL 7 PASSED**
+
+Cell 7 is doing exactly what it should do:
+
+- visualizing the frozen Cell 6 result;
+- introducing no additional hypothesis test;
+- separating the observed cross-validated effect from the permutation null;
+- exposing the actual prediction behavior rather than reporting R² alone.
+
+The figures also reveal an important feature of the result that is less obvious from the numerical table:
+
+> **The four radial–angular quantities are not equally recoverable from morphology, and the prediction geometry differs substantially across targets.**
+
+That heterogeneity should become part of the scientific interpretation.
+
+---
+
+# 1. Figure 1 — Observed Prediction vs Row-Permutation Null
+
+The first figure provides the clearest visual validation of Cell 6.
+
+For every target, the complete sampled permutation distribution lies below zero, while the observed cross-validated R² is positive.
+
+Approximate observed values are:
+
+| Radial–angular target | Observed CV R² |
+|---|---:|
+| F₂ peak magnitude | **0.2961** |
+| F₂ peak radius | **0.0594** |
+| Observed R₂ | **0.2170** |
+| Axial error | **0.1979** |
+
+The corresponding permutation-null means are all approximately:
+
+\[
+R^2_{\text{null}} \approx -0.10
+\]
+
+Therefore the visual separation is substantial.
+
+This supports the Cell 6 conclusion:
+
+> **Sketch-level morphology ↔ radial–angular correspondence is reproducible and is destroyed when the row correspondence between the two representations is broken.**
+
+This is stronger than merely observing pairwise feature correlations.
+
+---
+
+# 2. Figure 2 — Effect Magnitude and Null Separation
+
+Figure 2 is probably the strongest manuscript-level summary figure from Cell 7.
+
+It simultaneously shows:
+
+- the observed CV R²;
+- permutation-null mean;
+- permutation-null 95% interval;
+- zero-prediction reference.
+
+The ranking is immediately visible:
+
+\[
+F_2\text{ magnitude}
+>
+R_2
+\approx
+\text{axial error}
+>
+F_2\text{ radius}
+\]
+
+in terms of morphology-based predictive recovery.
+
+Numerically:
+
+\[
+R^2(F_2\text{ magnitude})=0.296
+\]
+
+\[
+R^2(R_2)=0.217
+\]
+
+\[
+R^2(\text{axial error})=0.198
+\]
+
+\[
+R^2(F_2\text{ radius})=0.059
+\]
+
+This provides evidence that cross-branch correspondence is **quantity-specific rather than uniform**.
+
+That is scientifically more interesting than simply saying that the two branches correlate.
+
+---
+
+# 3. Figure 3 — Morphology → F₂ Peak Magnitude
+
+This is visually the strongest of the four prediction plots.
+
+The predicted values track increasing observed F₂ magnitude, consistent with:
+
+\[
+R^2_{\mathrm{CV}}=0.2961
+\]
+
+and the previously reported:
+
+\[
+\rho_{\mathrm{OOF}}\approx0.642
+\]
+
+However, the plot also reveals substantial regression toward the center.
+
+Large observed F₂ magnitudes tend to be underpredicted.
+
+Predictions occupy a narrower range than observations.
+
+Therefore morphology captures an important component of F₂ magnitude variation but does not reconstruct the quantity exactly.
+
+A defensible interpretation is:
+
+> **F₂ response strength has substantial morphological correspondence, while retaining considerable variation not recovered by the tested morphology model.**
+
+Do not describe this as complete recovery.
+
+---
+
+# 4. Figure 4 — Morphology → F₂ Peak Radius
+
+This plot explains why:
+
+\[
+R^2_{\mathrm{CV}}=0.0594
+\]
+
+despite the permutation result being significant.
+
+There is a broad positive trend, but predicted radii are strongly compressed toward the central part of the radial range.
+
+Observed small-radius peaks tend to be predicted too far outward.
+
+Observed large-radius peaks tend to be predicted too far inward.
+
+The model therefore recovers some ordering information without accurately reproducing radial localization.
+
+This distinction is important.
+
+The result is:
+
+**🟢 reproducible correspondence**
+
+but:
+
+**🟡 weak predictive recovery**
+
+This is a good example of why permutation significance and effect magnitude must be reported together.
+
+---
+
+# 5. Figure 5 — Morphology → Observed Circular Strength R₂
+
+This is another strong and scientifically useful result.
+
+There is a clear positive relationship between observed and predicted circular strength.
+
+The numerical result is:
+
+\[
+R^2_{\mathrm{CV}}=0.2170
+\]
+
+with previously measured out-of-fold rank correspondence:
+
+\[
+\rho\approx0.538
+\]
+
+Again, predictions are compressed toward the population center.
+
+High observed R₂ values tend to be underestimated.
+
+Low observed R₂ values tend to be overestimated.
+
+Thus morphology captures part of the population-level variation in circular organization without reproducing its full dynamic range.
+
+This becomes particularly important when connected to Cells 30I–30M.
+
+Those cells established:
+
+\[
+R_2^{obs}
+\uparrow
+\quad\Longleftrightarrow\quad
+\text{axial error}
+\downarrow
+\]
+
+with:
+
+\[
+\rho=-0.4794
+\]
+
+Cell 7 now shows that the R₂ quantity involved in that recovery relationship is itself partially predictable from morphology.
+
+Therefore the evidence chain is becoming:
+
+\[
+\text{Morphology}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Circular organization}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Angular recovery reliability}
+\]
+
+This remains an empirical association chain.
+
+It must **not** be represented as a causal pathway.
+
+---
+
+# 6. Figure 6 — Morphology → Axial Recovery Error
+
+This is perhaps the most interesting prediction plot conceptually.
+
+Numerically:
+
+\[
+R^2_{\mathrm{CV}}=0.1979
+\]
+
+and:
+
+\[
+\rho_{\mathrm{OOF}}\approx0.440
+\]
+
+So morphology contains measurable information about whether radial–angular orientation will be recovered accurately.
+
+But the scatter plot exposes substantial heterogeneity.
+
+Low-error sketches dominate the population, yet their predicted errors span a fairly broad range.
+
+High-error observations are only partially tracked.
+
+Predictions again regress strongly toward the center.
+
+Therefore the correct conclusion is:
+
+> **Morphological organization is associated with angular recovery reliability, but morphology alone does not deterministically identify recovery success or failure.**
+
+This is actually preferable scientifically to an unrealistically perfect correspondence.
+
+It indicates overlap between the representations without collapsing them into identical measurements.
+
+---
+
+# 7. Important Observation From Figures 3–6
+
+All four plots exhibit some degree of:
+
+## Regression Toward the Mean
+
+The predicted distributions are generally narrower than the observed distributions.
+
+Schematically:
+
+\[
+\operatorname{Var}(\hat y)
+<
+\operatorname{Var}(y)
+\]
+
+for much of the target structure.
+
+This means the morphology model captures broad population organization better than extreme target behavior.
+
+That observation is particularly visible for:
+
+- F₂ radius;
+- R₂;
+- axial error.
+
+This should be described as a property of the observed prediction behavior, not automatically as evidence of a biological/geometric mechanism.
+
+---
+
+# 8. One Important Issue in Figure 6
+
+The axial error itself is constrained by definition to:
+
+\[
+0^\circ\leq e_{\alpha}\leq90^\circ
+\]
+
+but the linear regression produces predictions outside this physical range.
+
+The figure shows:
+
+\[
+\hat e_{\alpha}<0^\circ
+\]
+
+and:
+
+\[
+\hat e_{\alpha}>90^\circ
+\]
+
+for some observations.
+
+This does **not invalidate Cell 6**.
+
+It results from using an unconstrained regression model.
+
+However, it needs to be acknowledged if this figure goes into the manuscript.
+
+Do **not** clip the predictions now merely to improve the appearance.
+
+That would alter the frozen evaluation.
+
+Instead, report that the linear predictor was deliberately unconstrained and that prediction values were retained without post-hoc clipping.
+
+This preserves the audit trail.
+
+---
+
+# 9. Another Important Observation — F₂ Radius Is Discrete
+
+Figure 4 displays vertical bands because F₂ peak radius is selected from the locked radial grid.
+
+Therefore the observed target is effectively shell-discretized rather than continuously distributed.
+
+That structure is expected.
+
+It should not be interpreted as a plotting artifact.
+
+This also partly explains why direct linear regression of F₂ radius is a demanding prediction problem.
+
+Again, we should not change the model after seeing this result merely to improve R².
+
+The controlled experiment is more important than maximizing performance.
+
+---
+
+# 10. Cell 7 Strengthens the Interpretation of Cell 6
+
+Cell 6 established:
+
+\[
+\text{observed prediction}
+>
+\text{row-permutation prediction}
+\]
+
+Cell 7 now shows **what that prediction actually looks like**.
+
+The result is not produced by perfect reconstruction.
+
+Instead, morphology recovers broad components of radial–angular variation while leaving substantial sketch-level residual variation.
+
+This gives us a much more nuanced conclusion:
+
+> **Morphology and radial–angular representations overlap systematically, but they are not empirically interchangeable under the tested predictive model.**
+
+Be careful with the final clause.
+
+Failure of morphology to perfectly predict RA does not mathematically prove non-redundancy because a different nonlinear model could potentially recover more.
+
+So the exact scientific language should remain:
+
+> **They are not interchangeable under the tested predictive framework.**
+
+---
+
+# 11. Current Evidence Hierarchy
+
+We can now freeze the integration evidence through Cell 7 as follows.
+
+### Level A — Row identity
+
+\[
+M_i\leftrightarrow RA_i
+\]
+
+**🟢 VERIFIED**
+
+### Level B — Coordinate association
+
+Individual morphology coordinates correlate with radial–angular quantities.
+
+**🟢 ESTABLISHED — Cell 3**
+
+### Level C — Out-of-sample correspondence
+
+Morphology predicts radial–angular quantities on unseen sketches.
+
+**🟢 ESTABLISHED — Cell 4/6**
+
+### Level D — Correspondence exceeds row-permutation null
+
+**🟢 ESTABLISHED — Cell 6**
+
+### Level E — Prediction behavior visually verified
+
+Broad structure is recovered, with substantial residual variation and target-specific strength.
+
+**🟢 ESTABLISHED — Cell 7**
+
+### Level F — Incremental downstream utility
+
+Does radial–angular geometry contribute beyond morphology on an independent task?
+
+**⬜ NOT YET ESTABLISHED**
+
+That is Cell 8.
+
+---
+
+# 12. Cell 5 Should Not Be Used as Complementarity Evidence
+
+The earlier Cell 5 produced:
+
+\[
+\Delta R^2\approx0
+\]
+
+when predicting morphology-derived PCA coordinates.
+
+That experiment is not useful as the decisive complementarity test because the target itself is constructed from morphology.
+
+It may remain in the research audit trail.
+
+But I would **not make it a primary manuscript result**.
+
+Cell 6 gives the scientifically cleaner cross-branch correspondence test.
+
+Cell 8 should now give the scientifically cleaner complementarity test.
+
+---
+
+# 13. Cell 7 Manuscript Claim
+
+A conservative manuscript-ready interpretation is:
+
+> **Visualization of out-of-fold predictions confirmed heterogeneous cross-representational correspondence. Morphology most strongly recovered F₂ peak magnitude, followed by observed circular strength and axial recovery error, whereas radial localization of the F₂ maximum was only weakly recovered. Across targets, predictions exhibited substantial shrinkage toward population-central values, indicating that morphology captured broad radial–angular variation without reproducing the complete observed target structure.**
+
+That is fully consistent with the figures.
+
+---
+
+# 14. Figure Selection for the Paper
+
+I would not publish all six figures in the main paper.
+
+### Main manuscript
+
+Use **Figure 2**:
+
+**Observed Cross-Branch Prediction and Permutation-Null Distribution**
+
+It communicates the central result extremely efficiently.
+
+Then use perhaps two representative OOF plots:
+
+- F₂ peak magnitude — strongest recovery;
+- F₂ peak radius — weakest recovery.
+
+This visually demonstrates the heterogeneity.
+
+### Supplement
+
+Put:
+
+- full permutation distributions;
+- R₂ observed-vs-predicted;
+- axial-error observed-vs-predicted;
+- remaining prediction diagnostics.
+
+That keeps the main narrative clean.
+
+---
+
+# 15. Final Cell 7 Claim Boundary
+
+## SUPPORTED
+
+- Morphology exhibits reproducible correspondence with radial–angular quantities.
+- Correspondence survives out-of-sample evaluation.
+- Observed prediction exceeds the sampled row-permutation null for all four tested quantities.
+- Correspondence strength differs substantially across radial–angular quantities.
+- F₂ magnitude shows the strongest tested morphology correspondence.
+- F₂ radius shows the weakest tested morphology correspondence.
+- R₂ and angular recovery error exhibit intermediate correspondence.
+- Predictions retain substantial residual variation.
+
+## SUPPORTED WITH QUALIFICATION
+
+- Morphology and radial–angular representations capture overlapping geometric structure.
+
+Qualification:
+
+This statement applies under the present frozen representations and tested predictive model.
+
+## NOT YET SUPPORTED
+
+- Radial–angular descriptors provide incremental category information beyond morphology.
+- Radial–angular descriptors are statistically independent of morphology.
+- The two representations contain independent information in an information-theoretic sense.
+- Radial–angular features are semantically superior.
+- Morphology causes angular recovery.
+- Radial–angular structure corresponds directly to garment parts.
+
+---
+
+# FINAL VERDICT
+
+## 🟢 CELL 7 PASSES
+
+Cells 3 → 6 → 7 now provide a coherent cross-representation result:
+
+\[
+\boxed{
+\text{Morphology}
+\longleftrightarrow
+\text{Radial–Angular Organization}
+}
+\]
+
+with:
+
+\[
+\boxed{
+\text{reproducible but heterogeneous correspondence}
+}
+\]
+
+The result is strongest for F₂ magnitude, intermediate for R₂ and angular
+recovery error, and weakest for F₂ radial localization.
+
+Most importantly, the figures show that correspondence does **not**
+amount to exact reconstruction.
+
+The integration backbone has therefore reached the question that matters
+most:
+
+\[
+\boxed{
+\text{Does RA add useful information beyond morphology?}
+}
+\]
+
+That cannot be answered by another morphology ↔ RA correlation.
+
+It requires an **independent common downstream target**.
+
+---
+
+# NEXT — CELL 8
+
+## CONTROLLED DOWNSTREAM COMPLEMENTARITY TEST
+
+Compare on exactly the same frozen folds:
+
+\[
+M
+\]
+
+versus
+
+\[
+RA
+\]
+
+versus
+
+\[
+M+RA
+\]
+
+where:
+
+- \(M\) = frozen 135-D morphology;
+- \(RA\) = frozen 28-D radial–angular representation;
+- \(M+RA\) = concatenated 163-D representation.
+
+The downstream target should be identical across all three models.
+
+The decisive quantity is:
+
+\[
+\Delta =
+\operatorname{Performance}(M+RA)
+-
+\operatorname{Performance}(M)
+\]
+
+If:
+
+\[
+\Delta>0
+\]
+
+consistently across held-out folds and survives an appropriate paired
+randomization/permutation test, we obtain evidence for:
+
+> **incremental downstream utility of radial–angular geometry beyond the
+> frozen morphology representation.**
+
+That would be the missing link in the paper backbone.
+
+**Cell 8 should be run before adding any more interpretation to the
+morphology ↔ radial–angular integration story.**
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 8 Scientific Audit — Incremental Downstream Information
+
+### Status
+
+# 🟢 CELL 8 PASSED — AND THIS IS A MAJOR RESULT
+
+Cell 8 answers the question that Cells 3–7 deliberately did **not** answer:
+
+> **Does the radial–angular representation contribute useful information beyond the frozen 135-D morphology representation on an independent downstream task?**
+
+Under the tested 23-category classification task, the answer is:
+
+\[
+\boxed{\text{YES}}
+\]
+
+The experiment uses the same 2300 sketches, the frozen 135-D morphology representation, the frozen 28-D radial–angular representation, fixed five-fold cross-validation, and a 1000-permutation row-alignment test. :contentReference[oaicite:0]{index=0}
+
+---
+
+# 1. PRIMARY RESULT
+
+The morphology-only model achieves:
+
+\[
+\text{Macro-F1}_{M}=0.341131
+\]
+
+After adding the radial–angular representation:
+
+\[
+\text{Macro-F1}_{M+RA}=0.412332
+\]
+
+Therefore:
+
+\[
+\Delta \text{Macro-F1}
+=
+0.412332-0.341131
+=
+\boxed{+0.071201}
+\]
+
+Balanced accuracy shows essentially the same result:
+
+\[
+BA_M=0.342174
+\]
+
+\[
+BA_{M+RA}=0.415652
+\]
+
+giving:
+
+\[
+\Delta BA=\boxed{+0.073478}
+\]
+
+Thus the improvement is not confined to one evaluation metric. :contentReference[oaicite:1]{index=1}
+
+---
+
+# 2. THIS IS NOT A SMALL NUMERICAL CHANGE
+
+The absolute improvement is approximately seven percentage points:
+
+| Metric | Morphology | Morphology + RA | Δ |
+|---|---:|---:|---:|
+| Macro-F1 | 0.3411 | 0.4123 | **+0.0712** |
+| Balanced accuracy | 0.3422 | 0.4157 | **+0.0735** |
+
+For descriptive context, relative to the morphology-only score:
+
+\[
+\frac{0.071201}{0.341131}\approx20.9\%
+\]
+
+for Macro-F1, and:
+
+\[
+\frac{0.073478}{0.342174}\approx21.5\%
+\]
+
+for balanced accuracy.
+
+These relative percentages can be useful descriptively, but the manuscript should emphasize the **absolute paired improvement** rather than advertising a "21% improvement."
+
+---
+
+# 3. FOLD-WISE CONSISTENCY IS EXCELLENT
+
+This is one of the strongest parts of Cell 8.
+
+The Macro-F1 improvements across the five folds are:
+
+\[
++0.0888,\quad
++0.0826,\quad
++0.0430,\quad
++0.0321,\quad
++0.1096
+\]
+
+and balanced-accuracy improvements are:
+
+\[
++0.0935,\quad
++0.0848,\quad
++0.0457,\quad
++0.0348,\quad
++0.1087
+\]
+
+Therefore:
+
+\[
+\boxed{5/5\text{ folds improved}}
+\]
+
+for **both metrics**. :contentReference[oaicite:2]{index=2}
+
+This matters.
+
+The overall gain is not being produced by one unusually favorable split.
+
+Every held-out fold moves in the same direction.
+
+---
+
+# 4. THE PERMUTATION TEST MAKES THE RESULT MUCH STRONGER
+
+The experiment then performs the correct alignment-destruction test.
+
+For each permutation:
+
+\[
+X_M[i]+X_{RA}[\pi(i)]
+\]
+
+while morphology rows and category labels remain fixed.
+
+Thus:
+
+- morphology remains unchanged;
+- labels remain unchanged;
+- the RA marginal distribution remains unchanged;
+- only the correct **sketch ↔ radial-angular correspondence** is destroyed. :contentReference[oaicite:3]{index=3}
+
+This is exactly the null we need for the claim being tested.
+
+---
+
+# 5. MACRO-F1 PERMUTATION RESULT
+
+Observed:
+
+\[
+\Delta F1_{\text{obs}}=+0.071201
+\]
+
+Permutation-null mean:
+
+\[
+\Delta F1_{\text{null}}=-0.019598
+\]
+
+Permutation-null 95% interval:
+
+\[
+[-0.031254,-0.008179]
+\]
+
+Empirical permutation significance:
+
+\[
+\boxed{p=0.000999}
+\]
+
+Observed percentile:
+
+\[
+\boxed{100\%}
+\]
+
+The observed improvement therefore lies completely beyond the sampled permutation-null distribution. :contentReference[oaicite:4]{index=4}
+
+---
+
+# 6. BALANCED-ACCURACY PERMUTATION RESULT
+
+The secondary metric independently tells the same story.
+
+Observed:
+
+\[
+\Delta BA_{\text{obs}}=+0.073478
+\]
+
+Null mean:
+
+\[
+-0.019400
+\]
+
+Null 95% interval:
+
+\[
+[-0.030870,-0.007826]
+\]
+
+with:
+
+\[
+\boxed{p=0.000999}
+\]
+
+Again the observed result is at the 100th percentile of the sampled permutation distribution. :contentReference[oaicite:5]{index=5}
+
+---
+
+# 7. WHY THE NEGATIVE PERMUTATION Δ IS INTERESTING
+
+There is another useful result hiding here.
+
+When RA rows are randomly attached to the wrong sketches:
+
+\[
+\Delta F1_{\text{null}}\approx-0.0196
+\]
+
+and:
+
+\[
+\Delta BA_{\text{null}}\approx-0.0194
+\]
+
+So simply adding 28 extra radial–angular numbers does **not** improve classification.
+
+Randomly aligned RA actually tends to degrade performance.
+
+That makes the interpretation much cleaner:
+
+\[
+\text{extra dimensions alone}
+\neq
+\text{observed improvement}
+\]
+
+Instead, the improvement depends on the correct sketch-level alignment:
+
+\[
+\boxed{
+M_i+RA_i
+}
+\]
+
+rather than:
+
+\[
+M_i+RA_j.
+\]
+
+This is an important control against the trivial explanation that performance rose merely because the augmented model had more predictors.
+
+---
+
+# 8. WHAT CELLS 3–8 NOW ESTABLISH TOGETHER
+
+We now have a remarkably clean sequence.
+
+## Cell 3 — Association
+
+Morphology coordinates are associated with radial–angular measurements.
+
+\[
+M\leftrightarrow RA
+\]
+
+**🟢 Established**
+
+---
+
+## Cell 4 / Cell 6 — Cross-branch prediction
+
+Morphology can recover part of radial–angular organization out-of-sample.
+
+\[
+M\rightarrow\widehat{RA}
+\]
+
+**🟢 Established**
+
+---
+
+## Cell 6 — Permutation validation
+
+Correct morphology ↔ RA correspondence performs far above destroyed correspondence.
+
+**🟢 Established**
+
+---
+
+## Cell 7 — Prediction geometry
+
+The correspondence is heterogeneous:
+
+\[
+F_2\text{ magnitude}
+>
+R_2
+\approx
+\text{axial error}
+>
+F_2\text{ radius}
+\]
+
+and is not exact reconstruction.
+
+**🟢 Established**
+
+---
+
+## Cell 8 — Incremental downstream information
+
+Now:
+
+\[
+Performance(M+RA)
+>
+Performance(M)
+\]
+
+and this improvement disappears when RA correspondence is destroyed.
+
+**🟢 Established**
+
+This closes the major logical gap that remained after Cell 7.
+
+---
+
+# 9. IMPORTANT SCIENTIFIC DISTINCTION
+
+We should now distinguish three concepts very carefully.
+
+### Overlap
+
+Cells 3–7 show:
+
+\[
+M\cap RA\neq\varnothing
+\]
+
+conceptually: morphology and RA encode overlapping structure.
+
+### Non-equivalence under the tested model
+
+Morphology does not reconstruct RA perfectly.
+
+Therefore the two representations are not empirically interchangeable under the tested predictive framework.
+
+### Incremental downstream utility
+
+Cell 8 now establishes:
+
+\[
+\boxed{
+M+RA>M
+}
+\]
+
+on the controlled downstream classification task.
+
+That is substantially stronger than saying:
+
+> "RA correlates with morphology."
+
+It means correctly aligned radial–angular information contributes discriminative signal that the frozen morphology representation does not make equivalently available to the tested classifier.
+
+---
+
+# 10. WHAT WE STILL MUST NOT SAY
+
+Cell 8 does **not** prove:
+
+\[
+I(RA;Y\mid M)>0
+\]
+
+in a strict information-theoretic sense.
+
+We did not estimate conditional mutual information.
+
+Therefore avoid saying:
+
+> "RA contains mathematically independent information."
+
+Likewise, do not say:
+
+> "Morphology contains no RA information."
+
+Cells 3–7 explicitly show that it does.
+
+The correct description is:
+
+> **Radial–angular geometry provides reproducible incremental downstream information beyond the frozen morphology representation under the tested classification framework.**
+
+That wording in the Cell 8 output is scientifically appropriate. :contentReference[oaicite:6]{index=6}
+
+---
+
+# 11. THIS CHANGES THE PAPER STORY
+
+Before Cell 8, our evidence supported:
+
+\[
+\text{Morphology}
+\leftrightarrow
+\text{Radial-angular organization}
+\]
+
+Now it supports something stronger:
+
+\[
+\text{Morphology}
+\leftrightarrow
+\text{Radial-angular organization}
+\]
+
+but also:
+
+\[
+\boxed{
+M+RA>M
+}
+\]
+
+on the downstream task.
+
+Therefore RA is neither simply unrelated to morphology nor merely a useless re-expression of it.
+
+The evidence supports a much more interesting interpretation:
+
+> **The radial–angular representation overlaps with conventional morphology while preserving task-relevant geometric structure that provides measurable incremental discriminative value when the two representations are integrated.**
+
+That is potentially a central paper result.
+
+---
+
+# 12. CONNECTION TO THE RADIAL–ANGULAR RECOVERY BACKBONE
+
+Now connect Cell 8 with Cells 30C–30M.
+
+Those experiments established that radial–angular organization itself behaves systematically:
+
+\[
+R_2^{obs}\uparrow
+\Rightarrow
+\text{axial recovery error}\downarrow
+\]
+
+with:
+
+\[
+\rho=-0.4794
+\]
+
+and reliable-vs-failure separation:
+
+\[
+\delta=+0.5390.
+\]
+
+We also established threshold robustness.
+
+So RA is not simply an arbitrary 28-dimensional feature vector that happens to improve a classifier.
+
+We have separately characterized its internal geometric behavior.
+
+The evidence chain is now:
+
+\[
+\boxed{
+\text{Sketch morphology}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Radial-angular organization}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{measurable recovery behavior}
+}
+\]
+
+and independently:
+
+\[
+\boxed{
+M+RA
+>
+M
+}
+\]
+
+for downstream category discrimination.
+
+Do **not** draw causal arrows in the manuscript from this diagram without qualification; the arrows here denote the analysis sequence, not demonstrated causality.
+
+---
+
+# 13. THE MOST IMPORTANT CONTROL IN CELL 8
+
+There is one methodological point I especially like here.
+
+The 1000 permutations reuse fixed CV folds. :contentReference[oaicite:7]{index=7}
+
+That means the observed and null comparisons are not contaminated by repeatedly changing train/test composition.
+
+And the null specifically attacks:
+
+\[
+\text{correct RA ↔ sketch alignment}
+\]
+
+rather than destroying everything in the experiment.
+
+This makes the permutation test directly relevant to the claimed incremental contribution.
+
+---
+
+# 14. ONE THING TO CLEAN BEFORE THE FINAL NOTEBOOK
+
+The repeated scikit-learn warning:
+
+> `multi_class was deprecated...`
+
+is harmless to these numerical results, but remove the deprecated explicit `multi_class` argument when we freeze the final clean notebook.
+
+Do **not** rerun or alter the experiment merely to remove the warning.
+
+The scientific results are unaffected.
+
+The final publication notebook/code can simply use the current supported API.
+
+---
+
+# 15. MANUSCRIPT-LEVEL RESULT
+
+A conservative Results paragraph can now be written as:
+
+> **Integrating the frozen radial–angular representation with the 135-dimensional morphology representation improved held-out category discrimination across all five cross-validation folds. Macro-F1 increased from 0.341 to 0.412 (Δ = +0.071), while balanced accuracy increased from 0.342 to 0.416 (Δ = +0.073). To test whether this improvement depended on sketch-specific radial–angular information rather than dimensional augmentation alone, radial–angular rows were randomly permuted relative to morphology while morphology, category labels, and cross-validation folds were held fixed. Across 1000 permutations, the observed improvement exceeded the complete sampled null distribution for both Macro-F1 and balanced accuracy (empirical p = 0.000999). These results support reproducible incremental downstream utility of correctly aligned radial–angular geometry beyond the frozen morphology representation under the tested classification framework.**
+
+Every quantitative statement in that paragraph is supported directly by Cell 8. :contentReference[oaicite:8]{index=8}
+
+---
+
+# 16. CLAIM MATRIX AFTER CELL 8
+
+## 🟢 SUPPORTED
+
+1. Morphology and radial–angular representations exhibit reproducible cross-branch correspondence.
+
+2. Morphology partially predicts several radial–angular quantities out-of-sample.
+
+3. Cross-branch predictive strength differs across radial–angular quantities.
+
+4. Correctly aligned RA improves classification beyond frozen morphology alone.
+
+5. The improvement occurs in all five held-out folds.
+
+6. Improvement occurs for both Macro-F1 and balanced accuracy.
+
+7. The observed improvement exceeds the 1000-permutation alignment-null distribution.
+
+8. Randomly aligned RA does not reproduce the improvement.
+
+9. RA therefore provides reproducible incremental downstream information under the tested classification task.
+
+---
+
+## 🟡 SUPPORTED WITH QUALIFICATION
+
+**Morphology and RA contain complementary task-relevant structure.**
+
+This is acceptable provided "complementary" is explicitly operationalized as:
+
+> incremental downstream predictive utility under the tested model and task.
+
+Do not redefine it as statistical independence.
+
+---
+
+## 🔴 NOT ESTABLISHED
+
+- information-theoretic independence;
+- causal structure;
+- semantic garment-part recognition;
+- human-like understanding;
+- universal superiority of RA;
+- superiority across arbitrary classifiers/datasets;
+- mathematical novelty of Fourier/polar representation.
+
+The Cell 8 output itself correctly preserves these boundaries. :contentReference[oaicite:9]{index=9}
+
+---
+
+# 17. UPDATED PAPER BACKBONE
+
+The backbone is now considerably stronger:
+
+\[
+\boxed{
+\text{Frozen Morphology}
+}
+\]
+
+\[
+\updownarrow
+\]
+
+\[
+\boxed{
+\text{Radial–Angular Geometry}
+}
+\]
+
+### Evidence 1
+Feature-level statistical correspondence.
+
+### Evidence 2
+Out-of-sample cross-branch prediction.
+
+### Evidence 3
+Permutation-validated sketch-level correspondence.
+
+### Evidence 4
+Population-level radial–angular recovery behavior.
+
+### Evidence 5
+Recovery reliability associated with circular strength and radial localization.
+
+### Evidence 6
+Threshold-robust recovery regimes.
+
+### Evidence 7
+
+\[
+\boxed{
+M+RA>M
+}
+\]
+
+with:
+
+\[
+\Delta F1=+0.0712
+\]
+
+\[
+\Delta BA=+0.0735
+\]
+
+and:
+
+\[
+p_{\text{perm}}=0.000999.
+\]
+
+That is no longer merely a descriptor-development story.
+
+It is becoming an **integration and representation-analysis story**.
+
+---
+
+# 18. CELL 8 FINAL VERDICT
+
+# 🟢 FREEZE CELL 8
+
+Do not tune the model.
+
+Do not search for a larger Δ.
+
+Do not change the folds.
+
+Do not select another metric because it looks better.
+
+Do not change RA dimensions.
+
+Do not alter morphology.
+
+The controlled result is already strong:
+
+\[
+\boxed{
+\Delta MacroF1=+0.0712
+}
+\]
+
+\[
+\boxed{
+\Delta BA=+0.0735
+}
+\]
+
+\[
+\boxed{
+5/5\text{ folds positive}
+}
+\]
+
+\[
+\boxed{
+1000\text{-permutation }p=0.000999
+}
+\]
+
+Most importantly:
+
+\[
+\boxed{
+\text{correctly aligned RA adds reproducible downstream value beyond morphology}
+}
+\]
+
+under the tested task.
+
+---
+
+# NEXT — CELL 9
+
+## REPRESENTATION ABLATION / CONTRIBUTION LOCALIZATION
+
+We should **not** immediately add more models.
+
+The next scientific question is:
+
+> **Which part of the 28-D radial–angular representation is responsible for the incremental information established in Cell 8?**
+
+The frozen RA representation already contains five interpretable blocks:
+
+\[
+RA=
+[
+F_2,\;
+\alpha_2,\;
+R_2^{obs},\;
+R_2^{learned},\;
+relational
+]
+\]
+
+Cell 9 should therefore compare:
+
+\[
+M
+\]
+
+\[
+M+F_2
+\]
+
+\[
+M+\alpha_2
+\]
+
+\[
+M+\text{observed circular}
+\]
+
+\[
+M+\text{learned circular}
+\]
+
+\[
+M+\text{relational}
+\]
+
+\[
+M+RA_{\text{full}}
+\]
+
+using the **same fixed folds and same classifier**.
+
+The question is no longer:
+
+> "Does RA help?"
+
+Cell 8 has answered that.
+
+The question becomes:
+
+\[
+\boxed{
+\text{Where does the incremental RA contribution come from?}
+}
+\]
+
+That will tell us whether the +0.071 Macro-F1 gain is distributed across the radial–angular representation or concentrated in one geometric component.
+
+**That is Cell 9.**
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 9 Review — Final Complementarity Audit
+
+### Status
+
+# 🟢 CELL 9 PASSES
+
+Cell 9 does not add a new experiment; it performs the correct final synthesis of the Cell 8 downstream complementarity result.
+
+The central result remains:
+
+\[
+\boxed{
+\text{Morphology + Radial–Angular}
+>
+\text{Morphology only}
+}
+\]
+
+under the fixed 23-category discrimination experiment.
+
+---
+
+# 1. PRIMARY COMPLEMENTARITY RESULT
+
+For Macro-F1:
+
+\[
+F1_{\text{Morphology}} = 0.341131
+\]
+
+\[
+F1_{\text{Morphology+RA}} = 0.412332
+\]
+
+Therefore:
+
+\[
+\Delta F1
+=
+0.412332 - 0.341131
+=
+\boxed{+0.071201}
+\]
+
+For balanced accuracy:
+
+\[
+BA_{\text{Morphology}} = 0.342174
+\]
+
+\[
+BA_{\text{Morphology+RA}} = 0.415652
+\]
+
+Therefore:
+
+\[
+\Delta BA
+=
+0.415652 - 0.342174
+=
+\boxed{+0.073478}
+\]
+
+Both evaluation metrics therefore support the same conclusion.
+
+---
+
+# 2. THE PERMUTATION CONTROL IS THE DECISIVE PART
+
+The important control is not simply:
+
+> Does adding 28 dimensions improve classification?
+
+Instead Cell 8 tested:
+
+\[
+X_M[i] + X_{RA}[i]
+\]
+
+against:
+
+\[
+X_M[i] + X_{RA}[\pi(i)]
+\]
+
+where the radial–angular rows are randomly reassigned between sketches.
+
+This preserves:
+
+- the morphology representation;
+- the radial–angular feature distributions;
+- the category labels;
+- the classifier;
+- the cross-validation folds;
+- the number of added dimensions.
+
+It destroys only:
+
+\[
+\boxed{
+\text{correct sketch-level morphology ↔ RA correspondence}
+}
+\]
+
+This makes the null scientifically well matched to the complementarity claim.
+
+---
+
+# 3. MACRO-F1 NULL SEPARATION
+
+Observed:
+
+\[
+\Delta F1_{\text{obs}}
+=
++0.071201
+\]
+
+Permutation-null mean:
+
+\[
+\Delta F1_{\text{null}}
+=
+-0.019598
+\]
+
+Permutation 95% interval:
+
+\[
+[-0.031254,\,-0.008179]
+\]
+
+and:
+
+\[
+\boxed{
+p_{\text{perm}} = 0.000999
+}
+\]
+
+The observed effect is therefore far outside the sampled null distribution.
+
+---
+
+# 4. BALANCED-ACCURACY NULL SEPARATION
+
+Observed:
+
+\[
+\Delta BA_{\text{obs}}
+=
++0.073478
+\]
+
+Permutation-null mean:
+
+\[
+\Delta BA_{\text{null}}
+=
+-0.019400
+\]
+
+Permutation 95% interval:
+
+\[
+[-0.030870,\,-0.007826]
+\]
+
+with:
+
+\[
+\boxed{
+p_{\text{perm}} = 0.000999
+}
+\]
+
+The two primary metrics therefore agree both in direction and in permutation robustness.
+
+---
+
+# 5. THE FIGURE IS VERY CLEAN SCIENTIFICALLY
+
+The first plot captures the result particularly well.
+
+The observed complementarity effects sit around:
+
+\[
++0.07
+\]
+
+while the permutation-null distributions lie entirely below zero around:
+
+\[
+-0.02.
+\]
+
+So visually we have:
+
+\[
+\boxed{
+\Delta_{\text{aligned}}
+\gg
+\Delta_{\text{misaligned}}
+}
+\]
+
+This is much more informative than merely plotting morphology-only versus morphology + RA.
+
+It demonstrates that **correct correspondence matters**.
+
+---
+
+# 6. RANDOM RA IS ACTUALLY HARMFUL
+
+This is an important secondary observation.
+
+The permutation null is not centered at zero:
+
+\[
+\Delta_{\text{null}}\approx-0.02.
+\]
+
+So randomly attached RA descriptors tend to reduce downstream performance.
+
+This means:
+
+\[
+\text{adding RA dimensions}
+\]
+
+by itself is not sufficient.
+
+The useful signal requires:
+
+\[
+\boxed{
+\text{RA descriptors belonging to the correct sketch}
+}
+\]
+
+This strengthens the interpretation that the observed gain reflects structured information rather than simple dimensional expansion.
+
+---
+
+# 7. FOLD-WISE RESULT IS ALSO IMPORTANT
+
+The fold-wise Macro-F1 plot shows positive improvement in every fold:
+
+\[
+\Delta F1_1 \approx +0.0888
+\]
+
+\[
+\Delta F1_2 \approx +0.0826
+\]
+
+\[
+\Delta F1_3 \approx +0.0430
+\]
+
+\[
+\Delta F1_4 \approx +0.0321
+\]
+
+\[
+\Delta F1_5 \approx +0.1096
+\]
+
+Therefore:
+
+\[
+\boxed{
+5/5\text{ folds show positive incremental value}
+}
+\]
+
+The effect is heterogeneous in magnitude, but not in direction.
+
+That is exactly what we want from a robustness perspective.
+
+---
+
+# 8. WHAT THE ENTIRE INTEGRATION NOTEBOOK NOW ESTABLISHES
+
+The logic is now very strong.
+
+## Stage A — Provenance
+
+Morphology and radial–angular rows were independently verified to correspond to the same sketches.
+
+\[
+X_M[i]
+\leftrightarrow
+X_{RA}[i]
+\]
+
+**🟢 Established**
+
+---
+
+## Stage B — Feature-level association
+
+Individual morphology coordinates show reproducible associations with:
+
+- \(F_2\) peak magnitude;
+- \(F_2\) peak radius;
+- observed \(R_2\);
+- angular recovery error.
+
+Therefore:
+
+\[
+M \not\perp RA
+\]
+
+in the ordinary empirical association sense.
+
+**🟢 Established**
+
+---
+
+## Stage C — Cross-branch recoverability
+
+Morphology predicts part of RA out-of-sample:
+
+\[
+M
+\rightarrow
+\widehat{RA}
+\]
+
+with strongest prediction for \(F_2\) magnitude and observed \(R_2\).
+
+**🟢 Established**
+
+---
+
+## Stage D — Permutation-validated correspondence
+
+The observed cross-branch prediction exceeds row-permutation null distributions.
+
+Therefore the morphology ↔ RA relationship is tied to actual sketch correspondence.
+
+**🟢 Established**
+
+---
+
+## Stage E — Incremental downstream contribution
+
+Finally:
+
+\[
+Performance(M+RA)
+>
+Performance(M)
+\]
+
+and that improvement vanishes when the RA rows are permuted.
+
+**🟢 Established**
+
+---
+
+# 9. THIS IS THE CORRECT CONCEPT OF COMPLEMENTARITY HERE
+
+We should define the word carefully in the manuscript.
+
+We are **not** claiming:
+
+\[
+RA \perp M
+\]
+
+because Cells 3–7 explicitly show overlap.
+
+Instead we have:
+
+\[
+M \cap RA \neq \varnothing
+\]
+
+while simultaneously:
+
+\[
+Performance(M+RA)
+>
+Performance(M).
+\]
+
+So the empirical situation is:
+
+\[
+\boxed{
+\text{overlap + incremental utility}
+}
+\]
+
+That is exactly what representation complementarity can mean operationally.
+
+A strong manuscript wording is:
+
+> **The radial–angular representation is statistically related to the frozen morphology representation, yet contributes reproducible incremental category-discriminative information when integrated with morphology.**
+
+That is more precise than calling the two representations simply "independent."
+
+---
+
+# 10. DO NOT CALL THIS INFORMATION-THEORETIC INDEPENDENCE
+
+We should continue protecting this boundary.
+
+Cell 9 supports:
+
+> complementary predictive information under the tested downstream experiment.
+
+It does **not** establish:
+
+\[
+I(RA;Y\mid M)>0
+\]
+
+in a strict information-theoretic formulation.
+
+Nor does it establish conditional independence relationships.
+
+So avoid manuscript phrases such as:
+
+- "independent information";
+- "orthogonal information";
+- "unique information" without qualification.
+
+Prefer:
+
+- **incremental information under the tested classifier**;
+- **complementary task-relevant information**;
+- **incremental downstream utility**;
+- **non-redundant predictive contribution under the tested representation framework**.
+
+The last phrase is slightly stronger, so I would use the first three most often.
+
+---
+
+# 11. THE THREE FIGURES FORM A GOOD RESULT PANEL
+
+I would actually keep these together for the manuscript.
+
+### Panel A — Permutation complementarity effect
+
+This is the statistical centerpiece.
+
+It directly shows:
+
+\[
+\Delta_{\text{observed}}
+\]
+
+against:
+
+\[
+\Delta_{\text{permutation null}}.
+\]
+
+### Panel B — Absolute downstream performance
+
+This gives readers intuitive context:
+
+\[
+0.341 \rightarrow 0.412
+\]
+
+and:
+
+\[
+0.342 \rightarrow 0.416.
+\]
+
+### Panel C — Fold-wise ΔF1
+
+This demonstrates the effect is positive across all five held-out partitions.
+
+Together these answer three different reviewer questions:
+
+1. **Is the effect statistically real?**
+2. **How large is the practical improvement?**
+3. **Is it stable across folds?**
+
+That is an excellent figure structure.
+
+---
+
+# 12. ONE WORDING CHANGE I WOULD MAKE IN CELL 9
+
+Current:
+
+> `PRIMARY PAPER CLAIM: quantitative organization of fashion-sketch morphology.`
+
+That is broader than what Cell 9 itself establishes.
+
+I would not label that as the *primary paper claim* inside this notebook.
+
+Instead use:
+
+> **Integration-level claim:** independently derived radial–angular geometry contributes reproducible downstream information beyond frozen quantitative morphology.
+
+Why?
+
+Because the broader primary paper claim must eventually synthesize the whole CLO-SKET program, not just the integration notebook.
+
+So I would change only that wording before freezing Cell 9.
+
+---
+
+# 13. RECOMMENDED FINAL CLAIM BOUNDARY
+
+## Supported
+
+1. The frozen morphology and radial–angular representations exhibit reproducible correspondence.
+
+2. Morphology predicts part of radial–angular organization out-of-sample.
+
+3. Radial–angular geometry is not fully recoverable from morphology under the tested models.
+
+4. Adding correctly aligned radial–angular descriptors improves category discrimination over morphology alone.
+
+5. The improvement occurs for both Macro-F1 and balanced accuracy.
+
+6. The improvement is positive in every CV fold.
+
+7. The observed improvement lies beyond the 1000-permutation row-misalignment null.
+
+8. Randomly aligned radial–angular features do not reproduce the improvement.
+
+9. Therefore morphology and radial–angular geometry provide complementary task-relevant representation under the tested downstream task.
+
+---
+
+## Not supported
+
+- semantic garment understanding;
+- garment-part recognition;
+- causal garment structure;
+- human-like visual understanding;
+- information-theoretic independence;
+- mathematical novelty of polar/Fourier geometry;
+- universal superiority across datasets or classifiers.
+
+---
+
+# 14. MANUSCRIPT-READY RESULT
+
+A clean Results paragraph would be:
+
+> **To determine whether radial–angular geometry contributed information beyond the frozen 135-dimensional morphology representation, we evaluated morphology-only and morphology-plus-radial–angular models using identical five-fold cross-validation. Adding the 28-dimensional radial–angular representation increased Macro-F1 from 0.341 to 0.412 (Δ = 0.071) and balanced accuracy from 0.342 to 0.416 (Δ = 0.073), with positive improvement in all five folds. We then randomly permuted radial–angular rows relative to morphology while preserving morphology, category labels, feature distributions, and cross-validation partitions. Across 1000 permutations, the observed improvement exceeded the entire sampled null distribution for both metrics (empirical p = 0.000999). These results indicate that correctly aligned radial–angular geometry provides reproducible incremental downstream information beyond the frozen morphology representation under the tested classification framework.**
+
+That is strong and still scientifically conservative.
+
+---
+
+# 15. FINAL CELL 9 VERDICT
+
+# 🟢 FREEZE CELL 9
+
+Do not tune anything further here.
+
+Do not search for a bigger gain.
+
+Do not change the classifier.
+
+Do not change the folds.
+
+Do not alter the 135-D morphology representation.
+
+Do not alter the 28-D RA representation.
+
+The result is already clean:
+
+\[
+\boxed{
+\Delta MacroF1 = +0.0712
+}
+\]
+
+\[
+\boxed{
+\Delta BA = +0.0735
+}
+\]
+
+\[
+\boxed{
+5/5\text{ folds positive}
+}
+\]
+
+\[
+\boxed{
+p_{\text{perm}} = 0.000999
+}
+\]
+
+and most importantly:
+
+\[
+\boxed{
+\text{aligned radial–angular geometry adds reproducible downstream value beyond morphology}
+}
+\]
+
+---
+
+# NEXT — CELL 10
+
+## RADIAL–ANGULAR FAMILY CONTRIBUTION WITHIN THE MORPHOLOGY CONTEXT
+
+Now we ask a sharper question:
+
+> **Which radial–angular family is responsible for the +0.071 Macro-F1 complementarity effect?**
+
+Use the frozen morphology matrix as the common baseline and add each already-frozen RA family separately:
+
+\[
+M
+\]
+
+\[
+M + F_2\text{ radial}
+\]
+
+\[
+M + \alpha_2\text{ axial}
+\]
+
+\[
+M + \text{observed circular}
+\]
+
+\[
+M + \text{learned circular}
+\]
+
+\[
+M + \text{relational}
+\]
+
+\[
+M + RA_{\text{all}}
+\]
+
+with exactly the same:
+
+- folds;
+- scaling;
+- logistic regression;
+- category labels;
+- evaluation metrics.
+
+No feature selection.
+
+No hyperparameter tuning.
+
+No permutation test yet.
+
+First measure the **family-wise incremental contribution over morphology**.
+
+Then, only for the strongest family-level effects, we decide whether a focused permutation control is scientifically necessary.
+
+That gives us the next question:
+
+\[
+\boxed{
+\text{What geometric component creates the observed complementarity?}
+}
+\]
+
+# 🟢 READY FOR CELL 10
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 10 Review — Dimension-Matched Control
+
+### Status
+
+# 🟢 CELL 10 PASSES — FREEZE IT
+
+Cell 10 answers an important reviewer objection cleanly:
+
+> **Could the improvement from morphology + radial–angular features simply arise because the model received 28 additional predictors?**
+
+The answer from this control is:
+
+\[
+\boxed{\text{No evidence that dimensional expansion alone explains the gain.}}
+\]
+
+The control is particularly clean because morphology + real RA and morphology + permuted RA both contain exactly 163 dimensions, while the permutation preserves the RA marginal distributions and destroys only sketch-level correspondence. :contentReference[oaicite:0]{index=0}
+
+---
+
+# 1. DIMENSION-MATCHED DESIGN
+
+The experiment compares:
+
+\[
+M
+\]
+
+against:
+
+\[
+M + RA_{\text{real}}
+\]
+
+and:
+
+\[
+M + RA_{\text{permuted}}
+\]
+
+with:
+
+\[
+\dim(M)=135
+\]
+
+and:
+
+\[
+\dim(M+RA)=135+28=163.
+\]
+
+Therefore Models B and C have identical predictor dimensionality.
+
+The crucial manipulation is:
+
+\[
+RA_i
+\rightarrow
+RA_{\pi(i)}
+\]
+
+for the control condition.
+
+This preserves:
+
+- 28 RA dimensions;
+- every individual RA feature distribution;
+- the RA population;
+- morphology;
+- labels;
+- classifier;
+- CV structure.
+
+But destroys:
+
+\[
+\boxed{
+\text{sketch}_i
+\leftrightarrow
+RA_i
+}
+\]
+
+The audit confirms that the maximum sorted-feature difference after permutation is exactly zero, so the marginal RA distributions were preserved exactly. :contentReference[oaicite:1]{index=1}
+
+---
+
+# 2. THE RESULT IS VERY CLEAN
+
+The three models produced:
+
+| Representation | Dimensions | Balanced Accuracy | Macro-F1 |
+|---|---:|---:|---:|
+| Morphology | 135 | 0.342609 | 0.341348 |
+| Morphology + real RA | 163 | **0.415652** | **0.412332** |
+| Morphology + permuted RA | 163 | 0.336957 | 0.337226 |
+
+:contentReference[oaicite:2]{index=2}
+
+Thus:
+
+\[
+\Delta F1_{\text{real}}
+=
+\boxed{+0.070984}
+\]
+
+whereas:
+
+\[
+\Delta F1_{\text{permuted}}
+=
+\boxed{-0.004121}.
+\]
+
+Likewise:
+
+\[
+\Delta BA_{\text{real}}
+=
+\boxed{+0.073043}
+\]
+
+versus:
+
+\[
+\Delta BA_{\text{permuted}}
+=
+\boxed{-0.005652}.
+\]
+
+:contentReference[oaicite:3]{index=3}
+
+That is exactly the pattern we wanted from this control.
+
+---
+
+# 3. WHAT CELL 10 RULES OUT
+
+A weak explanation for Cell 8/9 would have been:
+
+\[
+\text{more dimensions}
+\rightarrow
+\text{better classification}.
+\]
+
+Cell 10 directly challenges that explanation.
+
+Both augmented models have:
+
+\[
+163\text{ dimensions}.
+\]
+
+Yet:
+
+\[
+F1(M+RA_{\text{real}})
+=
+0.4123
+\]
+
+while:
+
+\[
+F1(M+RA_{\text{permuted}})
+=
+0.3372.
+\]
+
+The difference between those two dimension-matched models is approximately:
+
+\[
+0.412332-0.337226
+=
+\boxed{0.075106}.
+\]
+
+So the advantage is associated with **correct RA-to-sketch alignment**, not merely the existence of another 28 numerical coordinates.
+
+---
+
+# 4. THE FOLD-WISE RESULT MAKES THIS STRONGER
+
+Correctly aligned RA improves Macro-F1 in:
+
+\[
+\boxed{5/5\text{ folds}}.
+\]
+
+The gains are:
+
+\[
++0.08697,\;
++0.08257,\;
++0.04342,\;
++0.03239,\;
++0.10957.
+\]
+
+By contrast, permuted RA improves Macro-F1 in only:
+
+\[
+\boxed{2/5\text{ folds}},
+\]
+
+with fold-wise changes:
+
+\[
+-0.00860,\;
+-0.00924,\;
+-0.01984,\;
++0.00567,\;
++0.01140.
+\]
+
+:contentReference[oaicite:4]{index=4}
+
+Notice the scale as well.
+
+The largest positive permuted-RA gain is only about:
+
+\[
++0.0114,
+\]
+
+while the **smallest** real-RA gain is:
+
+\[
++0.0324.
+\]
+
+So there is not even fold-level overlap between the ranges of positive real-RA and positive permuted-RA improvements in this single control.
+
+That is a nice descriptive observation.
+
+Do not turn it into a separate statistical claim; the formal permutation analysis from Cell 8 remains the inferential evidence.
+
+---
+
+# 5. CELLS 8–10 NOW FORM A VERY GOOD CONTROL CHAIN
+
+The logic is becoming reviewer-resistant.
+
+## Cell 8
+
+Established:
+
+\[
+Performance(M+RA)>Performance(M).
+\]
+
+with a full row-permutation null.
+
+---
+
+## Cell 9
+
+Audited and visualized the complementarity result.
+
+---
+
+## Cell 10
+
+Tests the specific alternative explanation:
+
+> Maybe adding 28 predictors is sufficient.
+
+And shows:
+
+\[
+Performance(M+RA_{\text{real}})
+\gg
+Performance(M+RA_{\text{permuted}}).
+\]
+
+Therefore the evidence now supports:
+
+\[
+\boxed{
+\text{The downstream gain depends on sketch-aligned radial–angular information rather than dimensional expansion alone.}
+}
+\]
+
+That is a stronger and more precise statement than simply saying:
+
+> "RA improves classification."
+
+---
+
+# 6. IMPORTANT DISTINCTION: CELL 10 IS A CONTROL, NOT A SECOND PERMUTATION TEST
+
+Do not report Cell 10 as though it provides another permutation \(p\)-value.
+
+It uses one fixed row-permuted dimension-matched representation.
+
+Its role is:
+
+\[
+\boxed{\text{mechanistic control for dimensional expansion}}
+\]
+
+rather than:
+
+\[
+\boxed{\text{inferential permutation test}}.
+\]
+
+The inferential permutation evidence remains Cell 8:
+
+\[
+p_{\mathrm{perm}}=0.000999.
+\]
+
+This distinction will matter when writing Methods.
+
+---
+
+# 7. ONE SMALL NUMERICAL DIFFERENCE IS FINE — BUT DOCUMENT IT
+
+There is a tiny difference between the morphology-only result previously reported and Cell 10:
+
+Earlier:
+
+\[
+F1_M=0.341131
+\]
+
+Cell 10:
+
+\[
+F1_M=0.341348.
+\]
+
+Similarly, the Cell 10 real-RA increment is:
+
+\[
++0.070984
+\]
+
+rather than the previous:
+
+\[
++0.071201.
+\]
+
+This difference is tiny and does not affect the scientific conclusion.
+
+However, before manuscript freeze, we should identify exactly why the baseline differs slightly — for example whether Cell 10 regenerated CV predictions/model initialization rather than reusing the exact Cell 8 baseline object.
+
+Do **not** alter Cell 10 to force numerical agreement.
+
+Instead we should audit the computational provenance and select one canonical reported value set for the manuscript.
+
+---
+
+# 8. THE SCIENTIFIC WORDING IN CELL 10 IS CORRECT
+
+The current interpretation says that the result:
+
+> supports the interpretation that the downstream gain depends on sketch-level radial-angular correspondence rather than simply on adding 28 additional dimensions.
+
+That is exactly right. :contentReference[oaicite:5]{index=5}
+
+I would retain this wording almost unchanged.
+
+---
+
+# 9. CLAIM WE CAN NOW DEFEND
+
+A manuscript-level version could be:
+
+> **The incremental performance associated with radial–angular integration was not reproduced by a dimension-matched control in which the same 28 radial–angular features were randomly reassigned across sketches. Because row permutation preserved feature dimensionality and marginal distributions while disrupting sketch-level correspondence, the observed gain cannot be adequately attributed to dimensional expansion alone.**
+
+That is strong without overclaiming.
+
+---
+
+# 10. WHAT WE STILL CANNOT SAY
+
+Cell 10 does **not** establish:
+
+- statistical independence of morphology and RA;
+- information-theoretic uniqueness;
+- causality;
+- semantic garment-part recognition;
+- human-like understanding;
+- universal improvement across classifiers or datasets.
+
+And importantly:
+
+\[
+\boxed{
+\text{complementary}
+\neq
+\text{independent}
+}
+\]
+
+Cells 3–7 already demonstrate substantial cross-branch correspondence.
+
+Our actual result is more interesting:
+
+\[
+\boxed{
+\text{RA overlaps with morphology but is not downstream-redundant with it.}
+}
+\]
+
+Under the tested task, the aligned RA representation contributes useful structure beyond what the frozen morphology representation alone provides.
+
+---
+
+# 11. WHERE THE PAPER STORY NOW STANDS
+
+We now have a coherent chain:
+
+\[
+\text{Frozen quantitative morphology}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Radial–angular organization}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Cross-branch correspondence}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Partial recoverability}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Downstream complementarity}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{Permutation validation}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{\text{Dimension-matched control}}
+\]
+
+This is considerably stronger than presenting RA as simply another handcrafted descriptor family.
+
+---
+
+# 12. CELL 10 FINAL VERDICT
+
+# 🟢 FREEZE CELL 10
+
+The experiment answers the intended question.
+
+No tuning.
+
+No new classifier.
+
+No feature selection.
+
+No attempt to increase the effect.
+
+No modification of morphology.
+
+No modification of RA.
+
+The critical result is:
+
+\[
+\boxed{
+\Delta F1_{\text{real RA}}=+0.07098
+}
+\]
+
+versus:
+
+\[
+\boxed{
+\Delta F1_{\text{permuted RA}}=-0.00412
+}
+\]
+
+and:
+
+\[
+\boxed{
+5/5\text{ real-RA folds improve}
+}
+\]
+
+versus:
+
+\[
+\boxed{
+2/5\text{ permuted-RA folds improve}.
+}
+\]
+
+The dimension-only explanation therefore does not account for the observed complementarity. :contentReference[oaicite:6]{index=6}
+
+---
+
+# NEXT — CELL 11
+
+## RADIAL–ANGULAR DESCRIPTOR FAMILY ABLATION
+
+Now we finally open the 28-D RA representation.
+
+The question becomes:
+
+> **Which components of the radial–angular representation contribute to the complementarity effect?**
+
+Use the same frozen morphology baseline:
+
+\[
+M
+\]
+
+and independently evaluate:
+
+\[
+M+F_2
+\]
+
+\[
+M+\alpha_2
+\]
+
+\[
+M+\text{observed circular}
+\]
+
+\[
+M+\text{learned circular}
+\]
+
+\[
+M+\text{relational}
+\]
+
+and:
+
+\[
+M+RA_{\text{all}}.
+\]
+
+The frozen RA blocks already give us:
+
+| RA family | Dimensions |
+|---|---:|
+| \(F_2\) radial | 9 |
+| \(\alpha_2\) | 7 |
+| Observed circular | 3 |
+| Learned circular | 4 |
+| Relational | 5 |
+| **Total** | **28** |
+
+### Cell 11 should answer only three questions
+
+1. Does each family improve over the same morphology baseline?
+2. How large is its incremental Macro-F1 and balanced-accuracy contribution?
+3. Does the full 28-D representation outperform the individual families?
+
+Do **not** optimize family combinations yet.
+
+Do **not** select features.
+
+Do **not** run every possible subset.
+
+Do **not** tune the classifier.
+
+That would turn an explanatory ablation into data-driven feature searching.
+
+The clean scientific question is:
+
+\[
+\boxed{
+\text{Which predefined geometric families carry the complementary signal?}
+}
+\]
+
+# 🟢 READY FOR CELL 11
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 11 Review — Radial–Angular Descriptor Ablation / Sensitivity Audit
+
+### Status
+
+# 🟢 CELL 11 PASSES — AND THE RESULT IS IMPORTANT
+
+Cell 11 answers the intended question:
+
+> **Is the complementary downstream information discovered in Cells 8–10 carried mainly by one radial–angular descriptor family, or is it distributed across several predefined geometric components?**
+
+The result is clear:
+
+\[
+\boxed{
+\text{All five RA descriptor families individually improve Macro-F1 over morphology alone.}
+}
+\]
+
+But they do so by different amounts.
+
+More importantly:
+
+\[
+\boxed{
+\text{The full 28-D RA representation substantially outperforms every individual block.}
+}
+\]
+
+This argues against the entire complementarity result being merely a disguised \(F_2\) effect.
+
+The five frozen blocks and their dimensions were correctly recovered as \(9+7+3+4+5=28\). :contentReference[oaicite:0]{index=0}
+
+---
+
+# 1. BASELINE
+
+The frozen morphology representation gives:
+
+\[
+F1_M = 0.341348
+\]
+
+and:
+
+\[
+BA_M = 0.342609.
+\]
+
+This is the same Cell 10 baseline, which is exactly what we want for the ablation experiment.
+
+---
+
+# 2. COMPLETE ABLATION RESULT
+
+| Added representation | Dimensions | Macro-F1 | Δ Macro-F1 | Balanced Accuracy | Δ BA |
+|---|---:|---:|---:|---:|---:|
+| None — morphology only | 0 | 0.341348 | — | 0.342609 | — |
+| \(\alpha_2\) | 7 | 0.356369 | **+0.015021** | 0.357391 | +0.014783 |
+| Observed circular | 3 | 0.358571 | **+0.017224** | 0.359565 | +0.016957 |
+| Relational | 5 | 0.362158 | **+0.020810** | 0.364348 | +0.021739 |
+| Learned circular | 4 | 0.366776 | **+0.025428** | 0.368261 | +0.025652 |
+| \(F_2\) radial | 9 | 0.374476 | **+0.033128** | 0.377391 | +0.034783 |
+| **Full RA** | **28** | **0.412332** | **+0.070984** | **0.415652** | **+0.073043** |
+
+These values are directly reported by the Cell 11 ablation summary. :contentReference[oaicite:1]{index=1}
+
+---
+
+# 3. FIRST MAJOR RESULT — EVERY BLOCK HAS POSITIVE UTILITY
+
+Relative to the same morphology baseline:
+
+\[
+\Delta F1_{\alpha_2}=+0.0150
+\]
+
+\[
+\Delta F1_{\text{observed circular}}=+0.0172
+\]
+
+\[
+\Delta F1_{\text{relational}}=+0.0208
+\]
+
+\[
+\Delta F1_{\text{learned circular}}=+0.0254
+\]
+
+\[
+\Delta F1_{F_2}=+0.0331.
+\]
+
+Therefore there is no single descriptor family for which the mean result says:
+
+\[
+M+RA_k < M.
+\]
+
+Descriptively, every predefined RA family contributes some downstream utility.
+
+### But maintain the claim boundary
+
+Cell 11 contains **no permutation test** for individual blocks.
+
+Therefore we should say:
+
+> Each descriptor block produced a positive mean incremental performance.
+
+We should **not** yet say:
+
+> Every descriptor block independently provides statistically significant complementary information.
+
+Those are different statements.
+
+---
+
+# 4. SECOND MAJOR RESULT — \(F_2\) IS THE STRONGEST SINGLE FAMILY
+
+Among the individual blocks:
+
+\[
+\boxed{
+F_2\text{ radial}
+}
+\]
+
+produces the largest gain:
+
+\[
+\Delta F1=+0.033128
+\]
+
+and:
+
+\[
+\Delta BA=+0.034783.
+\]
+
+Its Macro-F1 rises from:
+
+\[
+0.341348
+\rightarrow
+0.374476.
+\]
+
+So \(F_2\)-based radial organization appears to be the strongest **single-block contributor** under this downstream task.
+
+That is scientifically interesting because it agrees with the earlier cross-branch results showing substantial relationships between morphology and \(F_2\)-derived quantities.
+
+But:
+
+\[
+\boxed{
+F_2 \neq \text{the entire RA effect}.
+}
+\]
+
+That distinction is crucial.
+
+---
+
+# 5. THIRD MAJOR RESULT — LEARNED CIRCULAR STRUCTURE IS SECOND
+
+The ranking is:
+
+\[
+F_2
+>
+\text{learned circular}
+>
+\text{relational}
+>
+\text{observed circular}
+>
+\alpha_2.
+\]
+
+Specifically:
+
+\[
+\Delta F1_{\text{learned circular}}
+=
++0.025428.
+\]
+
+That is approximately three-quarters of the isolated \(F_2\) gain:
+
+\[
+\frac{0.025428}{0.033128}
+\approx 0.77.
+\]
+
+So learned circular structure is not a negligible appendage to the representation.
+
+It carries substantial downstream signal on its own.
+
+---
+
+# 6. RELATIONAL DESCRIPTORS ALSO MATTER
+
+The 5-D relational block gives:
+
+\[
+\Delta F1=+0.020810.
+\]
+
+This is particularly useful conceptually.
+
+It suggests that the value of the RA representation is not confined to absolute radial or angular measurements.
+
+Descriptors expressing relationships between radial–angular quantities also improve the downstream representation.
+
+Again, Cell 11 supports this as a **descriptive ablation result**, not an independently permutation-validated claim.
+
+---
+
+# 7. OBSERVED AND LEARNED CIRCULAR DESCRIPTORS BOTH HELP
+
+Observed circular:
+
+\[
+\Delta F1=+0.017224
+\]
+
+Learned circular:
+
+\[
+\Delta F1=+0.025428.
+\]
+
+So both carry useful information.
+
+Interestingly:
+
+\[
+\Delta F1_{\text{learned}}
+>
+\Delta F1_{\text{observed}}.
+\]
+
+But we should **not** interpret that as proof that the learned circular representation is intrinsically superior.
+
+The two blocks have different dimensionalities:
+
+\[
+3 \quad \text{versus} \quad 4
+\]
+
+and Cell 11 was not designed as a controlled head-to-head statistical comparison between those two representations.
+
+The safe statement is simply:
+
+> Both circular descriptor families produced positive incremental downstream performance, with the learned circular block showing the larger mean gain in this experiment.
+
+---
+
+# 8. \(\alpha_2\) IS THE WEAKEST INDIVIDUAL BLOCK — BUT STILL POSITIVE
+
+\[
+\Delta F1_{\alpha_2}
+=
++0.015021.
+\]
+
+That is the smallest individual-block gain.
+
+But it is still positive:
+
+\[
+0.341348
+\rightarrow
+0.356369.
+\]
+
+Therefore we should not call \(\alpha_2\) "unimportant."
+
+The correct interpretation is:
+
+\[
+\boxed{
+\alpha_2\text{ has the smallest isolated downstream gain among the five tested blocks.}
+}
+\]
+
+That wording matters.
+
+---
+
+# 9. THE MOST IMPORTANT RESULT IS THE FULL REPRESENTATION
+
+Now compare the strongest single block:
+
+\[
+M+F_2:
+F1=0.374476
+\]
+
+against:
+
+\[
+M+RA_{\text{full}}:
+F1=0.412332.
+\]
+
+The full representation therefore exceeds the strongest individual block by:
+
+\[
+0.412332-0.374476
+=
+\boxed{0.037856}.
+\]
+
+That difference is actually larger than the entire isolated \(F_2\) gain over morphology:
+
+\[
+\Delta F1_{F_2}=0.033128.
+\]
+
+This is a very useful observation.
+
+The complementarity effect is therefore not concentrated entirely in the strongest descriptor family.
+
+---
+
+# 10. DO NOT ADD THE INDIVIDUAL Δ VALUES
+
+An important statistical point for the paper:
+
+\[
+0.033128
++
+0.025428
++
+0.020810
++
+0.017224
++
+0.015021
+\]
+
+does **not** represent the expected combined gain.
+
+The blocks can:
+
+- overlap;
+- interact;
+- share variance;
+- suppress one another;
+- provide conditional information.
+
+Therefore:
+
+\[
+\Delta_{\text{full}}
+\neq
+\sum_k\Delta_k.
+\]
+
+Cell 11 is a block sensitivity analysis, not an additive decomposition of performance.
+
+This distinction should explicitly appear in Methods or Supplementary Methods.
+
+---
+
+# 11. THE RESULT SUPPORTS DISTRIBUTED COMPLEMENTARITY
+
+The question posed by Cell 11 was whether utility was concentrated in one block or distributed across several. :contentReference[oaicite:2]{index=2}
+
+The evidence favors:
+
+\[
+\boxed{
+\text{distributed complementary utility}
+}
+\]
+
+rather than:
+
+\[
+\text{single-block dominance}.
+\]
+
+There **is** a strongest block:
+
+\[
+F_2.
+\]
+
+But all five predefined families have positive mean gains, and the full representation considerably exceeds \(F_2\) alone.
+
+The nuanced scientific interpretation is therefore:
+
+> **Radial–angular complementarity is distributed across multiple descriptor families, with \(F_2\)-based radial structure providing the strongest isolated contribution.**
+
+That is a very defensible statement.
+
+---
+
+# 12. THIS ALSO HELPS INTERPRET CELLS 3–7
+
+Earlier we established:
+
+\[
+\text{Morphology}
+\leftrightarrow
+\text{RA}
+\]
+
+cross-branch correspondence.
+
+Yet Cells 8–10 showed:
+
+\[
+M+RA>M.
+\]
+
+Cell 11 now tells us something deeper.
+
+The additional downstream utility does not appear to reside solely in one scalar property or one descriptor family.
+
+Instead, multiple components of radial–angular organization produce positive incremental effects.
+
+So our emerging representation-level picture is:
+
+\[
+\boxed{
+\text{shared structure}
++
+\text{distributed complementary geometry}
+}
+\]
+
+rather than either extreme:
+
+\[
+\text{RA completely redundant with morphology}
+\]
+
+or:
+
+\[
+\text{RA completely independent of morphology}.
+\]
+
+That middle result is scientifically much more credible.
+
+---
+
+# 13. ONE PARTICULARLY NICE INTERNAL CONSISTENCY
+
+The full RA result is again:
+
+\[
+F1=0.412332
+\]
+
+\[
+BA=0.415652.
+\]
+
+These exactly match Cell 10's real-RA results.
+
+Excellent.
+
+It means the full-RA reference condition has remained stable across the dimension-control and ablation experiments.
+
+The morphology baseline also matches Cell 10:
+
+\[
+F1=0.341348,
+\qquad
+BA=0.342609.
+\]
+
+So Cells 10 and 11 now form one internally consistent experimental unit.
+
+---
+
+# 14. REVIEWER-LEVEL CLAIM
+
+I would write the paper result approximately like this:
+
+> **Block-wise sensitivity analysis indicated that the complementary downstream utility of the radial–angular representation was distributed across multiple predefined descriptor families. Each individual block increased mean Macro-F1 relative to the frozen morphology baseline, with the \(F_2\)-radial block producing the largest isolated gain (\(\Delta\)Macro-F1 = +0.033). However, the complete 28-dimensional radial–angular representation produced a substantially larger gain (\(\Delta\)Macro-F1 = +0.071) than any individual block, indicating that the observed task-level complementarity was not concentrated in a single descriptor family.**
+
+That is strong and accurately bounded by the experiment.
+
+---
+
+# 15. ONE WORD I WOULD AVOID
+
+Do not say:
+
+> "Each component independently contributes information."
+
+Because "independently" is too strong.
+
+We did not condition each block on all the other blocks.
+
+Instead say:
+
+> **Each block produced positive incremental performance when added individually to morphology.**
+
+And:
+
+> **Complementary utility was distributed across multiple descriptor families.**
+
+Those statements match the experiment exactly.
+
+---
+
+# 16. CELL 11 FINAL VERDICT
+
+# 🟢 FREEZE CELL 11
+
+No need for:
+
+- all \(2^5-1=31\) block combinations;
+- feature selection;
+- classifier tuning;
+- optimization of RA subsets;
+- post-hoc descriptor engineering.
+
+Doing those now would weaken the clean hypothesis-driven structure of the experiment.
+
+The predefined ablation has already answered the scientific question.
+
+The experiment itself also explicitly records that there was no feature modification, new representation learning, permutation test, classifier change, or provenance change. :contentReference[oaicite:3]{index=3}
+
+---
+
+# MORPHOLOGY ↔ RA: CURRENT EVIDENCE CHAIN
+
+We can now summarize the backbone as:
+
+\[
+\boxed{
+\text{Cell 1–2A: provenance}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Cell 3: feature-level association}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Cell 4: partial morphology recoverability}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Cell 6: permutation-validated cross-branch correspondence}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Cells 8–9: downstream complementarity}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Cell 10: not explained by dimensional expansion alone}
+}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\boxed{
+\text{Cell 11: complementary utility distributed across RA families}
+}
+\]
+
+This is now a coherent experimental argument rather than a collection of feature analyses.
+
+---
+
+# NEXT — CELL 12
+
+## FINAL CROSS-BRANCH EVIDENCE SYNTHESIS
+
+I would **not introduce another model in Cell 12**.
+
+Cell 12 should be an audit/synthesis cell.
+
+It should automatically collect the frozen numerical results from Cells 3, 4, 6, 8/9, 10 and 11 and generate one final evidence table containing:
+
+| Scientific question | Evidence | Primary statistic | Result | Claim level |
+|---|---|---|---|---|
+| Are morphology and RA associated? | Cell 3 | Spearman \(\rho\) | Yes | Association |
+| Can morphology recover RA structure? | Cells 4/6 | CV \(R^2\) | Partially | Correspondence |
+| Is correspondence above chance? | Cell 6 | permutation \(p\) | Yes | Validated correspondence |
+| Does RA improve morphology downstream? | Cell 8 | \(\Delta\)Macro-F1 | +0.071 | Complementarity |
+| Is improvement permutation-valid? | Cell 8 | \(p=0.000999\) | Yes | Reproducible complementarity |
+| Is gain merely dimensional expansion? | Cell 10 | real vs permuted RA | No | Dimension-control |
+| Is utility confined to one RA family? | Cell 11 | block ablation | No | Distributed sensitivity |
+
+And Cell 12 should end with exactly two scientific claims:
+
+### Primary
+
+\[
+\boxed{
+\text{Fashion-sketch morphology exhibits measurable quantitative organization.}
+}
+\]
+
+### Secondary
+
+\[
+\boxed{
+\text{Radial–angular geometry is related to, but not downstream-redundant with, the frozen morphology representation under the tested task.}
+}
+\]
+
+That is where I would close **Morphology_RadialAngular_Integration**.
+
+No more experiments unless Cell 12 exposes an actual unresolved methodological problem.
+
+# CLO-SKET — MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION
+## Cell 12 Final Review — Cross-Branch Evidence Synthesis
+
+### Final status
+
+# 🟢 FREEZE CELL 12
+# 🟢 FREEZE THE MORPHOLOGY ↔ RADIAL–ANGULAR INTEGRATION BRANCH
+# 🛑 NO FURTHER EXPERIMENT IS JUSTIFIED FROM THE CURRENT EVIDENCE CHAIN
+
+Cell 12 does what the final synthesis cell should do.
+
+It introduces:
+
+- no new model;
+- no new statistical test;
+- no feature modification;
+- no new representation;
+- no new threshold;
+- no post-hoc optimization.
+
+Instead, it consolidates the already established evidence into a logically ordered claim structure.
+
+That is the correct point to stop experimental expansion.
+
+---
+
+# 1. THE CENTRAL RESULT IS NOW MUCH CLEARER
+
+The strongest result of this branch is **not**:
+
+> radial–angular features classify garment sketches.
+
+Nor is it:
+
+> morphology and radial–angular geometry are independent.
+
+The evidence supports something more precise:
+
+\[
+\boxed{
+\text{Morphology and radial–angular geometry overlap measurably,
+but the radial–angular representation retains reproducible
+downstream utility beyond the frozen morphology representation.}
+}
+\]
+
+That distinction is the backbone of this entire integration experiment.
+
+---
+
+# 2. THE EVIDENCE CHAIN IS NOW COMPLETE
+
+## Stage A — Observation identity
+
+Cell 2A established:
+
+\[
+X_{\text{morph}}[i]
+\leftrightarrow
+X_{\text{RA}}[i]
+\]
+
+for every:
+
+\[
+i=1,\ldots,2300.
+\]
+
+Therefore all subsequent cross-branch comparisons operate on the same sketches.
+
+### Claim level
+
+**Provenance.**
+
+Nothing more.
+
+---
+
+# 3. MORPHOLOGY AND RADIAL–ANGULAR GEOMETRY ARE ASSOCIATED
+
+Cell 3 established extensive feature-level associations between coordinates of the frozen 135-D morphology representation and radial–angular quantities.
+
+But Cell 3 alone does **not** establish:
+
+- redundancy;
+- complementarity;
+- prediction;
+- causality;
+- semantics.
+
+Its role is simply:
+
+\[
+\boxed{
+M \leftrightarrow RA
+}
+\]
+
+at the association level.
+
+That distinction was correctly preserved throughout the later cells.
+
+---
+
+# 4. MORPHOLOGY CAN PARTIALLY RECOVER RA QUANTITIES
+
+Cell 4 provides a particularly useful quantitative result.
+
+The frozen morphology representation predicts:
+
+| RA quantity | CV \(R^2\) |
+|---|---:|
+| \(F_2\) peak magnitude | **0.2961** |
+| \(F_2\) peak radius | **0.0594** |
+| observed \(R_2\) | **0.2170** |
+| axial recovery error | **0.1979** |
+
+This is a very interesting pattern.
+
+Morphology explains some radial–angular variation, but nowhere close to all of it.
+
+For example:
+
+\[
+R^2_{F_2\ magnitude}=0.296
+\]
+
+means substantial correspondence exists, while substantial unexplained variation remains.
+
+Likewise:
+
+\[
+R^2_{R_2}=0.217.
+\]
+
+So we do **not** have:
+
+\[
+M \perp RA
+\]
+
+but we also do **not** have evidence that:
+
+\[
+RA=f(M)
+\]
+
+in any exhaustive sense.
+
+The correct interpretation remains:
+
+\[
+\boxed{
+\text{partial cross-representational recoverability}.
+}
+\]
+
+---
+
+# 5. CELL 6 MAKES THE CORRESPONDENCE MUCH STRONGER
+
+The row-permutation experiment is critical because it tests whether the observed morphology → RA predictability could arise after destroying sketch-level correspondence.
+
+For all four targets:
+
+\[
+R^2_{\text{observed}}
+>
+R^2_{\text{permutation null}}.
+\]
+
+Most strikingly:
+
+| Target | Observed \(R^2\) | Null mean |
+|---|---:|---:|
+| \(F_2\) magnitude | +0.2961 | -0.0965 |
+| \(F_2\) radius | +0.0594 | -0.0985 |
+| \(R_2\) | +0.2170 | -0.0956 |
+| axial error | +0.1979 | -0.0952 |
+
+All observed results were at the:
+
+\[
+100^{th}
+\]
+
+permutation percentile.
+
+With 100 permutations:
+
+\[
+p_{\mathrm{empirical}}
+=
+\frac{1}{101}
+=
+0.009901.
+\]
+
+### Therefore
+
+\[
+\boxed{
+\text{Morphology ↔ radial–angular correspondence is reproducible
+and sketch-specific under the tested permutation procedure.}
+}
+\]
+
+This is substantially stronger than Cell 3's correlation evidence.
+
+---
+
+# 6. THEN COMES THE KEY COMPLEMENTARITY RESULT
+
+Cells 8–9 move from correspondence to the question that matters most:
+
+> Does RA still help when morphology is already available?
+
+The answer is yes.
+
+### Macro-F1
+
+\[
+0.341348
+\rightarrow
+0.412332
+\]
+
+giving:
+
+\[
+\boxed{
+\Delta F1=+0.070984
+}
+\]
+
+### Balanced accuracy
+
+\[
+0.342609
+\rightarrow
+0.415652
+\]
+
+giving:
+
+\[
+\boxed{
+\Delta BA=+0.073043
+}
+\]
+
+That is not a trivial numerical change.
+
+Relative to the morphology-only Macro-F1:
+
+\[
+\frac{0.070984}{0.341348}
+\approx 20.8\%.
+\]
+
+So the absolute improvement is approximately **0.071 Macro-F1**, corresponding descriptively to about a **20.8% relative increase over the morphology-only baseline**.
+
+For the manuscript, however, I would emphasize the absolute gain rather than the relative percentage.
+
+---
+
+# 7. CELL 10 CLOSES AN OBVIOUS REVIEWER OBJECTION
+
+A reviewer could immediately argue:
+
+> Of course performance improved. You added another 28 dimensions.
+
+That objection had to be tested.
+
+Cell 10 therefore has an important methodological role:
+
+\[
+\text{real RA augmentation}
+\]
+
+versus an appropriate dimension-matched control.
+
+The resulting interpretation is:
+
+\[
+\boxed{
+\text{The improvement cannot be adequately attributed merely
+to increasing predictor dimensionality under the tested control.}
+}
+\]
+
+Notice the wording:
+
+### Say
+
+> **not adequately explained by dimensional expansion alone under the tested control.**
+
+### Do not say
+
+> dimensionality has absolutely no influence.
+
+The first follows from the experiment.
+
+The second would overclaim.
+
+---
+
+# 8. CELL 11 THEN ANSWERS THE SECOND OBVIOUS REVIEWER QUESTION
+
+Suppose the reviewer accepts complementarity but asks:
+
+> Isn't the whole result simply coming from \(F_2\)?
+
+Cell 11 gives the answer.
+
+### Individual block gains
+
+\[
+F_2:
++0.033128
+\]
+
+\[
+\text{learned circular}:
++0.025428
+\]
+
+\[
+\text{relational}:
++0.020810
+\]
+
+\[
+\text{observed circular}:
++0.017224
+\]
+
+\[
+\alpha_2:
++0.015021.
+\]
+
+And:
+
+\[
+\text{Full RA}:
++0.070984.
+\]
+
+Thus:
+
+\[
+\boxed{
+\Delta_{\text{full RA}}
+>
+\Delta_k
+\quad
+\forall k.
+}
+\]
+
+The previous Cell 11 output confirms that the full representation has the largest Macro-F1 gain and that \(F_2\) is the strongest individual block. :contentReference[oaicite:0]{index=0}
+
+Therefore:
+
+\[
+\boxed{
+\text{The observed RA utility is not concentrated entirely in one descriptor family.}
+}
+\]
+
+That is a valuable structural result.
+
+---
+
+# 9. PUTTING EVERYTHING TOGETHER
+
+We now have:
+
+\[
+\text{same observations}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+M \leftrightarrow RA
+\]
+
+\[
+\downarrow
+\]
+
+\[
+M \rightarrow RA
+\quad
+\text{partially predictable out-of-sample}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{prediction}>\text{row-permutation null}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+M+RA>M
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{gain not adequately explained by dimensional expansion}
+\]
+
+\[
+\downarrow
+\]
+
+\[
+\text{gain distributed across multiple RA descriptor families}.
+\]
+
+This is a coherent scientific chain.
+
+---
+
+# 10. WHAT THE RESULT ACTUALLY SAYS ABOUT THE TWO REPRESENTATIONS
+
+The evidence argues against two simplistic interpretations.
+
+## Interpretation A — Completely redundant
+
+\[
+RA \approx M
+\]
+
+If this were sufficient to describe the relationship, we would have little reason to expect the reproducible downstream improvement after morphology was already supplied.
+
+The downstream experiment argues against treating RA as merely a useless duplicate of morphology.
+
+---
+
+## Interpretation B — Completely independent
+
+\[
+RA \perp M
+\]
+
+That is also inconsistent with the results.
+
+Morphology predicts several RA quantities out-of-sample, and Cell 6 shows that this correspondence disappears under sketch-level permutation.
+
+So the scientifically interesting region is between those extremes:
+
+\[
+\boxed{
+\text{overlapping but complementary representations}.
+}
+\]
+
+This should become one of the central conceptual statements of the paper.
+
+---
+
+# 11. ONE CLAIM IN CELL 12 I WOULD SLIGHTLY TIGHTEN
+
+Cell 12 currently says:
+
+> **The 135-D representation provides a measurable quantitative morphology description of the 2300 sketches.**
+
+This is reasonable, but I would make it even more empirical:
+
+> **The frozen 135-D representation provides a reproducible quantitative description of sketch morphology across the 2300-image population.**
+
+Or, even more conservatively:
+
+> **The frozen 135-D representation quantifies predefined occupancy and global morphology properties across the 2300 sketches.**
+
+I prefer the second version.
+
+Why?
+
+Because it says exactly what the 135 dimensions actually contain without implicitly claiming that they exhaustively describe "morphology."
+
+---
+
+# 12. I WOULD ALSO TIGHTEN CLAIM 5
+
+Current:
+
+> The complementary downstream utility is not confined to a single radial-angular descriptor block.
+
+Good.
+
+But the manuscript version should be:
+
+> **Positive mean downstream gains were observed for each predefined radial–angular descriptor block when added individually to morphology, while the complete 28-D representation exceeded every single-block addition.**
+
+That statement directly mirrors the ablation design.
+
+Remember that Cell 11 itself explicitly states that it is a sensitivity/ablation analysis and does not establish information-theoretic independence or causal importance. :contentReference[oaicite:1]{index=1}
+
+---
+
+# 13. FINAL PAPER CLAIM HIERARCHY
+
+I would now lock the cross-branch paper claims at three levels.
+
+## LEVEL 1 — Representation result
+
+\[
+\boxed{
+\text{Garment sketches can be quantitatively characterized
+through complementary morphology and radial–angular measurements.}
+}
+\]
+
+---
+
+## LEVEL 2 — Cross-representation result
+
+\[
+\boxed{
+\text{Morphology and radial–angular organization exhibit
+reproducible sketch-level correspondence.}
+}
+\]
+
+Evidence:
+
+- Cell 3 associations;
+- Cell 4 cross-validated prediction;
+- Cell 6 permutation validation.
+
+---
+
+## LEVEL 3 — Strongest integration result
+
+\[
+\boxed{
+\text{Radial–angular geometry provides reproducible downstream
+utility beyond the frozen morphology representation under
+the tested 23-category discrimination task.}
+}
+\]
+
+Evidence:
+
+- Cells 8–9 complementarity;
+- Cell 10 dimension control;
+- Cell 11 ablation.
+
+This is the strongest claim of this branch.
+
+---
+
+# 14. WHAT WE ABSOLUTELY DO NOT SAY
+
+The final manuscript should never convert:
+
+\[
+\text{complementarity}
+\]
+
+into:
+
+\[
+\text{independence}.
+\]
+
+Nor:
+
+\[
+\text{classification utility}
+\]
+
+into:
+
+\[
+\text{semantic understanding}.
+\]
+
+Nor:
+
+\[
+\text{quantitative organization}
+\]
+
+into:
+
+\[
+\text{morphological grammar}.
+\]
+
+Nor:
+
+\[
+\text{structured representation}
+\]
+
+into:
+
+\[
+\text{manifold}
+\]
+
+unless a manifold has actually been defined and tested.
+
+So Cell 12's red-list is scientifically valuable and should survive into our manuscript claim audit.
+
+---
+
+# 15. THE BACKBONE OF THE PAPER IS NOW VISIBLE
+
+We began with two quantitative views of the sketches:
+
+\[
+\boxed{\text{Morphology}}
+\]
+
+and:
+
+\[
+\boxed{\text{Radial–Angular Geometry}}.
+\]
+
+The experiments now support:
+
+\[
+\boxed{
+\text{Morphology}
+\longleftrightarrow
+\text{Radial–Angular Organization}
+}
+\]
+
+with:
+
+\[
+\text{measurable overlap}
+\]
+
+but also:
+
+\[
+\text{non-redundant downstream utility}.
+\]
+
+That is considerably more interesting than simply saying:
+
+> "Our handcrafted features improve classification."
+
+The classification task is serving as a **controlled probe of representational complementarity**, not as the scientific endpoint.
+
+That distinction should shape the manuscript.
+
+---
+
+# 16. FINAL DECISION
+
+## 🟢 Freeze Cells 1–12
+
+I would now consider:
+
+# `CLO_SKET_31_Morphology_RadialAngular_Integration`
+
+**experimentally complete.**
+
+Do not add:
+
+- another classifier;
+- nonlinear models;
+- hyperparameter searches;
+- more RA descriptors;
+- more morphology descriptors;
+- all 31 ablation combinations;
+- feature-selection experiments;
+- another arbitrary downstream task.
+
+Every additional experiment needs a specific unresolved scientific question.
+
+At present, this branch has answered the questions it was designed to answer.
+
+---
+
+# 17. WHAT COMES NEXT
+
+We should **not immediately start writing Discussion prose**.
+
+The next step should be a manuscript-level **global evidence architecture**, because we now have at least two major experimental branches:
+
+1. the radial–angular recovery analysis;
+2. the morphology ↔ radial–angular integration analysis.
+
+Before writing Results, we should put their claims beside one another and determine:
+
+\[
+\text{main result}
+\rightarrow
+\text{supporting result}
+\rightarrow
+\text{robustness}
+\rightarrow
+\text{boundary}.
+\]
+
+Then we can decide what belongs in:
+
+- main Figures;
+- main Tables;
+- Supplementary;
+- Results;
+- Discussion;
+- Limitations.
+
+## So the next artifact I recommend is:
+
+# `CLO-SKET — MASTER EVIDENCE MATRIX`
+
+Not another notebook experiment.
+
+That matrix will combine the frozen evidence from the whole paper and tell us exactly what the paper can claim before we begin manuscript writing.
+
+# CLO-SKET — FINAL EXPERIMENT CHECKPOINT REVIEW
+
+## 🟢 CHECKPOINT ACCEPTED
+
+This is the correct place to close the experimental phase.
+
+The frozen directory now contains the essential evidence needed to reconstruct and audit the final radial–angular / morphology integration results:
+
+- `CLO_SKET_RADIAL_ANGULAR_FINAL_CHECKPOINT.pkl`
+- `CLO_SKET_FINAL_EVIDENCE_LEDGER.csv`
+- `CLO_SKET_FINAL_DECISION.json`
+- `CLO_SKET_CELL11_ABLATION_SUMMARY.csv`
+- `CLO_SKET_CELL6_CORRESPONDENCE_RESULTS.csv`
+- `CLO_SKET_CELL4_RECOVERY_RESULTS.csv`
+
+---
+
+# EXPERIMENTAL STATUS
+
+\[
+\boxed{\text{EXPERIMENTAL PHASE = CLOSED}}
+\]
+
+From this point onward, the frozen results should be treated as the evidential record of the experiment.
+
+Do **not** modify the frozen representations or rerun analyses simply because a different result might be preferable.
+
+Any genuinely necessary future analysis should be:
+
+1. motivated by a specific reviewer or scientific question;
+2. implemented as a new version or supplementary experiment;
+3. kept separate from this frozen checkpoint.
+
+---
+
+# WHAT WE HAVE NOW ESTABLISHED
+
+The completed evidence chain supports three distinct levels of result.
+
+## 1. Radial–angular recovery
+
+Across the 2300-sketch population, radial–angular organization is measurably recovered with non-uniform reliability.
+
+The recovery analysis established associations between angular recovery and:
+
+- observed circular strength \(R_2\);
+- \(F_2\) peak magnitude;
+- \(F_2\) peak radius.
+
+It also established that angular orientation recovery and circular-strength recovery should not be treated as identical phenomena.
+
+---
+
+## 2. Cross-representation correspondence
+
+The frozen 135-D morphology representation and the independently derived radial–angular representation exhibit reproducible sketch-level correspondence.
+
+Morphology partially predicts:
+
+\[
+F_2\text{ magnitude},
+\quad
+F_2\text{ radius},
+\quad
+R_2,
+\quad
+\text{axial recovery error}.
+\]
+
+The row-permutation analysis establishes that this correspondence is stronger than expected after destroying sketch-level alignment.
+
+---
+
+## 3. Downstream complementarity
+
+This is the strongest integration result:
+
+\[
+F1_{\text{morphology}}
+=
+0.341348
+\]
+
+versus
+
+\[
+F1_{\text{morphology+RA}}
+=
+0.412332
+\]
+
+giving:
+
+\[
+\boxed{\Delta F1=+0.070984}
+\]
+
+and:
+
+\[
+BA_{\text{morphology}}
+=
+0.342609
+\]
+
+versus:
+
+\[
+BA_{\text{morphology+RA}}
+=
+0.415652
+\]
+
+giving:
+
+\[
+\boxed{\Delta BA=+0.073043}.
+\]
+
+The subsequent controls show that this effect is not adequately explained by dimensional expansion alone under the tested control and is not confined to a single radial–angular descriptor block.
+
+---
+
+# FINAL REPRESENTATIONAL INTERPRETATION
+
+The evidence does **not** support either extreme:
+
+\[
+RA \equiv M
+\]
+
+or:
+
+\[
+RA \perp M.
+\]
+
+Instead, the experimentally supported picture is:
+
+\[
+\boxed{
+\text{Morphology}
+\;\longleftrightarrow\;
+\text{Radial–Angular Geometry}
+}
+\]
+
+with:
+
+\[
+\boxed{\text{measurable correspondence}}
+\]
+
+together with:
+
+\[
+\boxed{\text{reproducible downstream complementarity}}.
+\]
+
+That is the scientifically interesting result.
+
+---
+
+# CLAIM BOUNDARY REMAINS LOCKED
+
+### Supported
+
+- quantitative characterization of predefined sketch morphology;
+- measurable radial–angular organization;
+- sketch-level morphology ↔ radial–angular correspondence;
+- partial cross-representation recoverability;
+- permutation-validated correspondence;
+- downstream radial–angular complementarity under the tested 23-category task;
+- dimension-control evidence;
+- distributed descriptor-block utility.
+
+### Not established
+
+- semantic garment-part recognition;
+- human-like understanding;
+- causal morphology;
+- information-theoretic independence;
+- a mathematical manifold;
+- a morphology grammar;
+- universal garment morphology categories.
+
+---
+
+# 🔒 FREEZE DECISION
+
+## `CLO_SKET_31_Morphology_RadialAngular_Integration`
+
+### Status: **FROZEN**
+
+No more cells should be added to this experimental notebook.
+
+No result should now be optimized.
+
+No descriptor should be selected because it improves the final story.
+
+No classifier should be changed to increase performance.
+
+No threshold should be adjusted after seeing these results.
+
+The experimental record is complete.
+
+---
+
+# NEXT PHASE — MASTER EVIDENCE MATRIX
+
+We now leave:
+
+\[
+\boxed{\text{EXPERIMENTATION}}
+\]
+
+and enter:
+
+\[
+\boxed{\text{SCIENTIFIC SYNTHESIS}}
+\]
+
+The next document should integrate the entire CLO-SKET evidence chain—not merely this notebook—into one reviewer-facing matrix:
+
+| ID | Scientific question | Experiment | Evidence | Statistic | Robustness/control | Supported claim | Claim boundary | Manuscript role |
+|---|---|---|---|---|---|---|---|---|
+| E01 | Is morphology quantitatively measurable? | Morphology branch | Frozen 135-D representation | — | provenance/integrity | quantitative morphology description | not exhaustive morphology | Methods/Results |
+| E02 | Is radial-angular organization recoverable? | Cells 30C–30L | recovery population | error, \(R_2\), \(F_2\) | bootstrap + thresholds | measurable recovery | not semantic recovery | Results |
+| E03 | Does organization relate to recovery reliability? | Cell 30I | \(R_2\) vs axial error | \(\rho=-0.4794\) | bootstrap CI | stronger organization associated with lower error | observational | Results |
+| E04 | Are morphology and RA related? | Cells 3–6 | cross-branch prediction | CV \(R^2\) | row permutation | reproducible correspondence | not independence | Results |
+| E05 | Does RA add downstream utility? | Cells 8–9 | morphology vs morphology+RA | \(\Delta F1=+0.071\) | permutation | complementarity | task-specific | Main Result |
+| E06 | Is the gain just extra dimensions? | Cell 10 | dimension control | controlled Δ | matched control | simple dimensional expansion insufficient | control-specific | Robustness |
+| E07 | Is one RA block responsible? | Cell 11 | block ablation | blockwise ΔF1 | predefined blocks | utility distributed across blocks | no blockwise significance claim | Robustness |
+
+Once that master matrix is built, **then** we design the Results architecture.
+
+That is the right transition now.
+
+# 🟢 EXPERIMENTS CLOSED  
+# 🔒 EVIDENCE FROZEN  
+# ➜ NEXT: `CLO_SKET_MASTER_EVIDENCE_MATRIX`
