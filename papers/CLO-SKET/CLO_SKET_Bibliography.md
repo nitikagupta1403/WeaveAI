@@ -10,6 +10,8 @@ Bookstein, F. L. (1997). Landmark methods for forms without landmarks: Morphomet
 
 Fondevilla, A., Rohmer, D., Hahmann, S., Bousseau, A., & Cani, M.-P. (2021). Fashion transfer: Dressing 3D characters from stylized fashion sketches. *Computer Graphics Forum, 40*(6), 466–483. https://doi.org/10.1111/cgf.14390
 
+Jammalamadaka, S. R., & SenGupta, A. (2001). *Topics in circular statistics*. World Scientific. https://doi.org/10.1142/4031
+
 McCane, B. (2013). Shape variation in outline shapes. *Systematic Biology, 62*(1), 134–146. https://doi.org/10.1093/sysbio/sys080
 
 Oh, J., & Kim, S. (2026). Generation of body-fit garment patterns using a landmark matching algorithm. *Clothing and Textiles Research Journal, 44*(1), 75–92. https://doi.org/10.1177/0887302X251340652
@@ -20,24 +22,31 @@ Wang, T. Y., Ceylan, D., Popović, J., & Mitra, N. J. (2018). Learning a shared 
 
 Yasseen, Z., Nasri, A. H., Boukaram, W., Volino, P., & Magnenat-Thalmann, N. (2013). Sketch-based garment design with quad meshes. *Computer-Aided Design, 45*(2), 562–567. https://doi.org/10.1016/j.cad.2012.10.041
 
+Zahn, C. T., & Roskies, R. Z. (1972). Fourier descriptors for plane closed curves. *IEEE Transactions on Computers, C-21*(3), 269–281. https://doi.org/10.1109/TC.1972.5008949
+
 ## Claim-to-citation map
 
 | Manuscript claim | Citation(s) | Use |
 |---|---|---|
-| CLO-SKET contains 2,300 sketches generated from 230 source photographs across 23 subcategories | Arnia (2020) | Methods §3.2; dataset provenance |
+| CLO-SKET contains 2,300 sketches derived from 230 garment identities across 23 categories | Arnia (2020) | Methods; dataset provenance |
 | Fashion-flat contours can support explicit descriptor-based classification | An & Li (2014) | Introduction; Related Work §2.2 |
 | Drawn garment boundaries can constrain simulation-ready quad meshes | Yasseen et al. (2013) | Introduction; Related Work §2.1 |
 | Stylized fashion sketches can drive garment transfer to 3D characters | Fondevilla et al. (2021) | Introduction; Related Work §2.1 |
 | Sketches, sewing patterns, body shape, and simulated garments can be linked in a learned shared space | Wang et al. (2018) | Introduction; Related Work §2.1 |
 | Garment-silhouette populations can be analysed using explicit measurements and multivariate organization | Tsuru et al. (2021) | Related Work §2.2 |
-| Curves lacking fixed homologous landmarks can enter quantitative shape analysis through semilandmark methods | Bookstein (1997) | Related Work §2.3 |
-| Complete outlines can be compared without fixed point correspondence and embedded in a low-dimensional space | McCane (2013) | Related Work §2.3 |
-| Polar coordinates have precedent for parameterizing garment-pattern geometry | Oh & Kim (2026) | Introduction radial–angular motivation |
+| Curves and outlines admit quantitative shape analysis beyond fixed landmarks | Bookstein (1997); McCane (2013) | Related Work §2.2; conceptual alternatives |
+| Fourier coefficients provide harmonic descriptors of periodic shape signals | Zahn & Roskies (1972) | Related Work §2.2 |
+| Axial orientations are represented by doubled angles and interpreted modulo π | Jammalamadaka & SenGupta (2001) | Related Work §2.3; Methods |
+| Polar coordinates have precedent for parameterizing garment-pattern geometry | Oh & Kim (2026) | Introduction; Related Work §2.3 |
 
-## Citation boundaries
+## Citation and claim boundaries
 
-- Cite these papers for prior methods and motivating precedent, not as evidence for the present CLO-SKET results.
-- Do not describe the 135-D representation as conventional geometric morphometrics; it is an explicit image-derived morphology representation.
-- Do not imply that Oh and Kim used the present 28-D radial–angular descriptor. Their paper supports only the narrower precedent for polar garment-pattern parameterization.
+- Cite these works for methodological precedent, not as evidence for the present CLO-SKET results.
+- The audited primary representation is 14-D: 8 F2-family features plus 6 alpha2-family features.
+- Do not describe the present representation as conventional geometric morphometrics.
+- Do not imply that Oh and Kim used the present conditional angular distribution or 14-D descriptor; their work supports only the narrower precedent for polar garment-pattern parameterization.
+- Do not imply that Zahn and Roskies used the present shell-conditioned second harmonic; their work supports the broader precedent for Fourier shape description.
+- Do not imply that Jammalamadaka and SenGupta justify a fitted von Mises model here. CLO-SKET uses doubled-angle axial moments without fitting a circular probability distribution.
 - Do not cite Wang et al. as population-level morphology analysis; it is a multimodal garment-design model.
-- Do not use the literature to claim novelty in Fourier descriptors, PCA, multivariate shape analysis, polar coordinates, or garment sketch modelling individually.
+- Do not claim novelty in Fourier descriptors, polar coordinates, circular statistics, or garment-sketch modelling individually.
+- Do not reintroduce PCA, the historical 28-D family assembly, the 135-D morphology study, classifier complementarity, semantic recognition, or causal/physical interpretation into the audited manuscript.
