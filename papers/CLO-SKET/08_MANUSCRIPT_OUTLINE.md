@@ -1,1090 +1,746 @@
-# CLO-SKET — Manuscript Outline
+# CLO-SKET — Final Manuscript Outline
 
-## 0. Working Manuscript Identity
+## 0. Manuscript identity
 
-### Working title
+### Preferred title
 
-**Quantitative Organization of Garment Sketch Morphology through
-Complementary Geometric Representations**
+**Quantitative Organization of Garment-Sketch Morphology through Complementary Geometric Representations**
 
-### Alternative title
+### Alternative titles
 
-**Quantitative Morphology and Radial–Angular Geometry in Garment Sketches**
+1. **Explicit Morphology and Radial–Angular Geometry in Garment Sketches**
+2. **Identity-Aware Evaluation of Complementary Geometric Representations for Garment Sketches**
+3. **Quantitative Garment-Sketch Morphology under Source-Identity-Disjoint Evaluation**
 
-### Current preferred title
+### Title boundary
 
-**Quantitative Organization of Garment Sketch Morphology through
-Complementary Geometric Representations**
-
-The title deliberately avoids:
+The title must not claim:
 
 - semantic language;
-- morphology grammar;
-- morphology manifold;
-- universal morphology;
-- semantic primitives.
-
-Those claims are not established by the current evidence.
-
----
-
-# 1. Central Scientific Question
-
-The manuscript asks:
-
-> Can garment sketches be characterized as a quantitatively organized
-> population using an explicit morphology representation, and does an
-> independently constructed radial–angular representation reveal
-> complementary geometric information?
-
-This is the central question.
-
-All experiments should serve this question.
+- morphology primitives;
+- a morphology grammar;
+- a mathematical manifold;
+- independent information; or
+- universal garment morphology.
 
 ---
 
-# 2. Central Scientific Claim
+## 1. Central scientific question
 
-The manuscript's central claim is:
+> Can garment sketches be represented as a quantitatively organized population using explicit image-derived morphology measurements, and does a separately constructed radial–angular description provide additional task-relevant structure under source-garment-identity-disjoint evaluation?
 
-> Garment sketches exhibit reproducible quantitative geometric
-> organization that can be characterized using explicit morphology
-> measurements, while an independently constructed radial–angular
-> representation captures related but non-identical structure and
-> provides additional task-level utility.
+This question contains three linked but distinct components:
 
-This claim has two levels.
+1. **Organization:** Does the explicit morphology representation exhibit reproducible population-level quantitative structure?
+2. **Overlap:** Which radial–angular quantities are associated with and recoverable from morphology across unseen source identities?
+3. **Complementarity:** Does integrating radial–angular geometry improve downstream discrimination beyond morphology alone when complete source garments are withheld?
+
+A fourth control question constrains the mechanism:
+
+4. **Alignment:** Does the integrated advantage depend on the exact morphology–radial–angular pairing of each held-out sketch?
+
+---
+
+## 2. Central scientific claim
+
+The strongest supported claim is:
+
+> Across source-garment-identity-disjoint evaluation, an independently constructed radial–angular representation provides modest but reproducible task-level utility beyond explicit morphology for the examined 23-category CLO-SKET discrimination task.
+
+The mandatory qualification is:
+
+> A category-preserving alignment control did not establish that the improvement depends specifically on exact sketch-level morphology–radial–angular pairing.
+
+The paper therefore supports **partial representational overlap and task-level complementarity**, not statistical independence or a proven pair-specific mechanism.
+
+---
+
+## 3. Contribution hierarchy
 
 ### Primary contribution
 
-Quantitative organization of garment-sketch morphology.
+**Source-grouped task-level complementarity between explicit morphology and radial–angular geometry.**
+
+Evidence:
+
+- exact zero-overlap source-grouped folds;
+- pooled paired performance comparison;
+- positive effects in all five primary folds;
+- identity-aware bootstrap intervals;
+- positive effects across ten exact-balanced grouped partitions.
 
 ### Secondary contribution
 
-Complementary radial-angular geometric information beyond the
-135-dimensional morphology representation under the tested downstream
-task.
+**Explicit population-level morphology characterization and source-grouped cross-representation recovery.**
+
+Evidence:
+
+- transparent 135-dimensional morphology coordinates;
+- label-free morphology-space analyses;
+- feature-level associations;
+- grouped recovery of four radial–angular targets.
+
+### Supporting negative boundary
+
+**Exact held-out sketch alignment was not established as the mechanism of the integrated gain.**
+
+This result must be reported, not hidden, because it prevents the stronger complementarity claim from exceeding the evidence.
 
 ---
 
-# 3. Paper Logic
+## 4. Paper logic
 
-The paper should follow this scientific progression:
+The manuscript should follow one evidence chain:
 
-    Why study sketch morphology?
-              ↓
-    Explicit quantitative representation
-              ↓
-    Is morphology organized?
-              ↓
-    Independent radial-angular representation
-              ↓
-    Are the representations related?
-              ↓
-    Is the relationship sketch-specific?
-              ↓
-    Does radial-angular geometry add useful information?
-              ↓
-    Is the improvement explained by dimensionality?
-              ↓
-    Is utility concentrated in one descriptor block?
-              ↓
-    What can and cannot be concluded?
+1. define explicit morphology;
+2. characterize population-level organization;
+3. construct a distinct radial–angular coordinate system;
+4. establish exact row provenance;
+5. quantify shared structure using association and grouped recovery;
+6. expose leakage in the historical image-level evaluation;
+7. evaluate integration using exact source-grouped folds;
+8. quantify identity-sampling and split-allocation robustness;
+9. test whether exact held-out pairing explains the gain;
+10. constrain the final scientific claim.
 
-This progression should be visible throughout the manuscript.
+The classification task is an evaluation instrument. It should not replace the representation-focused scientific question.
 
 ---
 
-# 4. Abstract
-
-## Purpose
-
-Provide a compact statement of:
-
-1. problem;
-2. approach;
-3. dataset;
-4. primary morphology result;
-5. cross-branch result;
-6. downstream complementarity result;
-7. claim boundary.
+# Abstract
 
 ## Structure
 
-### Background
+The Abstract should contain six compact components.
 
-Garment sketches contain visual structure that is difficult to
-characterize quantitatively using only semantic labels or raw image
-pixels.
+### 1. Background
 
-### Objective
+State that garment sketches encode form geometrically, but population-level explicit morphology and relationships between alternative geometric representations remain less established than task-specific recognition or generation.
 
-Determine whether explicit image-derived morphology measurements reveal
-reproducible quantitative organization and whether an alternative
-radial-angular representation provides complementary information.
+### 2. Representations
 
-### Methods
+Report:
 
-Use 2,300 Clo-Sket sketches.
+- 2,300 CLO-SKET sketches;
+- 23 garment categories;
+- explicit 135-dimensional morphology representation;
+- independently constructed 28-dimensional radial–angular representation.
 
-Construct:
+### 3. Evaluation correction
 
-    135-D morphology representation
+State that filename provenance revealed 230 source-garment identities and that the primary analysis used exact category-balanced grouped folds with zero source-identity overlap.
 
-and:
+### 4. Primary result
 
-    28-D radial-angular representation.
+Report pooled grouped performance:
 
-Evaluate:
+- morphology Macro-F1: 0.306847;
+- integrated Macro-F1: 0.341445;
+- increment: +0.034598;
+- morphology balanced accuracy: 0.307826;
+- integrated balanced accuracy: 0.342174;
+- increment: +0.034348.
 
-- morphology-space organization;
-- feature-level association;
-- cross-validated recovery;
-- row-permutation correspondence;
-- downstream complementarity;
-- dimension-matched control;
-- descriptor ablation.
+The Abstract may round these to four decimals if journal style requires:
 
-### Results
+- Macro-F1: 0.3068 → 0.3414, Δ = +0.0346;
+- balanced accuracy: 0.3078 → 0.3422, Δ = +0.0343.
 
-Report the strongest numerical results:
+### 5. Robustness and mechanism
 
-    morphology → F₂ magnitude:
-    CV R² = 0.2961
+State:
 
-    morphology → R₂ at F₂ peak:
-    CV R² = 0.2170
+- the improvements were positive in all five primary folds and all ten repeated grouped partitions;
+- identity-bootstrap intervals excluded zero;
+- within-category alignment perturbations did not establish an exact sketch-pair-specific mechanism (Macro-F1 p = 0.1419; balanced-accuracy p = 0.1229).
 
-    Macro-F1:
-    0.3413 → 0.4123
+### 6. Conclusion
 
-    Δ Macro-F1:
-    +0.0710
+Conclude that the two explicit representations exhibit partial overlap and modest task-level complementarity under unseen-source-identity evaluation.
 
-    Balanced accuracy:
-    0.3426 → 0.4157
+### Abstract exclusions
 
-### Conclusion
+Do not include:
 
-The results support reproducible quantitative morphology organization
-and task-level complementary utility of radial-angular geometry.
-
-Do NOT claim semantic understanding.
+- the historical +0.071/+0.073 gains as the primary result;
+- the phrase “reproducible sketch-level correspondence”;
+- claims of independent information;
+- semantic, primitive, grammar, or manifold terminology;
+- supplementary direct-orientation results unless required by the journal.
 
 ---
 
-# 5. Introduction
+# 1. Introduction
 
-## 5.1 Paragraph 1 — The Problem
+## Paragraph 1 — Object of study
 
-Introduce garment sketches as structured visual artifacts rather than
-simply images to be classified.
+Present garment sketches as abstract geometric representations of garment form rather than reduced photographs.
 
-Motivation:
+## Paragraph 2 — Representation problem
 
-- designers communicate form through sketches;
-- sketches contain shape and spatial organization;
-- quantitative analysis requires representations that expose this
-  structure.
+Position the gap relative to task-oriented garment modelling, recognition, retrieval, transfer, and generation.
 
----
+## Paragraph 3 — Population-level morphology
 
-## 5.2 Paragraph 2 — Existing Gap
+Explain why jointly studying explicit geometric measurements across a sketch population is scientifically distinct from using them only as predictive inputs.
 
-Establish the gap:
+## Paragraph 4 — Explicit morphology representation
 
-Much work in visual fashion analysis emphasizes:
+Introduce the 135-dimensional representation:
 
-- recognition;
-- retrieval;
-- generation;
-- learned visual embeddings;
-- image-to-image transformation.
+\[
+\mathbf{x}_i = [\mathbf{h}_i,\mathbf{v}_i,\mathbf{g}_i]
+\in \mathbb{R}^{135},
+\]
 
-The present work focuses on a narrower question:
+with 64 horizontal, 64 vertical, and seven global descriptors.
 
-> What quantitative organization exists within garment-sketch
-> morphology itself?
+## Paragraph 5 — Alternative radial–angular description
 
-This section must be supported by the literature review.
+Introduce the 28-dimensional representation and its five blocks. Describe it as independently constructed, not statistically independent.
 
----
+## Paragraph 6 — Evaluation problem
 
-## 5.3 Paragraph 3 — Representation Problem
+Explain why multiple sketches from one garment create a source-identity generalization problem. Introduce grouped evaluation without detailing the full algorithm.
 
-Explain that raw pixels are high-dimensional and difficult to interpret,
-while learned embeddings can obscure the geometric meaning of
-individual coordinates.
+## Paragraph 7 — Questions and controls
 
-Motivate explicit quantitative morphology measurements.
+State the organization, overlap, complementarity, and alignment questions. Explain that the within-category control distinguishes general category-discriminative utility from exact pair-specific utility.
 
----
+## Paragraph 8 — Contributions
 
-## 5.4 Paragraph 4 — Study Strategy
+End with three contributions:
 
-Introduce the two representations:
+1. explicit population-level morphology characterization;
+2. grouped cross-representation recovery;
+3. source-grouped downstream integration with uncertainty, robustness, and alignment controls.
 
-    explicit morphology
-          +
-    radial-angular geometry.
+### Introduction citation requirement
 
-Explain that the purpose is not to claim that one representation is
-"correct."
-
-Instead, the study asks whether alternative geometric descriptions
-capture overlapping and complementary structure.
+Replace the two `[CITATIONS]` placeholders using verified sources from Related Work before manuscript assembly.
 
 ---
 
-## 5.5 Paragraph 5 — Contribution
+# 2. Related Work
 
-State the contributions explicitly.
+## 2.1 Computational geometry of garment sketches
 
-### Contribution 1
+Cover sketch-based garment modelling and geometry transfer:
 
-An explicit 135-dimensional quantitative morphology representation for
-2,300 garment sketches.
+- Yasseen et al.;
+- Fondevilla et al.;
+- Wang et al.
 
-### Contribution 2
+Use these studies to establish that sketches contain computationally recoverable garment geometry while distinguishing their task-oriented goals.
 
-A systematic analysis of quantitative morphology organization using
-multiple geometric and permutation-based analyses.
+## 2.2 Fashion flats and silhouette descriptors
 
-### Contribution 3
+Cover:
 
-Cross-branch evaluation showing reproducible correspondence between
-morphology and independently constructed radial-angular geometry.
+- An and Li's wavelet Fourier descriptor work;
+- Tsuru et al.'s quantitative silhouette analysis.
 
-### Contribution 4
+Explicitly state that geometric descriptors, Fourier operations, multivariate analysis, and PCA are not individually claimed as novel.
 
-A downstream complementarity analysis demonstrating additional
-task-level utility of the radial-angular representation beyond
-morphology.
+## 2.3 Geometric morphometrics and population-level shape
 
-### Contribution 5
+Use Bookstein and McCane to motivate explicit population-level shape analysis while clarifying that the current representation is not a conventional landmark morphometric model.
 
-Dimension-matched and descriptor-ablation controls that constrain
-interpretation of the downstream improvement.
+## 2.4 Alternative representations and cross-representation evidence
 
----
+Distinguish association, recoverability, redundancy, and complementarity.
 
-# 6. Related Work
+## 2.5 Identity-aware evaluation
 
-## 6.1 Fashion Sketch Understanding
+Explain the inferential difference between:
 
-Review literature on:
+- unseen sketches of observed garments; and
+- unseen source-garment identities.
 
-- fashion sketch recognition;
-- garment sketch analysis;
-- clothing image understanding;
-- sketch-based fashion retrieval.
+## 2.6 Research gap
 
-Question:
-
-> What has been measured about the internal morphology of fashion
-> sketches?
+End with the three principal research questions. Do not claim that no prior paper has ever examined fashion-sketch morphology unless a systematic search supports that absolute statement.
 
 ---
 
-## 6.2 Shape and Silhouette Representation
+# 3. Methods
 
-Review:
+## 3.1 Study design
 
-- shape descriptors;
-- occupancy-based representations;
-- silhouette representations;
-- contour-based methods;
-- geometric descriptors.
+Summarize the representation-focused analytical sequence and distinguish primary from supplementary analyses.
 
-Position the 135-D representation carefully.
+## 3.2 Dataset and source-identity reconstruction
 
-Do not claim that occupancy profiles themselves are novel.
+Report:
 
-The contribution is the analysis of the quantitative organization they
-enable in this domain.
+- 2,300 TIFF sketches;
+- 23 categories;
+- 100 sketches per category;
+- 230 source-garment identities;
+- 10 identities per category;
+- 9–11 images per identity;
+- filename separators `-`, `_`, and one `+`;
+- irregular replicate identifiers and duplicated identity–replicate combinations;
+- retention of all images.
 
----
+Define garment identity as category plus the first numeric filename token.
 
-## 6.3 Representation Learning
-
-Review:
-
-- learned visual embeddings;
-- dimensionality reduction;
-- representation geometry;
-- self-supervised visual representations.
-
-Position explicit morphology as complementary to opaque learned
-representations.
-
----
-
-## 6.4 Radial and Angular Shape Representations
-
-Review relevant:
-
-- radial descriptors;
-- polar representations;
-- angular shape descriptors;
-- contour geometry;
-- relational geometric representations.
-
-Clearly distinguish existing mathematical ideas from the specific
-radial-angular representation used here.
-
----
-
-## 6.5 Semantic Fashion Representation
-
-Review work involving:
-
-- garment parts;
-- attributes;
-- semantic parsing;
-- fashion vocabularies;
-- sketch semantics.
-
-Use this literature to establish the boundary:
-
-    existing semantic interpretation
-              vs
-    present quantitative morphology analysis.
-
----
-
-## 6.6 Gap Statement
-
-End Related Work with:
-
-> Existing work provides powerful mechanisms for recognizing or
-> generating fashion imagery, but comparatively less attention has been
-> given to establishing and validating an explicit quantitative
-> morphology space for garment sketches and examining how alternative
-> geometric representations relate to that space.
-
-This statement must be adjusted after the final literature review.
-
----
-
-# 7. Methods
-
-## 7.1 Dataset
+## 3.3 Morphology representation
 
 Describe:
 
-    Clo-Sket
-    n = 2300.
+- 64 × 64 grayscale canonicalization;
+- intensity division by 255;
+- foreground threshold below 0.8;
+- 64 horizontal occupancy coordinates;
+- 64 vertical occupancy coordinates;
+- seven global descriptors;
+- exact reconstructed SHA-256.
 
-Include dataset provenance and category structure.
+## 3.4 Morphology-space organization
+
+Describe standardization, 95%-variance PCA retention, local-neighborhood, spectral, graph, density, transition, and null analyses. Do not interpret density regions semantically.
+
+## 3.5 Radial–angular representation
+
+Define the centroid-referenced construction and the five descriptor blocks. Report the locked 25-shell domain from 3.5 to 27.5 and exact peak-shell matching.
+
+## 3.6 Provenance verification
+
+State that both branches contained 2,300 unique paths and matched exactly in frozen row order.
+
+## 3.7 Feature-level association
+
+Describe Spearman correlation and target-wise Benjamini–Hochberg correction across 135 morphology coordinates.
+
+## 3.8 Cross-validation designs
+
+### Historical image-level folds
+
+State that every test sketch had its source identity in training. Retain only for reproduction.
+
+### Primary grouped folds
+
+State:
+
+- five folds;
+- exactly two test identities per category;
+- all 23 categories in every fold;
+- 46 test identities per fold;
+- 459–461 test images;
+- zero source-identity overlap;
+- every row and identity tested once.
+
+### Repeated grouped folds
+
+Report ten exact-balanced partitions using seeds 20260820–20260829.
+
+## 3.9 Classification
+
+Define the fixed within-fold `StandardScaler` plus multinomial L2 logistic-regression pipeline. State that no feature selection or hyperparameter search was performed.
+
+## 3.10 Identity-aware uncertainty
+
+Describe the category-stratified clustered bootstrap of complete source identities, 5,000 replicates, paired predictions, and percentile intervals. Explicitly state that models were not refitted.
+
+## 3.11 Alignment control
+
+Describe 2,000 within-category held-out radial–angular permutations using fixed fold-specific models. State the exact null question and distinguish it from a refitting permutation test.
+
+## 3.12 Morphology-to-radial–angular recovery
+
+Define the within-fold `StandardScaler` plus `Ridge(alpha=1.0)` pipeline, historical KFold reproduction, and grouped primary evaluation.
+
+Name the fourth target “axial-disagreement magnitude,” not “axial orientation.”
+
+## 3.13 Recovery uncertainty
+
+Describe the 5,000-replicate category-stratified identity bootstrap with fixed grouped out-of-fold predictions.
+
+## 3.14 Supplementary direct orientation
+
+Describe prediction of cos(2α) and sin(2α), reconstruction of axial orientation, the category-conditioned mean-direction baseline, axial angular error, and paired identity bootstrap.
+
+## 3.15 Reproducibility
+
+Report software versions, fixed random states, frozen hashes, read-only arrays, result-package hashes, and the archived Validation Shield.
 
 ---
 
-## 7.2 Canonical Image Preprocessing
+# 4. Results
 
-Describe exactly:
+## 4.1 Population and representation integrity
 
-    grayscale conversion
-    intensity normalization
-    foreground threshold
-    64 × 64 canonical spatial size.
+Report the exact population, identity structure, representation dimensions, finite-value checks, exact morphology hash, and row-level alignment.
 
-Use the frozen preprocessing definition.
+Place:
 
-Do not imply optimization unless demonstrated.
+- Figure 1;
+- Table 1.
+
+## 4.2 Morphology-space organization
+
+Present the strongest convergent label-free evidence without enumerating every notebook result.
+
+Place:
+
+- Figure 2;
+- morphology-evidence summary table if needed.
+
+Avoid describing density regions as garment states.
+
+## 4.3 Feature-level associations
+
+Summarize association magnitudes, spatial patterns, and FDR results. Emphasize effect size rather than the number of significant coordinates.
+
+## 4.4 Source-identity audit
+
+Report that all historical test rows shared source identities with training and that grouped folds achieved exact zero overlap.
+
+Place:
+
+- Table 2;
+- Supplementary Figure S1.
+
+## 4.5 Historical integration reproduction
+
+Report only as historical context:
+
+- morphology fold-mean Macro-F1: 0.3411;
+- integrated fold-mean Macro-F1: 0.4123;
+- increment: +0.0712;
+- morphology fold-mean balanced accuracy: 0.3422;
+- integrated fold-mean balanced accuracy: 0.4157;
+- increment: +0.0735.
+
+Immediately state that this evaluates unseen sketches of observed source garments.
+
+## 4.6 Primary grouped integration
+
+Report pooled results:
+
+| Representation | Macro-F1 | Balanced accuracy |
+|---|---:|---:|
+| Morphology | 0.306847 | 0.307826 |
+| Radial–angular | 0.265323 | 0.276087 |
+| Integrated | **0.341445** | **0.342174** |
+| Integrated minus morphology | **+0.034598** | **+0.034348** |
+
+State that both increments were positive in all five folds.
+
+Place:
+
+- Figure 3 or Figure 4;
+- Table 3.
+
+## 4.7 Identity uncertainty and split robustness
+
+Report:
+
+- Macro-F1 increment interval: [0.015783, 0.053962];
+- balanced-accuracy increment interval: [0.015612, 0.054268];
+- ten of ten repeated partition effects positive;
+- mean repeated increments 0.042304 and 0.040609;
+- 49/50 fold effects positive for each metric.
+
+Place:
+
+- Figure 4 Panel C;
+- Figure 5;
+- Table 4.
+
+## 4.8 Alignment control
+
+Report:
+
+- Macro-F1 aligned-minus-permuted mean: +0.006153, p = 0.141929;
+- balanced-accuracy aligned-minus-permuted mean: +0.006842, p = 0.122939.
+
+State that exact sketch-level alignment was not established as the mechanism.
+
+Place:
+
+- Figure 6;
+- Table 6.
+
+## 4.9 Grouped recovery
+
+Report all four targets:
+
+| Target | R² | Spearman ρ |
+|---|---:|---:|
+| F2 peak magnitude | 0.302221 | 0.631055 |
+| F2 peak radius | 0.014269 | 0.324874 |
+| R2 at F2 peak | 0.190971 | 0.521587 |
+| Axial-disagreement magnitude | 0.206346 | 0.442901 |
+
+Interpret peak-radius recovery cautiously because its R² interval includes zero.
+
+Place:
+
+- Figure 7;
+- Table 5.
+
+## 4.10 Direct axial-orientation sensitivity
+
+Present as supplementary and explicitly mixed:
+
+- mean error improved;
+- median error worsened;
+- within 10° worsened;
+- within 30° and axial agreement improved.
+
+Do not convert this into a one-directional success claim.
+
+## 4.11 Integrated claim boundary
+
+Close Results with three statements:
+
+1. the branches exhibit partial overlap;
+2. integration yields modest reproducible grouped task-level utility;
+3. exact pair-specific alignment was not established as the mechanism.
 
 ---
 
-## 7.3 Morphology Representation
+# 5. Discussion
 
-Define:
+## 5.1 Principal findings
 
-    horizontal occupancy = 64
-    vertical occupancy = 64
-    global descriptors = 7
+Lead with the grouped result, not the historical result.
 
-Total:
+## 5.2 Morphology as a quantitative population
 
-    135 dimensions.
+Explain the value and limitations of an explicit interpretable coordinate system. Avoid semantic interpretations.
 
-Explain mathematically what occupancy means.
+## 5.3 Complementarity under unseen-source-identity evaluation
 
-Include one intuitive example.
+Discuss the reduction from the historical gain to the grouped gain as evidence that evaluation design matters. Emphasize that the grouped effect remains consistently positive.
 
----
+## 5.4 Shared structure without a proven alignment mechanism
 
-## 7.4 Morphology Representation Freezing
+Integrate recovery and alignment results:
 
-State that the morphology matrix was treated as a frozen artifact.
+- recovery demonstrates partial shared structure;
+- grouped integration demonstrates task-level complementarity;
+- the alignment control does not prove exact pair dependence;
+- category-conditioned or population-level radial–angular structure may contribute materially.
+
+## 5.5 Recovery heterogeneity
+
+Contrast F2 peak magnitude, R2, disagreement magnitude, and weak peak-radius variance recovery.
+
+## 5.6 Scientific contribution
+
+Position the contribution as empirical and validation-focused, not as a new descriptor or classifier.
+
+## 5.7 Limitations
 
 Include:
 
-- shape;
-- dtype;
-- feature ordering;
-- SHA-256;
-- provenance.
-
-This is important for reproducibility.
-
----
-
-## 7.5 PCA
-
-Describe PCA only where necessary.
-
-State:
-
-- where standardization occurs;
-- variance-retention criterion;
-- number of retained coordinates;
-- whether PCA is fitted globally or within folds for predictive
-  analyses.
-
-Important distinction:
-
-### Exploratory morphology PCA
-
-Describe the global morphology organization analysis.
-
-### Predictive PCA
-
-For Cell 5-type target construction, PCA is fitted within training
-folds.
-
-Do not mix these two uses.
-
----
-
-## 7.6 Morphology Organization Analyses
-
-Describe the analyses that establish quantitative organization.
-
-Organize them by scientific question rather than notebook cell.
-
-Possible subsections:
-
-### Variance structure
-
-### Neighborhood structure
-
-### Graph organization
-
-### Density organization
-
-### Ordered occupancy structure
-
-### Permutation controls
-
----
-
-# 8. Radial–Angular Representation
-
-## 8.1 Motivation
-
-Explain why a second geometric representation is useful.
-
-The objective is to test representation sensitivity and
-complementarity.
-
----
-
-## 8.2 Descriptor Construction
-
-Define:
-
-    F₂ radial = 9
-    α₂ = 7
-    observed circular = 3
-    learned circular = 4
-    relational = 5
-
-Total:
-
-    28 dimensions.
-
-Use the exact terminology established in the computational analysis.
-
----
-
-## 8.3 Important Clarification
-
-The number 28 is not claimed to be mathematically optimal.
-
-State:
-
-> "The 28-dimensional representation is the predefined compact
-> radial-angular descriptor set evaluated in this study."
-
----
-
-# 9. Provenance and Alignment
-
-Describe:
-
-- 2,300 morphology observations;
-- 2,300 radial-angular observations;
-- image-path arrays;
-- exact row-order matching;
-- duplicate/empty reference audit.
-
-State:
-
-> Cross-branch association analyses were performed only after
-> row-level provenance was verified.
-
-This is a critical methodological safeguard.
-
----
-
-# 10. Cross-Branch Association
-
-## 10.1 Feature-Level Association
-
-Describe:
-
-- Spearman correlation;
-- 135 morphology features;
-- four radial-angular targets;
-- Benjamini–Hochberg FDR correction.
-
-Explicitly state:
-
-> Association does not imply redundancy, complementarity, causality, or
-> semantic meaning.
-
----
-
-## 10.2 Cross-Validated Recovery
-
-Describe:
-
-- 5-fold cross-validation;
-- shuffled folds;
-- random state 42;
-- out-of-sample prediction;
-- R²;
-- MAE;
-- RMSE;
-- Spearman correlation.
-
----
-
-# 11. Permutation-Validated Correspondence
-
-Describe the row-permutation null.
-
-Null:
-
-    morphology[i]
-    paired with
-    radial-angular[π(i)].
-
-The null preserves the target distribution while destroying
-sketch-level correspondence.
-
-State:
-
-    permutations = 100
-    seed = 2026.
-
-Explain empirical p-value calculation.
-
-Do not overstate p-value resolution.
-
----
-
-# 12. Downstream Complementarity
-
-## 12.1 Task
-
-Describe the 23-category discrimination task.
-
-Clearly distinguish:
-
-    label-free representation construction
-
-from:
-
-    supervised downstream evaluation.
-
----
-
-## 12.2 Baseline
-
-    135-D morphology.
-
----
-
-## 12.3 Augmented Representation
-
-    135-D morphology
-    +
-    28-D radial-angular.
-
----
-
-## 12.4 Evaluation
-
-Describe:
-
-- cross-validation;
-- primary metric: Macro-F1;
-- secondary metric: Balanced Accuracy.
-
----
-
-# 13. Dimension-Matched Control
-
-Describe how the number of added dimensions is preserved while
-true sketch-level correspondence is destroyed.
-
-Scientific question:
-
-> Is the observed improvement explained merely by adding features?
-
-Interpretation:
-
-> The control tests dimensional expansion as an alternative
-> explanation.
-
-Do not call it an information-theoretic independence test.
-
----
-
-# 14. Descriptor Ablation
-
-Describe the predefined radial-angular blocks:
-
-- F₂ radial;
-- α₂;
-- observed circular;
-- learned circular;
-- relational;
-- full RA.
-
-Scientific question:
-
-> Is downstream utility concentrated in one descriptor block?
-
-State the limitation:
-
-> Block-specific statistical significance was not separately tested.
-
----
-
-# 15. Results
-
-Results should mirror the Methods structure.
-
-## 15.1 Morphology Organization
-
-Present:
-
-- Figure 2;
-- Table 2.
-
-Primary message:
-
-> reproducible quantitative organization.
-
----
-
-## 15.2 Cross-Branch Association
-
-Present:
-
-- feature association results;
-- selected effect sizes.
-
-Avoid listing all 135 features in the main text.
-
-Move complete feature tables to Supplementary Material.
-
----
-
-## 15.3 Morphology → Radial-Angular Recovery
-
-Present:
-
-- Figure 3;
-- Table 3.
-
-Highlight:
-
-    F₂ magnitude:
-    R² = 0.2961
-
-    R₂ at F₂ peak:
-    R² = 0.2170.
-
-Mention weaker recovery for F₂ radius.
-
-This variation should be retained rather than hidden.
-
----
-
-## 15.4 Permutation Correspondence
-
-Present:
-
-- Figure 4;
-- Table 4.
-
-Message:
-
-> observed cross-validated recovery exceeded all 100 row-permutation
-> replicates.
-
----
-
-## 15.5 Downstream Complementarity
-
-Present:
-
-- Figure 5;
-- Table 5.
-
-Main result:
-
-    Macro-F1:
-    0.3413 → 0.4123
-
-    Balanced accuracy:
-    0.3426 → 0.4157.
-
----
-
-## 15.6 Dimension-Matched Control
-
-Present alongside complementarity.
-
-Message:
-
-> improvement is not adequately explained by dimensional expansion
-> alone under the tested control.
-
----
-
-## 15.7 Descriptor Ablation
-
-Present:
-
-- Figure 6;
-- Table 6 or Supplementary Table.
-
-Message:
-
-> full radial-angular representation produced the largest observed
-> downstream gain among the tested configurations.
-
----
-
-# 16. Discussion
-
-The Discussion should follow this structure.
-
-## 16.1 Principal Finding
-
-Quantitative morphology is structured.
-
-## 16.2 Why Explicit Morphology Matters
-
-Interpretability and measurable geometry.
-
-## 16.3 Why PCA Is Not the Contribution
-
-PCA is a tool, not the scientific claim.
-
-## 16.4 Why the Radial-Angular Branch Matters
-
-Alternative coordinate description.
-
-## 16.5 Association vs Complementarity
-
-Explain the evidence progression.
-
-## 16.6 Why the Permutation Result Matters
-
-Actual sketch-level correspondence.
-
-## 16.7 Why the Dimension-Matched Control Matters
-
-Rules out simple feature-count explanation under the tested null.
-
-## 16.8 What "Complementary" Means Here
-
-Task-level complementarity, not information-theoretic independence.
-
-## 16.9 Representation Sensitivity
-
-Different coordinate systems expose different useful structure.
-
-## 16.10 Relationship to Semantic Understanding
-
-Position the work as a quantitative substrate, not semantic
-validation.
-
-## 16.11 Limitations
-
-Use the reviewer-risk document.
-
-## 16.12 Future Work
+1. one dataset and no external replication;
+2. handcrafted and preprocessing-dependent representations;
+3. fixed classifier family;
+4. fixed-prediction bootstrap intervals;
+5. non-refitting alignment control;
+6. mixed direct-orientation result;
+7. no semantic validation;
+8. incomplete robustness to alternative resolution and threshold choices.
+
+## 5.8 Future work
 
 Prioritize:
 
-1. external validation;
-2. preprocessing sensitivity;
-3. larger permutation analysis;
-4. model-family robustness;
-5. semantic annotation.
+1. external dataset replication;
+2. preprocessing/resolution sensitivity;
+3. model-family robustness under identical grouped folds;
+4. stronger conditional or refitting alignment tests if pair-specificity becomes a target claim;
+5. expert semantic validation only if semantic interpretation is later pursued.
+
+## 5.9 Conclusion
+
+End with the narrow validated statement:
+
+> Explicit morphology and radial–angular geometry provide partially overlapping descriptions of the examined garment-sketch population, and their integration yields modest, reproducible task-level utility under source-garment-disjoint evaluation. The evidence does not establish statistical independence, semantic structure, or an exact sketch-pair-specific mechanism.
 
 ---
 
-# 17. Conclusion
+# 6. Supplementary material
 
-The conclusion should be short.
+## Supplementary S1 — Complete feature definitions
 
-Recommended structure:
+- all 135 morphology coordinates;
+- all 28 radial–angular descriptors;
+- preprocessing definitions and units.
 
-### Sentence 1
+## Supplementary S2 — Identity reconstruction audit
 
-Garment sketches exhibit reproducible quantitative geometric
-organization under an explicit morphology representation.
+- separator irregularities;
+- identity and replicate distributions;
+- duplicated identity–replicate records;
+- fold assignments.
 
-### Sentence 2
+## Supplementary S3 — Full morphology-organization analyses
 
-An independently constructed radial-angular representation is
-systematically associated with morphology and captures additional
-task-relevant structure.
+- all neighborhood, graph, density, scale, and null results.
 
-### Sentence 3
+## Supplementary S4 — Feature-level associations
 
-The downstream improvement survives the dimension-matched control and
-is not confined to a single descriptor block.
+- complete Spearman coefficients;
+- raw and FDR-adjusted p-values;
+- spatial-coordinate summaries.
 
-### Sentence 4
+## Supplementary S5 — Historical reproduction
 
-The results provide a quantitative representation-level foundation
-for future investigation of semantic structure in garment sketches.
+- historical image-level classification;
+- exact Ridge/KFold estimator reproduction;
+- historical permutation controls;
+- explicit seen-source-identity boundary.
 
-Do NOT conclude:
+## Supplementary S6 — Repeated grouped results
 
-> "We discovered the semantic language of fashion."
+- all ten partitions;
+- every fold-level metric;
+- convergence audit.
 
----
+## Supplementary S7 — Alignment perturbations
 
-# 18. Supplementary Material
+- full 2,000-replicate distributions;
+- empirical calculation;
+- fixed-model scope.
 
-The Supplementary Material should contain details that are scientifically
-important but would interrupt the main narrative.
+## Supplementary S8 — Grouped recovery bootstrap
 
-Recommended contents:
+- intervals for R², Spearman ρ, MAE, and RMSE;
+- bootstrap design details.
 
-## Supplementary S1
+## Supplementary S9 — Direct axial orientation
 
-Complete 135-feature list.
+- cos(2α)/sin(2α) model;
+- baseline definition;
+- paired effects and intervals.
 
-## Supplementary S2
+## Supplementary S10 — Reproducibility manifest
 
-Complete feature-wise Spearman association tables.
-
-## Supplementary S3
-
-Complete FDR results.
-
-## Supplementary S4
-
-All morphology-space statistical diagnostics.
-
-## Supplementary S5
-
-Complete permutation distributions.
-
-## Supplementary S6
-
-Descriptor-level ablation details.
-
-## Supplementary S7
-
-Dimension-matched control details.
-
-## Supplementary S8
-
-Provenance and artifact audit.
-
-## Supplementary S9
-
-Additional visualization panels.
-
----
-
-# 19. What Does NOT Belong in the Main Manuscript
-
-Do not include every notebook output.
-
-Avoid:
-
-- raw debugging logs;
-- object existence checks;
-- Python variable names;
-- repeated shape audits;
-- every individual correlation;
-- every intermediate visualization;
-- implementation errors;
-- notebook execution history.
-
-The manuscript describes the scientific procedure.
-
-The repository preserves the computational history.
-
----
-
-# 20. What Must Be Preserved in the Repository
-
-The following should remain available even if omitted from the manuscript:
-
-- frozen morphology artifact;
-- radial-angular artifact;
-- provenance arrays;
-- feature names;
-- metadata;
+- software environment;
 - random seeds;
-- fold definitions;
-- permutation results;
-- downstream predictions;
-- residuals;
-- ablation results;
-- dimension-matched control results;
-- figure-generation code;
-- analysis notebooks.
+- SHA-256 values;
+- notebook-to-table mapping;
+- final archive receipt.
 
 ---
 
-# 21. Claim Hierarchy
+# 7. Figure and table placement
 
-Every major claim should map to evidence.
-
-| Claim | Evidence |
+| Manuscript location | Primary visual |
 |---|---|
-| Morphology is quantitatively organized | Morphology-space analyses |
-| Morphology and RA are associated | Cell 3 |
-| Morphology recovers RA | Cell 4 |
-| Correspondence is sketch-specific | Cell 6 |
-| RA improves downstream task | Cells 8–9 |
-| Improvement is not simple dimension count | Cell 10 |
-| Utility is not confined to one RA block | Cell 11 |
-
-No claim should appear in the manuscript without an identifiable
-analysis supporting it.
+| Introduction | Figure 1, if journal permits an overview figure early |
+| Results 4.2 | Figure 2 |
+| Results 4.4–4.6 | Figure 3 and Table 2 |
+| Results 4.6–4.7 | Figure 4 and Tables 3–4 |
+| Results 4.7 | Figure 5 or supplementary equivalent |
+| Results 4.8 | Figure 6 and Table 6 |
+| Results 4.9 | Figure 7 and Table 5 |
+| Results 4.10 | Supplementary Figure S3 |
+| Discussion | Table 7 only if a compact evidence ledger is useful |
 
 ---
 
-# 22. Claims Explicitly Excluded
+# 8. Numerical reporting conventions
 
-The manuscript will not claim:
+1. Use six decimals in canonical result tables.
+2. Use four decimals in prose unless additional precision is needed to reproduce an empirical probability.
+3. Use leading zeros for decimal values.
+4. Report absolute metric increments, not percentage improvements, unless both are explicitly distinguished.
+5. Use “percentage points” only after multiplying a metric increment by 100.
+6. Distinguish pooled out-of-fold metrics from fold-mean metrics.
+7. Do not attach confidence-interval terminology to permutation distributions.
+8. Do not call fixed-prediction bootstrap fractions independent p-values.
 
-- semantic novelty;
-- semantic garment-part recognition;
-- universal morphology categories;
-- morphology primitives;
+---
+
+# 9. Terminology lock
+
+## Use
+
+- explicit morphology representation;
+- independently constructed radial–angular representation;
+- quantitative organization;
+- partial representational overlap;
+- cross-validated recoverability;
+- task-level complementarity;
+- source-garment-identity-disjoint evaluation;
+- category-preserving alignment control;
+- axial-disagreement magnitude;
+- direct axial-orientation sensitivity analysis.
+
+## Avoid or explicitly reject
+
+- independent information;
+- true sketch-level correspondence as an established mechanism;
+- semantic language;
+- morphology primitive;
 - morphology grammar;
-- mathematical manifold structure;
-- causal mechanisms;
-- information-theoretic independence;
-- human-like visual understanding.
-
-These may appear only as future research questions.
-
----
-
-# 23. Manuscript Narrative in One Paragraph
-
-Garment sketches are treated as quantitative geometric objects rather
-than only as semantic images. An explicit 135-dimensional morphology
-representation is constructed from occupancy profiles and global
-descriptors and evaluated for reproducible organization across
-multiple geometric analyses. An independently constructed
-28-dimensional radial-angular representation is then used to test
-whether alternative geometric coordinates capture related structure.
-Feature-wise association, cross-validated recovery, and
-row-permutation analysis establish reproducible sketch-level
-correspondence. A downstream 23-category discrimination experiment
-then tests whether radial-angular geometry adds task-level utility
-beyond morphology. The observed improvement survives a
-dimension-matched control and is not confined to a single descriptor
-block. Together, the results support quantitative geometric
-organization and representation-level complementarity without
-requiring claims of semantic primitives, grammar, manifold structure,
-or information-theoretic independence.
+- morphology manifold;
+- intrinsic dimensionality of 73;
+- causal recovery;
+- universal classification improvement;
+- external validation.
 
 ---
 
-# 24. Final Manuscript Architecture
+# 10. Final manuscript architecture
 
-The final paper should therefore be:
-
-    TITLE
-
-    ABSTRACT
-
-    1. INTRODUCTION
-
-    2. RELATED WORK
-
-    3. METHODS
-       3.1 Dataset
-       3.2 Canonical preprocessing
-       3.3 Morphology representation
-       3.4 Morphology organization analysis
-       3.5 Radial-angular representation
-       3.6 Provenance alignment
-       3.7 Cross-branch association
-       3.8 Cross-validated recovery
-       3.9 Permutation correspondence
-       3.10 Downstream complementarity
-       3.11 Dimension-matched control
-       3.12 Descriptor ablation
-
-    4. RESULTS
-       4.1 Morphology organization
-       4.2 Cross-branch association
-       4.3 Morphology → RA recovery
-       4.4 Permutation correspondence
-       4.5 Downstream complementarity
-       4.6 Dimension-matched control
-       4.7 Descriptor ablation
-
-    5. DISCUSSION
-       5.1 Principal findings
-       5.2 Interpretation
-       5.3 Representation sensitivity
-       5.4 Implications
-       5.5 Limitations
-       5.6 Future work
-
-    6. CONCLUSION
-
-    REFERENCES
-
-    SUPPLEMENTARY MATERIAL
+```text
+TITLE
+ABSTRACT
+1. INTRODUCTION
+2. RELATED WORK
+3. METHODS
+   3.1 Study design
+   3.2 Dataset and source identities
+   3.3 Morphology representation
+   3.4 Morphology organization
+   3.5 Radial–angular representation
+   3.6 Provenance
+   3.7 Feature associations
+   3.8 Cross-validation designs
+   3.9 Classification
+   3.10 Identity bootstrap
+   3.11 Alignment control
+   3.12 Grouped recovery
+   3.13 Recovery uncertainty
+   3.14 Direct axial orientation
+   3.15 Reproducibility
+4. RESULTS
+   4.1 Population and integrity
+   4.2 Morphology organization
+   4.3 Feature associations
+   4.4 Source-identity audit
+   4.5 Historical reproduction
+   4.6 Primary grouped integration
+   4.7 Uncertainty and robustness
+   4.8 Alignment control
+   4.9 Grouped recovery
+   4.10 Axial-orientation sensitivity
+   4.11 Claim boundary
+5. DISCUSSION
+   5.1 Principal findings
+   5.2 Quantitative morphology
+   5.3 Grouped complementarity
+   5.4 Alignment boundary
+   5.5 Recovery heterogeneity
+   5.6 Contribution
+   5.7 Limitations
+   5.8 Future work
+   5.9 Conclusion
+REFERENCES
+SUPPLEMENTARY MATERIAL
+```
 
 ---
 
-# 25. Final Writing Principle
+# 11. Final manuscript narrative
 
-The paper should not read as:
+The manuscript should tell one coherent story:
 
-    "Here are all the things we tried."
-
-It should read as:
-
-    "Here is a scientific question.
-     Here is a representation.
-     Here is the evidence that it is structured.
-     Here is an independent geometric description.
-     Here is evidence that the two correspond.
-     Here is evidence that the second adds task-level utility.
-     Here are the controls that constrain that interpretation.
-     Here is what we still cannot claim."
-
-That is the final narrative architecture of CLO-SKET.
+> Garment sketches can be represented using explicit, interpretable morphology coordinates and a separately constructed radial–angular coordinate system. The two representations share measurable structure, but neither fully substitutes for the other. When complete source-garment identities are withheld, integrating radial–angular geometry with morphology yields a modest positive improvement that is stable across folds, identity resampling, and repeated grouped partitions. A category-preserving alignment control does not establish that the gain depends on exact sketch pairing. The evidence therefore supports partial overlap and task-level complementarity within the examined CLO-SKET population, without requiring semantic, causal, independence, grammar, or manifold claims.
