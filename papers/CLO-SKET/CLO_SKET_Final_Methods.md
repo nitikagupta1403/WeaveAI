@@ -1,135 +1,384 @@
 # 3. Methods
 
-## 3.1 Study design
+## 3.1 Study design and scope
 
-This study investigated the quantitative geometric organization of garment sketches using two explicitly defined, independently constructed representations: a canonical 135-dimensional morphology representation and a 28-dimensional radial–angular representation. The analysis was representation-focused rather than semantic. Neither garment-category labels nor manually annotated garment parts were used to construct either representation.
+This study developed and audited a compact radial–angular representation of garment sketches. The analysis was geometric rather than semantic: garment-category labels and manually annotated garment parts were not used to construct or select the descriptors. Category information was used only to balance grouped validation folds and to stratify the final permutation procedure.
 
-The analytical sequence was: (1) reconstruction and integrity verification of the frozen morphology representation; (2) independent construction of radial–angular descriptors from the same source images; (3) row-level provenance verification between representations; (4) characterization of morphology-space organization and feature-level cross-representation associations; (5) cross-validated recovery of radial–angular measurements from morphology; and (6) evaluation of downstream representation complementarity under source-identity-grouped classification. Supplementary analyses assessed sensitivity to fold allocation, held-out sketch-level alignment, and direct axial-orientation recovery.
+The final primary representation was a provenance-locked 14-dimensional vector comprising eight radial descriptors derived directly from the magnitude of the second angular harmonic and six axial descriptors derived from its phase. Historical 28-dimensional feature-family assemblies, principal-component analysis, von Mises fitting, full angular-density reconstruction, and category-based feature selection were not part of the final study.
 
-## 3.2 Dataset and source-identity reconstruction
+The analytical sequence was: (1) construct the conditional angular distribution around each sketch's intensity-weighted centroid; (2) extract the second angular harmonic over radius; (3) summarize its radial magnitude and axial orientation in the locked 14-dimensional representation; (4) audit exact algebraic relationships among harmonic quantities; (5) recover garment identities and construct identity-disjoint folds; (6) reconstruct the observed second-moment components out of fold; and (7) quantify uncertainty using garment-identity resampling and category-stratified permutation.
 
-The study used the CLO-SKET dataset (Arnia, 2020), which contains 2,300 garment sketches derived from 230 source clothing photographs: 23 predefined garment subcategories, 10 source photographs per subcategory, and 10 sketchers per source photograph. The present analysis used all 2,300 TIFF sketches. File paths were retained in the frozen radial–angular row order and were used to align all subsequent representations.
+## 3.2 Dataset and garment-identity reconstruction
 
-Source identity was reconstructed from the filename convention, in which the first numeric token identified the source garment within a category and the second numeric token represented a replicate identifier. The observed separators (`-`, `_`, and one `+`) were audited rather than normalized in the source records. Source identity was defined as the combination of garment category and the first numeric token, because numeric source identifiers repeat across categories.
+The analysis used all 2,300 CLO-SKET images. The directory structure contained 23 garment-category folders. Garment identity was reconstructed from the category-qualified source identifier encoded in each filename; the replicate identifier denoted the sketch associated with that source garment. This procedure recovered 230 garment identities, exactly 10 per category, with 9–11 sketches per identity because of irregular filename records.
 
-This procedure identified 230 source-garment identities, with exactly 10 identities per category. Replication was not assumed to be perfectly factorial: source identities contained 9–11 images because of irregular filename records, including repeated identity–replicate combinations and two nonstandard replicate identifiers. All 2,300 images were retained. Grouped analyses used the source-garment identity as the indivisible sampling and partitioning unit.
+File paths were unique. SHA-256 hashing found no repeated raw files, and hashing of decoded pixel arrays found no repeated decoded images. Perceptual hashes were used only to screen candidate visually similar pairs and were not interpreted as proof of duplication or lineage. The recovered garment identity was therefore used as the indivisible unit for cross-validation and resampling. The audit did not establish that the 230 garment identities were mutually independent sampling units; population-level inference remains conditional on that assumption.
 
-## 3.3 Canonical 135-dimensional morphology representation
+## 3.3 Polar coordinate construction
 
-The morphology representation was derived from canonical 64 × 64 grayscale sketch images. Pixel intensities were divided by 255, and foreground pixels were defined using an intensity threshold below 0.8. The representation comprised 64 horizontal occupancy coordinates, 64 vertical occupancy coordinates, and seven global geometric descriptors:
-
-\[
-64 + 64 + 7 = 135.
-\]
-
-The resulting matrix had shape 2,300 × 135 and was stored as `float32`. The canonical matrix was reconstructed directly from the frozen source-image paths using the original preprocessing definition. Reconstruction produced 2,300 finite vectors without failure and reproduced the recorded SHA-256 fingerprint exactly (`66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee`). The matrix was subsequently treated as read-only.
-
-## 3.4 Morphology-space organization
-
-For analyses requiring standardized coordinates, each morphology feature was standardized before principal component analysis (PCA). The retained PCA representation explained approximately 95% of standardized morphology variance using 73 components. PCA was used only as a coordinate and variance-retention procedure and was not interpreted as a semantic decomposition or as proof of mathematical intrinsic dimensionality.
-
-Morphology-space organization was examined using local-neighborhood, spectral, graph-geodesic, transition, multiscale-density, and permutation-based analyses. Density-defined regions were treated as areas of differing quantitative morphology density rather than discrete garment states. Region-size-preserving permutations were used to assess local neighbor retention and cross-scale stability of feature-level regional discrimination. Feature-order permutations disrupted the spatial ordering of occupancy coordinates while preserving each sketch's occupancy values. These analyses tested reproducible quantitative organization and did not use garment-category labels to construct the morphology space.
-
-## 3.5 Independent radial–angular representation
-
-The radial–angular branch was constructed independently of the frozen morphology matrix. Source sketches were represented in an isotropic physical coordinate system and referenced to an intensity-weighted centroid. Radial and angular profiles were used to characterize the spatial distribution of sketch intensity, including second-harmonic radial magnitude and phase, circular concentration, and relationships between observed and learned axial organization.
-
-The final compact representation contained 28 descriptors distributed across five predefined blocks:
-
-| Descriptor block | Dimensions |
-|---|---:|
-| F₂ radial | 9 |
-| α₂ | 7 |
-| Observed circular | 3 |
-| Learned circular | 4 |
-| Relational | 5 |
-| **Total** | **28** |
-
-The resulting matrix had shape 2,300 × 28 and contained only finite values. The representation was not used to modify, select, or tune the morphology features.
-
-Radial–circular comparisons used a locked radial domain from 3.5 to 27.5 with 25 circular shells. The F₂ peak radius was matched to the corresponding circular shell. The maximum mismatch between the recorded peak radius and matched shell center was zero across all observations.
-
-## 3.6 Row-level provenance verification
-
-Before any cross-representation analysis, morphology-side and radial–angular image references were audited for population size, missing values, duplicates, and ordering. Both branches contained 2,300 unique, nonempty image paths. The path arrays matched exactly in row order; therefore, morphology row \(i\) and radial–angular row \(i\) referred to the same source sketch for every observation.
-
-## 3.7 Feature-level cross-representation association
-
-Spearman correlation was used to quantify association between each of the 135 morphology coordinates and four independently derived radial–angular targets: F₂ peak magnitude, F₂ peak radius, observed R₂ at the matched F₂ peak shell, and axial-disagreement magnitude at that shell. The last target was defined as the unsigned axial difference between observed and learned orientations, folded onto [0°, 90°].
-
-Benjamini–Hochberg false-discovery-rate correction was performed separately across the 135 morphology coordinates for each target. These tests were interpreted as feature-level association analyses; they did not establish causality, redundancy, complementarity, or feature independence.
-
-## 3.8 Cross-validation designs
-
-### 3.8.1 Historical image-level folds
-
-The frozen historical classification analysis used five-fold `StratifiedKFold` cross-validation with shuffling and random state 42. Audit showed that all test sketches had their source identity represented in the corresponding training set. These folds were retained only to reproduce the historical image-level result and were interpreted as evaluation on unseen sketches of observed source identities.
-
-The historical morphology-to-radial–angular recovery analysis used five-fold shuffled `KFold` cross-validation with random state 42. This distinct split definition was reproduced exactly when verifying the historical regression results.
-
-### 3.8.2 Primary source-identity-grouped folds
-
-For the primary evaluation, five exactly category-balanced grouped partitions were constructed. Within each of the 23 categories, the 10 source identities were randomly assigned so that each fold tested exactly two identities per category. Each test fold therefore contained 46 complete source identities and all 23 garment categories. Source identities never crossed training and testing; every identity and every sketch appeared in exactly one test fold. Because identity-level replication was slightly unbalanced, test-fold sizes ranged from 459 to 461 images.
-
-### 3.8.3 Repeated grouped partitions
-
-Sensitivity to identity-to-fold allocation was evaluated using ten independently generated, exactly category-balanced grouped partitions with random seeds 20260820–20260829. The fold-construction constraints were identical in every repeat: two test identities per category, all categories in every fold, zero source-identity overlap, and one test assignment per observation.
-
-## 3.9 Downstream classification
-
-Three representations were evaluated in the predefined 23-category classification task: morphology alone (135 dimensions), radial–angular descriptors alone (28 dimensions), and their concatenation (163 dimensions). All comparisons used identical folds and target labels.
-
-The fixed classification pipeline consisted of `StandardScaler` fitted within each training fold followed by multinomial logistic regression with L2 regularization (`C = 1`, `solver = lbfgs`, `max_iter = 5000`, and `tol = 10⁻⁴`). No feature selection or hyperparameter search was performed. Performance was summarized using pooled out-of-fold Macro-F1 and balanced accuracy. Fold-level metrics and category-level F1 values were retained as secondary stability measures.
-
-The historical image-level morphology and integrated results were first reproduced using the original stored folds and their original fold-mean reporting convention. The primary morphology, radial–angular, and integrated comparison was then performed using the source-identity-grouped folds.
-
-## 3.10 Identity-aware uncertainty for the integration effect
-
-Uncertainty in the grouped integration gain was evaluated using a category-stratified source-identity bootstrap. Within each category, the 10 source identities were sampled with replacement, and all sketches belonging to each selected identity were included as a cluster. Morphology-only and integrated out-of-fold predictions remained paired within every replicate. Macro-F1 and balanced accuracy were recomputed for 5,000 bootstrap samples using random seed 20260820.
-
-Percentile intervals were defined by the 2.5th and 97.5th percentiles. The fraction of bootstrap effects less than or equal to zero was recorded descriptively. Because the out-of-fold predictions were held fixed, these intervals quantify uncertainty across sampled identities conditional on the fitted fold-specific models; they are not model-refitting permutation-test p-values.
-
-## 3.11 Within-category alignment control
-
-To test whether downstream performance specifically depended on exact held-out sketch-level pairing, radial–angular rows were permuted within garment category among the test observations of each grouped fold. This preserved category membership and the category-level radial–angular distribution while disrupting exact morphology–radial–angular pairing. Trained fold-specific models, morphology rows, representations, and grouped partitions remained unchanged.
-
-Macro-F1 and balanced accuracy were recomputed for 2,000 perturbations using random seed 20260821. The aligned-minus-permuted effect and the +1-corrected empirical probability were reported. This fixed-model test measures sensitivity to test-time alignment and is not equivalent to a full model-refitting permutation test.
-
-## 3.12 Morphology-to-radial–angular recovery
-
-The recovery analysis used the 135 morphology coordinates as predictors and four radial–angular quantities as targets: F₂ peak magnitude, F₂ peak radius, observed R₂ at the F₂ peak, and axial-disagreement magnitude. The estimator was fixed as a pipeline containing training-fold `StandardScaler` followed by `Ridge(alpha = 1.0)`. No category labels, feature selection, or target-specific tuning were used.
-
-Historical recovery was reproduced using shuffled five-fold `KFold` cross-validation with random state 42 and pooled out-of-fold R², MAE, RMSE, Pearson correlation, and Spearman correlation. The morphology matrix was promoted to `float64` before modelling, matching the historical implementation. The identical estimator and preprocessing were then applied to the source-identity-grouped folds; only the partition design changed.
-
-Uncertainty in grouped R², MAE, RMSE, and Spearman correlation was assessed with 5,000 category-stratified source-identity bootstrap replicates using random seed 20260820. Complete identities were resampled as clusters while grouped out-of-fold predictions remained fixed.
-
-## 3.13 Supplementary direct axial-orientation analysis
-
-Because axial-disagreement magnitude is a scalar rather than a directional target, direct recovery of observed axial orientation was evaluated separately. Observed orientation \(\alpha\) was encoded using the doubled-angle representation
+For sketch \(i\), let \(w_{ip}\geq 0\) denote the foreground intensity weight at pixel \(p\), located at isotropic Cartesian coordinates \((x_{ip},y_{ip})\). Its intensity-weighted centroid was
 
 \[
-(\cos 2\alpha,\;\sin 2\alpha),
+c_{x,i}=\frac{\sum_p w_{ip}x_{ip}}{\sum_p w_{ip}},
+\qquad
+c_{y,i}=\frac{\sum_p w_{ip}y_{ip}}{\sum_p w_{ip}}.
 \]
 
-which respects 180° axial periodicity. Separate fold-local standardized Ridge models with \(\alpha_{\mathrm{Ridge}}=1\) predicted the cosine and sine components from morphology under the primary source-grouped folds. Predicted component pairs were normalized and transformed back to an axial angle in [0°, 180°).
-
-Prediction error was calculated as the shortest unsigned axial difference,
+Each foreground location was expressed relative to this centroid as
 
 \[
-d_{\mathrm{axial}}(\alpha,\hat{\alpha})=
-\min\left(|\alpha-\hat{\alpha}|,\;180^\circ-|\alpha-\hat{\alpha}|\right),
+r_{ip}=\sqrt{(x_{ip}-c_{x,i})^2+(y_{ip}-c_{y,i})^2},
+\qquad
+\theta_{ip}=\operatorname{atan2}(y_{ip}-c_{y,i},x_{ip}-c_{x,i}).
 \]
 
-which lies in [0°, 90°]. A training-fold mean axial direction served as an internal no-morphology reference. Metrics included mean and median axial error, interquartile error range, proportions within 10°, 15°, and 30°, mean \(\cos(2\Delta\alpha)\) agreement, and an observed-R₂-weighted mean error. The complete 2,300-sketch population was primary; thresholds of observed R₂ ≥ 0.20 and R₂ ≥ 0.40 were supplementary sensitivity strata rather than exclusion criteria.
+The implementation discretized radius into 72 radial bins and angle into 72 angular bins. Let \(H_i(r_j,\theta_k)\) be the accumulated intensity weight in radial bin \(j\) and angular bin \(k\). The conditional angular distribution at a nonempty radial bin was
 
-Model–reference differences were evaluated using 5,000 paired, category-stratified source-identity bootstrap samples. Complete identities were resampled, and both methods were evaluated on identical resampled observations. Positive effects were defined consistently as favoring the morphology model. This component-wise analysis respects axial periodicity but is not a full probabilistic circular-regression model.
+\[
+p_i(\theta_k\mid r_j)
+=
+\frac{H_i(r_j,\theta_k)}{\sum_{\ell=1}^{72}H_i(r_j,\theta_\ell)},
+\qquad
+\sum_{k=1}^{72}p_i(\theta_k\mid r_j)=1.
+\]
 
-## 3.14 Computational integrity and reproducibility
+Thus, the construction retained angular organization conditional on radius rather than allowing high-mass radial shells to dominate merely because they contained more ink.
 
-All final analyses used Python 3.12.13, NumPy 2.0.2, pandas 2.2.3, and scikit-learn 1.6.1. Frozen runtime backups were inventoried and hashed before validation. The canonical morphology matrix was reproduced exactly from the source images, and grouped-fold construction was audited for category coverage, test assignment, and source-identity overlap.
+## 3.4 Second angular harmonic and axial orientation
 
-Final result tables, uncertainty summaries, fold-design records, and claim boundaries were consolidated into a versioned result package. Each canonical table received an individual SHA-256 fingerprint. The final pickle package had SHA-256 `c174f33bd40950bc4daa66d39ee0290869b79f758eac77f3ae9303847ed9a2df`; its compressed archive and uncompressed contents were independently copied and hash-verified.
+At each radial shell, the complex second angular moment was defined as
 
-## 3.15 Methodological scope
+\[
+F_{2,i}(r_j)
+=
+\sum_{k=1}^{72}p_i(\theta_k\mid r_j)e^{-\mathrm{i}2\theta_k}.
+\]
 
-The representations and association analyses were label-free; garment-category labels entered only the downstream classification task and the category-stratified design of grouped folds and bootstrap resampling. The analyses test quantitative organization, cross-representation association, recoverability, and task-level complementarity under the specified dataset and fixed estimators. They do not test semantic garment-part recognition, causal mechanisms, information-theoretic independence, universal morphology categories, or a garment grammar.
+The negative exponential records the FFT convention used by the audited implementation. Equivalently,
+
+\[
+C_{2,i}(r_j)
+=
+\sum_k p_i(\theta_k\mid r_j)\cos(2\theta_k),
+\]
+
+\[
+S_{2,i}(r_j)
+=
+\sum_k p_i(\theta_k\mid r_j)\sin(2\theta_k),
+\]
+
+so that
+
+\[
+F_{2,i}(r_j)=C_{2,i}(r_j)-\mathrm{i}S_{2,i}(r_j).
+\]
+
+Its magnitude, also called the second resultant length, was
+
+\[
+m_i(r_j)=|F_{2,i}(r_j)|
+=R_{2,i}(r_j)
+=\sqrt{C_{2,i}(r_j)^2+S_{2,i}(r_j)^2}.
+\]
+
+The associated axial direction was
+
+\[
+\alpha_{2,i}(r_j)
+=
+\frac{1}{2}\operatorname{atan2}
+\!\left(S_{2,i}(r_j),C_{2,i}(r_j)\right)
+\pmod{\pi}.
+\]
+
+The factor of two makes the direction axial: \(\alpha\) and \(\alpha+\pi\) describe the same undirected orientation. Consequently, angular differences were folded onto \([0,\pi/2]\):
+
+\[
+d_{\mathrm{ax}}(a,b)
+=
+\min\!\left(
+|a-b|\bmod \pi,
+\pi-(|a-b|\bmod \pi)
+\right).
+\]
+
+All reported angular errors used the degree-equivalent interval \([0^\circ,90^\circ]\).
+
+## 3.5 Locked radial domain
+
+The primary radial analysis was restricted to 25 shell centers spanning
+
+\[
+\mathcal R=\{3.5,4.5,\ldots,27.5\}.
+\]
+
+This domain was fixed before the peak-shell sensitivity and inferential analyses. For each sketch, the selected observed peak shell was
+
+\[
+j_i^\star=\arg\max_{j:r_j\in\mathcal R}m_i(r_j),
+\qquad
+r_i^\star=r_{j_i^\star}.
+\]
+
+The peak magnitude was \(m_i^\star=m_i(r_i^\star)\). Because \(R_2(r)=|F_2(r)|\) by construction,
+
+\[
+R_{2,i}(r_i^\star)=m_i^\star.
+\]
+
+These are therefore two names for the same measured quantity, not independent features or independent evidence. Peak radius is a selected coordinate on a discrete, bounded domain; boundary occupancy was audited explicitly.
+
+## 3.6 Eight radial-magnitude descriptors
+
+Let \(m_i(r)=|F_{2,i}(r)|\) over \(\mathcal R\). Integrals below were evaluated by the trapezoidal rule at the radial-shell centers. They are expressed in radial-bin-coordinate units, not physical distance, and the magnitude integral is not Fourier energy.
+
+The integrated magnitude was
+
+\[
+I_i=\int_{\mathcal R}m_i(r)\,dr.
+\]
+
+The magnitude-weighted radial centroid and spread were
+
+\[
+\bar r_i
+=
+\frac{\int_{\mathcal R}r\,m_i(r)\,dr}{I_i},
+\qquad
+s_{r,i}
+=
+\sqrt{
+\frac{\int_{\mathcal R}(r-\bar r_i)^2m_i(r)\,dr}{I_i}
+}.
+\]
+
+With \(r_i^\star\) denoting the discrete peak radius, radial concentration was the fraction of integrated magnitude within four radial-coordinate units of the peak:
+
+\[
+q_i
+=
+\frac{
+\int_{\mathcal R\cap[r_i^\star-4,r_i^\star+4]}m_i(r)\,dr
+}{I_i}.
+\]
+
+Let \(\tau_i=0.10\,m_i^\star\). The observed onset and termination radii were
+
+\[
+r_i^{\mathrm{on}}
+=\min\{r\in\mathcal R:m_i(r)\geq\tau_i\},
+\qquad
+r_i^{\mathrm{off}}
+=\max\{r\in\mathcal R:m_i(r)\geq\tau_i\}.
+\]
+
+The eight locked radial features, in column order, were
+
+\[
+\mathbf x^{(F_2)}_i=
+[
+I_i,
+\bar r_i,
+s_{r,i},
+q_i,
+r_i^{\mathrm{on}},
+r_i^{\mathrm{off}},
+r_i^\star,
+m_i^\star
+]\in\mathbb R^8.
+\]
+
+The radial extent \(r_i^{\mathrm{off}}-r_i^{\mathrm{on}}\) was excluded because it is exactly determined by two retained features.
+
+## 3.7 Six axial-safe descriptors
+
+The peak axial direction was
+
+\[
+\alpha_i^\star=\alpha_{2,i}(r_i^\star).
+\]
+
+The magnitude-weighted axial mean used the doubled-angle resultant
+
+\[
+Z_i
+=
+\sum_{r_j\in\mathcal R}
+m_i(r_j)e^{\mathrm{i}2\alpha_{2,i}(r_j)},
+\qquad
+\bar\alpha_i
+=
+\frac{1}{2}\arg(Z_i)\pmod{\pi}.
+\]
+
+Axial coherence was
+
+\[
+\kappa_i
+=
+\frac{|Z_i|}{\sum_{r_j\in\mathcal R}m_i(r_j)},
+\qquad 0\leq\kappa_i\leq1,
+\]
+
+and orientation drift was the axial distance between the orientations at the first and last locked shells:
+
+\[
+\delta_i
+=
+d_{\mathrm{ax}}
+\!\left(
+\alpha_{2,i}(3.5),
+\alpha_{2,i}(27.5)
+\right).
+\]
+
+Raw axial angles were not entered directly into the primary vector. Each retained direction was represented by its doubled-angle Cartesian coordinates, yielding
+
+\[
+\mathbf x^{(\alpha_2)}_i=
+[
+\cos(2\alpha_i^\star),
+\sin(2\alpha_i^\star),
+\cos(2\bar\alpha_i),
+\sin(2\bar\alpha_i),
+\kappa_i,
+\delta_i
+]\in\mathbb R^6.
+\]
+
+This encoding is invariant under \(\alpha\mapsto\alpha+\pi\). Persistence and weighted-dispersion summaries were excluded after the redundancy audit; reconstructed circular quantities and tautological \(F_2\)-versus-\(R_2\) relations were retained only for auditing, not as primary features.
+
+## 3.8 Primary 14-dimensional representation and provenance lock
+
+The final sketch representation was the exact ordered concatenation
+
+\[
+\mathbf x_i
+=
+\left[
+\mathbf x^{(F_2)}_i\mid
+\mathbf x^{(\alpha_2)}_i
+\right]
+\in\mathbb R^{14}.
+\]
+
+The resulting matrix had shape \(2300\times14\), contained only finite values, and matched the locked \(8+6\) concatenation exactly with maximum numerical difference zero. Column order was frozen by the Cell 23C provenance lock. No historical 28-dimensional family assembly was asserted.
+
+## 3.9 Garment-identity-disjoint out-of-fold reconstruction
+
+To evaluate whether the observed second-moment field could be reconstructed from radius and harmonic magnitude while preventing source-garment leakage, five category-balanced folds were constructed over the 230 recovered garment identities. Each test fold contained two complete identities from every category, giving 46 test identities and all 23 categories per fold. Garment-identity overlap between training and testing was zero, and every sketch was tested exactly once.
+
+At every valid sketch-shell row, the predictors were
+
+\[
+\mathbf z_{ij}=[r_j,m_i(r_j)]
+\]
+
+and the two targets were \(C_{2,i}(r_j)\) and \(S_{2,i}(r_j)\). Two `HistGradientBoostingRegressor` models were fitted independently within each training fold:
+
+\[
+\widehat C_{2,i}(r_j)=f_C(\mathbf z_{ij}),
+\qquad
+\widehat S_{2,i}(r_j)=f_S(\mathbf z_{ij}).
+\]
+
+Reconstructed magnitude and orientation were then derived, rather than fitted directly:
+
+\[
+\widehat R_{2,i}(r_j)
+=
+\sqrt{\widehat C_{2,i}(r_j)^2+\widehat S_{2,i}(r_j)^2},
+\]
+
+\[
+\widehat\mu_{2,i}(r_j)
+=
+\frac{1}{2}\operatorname{atan2}
+\!\left(
+\widehat S_{2,i}(r_j),
+\widehat C_{2,i}(r_j)
+\right)
+\pmod{\pi}.
+\]
+
+At the observed peak shell, axial reconstruction error was
+
+\[
+e_i=d_{\mathrm{ax}}
+\!\left(
+\widehat\mu_{2,i}(r_i^\star),
+\mu_{2,i}(r_i^\star)
+\right).
+\]
+
+Fold-local global and radius-only models were retained as comparators. The historical sketch-level out-of-fold arrays were preserved for audit comparison but were superseded for final reporting by the identity-disjoint estimates.
+
+This reconstruction is a shared-source consistency diagnostic: \(m\), \(C_2\), and \(S_2\) all arise from the same conditional angular field. It does not demonstrate recovery of an independent physical or semantic target.
+
+## 3.10 Peak-shell association analysis
+
+The two prespecified primary quantities were observed peak-shell magnitude \(R_{2,i}(r_i^\star)\) and selected peak radius \(r_i^\star\). The primary outcome was peak-shell axial error \(e_i\).
+
+For confirmatory association analysis, all sketches belonging to garment identity \(g\) were reduced to medians:
+
+\[
+\widetilde R_{2,g}=\operatorname{median}_{i\in g}R_{2,i}(r_i^\star),
+\quad
+\widetilde r_g^\star=\operatorname{median}_{i\in g}r_i^\star,
+\quad
+\widetilde e_g=\operatorname{median}_{i\in g}e_i.
+\]
+
+Spearman's rank correlation was computed across the 230 identities for \((\widetilde R_{2,g},\widetilde e_g)\) and \((\widetilde r_g^\star,\widetilde e_g)\). This gave equal weight to each recovered garment identity. The two primary permutation probabilities were adjusted by Holm's procedure. Corresponding correlations over all 2,300 sketches were retained as descriptive summaries without inferential p-values.
+
+## 3.11 Garment-cluster bootstrap and stratified permutation
+
+Confidence intervals were obtained from 5,000 bootstrap replicates. Complete garment identities, rather than individual sketches or sketch-shell rows, were resampled; every selected cluster contributed all its sketches and, where applicable, all 25 shells. Percentile 95% intervals were defined by the 2.5th and 97.5th percentiles.
+
+For each primary association, 10,000 permutations were performed within the 23 category strata. Garment-level outcome values were permuted only among identities in the same category, thereby holding category composition fixed. With observed statistic \(T_{\mathrm{obs}}\), the two-sided corrected permutation probability was
+
+\[
+p
+=
+\frac{1+\sum_{b=1}^{B}
+\mathbf 1\{|T_b|\geq|T_{\mathrm{obs}}|\}}
+{B+1},
+\qquad B=10000.
+\]
+
+All intervals and permutation results remain conditional on mutual independence of the 230 recovered garment identities.
+
+## 3.12 Outcome-defined bands and threshold sensitivity
+
+Peak-shell errors were summarized descriptively as low (\(e_i\leq15^\circ\)), intermediate (\(15^\circ<e_i\leq45^\circ\)), and high (\(e_i>45^\circ\)). Sensitivity was assessed using four prespecified low/high threshold pairs: \(10^\circ/30^\circ\), \(15^\circ/45^\circ\), \(20^\circ/45^\circ\), and \(20^\circ/60^\circ\).
+
+For each pair, median observed peak-shell \(R_2\) and Cliff's delta were computed between the low- and high-error groups. Cliff's delta was oriented as
+
+\[
+\delta_C
+=
+P(R_{2,\mathrm{low}}>R_{2,\mathrm{high}})
+-
+P(R_{2,\mathrm{low}}<R_{2,\mathrm{high}}).
+\]
+
+Intervals were obtained by resampling complete garment identities. No p-values were assigned to these outcome-defined, strongly overlapping groups, and the thresholds were not optimized against the data.
+
+## 3.13 Algebraically coupled diagnostic
+
+Peak-shell magnitude error was
+
+\[
+\Delta R_{2,i}
+=
+\widehat R_{2,i}(r_i^\star)
+-
+R_{2,i}(r_i^\star).
+\]
+
+Because the observed value appears algebraically with a negative sign in \(\Delta R_2\), its correlation with observed \(R_2\) is mathematically coupled. This correlation was reported only as a calibration diagnostic and received no inferential p-value.
+
+## 3.14 Evidence and claim boundary
+
+The analysis supports exact computational-provenance claims for the 14-dimensional representation, leakage-controlled reconstruction transfer to unseen recovered garment identities, descriptive peak-shell reconstruction behavior, and conditional garment-level associations. It does not establish mutual independence of the 230 identities, causality, semantic garment-part recognition, human-like understanding, a physical radial law, a prospective reliability classifier, von Mises fitting, or reconstruction of the complete angular density.
