@@ -2,9 +2,17 @@
 
 ## 4.1 Population, radial-domain and representation locks
 
-The final analysis retained all 2,300 sketches. The conditional angular tensor had shape \(2300\times72\times72\), the second-harmonic magnitude field had shape \(2300\times72\), and the locked circular field had shape \(2300\times25\). All 25 circular shells lay in the prespecified radial domain from 3.50 to 27.50.
+The final analysis retained all 2,300 sketches. The conditional angular tensor had shape \(2300\times72\times72\), the second-harmonic magnitude field had shape \(2300\times72\), and the locked circular field had shape \(2300\times25\). All 25 circular shells lay in the prespecified radial domain from 3.50 to 27.50. The construction from a representative sketch to the centroid-relative polar field, conditional angular distribution, second-harmonic magnitude, and axial orientation is illustrated in Figure 1.
 
-The primary representation was the exact concatenation of eight direct \(F_2\) radial descriptors and six axial-safe \(\alpha_2\) descriptors. The resulting matrix had shape \(2300\times14\), contained only finite values, reproduced the Cell 23C column order, and matched the independently concatenated \(8+6\) matrix exactly; the maximum absolute difference was 0.0. No historical 28-dimensional family assembly was asserted.
+![Figure 1. Radial–angular construction and second-harmonic interpretation.](Radial_Fig/Figure_1_Radial_Angular_Construction.png)
+
+**Figure 1. Radial–angular construction and second-harmonic interpretation.** (A) Representative CLO-SKET sketch with intensity-weighted centroid. (B) Centroid-relative polar geometry used to accumulate foreground intensity by radius and angle. (C) Conditional angular distribution \(p(\theta\mid r)\); the shaded interval marks the locked 25-shell primary radial domain \(r=3.5,\ldots,27.5\). (D) Second-harmonic magnitude \(R_2(r)=|F_2(r)|\), with the selected observed peak shell marked. (E) Axial orientation \(\alpha_2(r)\) over the locked domain. The top inset illustrates one-, two-, and three-fold angular organization; the second harmonic is used here because its orientation is axial, with \(\alpha\equiv\alpha+\pi\).
+
+The primary representation was the exact concatenation of eight direct \(F_2\) radial descriptors and six axial-safe \(\alpha_2\) descriptors (Figure 2). The resulting matrix had shape \(2300\times14\), contained only finite values, reproduced the Cell 23C column order, and matched the independently concatenated \(8+6\) matrix exactly; the maximum absolute difference was 0.0. No historical 28-dimensional family assembly was asserted.
+
+![Figure 2. Provenance-locked 14-dimensional radial–angular representation.](Radial_Fig/Figure_2_Provenance_Locked_14D_Representation.png)
+
+**Figure 2. Provenance-locked 14-dimensional radial–angular representation.** The primary vector is the exact concatenation of eight direct second-harmonic magnitude descriptors and six axial-safe orientation descriptors. The radial block comprises integrated \(F_2\) magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. The axial block encodes peak and magnitude-weighted mean orientations through doubled-angle cosine/sine coordinates together with axial coherence and orientation drift. Radial extent is excluded because it is exactly termination minus onset.
 
 The observed circular quantities \(C_2\), \(S_2\), \(R_2\), and \(\mu_2\), together with their reconstructed counterparts, each had shape \(2300\times25\). At the selected observed peak shell, the maximum absolute discrepancy between observed \(R_2\) and observed \(|F_2|\) was \(6.661\times10^{-16}\). This numerical result confirmed the expected identity \(R_2=|F_2|\); the two quantities were therefore not counted as independent evidence.
 
@@ -68,7 +76,11 @@ The median peak-shell magnitude difference was negative:
 
 indicating systematic peak-shell magnitude attenuation. This is a calibration-compression diagnostic, not evidence of semantic or physical failure.
 
-Median peak-shell axial error was \(4.104118^\circ\) (3.815065°–4.511576°). The low-error proportion was 78.17% (75.77%–80.60%), the intermediate proportion was 6.13% (5.13%–7.17%), and the high-error proportion was 15.70% (13.50%–17.95%).
+Median peak-shell axial error was \(4.104118^\circ\) (3.815065°–4.511576°). The low-error proportion was 78.17% (75.77%–80.60%), the intermediate proportion was 6.13% (5.13%–7.17%), and the high-error proportion was 15.70% (13.50%–17.95%). Figure 3 summarizes the identity-disjoint field and peak-shell reconstruction together with the fold design.
+
+![Figure 3. Identity-disjoint reconstruction validation.](Radial_Fig/Figure_3_Identity_Disjoint_Reconstruction_Validation.png)
+
+**Figure 3. Identity-disjoint reconstruction validation.** (A) Observed versus reconstructed \(R_2\) over all 57,500 held-out sketch-shell rows (RMSE 0.145610; Pearson \(r=0.926390\)). (B) Observed versus reconstructed \(R_2\) at each sketch's observed peak shell (\(n=2,300\); RMSE 0.148303; Pearson \(r=0.810543\)). (C) Axial reconstruction error at the observed peak shell; the dashed line marks the median \(4.104^\circ\). (D) Five category-balanced folds withheld complete recovered garment identities, with 184 training identities, 46 test identities, all 23 categories in each test fold, and zero train/test identity overlap. Reconstruction is a shared-source consistency diagnostic because \(R_2\), \(C_2\), and \(S_2\) derive from the same conditional angular field.
 
 ## 4.7 Peak-shell reconstruction across observed-\(R_2\) strata
 
@@ -100,7 +112,7 @@ Garment-level median selected peak radius was also negatively associated with ga
 =-0.322472\ \text{to}\ -0.095626,
 \]
 
-with category-stratified \(p_{\mathrm{raw}}=0.030097\) and \(p_{\mathrm{Holm}}=0.030097\) (Table 3).
+with category-stratified \(p_{\mathrm{raw}}=0.030097\) and \(p_{\mathrm{Holm}}=0.030097\) (Table 3). The two identity-level associations are visualized in Figure 4A–B, and their bootstrap and category-stratified permutation distributions are shown in Figure 5.
 
 **Table 3. Primary garment-level monotonic associations (\(n=230\) identities).**
 
@@ -109,15 +121,25 @@ with category-stratified \(p_{\mathrm{raw}}=0.030097\) and \(p_{\mathrm{Holm}}=0
 | Median observed peak-shell \(R_2\) vs median axial error | −0.355875 | [−0.455749, −0.248336] | 0.000100 | 0.000200 |
 | Median selected peak radius vs median axial error | −0.207675 | [−0.322472, −0.095626] | 0.030097 | 0.030097 |
 
+For descriptive visualization at the same inferential unit, the 230 garment-identity medians were divided into quartiles of observed peak-shell \(R_2\). Median identity-OOF axial error decreased from 5.99° (Q1; \(n=58\)) to 4.04° (Q2; \(n=57\)), 3.72° (Q3; \(n=57\)), and 2.92° (Q4; \(n=58\)) (Figure 4C). This identity-level quartile display is descriptive and is distinct from the sketch-level strata in Section 4.7.
+
 At the sketch level, the corresponding Spearman correlations were −0.253366 for observed peak-shell \(R_2\) and −0.271404 for selected peak radius. These pooled-sketch estimates were retained as descriptive summaries without inferential p-values.
 
 The peak-radius result describes sensitivity in this dataset. Peak radius is selected from 25 discrete, bounded shells and can be censored at the domain boundaries; the association does not establish a physical radial law.
+
+![Figure 4. Association between second-harmonic organization and axial reconstruction error.](Radial_Fig/Figure_4_Garment_Identity_Inference.png)
+
+**Figure 4. Association between second-harmonic organization and axial reconstruction error.** (A) Across 230 garment-identity medians, observed peak-shell \(R_2\) was negatively associated with identity-OOF axial error (Spearman \(\rho=-0.355875\), 95% garment-cluster bootstrap CI \([-0.455749,-0.248336]\), Holm-adjusted \(p=0.000200\)). (B) Median selected peak radius showed a weaker negative association (\(\rho=-0.207675\), 95% CI \([-0.322472,-0.095626]\), Holm-adjusted \(p=0.030097\)). (C) Descriptive identity-level quartiles show decreasing median axial error with increasing observed peak-shell \(R_2\); no inferential test is assigned to the four quartile medians. (D) Across four prespecified sketch-level low/high axial-error threshold pairs, the low-error group had higher median observed peak-shell \(R_2\) in every comparison; error bars are 95% garment-cluster bootstrap intervals. Outcome-defined threshold groups are descriptive rather than prospective reliability classes.
+
+![Figure 5. Identity-aware uncertainty and category-stratified permutation inference.](Radial_Fig/Figure_5_Bootstrap_Permutation_Inference.png)
+
+**Figure 5. Identity-aware uncertainty and category-stratified permutation inference for the two primary associations.** (A,C) Garment-cluster bootstrap distributions from 5,000 replicates for the observed peak-shell \(R_2\) and selected peak-radius Spearman associations; dashed lines mark percentile 95% intervals and solid lines the observed statistics. (B,D) Null distributions from 10,000 permutations performed within garment category, with observed statistics marked; Holm-adjusted permutation probabilities were 0.000200 and 0.030097. Because permutations were restricted within category, the conditional null distributions need not be centered at zero; they preserve category structure while breaking the within-category identity-level correspondence.
 
 ## 4.9 Outcome-defined bands and threshold sensitivity
 
 Using the primary 15°/45° definition, 1,798 sketches were in the low-error band, 141 in the intermediate band, and 361 in the high-error band. Median observed peak-shell \(R_2\) was 0.674442 in the low-error band and 0.609574 in the high-error band. Their median difference was 0.064868 (95% garment-cluster bootstrap CI 0.047036–0.084433), and Cliff's \(\delta\) was 0.269838 (0.188673–0.351032).
 
-The same direction persisted across all four prespecified threshold pairs (Table 4). Median differences ranged from 0.059442 to 0.072677 and Cliff's \(\delta\) ranged from 0.236987 to 0.300349. All cluster-bootstrap intervals remained above zero.
+The same direction persisted across all four prespecified threshold pairs (Table 4; Figure 4D). Median differences ranged from 0.059442 to 0.072677 and Cliff's \(\delta\) ranged from 0.236987 to 0.300349. All cluster-bootstrap intervals remained above zero.
 
 **Table 4. Threshold sensitivity of the descriptive low/high observed-\(R_2\) contrast.**
 
