@@ -44,101 +44,7 @@ Accordingly, \(R_2\) and \(|F_2|\) were not treated as independent evidence.
 
 ---
 
-## 4.8 Rigid-image rotation control of the 14-dimensional representation
 
-A separate image-domain perturbation control evaluated whether the final
-14-dimensional representation exhibited the intended invariant and equivariant
-behavior when the raster sketch itself was rigidly rotated and the complete
-radial-angular measurement was recomputed.
-
-All 2,300 sketches were evaluated at
-
-\[
-\phi
-\in
-\{-20^\circ,-10^\circ,-5^\circ,0^\circ,5^\circ,10^\circ,20^\circ\}.
-\]
-
-No garment labels were used and no predictive model was fitted.
-
-### 4.8.1 Stability of the second-harmonic magnitude field
-
-Across non-zero rotation conditions, the primary-domain second-harmonic magnitude
-profile showed small median numerical perturbations relative to the \(0^\circ\)
-reference.
-
-The median normalized mean absolute errors were:
-
-| Rotation | Median \(R_2\) NMAE | 95th percentile |
-|---:|---:|---:|
-| \(-20^\circ\) | 0.034374 | 0.110528 |
-| \(-10^\circ\) | 0.025998 | 0.080176 |
-| \(-5^\circ\) | 0.019959 | 0.065123 |
-| \(+5^\circ\) | 0.020684 | 0.068462 |
-| \(+10^\circ\) | 0.026253 | 0.083533 |
-| \(+20^\circ\) | 0.033446 | 0.114846 |
-
-The perturbation was smallest near the reference orientation and increased
-modestly toward the largest tested rotations, consistent with interpolation and
-finite-bin effects rather than exact raster-level invariance.
-
-### 4.8.2 Axial orientation equivariance
-
-The two doubled-angle orientation pairs exhibited the expected axial-equivariant
-behavior.
-
-For the peak axial orientation, median observed shifts closely matched the imposed
-physical rotations:
-
-| Rotation | Median observed shift | Median equivariance error | 95th percentile error |
-|---:|---:|---:|---:|
-| \(-20^\circ\) | \(-19.9968^\circ\) | \(0.2554^\circ\) | \(4.8725^\circ\) |
-| \(-10^\circ\) | \(-9.9985^\circ\) | \(0.1947^\circ\) | \(3.6967^\circ\) |
-| \(-5^\circ\) | \(-4.9930^\circ\) | \(0.1536^\circ\) | \(2.4070^\circ\) |
-| \(+5^\circ\) | \(5.0130^\circ\) | \(0.1566^\circ\) | \(2.6419^\circ\) |
-| \(+10^\circ\) | \(10.0089^\circ\) | \(0.2001^\circ\) | \(3.7304^\circ\) |
-| \(+20^\circ\) | \(20.0127^\circ\) | \(0.2638^\circ\) | \(4.5054^\circ\) |
-
-The magnitude-weighted mean orientation was even more stable:
-
-| Rotation | Median observed shift | Median equivariance error | 95th percentile error |
-|---:|---:|---:|---:|
-| \(-20^\circ\) | \(-19.9944^\circ\) | \(0.0925^\circ\) | \(0.8485^\circ\) |
-| \(-10^\circ\) | \(-9.9939^\circ\) | \(0.0791^\circ\) | \(0.7474^\circ\) |
-| \(-5^\circ\) | \(-4.9927^\circ\) | \(0.0722^\circ\) | \(0.6705^\circ\) |
-| \(+5^\circ\) | \(5.0048^\circ\) | \(0.0717^\circ\) | \(0.6327^\circ\) |
-| \(+10^\circ\) | \(10.0047^\circ\) | \(0.0797^\circ\) | \(0.7251^\circ\) |
-| \(+20^\circ\) | \(20.0065^\circ\) | \(0.0901^\circ\) | \(0.8223^\circ\) |
-
-Thus, the doubled-angle orientation coordinates transformed closely according to
-the expected \(R(2\phi)\) action over the tested rotation range.
-
-### 4.8.3 Rotation-invariant directional scalars
-
-Axial coherence showed very small absolute changes across the tested rotations.
-
-| Rotation | Median \(|\Delta\kappa|\) | 95th percentile |
-|---:|---:|---:|
-| \(-20^\circ\) | 0.002789 | 0.015726 |
-| \(-10^\circ\) | 0.002417 | 0.013304 |
-| \(-5^\circ\) | 0.002110 | 0.011695 |
-| \(+5^\circ\) | 0.002105 | 0.012179 |
-| \(+10^\circ\) | 0.002307 | 0.013588 |
-| \(+20^\circ\) | 0.002923 | 0.015927 |
-
-Orientation drift also showed small median changes, ranging from approximately
-\(1.11^\circ\) to \(1.42^\circ\), but with substantially larger upper-tail
-variation. The 95th-percentile absolute changes ranged from approximately
-\(24.69^\circ\) to \(29.39^\circ\).
-
-These results therefore support the intended transformation structure of the
-representation over the tested rigid rotations: the radial-magnitude block
-showed small numerical perturbations, the doubled-angle orientation pairs behaved
-equivariantly, and coherence and orientation drift behaved as invariant scalar
-descriptors. The results do not imply exact invariance under raster rotation or
-robustness beyond the evaluated perturbations.
-
----
 
 ## 4.3 Garment-identity separation in validation
 
@@ -340,60 +246,99 @@ This result does not invalidate the radial–angular representation; rather, it 
 
 ---
 
-## 4.8 Parameter and discretization sensitivity
+## 4.8 Rigid-image rotation control of the 14-dimensional representation
 
-Sensitivity analyses varied one construction choice at a time while preserving the primary representation and analysis.
+A separate image-domain perturbation control evaluated whether the final
+14-dimensional representation exhibited the intended invariant and equivariant
+behavior when the raster sketch itself was rigidly rotated and the complete
+radial-angular measurement was recomputed.
 
-### 4.8.1 Support threshold and concentration width
+All 2,300 sketches were evaluated at
 
-The primary support threshold was \(0.10\,m^\star\). Alternative thresholds of 0.05 and 0.15 left six of the eight radial descriptors exactly unchanged. Changes were confined primarily to onset and termination radii, which were exactly preserved for approximately 95–97% of sketches and remained within two shells for approximately 98–100%.
+\[
+\phi
+\in
+\{-20^\circ,-10^\circ,-5^\circ,0^\circ,5^\circ,10^\circ,20^\circ\}.
+\]
 
-Changing the concentration half-width from the primary \(\pm4\) shell-coordinate units to \(\pm2\) or \(\pm6\) altered only the concentration coordinate by construction. The remaining seven radial descriptors were identical. Rank correlation of the concentration coordinate with its primary value remained 0.888 at half-width 2 and 0.949 at half-width 6.
+No garment labels were used and no predictive model was fitted.
 
-### 4.8.2 Angular resolution
+### 4.8.1 Stability of the second-harmonic magnitude field
 
-The canonical 72 angular bins were coarsened by exact mass aggregation to 36 and 24 bins, without image interpolation.
+Across non-zero rotation conditions, the primary-domain second-harmonic magnitude
+profile showed small median numerical perturbations relative to the \(0^\circ\)
+reference.
 
-**Table 4. Sensitivity of the harmonic field to angular resolution.**
+The median normalized mean absolute errors were:
 
-| Angular bins | \(R_2\) Spearman vs 72 | \(C_2\) Spearman | \(S_2\) Spearman | Median axial difference | Exact peak-radius agreement | Peak-magnitude Spearman |
-|---:|---:|---:|---:|---:|---:|---:|
-| 72 | 1.000000 | 1.000000 | 1.000000 | \(0.000^\circ\) | 1.000000 | 1.000000 |
-| 36 | 0.999193 | 0.998844 | 0.971118 | \(2.530^\circ\) | 0.926522 | 0.998305 |
-| 24 | 0.997051 | 0.995460 | 0.912654 | \(5.040^\circ\) | 0.862174 | 0.994252 |
+| Rotation | Median \(R_2\) NMAE | 95th percentile |
+|---:|---:|---:|
+| \(-20^\circ\) | 0.034374 | 0.110528 |
+| \(-10^\circ\) | 0.025998 | 0.080176 |
+| \(-5^\circ\) | 0.019959 | 0.065123 |
+| \(+5^\circ\) | 0.020684 | 0.068462 |
+| \(+10^\circ\) | 0.026253 | 0.083533 |
+| \(+20^\circ\) | 0.033446 | 0.114846 |
 
-Second-harmonic magnitude was therefore highly stable to substantial reductions in angular resolution. The larger changes in \(S_2\) than \(C_2\) were interpreted as coordinate-component effects rather than distinct physical signals.
+The perturbation was smallest near the reference orientation and increased
+modestly toward the largest tested rotations, consistent with interpolation and
+finite-bin effects rather than exact raster-level invariance.
 
-### 4.8.3 Radial domain
+### 4.8.2 Axial orientation equivariance
 
-The primary domain \(3.5\text{--}27.5\) contained endpoint peak locations for 22.04% of sketches. Specifically, 12.70% peaked at the lower endpoint and 9.35% at the upper endpoint.
+The two doubled-angle orientation pairs exhibited the expected axial-equivariant
+behavior.
 
-The primary domain was compared with inward and outward alternatives extending from \(5.5\text{--}25.5\) through \(0.5\text{--}30.5\). Global radial summaries remained more stable than localized quantities. Relative to the primary domain, rank correlations at the widest tested domain \(0.5\text{--}30.5\) were 0.955 for integrated magnitude, 0.883 for radial centroid, and 0.786 for radial spread, whereas peak radius decreased to 0.511, concentration to 0.476, and onset radius to 0.471.
+For the peak axial orientation, median observed shifts closely matched the imposed
+physical rotations:
 
-Among the 215 sketches whose primary peak occurred at the upper boundary \(r=27.5\), expansion to \(r=30.5\) caused 40.93% to move to a larger radius. Only 38.14% remained at 27.5 under the widest tested expansion.
+| Rotation | Median observed shift | Median equivariance error | 95th percentile error |
+|---:|---:|---:|---:|
+| \(-20^\circ\) | \(-19.9968^\circ\) | \(0.2554^\circ\) | \(4.8725^\circ\) |
+| \(-10^\circ\) | \(-9.9985^\circ\) | \(0.1947^\circ\) | \(3.6967^\circ\) |
+| \(-5^\circ\) | \(-4.9930^\circ\) | \(0.1536^\circ\) | \(2.4070^\circ\) |
+| \(+5^\circ\) | \(5.0130^\circ\) | \(0.1566^\circ\) | \(2.6419^\circ\) |
+| \(+10^\circ\) | \(10.0089^\circ\) | \(0.2001^\circ\) | \(3.7304^\circ\) |
+| \(+20^\circ\) | \(20.0127^\circ\) | \(0.2638^\circ\) | \(4.5054^\circ\) |
 
-Accordingly, peak radius is a window-dependent localization statistic. The endpoint occupancy and outward migration indicate partial boundary censoring, particularly for upper-boundary peaks.
+The magnitude-weighted mean orientation was even more stable:
 
-### 4.8.4 Radial resolution
+| Rotation | Median observed shift | Median equivariance error | 95th percentile error |
+|---:|---:|---:|---:|
+| \(-20^\circ\) | \(-19.9944^\circ\) | \(0.0925^\circ\) | \(0.8485^\circ\) |
+| \(-10^\circ\) | \(-9.9939^\circ\) | \(0.0791^\circ\) | \(0.7474^\circ\) |
+| \(-5^\circ\) | \(-4.9927^\circ\) | \(0.0722^\circ\) | \(0.6705^\circ\) |
+| \(+5^\circ\) | \(5.0048^\circ\) | \(0.0717^\circ\) | \(0.6327^\circ\) |
+| \(+10^\circ\) | \(10.0047^\circ\) | \(0.0797^\circ\) | \(0.7251^\circ\) |
+| \(+20^\circ\) | \(20.0065^\circ\) | \(0.0901^\circ\) | \(0.8223^\circ\) |
 
-Radial-resolution sensitivity was assessed after exact mass aggregation from 72 to 36 and 24 radial bins. To isolate resolution from domain mismatch, all three resolutions were compared over the same normalized physical interval, \(1/12\le r_{\mathrm{norm}}\le1/3\).
+Thus, the doubled-angle orientation coordinates transformed closely according to
+the expected \(R(2\phi)\) action over the tested rotation range.
 
-**Table 5. Radial-resolution rank stability on an exact common physical domain.**
+### 4.8.3 Rotation-invariant directional scalars
 
-| Feature | 36 bins vs 72 | 24 bins vs 72 |
-|---|---:|---:|
-| Integrated magnitude | 0.978486 | 0.942134 |
-| Radial centroid | 0.967402 | 0.931144 |
-| Radial spread | 0.948735 | 0.892909 |
-| Peak magnitude | 0.935818 | 0.877158 |
-| Peak radius | 0.790820 | 0.691084 |
-| Peak concentration | 0.676002 | 0.606417 |
-| Onset radius | 0.591605 | 0.463113 |
-| Termination radius | 0.635755 | 0.418232 |
+Axial coherence showed very small absolute changes across the tested rotations.
 
-Median normalized physical displacement of peak radius was 0.006944 at 36 bins and 0.013889 at 24 bins.
+| Rotation | Median \(|\Delta\kappa|\) | 95th percentile |
+|---:|---:|---:|
+| \(-20^\circ\) | 0.002789 | 0.015726 |
+| \(-10^\circ\) | 0.002417 | 0.013304 |
+| \(-5^\circ\) | 0.002110 | 0.011695 |
+| \(+5^\circ\) | 0.002105 | 0.012179 |
+| \(+10^\circ\) | 0.002307 | 0.013588 |
+| \(+20^\circ\) | 0.002923 | 0.015927 |
 
-Overall, integrated magnitude, centroid, and spread were substantially more stable to domain and resolution perturbations than localized peak-, onset-, termination-, and concentration-based descriptors. The primary parameterization is therefore treated as a fixed measurement specification rather than as an empirically optimal or universally invariant configuration.
+Orientation drift also showed small median changes, ranging from approximately
+\(1.11^\circ\) to \(1.42^\circ\), but with substantially larger upper-tail
+variation. The 95th-percentile absolute changes ranged from approximately
+\(24.69^\circ\) to \(29.39^\circ\).
+
+These results therefore support the intended transformation structure of the
+representation over the tested rigid rotations: the radial-magnitude block
+showed small numerical perturbations, the doubled-angle orientation pairs behaved
+equivariantly, and coherence and orientation drift behaved as invariant scalar
+descriptors. The results do not imply exact invariance under raster rotation or
+robustness beyond the evaluated perturbations.
 
 ---
 
