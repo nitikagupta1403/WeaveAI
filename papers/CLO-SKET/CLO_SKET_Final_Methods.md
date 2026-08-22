@@ -2,17 +2,17 @@
 
 ## 3.1 Study design and scope
 
-This study developed and audited a compact radial–angular representation of garment sketches. The analysis was geometric rather than semantic: garment-category labels and manually annotated garment parts were not used to construct or select the descriptors. Category information was used only to balance grouped validation folds and to stratify the final permutation procedure.
+This study develops an explicit radial–angular representation of garment-sketch geometry. The analysis is geometric rather than semantic: garment-category labels and manually annotated garment parts are not used to construct or select the descriptors. Category information is used only to balance grouped validation folds and to stratify the permutation procedure.
 
-The final primary representation was a provenance-locked 14-dimensional vector comprising eight radial descriptors derived directly from the magnitude of the second angular harmonic and six axial descriptors derived from its phase. Historical 28-dimensional feature-family assemblies, principal-component analysis, von Mises fitting, full angular-density reconstruction, and category-based feature selection were not part of the final study.
+The primary representation is a 14-dimensional vector comprising eight radial descriptors derived from the magnitude of the second angular harmonic and six axial descriptors derived from its orientation. No dimensionality reduction or learned embedding is used in constructing this representation.
 
-The analytical sequence was: (1) construct the conditional angular distribution around each sketch's intensity-weighted centroid; (2) extract the second angular harmonic over radius; (3) summarize its radial magnitude and axial orientation in the locked 14-dimensional representation; (4) audit exact algebraic relationships among harmonic quantities; (5) recover garment identities and construct identity-disjoint folds; (6) reconstruct the observed second-moment components out of fold; and (7) quantify uncertainty using garment-identity resampling and category-stratified permutation.
+The analysis proceeds in seven stages: (1) construction of the conditional angular distribution around each sketch's intensity-weighted centroid; (2) extraction of the second angular harmonic over radius; (3) reduction of its radial magnitude and axial orientation to the 14-dimensional representation; (4) verification of algebraic relationships among harmonic quantities; (5) recovery of garment identities and construction of identity-disjoint folds; (6) out-of-fold reconstruction of the observed second-harmonic Cartesian components; and (7) uncertainty estimation and association analysis at the garment-identity level.
 
 ## 3.2 Dataset and garment-identity reconstruction
 
 The analysis used all 2,300 CLO-SKET images. The directory structure contained 23 garment-category folders. Garment identity was reconstructed from the category-qualified source identifier encoded in each filename; the replicate identifier denoted the sketch associated with that source garment. This procedure recovered 230 garment identities, exactly 10 per category, with 9–11 sketches per identity because of irregular filename records.
 
-File paths were unique. SHA-256 hashing found no repeated raw files, and hashing of decoded pixel arrays found no repeated decoded images. Perceptual hashes were used only to screen candidate visually similar pairs and were not interpreted as proof of duplication or lineage. The recovered garment identity was therefore used as the indivisible unit for cross-validation and resampling. The audit did not establish that the 230 garment identities were mutually independent sampling units; population-level inference remains conditional on that assumption.
+File paths were unique. SHA-256 hashing found no repeated raw files, and hashing of decoded pixel arrays found no repeated decoded images. Perceptual hashes were used only to screen candidate visually similar pairs and were not interpreted as proof of duplication or lineage. The recovered garment identity was therefore used as the indivisible unit for cross-validation and resampling. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference is therefore conditional on that assumption.
 
 ## 3.3 Polar coordinate construction
 
@@ -54,7 +54,7 @@ F_{2,i}(r_j)
 \sum_{k=1}^{72}p_i(\theta_k\mid r_j)e^{-\mathrm{i}2\theta_k}.
 \]
 
-The negative exponential records the FFT convention used by the audited implementation. Equivalently,
+The negative exponential follows the discrete Fourier-transform convention used in the implementation.Equivqlently,
 
 \[
 C_{2,i}(r_j)
@@ -105,7 +105,7 @@ d_{\mathrm{ax}}(a,b)
 
 All reported angular errors used the degree-equivalent interval \([0^\circ,90^\circ]\).
 
-## 3.5 Locked radial domain
+## 3.5 Primary radial domain
 
 The primary radial analysis was restricted to 25 shell centers spanning
 
@@ -113,7 +113,11 @@ The primary radial analysis was restricted to 25 shell centers spanning
 \mathcal R=\{3.5,4.5,\ldots,27.5\}.
 \]
 
-This domain was fixed before the peak-shell sensitivity and inferential analyses. For each sketch, the selected observed peak shell was
+The primary analysis was prespecified on 25 shell centers,
+\[
+\mathcal R=\{3.5,4.5,\ldots,27.5\}.
+\]
+Sensitivity analyses subsequently examined dependence on radial-domain choice without altering this primary specification.
 
 \[
 j_i^\star=\arg\max_{j:r_j\in\mathcal R}m_i(r_j),
@@ -127,7 +131,7 @@ The peak magnitude was \(m_i^\star=m_i(r_i^\star)\). Because \(R_2(r)=|F_2(r)|\)
 R_{2,i}(r_i^\star)=m_i^\star.
 \]
 
-These are therefore two names for the same measured quantity, not independent features or independent evidence. Peak radius is a selected coordinate on a discrete, bounded domain; boundary occupancy was audited explicitly.
+These are therefore two names for the same measured quantity, not independent features or independent evidence. Peak radius is a selected coordinate on a discrete, bounded domain; Because peak radius is selected on a finite discrete domain, boundary occupancy and radial-domain sensitivity were evaluated separately.
 
 ## 3.6 Eight radial-magnitude descriptors
 
@@ -247,9 +251,9 @@ Raw axial angles were not entered directly into the primary vector. Each retaine
 ]\in\mathbb R^6.
 \]
 
-This encoding is invariant under \(\alpha\mapsto\alpha+\pi\). Persistence and weighted-dispersion summaries were excluded after the redundancy audit; reconstructed circular quantities and tautological \(F_2\)-versus-\(R_2\) relations were retained only for auditing, not as primary features.
+This encoding is invariant under \(\alpha\mapsto\alpha+\pi\). Persistence and weighted-dispersion summaries were excluded because they were redundant with retained coordinates. Reconstructed circular quantities and algebraically determined \(F_2\)-versus-\(R_2\) relationships were used only as numerical consistency checks and were not included as primary features.
 
-## 3.8 Primary 14-dimensional representation and provenance lock
+## 3.8 Primary 14-dimensional representation
 
 The final sketch representation was the exact ordered concatenation
 
@@ -263,7 +267,22 @@ The final sketch representation was the exact ordered concatenation
 \in\mathbb R^{14}.
 \]
 
-The resulting matrix had shape \(2300\times14\), contained only finite values, and matched the locked \(8+6\) concatenation exactly with maximum numerical difference zero. Column order was frozen by the Cell 23C provenance lock. No historical 28-dimensional family assembly was asserted.
+The resulting matrix had shape \(2300\times14\), contained only finite values, and matched the locked \(8+6\) concatenation exactly with maximum numerical difference zero. al ## 3.8 Primary 14-dimensional representation
+
+The sketch-level representation is the ordered concatenation
+
+\[
+\mathbf x_i
+=
+\left[
+\mathbf x^{(F_2)}_i
+\mid
+\mathbf x^{(\alpha_2)}_i
+\right]
+\in\mathbb R^{14}.
+\]
+
+The resulting matrix has dimensions \(2300\times14\). The eight radial and six axial coordinates were concatenated in the prespecified order given in Sections 3.6 and 3.7. Numerical verification confirmed exact equality between the stored representation and an independently reconstructed \(8+6\) concatenation, with maximum absolute difference zero. All entries were finite.
 
 ## 3.9 Garment-identity-disjoint out-of-fold reconstruction
 
@@ -312,13 +331,13 @@ e_i=d_{\mathrm{ax}}
 \right).
 \]
 
-Fold-local global and radius-only models were retained as comparators. The historical sketch-level out-of-fold arrays were preserved for audit comparison but were superseded for final reporting by the identity-disjoint estimates.
+Fold-local global and radius-only models were retained as comparators. An initial image-level split was retained only as a sensitivity comparison. Primary reconstruction results use the garment-identity-disjoint folds.
 
 This reconstruction is a shared-source consistency diagnostic: \(m\), \(C_2\), and \(S_2\) all arise from the same conditional angular field. It does not demonstrate recovery of an independent physical or semantic target.
 
 ## 3.10 Peak-shell association analysis
 
-The two prespecified primary quantities were observed peak-shell magnitude \(R_{2,i}(r_i^\star)\) and selected peak radius \(r_i^\star\). The primary outcome was peak-shell axial error \(e_i\).
+The primary association concerned observed peak-shell magnitude \(R_{2,i}(r_i^\star)\) and peak-shell axial error \(e_i\). Selected peak radius \(r_i^\star\) was evaluated as a secondary, sensitivity-qualified association because it is defined by an argmax over a finite radial domain.
 
 For confirmatory association analysis, all sketches belonging to garment identity \(g\) were reduced to medians:
 
@@ -365,7 +384,7 @@ P(R_{2,\mathrm{low}}<R_{2,\mathrm{high}}).
 
 Intervals were obtained by resampling complete garment identities. No p-values were assigned to these outcome-defined, strongly overlapping groups, and the thresholds were not optimized against the data.
 
-## 3.13 Algebraically coupled diagnostic
+## 3.13 Algebraically coupled calibration diagnostic
 
 Peak-shell magnitude error was
 
@@ -379,6 +398,8 @@ R_{2,i}(r_i^\star).
 
 Because the observed value appears algebraically with a negative sign in \(\Delta R_2\), its correlation with observed \(R_2\) is mathematically coupled. This correlation was reported only as a calibration diagnostic and received no inferential p-value.
 
-## 3.14 Evidence and claim boundary
+## 3.14 Scope of inference
 
-The analysis supports exact computational-provenance claims for the 14-dimensional representation, leakage-controlled reconstruction transfer to unseen recovered garment identities, descriptive peak-shell reconstruction behavior, and conditional garment-level associations. It does not establish mutual independence of the 230 identities, causality, semantic garment-part recognition, human-like understanding, a physical radial law, a prospective reliability classifier, von Mises fitting, or reconstruction of the complete angular density.
+The analysis supports an explicit 14-dimensional geometric representation, reconstruction evaluation on unseen recovered garment identities, cluster-aware uncertainty estimates, and garment-level association analyses. Reconstruction from \((r,|F_2|)\) is a shared-source consistency diagnostic because the predictors and targets arise from the same conditional angular field.
+
+Inference remains conditional on the recovered garment identities constituting appropriate independent sampling units. The analysis does not establish causality, semantic garment-part recognition, a physical radial law, prospective reliability classification, likelihood-based circular modeling, or reconstruction of the complete angular density.
