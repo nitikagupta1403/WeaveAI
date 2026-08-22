@@ -267,7 +267,7 @@ The appropriate conclusion is therefore empirical rather than absolute. The rigi
 
 ---
 
-## 5.5 Garment identity and the generalization target
+## 5.6 Garment identity and the generalization target
 
 CLO-SKET contains repeated drawings of common source garments. The 2,300 sketches correspond to 230 recovered garment identities distributed across 23 garment categories, with 9–11 sketches per identity.
 
@@ -283,7 +283,7 @@ The same dependency structure also motivates garment-level inference. Repeated s
 
 ---
 
-## 5.6 What magnitude-only reconstruction actually shows
+## 5.7 What magnitude-only reconstruction actually shows
 
 The reconstruction experiment deliberately removes explicit phase information. The predictors are only
 
@@ -337,7 +337,7 @@ This does not invalidate the radial–angular representation. It identifies what
 
 ---
 
-## 5.7 Parameter sensitivity and the distinction between global and localized descriptors
+## 5.8 Parameter sensitivity and the distinction between global and localized descriptors
 
 An explicit representation is only as interpretable as its dependence on numerical design choices.
 
@@ -359,7 +359,7 @@ This distinction also changes the interpretation of peak radius in subsequent as
 
 ---
 
-## 5.8 Why phase error depends on harmonic magnitude
+## 5.9 Why phase error depends on harmonic magnitude
 
 The empirical relationship between harmonic magnitude and angular reconstruction error has a direct mathematical basis.
 
@@ -439,7 +439,7 @@ The first-order approximation is also not exact for large perturbations. Its rol
 
 ---
 
-## 5.9 Conditioning of orientation drift
+## 5.10 Conditioning of orientation drift
 
 Orientation drift across the primary radial domain should also be interpreted in relation to endpoint harmonic strength. The descriptor
 
@@ -473,7 +473,7 @@ Orientation drift should therefore not be interpreted as an unqualified measure 
 
 ---
 
-## 5.10 Statistical interpretation
+## 5.11 Statistical interpretation
 
 The analysis separates mathematical identities, descriptive empirical patterns, and inferential claims.
 
@@ -531,7 +531,7 @@ Inference remains conditional on treating the 230 recovered garment identities a
 
 ---
 
-## 5.11 Scientific contribution
+## 5.12 Scientific contribution
 
 None of the individual mathematical operations used here is new. Polar coordinates, Fourier moments, axial statistics, tree-based regression, bootstrap resampling, and permutation inference are established methods.
 
@@ -552,7 +552,7 @@ The resulting contribution is therefore methodological rather than semantic. Thi
 
 ---
 
-## 5.12 Limitations
+## 5.13 Limitations
 
 Several limitations remain.
 
@@ -576,7 +576,7 @@ Finally, no garment-part annotations, semantic labels beyond garment category, p
 
 ---
 
-## 5.13 Future work
+## 5.14 Future work
 
 The highest-priority extension is external validation on independently curated garment-sketch collections with explicit garment, designer, and collection identifiers. The representation and evaluation protocol should be specified before examining transfer performance so that external validation tests generalization rather than enabling another round of parameter selection.
 
@@ -592,7 +592,7 @@ Finally, semantic validation would require independent annotations. Expert-defin
 
 ---
 
-## 5.14 Conclusion
+## 5.15 Conclusion
 
 This study demonstrates that garment sketches can be represented as explicit radial–angular measurements using shell-conditioned second-harmonic geometry.
 
