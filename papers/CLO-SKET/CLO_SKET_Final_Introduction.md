@@ -60,7 +60,7 @@ S_2(r)^2
 and its axial orientation is
 
 \[
-\mu_2(r)
+\alpha_2(r)
 =
 \frac12
 \operatorname{atan2}
@@ -71,7 +71,7 @@ C_2(r)
 \pmod{\pi}.
 \]
 
-The use of \(m=2\) is dictated by axial symmetry rather than by retrospective model performance. Garment orientation is treated as undirected, so
+The use of \(m=2\) follows from the axial orientation quantity targeted by the representation rather than from retrospective model performance. We represent orientation as undirected, so
 
 \[
 \theta
@@ -87,7 +87,7 @@ F_m(\theta+\pi)
 (-1)^mF_m(\theta).
 \]
 
-Odd harmonics therefore change sign, whereas even harmonics remain invariant. The second harmonic is consequently the lowest non-zero harmonic compatible with the required axial equivalence. Higher even harmonics can describe finer angular organization, but they do not replace the lowest-order axial statistic. This geometric rationale is evaluated empirically through a low-order \(m=1,2,3,4\) control rather than used as a post-hoc harmonic-selection procedure.
+Odd harmonics therefore change sign, whereas even harmonics remain invariant. The second harmonic is consequently the lowest non-zero harmonic compatible with this axial equivalence. Higher even harmonics can describe finer angular organization, but they do not replace the lowest-order axial statistic. This geometric rationale is evaluated empirically through a low-order \(m=1,2,3,4\) control rather than used as a post-hoc harmonic-selection procedure.
 
 The shell-level harmonic field is reduced to an explicit 14-dimensional sketch representation. Eight coordinates summarize radial second-harmonic magnitude: integrated magnitude, magnitude-weighted radial centroid, radial spread, concentration near the discrete peak, onset radius, termination radius, peak radius, and peak magnitude. Six coordinates summarize axial structure: doubled-angle Cartesian encodings of the peak and magnitude-weighted mean orientations, together with axial coherence and orientation drift.
 
@@ -140,7 +140,7 @@ Explicit measurements also depend on numerical design choices. The present analy
 A further issue arises when interpreting axial reconstruction error. The phase of a short harmonic vector is intrinsically less stable than that of a long one. For
 
 \[
-\mu_2
+\alpha_2
 =
 \frac12
 \operatorname{atan2}(S_2,C_2),
@@ -149,7 +149,7 @@ A further issue arises when interpreting axial reconstruction error. The phase o
 first-order perturbation gives
 
 \[
-d\mu_2
+d\alpha_2
 =
 \frac{
 C_2\,dS_2-S_2\,dC_2
@@ -161,7 +161,7 @@ C_2\,dS_2-S_2\,dC_2
 with
 
 \[
-|d\mu_2|
+|d\alpha_2|
 \leq
 \frac{
 \sqrt{dC_2^2+dS_2^2}
@@ -184,11 +184,11 @@ Against this background, the study addresses five questions:
 
 3. **Robustness:** How stable are broad and localized radial–angular descriptors to changes in support threshold, concentration width, angular resolution, radial resolution, and radial domain?
 
-4. **Harmonic rationale:** Is the primary \(m=2\) statistic justified by the axial symmetry of the measurement and consistent with the observed low-order harmonic spectrum?
+4. **Harmonic rationale:** Is the primary \(m=2\) statistic justified by the axial orientation convention of the measurement and consistent with the observed low-order harmonic spectrum?
 
 5. **Error geometry and association:** Are garment-level differences in axial reconstruction error associated with observed harmonic magnitude, and are those differences consistent with the perturbation conditioning of axial phase?
 
-The contribution of CLO-SKET is therefore not a new Fourier transform, a semantic garment-recognition model, or a new generative fashion architecture. It is an explicit geometric measurement framework for repeated garment sketches that keeps the chain
+The contribution of this study is therefore not a new Fourier transform, a semantic garment-recognition model, or a new generative fashion architecture. It is an explicit geometric measurement framework for repeated garment sketches that keeps the chain
 
 \[
 \text{geometry}
