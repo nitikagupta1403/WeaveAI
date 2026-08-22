@@ -736,36 +736,29 @@ The eight radial and six axial coordinates were concatenated in the order define
 
 ---
 
-## 3.10 Garment-identity-disjoint reconstruction
+## 3.10 Garment-identity-disjoint shell-field reconstruction
 
-The reconstruction experiment assessed whether the observed second-harmonic Cartesian field could be estimated from radius and harmonic magnitude while withholding complete garment identities.
+The reconstruction experiment interrogated the shell-level second-harmonic field underlying the 14-dimensional summary representation. It did not use the 14-dimensional vector itself as the predictor input.
 
-Five category-balanced folds were constructed over the 230 recovered garment identities. Each test fold contained two complete identities from each of the 23 garment categories,
+Five category-balanced folds were constructed over the 230 recovered garment identities. Each test fold contained two complete identities from each of the 23 garment categories, giving 46 test identities per fold; the remaining 184 identities formed the training set. Train/test garment-identity overlap was zero in every fold, and every valid sketch-shell observation received exactly one out-of-fold prediction.
 
-\[
-46
-\]
-
-test identities per fold, while the remaining
-
-\[
-184
-\]
-
-identities formed the training set. Train/test garment-identity overlap was zero. Every sketch and every garment identity received exactly one out-of-fold prediction.
-
-For sketch \(i\) and shell \(j\), predictors were
+For sketch \(i\) and primary-domain shell \(r_j\), the predictor vector was
 
 \[
 \mathbf z_{ij}
 =
-[
-r_j,
+\left[
+r_j,\,
 R_{2,i}(r_j)
-].
+\right]
+=
+\left[
+r_j,\,
+|F_{2,i}(r_j)|
+\right].
 \]
 
-Separate regression models estimated
+Separate regression models estimated the Cartesian second-harmonic components,
 
 \[
 \widehat C_{2,i}(r_j)
@@ -781,21 +774,18 @@ and
 f_S(\mathbf z_{ij}).
 \]
 
-Both models used `HistGradientBoostingRegressor` with the same fixed specification:
+Both \(f_C\) and \(f_S\) were implemented using
+`HistGradientBoostingRegressor` with
 
 \[
 \texttt{max\_iter}=250,
-\]
-
-\[
+\qquad
 \texttt{learning\_rate}=0.05,
 \]
 
 \[
 \texttt{max\_leaf\_nodes}=15,
-\]
-
-\[
+\qquad
 \texttt{l2\_regularization}=1.0,
 \]
 
@@ -805,46 +795,9 @@ and
 \texttt{random\_state}=42.
 \]
 
-Predicted magnitude and orientation were derived from the predicted Cartesian components rather than fitted separately:
+No feature standardization or other scaling transformation was applied. All unspecified estimator arguments used the defaults of scikit-learn 1.6.1.
 
-\[
-\widehat R_{2,i}(r_j)
-=
-\sqrt{
-\widehat C_{2,i}(r_j)^2+
-\widehat S_{2,i}(r_j)^2
-},
-\]
-
-\[
-\widehat\mu_{2,i}(r_j)
-=
-\frac12
-\operatorname{atan2}
-\left(
-\widehat S_{2,i}(r_j),
-\widehat C_{2,i}(r_j)
-\right)
-\pmod{\pi}.
-\]
-
-At the observed peak shell,
-
-\[
-e_i
-=
-d_{\mathrm{ax}}
-\left[
-\widehat\mu_{2,i}(r_i^\star),
-\mu_{2,i}(r_i^\star)
-\right]
-\]
-
-defined the peak-shell axial reconstruction error.
-
-Two fold-local comparators were evaluated using the same held-out identities: a global intercept-only reference and a radius-only model. An initial image-level cross-validation analysis was retained only to assess sensitivity to the validation unit; all primary reconstruction results use garment-identity-disjoint predictions.
-
-Because \(R_2\), \(C_2\), and \(S_2\) all derive from the same conditional angular field, reconstruction is interpreted as a shared-source consistency diagnostic rather than recovery of an independent semantic or physical target.
+The final analysis was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1.
 
 ---
 
