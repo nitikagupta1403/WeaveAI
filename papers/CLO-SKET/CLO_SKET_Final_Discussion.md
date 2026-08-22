@@ -22,7 +22,19 @@ Even harmonics are therefore invariant under a \(180^\circ\) reversal, whereas o
 
 Second, garment identity is the appropriate internal unit for evaluating generalization in CLO-SKET. The dataset contains 2,300 sketches corresponding to 230 recovered garment identities, with approximately ten sketches per identity. Complete garment identities were therefore withheld during five-fold cross-validation. Under this identity-disjoint design, reconstructed second-harmonic magnitude remained strongly aligned with observation, with whole-field \(R_2\) RMSE \(=0.145610\) and Pearson \(r=0.926390\), peak-shell RMSE \(=0.148303\) and Pearson \(r=0.810543\), and median peak-shell axial error \(=4.104^\circ\).
 
-Third, the reconstruction experiment is strongly dependent on the common image coordinate frame. Global analytic rotation left coordinate-free performance essentially unchanged, but assigning independent rotations to garment identities caused peak-shell axial error to approach the \(45^\circ\) chance expectation for an axial angle. Thus, radius and \(R_2\) do not intrinsically determine phase. The strong phase recovery observed in upright sketches depends substantially on population-level orientation structure relative to the common image axes.
+Third, the reconstruction experiment is strongly dependent on the common image coordinate frame. A complementary image-domain rotation control tested the transformation behavior
+of the 14-dimensional representation itself. When all 2,300 raster sketches were
+rigidly rotated by \(\pm5^\circ\), \(\pm10^\circ\), and \(\pm20^\circ\) and the
+complete measurement pipeline was recomputed, the radial-magnitude block showed
+small median numerical perturbations, while the two doubled-angle orientation
+pairs tracked the imposed rotations closely under the expected \(R(2\phi)\)
+action. Magnitude-weighted mean orientation was particularly stable, with
+95th-percentile transformation error remaining below \(0.85^\circ\) over the
+tested range. Axial coherence changed only slightly, whereas orientation drift
+showed small median changes but a substantially wider upper tail. These results
+support the intended invariant/equivariant transformation structure of the
+representation over the tested rigid rotations, without implying exact raster
+invariance or robustness beyond those perturbations. Global analytic rotation left coordinate-free performance essentially unchanged, but assigning independent rotations to garment identities caused peak-shell axial error to approach the \(45^\circ\) chance expectation for an axial angle. Thus, radius and \(R_2\) do not intrinsically determine phase. The strong phase recovery observed in upright sketches depends substantially on population-level orientation structure relative to the common image axes.
 
 Fourth, robustness differs substantially across descriptor families. Broad radial summaries such as integrated magnitude, radial centroid, and radial spread were comparatively stable under reasonable discretization and domain perturbations. Localized descriptors—particularly onset, termination, concentration, and peak radius—were more dependent on radial resolution and analysis boundaries. Approximately 22% of primary peak radii occurred at a radial-domain endpoint, and 40.9% of sketches whose primary peak occurred at the upper boundary moved beyond that boundary when the domain was expanded to 30.5. Peak radius must therefore be interpreted as a domain-conditioned localization statistic rather than an intrinsic physical scale.
 
