@@ -1,52 +1,79 @@
-# CLO-SKET Bibliography and Citation Map
+@inproceedings{baldrati2023multimodal,
+  author    = {Baldrati, Alberto and Morelli, Davide and Cartella, Giuseppe and Cornia, Marcella and Bertini, Marco and Cucchiara, Rita},
+  title     = {Multimodal Garment Designer: Human-Centric Latent Diffusion Models for Fashion Image Editing},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2023},
+  pages     = {23393--23402},
+  doi       = {10.1109/ICCV51070.2023.02138}
+}
 
-## Verified reference list
+@article{cao2023sketch,
+  author  = {Cao, Xiao-lu and Lu, Fu-nan and Zhu, Xiang and Weng, Li-bo and Lu, Shu-fang and Gao, Fei},
+  title   = {Sketch-Based Compatible Clothing Image Generation},
+  journal = {Journal of Zhejiang University (Engineering Science)},
+  year    = {2023},
+  volume  = {57},
+  number  = {5},
+  pages   = {939--947},
+  doi     = {10.3785/j.issn.1008-973X.2023.05.010}
+}
 
-An, L., & Li, W. (2014). An integrated approach to fashion flat sketches classification. *International Journal of Clothing Science and Technology, 26*(5), 346–366. https://doi.org/10.1108/IJCST-05-2013-0054
+@article{liang2023controllable,
+  author  = {Liang, Xinru and Mo, Haoran and Gao, Chengying},
+  title   = {Controllable Garment Image Synthesis Integrated with Frequency Domain Features},
+  journal = {Computer Graphics Forum},
+  year    = {2023},
+  volume  = {42},
+  number  = {7},
+  pages   = {e14938},
+  doi     = {10.1111/cgf.14938}
+}
 
-Arnia, F. (2020). *Clo-Sket* (Version 1) [Data set]. Mendeley Data. https://doi.org/10.17632/jt533nkhsf.1
+@inproceedings{zhang2024texcontrol,
+  author    = {Zhang, Yongming and Zhang, Tianyu and Xie, Haoran},
+  title     = {TexControl: Sketch-Based Two-Stage Fashion Image Generation Using Diffusion Model},
+  booktitle = {Proceedings of the 2024 NICOGRAPH International (NICOInt)},
+  year      = {2024},
+  pages     = {64--68},
+  doi       = {10.1109/NICOInt62634.2024.00021}
+}
 
-Bookstein, F. L. (1997). Landmark methods for forms without landmarks: Morphometrics of group differences in outline shape. *Medical Image Analysis, 1*(3), 225–243. https://doi.org/10.1016/S1361-8415(97)85012-8
+@misc{singh2024fashionsdx,
+  author        = {Singh, Abhishek Kumar and Patras, Ioannis},
+  title         = {FashionSD-X: Multimodal Fashion Garment Synthesis Using Latent Diffusion},
+  year          = {2024},
+  eprint        = {2404.18591},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2404.18591}
+}
 
-Fondevilla, A., Rohmer, D., Hahmann, S., Bousseau, A., & Cani, M.-P. (2021). Fashion transfer: Dressing 3D characters from stylized fashion sketches. *Computer Graphics Forum, 40*(6), 466–483. https://doi.org/10.1111/cgf.14390
+@article{huang2025sketchtailor,
+  author  = {Huang, Dongjin and Wang, Yanli and Qu, Jiantao and Wang, Ansheng and Tang, Yixiang},
+  title   = {SketchTailor: Lightweight Sketch-Driven Modeling for High-Fidelity Garment Pattern Reconstruction},
+  journal = {Computers \& Graphics},
+  year    = {2025},
+  volume  = {131},
+  pages   = {104345},
+  doi     = {10.1016/j.cag.2025.104345}
+}
 
-Jammalamadaka, S. R., & SenGupta, A. (2001). *Topics in circular statistics*. World Scientific. https://doi.org/10.1142/4031
+@misc{cao2026vietfashion,
+  author        = {Cao, Hoang-Nguyen and Bui, Le-Hoang and Vo, Dinh-Khoi and Tran, Minh-Triet and Le, Trung-Nghia},
+  title         = {VietFashion: Benchmarking Sketch-Text Composed Image Retrieval for Cultural Outfits},
+  year          = {2026},
+  eprint        = {2606.13427},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2606.13427}
+}
 
-McCane, B. (2013). Shape variation in outline shapes. *Systematic Biology, 62*(1), 134–146. https://doi.org/10.1093/sysbio/sys080
-
-Oh, J., & Kim, S. (2026). Generation of body-fit garment patterns using a landmark matching algorithm. *Clothing and Textiles Research Journal, 44*(1), 75–92. https://doi.org/10.1177/0887302X251340652
-
-Tsuru, T., Sugahara, M., & Nishimura, H. (2021). Silhouette classification of designer's collections in luxury fashion brands. *International Journal of Affective Engineering, 20*(1), 33–40. https://doi.org/10.5057/ijae.IJAE-D-20-00002
-
-Wang, T. Y., Ceylan, D., Popović, J., & Mitra, N. J. (2018). Learning a shared shape space for multimodal garment design. *ACM Transactions on Graphics, 37*(6), Article 203, 1–13. https://doi.org/10.1145/3272127.3275074
-
-Yasseen, Z., Nasri, A. H., Boukaram, W., Volino, P., & Magnenat-Thalmann, N. (2013). Sketch-based garment design with quad meshes. *Computer-Aided Design, 45*(2), 562–567. https://doi.org/10.1016/j.cad.2012.10.041
-
-Zahn, C. T., & Roskies, R. Z. (1972). Fourier descriptors for plane closed curves. *IEEE Transactions on Computers, C-21*(3), 269–281. https://doi.org/10.1109/TC.1972.5008949
-
-## Claim-to-citation map
-
-| Manuscript claim | Citation(s) | Use |
-|---|---|---|
-| CLO-SKET contains 2,300 sketches derived from 230 garment identities across 23 categories | Arnia (2020) | Methods; dataset provenance |
-| Fashion-flat contours can support explicit descriptor-based classification | An & Li (2014) | Introduction; Related Work §2.2 |
-| Drawn garment boundaries can constrain simulation-ready quad meshes | Yasseen et al. (2013) | Introduction; Related Work §2.1 |
-| Stylized fashion sketches can drive garment transfer to 3D characters | Fondevilla et al. (2021) | Introduction; Related Work §2.1 |
-| Sketches, sewing patterns, body shape, and simulated garments can be linked in a learned shared space | Wang et al. (2018) | Introduction; Related Work §2.1 |
-| Garment-silhouette populations can be analysed using explicit measurements and multivariate organization | Tsuru et al. (2021) | Related Work §2.2 |
-| Curves and outlines admit quantitative shape analysis beyond fixed landmarks | Bookstein (1997); McCane (2013) | Related Work §2.2; conceptual alternatives |
-| Fourier coefficients provide harmonic descriptors of periodic shape signals | Zahn & Roskies (1972) | Related Work §2.2 |
-| Axial orientations are represented by doubled angles and interpreted modulo π | Jammalamadaka & SenGupta (2001) | Related Work §2.3; Methods |
-| Polar coordinates have precedent for parameterizing garment-pattern geometry | Oh & Kim (2026) | Introduction; Related Work §2.3 |
-
-## Citation and claim boundaries
-
-- Cite these works for methodological precedent, not as evidence for the present CLO-SKET results.
-- The audited primary representation is 14-D: 8 F2-family features plus 6 alpha2-family features.
-- Do not describe the present representation as conventional geometric morphometrics.
-- Do not imply that Oh and Kim used the present conditional angular distribution or 14-D descriptor; their work supports only the narrower precedent for polar garment-pattern parameterization.
-- Do not imply that Zahn and Roskies used the present shell-conditioned second harmonic; their work supports the broader precedent for Fourier shape description.
-- Do not imply that Jammalamadaka and SenGupta justify a fitted von Mises model here. CLO-SKET uses doubled-angle axial moments without fitting a circular probability distribution.
-- Do not cite Wang et al. as population-level morphology analysis; it is a multimodal garment-design model.
-- Do not claim novelty in Fourier descriptors, polar coordinates, circular statistics, or garment-sketch modelling individually.
-- Do not reintroduce PCA, the historical 28-D family assembly, the 135-D morphology study, classifier complementarity, semantic recognition, or causal/physical interpretation into the audited manuscript.
+@misc{bui2026garmentsketch,
+  author        = {Bui, Duong-Duy-Khang and Pham, Minh-Tan and Nguyen, Tam V. and Tran, Minh-Triet and Le, Trung-Nghia},
+  title         = {GarmentSketch: Large-Scale Sketch-to-Fashion Benchmark},
+  year          = {2026},
+  eprint        = {2606.14025},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2606.14025}
+}
