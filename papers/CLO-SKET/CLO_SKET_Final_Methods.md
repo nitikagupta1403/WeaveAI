@@ -2,218 +2,476 @@
 
 ## 3.1 Study design and scope
 
-This study develops an explicit radial–angular representation of garment-sketch geometry. The analysis is geometric rather than semantic: garment-category labels and manually annotated garment parts are not used to construct or select the descriptors. Category information is used only to balance grouped validation folds and to stratify the permutation procedure.
+This study develops an explicit radial–angular representation of garment-sketch geometry and evaluates its numerical, geometric, and statistical properties. The analysis is geometric rather than semantic: garment-category labels and manually annotated garment parts are not used to construct or select the representation. Category information is used only to balance grouped validation folds and to stratify permutation inference.
 
-The primary representation is a 14-dimensional vector comprising eight radial descriptors derived from the magnitude of the second angular harmonic and six axial descriptors derived from its orientation. No dimensionality reduction or learned embedding is used in constructing this representation.
+The primary sketch representation is a 14-dimensional vector comprising eight radial descriptors derived from second-harmonic magnitude and six descriptors of axial orientation. No principal-component analysis, learned embedding, semantic segmentation, von Mises fitting, or reconstruction of the complete angular density is used to construct this representation.
 
-The analysis proceeds in seven stages: (1) construction of the conditional angular distribution around each sketch's intensity-weighted centroid; (2) extraction of the second angular harmonic over radius; (3) reduction of its radial magnitude and axial orientation to the 14-dimensional representation; (4) verification of algebraic relationships among harmonic quantities; (5) recovery of garment identities and construction of identity-disjoint folds; (6) out-of-fold reconstruction of the observed second-harmonic Cartesian components; and (7) uncertainty estimation and association analysis at the garment-identity level.
+The analysis comprises: (1) centroid-relative polar transformation; (2) estimation of the conditional angular distribution within radial shells; (3) extraction of the second angular harmonic; (4) construction of the 14-dimensional representation; (5) garment-identity-disjoint reconstruction of second-harmonic Cartesian components; (6) coordinate-frame, harmonic-order, parameter, and discretization controls; (7) phase-conditioning analysis; and (8) garment-level uncertainty estimation and association analysis.
+
+---
 
 ## 3.2 Dataset and garment-identity reconstruction
 
-The analysis used all 2,300 CLO-SKET images. The directory structure contained 23 garment-category folders. Garment identity was reconstructed from the category-qualified source identifier encoded in each filename; the replicate identifier denoted the sketch associated with that source garment. This procedure recovered 230 garment identities, exactly 10 per category, with 9–11 sketches per identity because of irregular filename records.
+The analysis used all 2,300 images in the CLO-SKET dataset, organized into 23 garment categories. Garment identity was reconstructed from the category-qualified source identifier encoded in each filename. The accompanying replicate identifier denoted the repeated sketch associated with that source garment.
 
-File paths were unique. SHA-256 hashing found no repeated raw files, and hashing of decoded pixel arrays found no repeated decoded images. Perceptual hashes were used only to screen candidate visually similar pairs and were not interpreted as proof of duplication or lineage. The recovered garment identity was therefore used as the indivisible unit for cross-validation and resampling. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference is therefore conditional on that assumption.
+This procedure recovered
+
+\[
+N_{\mathrm{id}}=230
+\]
+
+garment identities, exactly 10 within each category. Individual identities contained 9–11 sketches because of irregular filename records.
+
+All 2,300 file paths were unique. SHA-256 hashing detected no repeated raw files, and hashing of decoded pixel arrays detected no repeated decoded images. Perceptual hashing was used only to identify visually similar candidate pairs and was not interpreted as evidence of file duplication or shared lineage.
+
+Recovered garment identity was treated as the indivisible clustering unit for cross-validation, bootstrap resampling, and confirmatory association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent population sampling units; population-level inference is therefore conditional on that assumption.
+
+---
 
 ## 3.3 Polar coordinate construction
 
-For sketch \(i\), let \(w_{ip}\geq 0\) denote the foreground intensity weight at pixel \(p\), located at isotropic Cartesian coordinates \((x_{ip},y_{ip})\). Its intensity-weighted centroid was
+For sketch \(i\), let \(w_{ip}\geq0\) denote foreground intensity weight at pixel \(p\), located at isotropically scaled Cartesian coordinates \((x_{ip},y_{ip})\).
+
+The intensity-weighted foreground centroid was
 
 \[
-c_{x,i}=\frac{\sum_p w_{ip}x_{ip}}{\sum_p w_{ip}},
+c_{x,i}
+=
+\frac{\sum_p w_{ip}x_{ip}}
+     {\sum_p w_{ip}},
 \qquad
-c_{y,i}=\frac{\sum_p w_{ip}y_{ip}}{\sum_p w_{ip}}.
+c_{y,i}
+=
+\frac{\sum_p w_{ip}y_{ip}}
+     {\sum_p w_{ip}}.
 \]
 
-Each foreground location was expressed relative to this centroid as
+Each foreground location was represented relative to this centroid as
 
 \[
-r_{ip}=\sqrt{(x_{ip}-c_{x,i})^2+(y_{ip}-c_{y,i})^2},
-\qquad
-\theta_{ip}=\operatorname{atan2}(y_{ip}-c_{y,i},x_{ip}-c_{x,i}).
+r_{ip}
+=
+\sqrt{
+(x_{ip}-c_{x,i})^2+
+(y_{ip}-c_{y,i})^2
+},
 \]
 
-The implementation discretized radius into 72 radial bins and angle into 72 angular bins. Let \(H_i(r_j,\theta_k)\) be the accumulated intensity weight in radial bin \(j\) and angular bin \(k\). The conditional angular distribution at a nonempty radial bin was
+\[
+\theta_{ip}
+=
+\operatorname{atan2}
+\left(
+y_{ip}-c_{y,i},
+x_{ip}-c_{x,i}
+\right).
+\]
+
+Radius and angle were discretized into 72 bins each. Let
+
+\[
+H_i(r_j,\theta_k)
+\]
+
+denote foreground intensity accumulated in radial bin \(j\) and angular bin \(k\).
+
+For each nonempty radial shell, the conditional angular distribution was
 
 \[
 p_i(\theta_k\mid r_j)
 =
-\frac{H_i(r_j,\theta_k)}{\sum_{\ell=1}^{72}H_i(r_j,\theta_\ell)},
-\qquad
-\sum_{k=1}^{72}p_i(\theta_k\mid r_j)=1.
+\frac{
+H_i(r_j,\theta_k)
+}{
+\sum_{\ell=1}^{72}
+H_i(r_j,\theta_\ell)
+},
 \]
 
-Thus, the construction retained angular organization conditional on radius rather than allowing high-mass radial shells to dominate merely because they contained more ink.
+with
 
-## 3.4 Second angular harmonic and axial orientation
+\[
+\sum_{k=1}^{72}
+p_i(\theta_k\mid r_j)
+=
+1.
+\]
 
-At each radial shell, the complex second angular moment was defined as
+Conditioning on radius prevents shells with greater total foreground mass from dominating the angular representation solely because they contain more ink.
+
+---
+
+## 3.4 Angular harmonics and axial orientation
+
+For harmonic order \(m\), the complex angular moment at radial shell \(r_j\) was
+
+\[
+F_{m,i}(r_j)
+=
+\sum_{k=1}^{72}
+p_i(\theta_k\mid r_j)
+e^{-\mathrm{i}m\theta_k}.
+\]
+
+The negative exponential follows the discrete Fourier-transform convention used in the implementation.
+
+The primary analysis uses \(m=2\):
 
 \[
 F_{2,i}(r_j)
 =
-\sum_{k=1}^{72}p_i(\theta_k\mid r_j)e^{-\mathrm{i}2\theta_k}.
+C_{2,i}(r_j)
+-
+\mathrm{i}S_{2,i}(r_j),
 \]
 
-The negative exponential follows the discrete Fourier-transform convention used in the implementation.Equivqlently,
+where
 
 \[
 C_{2,i}(r_j)
 =
-\sum_k p_i(\theta_k\mid r_j)\cos(2\theta_k),
+\sum_k
+p_i(\theta_k\mid r_j)
+\cos(2\theta_k),
 \]
+
+and
 
 \[
 S_{2,i}(r_j)
 =
-\sum_k p_i(\theta_k\mid r_j)\sin(2\theta_k),
+\sum_k
+p_i(\theta_k\mid r_j)
+\sin(2\theta_k).
 \]
 
-so that
+The second-harmonic magnitude is
 
 \[
-F_{2,i}(r_j)=C_{2,i}(r_j)-\mathrm{i}S_{2,i}(r_j).
+R_{2,i}(r_j)
+=
+|F_{2,i}(r_j)|
+=
+\sqrt{
+C_{2,i}(r_j)^2+
+S_{2,i}(r_j)^2
+}.
 \]
 
-Its magnitude, also called the second resultant length, was
+For notational convenience,
 
 \[
-m_i(r_j)=|F_{2,i}(r_j)|
-=R_{2,i}(r_j)
-=\sqrt{C_{2,i}(r_j)^2+S_{2,i}(r_j)^2}.
+m_i(r_j)
+\equiv
+R_{2,i}(r_j).
 \]
 
-The associated axial direction was
+The associated axial orientation is
 
 \[
 \alpha_{2,i}(r_j)
 =
-\frac{1}{2}\operatorname{atan2}
-\!\left(S_{2,i}(r_j),C_{2,i}(r_j)\right)
+\frac12
+\operatorname{atan2}
+\left(
+S_{2,i}(r_j),
+C_{2,i}(r_j)
+\right)
 \pmod{\pi}.
 \]
 
-The factor of two makes the direction axial: \(\alpha\) and \(\alpha+\pi\) describe the same undirected orientation. Consequently, angular differences were folded onto \([0,\pi/2]\):
+Because orientation is axial rather than directional,
+
+\[
+\alpha
+\equiv
+\alpha+\pi.
+\]
+
+Axial angular distance was therefore defined as
 
 \[
 d_{\mathrm{ax}}(a,b)
 =
-\min\!\left(
-|a-b|\bmod \pi,
-\pi-(|a-b|\bmod \pi)
-\right).
+\min
+\left[
+|a-b|\bmod\pi,\,
+\pi-(|a-b|\bmod\pi)
+\right],
 \]
 
-All reported angular errors used the degree-equivalent interval \([0^\circ,90^\circ]\).
-
-## 3.5 Primary radial domain
-
-The primary radial analysis was restricted to 25 shell centers spanning
+which lies on
 
 \[
-\mathcal R=\{3.5,4.5,\ldots,27.5\}.
+[0,\pi/2].
 \]
 
-The primary analysis was prespecified on 25 shell centers,
-\[
-\mathcal R=\{3.5,4.5,\ldots,27.5\}.
-\]
-Sensitivity analyses subsequently examined dependence on radial-domain choice without altering this primary specification.
+Reported angular errors are expressed on the equivalent interval
 
 \[
-j_i^\star=\arg\max_{j:r_j\in\mathcal R}m_i(r_j),
-\qquad
-r_i^\star=r_{j_i^\star}.
+[0^\circ,90^\circ].
 \]
 
-The peak magnitude was \(m_i^\star=m_i(r_i^\star)\). Because \(R_2(r)=|F_2(r)|\) by construction,
+---
+
+## 3.5 Why the second harmonic is the primary angular statistic
+
+The choice \(m=2\) follows from the axial symmetry of the quantity being represented rather than from retrospective comparison of harmonic performance.
+
+Under a \(180^\circ\) reversal,
 
 \[
-R_{2,i}(r_i^\star)=m_i^\star.
+\theta
+\mapsto
+\theta+\pi.
 \]
 
-These are therefore two names for the same measured quantity, not independent features or independent evidence. Peak radius is a selected coordinate on a discrete, bounded domain; Because peak radius is selected on a finite discrete domain, boundary occupancy and radial-domain sensitivity were evaluated separately.
-
-## 3.6 Eight radial-magnitude descriptors
-
-Let \(m_i(r)=|F_{2,i}(r)|\) over \(\mathcal R\). Integrals below were evaluated by the trapezoidal rule at the radial-shell centers. They are expressed in radial-bin-coordinate units, not physical distance, and the magnitude integral is not Fourier energy.
-
-The integrated magnitude was
+For harmonic order \(m\),
 
 \[
-I_i=\int_{\mathcal R}m_i(r)\,dr.
+e^{-\mathrm{i}m(\theta+\pi)}
+=
+e^{-\mathrm{i}m\theta}
+e^{-\mathrm{i}m\pi}
+=
+(-1)^m
+e^{-\mathrm{i}m\theta}.
 \]
 
-The magnitude-weighted radial centroid and spread were
+Hence
+
+\[
+F_m(\theta+\pi)
+=
+(-1)^mF_m(\theta).
+\]
+
+Odd harmonics change sign under axial reversal, whereas even harmonics are invariant. Consequently,
+
+\[
+m=2
+\]
+
+is the lowest non-zero harmonic compatible with the required \(180^\circ\) equivalence.
+
+The higher even harmonic \(m=4\) is also axially invariant but represents finer angular organization. Harmonics \(m=1\) and \(m=3\) were therefore used as odd-order controls and \(m=4\) as a higher-order axial control. Harmonic-order comparisons were conducted as descriptive consistency analyses and were not used to select the primary harmonic after inspecting results.
+
+---
+
+## 3.6 Primary radial domain and peak quantities
+
+The primary radial analysis was defined on 25 shell centers,
+
+\[
+\mathcal R
+=
+\{3.5,4.5,\ldots,27.5\}.
+\]
+
+For sketch \(i\), the observed peak shell was
+
+\[
+j_i^\star
+=
+\arg\max_{j:r_j\in\mathcal R}
+m_i(r_j),
+\]
+
+with peak radius
+
+\[
+r_i^\star
+=
+r_{j_i^\star},
+\]
+
+and peak magnitude
+
+\[
+m_i^\star
+=
+m_i(r_i^\star).
+\]
+
+Because
+
+\[
+m_i(r)=R_{2,i}(r)=|F_{2,i}(r)|,
+\]
+
+the identities
+
+\[
+m_i^\star
+=
+R_{2,i}(r_i^\star)
+=
+|F_{2,i}(r_i^\star)|
+\]
+
+refer to the same measured quantity and are not treated as independent evidence.
+
+Peak radius is the location of a discrete argmax on a finite domain. It was therefore treated as a localized, window-dependent statistic, and its boundary occupancy and radial-domain sensitivity were evaluated explicitly.
+
+---
+
+## 3.7 Eight radial-magnitude descriptors
+
+Let
+
+\[
+m_i(r)=R_{2,i}(r)
+\]
+
+over the primary domain \(\mathcal R\). Integrals were evaluated using the trapezoidal rule at radial-shell centers. Their units are radial-bin-coordinate units rather than physical distance, and the integrated magnitude is not interpreted as Fourier energy.
+
+### Integrated magnitude
+
+\[
+I_i
+=
+\int_{\mathcal R}
+m_i(r)\,dr.
+\]
+
+### Magnitude-weighted radial centroid
 
 \[
 \bar r_i
 =
-\frac{\int_{\mathcal R}r\,m_i(r)\,dr}{I_i},
-\qquad
-s_{r,i}
-=
-\sqrt{
-\frac{\int_{\mathcal R}(r-\bar r_i)^2m_i(r)\,dr}{I_i}
+\frac{
+\int_{\mathcal R}
+r\,m_i(r)\,dr
+}{
+I_i
 }.
 \]
 
-With \(r_i^\star\) denoting the discrete peak radius, radial concentration was the fraction of integrated magnitude within four radial-coordinate units of the peak:
+### Magnitude-weighted radial spread
+
+\[
+s_{r,i}
+=
+\sqrt{
+\frac{
+\int_{\mathcal R}
+(r-\bar r_i)^2m_i(r)\,dr
+}{
+I_i
+}
+}.
+\]
+
+### Peak concentration
+
+With \(r_i^\star\) denoting the discrete peak location, radial concentration was defined as the fraction of integrated magnitude within four shell-coordinate units of the peak,
 
 \[
 q_i
 =
 \frac{
-\int_{\mathcal R\cap[r_i^\star-4,r_i^\star+4]}m_i(r)\,dr
-}{I_i}.
+\int_{
+\mathcal R\cap
+[r_i^\star-4,r_i^\star+4]
+}
+m_i(r)\,dr
+}{
+I_i
+}.
 \]
 
-Let \(\tau_i=0.10\,m_i^\star\). The observed onset and termination radii were
+### Support onset and termination
+
+Let
+
+\[
+\tau_i
+=
+0.10\,m_i^\star.
+\]
+
+The support onset and termination radii were
 
 \[
 r_i^{\mathrm{on}}
-=\min\{r\in\mathcal R:m_i(r)\geq\tau_i\},
-\qquad
+=
+\min
+\{
+r\in\mathcal R:
+m_i(r)\geq\tau_i
+\},
+\]
+
+and
+
+\[
 r_i^{\mathrm{off}}
-=\max\{r\in\mathcal R:m_i(r)\geq\tau_i\}.
+=
+\max
+\{
+r\in\mathcal R:
+m_i(r)\geq\tau_i
+\}.
 \]
 
-The eight locked radial features, in column order, were
+The eight radial features were therefore
 
 \[
-\mathbf x^{(F_2)}_i=
+\mathbf x_i^{(F_2)}
+=
 [
-I_i,
-\bar r_i,
-s_{r,i},
-q_i,
-r_i^{\mathrm{on}},
-r_i^{\mathrm{off}},
-r_i^\star,
+I_i,\,
+\bar r_i,\,
+s_{r,i},\,
+q_i,\,
+r_i^{\mathrm{on}},\,
+r_i^{\mathrm{off}},\,
+r_i^\star,\,
 m_i^\star
-]\in\mathbb R^8.
+]
+\in\mathbb R^8.
 \]
 
-The radial extent \(r_i^{\mathrm{off}}-r_i^{\mathrm{on}}\) was excluded because it is exactly determined by two retained features.
-
-## 3.7 Six axial-safe descriptors
-
-The peak axial direction was
+Radial extent,
 
 \[
-\alpha_i^\star=\alpha_{2,i}(r_i^\star).
+r_i^{\mathrm{off}}
+-
+r_i^{\mathrm{on}},
 \]
 
-The magnitude-weighted axial mean used the doubled-angle resultant
+was excluded because it is exactly determined by two retained coordinates.
+
+---
+
+## 3.8 Six axial descriptors
+
+The peak axial orientation was
+
+\[
+\alpha_i^\star
+=
+\alpha_{2,i}(r_i^\star).
+\]
+
+A magnitude-weighted axial mean was constructed through the doubled-angle resultant
 
 \[
 Z_i
 =
 \sum_{r_j\in\mathcal R}
-m_i(r_j)e^{\mathrm{i}2\alpha_{2,i}(r_j)},
-\qquad
+m_i(r_j)
+e^{\mathrm{i}2\alpha_{2,i}(r_j)},
+\]
+
+with
+
+\[
 \bar\alpha_i
 =
-\frac{1}{2}\arg(Z_i)\pmod{\pi}.
+\frac12
+\arg(Z_i)
+\pmod{\pi}.
 \]
 
 Axial coherence was
@@ -221,158 +479,854 @@ Axial coherence was
 \[
 \kappa_i
 =
-\frac{|Z_i|}{\sum_{r_j\in\mathcal R}m_i(r_j)},
-\qquad 0\leq\kappa_i\leq1,
+\frac{
+|Z_i|
+}{
+\sum_{r_j\in\mathcal R}
+m_i(r_j)
+},
+\qquad
+0\leq\kappa_i\leq1.
 \]
 
-and orientation drift was the axial distance between the orientations at the first and last locked shells:
+Orientation drift across the primary radial domain was
 
 \[
 \delta_i
 =
 d_{\mathrm{ax}}
-\!\left(
+\left[
 \alpha_{2,i}(3.5),
 \alpha_{2,i}(27.5)
-\right).
+\right].
 \]
 
-Raw axial angles were not entered directly into the primary vector. Each retained direction was represented by its doubled-angle Cartesian coordinates, yielding
+Raw axial angles were not entered directly into the primary Euclidean feature vector. Peak and mean directions were encoded in doubled-angle Cartesian form:
 
 \[
-\mathbf x^{(\alpha_2)}_i=
+\mathbf x_i^{(\alpha_2)}
+=
 [
-\cos(2\alpha_i^\star),
-\sin(2\alpha_i^\star),
-\cos(2\bar\alpha_i),
-\sin(2\bar\alpha_i),
-\kappa_i,
+\cos(2\alpha_i^\star),\,
+\sin(2\alpha_i^\star),\,
+\cos(2\bar\alpha_i),\,
+\sin(2\bar\alpha_i),\,
+\kappa_i,\,
 \delta_i
-]\in\mathbb R^6.
+]
+\in\mathbb R^6.
 \]
 
-This encoding is invariant under \(\alpha\mapsto\alpha+\pi\). Persistence and weighted-dispersion summaries were excluded because they were redundant with retained coordinates. Reconstructed circular quantities and algebraically determined \(F_2\)-versus-\(R_2\) relationships were used only as numerical consistency checks and were not included as primary features.
+This encoding is invariant under
 
-## 3.8 Primary 14-dimensional representation
+\[
+\alpha
+\mapsto
+\alpha+\pi.
+\]
 
-The final sketch representation was the exact ordered concatenation
+Additional persistence and weighted-dispersion summaries were excluded because they were redundant with retained coordinates. Algebraically reconstructed quantities were used only for numerical consistency checks and were not added as independent features.
+
+---
+
+## 3.9 Primary 14-dimensional representation
+
+The final sketch-level representation was
 
 \[
 \mathbf x_i
 =
 \left[
-\mathbf x^{(F_2)}_i\mid
-\mathbf x^{(\alpha_2)}_i
-\right]
-\in\mathbb R^{14}.
-\]
-
-The resulting matrix had shape \(2300\times14\), contained only finite values, and matched the locked \(8+6\) concatenation exactly with maximum numerical difference zero. al ## 3.8 Primary 14-dimensional representation
-
-The sketch-level representation is the ordered concatenation
-
-\[
-\mathbf x_i
-=
-\left[
-\mathbf x^{(F_2)}_i
+\mathbf x_i^{(F_2)}
 \mid
-\mathbf x^{(\alpha_2)}_i
+\mathbf x_i^{(\alpha_2)}
 \right]
-\in\mathbb R^{14}.
+\in
+\mathbb R^{14}.
 \]
 
-The resulting matrix has dimensions \(2300\times14\). The eight radial and six axial coordinates were concatenated in the prespecified order given in Sections 3.6 and 3.7. Numerical verification confirmed exact equality between the stored representation and an independently reconstructed \(8+6\) concatenation, with maximum absolute difference zero. All entries were finite.
-
-## 3.9 Garment-identity-disjoint out-of-fold reconstruction
-
-To evaluate whether the observed second-moment field could be reconstructed from radius and harmonic magnitude while preventing source-garment leakage, five category-balanced folds were constructed over the 230 recovered garment identities. Each test fold contained two complete identities from every category, giving 46 test identities and all 23 categories per fold. Garment-identity overlap between training and testing was zero, and every sketch was tested exactly once.
-
-At every valid sketch-shell row, the predictors were
+The representation matrix therefore had dimensions
 
 \[
-\mathbf z_{ij}=[r_j,m_i(r_j)]
+2300\times14.
 \]
 
-and the two targets were \(C_{2,i}(r_j)\) and \(S_{2,i}(r_j)\). Two `HistGradientBoostingRegressor` models were fitted independently within each training fold:
+The eight radial and six axial coordinates were concatenated in the order defined above. An independent reconstruction of the two feature blocks reproduced the stored representation exactly, with maximum absolute numerical difference zero, and all values were finite.
+
+---
+
+## 3.10 Garment-identity-disjoint reconstruction
+
+The reconstruction experiment assessed whether the observed second-harmonic Cartesian field could be estimated from radius and harmonic magnitude while withholding complete garment identities.
+
+Five category-balanced folds were constructed over the 230 recovered garment identities. Each test fold contained two complete identities from each of the 23 garment categories,
 
 \[
-\widehat C_{2,i}(r_j)=f_C(\mathbf z_{ij}),
-\qquad
-\widehat S_{2,i}(r_j)=f_S(\mathbf z_{ij}).
+46
 \]
 
-Reconstructed magnitude and orientation were then derived, rather than fitted directly:
+test identities per fold, while the remaining
+
+\[
+184
+\]
+
+identities formed the training set. Train/test garment-identity overlap was zero. Every sketch and every garment identity received exactly one out-of-fold prediction.
+
+For sketch \(i\) and shell \(j\), predictors were
+
+\[
+\mathbf z_{ij}
+=
+[
+r_j,
+R_{2,i}(r_j)
+].
+\]
+
+Separate regression models estimated
+
+\[
+\widehat C_{2,i}(r_j)
+=
+f_C(\mathbf z_{ij}),
+\]
+
+and
+
+\[
+\widehat S_{2,i}(r_j)
+=
+f_S(\mathbf z_{ij}).
+\]
+
+Both models used `HistGradientBoostingRegressor` with the same fixed specification:
+
+\[
+\texttt{max\_iter}=250,
+\]
+
+\[
+\texttt{learning\_rate}=0.05,
+\]
+
+\[
+\texttt{max\_leaf\_nodes}=15,
+\]
+
+\[
+\texttt{l2\_regularization}=1.0,
+\]
+
+and
+
+\[
+\texttt{random\_state}=42.
+\]
+
+Predicted magnitude and orientation were derived from the predicted Cartesian components rather than fitted separately:
 
 \[
 \widehat R_{2,i}(r_j)
 =
-\sqrt{\widehat C_{2,i}(r_j)^2+\widehat S_{2,i}(r_j)^2},
+\sqrt{
+\widehat C_{2,i}(r_j)^2+
+\widehat S_{2,i}(r_j)^2
+},
 \]
 
 \[
 \widehat\mu_{2,i}(r_j)
 =
-\frac{1}{2}\operatorname{atan2}
-\!\left(
+\frac12
+\operatorname{atan2}
+\left(
 \widehat S_{2,i}(r_j),
 \widehat C_{2,i}(r_j)
 \right)
 \pmod{\pi}.
 \]
 
-At the observed peak shell, axial reconstruction error was
+At the observed peak shell,
 
 \[
-e_i=d_{\mathrm{ax}}
-\!\left(
+e_i
+=
+d_{\mathrm{ax}}
+\left[
 \widehat\mu_{2,i}(r_i^\star),
 \mu_{2,i}(r_i^\star)
+\right]
+\]
+
+defined the peak-shell axial reconstruction error.
+
+Two fold-local comparators were evaluated using the same held-out identities: a global intercept-only reference and a radius-only model. An initial image-level cross-validation analysis was retained only to assess sensitivity to the validation unit; all primary reconstruction results use garment-identity-disjoint predictions.
+
+Because \(R_2\), \(C_2\), and \(S_2\) all derive from the same conditional angular field, reconstruction is interpreted as a shared-source consistency diagnostic rather than recovery of an independent semantic or physical target.
+
+---
+
+## 3.11 Rotation and coordinate-frame controls
+
+Two complementary rotation controls evaluated the dependence of reconstruction on the common image coordinate frame.
+
+### 3.11.1 Analytic harmonic rotation
+
+For a physical image rotation by angle \(\phi\),
+
+\[
+\theta'
+=
+\theta+\phi.
+\]
+
+The \(m\)-th harmonic transforms as
+
+\[
+F_m'(r)
+=
+e^{-\mathrm{i}m\phi}
+F_m(r).
+\]
+
+For \(m=2\),
+
+\[
+F_2'(r)
+=
+e^{-\mathrm{i}2\phi}
+F_2(r).
+\]
+
+Writing
+
+\[
+F_2=C_2-\mathrm{i}S_2,
+\]
+
+the corresponding Cartesian transformation is
+
+\[
+C_2'
+=
+C_2\cos(2\phi)
+-
+S_2\sin(2\phi),
+\]
+
+\[
+S_2'
+=
+C_2\sin(2\phi)
++
+S_2\cos(2\phi).
+\]
+
+Magnitude is invariant:
+
+\[
+R_2'
+=
+\sqrt{C_2'^2+S_2'^2}
+=
+R_2,
+\]
+
+while axial orientation transforms as
+
+\[
+\mu_2'
+=
+\mu_2+\phi
+\pmod{\pi}.
+\]
+
+This analytic transformation was used instead of rotating raster images, thereby avoiding interpolation, resampling, and cropping artifacts.
+
+### 3.11.2 Global-rotation control
+
+The complete observed harmonic field was rotated by
+
+\[
+\phi
+\in
+\{
+0^\circ,
+22.5^\circ,
+45^\circ,
+67.5^\circ,
+90^\circ
+\}.
+\]
+
+For each rotation, the same predictors, estimator specification, garment-identity-disjoint folds, and evaluation metrics were used.
+
+Separate \(C_2\) and \(S_2\) RMSEs were retained to demonstrate their expected coordinate dependence, while vector RMSE, \(R_2\) error, peak-shell \(R_2\) performance, axial error, and equivariance error were used as substantive coordinate-aware or coordinate-free diagnostics.
+
+### 3.11.3 Garment-identity-randomized rotation
+
+A second control removed common population-level alignment while preserving repeated-sketch identity structure.
+
+For each randomization, one angle
+
+\[
+\phi_g
+\sim
+\operatorname{Uniform}(0,\pi)
+\]
+
+was sampled independently for each garment identity \(g\). Every sketch belonging to identity \(g\) received the same \(\phi_g\).
+
+Ten randomizations were performed using seeds
+
+\[
+20260830,\ldots,20260839.
+\]
+
+The procedure preserved:
+
+\[
+R_2,
+\]
+
+radius,
+
+garment identity,
+
+within-identity repeated-sketch structure,
+
+category labels,
+
+and the five validation folds,
+
+while disrupting shared absolute orientation across garment identities.
+
+For unrelated axial orientations, folded angular error is uniform on
+
+\[
+[0^\circ,90^\circ],
+\]
+
+giving the chance expectations
+
+\[
+\operatorname{median}(e)=45^\circ,
+\]
+
+\[
+E[e]=45^\circ,
+\]
+
+\[
+P(e\leq15^\circ)=\frac{1}{6},
+\]
+
+and
+
+\[
+P(e>45^\circ)=\frac12.
+\]
+
+These values were used as reference benchmarks rather than fitted null parameters.
+
+---
+
+## 3.12 Parameter and discretization sensitivity
+
+Sensitivity analyses evaluated dependence of the radial–angular representation on prespecified numerical choices. The primary configuration was not altered after these analyses.
+
+### 3.12.1 Support threshold
+
+The primary support threshold was
+
+\[
+\tau_i
+=
+0.10\,m_i^\star.
+\]
+
+Alternative fractions were
+
+\[
+0.05
+\quad\text{and}\quad
+0.15.
+\]
+
+All eight radial descriptors were recomputed while holding the radial domain and concentration width fixed.
+
+### 3.12.2 Concentration half-width
+
+The primary concentration half-width was
+
+\[
+h=4
+\]
+
+radial shell-coordinate units. Alternatives were
+
+\[
+h=2
+\quad\text{and}\quad
+h=6.
+\]
+
+All other descriptor definitions were unchanged.
+
+### 3.12.3 Radial-domain sensitivity
+
+The primary domain was
+
+\[
+[3.5,27.5].
+\]
+
+The following inward and outward alternatives were evaluated:
+
+\[
+[5.5,25.5],
+\]
+
+\[
+[4.5,26.5],
+\]
+
+\[
+[3.5,27.5],
+\]
+
+\[
+[2.5,28.5],
+\]
+
+\[
+[1.5,29.5],
+\]
+
+and
+
+\[
+[0.5,30.5].
+\]
+
+The canonical full 72-shell radial field was reconstructed directly from the raw images before domain expansion was evaluated. The primary 25-shell \(C_2\), \(S_2\), and \(R_2\) fields were reproduced numerically before the expanded field was accepted for sensitivity analysis.
+
+For each domain, descriptor rank stability, peak-location changes, endpoint occupancy, and peak-magnitude changes were quantified relative to the primary specification.
+
+### 3.12.4 Angular-resolution sensitivity
+
+The canonical 72 angular bins were coarsened to
+
+\[
+36
+\quad\text{and}\quad
+24
+\]
+
+bins by exact aggregation of adjacent angular mass bins. No image interpolation was used.
+
+For each resolution, \(F_2\), \(C_2\), \(S_2\), \(R_2\), axial orientation, peak magnitude, and peak radius were recomputed. The 72-bin field served as the reference.
+
+### 3.12.5 Radial-resolution sensitivity
+
+The canonical 72 radial bins were coarsened by exact radial mass aggregation to
+
+\[
+36
+\quad\text{and}\quad
+24
+\]
+
+bins.
+
+Because the primary radial-domain boundaries do not align exactly with all coarser grids, a second resolution analysis isolated bin resolution from domain mismatch using the common normalized physical interval
+
+\[
+\frac{1}{12}
+\leq
+r_{\mathrm{norm}}
+\leq
+\frac13.
+\]
+
+This interval corresponds exactly to 18 bins at resolution 72, 9 bins at resolution 36, and 6 bins at resolution 24.
+
+The concentration half-width was kept constant in normalized physical coordinates,
+
+\[
+h_{\mathrm{norm}}
+=
+\frac{4}{72}.
+\]
+
+Rank stability and absolute changes in each radial descriptor were then quantified relative to the 72-bin representation.
+
+These sensitivity analyses characterize measurement dependence; they are not parameter-selection procedures and do not establish that the primary configuration is universally optimal.
+
+---
+
+## 3.13 Low-order harmonic control
+
+To place the primary second harmonic within the observed low-order spectrum, harmonics
+
+\[
+m\in\{1,2,3,4\}
+\]
+
+were computed from the same canonical 72-bin conditional angular distributions and evaluated on the same 25-shell primary radial domain.
+
+For each \(m\), the following descriptive quantities were calculated:
+
+\[
+R_m(r)
+=
+|F_m(r)|,
+\]
+
+integrated radial harmonic magnitude,
+
+median shell magnitude,
+
+peak harmonic magnitude,
+
+peak radius,
+
+and the fraction of integrated magnitude carried by that order relative to the sum over \(m=1,\ldots,4\).
+
+Rank correlations between \(m=2\) and neighbouring harmonic magnitudes were used to assess whether the second harmonic duplicated other low-order structure.
+
+Because the geometric symmetry argument in Section 3.5 defines \(m=2\) a priori as the lowest non-zero axial harmonic, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
+
+---
+
+## 3.14 Phase-conditioning analysis
+
+Axial phase becomes poorly conditioned when the magnitude of its underlying Cartesian vector is small. This relationship was derived explicitly for the second harmonic.
+
+Let
+
+\[
+\mu_2
+=
+\frac12
+\operatorname{atan2}(S_2,C_2).
+\]
+
+Its first-order differential is
+
+\[
+d\mu_2
+=
+\frac12
+\frac{
+C_2\,dS_2
+-
+S_2\,dC_2
+}{
+C_2^2+S_2^2
+},
+\]
+
+or equivalently,
+
+\[
+d\mu_2
+=
+\frac{
+C_2\,dS_2
+-
+S_2\,dC_2
+}{
+2R_2^2
+}.
+\]
+
+By the Cauchy--Schwarz inequality,
+
+\[
+|C_2\,dS_2-S_2\,dC_2|
+\leq
+R_2
+\sqrt{
+dC_2^2+dS_2^2
+},
+\]
+
+giving
+
+\[
+|d\mu_2|
+\leq
+\frac{
+\sqrt{
+dC_2^2+dS_2^2
+}
+}{
+2R_2
+}.
+\]
+
+For the observed out-of-fold reconstruction, define Cartesian perturbations
+
+\[
+\Delta C_2
+=
+\widehat C_2-C_2,
+\]
+
+\[
+\Delta S_2
+=
+\widehat S_2-S_2,
+\]
+
+and perturbation norm
+
+\[
+E_{CS}
+=
+\sqrt{
+(\Delta C_2)^2+
+(\Delta S_2)^2
+}.
+\]
+
+The empirical conditioning quantity was
+
+\[
+B_\mu
+=
+\frac{
+E_{CS}
+}{
+2R_2
+}.
+\]
+
+The absolute first-order approximation was
+
+\[
+L_\mu
+=
+\left|
+\frac{
+C_2\Delta S_2
+-
+S_2\Delta C_2
+}{
+2R_2^2
+}
+\right|.
+\]
+
+These quantities were computed over the out-of-fold field and at the observed peak shell.
+
+For manuscript-facing association analysis, repeated sketches were reduced to garment-identity medians. Spearman correlations with median peak-shell axial error were calculated for:
+
+\[
+R_2,
+\]
+
+\[
+1/R_2,
+\]
+
+\[
+E_{CS},
+\]
+
+\[
+B_\mu,
+\]
+
+and
+
+\[
+L_\mu.
+\]
+
+The analysis tests whether empirical axial reconstruction error is consistent with the expected geometry of phase estimation. It does not assume that the first-order approximation is exact for large perturbations or that \(R_2\) causally determines angular error.
+
+### Magnitude-stratified conditioning
+
+For descriptive visualization, the 230 garment identities were divided into quartiles according to median observed peak-shell \(R_2\). Within each quartile, median component-error norm, conditioning bound, first-order phase approximation, and actual axial error were summarized.
+
+These quartiles were descriptive strata rather than independent inferential groups.
+
+---
+
+## 3.15 Garment-level association analysis
+
+The principal association analysis evaluated the relationship between observed peak-shell harmonic magnitude and peak-shell axial reconstruction error.
+
+For garment identity \(g\), repeated sketches were reduced to medians:
+
+\[
+\widetilde R_{2,g}
+=
+\operatorname{median}_{i\in g}
+R_{2,i}(r_i^\star),
+\]
+
+\[
+\widetilde e_g
+=
+\operatorname{median}_{i\in g}
+e_i.
+\]
+
+Spearman's rank correlation was computed across the 230 garment identities:
+
+\[
+\rho_R
+=
+\rho_s
+\left(
+\widetilde R_{2,g},
+\widetilde e_g
 \right).
 \]
 
-Fold-local global and radius-only models were retained as comparators. An initial image-level split was retained only as a sensitivity comparison. Primary reconstruction results use the garment-identity-disjoint folds.
-
-This reconstruction is a shared-source consistency diagnostic: \(m\), \(C_2\), and \(S_2\) all arise from the same conditional angular field. It does not demonstrate recovery of an independent physical or semantic target.
-
-## 3.10 Peak-shell association analysis
-
-The primary association concerned observed peak-shell magnitude \(R_{2,i}(r_i^\star)\) and peak-shell axial error \(e_i\). Selected peak radius \(r_i^\star\) was evaluated as a secondary, sensitivity-qualified association because it is defined by an argmax over a finite radial domain.
-
-For confirmatory association analysis, all sketches belonging to garment identity \(g\) were reduced to medians:
+Selected peak radius was evaluated as a secondary, sensitivity-qualified association:
 
 \[
-\widetilde R_{2,g}=\operatorname{median}_{i\in g}R_{2,i}(r_i^\star),
-\quad
-\widetilde r_g^\star=\operatorname{median}_{i\in g}r_i^\star,
-\quad
-\widetilde e_g=\operatorname{median}_{i\in g}e_i.
+\widetilde r_g^\star
+=
+\operatorname{median}_{i\in g}
+r_i^\star,
 \]
 
-Spearman's rank correlation was computed across the 230 identities for \((\widetilde R_{2,g},\widetilde e_g)\) and \((\widetilde r_g^\star,\widetilde e_g)\). This gave equal weight to each recovered garment identity. The two primary permutation probabilities were adjusted by Holm's procedure. Corresponding correlations over all 2,300 sketches were retained as descriptive summaries without inferential p-values.
+\[
+\rho_r
+=
+\rho_s
+\left(
+\widetilde r_g^\star,
+\widetilde e_g
+\right).
+\]
 
-## 3.11 Garment-cluster bootstrap and stratified permutation
+Peak radius is interpreted more cautiously because it is defined by an argmax over a finite radial domain and showed material domain and resolution sensitivity.
 
-Confidence intervals were obtained from 5,000 bootstrap replicates. Complete garment identities, rather than individual sketches or sketch-shell rows, were resampled; every selected cluster contributed all its sketches and, where applicable, all 25 shells. Percentile 95% intervals were defined by the 2.5th and 97.5th percentiles.
+Spearman correlations computed over all 2,300 sketches were retained only as descriptive pooled-sketch summaries and were not assigned inferential \(p\)-values.
 
-For each primary association, 10,000 permutations were performed within the 23 category strata. Garment-level outcome values were permuted only among identities in the same category, thereby holding category composition fixed. With observed statistic \(T_{\mathrm{obs}}\), the two-sided corrected permutation probability was
+The permutation probabilities for the two prespecified garment-level association tests were adjusted jointly using Holm's procedure.
+
+---
+
+## 3.16 Garment-cluster bootstrap
+
+Uncertainty intervals were estimated using
+
+\[
+B=5000
+\]
+
+bootstrap replicates.
+
+Complete garment identities, rather than individual sketches or sketch-shell rows, were sampled with replacement. Whenever an identity was selected, all of its repeated sketches and, where relevant, all 25 radial shells were included.
+
+Percentile 95% confidence intervals were defined by the
+
+\[
+2.5^{\mathrm{th}}
+\]
+
+and
+
+\[
+97.5^{\mathrm{th}}
+\]
+
+percentiles of the bootstrap distribution.
+
+The bootstrap was applied to reconstruction metrics, peak-shell quantities, garment-level correlations, and descriptive low/high error-group contrasts as appropriate.
+
+---
+
+## 3.17 Category-stratified permutation inference
+
+For each of the two prespecified garment-level association tests,
+
+\[
+10{,}000
+\]
+
+permutations were performed.
+
+Permutation was restricted within the 23 garment-category strata. Garment-level outcome values were shuffled only among identities belonging to the same category, preserving category composition while breaking the within-category correspondence between predictor and outcome.
+
+For observed statistic \(T_{\mathrm{obs}}\), the two-sided corrected permutation probability was
 
 \[
 p
 =
-\frac{1+\sum_{b=1}^{B}
-\mathbf 1\{|T_b|\geq|T_{\mathrm{obs}}|\}}
-{B+1},
-\qquad B=10000.
+\frac{
+1+
+\sum_{b=1}^{B}
+\mathbf 1
+\left(
+|T_b|
+\geq
+|T_{\mathrm{obs}}|
+\right)
+}{
+B+1
+},
+\qquad
+B=10{,}000.
 \]
 
-All intervals and permutation results remain conditional on mutual independence of the 230 recovered garment identities.
+The two resulting permutation probabilities were adjusted by Holm's procedure.
 
-## 3.12 Outcome-defined bands and threshold sensitivity
+Because permutation was conditional on garment category, the corresponding null distributions were not required to be centered at zero.
 
-Peak-shell errors were summarized descriptively as low (\(e_i\leq15^\circ\)), intermediate (\(15^\circ<e_i\leq45^\circ\)), and high (\(e_i>45^\circ\)). Sensitivity was assessed using four prespecified low/high threshold pairs: \(10^\circ/30^\circ\), \(15^\circ/45^\circ\), \(20^\circ/45^\circ\), and \(20^\circ/60^\circ\).
+---
 
-For each pair, median observed peak-shell \(R_2\) and Cliff's delta were computed between the low- and high-error groups. Cliff's delta was oriented as
+## 3.18 Outcome-defined error bands and threshold sensitivity
+
+Peak-shell axial errors were summarized descriptively into low, intermediate, and high bands.
+
+The primary descriptive thresholds were
+
+\[
+e_i\leq15^\circ,
+\]
+
+\[
+15^\circ<e_i\leq45^\circ,
+\]
+
+and
+
+\[
+e_i>45^\circ.
+\]
+
+Sensitivity was evaluated using four prespecified low/high threshold pairs:
+
+\[
+10^\circ/30^\circ,
+\]
+
+\[
+15^\circ/45^\circ,
+\]
+
+\[
+20^\circ/45^\circ,
+\]
+
+and
+
+\[
+20^\circ/60^\circ.
+\]
+
+For each threshold definition, median observed peak-shell \(R_2\) was compared between the low- and high-error groups.
+
+Effect size was summarized by Cliff's delta,
 
 \[
 \delta_C
@@ -382,11 +1336,15 @@ P(R_{2,\mathrm{low}}>R_{2,\mathrm{high}})
 P(R_{2,\mathrm{low}}<R_{2,\mathrm{high}}).
 \]
 
-Intervals were obtained by resampling complete garment identities. No p-values were assigned to these outcome-defined, strongly overlapping groups, and the thresholds were not optimized against the data.
+Confidence intervals were obtained by resampling complete garment identities.
 
-## 3.13 Algebraically coupled calibration diagnostic
+Because the error bands are defined using the observed outcome, overlap strongly across threshold choices, and are not independent experimental groups, no inferential \(p\)-values were assigned to these band comparisons. The thresholds were not optimized against the data and are not interpreted as prospective reliability cutoffs.
 
-Peak-shell magnitude error was
+---
+
+## 3.19 Algebraically coupled calibration diagnostic
+
+Peak-shell magnitude error was defined as
 
 \[
 \Delta R_{2,i}
@@ -396,10 +1354,42 @@ Peak-shell magnitude error was
 R_{2,i}(r_i^\star).
 \]
 
-Because the observed value appears algebraically with a negative sign in \(\Delta R_2\), its correlation with observed \(R_2\) is mathematically coupled. This correlation was reported only as a calibration diagnostic and received no inferential p-value.
+Any association between observed \(R_2\) and \(\Delta R_2\) is mathematically coupled because the observed value appears explicitly with a negative sign in the definition of the difference.
 
-## 3.14 Scope of inference
+Accordingly, the Spearman correlation
 
-The analysis supports an explicit 14-dimensional geometric representation, reconstruction evaluation on unseen recovered garment identities, cluster-aware uncertainty estimates, and garment-level association analyses. Reconstruction from \((r,|F_2|)\) is a shared-source consistency diagnostic because the predictors and targets arise from the same conditional angular field.
+\[
+\rho_s
+\left[
+R_{2,i}(r_i^\star),
+\Delta R_{2,i}
+\right]
+\]
 
-Inference remains conditional on the recovered garment identities constituting appropriate independent sampling units. The analysis does not establish causality, semantic garment-part recognition, a physical radial law, prospective reliability classification, likelihood-based circular modeling, or reconstruction of the complete angular density.
+was reported only as a descriptive calibration diagnostic and was assigned no inferential \(p\)-value.
+
+---
+
+## 3.20 Scope of inference
+
+The analysis supports an explicit 14-dimensional geometric representation of garment sketches, numerical validation of its harmonic construction, reconstruction assessment on previously unseen recovered garment identities, coordinate-frame controls, harmonic-order and parameter-sensitivity analyses, phase-conditioning analysis, cluster-aware uncertainty estimates, and garment-level monotonic association tests.
+
+Several boundaries on interpretation are explicit.
+
+First,
+
+\[
+R_2=|F_2|
+\]
+
+is an algebraic identity and does not constitute independent corroborating evidence.
+
+Second, reconstruction of \(C_2\) and \(S_2\) from \((r,R_2)\) is a shared-source consistency diagnostic because predictors and targets derive from the same conditional angular field.
+
+Third, the rotation controls show that strong phase reconstruction in the upright dataset depends substantially on population-level orientation relative to the common image coordinate frame.
+
+Fourth, the primary numerical settings are treated as a fixed measurement specification rather than as universally optimal parameters. Global radial summaries are more stable than localized peak- and support-based descriptors, and peak radius is specifically interpreted as a domain-dependent localization statistic.
+
+Fifth, the phase-conditioning analysis establishes consistency with the expected perturbation geometry of axial phase but does not establish that \(R_2\) causally determines reconstruction error or that first-order perturbation theory exactly describes large errors.
+
+Finally, population-level inference remains conditional on the 230 recovered garment identities constituting appropriate independent sampling units. No analysis establishes causal garment geometry, semantic garment-part recognition, human-like visual understanding, a physical radial law, a prospective reliability classifier, likelihood-based circular modeling, or reconstruction of the complete angular density.
