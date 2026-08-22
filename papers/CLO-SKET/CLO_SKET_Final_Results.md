@@ -44,9 +44,6 @@ Accordingly, \(R_2\) and \(|F_2|\) were not treated as independent evidence.
 
 ---
 
-<<<<<<< HEAD
-
-=======
 ## 4.2 Rigid-image rotation control of the 14-dimensional representation
 
 A separate image-domain perturbation control evaluated whether the final 14-dimensional representation exhibited the intended transformation behavior when the raster sketch itself was rigidly rotated and the complete radial-angular measurement was recomputed.
