@@ -124,7 +124,6 @@ Orientation drift also showed small median changes, ranging from approximately \
 These results support the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved as invariant scalar descriptors. The results do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
 
 ---
->>>>>>> c39687dae9922e25d194ebf773412a42cd37f31f
 
 ## 4.3 Duplicate-image screening and garment-identity structure
 
@@ -336,22 +335,17 @@ This result does not invalidate the radial–angular representation; rather, it 
 
 ---
 
-<<<<<<< HEAD
 ## 4.8 Rigid-image rotation control of the 14-dimensional representation
 =======
 ## 4.9 Parameter and discretization sensitivity
->>>>>>> c39687dae9922e25d194ebf773412a42cd37f31f
 
 A separate image-domain perturbation control evaluated whether the final
 14-dimensional representation exhibited the intended invariant and equivariant
 behavior when the raster sketch itself was rigidly rotated and the complete
 radial-angular measurement was recomputed.
 
-<<<<<<< HEAD
-All 2,300 sketches were evaluated at
 =======
 ### 4.9.1 Support threshold and concentration width
->>>>>>> c39687dae9922e25d194ebf773412a42cd37f31f
 
 \[
 \phi
@@ -361,11 +355,8 @@ All 2,300 sketches were evaluated at
 
 No garment labels were used and no predictive model was fitted.
 
-<<<<<<< HEAD
-### 4.8.1 Stability of the second-harmonic magnitude field
 =======
 ### 4.9.2 Angular resolution
->>>>>>> c39687dae9922e25d194ebf773412a42cd37f31f
 
 Across non-zero rotation conditions, the primary-domain second-harmonic magnitude
 profile showed small median numerical perturbations relative to the \(0^\circ\)
@@ -386,11 +377,8 @@ The perturbation was smallest near the reference orientation and increased
 modestly toward the largest tested rotations, consistent with interpolation and
 finite-bin effects rather than exact raster-level invariance.
 
-<<<<<<< HEAD
-### 4.8.2 Axial orientation equivariance
 =======
 ### 4.9.3 Radial domain
->>>>>>> c39687dae9922e25d194ebf773412a42cd37f31f
 
 The two doubled-angle orientation pairs exhibited the expected axial-equivariant
 behavior.
@@ -409,7 +397,6 @@ physical rotations:
 
 The magnitude-weighted mean orientation was even more stable:
 
-<<<<<<< HEAD
 | Rotation | Median observed shift | Median equivariance error | 95th percentile error |
 |---:|---:|---:|---:|
 | \(-20^\circ\) | \(-19.9944^\circ\) | \(0.0925^\circ\) | \(0.8485^\circ\) |
@@ -420,12 +407,9 @@ The magnitude-weighted mean orientation was even more stable:
 | \(+20^\circ\) | \(20.0065^\circ\) | \(0.0901^\circ\) | \(0.8223^\circ\) |
 =======
 ### 4.9.4 Radial resolution
->>>>>>> c39687dae9922e25d194ebf773412a42cd37f31f
 
 Thus, the doubled-angle orientation coordinates transformed closely according to
 the expected \(R(2\phi)\) action over the tested rotation range.
-
-### 4.8.3 Rotation-invariant directional scalars
 
 Axial coherence showed very small absolute changes across the tested rotations.
 
