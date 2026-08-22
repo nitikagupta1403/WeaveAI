@@ -19,13 +19,13 @@ R_2(r)=|F_2(r)|
 and axial orientation
 
 \[
-\mu_2(r)
+\alpha_2(r)
 =
 \frac12\operatorname{atan2}(S_2(r),C_2(r))
 \pmod{\pi}.
 \]
 
-The resulting 14-dimensional representation contains eight radial-magnitude and six doubled-angle axial descriptors. The choice \(m=2\) is determined by axial symmetry: it is the lowest non-zero harmonic invariant under \(180^\circ\) reversal.
+The resulting 14-dimensional representation contains eight radial-magnitude and six doubled-angle axial descriptors. The choice \(m=2\) follows from the axial orientation quantity targeted by the representation: it is the lowest non-zero harmonic compatible with the equivalence \(\theta\equiv\theta+\pi\).
 
 To evaluate information retained after explicit phase is omitted, \(C_2\) and \(S_2\) were reconstructed from radius and \(R_2\) using five category-balanced, garment-identity-disjoint folds. Whole-field reconstructed \(R_2\) achieved RMSE \(0.145610\) and Pearson \(r=0.926390\); peak-shell RMSE was \(0.148303\), Pearson \(r=0.810543\), and median axial error was \(4.104^\circ\).
 
