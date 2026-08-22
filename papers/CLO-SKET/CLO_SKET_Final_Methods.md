@@ -282,6 +282,138 @@ This shell conditioning separates angular organization from the amount of foregr
 
 ---
 
+## 3.X Rigid-image rotation control of the 14-dimensional representation
+
+The analytic rotation controls described above test coordinate-frame dependence
+directly in second-harmonic space. A separate image-domain perturbation control
+was performed to verify that the final 14-dimensional representation exhibits
+the intended invariant and equivariant behavior when the input sketch itself is
+rigidly rotated and the complete radial-angular measurement is recomputed.
+
+All 2,300 sketches were evaluated at the physical rotation angles
+
+\[
+\phi
+\in
+\{-20^\circ,-10^\circ,-5^\circ,0^\circ,5^\circ,10^\circ,20^\circ\}.
+\]
+
+This control was label-free and did not fit or refit any predictive model.
+
+To prevent clipping of the original rectangular sketch under rotation, each
+grayscale image was first embedded in a square white canvas whose side length was
+at least the diagonal of the original image,
+
+\[
+L_i
+=
+\left\lceil
+\sqrt{H_i^2+W_i^2}
+\right\rceil,
+\]
+
+with a one-pixel parity adjustment where required to maintain centered embedding.
+The same padded canvas was used for the reference condition and every rotated
+condition.
+
+For non-zero \(\phi\), the padded grayscale image was rotated using bilinear
+interpolation with fixed canvas size,
+
+\[
+\texttt{expand=False},
+\]
+
+and white background fill,
+
+\[
+\texttt{fillcolor}=255.
+\]
+
+The \(0^\circ\) condition used the same padded canvas without interpolation.
+
+After rotation, the complete radial-angular construction was rerun from the
+rotated grayscale image using the same frozen measurement procedure as for the
+primary representation. No descriptor definition, radial domain, angular
+discretization, or post-processing rule was changed for the rotation control.
+
+For second-harmonic magnitude, a rigid physical rotation ideally satisfies
+
+\[
+F_2'(r)
+=
+e^{-i2\phi}F_2(r),
+\]
+
+so that
+
+\[
+R_2'(r)
+=
+R_2(r).
+\]
+
+Accordingly, radial and magnitude-derived quantities were evaluated as
+approximately rotation-invariant numerical descriptors.
+
+For an axial orientation \(\alpha\),
+
+\[
+\alpha'
+=
+\alpha+\phi
+\pmod{\pi}.
+\]
+
+Its doubled-angle Cartesian representation therefore transforms as
+
+\[
+\begin{bmatrix}
+\cos 2\alpha'\\
+\sin 2\alpha'
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cos 2\phi & -\sin 2\phi\\
+\sin 2\phi & \cos 2\phi
+\end{bmatrix}
+\begin{bmatrix}
+\cos 2\alpha\\
+\sin 2\alpha
+\end{bmatrix}.
+\]
+
+Thus, the peak-orientation and magnitude-weighted mean-orientation coordinate
+pairs were evaluated as axial-equivariant quantities under the expected
+\(R(2\phi)\) action.
+
+Axial coherence,
+
+\[
+\kappa_i,
+\]
+
+and orientation drift,
+
+\[
+\delta_i,
+\]
+
+were treated as rotation-invariant scalar descriptors because they depend on
+relative rather than absolute axial orientation.
+
+Numerical stability of the radial-magnitude field was summarized by the
+normalized mean absolute error of the primary-domain \(R_2(r)\) profile relative
+to the \(0^\circ\) reference. Axial equivariance was evaluated by decoding the
+rotated doubled-angle orientation pairs and comparing the observed orientation
+shift with the imposed physical rotation. Coherence and orientation drift were
+evaluated by their absolute changes from the reference condition.
+
+This perturbation control evaluates empirical numerical behavior under the
+tested rotations only. It does not imply exact invariance under arbitrary image
+transformations, nor robustness beyond the evaluated rotation range.
+
+----
+
 ## 3.4 Angular harmonics and axial orientation
 
 For harmonic order \(m\), the complex angular moment at radial shell \(r_j\) was
