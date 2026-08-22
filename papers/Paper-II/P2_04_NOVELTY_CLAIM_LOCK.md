@@ -54,15 +54,19 @@ The primary contribution of Paper 2 is:
 }
 \]
 
-Specifically, the method:
+Specifically, building on the shared radial-angular Fourier
+measurement substrate, the method:
 
-1. constructs an angular Fourier morphology field
+1. takes the full radial-harmonic field
 
 \[
-F_k(r);
+F_k(r)
 \]
 
-2. retains angular harmonic order \(k\) explicitly;
+as its representation-selection object;
+
+2. retains radial location \(r\) and angular harmonic order \(k\)
+explicitly during representation selection;
 
 3. evaluates candidate radial representations separately across prespecified harmonic bands;
 
@@ -288,7 +292,9 @@ Paper 2 differs because:
 
 Therefore:
 
-> **Paper 2 does not introduce Fourier shape description; it introduces evidence-conditioned radial representation within an angular Fourier morphology field.**
+> **Paper 2 does not introduce Fourier shape description; > **Paper 2 does not introduce Fourier shape description; it develops
+> and evaluates evidence-conditioned radial representation within an
+> angular Fourier morphology field.**
 
 ---
 
@@ -554,9 +560,33 @@ The manuscript may state:
 
 > The study makes three main contributions.
 
-### Contribution 1
+## Contribution 1 — Harmonic-resolved radial representation question
 
-An evidence-controlled strategy for selecting radial encoding separately across angular harmonic bands of a probabilistic Fourier morphology field.
+Building on the shared radial-angular Fourier substrate,
+
+\[
+P(\theta\mid r)
+\rightarrow
+F_k(r),
+\]
+
+we retain the full positive angular-harmonic field as a collection of
+radial functions and ask whether the appropriate radial representation
+depends on angular harmonic scale.
+
+The contribution is therefore not the construction of the
+radial-angular Fourier measurement itself, but the formulation and
+evaluation of the representation-selection problem
+
+\[
+\boxed{
+\text{Does the radial representation required for }F_k(r)
+\text{ depend on }k?
+}
+\]
+
+This establishes the full harmonic field as the object on which
+band-specific radial representation selection is subsequently performed.
 
 ### Contribution 2
 
