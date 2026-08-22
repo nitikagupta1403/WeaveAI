@@ -6,7 +6,7 @@ This study develops an explicit radial–angular representation of garment-sketc
 
 The primary sketch representation is a 14-dimensional vector comprising eight radial descriptors derived from second-harmonic magnitude and six descriptors of axial orientation. No principal-component analysis, learned embedding, semantic segmentation, von Mises fitting, or reconstruction of the complete angular density is used to construct this representation.
 
-The analysis comprises: (1) centroid-relative polar transformation; (2) estimation of the conditional angular distribution within radial shells; (3) extraction of the second angular harmonic; (4) construction of the 14-dimensional representation; (5) garment-identity-disjoint reconstruction of second-harmonic Cartesian components; (6) coordinate-frame, harmonic-order, parameter, and discretization controls; (7) phase-conditioning analysis; and (8) garment-level uncertainty estimation and association analysis.
+The analysis comprises: (1) centroid-relative polar transformation; (2) estimation of the conditional angular distribution within radial shells; (3) extraction of the second angular harmonic; (4) construction of the 14-dimensional representation; (5) garment-identity-disjoint reconstruction of second-harmonic Cartesian components; (6) coordinate-frame, rigid-image rotation, harmonic-order, parameter, and discretization controls; (7) phase-conditioning analysis; and (8) garment-level uncertainty estimation and association analysis.
 
 ---
 
@@ -282,13 +282,9 @@ This shell conditioning separates angular organization from the amount of foregr
 
 ---
 
-## 3.X Rigid-image rotation control of the 14-dimensional representation
+## 3.4 Rigid-image rotation control of the 14-dimensional representation
 
-The analytic rotation controls described above test coordinate-frame dependence
-directly in second-harmonic space. A separate image-domain perturbation control
-was performed to verify that the final 14-dimensional representation exhibits
-the intended invariant and equivariant behavior when the input sketch itself is
-rigidly rotated and the complete radial-angular measurement is recomputed.
+The analytic rotation controls described later test coordinate-frame dependence directly in second-harmonic space. A separate image-domain perturbation control was performed to verify that the final 14-dimensional representation exhibits the intended invariant and equivariant behavior when the input sketch itself is rigidly rotated and the complete radial-angular measurement is recomputed.
 
 All 2,300 sketches were evaluated at the physical rotation angles
 
@@ -300,9 +296,7 @@ All 2,300 sketches were evaluated at the physical rotation angles
 
 This control was label-free and did not fit or refit any predictive model.
 
-To prevent clipping of the original rectangular sketch under rotation, each
-grayscale image was first embedded in a square white canvas whose side length was
-at least the diagonal of the original image,
+To prevent clipping of the original rectangular sketch under rotation, each grayscale image was first embedded in a square white canvas whose side length was at least the diagonal of the original image,
 
 \[
 L_i
@@ -312,12 +306,9 @@ L_i
 \right\rceil,
 \]
 
-with a one-pixel parity adjustment where required to maintain centered embedding.
-The same padded canvas was used for the reference condition and every rotated
-condition.
+with a one-pixel parity adjustment where required to maintain centered embedding. The same padded canvas was used for the reference condition and every rotated condition.
 
-For non-zero \(\phi\), the padded grayscale image was rotated using bilinear
-interpolation with fixed canvas size,
+For non-zero \(\phi\), the padded grayscale image was rotated using bilinear interpolation with fixed canvas size,
 
 \[
 \texttt{expand=False},
@@ -331,10 +322,7 @@ and white background fill,
 
 The \(0^\circ\) condition used the same padded canvas without interpolation.
 
-After rotation, the complete radial-angular construction was rerun from the
-rotated grayscale image using the same frozen measurement procedure as for the
-primary representation. No descriptor definition, radial domain, angular
-discretization, or post-processing rule was changed for the rotation control.
+After rotation, the complete radial-angular construction was rerun from the rotated grayscale image using the same frozen measurement procedure as for the primary representation. No descriptor definition, radial domain, angular discretization, or post-processing rule was changed for the rotation control.
 
 For second-harmonic magnitude, a rigid physical rotation ideally satisfies
 
@@ -352,8 +340,7 @@ R_2'(r)
 R_2(r).
 \]
 
-Accordingly, radial and magnitude-derived quantities were evaluated as
-approximately rotation-invariant numerical descriptors.
+Accordingly, radial and magnitude-derived quantities were evaluated as approximately rotation-invariant numerical descriptors.
 
 For an axial orientation \(\alpha\),
 
@@ -382,9 +369,7 @@ Its doubled-angle Cartesian representation therefore transforms as
 \end{bmatrix}.
 \]
 
-Thus, the peak-orientation and magnitude-weighted mean-orientation coordinate
-pairs were evaluated as axial-equivariant quantities under the expected
-\(R(2\phi)\) action.
+Thus, the peak-orientation and magnitude-weighted mean-orientation coordinate pairs were evaluated as axial-equivariant quantities under the expected \(R(2\phi)\) action.
 
 Axial coherence,
 
@@ -398,23 +383,15 @@ and orientation drift,
 \delta_i,
 \]
 
-were treated as rotation-invariant scalar descriptors because they depend on
-relative rather than absolute axial orientation.
+were treated as rotation-invariant scalar descriptors because they depend on relative rather than absolute axial orientation.
 
-Numerical stability of the radial-magnitude field was summarized by the
-normalized mean absolute error of the primary-domain \(R_2(r)\) profile relative
-to the \(0^\circ\) reference. Axial equivariance was evaluated by decoding the
-rotated doubled-angle orientation pairs and comparing the observed orientation
-shift with the imposed physical rotation. Coherence and orientation drift were
-evaluated by their absolute changes from the reference condition.
+Numerical stability of the radial-magnitude field was summarized by the normalized mean absolute error of the primary-domain \(R_2(r)\) profile relative to the \(0^\circ\) reference. Axial equivariance was evaluated by decoding the rotated doubled-angle orientation pairs and comparing the observed orientation shift with the imposed physical rotation. Coherence and orientation drift were evaluated by their absolute changes from the reference condition.
 
-This perturbation control evaluates empirical numerical behavior under the
-tested rotations only. It does not imply exact invariance under arbitrary image
-transformations, nor robustness beyond the evaluated rotation range.
+This perturbation control evaluates empirical numerical behavior under the tested rotations only. It does not imply exact invariance under arbitrary image transformations, nor robustness beyond the evaluated rotation range.
 
-----
+---
 
-## 3.4 Angular harmonics and axial orientation
+## 3.5 Angular harmonics and axial orientation
 
 For harmonic order \(m\), the complex angular moment at radial shell \(r_j\) was
 
@@ -527,7 +504,7 @@ Reported angular errors are expressed on the equivalent interval
 
 ---
 
-## 3.5 Why the second harmonic is the primary angular statistic
+## 3.6 Why the second harmonic is the primary angular statistic
 
 The choice \(m=2\) follows from the axial symmetry of the quantity being represented rather than from retrospective comparison of harmonic performance.
 
@@ -571,7 +548,7 @@ The higher even harmonic \(m=4\) is also axially invariant but represents finer 
 
 ---
 
-## 3.6 Primary radial domain and peak quantities
+## 3.7 Primary radial domain and peak quantities
 
 The primary radial analysis was defined on 25 shell centers,
 
@@ -628,7 +605,7 @@ Peak radius is the location of a discrete argmax on a finite domain. It was ther
 
 ---
 
-## 3.7 Eight radial-magnitude descriptors
+## 3.8 Eight radial-magnitude descriptors
 
 Let
 
@@ -757,7 +734,7 @@ was excluded because it is exactly determined by two retained coordinates.
 
 ---
 
-## 3.8 Six axial descriptors
+## 3.9 Six axial descriptors
 
 The peak axial orientation was
 
@@ -842,7 +819,7 @@ Additional persistence and weighted-dispersion summaries were excluded because t
 
 ---
 
-## 3.9 Primary 14-dimensional representation
+## 3.10 Primary 14-dimensional representation
 
 The final sketch-level representation was
 
@@ -868,7 +845,7 @@ The eight radial and six axial coordinates were concatenated in the order define
 
 ---
 
-## 3.10 Garment-identity-disjoint shell-field reconstruction
+## 3.11 Garment-identity-disjoint shell-field reconstruction
 
 The reconstruction experiment interrogated the shell-level second-harmonic field underlying the 14-dimensional summary representation. It did not use the 14-dimensional vector itself as the predictor input.
 
@@ -933,11 +910,11 @@ The final analysis was executed with Python 3.12.13, NumPy 2.0.2, and scikit-lea
 
 ---
 
-## 3.11 Rotation and coordinate-frame controls
+## 3.12 Rotation and coordinate-frame controls
 
 Two complementary rotation controls evaluated the dependence of reconstruction on the common image coordinate frame.
 
-### 3.11.1 Analytic harmonic rotation
+### 3.12.1 Analytic harmonic rotation
 
 For a physical image rotation by angle \(\phi\),
 
@@ -1010,7 +987,7 @@ while axial orientation transforms as
 
 This analytic transformation was used instead of rotating raster images, thereby avoiding interpolation, resampling, and cropping artifacts.
 
-### 3.11.2 Global-rotation control
+### 3.12.2 Global-rotation control
 
 The complete observed harmonic field was rotated by
 
@@ -1030,7 +1007,7 @@ For each rotation, the same predictors, estimator specification, garment-identit
 
 Separate \(C_2\) and \(S_2\) RMSEs were retained to demonstrate their expected coordinate dependence, while vector RMSE, \(R_2\) error, peak-shell \(R_2\) performance, axial error, and equivariance error were used as substantive coordinate-aware or coordinate-free diagnostics.
 
-### 3.11.3 Garment-identity-randomized rotation
+### 3.12.3 Garment-identity-randomized rotation
 
 A second control removed common population-level alignment while preserving repeated-sketch identity structure.
 
@@ -1098,11 +1075,11 @@ These values were used as reference benchmarks rather than fitted null parameter
 
 ---
 
-## 3.12 Parameter and discretization sensitivity
+## 3.13 Parameter and discretization sensitivity
 
 Sensitivity analyses evaluated dependence of the radial–angular representation on prespecified numerical choices. The primary configuration was not altered after these analyses.
 
-### 3.12.1 Support threshold
+### 3.13.1 Support threshold
 
 The primary support threshold was
 
@@ -1122,7 +1099,7 @@ Alternative fractions were
 
 All eight radial descriptors were recomputed while holding the radial domain and concentration width fixed.
 
-### 3.12.2 Concentration half-width
+### 3.13.2 Concentration half-width
 
 The primary concentration half-width was
 
@@ -1140,7 +1117,7 @@ h=6.
 
 All other descriptor definitions were unchanged.
 
-### 3.12.3 Radial-domain sensitivity
+### 3.13.3 Radial-domain sensitivity
 
 The primary domain was
 
@@ -1180,7 +1157,7 @@ The canonical full 72-shell radial field was reconstructed directly from the raw
 
 For each domain, descriptor rank stability, peak-location changes, endpoint occupancy, and peak-magnitude changes were quantified relative to the primary specification.
 
-### 3.12.4 Angular-resolution sensitivity
+### 3.13.4 Angular-resolution sensitivity
 
 The canonical 72 angular bins were coarsened to
 
@@ -1194,7 +1171,7 @@ bins by exact aggregation of adjacent angular mass bins. No image interpolation 
 
 For each resolution, \(F_2\), \(C_2\), \(S_2\), \(R_2\), axial orientation, peak magnitude, and peak radius were recomputed. The 72-bin field served as the reference.
 
-### 3.12.5 Radial-resolution sensitivity
+### 3.13.5 Radial-resolution sensitivity
 
 The canonical 72 radial bins were coarsened by exact radial mass aggregation to
 
@@ -1232,7 +1209,7 @@ These sensitivity analyses characterize measurement dependence; they are not par
 
 ---
 
-## 3.13 Low-order harmonic control
+## 3.14 Low-order harmonic control
 
 To place the primary second harmonic within the observed low-order spectrum, harmonics
 
@@ -1262,11 +1239,11 @@ and the fraction of integrated magnitude carried by that order relative to the s
 
 Rank correlations between \(m=2\) and neighbouring harmonic magnitudes were used to assess whether the second harmonic duplicated other low-order structure.
 
-Because the geometric symmetry argument in Section 3.5 defines \(m=2\) a priori as the lowest non-zero axial harmonic, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
+Because the geometric symmetry argument in Section 3.6 defines \(m=2\) a priori as the lowest non-zero axial harmonic, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
 
 ---
 
-## 3.14 Phase-conditioning analysis
+## 3.15 Phase-conditioning analysis
 
 Axial phase becomes poorly conditioned when the magnitude of its underlying Cartesian vector is small. This relationship was derived explicitly for the second harmonic.
 
@@ -1422,7 +1399,7 @@ These quartiles were descriptive strata rather than independent inferential grou
 
 ---
 
-## 3.15 Garment-level association analysis
+## 3.16 Garment-level association analysis
 
 The principal association analysis evaluated the relationship between observed peak-shell harmonic magnitude and peak-shell axial reconstruction error.
 
@@ -1481,7 +1458,7 @@ The permutation probabilities for the two prespecified garment-level association
 
 ---
 
-## 3.16 Garment-cluster bootstrap
+## 3.17 Garment-cluster bootstrap
 
 Uncertainty intervals were estimated using
 
@@ -1511,7 +1488,7 @@ The bootstrap was applied to reconstruction metrics, peak-shell quantities, garm
 
 ---
 
-## 3.17 Category-stratified permutation inference
+## 3.18 Category-stratified permutation inference
 
 For each of the two prespecified garment-level association tests,
 
@@ -1550,7 +1527,7 @@ Because permutation was conditional on garment category, the corresponding null 
 
 ---
 
-## 3.18 Outcome-defined error bands and threshold sensitivity
+## 3.19 Outcome-defined error bands and threshold sensitivity
 
 Peak-shell axial errors were summarized descriptively into low, intermediate, and high bands.
 
@@ -1608,7 +1585,7 @@ Because the error bands are defined using the observed outcome, overlap strongly
 
 ---
 
-## 3.19 Algebraically coupled calibration diagnostic
+## 3.20 Algebraically coupled calibration diagnostic
 
 Peak-shell magnitude error was defined as
 
@@ -1636,9 +1613,9 @@ was reported only as a descriptive calibration diagnostic and was assigned no in
 
 ---
 
-## 3.20 Scope of inference
+## 3.21 Scope of inference
 
-The analysis supports an explicit 14-dimensional geometric representation of garment sketches, numerical validation of its harmonic construction, reconstruction assessment on previously unseen recovered garment identities, coordinate-frame controls, harmonic-order and parameter-sensitivity analyses, phase-conditioning analysis, cluster-aware uncertainty estimates, and garment-level monotonic association tests.
+The analysis supports an explicit 14-dimensional geometric representation of garment sketches, numerical validation of its harmonic construction, reconstruction assessment on previously unseen recovered garment identities, coordinate-frame and rigid-image rotation controls, harmonic-order and parameter-sensitivity analyses, phase-conditioning analysis, cluster-aware uncertainty estimates, and garment-level monotonic association tests.
 
 Several boundaries on interpretation are explicit.
 
@@ -1652,7 +1629,7 @@ is an algebraic identity and does not constitute independent corroborating evide
 
 Second, reconstruction of \(C_2\) and \(S_2\) from \((r,R_2)\) is a shared-source consistency diagnostic because predictors and targets derive from the same conditional angular field.
 
-Third, the rotation controls show that strong phase reconstruction in the upright dataset depends substantially on population-level orientation relative to the common image coordinate frame.
+Third, the analytic and randomized rotation controls show that strong phase reconstruction in the upright dataset depends substantially on population-level orientation relative to the common image coordinate frame, while the rigid-image perturbation control evaluates whether the 14-dimensional descriptor exhibits the intended invariant/equivariant behavior under the tested rotations.
 
 Fourth, the primary numerical settings are treated as a fixed measurement specification rather than as universally optimal parameters. Global radial summaries are more stable than localized peak- and support-based descriptors, and peak radius is specifically interpreted as a domain-dependent localization statistic.
 
