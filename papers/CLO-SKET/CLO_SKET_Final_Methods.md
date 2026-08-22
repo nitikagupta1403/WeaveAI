@@ -28,54 +28,234 @@ Recovered garment identity was treated as the indivisible clustering unit for cr
 
 ---
 
-## 3.3 Polar coordinate construction
+## 3.3 Raw-image radial–angular construction
 
-For sketch \(i\), let \(w_{ip}\geq0\) denote foreground intensity weight at pixel \(p\), located at isotropically scaled Cartesian coordinates \((x_{ip},y_{ip})\).
+The radial–angular representation was constructed directly from the original grayscale TIFF images at their native spatial resolution. No foreground thresholding, binarization, resizing, rotation, straightening, or principal-axis alignment was applied in this branch.
 
-The intensity-weighted foreground centroid was
+For sketch \(i\), let \(I_{ip}\in[0,255]\) denote the grayscale intensity of pixel \(p\). Continuous foreground darkness was defined as
+
+\[
+w_{ip}
+=
+\max\left(255-I_{ip},\,0\right).
+\]
+
+Thus darker sketch pixels contribute more mass, while white background pixels contribute zero mass.
+
+For an image of width \(W_i\) and height \(H_i\), a common isotropic scale was defined as
+
+\[
+S_i
+=
+\max(W_i,H_i).
+\]
+
+Pixel coordinates \((u_{ip},v_{ip})\) were mapped to an aspect-ratio-preserving isotropic coordinate system,
+
+\[
+x_{ip}
+=
+\frac{
+u_{ip}-(W_i-1)/2
+}{
+S_i
+},
+\qquad
+y_{ip}
+=
+\frac{
+v_{ip}-(H_i-1)/2
+}{
+S_i
+}.
+\]
+
+The same scale factor was used for both axes, so portrait sketches were not independently stretched along \(x\) and \(y\).
+
+The darkness-weighted centroid was
 
 \[
 c_{x,i}
 =
-\frac{\sum_p w_{ip}x_{ip}}
-     {\sum_p w_{ip}},
+\frac{
+\sum_p w_{ip}x_{ip}
+}{
+\sum_p w_{ip}
+},
 \qquad
 c_{y,i}
 =
-\frac{\sum_p w_{ip}y_{ip}}
-     {\sum_p w_{ip}}.
+\frac{
+\sum_p w_{ip}y_{ip}
+}{
+\sum_p w_{ip}
+}.
 \]
 
-Each foreground location was represented relative to this centroid as
+Centroid-relative coordinates were then
 
 \[
-r_{ip}
+\widetilde x_{ip}
+=
+x_{ip}-c_{x,i},
+\qquad
+\widetilde y_{ip}
+=
+y_{ip}-c_{y,i},
+\]
+
+with Euclidean radius
+
+\[
+R_{ip}
 =
 \sqrt{
-(x_{ip}-c_{x,i})^2+
-(y_{ip}-c_{y,i})^2
+\widetilde x_{ip}^{\,2}
++
+\widetilde y_{ip}^{\,2}
 },
 \]
+
+and polar angle
 
 \[
 \theta_{ip}
 =
 \operatorname{atan2}
 \left(
-y_{ip}-c_{y,i},
-x_{ip}-c_{x,i}
+\widetilde y_{ip},
+\widetilde x_{ip}
 \right).
 \]
 
-Radius and angle were discretized into 72 bins each. Let
+To remove sketch-specific overall scale while preserving internal radial proportions, radius was normalized separately within each sketch:
+
+\[
+R_{i,\max}
+=
+\max_p R_{ip},
+\]
+
+\[
+\rho_{ip}
+=
+\frac{
+R_{ip}
+}{
+R_{i,\max}
+},
+\qquad
+0\leq\rho_{ip}\leq1.
+\]
+
+The normalized radial coordinate was divided into 72 equal-width bins with edges
+
+\[
+e_j^{(r)}
+=
+\frac{j}{72},
+\qquad
+j=0,\ldots,72.
+\]
+
+The corresponding normalized radial-bin centres were
+
+\[
+\rho_j
+=
+\frac{
+j+\tfrac12
+}{
+72
+},
+\qquad
+j=0,\ldots,71.
+\]
+
+For reporting and descriptor construction, these centres were expressed in shell-coordinate units,
+
+\[
+r_j
+=
+72\rho_j
+=
+j+\frac12,
+\]
+
+so that the full radial grid is
+
+\[
+r_j
+=
+0.5,1.5,\ldots,71.5.
+\]
+
+Angular position was divided into 72 equal-width bins over
+
+\[
+[-\pi,\pi],
+\]
+
+with edges
+
+\[
+e_k^{(\theta)}
+=
+-\pi
++
+k\frac{2\pi}{72},
+\qquad
+k=0,\ldots,72.
+\]
+
+Each angular bin therefore spans
+
+\[
+5^\circ.
+\]
+
+Let
 
 \[
 H_i(r_j,\theta_k)
 \]
 
-denote foreground intensity accumulated in radial bin \(j\) and angular bin \(k\).
+denote the accumulated darkness mass of pixels assigned jointly to radial bin \(j\) and angular bin \(k\):
 
-For each nonempty radial shell, the conditional angular distribution was
+\[
+H_i(r_j,\theta_k)
+=
+\sum_p
+w_{ip}
+\,
+\mathbf 1
+\left[
+\rho_{ip}\in B_j^{(r)}
+\right]
+\mathbf 1
+\left[
+\theta_{ip}\in B_k^{(\theta)}
+\right].
+\]
+
+Pixels with \(\rho_{ip}=1\) were retained in the final radial bin.
+
+For radial shell \(r_j\), define its accumulated darkness mass as
+
+\[
+M_i(r_j)
+=
+\sum_{k=1}^{72}
+H_i(r_j,\theta_k).
+\]
+
+For nonempty shells,
+
+\[
+M_i(r_j)>10^{-14},
+\]
+
+the conditional angular distribution was
 
 \[
 p_i(\theta_k\mid r_j)
@@ -83,12 +263,11 @@ p_i(\theta_k\mid r_j)
 \frac{
 H_i(r_j,\theta_k)
 }{
-\sum_{\ell=1}^{72}
-H_i(r_j,\theta_\ell)
+M_i(r_j)
 },
 \]
 
-with
+so that
 
 \[
 \sum_{k=1}^{72}
@@ -97,7 +276,9 @@ p_i(\theta_k\mid r_j)
 1.
 \]
 
-Conditioning on radius prevents shells with greater total foreground mass from dominating the angular representation solely because they contain more ink.
+Empty radial shells were represented by zeros.
+
+This shell conditioning separates angular organization from the amount of foreground mass present at a given radius. Consequently, radial shells containing more total ink do not dominate the angular statistic solely because they contain more foreground intensity.
 
 ---
 
