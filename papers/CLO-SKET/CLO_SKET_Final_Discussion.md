@@ -46,8 +46,7 @@ describes how foreground mass is distributed around the sketch centroid. Its sec
 F_2(r)
 =
 \sum_k
-p(\theta_k\mid r)
-e^{-i2\theta_k},
+p(\theta_k\mid r)e^{-i2\theta_k},
 \]
 
 can be written as
@@ -320,7 +319,41 @@ The first-order approximation is also not exact for large perturbations. Its rol
 
 ---
 
-## 5.9 Statistical interpretation
+## 5.9 Conditioning of orientation drift
+
+Orientation drift across the primary radial domain should also be interpreted in relation to endpoint harmonic strength. The descriptor
+
+\[
+\delta_i
+=
+d_{\mathrm{ax}}
+\left[
+\mu_{2,i}(3.5),
+\mu_{2,i}(27.5)
+\right]
+\]
+
+compares two phase estimates, each of which becomes less stable as the corresponding second-harmonic magnitude approaches zero.
+
+This dependence was evaluated descriptively using
+
+\[
+R_{2,i}^{\mathrm{end,min}}
+=
+\min
+\left[
+R_{2,i}(3.5),
+R_{2,i}(27.5)
+\right].
+\]
+
+Median orientation drift decreased from \(43.86^\circ\) in the weakest endpoint-magnitude quartile to \(9.30^\circ\) in the strongest. At the garment-identity level, median minimum endpoint \(R_2\) was negatively associated with median drift (\(\rho=-0.382\)). Endpoint-specific analysis showed a stronger association for the inner endpoint (\(\rho=-0.432\)) than for the outer endpoint (\(\rho=-0.131\)), indicating that the effect was not attributable solely to the outer radial boundary.
+
+Orientation drift should therefore not be interpreted as an unqualified measure of radial orientation change. The descriptor contains a conditioning component because the phase of a short harmonic vector is intrinsically unstable. However, appreciable drift remained among sketches without extremely weak endpoint magnitudes, so radial variation in second-harmonic orientation cannot be dismissed as a purely numerical artifact. No endpoint-magnitude threshold was used to exclude sketches or alter the 14-dimensional representation.
+
+---
+
+## 5.10 Statistical interpretation
 
 The analysis separates mathematical identities, descriptive empirical patterns, and inferential claims.
 
@@ -378,7 +411,7 @@ Inference remains conditional on treating the 230 recovered garment identities a
 
 ---
 
-## 5.10 Scientific contribution
+## 5.11 Scientific contribution
 
 None of the individual mathematical operations used here is new. Polar coordinates, Fourier moments, axial statistics, tree-based regression, bootstrap resampling, and permutation inference are established methods.
 
@@ -399,7 +432,7 @@ The resulting contribution is therefore methodological rather than semantic. CLO
 
 ---
 
-## 5.11 Limitations
+## 5.12 Limitations
 
 Several limitations remain.
 
@@ -423,7 +456,7 @@ Finally, no garment-part annotations, semantic labels beyond garment category, p
 
 ---
 
-## 5.12 Future work
+## 5.13 Future work
 
 The highest-priority extension is external validation on independently curated garment-sketch collections with explicit garment, designer, and collection identifiers. The representation and evaluation protocol should be specified before examining transfer performance so that external validation tests generalization rather than enabling another round of parameter selection.
 
@@ -439,7 +472,7 @@ Finally, semantic validation would require independent annotations. Expert-defin
 
 ---
 
-## 5.13 Conclusion
+## 5.14 Conclusion
 
 CLO-SKET demonstrates that garment sketches can be represented as explicit radial–angular measurements using shell-conditioned second-harmonic geometry.
 
