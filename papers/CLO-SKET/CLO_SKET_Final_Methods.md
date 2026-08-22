@@ -55,8 +55,7 @@ Pixel coordinates \((u_{ip},v_{ip})\) were mapped to an aspect-ratio-preserving 
 \[
 x_{ip}
 =
-\frac{
-u_{ip}-(W_i-1)/2
+\frac{u_{ip}-(W_i-1)/2
 }{
 S_i
 },
@@ -506,7 +505,7 @@ Reported angular errors are expressed on the equivalent interval
 
 ## 3.6 Why the second harmonic is the primary angular statistic
 
-The choice \(m=2\) follows from the axial symmetry of the quantity being represented rather than from retrospective comparison of harmonic performance.
+The choice \(m=2\) follows from the symmetry of the orientation quantity being represented rather than from retrospective comparison of harmonic performance. The representation targets undirected axial organization, so an axis at angle \(\theta\) is equivalent to the same axis at \(\theta+\pi\).
 
 Under a \(180^\circ\) reversal,
 
@@ -542,13 +541,15 @@ Odd harmonics change sign under axial reversal, whereas even harmonics are invar
 m=2
 \]
 
-is the lowest non-zero harmonic compatible with the required \(180^\circ\) equivalence.
+is the lowest non-zero harmonic compatible with this axial equivalence.
 
-The higher even harmonic \(m=4\) is also axially invariant but represents finer angular organization. Harmonics \(m=1\) and \(m=3\) were therefore used as odd-order controls and \(m=4\) as a higher-order axial control. Harmonic-order comparisons were conducted as descriptive consistency analyses and were not used to select the primary harmonic after inspecting results.
+The higher even harmonic \(m=4\) is also axially invariant but represents finer angular organization. Harmonics \(m=1\) and \(m=3\) were used as directional controls and \(m=4\) as a higher-order axial control; these comparisons were descriptive and did not redefine the primary \(m=2\) representation.
 
 ---
 
 ## 3.7 Primary radial domain and peak quantities
+
+The reported shell coordinate \(r_j=j+\tfrac12\) is a dimensionless bin-coordinate representation of the sketch-normalized radius \(\rho_j=(j+\tfrac12)/72\); it is not a physical pixel distance.
 
 The primary radial analysis was defined on 25 shell centers,
 
@@ -979,9 +980,9 @@ R_2,
 while axial orientation transforms as
 
 \[
-\mu_2'
+\alpha_2'
 =
-\mu_2+\phi
+\alpha_2+\phi
 \pmod{\pi}.
 \]
 
@@ -1005,7 +1006,7 @@ The complete observed harmonic field was rotated by
 
 For each rotation, the same predictors, estimator specification, garment-identity-disjoint folds, and evaluation metrics were used.
 
-Separate \(C_2\) and \(S_2\) RMSEs were retained to demonstrate their expected coordinate dependence, while vector RMSE, \(R_2\) error, peak-shell \(R_2\) performance, axial error, and equivariance error were used as substantive coordinate-aware or coordinate-free diagnostics.
+Separate \(C_2\) and \(S_2\) RMSEs were retained to demonstrate their expected coordinate dependence, while vector RMSE, \(R_2\) error, peak-shell \(R_2\) performance, axial error, and coordinate-frame consistency error were used as substantive diagnostics.
 
 ### 3.12.3 Garment-identity-randomized rotation
 
@@ -1077,7 +1078,7 @@ These values were used as reference benchmarks rather than fitted null parameter
 
 ## 3.13 Parameter and discretization sensitivity
 
-Sensitivity analyses evaluated dependence of the radial–angular representation on prespecified numerical choices. The primary configuration was not altered after these analyses.
+Sensitivity analyses evaluated dependence of the radial–angular representation on the fixed numerical choices used in the primary measurement specification. The primary configuration was not altered after these analyses.
 
 ### 3.13.1 Support threshold
 
@@ -1239,7 +1240,7 @@ and the fraction of integrated magnitude carried by that order relative to the s
 
 Rank correlations between \(m=2\) and neighbouring harmonic magnitudes were used to assess whether the second harmonic duplicated other low-order structure.
 
-Because the geometric symmetry argument in Section 3.6 defines \(m=2\) a priori as the lowest non-zero axial harmonic, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
+Because Section 3.6 defines \(m=2\) from the axial orientation convention of the measurement, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
 
 ---
 
@@ -1250,7 +1251,7 @@ Axial phase becomes poorly conditioned when the magnitude of its underlying Cart
 Let
 
 \[
-\mu_2
+\alpha_2
 =
 \frac12
 \operatorname{atan2}(S_2,C_2).
@@ -1259,7 +1260,7 @@ Let
 Its first-order differential is
 
 \[
-d\mu_2
+d\alpha_2
 =
 \frac12
 \frac{
@@ -1274,7 +1275,7 @@ C_2^2+S_2^2
 or equivalently,
 
 \[
-d\mu_2
+d\alpha_2
 =
 \frac{
 C_2\,dS_2
@@ -1299,7 +1300,7 @@ dC_2^2+dS_2^2
 giving
 
 \[
-|d\mu_2|
+|d\alpha_2|
 \leq
 \frac{
 \sqrt{
@@ -1338,7 +1339,7 @@ E_{CS}
 The empirical conditioning quantity was
 
 \[
-B_\mu
+B_\alpha
 =
 \frac{
 E_{CS}
@@ -1350,7 +1351,7 @@ E_{CS}
 The absolute first-order approximation was
 
 \[
-L_\mu
+L_\alpha
 =
 \left|
 \frac{
@@ -1380,13 +1381,13 @@ E_{CS},
 \]
 
 \[
-B_\mu,
+B_\alpha,
 \]
 
 and
 
 \[
-L_\mu.
+L_\alpha.
 \]
 
 The analysis tests whether empirical axial reconstruction error is consistent with the expected geometry of phase estimation. It does not assume that the first-order approximation is exact for large perturbations or that \(R_2\) causally determines angular error.
@@ -1454,7 +1455,7 @@ Peak radius is interpreted more cautiously because it is defined by an argmax ov
 
 Spearman correlations computed over all 2,300 sketches were retained only as descriptive pooled-sketch summaries and were not assigned inferential \(p\)-values.
 
-The permutation probabilities for the two prespecified garment-level association tests were adjusted jointly using Holm's procedure.
+The permutation probabilities for the two garment-level association tests were adjusted jointly using Holm's procedure.
 
 ---
 
@@ -1490,7 +1491,7 @@ The bootstrap was applied to reconstruction metrics, peak-shell quantities, garm
 
 ## 3.18 Category-stratified permutation inference
 
-For each of the two prespecified garment-level association tests,
+For each of the two garment-level association tests,
 
 \[
 10{,}000
@@ -1547,7 +1548,7 @@ and
 e_i>45^\circ.
 \]
 
-Sensitivity was evaluated using four prespecified low/high threshold pairs:
+Sensitivity was evaluated using four tested low/high threshold pairs:
 
 \[
 10^\circ/30^\circ,
@@ -1629,7 +1630,7 @@ is an algebraic identity and does not constitute independent corroborating evide
 
 Second, reconstruction of \(C_2\) and \(S_2\) from \((r,R_2)\) is a shared-source consistency diagnostic because predictors and targets derive from the same conditional angular field.
 
-Third, the analytic and randomized rotation controls show that strong phase reconstruction in the upright dataset depends substantially on population-level orientation relative to the common image coordinate frame, while the rigid-image perturbation control evaluates whether the 14-dimensional descriptor exhibits the intended invariant/equivariant behavior under the tested rotations.
+Third, the analytic and randomized rotation controls show that strong phase reconstruction in the upright dataset depends substantially on population-level orientation relative to the common image coordinate frame, while the rigid-image perturbation control evaluates empirical descriptor behavior under the tested physical rotations.
 
 Fourth, the primary numerical settings are treated as a fixed measurement specification rather than as universally optimal parameters. Global radial summaries are more stable than localized peak- and support-based descriptors, and peak radius is specifically interpreted as a domain-dependent localization statistic.
 
