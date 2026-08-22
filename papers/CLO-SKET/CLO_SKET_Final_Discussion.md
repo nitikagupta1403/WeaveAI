@@ -158,6 +158,114 @@ The representation therefore encodes axial directions through doubled-angle Cart
 The resulting 14-dimensional representation contains direct radial and axial summaries rather than reconstructed outputs or algebraically redundant transformations. This is more important scientifically than the reduction in dimensionality itself: it keeps the distinction between measured coordinates, deterministic transformations, model outputs, and statistical evidence explicit.
 
 ---
+## 5.5 Transformation behavior of the 14-dimensional representation
+
+The representation contains coordinates with different transformation roles
+under rigid image rotation, and these roles should not be conflated.
+
+The radial and magnitude-derived coordinates are intended to be invariant to
+global in-plane rotation, because rigid rotation changes second-harmonic phase
+but not its magnitude,
+
+\[
+F_2'(r)=e^{-i2\phi}F_2(r),
+\qquad
+R_2'(r)=R_2(r).
+\]
+
+By contrast, the two axial orientation pairs are not invariant. If an axial
+orientation transforms as
+
+\[
+\alpha'=\alpha+\phi \pmod{\pi},
+\]
+
+then its doubled-angle Cartesian representation transforms equivariantly as
+
+\[
+\begin{bmatrix}
+\cos2\alpha'\\
+\sin2\alpha'
+\end{bmatrix}
+=
+R(2\phi)
+\begin{bmatrix}
+\cos2\alpha\\
+\sin2\alpha
+\end{bmatrix}.
+\]
+
+Axial coherence and orientation drift are scalar quantities defined from relative
+orientation structure and are therefore intended to remain invariant under a
+common global rotation.
+
+The image-domain perturbation control largely reproduced these expected roles.
+Across \(\pm5^\circ\), \(\pm10^\circ\), and \(\pm20^\circ\), median
+second-harmonic magnitude-profile perturbations remained small. Decoded peak and
+magnitude-weighted axial orientations closely tracked the imposed image rotation,
+with the latter showing especially small upper-tail transformation error. Axial
+coherence was also numerically stable.
+
+Orientation drift requires a more qualified interpretation. Its median absolute
+change was small, but its 95th-percentile change was much larger. This does not
+alter its mathematical status as a rotation-invariant scalar; rather, it shows
+that a mathematically invariant descriptor can still exhibit non-negligible
+numerical sensitivity when estimated from discretized raster data.
+
+The appropriate claim is therefore empirical rather than absolute: the tested
+rotation control supports the intended invariant/equivariant structure of the
+representation over the evaluated perturbations. It does not establish exact
+invariance of rasterized sketches, invariance under arbitrary transformations,
+or stability outside the tested rotation range.
+
+## 5.5 Transformation behavior of the 14-dimensional representation
+
+The representation contains coordinates with distinct transformation roles under rigid image rotation, and these roles should not be conflated.
+
+The radial and magnitude-derived coordinates are intended to be invariant to global in-plane rotation. Under a rigid rotation by \(\phi\),
+
+\[
+F_2'(r)=e^{-i2\phi}F_2(r),
+\]
+
+so that
+
+\[
+R_2'(r)=|F_2'(r)|=R_2(r).
+\]
+
+By contrast, the axial orientation coordinates are equivariant rather than invariant. If
+
+\[
+\alpha'=\alpha+\phi \pmod{\pi},
+\]
+
+then the doubled-angle Cartesian encoding transforms as
+
+\[
+\begin{bmatrix}
+\cos 2\alpha'\\
+\sin 2\alpha'
+\end{bmatrix}
+=
+R(2\phi)
+\begin{bmatrix}
+\cos 2\alpha\\
+\sin 2\alpha
+\end{bmatrix},
+\]
+
+where \(R(2\phi)\) is the ordinary two-dimensional rotation matrix through angle \(2\phi\).
+
+Axial coherence and orientation drift are scalar summaries of relative directional structure and are therefore intended to remain invariant under a common rigid rotation.
+
+The image-domain perturbation control largely reproduced these expected transformation roles. Across rotations of \(\pm5^\circ\), \(\pm10^\circ\), and \(\pm20^\circ\), second-harmonic radial-magnitude profiles showed small median perturbations. Peak and magnitude-weighted axial orientations closely followed the imposed rotation, with the magnitude-weighted orientation showing 95th-percentile equivariance error below \(0.85^\circ\) over the tested range. Axial coherence was also numerically stable.
+
+Orientation drift requires a more qualified interpretation. Its median absolute change was small, but its upper-tail perturbation was substantially larger. This does not alter its mathematical classification as a rotation-invariant scalar; rather, it shows that a theoretically invariant statistic may remain numerically sensitive when estimated from discretized raster images.
+
+The appropriate conclusion is therefore empirical rather than absolute. The rigid-image control supports the intended invariant/equivariant organization of the 14-dimensional representation over the tested rotations. It does not establish exact invariance of rasterized sketches, invariance under arbitrary transformations, or stability outside the evaluated rotation range.
+
+---
 
 ## 5.5 Garment identity and the generalization target
 
