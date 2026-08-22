@@ -484,7 +484,7 @@ The framework provides:
 2. an axial second-harmonic representation whose order follows from the chosen \(180^\circ\) orientation equivalence;
 3. a compact 14-dimensional feature vector that excludes algebraically redundant and model-derived quantities;
 4. garment-identity-disjoint reconstruction for evaluating transfer to unseen source garments;
-5. analytic and identity-randomized rotation controls that expose dependence on the common coordinate frame;
+5. rigid-image rotation control verifying the intended invariant/equivariant transformation behavior of the 14-dimensional representation, together with analytic    and identity-randomized rotation controls exposing reconstruction dependence on the common coordinate frame;
 6. parameter-sensitivity analyses that distinguish robust global summaries from boundary- and resolution-sensitive localized descriptors;
 7. a perturbation-theoretic explanation of the relationship between harmonic magnitude and phase error; and
 8. garment-level uncertainty and permutation inference that respect the repeated-sketch structure.
