@@ -44,13 +44,99 @@ Accordingly, \(R_2\) and \(|F_2|\) were not treated as independent evidence.
 
 ---
 
-## 4.2 Duplicate-image screening and garment-identity structure
+## 4.8 Rigid-image rotation control of the 14-dimensional representation
 
-All 2,300 file paths were unique. SHA-256 hashing detected no repeated raw files, and hashing of decoded pixel arrays detected no repeated decoded images. Perceptual-hash screening identified 11 candidate pairs at Hamming distance 0, 39 at distance at most 2, and 248 at distance at most 4. These candidates were treated as a screen for visual similarity rather than evidence of duplicated files or shared lineage.
+A separate image-domain perturbation control evaluated whether the final
+14-dimensional representation exhibited the intended invariant and equivariant
+behavior when the raster sketch itself was rigidly rotated and the complete
+radial-angular measurement was recomputed.
 
-Filename and category structure recovered 230 category-qualified garment identities, exactly 10 identities within each of the 23 categories. Individual garment identities contained 9–11 sketches and 9–11 distinct replicate identifiers. Eight identity–replicate combinations appeared more than once in the filename records.
+All 2,300 sketches were evaluated at
 
-Recovered garment identity was therefore used as the clustering unit for validation, bootstrap resampling, and confirmatory association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
+\[
+\phi
+\in
+\{-20^\circ,-10^\circ,-5^\circ,0^\circ,5^\circ,10^\circ,20^\circ\}.
+\]
+
+No garment labels were used and no predictive model was fitted.
+
+### 4.8.1 Stability of the second-harmonic magnitude field
+
+Across non-zero rotation conditions, the primary-domain second-harmonic magnitude
+profile showed small median numerical perturbations relative to the \(0^\circ\)
+reference.
+
+The median normalized mean absolute errors were:
+
+| Rotation | Median \(R_2\) NMAE | 95th percentile |
+|---:|---:|---:|
+| \(-20^\circ\) | 0.034374 | 0.110528 |
+| \(-10^\circ\) | 0.025998 | 0.080176 |
+| \(-5^\circ\) | 0.019959 | 0.065123 |
+| \(+5^\circ\) | 0.020684 | 0.068462 |
+| \(+10^\circ\) | 0.026253 | 0.083533 |
+| \(+20^\circ\) | 0.033446 | 0.114846 |
+
+The perturbation was smallest near the reference orientation and increased
+modestly toward the largest tested rotations, consistent with interpolation and
+finite-bin effects rather than exact raster-level invariance.
+
+### 4.8.2 Axial orientation equivariance
+
+The two doubled-angle orientation pairs exhibited the expected axial-equivariant
+behavior.
+
+For the peak axial orientation, median observed shifts closely matched the imposed
+physical rotations:
+
+| Rotation | Median observed shift | Median equivariance error | 95th percentile error |
+|---:|---:|---:|---:|
+| \(-20^\circ\) | \(-19.9968^\circ\) | \(0.2554^\circ\) | \(4.8725^\circ\) |
+| \(-10^\circ\) | \(-9.9985^\circ\) | \(0.1947^\circ\) | \(3.6967^\circ\) |
+| \(-5^\circ\) | \(-4.9930^\circ\) | \(0.1536^\circ\) | \(2.4070^\circ\) |
+| \(+5^\circ\) | \(5.0130^\circ\) | \(0.1566^\circ\) | \(2.6419^\circ\) |
+| \(+10^\circ\) | \(10.0089^\circ\) | \(0.2001^\circ\) | \(3.7304^\circ\) |
+| \(+20^\circ\) | \(20.0127^\circ\) | \(0.2638^\circ\) | \(4.5054^\circ\) |
+
+The magnitude-weighted mean orientation was even more stable:
+
+| Rotation | Median observed shift | Median equivariance error | 95th percentile error |
+|---:|---:|---:|---:|
+| \(-20^\circ\) | \(-19.9944^\circ\) | \(0.0925^\circ\) | \(0.8485^\circ\) |
+| \(-10^\circ\) | \(-9.9939^\circ\) | \(0.0791^\circ\) | \(0.7474^\circ\) |
+| \(-5^\circ\) | \(-4.9927^\circ\) | \(0.0722^\circ\) | \(0.6705^\circ\) |
+| \(+5^\circ\) | \(5.0048^\circ\) | \(0.0717^\circ\) | \(0.6327^\circ\) |
+| \(+10^\circ\) | \(10.0047^\circ\) | \(0.0797^\circ\) | \(0.7251^\circ\) |
+| \(+20^\circ\) | \(20.0065^\circ\) | \(0.0901^\circ\) | \(0.8223^\circ\) |
+
+Thus, the doubled-angle orientation coordinates transformed closely according to
+the expected \(R(2\phi)\) action over the tested rotation range.
+
+### 4.8.3 Rotation-invariant directional scalars
+
+Axial coherence showed very small absolute changes across the tested rotations.
+
+| Rotation | Median \(|\Delta\kappa|\) | 95th percentile |
+|---:|---:|---:|
+| \(-20^\circ\) | 0.002789 | 0.015726 |
+| \(-10^\circ\) | 0.002417 | 0.013304 |
+| \(-5^\circ\) | 0.002110 | 0.011695 |
+| \(+5^\circ\) | 0.002105 | 0.012179 |
+| \(+10^\circ\) | 0.002307 | 0.013588 |
+| \(+20^\circ\) | 0.002923 | 0.015927 |
+
+Orientation drift also showed small median changes, ranging from approximately
+\(1.11^\circ\) to \(1.42^\circ\), but with substantially larger upper-tail
+variation. The 95th-percentile absolute changes ranged from approximately
+\(24.69^\circ\) to \(29.39^\circ\).
+
+These results therefore support the intended transformation structure of the
+representation over the tested rigid rotations: the radial-magnitude block
+showed small numerical perturbations, the doubled-angle orientation pairs behaved
+equivariantly, and coherence and orientation drift behaved as invariant scalar
+descriptors. The results do not imply exact invariance under raster rotation or
+robustness beyond the evaluated perturbations.
 
 ---
 
