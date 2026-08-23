@@ -49,8 +49,7 @@ For harmonic order \(m\),
 F_m(r_k)
 =
 \sum_j
-p(\theta_j\mid r_k)
-e^{-\mathrm{i}m\theta_j}.
+p(\theta_j\mid r_k)e^{-\mathrm{i}m\theta_j}.
 \]
 
 The primary analysis uses \(m=2\). This choice follows from axial rather than directional geometry. If orientations separated by \(\pi\) denote the same undirected axis,
@@ -94,7 +93,7 @@ R_2(r_k)
 and
 
 \[
-\mu_2(r_k)
+\alpha_2(r_k)
 =
 \frac12
 \operatorname{atan2}
@@ -105,7 +104,7 @@ C_2(r_k)
 \pmod{\pi}.
 \]
 
-Thus \(R_2\in[0,1]\) measures the strength of shell-level second-harmonic axial organization, while \(\mu_2\) gives the corresponding undirected orientation.
+Thus \(R_2\in[0,1]\) measures the strength of shell-level second-harmonic axial organization, while \(\alpha_2\) gives the corresponding undirected orientation.
 
 These quantities are deterministic summaries of the observed conditional angular histogram. In particular,
 
@@ -137,8 +136,7 @@ For a physical image rotation by \(\phi\),
 
 \[
 F_2'(r)
-=
-e^{-\,\mathrm{i}2\phi}F_2(r),
+=e^{-\,\mathrm{i}2\phi}F_2(r),
 \]
 
 so
@@ -187,7 +185,7 @@ The predicted vector then implies
 and
 
 \[
-\widehat\mu_2(r)
+\widehat\alpha_2(r)
 =
 \frac12
 \operatorname{atan2}
@@ -207,7 +205,7 @@ The rotation controls further constrain its interpretation. A common global rota
 The magnitude of a harmonic vector also determines the numerical conditioning of its orientation. For
 
 \[
-\mu_2
+\alpha_2
 =
 \frac12
 \operatorname{atan2}(S_2,C_2),
@@ -216,7 +214,7 @@ The magnitude of a harmonic vector also determines the numerical conditioning of
 a first-order perturbation gives
 
 \[
-d\mu_2
+d\alpha_2
 =
 \frac{
 C_2\,dS_2-S_2\,dC_2
@@ -234,7 +232,7 @@ C_2\,dS_2-S_2\,dC_2
 By the Cauchy--Schwarz inequality,
 
 \[
-|d\mu_2|
+|d\alpha_2|
 \le
 \frac{
 \sqrt{dC_2^2+dS_2^2}
