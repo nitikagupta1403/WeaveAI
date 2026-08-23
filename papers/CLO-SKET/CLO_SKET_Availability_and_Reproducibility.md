@@ -6,32 +6,58 @@ Garment identities used for dependency-aware validation were reconstructed from 
 
 Derived analysis code, representation-construction procedures, validation routines, and manuscript-supporting materials are maintained separately from the source image data so that redistribution of the original dataset is not required. The original CLO-SKET images should be obtained from the dataset's official Mendeley Data record.
 
----
-
 ## Code Availability
 
-The curated computational materials supporting CLO-SKET Paper I are available in the public WeaveAI repository under:
+The curated computational materials supporting CLO-SKET Paper I are available in this repository under:
 
-`papers/CLO-SKET/Codes_paper_I/`
+```text
+papers/CLO-SKET/Codes_paper_I/
+```
 
-The package contains five manuscript-facing scientific notebooks:
+The public Paper-I package contains five scientific notebooks:
 
-1. `01_Core_Radial_Angular_14D_and_Reconstruction.ipynb` — canonical source-to-measurement pipeline, 14-dimensional representation construction, garment-identity-aware validation, and reconstruction analyses;
-2. `02_Parameter_Sensitivity.ipynb` — support/concentration, radial-domain, angular-resolution, radial-resolution, and common-physical-domain sensitivity analyses;
+1. `01_Core_Radial_Angular_14D_and_Reconstruction.ipynb` — source-TIFF radial-angular construction, explicit second-harmonic measurements, final 14-dimensional representation, garment-identity-aware validation, and the canonical reconstruction analyses;
+2. `02_Parameter_Sensitivity.ipynb` — prespecified parameter, radial-domain, angular-resolution, and radial-resolution sensitivity analyses;
 3. `03_Harmonic_Order_Control.ipynb` — low-order harmonic diagnostics supporting the second-harmonic focus;
-4. `04_Phase_Conditioning.ipynb` — axial phase/orientation conditioning and garment-identity-aware association analyses; and
-5. `05_Rotation_Controls.ipynb` — both the analytic/garment-identity-randomized reconstruction coordinate-frame controls and the distinct rigid-image invariance/equivariance audit of the final 14-dimensional representation.
+4. `04_Phase_Conditioning.ipynb` — axial phase/orientation conditioning analyses at the garment-identity level;
+5. `05_Rotation_Controls.ipynb` — both analytic/randomized coordinate-frame controls and the distinct rigid-image invariance/equivariance control.
 
-An additional notebook, `audit_Final_Validation_Shield.ipynb`, is retained for historical validation and provenance auditing. It is not the primary source-to-result execution path and may reference frozen runtime checkpoints used during development.
+The package also contains `audit_Final_Validation_Shield.ipynb`, retained as an audit/provenance record rather than as the canonical source-to-result execution path.
 
-The intended public reproducibility workflow is source-code driven: the original CLO-SKET TIFF images are obtained from the official dataset release, the canonical representation is rebuilt from source images, and the targeted validation notebooks are then used to reproduce the manuscript-facing controls and sensitivity analyses. Large private runtime-memory pickle snapshots are not treated as the canonical scientific source and are not required as part of the intended reproducibility package.
+The intended public computational lineage is source-code driven: the official CLO-SKET TIFF images are supplied to Notebook 01, and the downstream validation notebooks operate on the same Paper-I measurement lineage. Large historical runtime-memory pickle snapshots are not treated as the scientific source of record. Where historical checkpoint-loading cells remain for provenance, they should be interpreted as audit/recovery records unless the corresponding checkpoint is explicitly supplied.
 
-The execution order, scientific role of each notebook, rotation-control distinction, and Paper-I/Paper-II scope boundary are documented in `papers/CLO-SKET/Codes_paper_I/README.md`.
+Full-harmonic representation-selection, bandwise compression, and latent-geometry analyses belonging to Paper II are intentionally excluded from the Paper-I reproducibility package. The formal ownership boundary is documented in `P1_P2_CLAIM_FIREWALL.md`.
 
----
+## Software Environment
 
-## Reproducibility Scope
+The final validation environment recorded by the Paper-I validation shield was:
 
-The released code is organized specifically around the scientific claims of CLO-SKET Paper I. Full-harmonic representation selection, bandwise spectral compression, and latent-geometry analyses belong to Paper II and are intentionally excluded from this package.
+- Python 3.12.13;
+- NumPy 2.0.2;
+- pandas 2.2.3;
+- scikit-learn 1.6.1;
+- Linux x86_64 execution environment.
 
-Where stochastic procedures are used, seeds and resampling/permutation counts are declared in the relevant notebook cells. Garment identity is preserved as the dependency unit for grouped validation and inferential procedures where specified in the manuscript. Historical audit cells that depend on frozen checkpoint files are retained for provenance but should not be interpreted as the canonical execution route.
+The scientific notebooks additionally use SciPy, Matplotlib, Pillow (`PIL`), Joblib, and standard-library modules as declared in their import cells. Pillow is used for TIFF decoding and for the rigid-image rotation control. Because exact SciPy, Matplotlib, Pillow, and Joblib version strings were not written into the frozen validation-shield environment record, no retrospective version number is asserted for those packages here. Their imports and algorithmic roles are explicit in the notebooks, and the manuscript reports the fixed image-rotation operator and interpolation settings used in the rigid-image control.
+
+The canonical source notebook supports a configurable dataset location through `CLO_SKET_DATA_ROOT`; its historical Colab path is only the default used during the reported execution.
+
+## Randomness and Reproducibility Lock
+
+Randomness is restricted to explicitly declared model, resampling, permutation, or rotation-control procedures. Deterministic geometric construction of the radial-angular field and the 14-dimensional descriptor does not depend on random initialization.
+
+The manuscript-facing stochastic controls currently frozen in the public notebooks include:
+
+- `HistGradientBoostingRegressor` reconstruction models with `random_state=42`;
+- bootstrap diagnostics in the core notebook with `BOOTSTRAP_SEED=20260820` and `N_BOOT=5000` where those diagnostics are used;
+- held-out permutation-importance diagnostics with fold-specific seeds `42 + fold` and `142 + fold`;
+- analytic garment-identity-randomized rotation control with 10 independent repeats and seeds `20260830, ..., 20260839`;
+- the rigid-image rotation experiment itself is deterministic for a given input image and angle because the tested angles are fixed at `[-20, -10, -5, 0, 5, 10, 20]` degrees and the image operator is fixed.
+
+Some older exploratory/category-discrimination cells retained inside the historical core notebook declare additional random states or permutation seeds. Those cells are not promoted here as independent manuscript claims; the governing numerical and inferential design is the one described in the final Methods and Results.
+
+For reproducibility, users should preserve the exact garment-identity grouping structure, fold assignments where frozen, tested rotation angles, estimator hyperparameters, random states, and declared resampling units. A different random seed may produce numerically different bootstrap or randomized-control realizations even when the qualitative conclusion is unchanged.
+
+## Reproducibility Boundary
+
+The reproducibility package is intended to regenerate and audit the Paper-I measurement and validation chain without requiring Paper-II-only code. Historical `.pkl` checkpoint references that survive inside audit/recovery cells do not redefine the scientific source of record. The canonical evidence remains the explicit source code, the original CLO-SKET images, the final manuscript Methods/Results, and the claim firewall.
