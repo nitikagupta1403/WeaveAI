@@ -119,6 +119,8 @@ Predicted Cartesian components imply reconstructed magnitude and axial orientati
 
 This experiment has a deliberately restricted interpretation. Predictor and targets arise from the same observed conditional angular field; reconstruction is therefore a shared-source consistency diagnostic rather than recovery of an independent semantic or physical quantity. More importantly, phase is not mathematically determined by magnitude. A common coordinate frame may allow population-level relationships between radius, magnitude, and orientation to become statistically recoverable. The study therefore includes explicit rotation controls to distinguish intrinsic magnitude information from structure associated with the common image axes.
 
+A separate rigid-image perturbation control evaluates the transformation behavior of the final 14-dimensional representation itself. Each raster sketch is evaluated at \(0^\circ\) and at physical rotations of \(\pm5^\circ\), \(\pm10^\circ\), and \(\pm20^\circ\), after which the complete radial–angular measurement is recomputed. This control tests whether radial-magnitude coordinates remain numerically stable, doubled-angle axial coordinates transform equivariantly under the expected \(R(2\phi)\) action, and relative-orientation scalars behave as rotation-invariant descriptors over the tested perturbations.
+
 For a physical rotation by \(\phi\),
 
 \[
@@ -133,7 +135,7 @@ so
 R_2'(r)=R_2(r),
 \]
 
-while the Cartesian components and axial phase rotate. Global analytic rotations test whether coordinate-free reconstruction behaviour remains stable under a common change of axes. A complementary garment-identity-randomized rotation assigns independent orientations to different garment identities while preserving radius, \(R_2\), repeated-sketch structure, and validation folds. Together, these controls identify how much phase reconstruction depends on population-level alignment relative to the image coordinate system.
+while the Cartesian components and axial phase rotate. Global analytic rotations test whether coordinate-free reconstruction behaviour remains stable under a common change of axes. A complementary garment-identity-randomized rotation assigns independent orientations to different garment identities while preserving radius, \(R_2\), repeated-sketch structure, and validation folds. Together, these analytic controls identify how much phase reconstruction depends on population-level alignment relative to the image coordinate system, while the rigid-image control separately evaluates the empirical transformation behavior of the representation under physical raster rotation.
 
 Explicit measurements also depend on numerical design choices. The present analysis therefore examines sensitivity to support threshold, concentration width, angular resolution, radial resolution, and radial-domain boundaries. These analyses do not search for a configuration that maximizes a downstream result. Instead, they ask which geometric summaries are stable to reasonable perturbations of the measurement procedure and which require more cautious interpretation.
 
@@ -142,8 +144,7 @@ A further issue arises when interpreting axial reconstruction error. The phase o
 \[
 \alpha_2
 =
-\frac12
-\operatorname{atan2}(S_2,C_2),
+\frac12\operatorname{atan2}(S_2,C_2),
 \]
 
 first-order perturbation gives
@@ -208,6 +209,6 @@ The contribution of this study is therefore not a new Fourier transform, a seman
 
 visible throughout the analysis.
 
-More specifically, the study contributes a shell-conditioned radial–angular representation based on axial Fourier moments; a mathematically justified and empirically controlled choice of the second harmonic; garment-identity-disjoint reconstruction of the observed harmonic field; analytic and identity-randomized rotation controls; parameter and discretization sensitivity analyses; a perturbation-theoretic interpretation of phase error; and dependency-aware uncertainty and association analysis at the garment-identity level.
+More specifically, the study contributes a shell-conditioned radial–angular representation based on axial Fourier moments; a mathematically justified and empirically controlled choice of the second harmonic; garment-identity-disjoint reconstruction of the observed harmonic field; a rigid-image rotation control of the 14-dimensional representation together with analytic and identity-randomized coordinate-frame controls; parameter and discretization sensitivity analyses; a perturbation-theoretic interpretation of phase error; and dependency-aware uncertainty and association analysis at the garment-identity level.
 
 The intended claims remain narrow. The analysis does not establish semantic garment-part recognition, causal geometric laws, human-like visual understanding, a universally optimal harmonic order or radial domain, a prospective reliability classifier, likelihood-based circular modeling, or reconstruction of the complete angular density. Within these boundaries, it demonstrates how repeated garment sketches can be studied as explicit radial–angular observations while preserving the distinction between mathematical identity, empirical regularity, and conditional statistical evidence.
