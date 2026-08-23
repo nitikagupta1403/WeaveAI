@@ -87,7 +87,7 @@ Such a statement should not appear in that manuscript.
 
 ### Primary scientific question
 
-> What exactly does an explicit second-harmonic radial-angular measurement of a garment sketch contain, how valid is it, and what are its mathematical, numerical, coordinate, and statistical limits?
+> What exactly does an explicit second-harmonic radial-angular measurement of a garment sketch contain, how valid is it, and what are its mathematical, numerical, transformation, coordinate, and statistical limits?
 
 ### Paper 1 ownership
 
@@ -98,6 +98,8 @@ Such a statement should not appear in that manuscript.
 F_2\text{ axial geometry}
 +
 14D
++
+\text{rigid-image transformation audit}
 +
 \text{reconstruction}
 +
@@ -221,10 +223,15 @@ The papers may use the same substrate while asking different scientific question
 
 ---
 
-## 5.3 Coordinate dependence and robustness
+## 5.3 Transformation behavior, coordinate dependence, and robustness
 
 | Claim / method | Paper 1 | Paper 2 | Firewall |
 |---|---:|---:|---|
+| rigid-image raster rotation control of the final 14-D representation | ✓ | — | PAPER-1 ONLY |
+| empirical invariance of radial-magnitude quantities over tested rigid rotations | ✓ | — | PAPER-1 ONLY |
+| \(R(2\phi)\) equivariance of doubled-angle axial orientation pairs | ✓ | — | PAPER-1 ONLY |
+| invariant-scalar treatment of axial coherence and orientation drift | ✓ | — | PAPER-1 ONLY |
+| rigid-image rotation numerical perturbation / interpolation effects | ✓ | — | PAPER-1 ONLY |
 | global analytic rotation control | ✓ | — | PAPER-1 ONLY |
 | identity-randomized rotation | ✓ | — | PAPER-1 ONLY |
 | canonical image-frame dependence | ✓ | — | PAPER-1 ONLY |
@@ -235,6 +242,8 @@ The papers may use the same substrate while asking different scientific question
 | radial-resolution sensitivity | ✓ | — | PAPER-1 ONLY |
 | radial-domain sensitivity | ✓ | — | PAPER-1 ONLY |
 | peak-radius boundary sensitivity | ✓ | — | PAPER-1 ONLY |
+
+**Interpretation lock:** the rigid-image raster control and the analytic/randomized rotation controls answer different questions and must not be collapsed into one generic “rotation robustness” claim. The rigid-image control evaluates the transformation behavior of the final 14-D representation under the tested image-domain perturbations. The analytic and garment-identity-randomized controls evaluate coordinate-frame dependence of the reconstruction experiment.
 
 ---
 
@@ -319,6 +328,8 @@ and
 \[
 \text{identity-randomized median axial error}=44.675^\circ.
 \]
+
+Paper 1 also exclusively owns the rigid-image rotation-control results over \(\pm5^\circ\), \(\pm10^\circ\), and \(\pm20^\circ\), including the observed radial-magnitude perturbations, the decoded axial shifts, the \(R(2\phi)\) transformation audit, and the reported upper-tail equivariance errors (including the approximately \(4.87^\circ\) peak-orientation and \(0.85^\circ\) magnitude-weighted-orientation maxima across the tested conditions).
 
 Paper 1 also exclusively owns numerical findings concerning:
 
@@ -448,11 +459,17 @@ Paper 2 must **not** claim:
 
 ---
 
+Paper 2 must **not** independently claim that the 14-dimensional Paper-1 representation is invariant/equivariant under rigid image rotation, or reproduce the \(R(2\phi)\) audit or its numerical transformation-error results as Paper-2 evidence.
+
+If transformation behavior must be mentioned for lineage, Paper 2 should cite Paper 1 and state it only as prior validation of the shared measurement lineage.
+
+---
+
 Paper 2 must **not** claim:
 
 > The radial-angular representation is robust to coordinate transformation or numerical perturbation.
 
-unless the statement explicitly cites Paper 1 and is clearly background rather than a Paper 2 result.
+unless the statement explicitly cites Paper 1 and is clearly background rather than a Paper 2 result. Even with citation, avoid broad “robust” wording: Paper 1 supports transformation behavior only over the tested rigid rotations and explicitly does not establish arbitrary transformation robustness.
 
 ---
 
@@ -565,10 +582,15 @@ Use preferentially:
 - **axial orientation**
 - **axial-safe descriptors**
 - **shell-conditioned angular distribution**
+- **rigid-image rotation control**
+- **invariant/equivariant transformation behavior**
+- **doubled-angle equivariance**
+- **\(R(2\phi)\) action**
+- **tested rigid rotations**
 - **coordinate-frame dependence**
 - **magnitude-only reconstruction**
 - **phase reconstruction**
-- **rotation control**
+- **analytic rotation control**
 - **descriptor sensitivity**
 - **radial-domain sensitivity**
 - **phase-conditioning geometry**
@@ -646,7 +668,9 @@ The following terms may appear in either manuscript only when context makes owne
 - interpretable representation;
 - morphology representation;
 - geometric representation;
-- harmonic representation.
+- harmonic representation;
+- rotation robustness;
+- rotation invariance.
 
 In Paper 2, avoid using these broad phrases alone as novelty statements.
 
@@ -663,6 +687,8 @@ For example:
 or
 
 > We construct an evidence-selected hybrid radial-spectral representation from the shared shell-conditioned harmonic field.
+
+For Paper 1, prefer **“intended invariant/equivariant transformation behavior over the tested rigid rotations”** over unqualified claims of “rotation invariance” or “rotation robustness.”
 
 ---
 
@@ -747,16 +773,19 @@ Paper 1 may claim contributions in the following form:
 1. an explicit second-harmonic radial-angular measurement of garment-sketch geometry;
 2. a mathematically justified axial interpretation of \(m=2\);
 3. a non-redundant 14-dimensional radial and axial descriptor representation;
-4. garment-identity-disjoint reconstruction of the observed second-harmonic field;
-5. explicit global and identity-randomized rotation controls;
-6. numerical and radial-domain sensitivity analysis;
-7. perturbation-theoretic analysis of axial phase error;
-8. garment-identity-aware uncertainty and association analysis.
+4. a rigid-image rotation audit of the final 14-dimensional representation, separating approximately invariant scalar/magnitude behavior from \(R(2\phi)\)-equivariant doubled-angle orientation coordinates over the tested rotations;
+5. garment-identity-disjoint reconstruction of the observed second-harmonic field;
+6. separate global analytic and identity-randomized rotation controls establishing coordinate-frame dependence of the reconstruction experiment;
+7. numerical and radial-domain sensitivity analysis;
+8. perturbation-theoretic analysis of axial phase error;
+9. garment-identity-aware uncertainty and association analysis.
 
 Paper 1 must keep these claims narrow.
 
 It does **not** claim:
 
+- exact raster-level rotation invariance;
+- robustness to arbitrary transformations or rotations outside the tested range;
 - semantic garment understanding;
 - optimal spectral compression;
 - universal harmonic superiority;
@@ -785,6 +814,7 @@ Paper 2 does **not** claim:
 - invention of radial-angular garment measurement;
 - invention of shell-conditioned angular Fourier analysis;
 - second-harmonic axial validation;
+- rigid-image invariance/equivariance validation of the 14-D Paper-1 representation;
 - semantic garment factors;
 - universal optimal compression;
 - mathematical incompressibility of intermediate harmonics;
@@ -821,6 +851,12 @@ Specifically:
 \text{strong }F_2\text{ reconstruction}
 \nRightarrow
 \text{valid hybrid compression}
+\]
+
+\[
+\text{P1 rigid-image equivariance/invariance audit}
+\nRightarrow
+\text{P2 full-harmonic compression validity}
 \]
 
 \[
@@ -861,7 +897,7 @@ Where journal policy permits or requires, the manuscripts should make clear that
 
 1. the studies use the same underlying CLO-SKET dataset;
 2. they address different scientific questions;
-3. Paper 1 concerns explicit second-harmonic measurement and validation;
+3. Paper 1 concerns explicit second-harmonic measurement, transformation behavior, reconstruction, and validation;
 4. Paper 2 concerns representation requirements across the full harmonic field and subsequent latent characterization;
 5. shared preprocessing does not imply duplicated primary analyses or results.
 
@@ -875,10 +911,13 @@ Before submission, verify that:
 
 - [ ] P1 Abstract owns the 14-D representation.
 - [ ] P1 Abstract owns \(m=2\) axial interpretation.
-- [ ] P1 Abstract owns reconstruction and rotation controls.
+- [ ] P1 Abstract owns the rigid-image invariance/equivariance audit over the tested rotations.
+- [ ] P1 Abstract keeps the rigid-image transformation audit distinct from analytic/randomized coordinate-frame controls.
+- [ ] P1 Abstract owns reconstruction and coordinate-frame controls.
 - [ ] P1 Abstract owns sensitivity and phase conditioning.
 - [ ] P1 Abstract does not mention P2 compression findings.
 - [ ] P2 Abstract does not claim invention of radial-angular measurement.
+- [ ] P2 Abstract does not claim the P1 rigid-image rotation-control result as P2 evidence.
 - [ ] P2 Abstract begins its novelty at the full harmonic field / representation-selection problem.
 - [ ] P2 Abstract owns harmonic-band-dependent compression support.
 - [ ] P2 Abstract owns the hybrid representation.
@@ -891,10 +930,11 @@ Before submission, verify that:
 
 - [ ] Shared substrate is described as background/methodological lineage.
 - [ ] \(P(\theta\mid r)\) is not independently claimed as P2 novelty.
-- [ ] P1 research questions concern measurement, reconstruction, robustness, symmetry, and error geometry.
+- [ ] P1 research questions concern measurement, transformation behavior, reconstruction, robustness limits, symmetry, and error geometry.
+- [ ] P1 distinguishes rigid-image representation transformation behavior from analytic/randomized reconstruction coordinate dependence.
 - [ ] P2 research questions concern harmonic-conditioned radial representation and latent structure.
 - [ ] P1 contribution list contains no compression contribution.
-- [ ] P2 contribution list contains no 14-D or axial-measurement contribution.
+- [ ] P2 contribution list contains no 14-D, axial-measurement, or rigid-image equivariance contribution.
 - [ ] P2 Contribution 1 uses the approved revised wording.
 - [ ] Neither manuscript describes itself as solving the other's central scientific question.
 
@@ -909,7 +949,8 @@ Before submission, verify that:
 - [ ] Shared radial/angular grid specifications agree where the same objects are used.
 - [ ] Shared methods are identified as shared foundation rather than duplicated novelty.
 - [ ] P1 owns detailed \(F_2\)/14-D construction.
-- [ ] P1 owns reconstruction and rotation methods.
+- [ ] P1 owns the rigid-image rotation/preprocessing control and \(R(2\phi)\) transformation audit.
+- [ ] P1 owns reconstruction and analytic/randomized rotation methods.
 - [ ] P1 owns sensitivity and phase-conditioning methods.
 - [ ] P2 owns harmonic-band partition.
 - [ ] P2 owns DCT/wavelet/raw candidate evaluation.
@@ -921,8 +962,9 @@ Before submission, verify that:
 
 # 18. Results firewall checklist
 
+- [ ] P1 rigid-image rotation-control results appear only as P1 primary evidence.
 - [ ] P1 reconstruction results appear only as P1 primary evidence.
-- [ ] P1 rotation results appear only as P1 primary evidence.
+- [ ] P1 analytic/randomized rotation results appear only as P1 primary evidence.
 - [ ] P1 sensitivity results appear only as P1 primary evidence.
 - [ ] P1 phase-conditioning associations appear only as P1 primary evidence.
 - [ ] P2 compression statistics appear only as P2 primary evidence.
@@ -937,6 +979,8 @@ Before submission, verify that:
 # 19. Discussion firewall checklist
 
 - [ ] P1 discusses measurement validity rather than compression architecture.
+- [ ] P1 discusses the intended invariant/equivariant structure over the tested rigid-image rotations without claiming exact or universal rotation invariance.
+- [ ] P1 keeps rigid-image transformation validation distinct from reconstruction coordinate-frame dependence.
 - [ ] P1 discusses coordinate dependence.
 - [ ] P1 discusses numerical/domain sensitivity.
 - [ ] P1 discusses phase-conditioning geometry.
@@ -945,6 +989,7 @@ Before submission, verify that:
 - [ ] P2 distinguishes nonlinear geometry from nonlinear-model utility.
 - [ ] P2 discusses retained-subspace localization without semantic overreach.
 - [ ] P2 does not redefine the radial-angular substrate as its own methodological invention.
+- [ ] P2 does not appropriate the P1 rigid-image rotation audit as a P2 contribution.
 - [ ] P1 does not retrospectively use P2 to strengthen the \(m=2\) argument.
 - [ ] Neither paper claims semantic garment understanding.
 
@@ -958,7 +1003,7 @@ Paper 1's conclusion should terminate approximately at:
 \boxed{
 \text{explicit measurement}
 \rightarrow
-\text{validated dependencies}
+\text{validated transformation/dependency structure}
 \rightarrow
 \text{known limits}
 }
@@ -1005,6 +1050,9 @@ Before either manuscript is submitted, perform a literal line-by-line search for
 - `optimal`
 - `robust`
 - `generalizable`
+- `invariant`
+- `equivariant`
+- `rotation`
 - `compress`
 - `latent`
 - `morphology`
@@ -1021,7 +1069,7 @@ A reviewer reading both papers should be able to state:
 
 ### Paper 1
 
-> This paper defines and stress-tests an explicit second-harmonic radial-angular measurement of repeated garment sketches, including its axial interpretation, reconstruction behavior, coordinate dependence, numerical sensitivity, and phase-error geometry.
+> This paper defines and stress-tests an explicit second-harmonic radial-angular measurement of repeated garment sketches, including its axial interpretation, rigid-image invariant/equivariant transformation behavior over tested rotations, reconstruction behavior, coordinate dependence, numerical sensitivity, and phase-error geometry.
 
 ### Paper 2
 
@@ -1040,15 +1088,16 @@ the firewall has failed.
 Manuscript editing must stop for review if any proposed revision does one of the following:
 
 1. assigns the 14-D representation to Paper 2;
-2. assigns full-harmonic compression to Paper 1;
-3. claims \(P(\theta\mid r)\rightarrow F_k(r)\) as independent novelty in both;
-4. imports numerical primary results from one paper into the other's evidentiary argument;
-5. uses P2 compression findings to retrospectively justify \(m=2\);
-6. uses P1 reconstruction findings to validate P2 compression;
-7. converts a descriptive localization result into semantic interpretation;
-8. converts unsupported compression into mathematical incompressibility;
-9. converts nonlinear-model negative results into a general claim of linear morphology;
-10. changes shared-method descriptions solely to conceal common methodological lineage.
+2. assigns the rigid-image invariance/equivariance audit of the 14-D representation to Paper 2;
+3. assigns full-harmonic compression to Paper 1;
+4. claims \(P(\theta\mid r)\rightarrow F_k(r)\) as independent novelty in both;
+5. imports numerical primary results from one paper into the other's evidentiary argument;
+6. uses P2 compression findings to retrospectively justify \(m=2\);
+7. uses P1 reconstruction or rigid-image transformation findings to validate P2 compression;
+8. converts a descriptive localization result into semantic interpretation;
+9. converts unsupported compression into mathematical incompressibility;
+10. converts nonlinear-model negative results into a general claim of linear morphology;
+11. changes shared-method descriptions solely to conceal common methodological lineage.
 
 Any such revision requires explicit firewall reassessment before acceptance.
 
@@ -1066,6 +1115,7 @@ Any such revision requires explicit firewall reassessment before acceptance.
 \text{explicit second-harmonic measurement}\\
 &+\text{axial geometry}\\
 &+\text{14D representation}\\
+&+\text{rigid-image transformation audit}\\
 &+\text{identity-disjoint reconstruction}\\
 &+\text{coordinate-frame controls}\\
 &+\text{numerical sensitivity}\\
@@ -1116,7 +1166,7 @@ Their separation is:
 
 \[
 \boxed{
-\textbf{Paper 1: What does the measurement mean, and when can it be trusted?}
+\textbf{Paper 1: What does the measurement mean, how does it transform, and when can it be trusted?}
 }
 \]
 
@@ -1142,4 +1192,4 @@ This distinction must remain invariant through all subsequent manuscript revisio
 
 **Mandatory outstanding action:** revise Paper 2 Contribution 1 according to Section 10 before final submission.
 
-Any future change to either manuscript's contribution statement, primary research question, or interpretation of shared radial-angular methodology must be checked against this file before being accepted.
+Any future change to either manuscript's contribution statement, primary research question, transformation claims, or interpretation of shared radial-angular methodology must be checked against this file before being accepted.
