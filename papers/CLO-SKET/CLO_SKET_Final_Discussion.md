@@ -484,7 +484,7 @@ The framework provides:
 2. an axial second-harmonic representation whose order follows from the chosen \(180^\circ\) orientation equivalence;
 3. a compact 14-dimensional feature vector that excludes algebraically redundant and model-derived quantities;
 4. garment-identity-disjoint reconstruction for evaluating transfer to unseen source garments;
-5. rigid-image rotation control verifying the intended invariant/equivariant transformation behavior of the 14-dimensional representation, together with analytic    and identity-randomized rotation controls exposing reconstruction dependence on the common coordinate frame;
+5. rigid-image rotation control verifying the intended invariant/equivariant transformation behavior of the 14-dimensional representation, together with analytic and identity-randomized rotation controls exposing reconstruction dependence on the common coordinate frame;
 6. parameter-sensitivity analyses that distinguish robust global summaries from boundary- and resolution-sensitive localized descriptors;
 7. a perturbation-theoretic explanation of the relationship between harmonic magnitude and phase error; and
 8. garment-level uncertainty and permutation inference that respect the repeated-sketch structure.
@@ -530,23 +530,3 @@ Radial localization could be improved through continuous or multiscale peak esti
 The low-order harmonic analysis suggests another extension: a multiharmonic representation in which \(m=2\) remains the primary axial component but odd and higher even harmonics encode complementary directional and fine-scale organization. Such an extension should be evaluated for added information rather than simply increased dimensionality.
 
 Finally, semantic validation would require independent annotations. Expert-defined attributes such as silhouette structure, symmetry, flare, sleeve organization, or other design properties could be tested against the geometric coordinates prospectively. Such work would constitute a new study; semantic meaning should not be assigned retrospectively to the present harmonic descriptors.
-
----
-
-## 5.15 Conclusion
-
-This study demonstrates that garment sketches can be represented as explicit radial–angular measurements using shell-conditioned second-harmonic geometry.
-
-The second harmonic is justified by the axial orientation convention of the representation: \(m=2\) is the lowest non-zero Fourier order compatible with the equivalence \(\theta\equiv\theta+\pi\). The resulting 14-dimensional representation separates radial harmonic magnitude from axial orientation while avoiding algebraically redundant coordinates.
-
-Under five-fold garment-identity-disjoint validation, reconstructed second-harmonic magnitude remained strongly aligned with observation: whole-field \(R_2\) RMSE was 0.145610 with Pearson \(r=0.926390\), peak-shell RMSE was 0.148303 with Pearson \(r=0.810543\), and median peak-shell axial error was \(4.104^\circ\).
-
-Rotation controls provide an essential qualification. Common global rotations left coordinate-free reconstruction performance essentially unchanged, whereas independently rotating garment identities increased median axial error to \(44.675^\circ\), approximately the axial chance level. Radius and harmonic magnitude therefore do not intrinsically determine phase; successful phase reconstruction in the original data depends substantially on shared orientation structure in the common image coordinate frame.
-
-Sensitivity analyses further show that broad radial summaries are more robust than localized descriptors. Integrated magnitude, radial centroid, and radial spread remain comparatively stable under coarser discretization and domain perturbation, whereas peak radius, onset, termination, and concentration depend more strongly on radial resolution and boundaries.
-
-Finally, the association between harmonic magnitude and axial error is consistent with phase-conditioning geometry. At the garment-identity level, peak \(R_2\) was negatively associated with axial error (\(\rho=-0.356\)), while Cartesian perturbation (\(\rho=+0.760\)) and the combined conditioning quantity (\(\rho=+0.789\)) tracked angular error more strongly. The weakest-harmonic identities exhibited approximately twice the median axial error of the strongest.
-
-The evidence therefore supports a deliberately bounded conclusion. This study provides a reproducible geometric measurement framework for radial and axial organization in repeated garment sketches using CLO-SKET. It does not establish semantic garment understanding, a uniquely optimal representation, an intrinsic physical peak radius, causal geometric effects, complete angular-density reconstruction, or orientation-independent phase predictability.
-
-Its principal value is that the geometry, coordinate assumptions, numerical sensitivity, repeated-measure structure, and limits of inference remain explicit rather than hidden inside the representation.
