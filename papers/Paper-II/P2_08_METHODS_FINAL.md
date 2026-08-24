@@ -409,6 +409,51 @@ and the same training-fold parameters were applied unchanged to the correspondin
 
 After model selection was complete, the final descriptive PCA used for morphology interpretation was fitted to the frozen full representation with its corresponding full-data standardization. This final descriptive fit was not used to estimate held-out predictive performance.
 
+
+### 3.10.1 Whole-representation baseline sensitivity
+
+After the heterogeneous hybrid had been frozen, a fixed whole-representation sensitivity analysis compared it with simple descriptors applied uniformly across all 36 retained positive harmonics. This analysis was post-selection and descriptive; it did not reopen the band-selection procedure or introduce additional representation optimization.
+
+Five representations were compared:
+
+\[
+\mathrm{HYBRID}
+=
+\mathrm{DCT}_4/
+\mathrm{RAW}_{72}/
+\mathrm{RAW}_{72}/
+\mathrm{db4}_4,
+\]
+
+with 1504 complex coefficients (3008 real coordinates);
+
+\[
+\mathrm{FULL\ RAW}_{72},
+\]
+
+with \(36\times72=2592\) complex coefficients (5184 real coordinates); and three approximately dimension-matched uniform representations with a fixed radial budget \(B=42\),
+
+\[
+\mathrm{UNIFORM\ RAW}_{42},
+\qquad
+\mathrm{UNIFORM\ DCT}_{42},
+\qquad
+\mathrm{UNIFORM\ db4}_{42}.
+\]
+
+Each uniform \(B=42\) descriptor contained
+
+\[
+36\times42=1512
+\]
+
+complex coefficients, corresponding to 3024 real coordinates and differing from the hybrid by only eight complex coefficients (0.532%).
+
+For the uniform raw representation, 42 approximately equally spaced radial coordinates were retained for every harmonic. For the uniform DCT representation, a type-II orthonormal DCT was applied along radius and the first 42 coefficients were retained for every harmonic. For the uniform wavelet representation, the same `db4` wavelet, `periodization` boundary handling, maximum admissible decomposition level, and fixed coarse-to-fine coefficient ordering used in the primary analysis were applied uniformly to every harmonic, with the first 42 coefficients retained.
+
+All descriptors were evaluated using the same five frozen garment-identity-disjoint folds. Standardization parameters were estimated from outer-training identities only and applied unchanged to the outer-test sketches. Retrieval used the same category-restricted leave-one-sketch-out garment prototypes, Euclidean distance, and deterministic tie handling defined above. No hyperparameter search, additional feature selection, or inferential test was introduced for this sensitivity comparison.
+
+
 ## 3.11 Latent representation comparison
 
 Three latent representation families were evaluated:

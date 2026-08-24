@@ -77,6 +77,26 @@ Radial mass was more informative, but only modestly so. Appending the independen
 The primary 3008-dimensional representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
 
 
+
+### 5.2.2 Whole-representation baselines support heterogeneity without establishing universal superiority
+
+The descriptor-level sensitivity analysis provides an important complement to the band-wise inferential results. The heterogeneous hybrid did not exceed the complete \(\mathrm{RAW}_{72}\) representation in mean retrieval: full radial structure was descriptively higher by 0.002607 MRR. However, the complete representation required 5184 real coordinates, compared with 3008 for the hybrid. The central benefit of the hybrid is therefore not maximum raw retrieval score, but substantial dimensional reduction with little loss in the present identity-retrieval task.
+
+The nearly dimension-matched uniform \(\mathrm{RAW}_{42}\) descriptor was also competitive, differing from the hybrid by only \(-0.000870\) mean MRR. This result prevents an overly strong claim that heterogeneous encoding is uniquely necessary for competitive retrieval. A simple uniformly subsampled radial representation can preserve much of the same identity information at a similar dimensionality.
+
+The uniform transform baselines nevertheless reveal why the evidence-controlled architecture is useful. Applying DCT-42 uniformly across all harmonics reduced mean MRR by 0.033263 relative to the hybrid, and uniform db4-wavelet-42 reduced it by 0.027388. Both deficits occurred in all five identity-disjoint folds. These results are consistent with the primary finding that one compact radial basis should not be assumed appropriate across the complete harmonic field.
+
+Accordingly, the whole-representation evidence supports a bounded conclusion:
+
+\[
+\boxed{
+\text{heterogeneous encoding preserves near-full retrieval at reduced dimension}
+}
+\]
+
+while avoiding the losses associated with uniformly imposing the tested compact DCT or wavelet bases. It does not establish that the hybrid is universally optimal, and the competitive performance of uniform \(\mathrm{RAW}_{42}\) should remain visible when interpreting the contribution.
+
+
 ## 5.3 Nonlinear pairwise structure and nonlinear-model utility are different scientific questions
 
 The latent analysis illustrates a second methodological principle: detectable nonlinear predictive structure does not automatically justify a nonlinear latent model.

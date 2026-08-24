@@ -274,6 +274,100 @@ Four of five folds showed positive MRR differences and one showed a decrease. At
 These sensitivities do not change the frozen primary representation. The 3008-dimensional descriptor remains a representation of **conditional angular morphology across radius**; occupancy and radial ink mass are distinct auxiliary quantities.
 
 
+
+### 4.2.2 The heterogeneous descriptor matched full radial retrieval closely and avoided losses from uniform compact transforms
+
+We next compared the frozen heterogeneous hybrid with complete and uniform whole-representation baselines. The hybrid contained 1504 complex coefficients (3008 real coordinates), whereas the complete \(\mathrm{RAW}_{72}\) field contained 2592 complex coefficients (5184 real coordinates). The dimension-matched uniform descriptors used 1512 complex coefficients (3024 real coordinates), only 0.532% more than the hybrid.
+
+Mean held-out retrieval for the complete radial field was
+
+\[
+\mathrm{MRR}=0.819373,
+\qquad
+\mathrm{Top1}=0.638746.
+\]
+
+The frozen hybrid yielded
+
+\[
+\mathrm{MRR}=0.816766,
+\qquad
+\mathrm{Top1}=0.633531.
+\]
+
+Thus the complete \(\mathrm{RAW}_{72}\) field was descriptively higher by only
+
+\[
+\Delta\mathrm{MRR}=+0.002607
+\]
+
+and
+
+\[
+\Delta\mathrm{Top1}=+0.005215,
+\]
+
+while requiring 5184 rather than 3008 real coordinates.
+
+The dimension-matched uniform raw descriptor was similarly close:
+
+\[
+\mathrm{MRR}=0.815896,
+\qquad
+\mathrm{Top1}=0.631792,
+\]
+
+corresponding to
+
+\[
+\Delta\mathrm{MRR}=-0.000870
+\]
+
+relative to the hybrid. Its fold-wise MRR difference was positive in three folds and negative in two.
+
+In contrast, applying one compact transform uniformly across all harmonics produced consistently lower retrieval. Uniform DCT-42 yielded
+
+\[
+\mathrm{MRR}=0.783503,
+\qquad
+\mathrm{Top1}=0.567006,
+\]
+
+with
+
+\[
+\boxed{\Delta\mathrm{MRR}=-0.033263}
+\]
+
+relative to the hybrid. Uniform db4-wavelet-42 yielded
+
+\[
+\mathrm{MRR}=0.789378,
+\qquad
+\mathrm{Top1}=0.578755,
+\]
+
+with
+
+\[
+\boxed{\Delta\mathrm{MRR}=-0.027388}.
+\]
+
+Both uniform compact-transform baselines had lower MRR than the hybrid in all five identity-disjoint folds.
+
+### Table 3. Whole-representation descriptive sensitivity
+
+| Representation | Complex coefficients | Real dimension | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
+|---|---:|---:|---:|---:|---:|
+| Full \(\mathrm{RAW}_{72}\) | 2592 | 5184 | 0.819373 | 0.638746 | +0.002607 |
+| Frozen heterogeneous hybrid | 1504 | 3008 | 0.816766 | 0.633531 | 0 |
+| Uniform \(\mathrm{RAW}_{42}\) | 1512 | 3024 | 0.815896 | 0.631792 | -0.000870 |
+| Uniform db4-wavelet-42 | 1512 | 3024 | 0.789378 | 0.578755 | -0.027388 |
+| Uniform DCT-42 | 1512 | 3024 | 0.783503 | 0.567006 | -0.033263 |
+
+These comparisons are descriptive post-selection sensitivities rather than a new inferential family. They therefore do not establish population-level superiority of the hybrid over every alternative descriptor. They do show that the heterogeneous representation preserved nearly the retrieval behaviour of the complete radial field at substantially lower dimensionality, while avoiding the larger losses observed when a single compact DCT or wavelet representation was imposed uniformly across the harmonic field. Uniform \(\mathrm{RAW}_{42}\) remained a competitive simple baseline and is reported explicitly.
+
+
 ## 4.3 Nonlinear latent models did not earn a validated replacement of PCA
 
 We next asked, **conditional on the heterogeneous radial-spectral representation selected by the preceding full cross-validated band analysis**, whether a nonlinear latent model earned sufficient task evidence to replace PCA for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
