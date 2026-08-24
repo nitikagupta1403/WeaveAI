@@ -1429,14 +1429,14 @@ the corresponding Cartesian transformation is
 C_2'
 =
 C_2\cos(2\phi)
--
++
 S_2\sin(2\phi),
 \]
 
 \[
 S_2'
 =
-C_2\sin(2\phi)
+- C_2\sin(2\phi)
 +
 S_2\cos(2\phi).
 \]
