@@ -3,7 +3,7 @@ import re
 
 ROOT = Path(__file__).resolve().parent
 
-TITLE = "Garment-Sketch Morphology Radial-Spectral Representation"
+TITLE = "Garment-Sketch Morphology Radial-Spectral Representation: Evidence-Controlled Conditional Compression"
 AUTHOR = "NITIKA GUPTA"
 OUT = ROOT / "P2_19_MANUSCRIPT_MASTER.md"
 
