@@ -33,3 +33,18 @@ Yap, P.-T., Jiang, X., & Kot, A. C. (2010). Two-dimensional polar harmonic trans
 Zahn, C. T., & Roskies, R. Z. (1972). Fourier descriptors for plane closed curves. *IEEE Transactions on Computers*, C-21(3), 269–281. https://doi.org/10.1109/TC.1972.5008949
 
 Zhang, D., & Lu, G. (2002). Shape-based image retrieval using generic Fourier descriptor. *Signal Processing: Image Communication*, 17(10), 825–848. https://doi.org/10.1016/S0923-5965(02)00084-X
+
+
+Bhunia, A. K., Koley, S., Khilji, A. F. U. R., Sain, A., Chowdhury, P. N., Xiang, T., & Song, Y.-Z. (2022). Sketching without worrying: Noise-tolerant sketch-based image retrieval. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, 999–1008.
+
+Chaudhuri, A., Bhunia, A. K., Song, Y.-Z., & Dutta, A. (2023). Data-free sketch-based image retrieval. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, 12084–12093.
+
+Islam, S. M., Joardar, S., & Sekh, A. A. (2024). A survey on fashion image retrieval. *ACM Computing Surveys*, 56(6). https://doi.org/10.1145/3636552
+
+Koley, S., Bhunia, A. K., Sain, A., Chowdhury, P. N., Xiang, T., & Song, Y.-Z. (2024). How to handle sketch-abstraction in sketch-based image retrieval? *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, 16859–16869.
+
+Lee, Y., Kang, Y., & Kim, S. (2024). Automatic extraction of flat sketch design element from clothing images using artificial intelligence. *Journal of Engineered Fibers and Fabrics*, 19. https://doi.org/10.1177/15589250241228266
+
+Lei, H.-P., Chen, S., Wang, M., He, X., Jia, W., & Li, S. (2021). A new algorithm for sketch-based fashion image retrieval based on cross-domain transformation. *Wireless Communications and Mobile Computing*, 2021, 5577735. https://doi.org/10.1155/2021/5577735
+
+Li, J., Ling, Z., Niu, L., & Zhang, L. (2022). Zero-shot sketch-based image retrieval with structure-aware asymmetric disentanglement. *Computer Vision and Image Understanding*, 218, 103412.
