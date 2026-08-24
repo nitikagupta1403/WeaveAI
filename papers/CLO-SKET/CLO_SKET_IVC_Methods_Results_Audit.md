@@ -40,22 +40,30 @@ This audit checks whether each manuscript-facing result has a corresponding pres
 | Outcome-defined error bands treated descriptively/sensitivity-tested | corresponding Methods section | PASS |
 | Algebraically coupled ΔR2 diagnostic explicitly non-inferential | corresponding Methods section | PASS |
 
-## One discrepancy requiring correction
+## Resolved provenance discrepancy: primary-fold sketch-row counts
 
-### Primary-fold sketch-row counts
+An earlier audit pass treated the five-value test-fold sequence
 
-The current §3.12 text states:
+> 459, 460, 462, 460, and 459
 
-> test-row counts were 459, 460, 462, 460, and 459.
+as a clerical error because an older aggregate `grouped_fold_design.csv` summary reported test-fold counts of 461, 460, 459, 460, and 460 sketches (training counts 1839–1841). That interpretation has now been superseded by direct reproduction from the frozen Experiment 06 checkpoint.
 
-This conflicts with the frozen validation-shield provenance and the Results description, which constrain primary test-fold sizes to **459–461 sketches** (and training-fold sizes to 1839–1841). A 462-row test fold would imply a 1838-row training fold and is therefore inconsistent with the frozen fold audit.
+The authoritative row-level `fold_id` stored in `CLO_SKET_EXPERIMENT06_FINAL_CHECKPOINT.pkl` gives test-fold sizes of **459, 460, 462, 460, and 459 sketches**, corresponding to training-fold sizes of **1841, 1840, 1838, 1840, and 1841 sketches**. Each fold contains 46 held-out garment identities, 184 training identities, and zero train/test garment-identity overlap.
 
-**Required manuscript correction:** do not assert the erroneous five-value sequence. Replace it with the provenance-safe statement:
+Most importantly, using this checkpoint fold map with the frozen Experiment 06 feature matrices and locked classifier reproduces the primary pooled results to numerical precision:
 
-> Every sketch appeared in exactly one test fold; test-fold sizes ranged from 459 to 461 sketches because identity block sizes varied slightly.
+- morphology: macro-F1 = 0.2977879716, balanced accuracy = 0.2982608696;
+- morphology + R + A: macro-F1 = 0.3357646054, balanced accuracy = 0.3360869565;
+- primary deltas: Δmacro-F1 = +0.0379766338 and Δbalanced accuracy = +0.0378260870.
 
-The same wording should be used in both `CLO_SKET_IVC_Methods.md` and the integrated `CLO_SKET_IVC_Manuscript.md`.
+The older aggregate fold-design summary therefore does not define the row-level partition that generated the frozen Experiment 06 primary results. It should be treated as a stale or earlier fold-design summary rather than as the authoritative Experiment 06 split. The manuscript's explicit sequence `459, 460, 462, 460, 459` is therefore retained.
+
+The public repository does not currently track the stale `grouped_fold_design.csv` artifact itself; the remaining inconsistency was this audit note, which is corrected here.
+
+## Experiment 07 provenance cross-check
+
+The secondary HOG baseline reused the same authoritative Experiment 06 checkpoint `fold_id`. Before fitting either HOG model, the Experiment 06 morphology and morphology-plus-R+A results were reproduced exactly under that fold map. Experiment 07 therefore provides an independent execution-time confirmation that the checkpoint split, not the older aggregate summary, is the relevant frozen row-level assignment for the manuscript-facing primary experiment.
 
 ## Overall decision
 
-**PASS with one clerical correction.** The inferential architecture is reproducible and one-to-one across Methods and Results: the estimator, folds, resampling unit, metrics, repeated-partition design, alignment-null construction, permutation count, random-state lineage, and claim hierarchy are all explicitly defined. The only discrepancy identified in this pass is the primary-fold row-count sequence above; it is a reporting inconsistency rather than an analysis-design inconsistency.
+**PASS.** The inferential architecture is reproducible and one-to-one across Methods and Results: the estimator, authoritative row-level folds, resampling unit, metrics, repeated-partition design, alignment-null construction, permutation count, random-state lineage, and claim hierarchy are explicitly defined. The earlier fold-count discrepancy is resolved in favor of the final Experiment 06 checkpoint because that row-level assignment exactly reproduces the locked primary results.
