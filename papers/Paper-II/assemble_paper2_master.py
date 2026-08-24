@@ -112,7 +112,7 @@ required = [
     "51.30%",
     "Spectral-centroid × radial-centroid localization",
     "Zhang and Lu, 2002",
-    "An and Li, 2014",
+    "An and Li (2014)",
     "Jolliffe and Cadima, 2016",
     "Hinton and Salakhutdinov, 2006",
     "Kingma and Welling, 2014",
