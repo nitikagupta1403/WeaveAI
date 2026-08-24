@@ -347,7 +347,7 @@ Two fixed `HistGradientBoostingRegressor` models reconstructed \(C_2\) and \(S_2
 [r_j,R_{2,i}(r_j)].
 \]
 
-Across the five garment-identity-disjoint folds, \(C_2\) RMSE ranged from 0.210938 to 0.228147 and \(S_2\) RMSE ranged from 0.124814 to 0.131585 (Table 1). All 57,500 sketch-shell rows received exactly one out-of-fold prediction.
+Across the five garment-identity-disjoint folds, \(C_2\) RMSE ranged from 0.210938 to 0.228147 and \(S_2\) RMSE ranged from 0.124814 to 0.131585 (Table 5). All 57,500 sketch-shell rows received exactly one out-of-fold prediction.
 
 **Table 5. Garment-identity-disjoint fold performance for component reconstruction.**
 
@@ -359,7 +359,7 @@ Across the five garment-identity-disjoint folds, \(C_2\) RMSE ranged from 0.2109
 | 3 | 184 | 46 | 0 | 0.228147 | 0.128320 |
 | 4 | 184 | 46 | 0 | 0.220904 | 0.131585 |
 
-Across all held-out rows, the fold-local global baseline produced RMSEs of 0.300420 for \(C_2\) and 0.129034 for \(S_2\). A radius-only model produced RMSEs of 0.287288 and 0.128729, respectively. Adding \(R_2=|F_2|\) to radius reduced \(C_2\) RMSE to 0.218161, an absolute reduction of 0.069127 and a relative reduction of 24.06%. For \(S_2\), RMSE decreased to 0.127405, an absolute reduction of 0.001324 and a relative reduction of 1.03% (Table 2).
+Across all held-out rows, the fold-local global baseline produced RMSEs of 0.300420 for \(C_2\) and 0.129034 for \(S_2\). A radius-only model produced RMSEs of 0.287288 and 0.128729, respectively. Adding \(R_2=|F_2|\) to radius reduced \(C_2\) RMSE to 0.218161, an absolute reduction of 0.069127 and a relative reduction of 24.06%. For \(S_2\), RMSE decreased to 0.127405, an absolute reduction of 0.001324 and a relative reduction of 1.03% (Table 6).
 
 **Table 6. Comparator performance and incremental contribution of second-harmonic magnitude.**
 
@@ -369,7 +369,7 @@ Across all held-out rows, the fold-local global baseline produced RMSEs of 0.300
 | Radius only | 0.287288 | 0.128729 |
 | Radius + \(R_2\) | **0.218161** | **0.127405** |
 
-The component-specific gains were strongly asymmetric. However, the rotation analysis in Section 4.8 shows that separate \(C_2\) and \(S_2\) errors are coordinate-dependent quantities and should not be interpreted as intrinsic differences between cosine-like and sine-like garment structure.
+The component-specific gains were strongly asymmetric. However, the rotation analysis in Section 4.15 shows that separate \(C_2\) and \(S_2\) errors are coordinate-dependent quantities and should not be interpreted as intrinsic differences between cosine-like and sine-like garment structure.
 
 Because \(R_2\), \(C_2\), and \(S_2\) derive from the same conditional angular distribution, reconstruction remains a shared-source consistency diagnostic rather than recovery of an independent physical or semantic target.
 
@@ -806,7 +806,7 @@ and Cliff's \(\delta\) was
 (0.188673\text{--}0.351032).
 \]
 
-The same direction persisted across all four tested threshold pairs (Table 9). Median \(R_2\) differences ranged from 0.059442 to 0.072677, and Cliff's \(\delta\) ranged from 0.236987 to 0.300349. All garment-cluster bootstrap intervals remained above zero.
+The same direction persisted across all four tested threshold pairs (Table 13). Median \(R_2\) differences ranged from 0.059442 to 0.072677, and Cliff's \(\delta\) ranged from 0.236987 to 0.300349. All garment-cluster bootstrap intervals remained above zero.
 
 **Table 13. Threshold sensitivity of the descriptive low/high peak-\(R_2\) contrast.**
 
