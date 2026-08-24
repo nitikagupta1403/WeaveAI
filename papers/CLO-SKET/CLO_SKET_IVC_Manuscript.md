@@ -1277,7 +1277,7 @@ The experiment was confirmatory for the compact 14-D representation but not hist
 
 Every feature set used training-fold `StandardScaler` followed by `LogisticRegression` with L2 penalty, \(C=1.0\), `solver=lbfgs`, `max_iter=5000`, `class_weight=None`, and `random_state=20260820`. No hyperparameter search or feature-set-specific classifier change was performed.
 
-Five deterministic category-balanced folds were constructed over the 230 garment identities. Each fold held out exactly two complete identities from each of 23 categories (46 test identities; 184 train identities), with zero identity overlap. Every sketch appeared in exactly one test fold; test-row counts were 459, 460, 462, 460, and 459. Macro-F1 (primary) and balanced accuracy (secondary) were computed from pooled out-of-fold predictions.
+Five deterministic category-balanced folds were constructed over the 230 garment identities. Each fold held out exactly two complete identities from each of 23 categories (46 test identities; 184 train identities), with zero identity overlap. Every sketch appeared in exactly one test fold; test-fold sizes ranged from 459 to 461 sketches because identity block sizes varied slightly. Macro-F1 (primary) and balanced accuracy (secondary) were computed from pooled out-of-fold predictions.
 
 ## 3.13 Paired garment-identity bootstrap
 
