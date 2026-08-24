@@ -326,7 +326,7 @@ with deterministic fold/model-specific offsets used by the frozen implementation
 
 The primary held-out benchmark was garment-identity MRR; top-1 retrieval accuracy was retained as a secondary descriptive sensitivity measure.
 
-## 3.12 Multiplicity-controlled nonlinear-model inference
+## 3.12 Multiplicity-controlled fold-level nonlinear-model sensitivity analysis
 
 Nonlinear latent representations were compared directly with PCA at the same latent dimension. The ten prespecified contrasts were
 
@@ -341,23 +341,25 @@ and
 \qquad z\in\{8,16,24,32,64\}.
 \]
 
-For each contrast, the inferential observations were the five paired outer-fold differences in held-out MRR. The primary statistic was the mean paired outer-fold MRR difference.
+For each contrast, the five paired outer-fold differences in held-out MRR were used as the fold-level sensitivity observations, and the summary statistic was the mean paired outer-fold MRR difference. The outer test partitions were garment-identity-disjoint. However, because cross-validation training sets necessarily overlap, the five fitted-model comparisons were not treated as five independent population-level experimental replicates.
 
-Because only five independent outer folds were available, the paired null distribution was enumerated exactly over
+All
 
 \[
 2^5=32
 \]
 
-possible fold-level sign patterns. For each sign pattern, all ten nonlinear-versus-PCA statistics were recomputed and their maximum retained. Each observed contrast was compared with this common maximum-statistic null distribution, providing simultaneous FWER control over all
+possible fold-level sign configurations were exhaustively enumerated. For each sign configuration, all ten nonlinear-versus-PCA mean effects were recomputed and their maximum retained. Each observed contrast was then compared with this common maximum-statistic distribution, controlling selection across the
 
 \[
 2\times5=10
 \]
 
-searched nonlinear contrasts. Accordingly, choosing the best-performing nonlinear family or latent dimension after inspection could not evade multiplicity correction.
+searched nonlinear contrasts within this fold-level sensitivity analysis.
 
-The nonlinear-model comparison tested validated task advantage, not whether the representation possessed nonlinear geometry. Nonlinear geometric structure was therefore examined separately in Section 3.13.
+Because only five outer folds were available, the sign-flip distribution has coarse probability resolution. In addition, overlap among the corresponding training sets limits population-level interpretation of fold-wise resampling. Accordingly, this procedure was used as a **conservative validation sensitivity analysis**, not as an exact population-level inferential test of model-family superiority. Its decision question was whether the frozen five-fold evidence was sufficient to justify replacing PCA with one of the tested AE or VAE configurations.
+
+The nonlinear-model comparison tested validated task advantage, not whether the representation possessed nonlinear geometry. Failure of a nonlinear contrast to survive this analysis was therefore interpreted as absence of sufficient validation evidence to replace PCA, not as evidence that PCA is universally superior or that the representation geometry is globally linear. Nonlinear geometric structure was examined separately in Section 3.13.
 
 ## 3.13 Nonlinear geometry characterization
 
