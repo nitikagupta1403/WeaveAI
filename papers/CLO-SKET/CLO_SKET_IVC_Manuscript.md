@@ -2300,9 +2300,9 @@ To visualize what the measured field represents without selecting examples by cl
 
 The selected examples were a Cardigan at the low radial-organization quantile, a Jumpsuit near the median, and a Dress at the high quantile. Their observed shell fields illustrate how \(R_2(r)\) localizes the strength of second-harmonic organization over radius while \(\alpha_2(r)\) records the corresponding undirected axial orientation. This figure is descriptive and is not evidence for category separation.
 
-## 4.8 Study population and primary representation
+## 4.8 Measurement-field integrity and representation construction
 
-The analysis retained all 2,300 CLO-SKET sketches. The conditional angular tensor had dimensions \(2300\times72\times72\), the full second-harmonic field had dimensions \(2300\times72\), and the primary radial analysis comprised 25 shells spanning the fixed shell-coordinate domain
+For the retained 2,300-sketch cohort defined in Section 4.1, the conditional angular tensor had dimensions \(2300\times72\times72\), the full second-harmonic field had dimensions \(2300\times72\), and the primary radial analysis comprised 25 shells spanning the fixed shell-coordinate domain
 
 \[
 r=3.5,4.5,\ldots,27.5.
@@ -2427,23 +2427,21 @@ These results support the intended transformation structure of the representatio
 
 ---
 
-## 4.10 Duplicate-image screening and garment-identity structure
+## 4.10 Duplicate-image screening and provenance audit
 
 All 2,300 file paths were unique. SHA-256 hashing detected no repeated raw files, and hashing of decoded pixel arrays detected no repeated decoded images. Perceptual-hash screening identified 11 candidate pairs at Hamming distance 0, 39 at distance at most 2, and 248 at distance at most 4. These candidates were treated as a screen for visual similarity rather than evidence of duplicated files or shared lineage.
 
-Filename and category structure recovered 230 category-qualified garment identities, exactly 10 identities within each of the 23 categories. Individual garment identities contained 9–11 sketches and 9–11 distinct replicate identifiers. Eight identity–replicate combinations appeared more than once in the filename records.
+Beyond the cohort summary in Section 4.1, the provenance audit showed that individual recovered garment identities contained 9–11 sketches and 9–11 distinct replicate identifiers, with eight identity–replicate combinations appearing more than once in the filename records. These irregularities did not alter the category-qualified recovery of 230 garment identities used throughout the study.
 
-Recovered garment identity was therefore used as the clustering unit for validation, bootstrap resampling, and confirmatory association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
+The available metadata do not establish that the recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
 
 ---
 
-## 4.11 Garment-identity separation in validation
+## 4.11 Validation-unit audit and sensitivity rationale
 
 An initial image-level cross-validation design did not separate repeated sketches by garment identity: garment identities represented in each test fold were also represented in the corresponding training set. That design therefore evaluated unseen image files rather than unseen garments and was retained only as a sensitivity comparison.
 
-The primary validation used five category-balanced, garment-identity-disjoint folds. Each test fold contained 46 complete garment identities—two identities from each of the 23 categories—and each training fold contained the remaining 184 identities. Test-fold sizes ranged from 459 to 461 sketches because the number of repeated sketches per garment identity varied slightly.
-
-Every sketch and every recovered garment identity was held out exactly once. Train/test garment-identity overlap was zero in all five folds.
+The primary garment-identity-disjoint design summarized in Section 4.1 eliminated that leakage route. Test-fold sizes ranged from 459 to 461 sketches because the number of repeated sketches per garment identity varied slightly; every sketch and every recovered garment identity was held out exactly once, with zero train/test garment-identity overlap in all five folds.
 
 ---
 
