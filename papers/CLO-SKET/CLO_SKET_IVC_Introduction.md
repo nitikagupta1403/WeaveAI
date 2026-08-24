@@ -8,7 +8,14 @@ This distinction matters because an improved downstream score does not by itself
 F_2(r)=\sum_k p(\theta_k\mid r)e^{-2\mathrm{i}\theta_k},
 \]
 
-with magnitude \(R_2(r)=|F_2(r)|\) and axial orientation \(\alpha_2(r)=\tfrac12\arg F_2(r)\pmod{\pi}\). The choice \(m=2\) follows from axial symmetry rather than retrospective classification performance: an undirected axis satisfies \(\theta\equiv\theta+\pi\), making the second harmonic the lowest non-zero order compatible with axial reversal.
+with magnitude \(R_2(r)=|F_2(r)|\) and axial orientation
+
+\[
+\alpha_2(r)=-\tfrac12\arg F_2(r)\pmod{\pi}
+=\tfrac12\operatorname{atan2}\!\left(S_2(r),C_2(r)\right)\pmod{\pi},
+\]
+
+under the adopted negative-exponential convention \(F_2=C_2-\mathrm{i}S_2\). The choice \(m=2\) follows from axial symmetry rather than retrospective classification performance: an undirected axis satisfies \(\theta\equiv\theta+\pi\), making the second harmonic the lowest non-zero order compatible with axial reversal.
 
 The shell-level field is summarized by a compact 14-dimensional representation comprising eight radial descriptors of second-harmonic magnitude and six axial descriptors encoded in doubled-angle form. Algebraically redundant quantities are excluded, and axial directions are represented through Cartesian doubled-angle coordinates rather than raw Euclidean angles. The representation is therefore explicit, low-dimensional, and mechanically interpretable rather than learned as a latent embedding.
 
