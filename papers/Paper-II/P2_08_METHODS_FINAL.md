@@ -392,7 +392,7 @@ was assigned to each category and applied jointly to that category's complete fo
 (D_{c,1},D_{c,2},D_{c,3},D_{c,4})\mapsto s_c(D_{c,1},D_{c,2},D_{c,3},D_{c,4}).
 \]
 
-This preserves dependence among harmonic bands within category while removing systematic effect direction. The permutation seed was
+This preserves dependence among harmonic bands within category while removing systematic effect direction. The category-cluster sign-flip procedure relies on sign exchangeability of the four-band category effect vector under the null: conditional on the observed effect magnitudes, reversing the sign of a category's complete effect vector is treated as equally plausible under no systematic directional compression effect. The 10,000 randomly generated sign configurations therefore provide a Monte Carlo randomization approximation rather than an exhaustive enumeration of all possible category-sign assignments. The permutation seed was
 
 \[
 20260914.

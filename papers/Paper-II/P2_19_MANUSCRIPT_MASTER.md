@@ -579,7 +579,7 @@ was assigned to each category and applied jointly to that category's complete fo
 (D_{c,1},D_{c,2},D_{c,3},D_{c,4})\mapsto s_c(D_{c,1},D_{c,2},D_{c,3},D_{c,4}).
 \]
 
-This preserves dependence among harmonic bands within category while removing systematic effect direction. The permutation seed was
+This preserves dependence among harmonic bands within category while removing systematic effect direction. The category-cluster sign-flip procedure relies on sign exchangeability of the four-band category effect vector under the null: conditional on the observed effect magnitudes, reversing the sign of a category's complete effect vector is treated as equally plausible under no systematic directional compression effect. The 10,000 randomly generated sign configurations therefore provide a Monte Carlo randomization approximation rather than an exhaustive enumeration of all possible category-sign assignments. The permutation seed was
 
 \[
 20260914.
@@ -1029,7 +1029,7 @@ S^{(\mathrm{full})}_{g,b}
 We denote the observed value by \(\Delta=T_b\).
 
 
-This confirmatory effect should not be interpreted as a held-out retrieval non-inferiority test. The \(Q_c\geq0.95\) criterion was used only inside each outer-training fold to define candidate eligibility; the confirmatory endpoint was the distinct held-out category-balanced separation statistic \(T_b\). Consequently, inferential support below means that the training-selected compact representation showed a positive held-out separation effect under the frozen design. It does not imply that discarded coefficients were noise or that compression is universally superior to the complete representation.
+This confirmatory effect should not be interpreted as a held-out retrieval non-inferiority test. The \(Q_c\geq0.95\) criterion was used only inside each outer-training fold to define candidate eligibility; the confirmatory endpoint was the distinct held-out category-balanced separation statistic \(T_b\). Consequently, inferential support below means that the training-selected compact representation showed a positive held-out separation effect under the frozen design. It does not imply that discarded coefficients were noise or that compression is universally superior to the complete representation. Inferential decisions use the max-statistic FWER-adjusted \(p\)-values from the joint four-band category-cluster sign-flip procedure; unadjusted tail probabilities, where reported, are not the confirmatory decision quantities.
 
 For the lowest harmonic band, \(k=1{:}4\), the training-selected four-coefficient DCT representation yielded
 
@@ -1043,7 +1043,7 @@ with bootstrap 95% CI
 [0.023295,\;0.108196],
 \]
 
-and multiplicity-controlled probability
+and max-statistic FWER-adjusted \(p\)-value
 
 \[
 \boxed{p_{\mathrm{FWER}}=0.000200}.
@@ -1828,7 +1828,7 @@ A third direction follows from the exact inverse mapping. Controlled perturbatio
 
 The strongest conclusion from Paper II is not that one transform is superior to another. It is that representation complexity did not behave uniformly across the radial-harmonic morphology field, and that this heterogeneity could be handled explicitly rather than hidden inside a single global descriptor.
 
-Under the CLO-SKET identity-disjoint inferential framework, compact radial representations were supported for the lowest and highest tested harmonic bands, whereas full radial structure was preserved in the intermediate ranges because the tested compression alternatives did not receive sufficient support. The resulting hybrid reduced coefficient count without assuming uniform compressibility.
+Under the CLO-SKET identity-disjoint inferential framework, compact radial representations were supported for the lowest and highest tested harmonic bands, whereas full radial structure was preserved in the intermediate ranges because the tested compression alternatives did not receive sufficient support. These band-level conclusions are conditional on the category-level sign-exchangeability assumption underlying the prespecified cluster sign-flip randomization procedure and on max-statistic family-wise error control across the four tested bands. The resulting hybrid reduced coefficient count without assuming uniform compressibility.
 
 At the latent level, greater model complexity likewise had to earn empirical support. The tested nonlinear encoders did not establish a multiplicity-controlled task advantage over PCA, even though a separate audit detected nonlinear pairwise predictability. PCA therefore remained the practical representation for interpretation without being promoted to a claim of intrinsic linearity.
 

@@ -130,6 +130,10 @@ required = [
 
     "not an estimate of removed noise",
     "does not establish that these constants are optimal",
+    "sign exchangeability of the four-band category effect vector",
+    "Monte Carlo randomization approximation",
+    "max-statistic FWER-adjusted",
+    "category-level sign-exchangeability assumption",
     "mismatched shell cells across 2,300 sketches",
     "44.65%",
     "78.54%",
