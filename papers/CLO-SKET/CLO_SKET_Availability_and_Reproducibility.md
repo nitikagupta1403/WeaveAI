@@ -22,7 +22,9 @@ The public Paper-I package contains five scientific notebooks:
 4. `04_Phase_Conditioning.ipynb` — axial phase/orientation conditioning analyses at the garment-identity level;
 5. `05_Rotation_Controls.ipynb` — both analytic/randomized coordinate-frame controls and the distinct rigid-image invariance/equivariance control.
 
-The package also contains `audit_Final_Validation_Shield.ipynb`, retained as an audit/provenance record rather than as the canonical source-to-result execution path.
+The package also contains `audit_Final_Validation_Shield.ipynb`, retained as an audit/provenance record rather than as the canonical source-to-result execution path, and `06_Experiment_06_Evidence_Record.md`, which records the exact locked design, numerical outputs, alignment-control result, and claim boundary for the compact-representation experiment.
+
+The Experiment 06 evidence record is deliberately identified as a provenance record rather than as a standalone executable notebook. The public repository does **not** claim that a separate rerunnable Experiment 06 notebook or frozen Experiment 06 runtime bundle is available unless such a file is explicitly deposited. This wording supersedes any earlier draft language that implied the existence of a separate public Experiment 06 evidence bundle.
 
 The intended public computational lineage is source-code driven: the official CLO-SKET TIFF images are supplied to Notebook 01, and the downstream validation notebooks operate on the same Paper-I measurement lineage. Large historical runtime-memory pickle snapshots are not treated as the scientific source of record. Where historical checkpoint-loading cells remain for provenance, they should be interpreted as audit/recovery records unless the corresponding checkpoint is explicitly supplied.
 
@@ -60,4 +62,4 @@ For reproducibility, users should preserve the exact garment-identity grouping s
 
 ## Reproducibility Boundary
 
-The reproducibility package is intended to regenerate and audit the Paper-I measurement and validation chain without requiring Paper-II-only code. Historical `.pkl` checkpoint references that survive inside audit/recovery cells do not redefine the scientific source of record. The canonical evidence remains the explicit source code, the original CLO-SKET images, the final manuscript Methods/Results, and the claim firewall.
+The reproducibility package is intended to regenerate and audit the Paper-I measurement and validation chain without requiring Paper-II-only code. Historical `.pkl` checkpoint references that survive inside audit/recovery cells do not redefine the scientific source of record. The canonical evidence remains the explicit source code, the original CLO-SKET images, the final manuscript Methods/Results, the public Experiment 06 evidence record, and the claim firewall.
