@@ -32,6 +32,9 @@ S^{(\mathrm{full})}_{g,b}
 
 We denote the observed value by \(\Delta=T_b\).
 
+
+This confirmatory effect should not be interpreted as a held-out retrieval non-inferiority test. The \(Q_c\geq0.95\) criterion was used only inside each outer-training fold to define candidate eligibility; the confirmatory endpoint was the distinct held-out category-balanced separation statistic \(T_b\). Consequently, inferential support below means that the training-selected compact representation showed a positive held-out separation effect under the frozen design. It does not imply that discarded coefficients were noise or that compression is universally superior to the complete representation.
+
 For the lowest harmonic band, \(k=1{:}4\), the training-selected four-coefficient DCT representation yielded
 
 \[

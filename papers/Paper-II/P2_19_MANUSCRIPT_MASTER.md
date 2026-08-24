@@ -456,7 +456,13 @@ A candidate was eligible when
 Q_c\geq0.95.
 \]
 
+The \(0.95\) value served as a **training-only admissibility threshold**: a compact candidate was not considered unless its category-restricted prototype-retrieval MRR retained at least 95% of the complete radial reference within the outer-training identities. It was not estimated from the held-out identities, was not treated as a statistically calibrated non-inferiority margin, and is not claimed to be a universally optimal retention threshold.
+
 Among eligible candidates, the smallest radial budget \(B\) was selected. If several representation families shared the minimum budget, the candidate with the greatest training reconstruction-energy fraction was retained; remaining ties were resolved deterministically by representation name. Thus basis family and radial coefficient budget were chosen without reference to the outer held-out garment identities.
+
+The training MRR screen and the subsequent held-out inferential endpoint intentionally served different roles. Training MRR was used only to prevent severe loss of identity-retrieval utility during candidate selection. The held-out statistic \(S_g\), defined below, then asked a stricter and separate question: whether the training-selected compact representation produced a positive change in category-controlled garment-identity separation relative to the complete radial field. The procedure therefore was **not** formulated as a conventional held-out non-inferiority test of retrieval performance.
+
+The retention threshold \(0.95\), radial-budget grid \(B\in\{4,8,12,18,24,36,48,72\}\), and harmonic-band boundaries were fixed design choices of the frozen analysis. Prespecification prevents held-out adaptation but does not establish that these constants are optimal. No post hoc threshold or boundary search is used here to strengthen the primary inferential claims; conclusions are conditional on these design choices.
 
 
 ### 3.6.1 Category-restricted prototype retrieval
@@ -1021,6 +1027,9 @@ S^{(\mathrm{full})}_{g,b}
 \]
 
 We denote the observed value by \(\Delta=T_b\).
+
+
+This confirmatory effect should not be interpreted as a held-out retrieval non-inferiority test. The \(Q_c\geq0.95\) criterion was used only inside each outer-training fold to define candidate eligibility; the confirmatory endpoint was the distinct held-out category-balanced separation statistic \(T_b\). Consequently, inferential support below means that the training-selected compact representation showed a positive held-out separation effect under the frozen design. It does not imply that discarded coefficients were noise or that compression is universally superior to the complete representation.
 
 For the lowest harmonic band, \(k=1{:}4\), the training-selected four-coefficient DCT representation yielded
 
@@ -1612,6 +1621,9 @@ This structure is important because it was not chosen for architectural symmetry
 
 This is more than a compression rule. It is a representation-preservation rule. Negative evidence contributes directly to the architecture by preventing unsupported dimensional reduction.
 
+
+The decision rule also separates **candidate admissibility** from **confirmatory evidence**. A compact candidate first had to retain at least 95% of training-fold retrieval MRR relative to the complete radial reference. Passing that screen did not itself authorize compression. The selected candidate then had to show multiplicity-controlled positive held-out evidence on the category-balanced garment-separation endpoint. The framework therefore asks for more than ordinary retrieval retention before replacing the full radial field. This should not be interpreted as a denoising test: no discarded coefficient is classified as noise.
+
 The conclusion is deliberately conditional. The present experiments establish that support for the tested radial compression strategies differed across angular harmonic scale under the frozen CLO-SKET validation design. They do not establish a universal law relating angular harmonic order to radial complexity, nor do they prove that the intermediate bands are intrinsically incompressible.
 
 ---
@@ -1774,7 +1786,7 @@ Several limitations determine how broadly these findings can be interpreted.
 
 First, the empirical results are currently specific to CLO-SKET. Garment identity and category structure were incorporated into validation, but independent garment-sketch datasets are required before the selected DCT/raw/raw/wavelet pattern can be considered a general property of fashion-sketch morphology.
 
-Second, radial-representation selection is conditional on the candidate family, coefficient budgets, objective, and validation statistic tested here. The lack of support for compression at \(k=5{:}24\) does not imply that no compact representation exists for those ranges. Alternative analytical bases, adaptive dictionaries, learned representations, larger budgets, or different evaluation objectives could lead to different decisions.
+Second, radial-representation selection is conditional on the candidate family, coefficient budgets, objective, validation statistic, \(Q_c=0.95\) training-retention threshold, and prespecified harmonic-band boundaries tested here. The \(0.95\) value is a design admissibility threshold rather than a statistically calibrated non-inferiority margin, and the present analysis does not establish that this threshold, the eight tested budgets, or the four band boundaries are optimal. Prespecification prevents held-out tuning but does not remove this design dependence. The lack of support for compression at \(k=5{:}24\) therefore does not imply that no compact representation exists for those ranges. Alternative thresholds, partitions, analytical bases, adaptive dictionaries, learned representations, larger budgets, or different evaluation objectives could lead to different decisions.
 
 Third, the nonlinear-model conclusion is also model-conditional. It applies to the tested PCA, AE, and VAE configurations, latent dimensions, dataset size, and five-fold outer validation design. With only five outer folds, exhaustive fold-level sign-flip inference has coarse probability resolution, and overlapping training sets limit population-level interpretation. The result therefore supports retention of PCA under the present evidence rather than a general rejection of nonlinear latent modeling.
 

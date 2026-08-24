@@ -269,7 +269,13 @@ A candidate was eligible when
 Q_c\geq0.95.
 \]
 
+The \(0.95\) value served as a **training-only admissibility threshold**: a compact candidate was not considered unless its category-restricted prototype-retrieval MRR retained at least 95% of the complete radial reference within the outer-training identities. It was not estimated from the held-out identities, was not treated as a statistically calibrated non-inferiority margin, and is not claimed to be a universally optimal retention threshold.
+
 Among eligible candidates, the smallest radial budget \(B\) was selected. If several representation families shared the minimum budget, the candidate with the greatest training reconstruction-energy fraction was retained; remaining ties were resolved deterministically by representation name. Thus basis family and radial coefficient budget were chosen without reference to the outer held-out garment identities.
+
+The training MRR screen and the subsequent held-out inferential endpoint intentionally served different roles. Training MRR was used only to prevent severe loss of identity-retrieval utility during candidate selection. The held-out statistic \(S_g\), defined below, then asked a stricter and separate question: whether the training-selected compact representation produced a positive change in category-controlled garment-identity separation relative to the complete radial field. The procedure therefore was **not** formulated as a conventional held-out non-inferiority test of retrieval performance.
+
+The retention threshold \(0.95\), radial-budget grid \(B\in\{4,8,12,18,24,36,48,72\}\), and harmonic-band boundaries were fixed design choices of the frozen analysis. Prespecification prevents held-out adaptation but does not establish that these constants are optimal. No post hoc threshold or boundary search is used here to strengthen the primary inferential claims; conclusions are conditional on these design choices.
 
 
 ### 3.6.1 Category-restricted prototype retrieval

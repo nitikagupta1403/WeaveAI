@@ -125,6 +125,11 @@ required = [
     "mean reciprocal rank",
     "Rare exact ties were resolved deterministically",
     "common frozen comparison geometry",
+    "training-only admissibility threshold",
+    "statistically calibrated non-inferiority margin",
+
+    "not an estimate of removed noise",
+    "does not establish that these constants are optimal",
     "mismatched shell cells across 2,300 sketches",
     "44.65%",
     "78.54%",
