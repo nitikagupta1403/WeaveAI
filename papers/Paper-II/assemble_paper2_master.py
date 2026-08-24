@@ -40,6 +40,7 @@ discussion = read("P2_10_DISCUSSION_FINAL.md")
 front = read("P2_12_ABSTRACT_TITLE_KEYWORDS.md")
 conclusion = read("P2_13_CONCLUSION_FINAL.md")
 legacy = read("P2_18_CVIU_CITATION_INTEGRATED_MANUSCRIPT.md")
+figure_captions = read("P2_21_FIGURE_CAPTIONS_CVIU_FINAL.md")
 references = read("P2_14_REFERENCES_FINAL.md")
 
 abstract = section(front, "Abstract", "Keywords")
@@ -52,6 +53,7 @@ discussion_s = section(discussion, "5. Discussion")
 conclusion_s = section(conclusion, "6. Conclusion")
 data_av = section(legacy, "Data Availability", "Code Availability")
 code_av = section(legacy, "Code Availability", "References")
+captions_s = section(figure_captions, "Figure Captions")
 refs = section(references, "References")
 
 master = "\n\n---\n\n".join([
@@ -66,6 +68,7 @@ master = "\n\n---\n\n".join([
     conclusion_s,
     data_av,
     code_av,
+    captions_s,
     refs,
 ]).strip() + "\n"
 
@@ -77,6 +80,8 @@ for forbidden in [
     "Step 9 lock",
     "Results claim boundary",
     "MANUSCRIPT ASSEMBLY DRAFT",
+    "Local geometry was evaluated in the descriptive PCA-64 score space",
+    "Peak radial–harmonic coordinates for all 64 retained PCA axes",
 ]:
     if forbidden.lower() in master.lower():
         raise RuntimeError(f"Forbidden stale manuscript text detected: {forbidden}")
@@ -85,6 +90,7 @@ required = [
     TITLE,
     AUTHOR,
     "# Abstract",
+    "Compact spectral shape descriptors commonly apply one encoding rule",
     "# 1. Introduction",
     "# 2. Related Work",
     "# 3. Methods",
@@ -93,14 +99,18 @@ required = [
     "# 6. Conclusion",
     "# Data Availability",
     "# Code Availability",
+    "# Figure Captions",
     "# References",
     "2592",
     "1504",
     "41.98%",
+    "613",
+    "0.0245",
     "44.65%",
     "78.54%",
     "66.84%",
     "51.30%",
+    "Spectral-centroid × radial-centroid localization",
     "Zhang and Lu, 2002",
     "An and Li, 2014",
     "Jolliffe and Cadima, 2016",
@@ -119,7 +129,7 @@ if re.search(r"(?m)^---\s*\n\s*---\s*$", master):
 for heading in [
     "Abstract", "Keywords", "1. Introduction", "2. Related Work", "3. Methods",
     "4. Results", "5. Discussion", "6. Conclusion", "Data Availability",
-    "Code Availability", "References",
+    "Code Availability", "Figure Captions", "References",
 ]:
     n = len(re.findall(rf"(?m)^# {re.escape(heading)}\s*$", master))
     if n != 1:
