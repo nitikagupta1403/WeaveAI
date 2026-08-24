@@ -82,6 +82,8 @@ for forbidden in [
     "MANUSCRIPT ASSEMBLY DRAFT",
     "Local geometry was evaluated in the descriptive PCA-64 score space",
     "Peak radial–harmonic coordinates for all 64 retained PCA axes",
+    "0.0245",
+    "local/global ratio",
 ]:
     if forbidden.lower() in master.lower():
         raise RuntimeError(f"Forbidden stale manuscript text detected: {forbidden}")
@@ -104,8 +106,7 @@ required = [
     "2592",
     "1504",
     "41.98%",
-    "613",
-    "0.0245",
+    "rank at most 19",
     "44.65%",
     "78.54%",
     "66.84%",
