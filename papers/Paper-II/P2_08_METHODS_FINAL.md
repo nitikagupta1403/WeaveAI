@@ -62,7 +62,7 @@ producing a full radial-harmonic field of
 
 complex coefficients per sketch.
 
-## 3.4 Harmonic-band partition
+## 3.4 Harmonic-band partition and evidence-controlled compression rule
 
 The 36 retained positive harmonics were partitioned a priori into four bands:
 
@@ -70,7 +70,35 @@ The 36 retained positive harmonics were partitioned a priori into four bands:
 K_1=1{:}4,\qquad K_2=5{:}12,\qquad K_3=13{:}24,\qquad K_4=25{:}36.
 \]
 
-The corresponding numbers of harmonics were \(4,8,12,12\). Radial representation was evaluated separately within each band. The partition was not assigned semantic meaning; it was used to test whether radial representation requirements differed across the tested angular harmonic bands.
+The corresponding numbers of harmonics were \(4,8,12,12\). The partition was not assigned semantic meaning. It defined four prespecified regions of the radial-harmonic field in which **support for radial compression** was evaluated separately.
+
+The methodological decision was deliberately conditional rather than global. For each band \(K_b\), candidate compact radial encodings were selected using training identities and then evaluated on held-out garment identities. Let \(\mathcal C_b\) denote the training-selected compact radial operator for band \(b\), and let \(\mathcal I_b\) denote the identity operator that preserves the complete 72-shell radial field. The final band operator was
+
+\[
+\mathcal R_b=
+\begin{cases}
+\mathcal C_b, & p_{\mathrm{FWER},b}\leq0.05,\\[2mm]
+\mathcal I_b, & p_{\mathrm{FWER},b}>0.05.
+\end{cases}
+\]
+
+Equivalently, the representation-design logic was
+
+\[
+\boxed{
+\text{training-only candidate selection}
+\rightarrow
+\text{held-out garment-identity effect}
+\rightarrow
+\text{simultaneous inference}
+\rightarrow
+\begin{cases}
+\text{compress}, & \text{supported},\\
+\text{preserve full radial field}, & \text{otherwise}.
+\end{cases}}
+\]
+
+Thus, dimensional reduction was not imposed uniformly across \(F_i(r,k)\), and failure to establish compression support was itself an explicit representation-preservation decision. Sections 3.5–3.8 define the candidate family, selection criterion, held-out effect, and simultaneous inference used to implement this rule.
 
 ## 3.5 Candidate radial representations
 
@@ -386,37 +414,55 @@ Thus \(p_j(r,k)\) describes relative localization of morphology variation associ
 For descriptive interpretation, radial space was partitioned into three equal-shell zones,
 
 \[
-R_{\mathrm{inner}}=1{:}24,\qquad R_{\mathrm{middle}}=25{:}48,\qquad R_{\mathrm{outer}}=49{:}72.
+R_{\mathrm{inner}}=1{:}24,
+\qquad
+R_{\mathrm{middle}}=25{:}48,
+\qquad
+R_{\mathrm{outer}}=49{:}72.
 \]
 
-The harmonic field retained the four frozen bands \(1{:}4\), \(5{:}12\), \(13{:}24\), and \(25{:}36\). For radial region \(R\) and harmonic band \(B\), component-specific morphology localization was
+These zones were used only as representation-space summaries. They were not interpreted as semantic garment regions.
+
+For each retained PCA component, radial-zone energy fractions were
 
 \[
-P_j(R,B)=\sum_{r\in R}\sum_{k\in B}p_j(r,k).
+E_j(R)=\sum_{r\in R}\sum_kp_j(r,k),
 \]
 
-Marginal radial and harmonic localization followed by summing over the complementary coordinate. The radial zones are representation-space partitions and were not interpreted as semantic garment regions.
+and harmonic-band energy fractions were
+
+\[
+E_j(K)=\sum_r\sum_{k\in K}p_j(r,k).
+\]
+
+Joint radial-harmonic localization was
+
+\[
+E_j(R,K)=\sum_{r\in R}\sum_{k\in K}p_j(r,k).
+\]
+
+No radial-zone-by-harmonic-band independence or interaction hypothesis was tested. Joint localization was therefore interpreted descriptively rather than as enrichment, synergy, or interaction.
 
 ## 3.17 Variance-weighted retained-subspace morphology
 
-Let \(\eta_j\) denote the explained-variance ratio of PCA component \(j\). Weights were normalized within the retained 64-component subspace,
+To summarize morphology across the retained PCA subspace, component-specific localization maps were weighted by explained-variance fraction within the retained 64-component subspace. Let
 
 \[
-w_j=\frac{\eta_j}{\sum_{\ell=1}^{64}\eta_\ell},
-\qquad
-\sum_{j=1}^{64}w_j=1.
+w_j=\frac{\lambda_j}{\sum_{\ell=1}^{64}\lambda_\ell}.
 \]
 
-The variance-weighted morphology localization was
+The retained-subspace morphology map was
 
 \[
-\bar P(R,B)=\sum_{j=1}^{64}w_jP_j(R,B).
+P(r,k)=\sum_{j=1}^{64}w_jp_j(r,k).
 \]
 
-This quantity characterizes where variation represented by the retained PCA-64 subspace is localized in radial-harmonic Fourier coordinates. It is not a decomposition of the complete 3008-dimensional representation, total garment morphology, discarded PCA variance, or semantic garment structure.
+Because
 
----
+\[
+\sum_r\sum_kP(r,k)=1,
+\]
 
-## Methods claim boundary
+radial, harmonic, and joint localization fractions can be obtained by summing \(P(r,k)\) over the corresponding regions.
 
-The Methods define an evidence-controlled representation-selection and interpretation framework. They do not assume that low harmonics are signal, high harmonics are noise, unsupported compression implies mathematical incompressibility, PCA axes are semantic garment factors, nonlinear models are generally inferior, or radial zones correspond to garment parts.
+All percentages derived from \(P(r,k)\) are explicitly conditional on the retained PCA-64 subspace. They are not interpreted as fractions of total garment morphology, total dataset information, or semantic garment variation.
