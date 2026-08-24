@@ -10,9 +10,9 @@ No new scientific claim is introduced here. Wording is aligned with the frozen M
 
 # Title
 
-**Evidence-Controlled Radial-Spectral Representation of Garment-Sketch Morphology**
+**Garment-Sketch Morphology Radial-Spectral Representation**
 
-The title foregrounds the methodological contribution without claiming novelty for Fourier analysis, polar representations, DCT, wavelets, PCA, or nonlinear latent models.
+The title names the subject and representation directly without claiming novelty for Fourier analysis, polar representations, DCT, wavelets, PCA, or nonlinear latent models.
 
 ---
 
@@ -30,7 +30,7 @@ garment sketch morphology; Fourier shape analysis; radial-angular representation
 
 # Running title
 
-**Evidence-Controlled Fourier Garment Morphology**
+**Garment-Sketch Radial-Spectral Morphology**
 
 ---
 
