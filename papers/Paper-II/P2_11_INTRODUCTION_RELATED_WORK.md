@@ -8,64 +8,79 @@
 
 # 1. Introduction
 
-Garment sketches encode morphology across both radial position and angular scale. A compact global descriptor can summarize shape efficiently, but complete collapse of spatial organization can obscure where geometric variation occurs. Conversely, retaining the full radial-angular field preserves localization at the cost of high dimensionality. The relevant representation question is therefore not simply how much morphology should be compressed, but **which parts of the representation can be compressed under held-out evidence**.
+Representing garment sketches computationally requires a choice about what geometric information to preserve. A sketch contains spatial structure across multiple radial locations and angular scales, yet many representation pipelines resolve this choice globally: a single descriptor, basis, compression rule, or learned embedding is applied to the representation as a whole. Such uniformity is computationally convenient, but it need not reflect how discriminative morphology is distributed across scales.
 
-We represent sketch morphology in centroid-relative polar coordinates. For sketch \(i\), the angular distribution within radial shell \(r\) is written
+This issue is particularly relevant for radial–angular spectral representations. Once sketch morphology is expressed as a conditional angular distribution \(P(\theta\mid r)\), its angular organization can be decomposed into harmonic morphology functions \(F_k(r)\). The harmonic index \(k\) then distinguishes angular scales, while the radial coordinate \(r\) retains information about where those structures occur. This produces an explicit two-coordinate morphology field rather than an undifferentiated image embedding. Fourier and radial–angular shape representations themselves are well established; the unresolved question considered here is therefore not whether such transforms can represent shape, but **how much radial structure should be retained at different angular harmonic scales**.
 
-\[
-P_i(\theta\mid r),
-\qquad
-\sum_\theta P_i(\theta\mid r)=1,
-\]
+A common response to high-dimensional spectral representations is compression. However, imposing one compression family or coefficient budget across all harmonics assumes that radial information has comparable representational requirements throughout the angular spectrum. The opposite extreme—retaining every radial coefficient—avoids that assumption but preserves potentially unnecessary dimensionality. Neither strategy asks whether compression is actually supported by held-out morphological evidence in a particular spectral regime.
 
-and its angular Fourier coefficients are evaluated independently at each radial location,
+We therefore formulate representation construction as an **evidence-controlled selection problem**. Rather than selecting one radial basis globally, candidate radial representations are evaluated separately within prespecified harmonic bands. Compact encoding is retained only when its advantage over the complete radial representation survives garment-identity-disjoint validation and multiplicity control; where such support is absent, complete radial structure is preserved. Thus, failure to establish compression support is treated as a representation decision rather than converted into evidence that the underlying structure is intrinsically incompressible.
+
+This principle leads naturally to a heterogeneous representation,
 
 \[
-F_{i,k}(r)
+\mathcal H
 =
-\sum_\theta P_i(\theta\mid r)e^{-ik\theta}.
+\bigoplus_b
+\mathcal R_b\!\left(F_k(r)\right),
 \]
 
-Thus, for each angular harmonic \(k\), the representation retains a complex radial function
+where the radial operator \(\mathcal R_b\) is permitted to differ between harmonic bands \(b\). The resulting representation is therefore determined neither by architectural symmetry nor by a prespecified global compression ratio. Instead, complexity is retained selectively according to the evidence available for each spectral region.
+
+A second representation question arises after this radial–spectral structure has been established. High-dimensional morphology can exhibit nonlinear geometry, but the existence of such geometry does not by itself demonstrate that a nonlinear encoder provides a better practical representation. Autoencoders and variational autoencoders can model nonlinear mappings, whereas PCA provides a simpler linear baseline with exact and transparent inverse structure. We therefore separate two questions that are often conflated:
 
 \[
-F_{i,k}:r\mapsto\mathbb C.
+\text{Is nonlinear geometry detectable?}
 \]
 
-Keeping \(r\) and \(k\) explicit makes it possible to test whether support for radial compression differs across angular harmonic bands rather than imposing one radial encoding on the complete Fourier field.
+and
 
-Classical Fourier descriptors provide longstanding precedent for spectral shape representation (Zahn and Roskies, 1972; Kuhl and Giardina, 1982). Polar Fourier and radial-angular methods further establish that radial and angular spectral organization can be represented jointly: the Generic Fourier Descriptor applies a two-dimensional Fourier transform to a polar-raster shape representation (Zhang and Lu, 2002), while the Angular Radial Transform is an established MPEG-7 region-shape descriptor (Ricard et al., 2005). Multiscale Fourier-wavelet descriptors likewise show that Fourier and multiresolution representations can be combined (Kunttu et al., 2006), including a Wavelet Fourier Descriptor developed specifically for fashion-flat sketch classification (An and Li, 2014). The present study therefore does not claim novelty for Fourier analysis, polar representation, DCT compression, wavelets, PCA, or their combination. Instead, it investigates an evidence-controlled representation-selection principle: candidate radial encodings are evaluated separately across prespecified angular harmonic bands under garment-identity-disjoint validation, and full radial structure is preserved whenever tested compression is not supported by multiplicity-controlled inference.
+\[
+\text{Does a nonlinear latent model provide validated task advantage?}
+\]
 
-This principle deliberately allows a heterogeneous representation. A compact basis can be retained where supported without forcing the same transform or coefficient budget on harmonic bands for which the evidence does not justify compression. Negative compression results therefore contribute directly to representation construction rather than triggering an unrestricted search for a lower-dimensional alternative.
+Nonlinear alternatives are compared directly with same-dimensional PCA representations under garment-identity-disjoint evaluation and multiplicity-controlled inference. Geometric nonlinearity is then audited separately, so that evidence of curvature cannot retrospectively determine the model-selection conclusion. This distinction allows representational complexity, like radial compression, to **earn empirical support rather than being assumed from model flexibility alone**.
 
-A second question concerns the geometry of the selected representation. Detecting nonlinear geometric structure does not imply that a nonlinear latent model improves held-out task performance. We therefore separate **geometric nonlinearity** from **nonlinear-model utility**: PCA provides the linear reference (Jolliffe and Cadima, 2016), while autoencoder and variational-autoencoder representations provide nonlinear alternatives (Hinton and Salakhutdinov, 2006; Kingma and Welling, 2014). Manifold-oriented analyses are treated separately as geometric diagnostics rather than as automatic evidence for replacing the validated task representation.
-
-Finally, latent variation is mapped back to the original radial-harmonic coordinates. For PCA direction \(j\), a one-score-standard-deviation perturbation is reconstructed through the frozen representation,
+A third requirement is traceability. A compact latent coordinate is useful for downstream modelling, but its relationship to the original morphology can become opaque. Because the radial–spectral representation constructed here retains an exact inverse path, a perturbation along principal latent direction \(j\) can be mapped back to the Fourier morphology field,
 
 \[
 PC_j
-\rightarrow
-\Delta x_j
-\rightarrow
+\longrightarrow
 \Delta F_j(r,k),
 \]
 
-and summarized by the sign-invariant morphology energy
+and localized through the sign-invariant energy
 
 \[
-E_j(r,k)=|\Delta F_j(r,k)|^2.
+E_j(r,k)
+=
+\left|
+\Delta F_j(r,k)
+\right|^2.
 \]
 
-This permits localization of retained latent variation in \((r,k)\) space without assigning unsupported semantic labels to individual spectral or PCA coordinates.
+This provides an explicit description of where latent variation occurs in radial–harmonic coordinates. It does not require assigning individual principal components to garment parts or semantic attributes. That boundary is deliberate: localization in a mathematical morphology field is not equivalent to semantic garment understanding.
 
-Using 2,300 sketches representing 230 recovered garment identities across 23 categories, the study addresses four questions:
+We study these questions using CLO-SKET, a controlled garment-sketch corpus containing 2,300 sketches representing 230 recovered garment identities across 23 garment categories. The repeated-identity structure is central to the experimental design: validation is organized so that sketches of the same garment identity do not appear across training and held-out groups. Representation selection is therefore evaluated on transfer to unseen garment identities rather than on replication-specific similarity.
 
-1. Does support for radial compression differ across the tested angular harmonic bands?
-2. Can band-specific representation selection reduce dimensionality while preserving complete radial structure where tested compression is unsupported?
-3. Do tested nonlinear latent representations establish a multiplicity-controlled held-out task advantage over PCA, independently of evidence for nonlinear geometry?
-4. Where is variation within the retained PCA subspace localized across radial position and angular harmonic order?
+The study makes three methodological contributions:
 
-**The primary contribution is to formulate compression of the structured radial-angular field \(F(r,k)\) as an inferential representation decision rather than a uniform descriptor-design choice.** For each prespecified angular-harmonic band, candidate radial encodings are selected using training identities and adopted only when their effect is supported on held-out garment identities under simultaneous inference; otherwise, the complete radial field is retained. The resulting representation can therefore be heterogeneous by construction, with compressed and uncompressed bands determined by evidence rather than a predetermined global coefficient budget. Two secondary safeguards preserve interpretability: nonlinear geometric structure is separated from validated nonlinear-model utility, and the selected latent representation retains an exact inverse path to radial-harmonic coordinates. The contribution is therefore not a new Fourier, cosine, wavelet, or PCA transform, but an evidence-controlled framework for deciding where a structured spectral representation may be compressed and where its original radial resolution should be preserved. Claims remain restricted to the tested candidate representations, validation criterion, dataset, and retained latent subspace.
+1. **Harmonic-conditioned, evidence-controlled radial representation selection.** We test radial compression separately across angular harmonic regimes and construct a heterogeneous representation in which compact bases are retained only where inferential support is established, while complete radial structure is preserved elsewhere.
+2. **Evidence-controlled latent-complexity selection.** We compare PCA with nonlinear AE and VAE alternatives under the same identity-disjoint validation framework and distinguish predictive utility from the separate question of nonlinear geometry.
+3. **Exact latent-to-morphology traceability.** We map retained PCA directions through the inverse hybrid representation into explicit radial–harmonic morphology fields, allowing latent variation to be localized without assigning unsupported semantic meaning.
+
+The resulting experiments show that radial representation requirements are not uniform across the tested harmonic spectrum. Evidence supports compact representations at the lowest and highest tested harmonic ranges but not across the intermediate orders, yielding a DCT/raw/raw/wavelet hybrid rather than a globally imposed basis. Nonlinear encoders subsequently fail to establish a multiplicity-controlled task advantage over same-dimensional PCA despite separately detectable nonlinear geometry. Finally, inverse mapping of the retained PCA representation reveals structured but heterogeneous radial–harmonic localization of latent morphology.
+
+Together, these results motivate a general representation principle:
+
+\[
+\boxed{
+\text{compress where evidence supports compression;}
+\quad
+\text{preserve structure where it does not.}
+\]
+
+The contribution is therefore **not a new Fourier transform, DCT, wavelet family, or latent model**. It is an evidence-controlled strategy for allocating representation complexity across a structured morphology field while retaining an explicit path from compact latent coordinates back to the geometry from which they were derived. Claims remain restricted to the tested candidate representations, validation criterion, dataset, and retained latent subspace.
 
 ---
 
