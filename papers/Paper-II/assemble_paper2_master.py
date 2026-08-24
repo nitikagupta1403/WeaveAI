@@ -12,13 +12,25 @@ def read(name):
     return (ROOT / name).read_text(encoding="utf-8")
 
 
+def clean_section_body(body):
+    """Remove source-file boundary rules so the assembler owns section spacing."""
+    body = body.strip()
+    body = re.sub(r"\A(?:\s*---\s*)+", "", body)
+    body = re.sub(r"(?:\s*---\s*)+\Z", "", body)
+    return body.strip()
+
+
 def section(text, start, end=None):
     """Extract a manuscript section beginning at an exact Markdown H1 heading."""
-    pat = rf"(?ms)^# {re.escape(start)}\s*\n(.*?)(?=^# {re.escape(end)}\s*$|\Z)" if end else rf"(?ms)^# {re.escape(start)}\s*\n(.*)\Z"
+    pat = (
+        rf"(?ms)^# {re.escape(start)}\s*\n(.*?)(?=^# {re.escape(end)}\s*$|\Z)"
+        if end
+        else rf"(?ms)^# {re.escape(start)}\s*\n(.*)\Z"
+    )
     m = re.search(pat, text)
     if not m:
         raise RuntimeError(f"Could not extract section: {start}")
-    return f"# {start}\n\n" + m.group(1).strip() + "\n"
+    return f"# {start}\n\n" + clean_section_body(m.group(1)) + "\n"
 
 
 intro_rw = read("P2_11_INTRODUCTION_RELATED_WORK.md")
@@ -99,6 +111,20 @@ required = [
 for token in required:
     if token not in master:
         raise RuntimeError(f"Required manuscript token missing: {token}")
+
+# Final assembly hygiene: section boundaries must contain exactly one rule.
+if re.search(r"(?m)^---\s*\n\s*---\s*$", master):
+    raise RuntimeError("Duplicate horizontal-rule boundary detected")
+
+# Guard against accidental duplicate top-level manuscript sections.
+for heading in [
+    "Abstract", "Keywords", "1. Introduction", "2. Related Work", "3. Methods",
+    "4. Results", "5. Discussion", "6. Conclusion", "Data Availability",
+    "Code Availability", "References",
+]:
+    n = len(re.findall(rf"(?m)^# {re.escape(heading)}\s*$", master))
+    if n != 1:
+        raise RuntimeError(f"Expected exactly one '# {heading}' heading; found {n}")
 
 OUT.write_text(master, encoding="utf-8")
 print(f"Wrote {OUT}")
