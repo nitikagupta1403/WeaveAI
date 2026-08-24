@@ -13,41 +13,21 @@
 
 # Abstract
 
-Garment sketches encode design structure through multiple geometric organizations that need not be captured by a single representation. We investigate whether explicit radial–axial geometry provides reproducible information beyond conventional morphology in repeated garment sketches, while separating predictive utility from garment-specific correspondence. Using all 2,300 sketches in CLO-SKET, comprising 23 garment categories and 230 recovered garment identities, we construct a compact 14-dimensional representation from centroid-relative shell-conditioned second-harmonic geometry.
-
-For foreground angular distribution \(p(\theta\mid r)\) at radial shell \(r\), the second harmonic is
+Garment sketches contain geometric structure that can be described through complementary coordinate systems, but improved prediction after feature concatenation does not establish that the added information is specific to the same garment instance. We test this distinction in CLO-SKET using all 2,300 sketches from 23 categories and 230 recovered garment identities. From centroid-relative shell-conditioned angular distributions, we construct a compact 14-dimensional axial–radial representation based on the second circular harmonic,
 
 \[
-F_2(r)=\sum_k p(\theta_k\mid r)e^{-2\mathrm{i}\theta_k}
-      =C_2(r)-\mathrm{i}S_2(r),
+F_2(r)=\sum_k p(\theta_k\mid r)e^{-2\mathrm{i}\theta_k},
 \]
 
-from which radial organization and axial orientation are obtained as
+whose magnitude \(R_2(r)=|F_2(r)|\) measures radial second-harmonic organization and whose half-phase \(\alpha_2(r)=\tfrac12\arg F_2(r)\pmod{\pi}\) represents undirected axial orientation. Eight radial descriptors and six doubled-angle axial descriptors form the final representation.
 
-\[
-R_2(r)=|F_2(r)|,
-\qquad
-\alpha_2(r)=\frac{1}{2}\operatorname{atan2}\!\left(S_2(r),C_2(r)\right)
-\pmod{\pi}.
-\]
+The preregistered primary experiment asked whether these 14 coordinates add garment-category information beyond a frozen 135-dimensional morphology representation under category-balanced, garment-identity-disjoint validation. Morphology alone achieved pooled out-of-fold macro-F1 \(0.2978\) and balanced accuracy \(0.2983\); morphology plus the axial–radial representation achieved \(0.3358\) and \(0.3361\), respectively, yielding \(\Delta F_1=+0.0380\) and \(\Delta BA=+0.0378\). Category-stratified garment-identity bootstrap intervals excluded zero for macro-F1 (95% CI \([+0.0202,+0.0559]\)) and balanced accuracy (\([+0.0200,+0.0562]\)). The macro-F1 increment remained positive across all 10 repeated grouped partitions (mean \(+0.0323\), range \(+0.0206\) to \(+0.0433\)). Ablation localized most direct predictive value to the radial block: adding radial descriptors to morphology increased macro-F1 by \(+0.0268\), compared with \(+0.0023\) for the axial block alone.
 
-Eight radial descriptors summarize the distribution of \(R_2(r)\), while six axial descriptors encode orientation using doubled-angle coordinates, yielding an explicit 14-dimensional axial–radial representation. The second harmonic is used because \(m=2\) is the lowest non-zero Fourier order compatible with undirected axial orientation, \(\theta\equiv\theta+\pi\).
+A stronger category-preserving alignment control materially limited interpretation. Across 2,000 identity-block permutations that destroyed 97.39% of exact garment-level morphology–axial–radial correspondence while preserving category and block-size structure, the correctly aligned increment was not exceptional (null mean macro-F1 increment \(+0.0429\); empirical \(p=0.763\); balanced-accuracy \(p=0.730\)). Thus, the compact representation provides reproducible incremental predictive utility, but the evidence does not support uniquely paired garment-level complementarity. Rotation and sensitivity controls further show that radial magnitudes behave approximately invariantly under tested rigid rotations, axial orientation is equivariant in doubled-angle form, canonical image orientation contributes substantially to phase regularity, and localized radial descriptors are more measurement-sensitive than broad radial summaries.
 
-The central experiment tests whether this compact representation adds category-discriminative information beyond a frozen 135-dimensional morphology representation under category-balanced, garment-identity-disjoint validation. Morphology alone achieved a pooled out-of-fold macro-F1 of \(0.2978\); augmenting it with the 14-dimensional axial–radial representation increased macro-F1 to \(0.3358\), giving
+The resulting contribution is both representational and methodological: an explicit axial–radial measurement of sparse garment-sketch geometry and an identity-aware validation framework that separates **predictive increment** from **garment-specific correspondence**.
 
-\[
-\Delta F_{1,\mathrm{macro}}=+0.0380.
-\]
-
-A category-stratified garment-identity bootstrap gave a 95% confidence interval of \([+0.0202,+0.0559]\), and the increment remained positive across all 10 repeated grouped partitions (mean \(+0.0323\), range \(+0.0206\) to \(+0.0433\)). Mechanistic ablation localized most of the direct increment to the radial component: adding the eight radial descriptors to morphology increased macro-F1 by \(+0.0268\), whereas the six axial descriptors alone contributed \(+0.0023\).
-
-Critically, predictive improvement did not imply garment-specific complementary information. In a 2,000-replicate control that permuted complete axial–radial identity blocks within garment category while preserving category composition and block size, the correctly aligned increment did not exceed the misalignment null (null mean \(+0.0429\); empirical \(p=0.763\)). Thus, the observed gain cannot be attributed to exact morphology–axial–radial correspondence at the individual-garment level and is more consistent with category-level geometric organization.
-
-Independent representation diagnostics establish the mathematical and numerical behavior underlying this result. Rigid-image rotation controls support the expected invariance of radial magnitude and doubled-angle equivariance of axial orientation; coordinate-frame randomization demonstrates that phase reconstruction depends substantially on canonical orientation; and sensitivity analyses distinguish stable global radial summaries from domain-sensitive localized descriptors.
-
-These results establish a bounded but consequential finding: **explicit radial organization captures reproducible garment-category structure beyond a substantially larger morphology representation, but this additional utility is primarily distributional at the category level rather than evidence of garment-specific geometric complementarity.** The resulting framework provides both an interpretable representation of garment-sketch geometry and an identity-aware experimental procedure for determining where its predictive information resides.
-
-**Keywords:** garment sketches; radial–axial geometry; second harmonic; Fourier descriptors; morphology; incremental representation value; grouped cross-validation; identity-aware validation
+**Keywords:** garment sketches; radial–axial geometry; second harmonic; Fourier descriptors; morphology; incremental predictive utility; grouped cross-validation; identity-aware validation
 
 ---
 
