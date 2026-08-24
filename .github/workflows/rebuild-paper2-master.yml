@@ -1,0 +1,31 @@
+name: Rebuild Paper II master
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    if: ${{ !contains(github.event.head_commit.message, '[skip paper2-rebuild]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rebuild master
+        run: python papers/Paper-II/assemble_paper2_master.py
+
+      - name: Commit rebuilt master if changed
+        run: |
+          if git diff --quiet -- papers/Paper-II/P2_19_MANUSCRIPT_MASTER.md; then
+            echo "Master already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add papers/Paper-II/P2_19_MANUSCRIPT_MASTER.md
+          git commit -m "Rebuild Paper II master [skip paper2-rebuild]"
+          git push
