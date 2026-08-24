@@ -363,37 +363,125 @@ The nonlinear-model comparison tested validated task advantage, not whether the 
 
 ## 3.13 Nonlinear geometry characterization
 
-Nonlinear geometry was evaluated **after and separately from** the PCA/AE/VAE task comparison. These analyses were not allowed to reopen the latent-model decision in Section 3.12 merely because curvature or local low-dimensional structure was detectable. Their purpose was to test the narrower geometric question of whether the frozen representation was adequately described as globally linear.
+Nonlinear geometry was evaluated **after and separately from** the PCA/AE/VAE task comparison. The purpose of this audit was not to reopen latent-model selection, but to test whether the frozen radial-spectral representation retained detectable curvature or locally lower-dimensional structure within the validated PCA coordinate system. Accordingly, evidence of curvature was not interpreted as evidence that a nonlinear encoder should replace PCA.
 
-Three complementary classes of diagnostics were retained.
+### 3.13.1 Canonical PCA geometry
 
-First, prespecified PCA-coordinate relations were compared under held-out linear and quadratic prediction. For each relation, the geometric effect was summarized as the held-out improvement
-
+The geometry audit operated on the frozen real-valued radial-spectral representation,
 \[
-\Delta R^2
-=
-R^2_{\mathrm{quadratic}}
--
-R^2_{\mathrm{linear}}.
+x_i\in\mathbb R^{3008},
 \]
+for 2,300 sketches from 230 garment identities and 23 categories. The same five garment-identity-disjoint outer-fold assignment used for latent validation was retained. For descriptive visualization only, the complete dataset was standardized and a 64-component PCA was fitted to obtain the eigenspectrum, cumulative explained variance, and leading-PC score plots. These full-population coordinates were **not** used for confirmatory curvature testing.
 
-Multiplicity was controlled across the tested coordinate relations, so evidence for curvature required family-wise-error-rate support rather than selection of the largest unadjusted quadratic improvement. This analysis tested detectable curvature within the PCA coordinate description; it did not test whether an AE, VAE, or other nonlinear encoder improved garment-identity retrieval.
+For the held-out curvature audit, preprocessing was repeated independently within every outer fold. If \(f\in\{1,\ldots,5\}\) denotes the held-out fold, the standardization parameters and PCA basis were estimated exclusively from identities outside \(f\), and the held-out sketches were subsequently transformed using those training-fold quantities. Thus,
+\[
+G_{\mathrm{train}}^{(f)}\cap G_{\mathrm{test}}^{(f)}=\varnothing,
+\]
+and held-out identities influenced neither feature standardization, PCA-axis estimation, nor regression fitting.
 
-Second, global and local linear dimensionality were contrasted at the same 90%-variance threshold. Global dimensionality was defined as the number of principal directions required to explain 90% of variance in the complete standardized frozen representation. Local tangent dimensionality was estimated at the prespecified 20-neighbor scale and summarized at garment-identity level before reporting the median and interquartile range across identities. The resulting global/local comparison was treated as a scale-dependent geometric diagnostic, not as an estimator of a unique intrinsic manifold dimension.
+### 3.13.2 Prespecified pairwise curvature family
 
-Third, additional nonlinear-geometry sensitivity analyses included Isomap-based neighborhood geometry, principal-curve analysis and stability assessment, and diffusion-map sensitivity analysis. These analyses asked whether the observed departures from global linearity resolved into a stable nonlinear coordinate system. Neighborhood preservation was treated as the primary geometric criterion in the controlled embedding audits, with garment-identity retrieval retained as a secondary quantity where applicable.
+The curvature family was fixed to the first eight fold-local principal components before inspection of pairwise results. Every unordered pair was evaluated in both prediction directions, yielding
+\[
+2\binom{8}{2}=56
+\]
+directed relations \(PC_i\rightarrow PC_j\).
 
-The geometry analyses were therefore governed by the explicit separation
+For each directed relation and outer fold, two nested models were fitted on the training-fold PCA scores. The linear model was
+\[
+y=\beta_0+\beta_1x,
+\]
+whereas the nonlinear alternative was deliberately restricted to the fixed quadratic form
+\[
+y=\beta_0+\beta_1x+\beta_2x^2.
+\]
+No polynomial-degree search or post-hoc basis selection was performed.
 
+Both models were evaluated on the same held-out identities. Let
+\[
+R^{2,(f)}_{ij,\mathrm{lin}}
+\quad\text{and}\quad
+R^{2,(f)}_{ij,\mathrm{quad}}
+\]
+denote their held-out coefficients of determination. The fold-level curvature effect was
+\[
+d^{(f)}_{ij}
+=
+R^{2,(f)}_{ij,\mathrm{quad}}
+-
+R^{2,(f)}_{ij,\mathrm{lin}},
+\]
+and the observed relation-level statistic was the mean across the five outer folds,
+\[
+T_{ij}
+=
+\frac{1}{5}\sum_{f=1}^{5}d^{(f)}_{ij}.
+\]
+Positive \(T_{ij}\) therefore indicates improved held-out prediction from the fixed quadratic relation relative to the corresponding linear relation.
+
+### 3.13.3 Exact sign-flip inference and family-wise error control
+
+Because each directed relation produced exactly five fold-level effects, all
+\[
+2^5=32
+\]
+possible sign configurations were enumerated. For sign vector
+\[
+s=(s_1,\ldots,s_5),\qquad s_f\in\{-1,+1\},
+\]
+the null statistic for relation \((i,j)\) was
+\[
+T_{ij}^{(s)}
+=
+\frac{1}{5}\sum_{f=1}^{5}s_fd^{(f)}_{ij}.
+\]
+The one-sided unadjusted exact probability was the fraction of the 32 sign configurations satisfying
+\[
+T_{ij}^{(s)}\ge T_{ij}.
+\]
+Consequently, the attainable probability resolution was explicitly limited by the five-fold design.
+
+Multiplicity across the complete family of 56 directed relations was controlled by a common max-statistic. For every sign configuration,
+\[
+M^{(s)}
+=
+\max_{(i,j)}T_{ij}^{(s)},
+\]
+where the maximum was taken over all prespecified directed relations using the **same fold-sign vector jointly across the relation family**. The family-wise-error-rate-adjusted probability for relation \((i,j)\) was
+\[
+p_{\mathrm{FWER},ij}
+=
+\frac{1}{32}
+\sum_{s}
+\mathbf 1\!\left[
+M^{(s)}\ge T_{ij}
+\right].
+\]
+A pairwise curvature relation was designated supported only when
+\[
+p_{\mathrm{FWER},ij}\le0.05.
+\]
+This procedure tests whether the fixed quadratic term improves held-out prediction for at least one member of the prespecified PCA-coordinate family while controlling selection across all 56 searched directions.
+
+As in the nonlinear-model sensitivity analysis, the five outer training sets overlap. The sign-flip calculation is therefore used as a conservative fold-level geometry audit rather than as an exact population-level experiment with five independent replicates.
+
+### 3.13.4 Local-versus-global dimensionality diagnostic
+
+A complementary descriptive diagnostic compared global and local linear dimensionality at a common 90% variance threshold. Global dimensionality was defined from the cumulative eigenspectrum of the standardized full-population PCA. Local geometry was evaluated in the descriptive PCA-64 score space using Euclidean 20-nearest-neighbor neighborhoods. For each sketch, the sketch itself was excluded, the 20-neighbor score matrix was centered, and singular-value energy was accumulated until 90% of local variance was retained. The resulting local dimension was first summarized within garment identity and only then summarized across identities by the median and interquartile range.
+
+This local/global comparison is explicitly scale dependent: it depends on the 20-neighbor definition, the PCA-64 descriptive coordinate system, and the 90% variance criterion. It was therefore treated as a geometry diagnostic rather than an estimator of a unique intrinsic manifold dimension.
+
+### 3.13.5 Interpretation boundary
+
+The geometry audit was governed by
 \[
 \boxed{
 \text{detectable nonlinear geometry}
 \;\not\equiv\;
-\text{validated nonlinear-model utility}.
+\text{validated nonlinear-model superiority}.
 }
 \]
-
-A nonlinear geometric finding could characterize the representation without establishing a task-validated replacement for PCA. Conversely, failure of the tested AE/VAE configurations to replace PCA could not be interpreted as evidence that the morphology geometry was intrinsically linear.
+Pairwise quadratic predictability and locally reduced tangent dimensionality can demonstrate departures from a globally linear coordinate description, but they do not establish a unique nonlinear manifold, a true intrinsic dimension, causal morphology factors, or superiority of AE/VAE representations. Conversely, absence of a supported AE/VAE task advantage cannot be interpreted as evidence that the morphology geometry is intrinsically linear.
 
 ## 3.14 PCA morphology perturbation
 
