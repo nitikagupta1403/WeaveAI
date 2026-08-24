@@ -33,35 +33,70 @@ The resulting contribution is both representational and methodological: an expli
 
 # 1. Introduction
 
-Garment sketches occupy an unusual position in computational fashion. They are visually sparse, yet they encode substantial design structure: silhouette, proportion, symmetry, directional organization, and the placement of form relative to the garment centre. Contemporary systems have demonstrated that such sketches can support garment retrieval, image synthesis, editing, three-dimensional reconstruction, and sewing-pattern generation. In most of these settings, however, the sketch is treated primarily as an input signal whose usefulness is judged by downstream performance. Much less attention is given to a different question: **what geometric information is actually present in the sketch, and whether distinct geometric representations capture the same or different aspects of that information.**
+Garment sketches are sparse visual objects, but their sparsity does not imply geometric simplicity. A few strokes can encode silhouette, proportion, bilateral organization, directional structure, and the distribution of form around the garment centre. Computational fashion systems commonly exploit such sketches as inputs for retrieval, generation, editing, reconstruction, or pattern-related tasks. In those settings, representation quality is usually judged by downstream performance. A different question is less often isolated: **what geometric organization is explicitly measurable in a garment sketch, and does that organization contribute predictive information beyond a conventional morphology representation?**
 
-This distinction matters because garment shape is not a single geometric property. A conventional morphology representation can describe properties of foreground form such as extent, occupancy, contour organization, and related shape statistics. The same sketch can also be viewed relative to its centre: structural evidence may occur preferentially at particular radial distances, and that evidence may exhibit characteristic orientation about the centre. These views are related because they arise from the same drawing, but they are not mathematically identical. Consequently, the presence of a second representation does not by itself establish that it contains useful information beyond morphology. That question requires an explicit incremental test.
+This question requires more than constructing another descriptor. Two representations extracted from the same image may differ mathematically yet carry largely overlapping predictive information. Conversely, a compact representation may add useful structure even when a substantially larger baseline is already available. Demonstrating such an increment requires the baseline and augmented representations to be compared under identical validation conditions. Demonstrating that the increment is *garment-specific* requires a stronger test still: the gain must depend on pairing each morphology vector with the axial–radial geometry of the correct garment.
 
-We study this problem using CLO-SKET, containing 2,300 sketches from 23 garment categories. The repeated-sketch structure of the dataset is particularly important. The sketches correspond to 230 recovered source-garment identities, with approximately ten drawings per garment. Different sketches of the same source garment are therefore dependent observations. A random image-level train/test split can place renderings of the same garment on both sides of the validation boundary and thereby confound generalization to unseen files with generalization to unseen garment identities. Throughout this study, complete garment identities are consequently treated as the fundamental validation and resampling units.
+The distinction is particularly important in CLO-SKET. The dataset contains 2,300 sketches from 23 garment categories, but these are not 2,300 independent garment instances. Filename and category provenance recover 230 source-garment identities, with 10 identities per category and approximately 10 repeated sketches per identity. Different renderings of the same source garment are therefore dependent observations. Image-level random splitting could place drawings of the same garment on both sides of the validation boundary and confound recognition of an unseen file with transfer to an unseen garment. We consequently treat the complete garment identity as the fundamental unit of validation, resampling, and permutation.
 
-## 1.1 Explicit radial–axial geometry
+Against this dependency-aware design, we study an explicit radial–axial representation derived from the angular organization of foreground evidence around the sketch centroid. The objective is not to replace morphology or to claim a new Fourier formalism. It is to determine whether a small set of geometrically defined second-harmonic measurements contributes reproducible information beyond a frozen 135-dimensional morphology representation, and then to test how strongly that additional information can be localized.
 
-To characterize geometric organization beyond conventional morphology, we represent each sketch relative to its intensity-weighted centroid and examine the distribution of foreground evidence jointly over radius and angle. Within radial shell \(r\), foreground mass defines a conditional angular distribution \(p(\theta\mid r)\). Its second circular harmonic,
+## 1.1 Axial–radial geometry of a garment sketch
 
-\[
-F_2(r)=\sum_k p(\theta_k\mid r)\exp(-2\mathrm{i}\theta_k),
-\]
-
-provides two conceptually distinct quantities:
+Let foreground evidence within radial shell \(r\) define the conditional angular distribution \(p(\theta\mid r)\). We characterize its undirected directional organization using the second circular harmonic
 
 \[
-R_2(r)=|F_2(r)|,
-\qquad
-\alpha_2(r)=\frac{1}{2}\arg F_2(r)\pmod{\pi}.
+F_2(r)
+=
+\sum_k p(\theta_k\mid r)e^{-2\mathrm{i}\theta_k}
+=
+C_2(r)-\mathrm{i}S_2(r).
 \]
 
-Here, \(R_2(r)\) measures the strength of second-harmonic angular organization at radius \(r\), whereas \(\alpha_2(r)\) describes its undirected axial orientation. The use of the second harmonic follows from the axial equivalence \(\theta\equiv\theta+\pi\): \(m=2\) is the lowest non-zero Fourier order compatible with an orientation for which directions separated by \(180^\circ\) represent the same axis.
+Its magnitude,
 
-Rather than retaining the complete shell field as a high-dimensional representation, we summarize it with a compact 14-dimensional vector. Eight radial coordinates describe the distribution of second-harmonic magnitude across radius, including integrated magnitude, radial centroid, spread, concentration, support and peak quantities. Six axial coordinates describe peak and magnitude-weighted orientations through doubled-angle Cartesian encoding, together with axial coherence and orientation drift. Algebraically redundant quantities are excluded.
+\[
+R_2(r)=|F_2(r)|=\sqrt{C_2(r)^2+S_2(r)^2},
+\]
 
-This construction provides an interpretable representation, but interpretability alone is not sufficient evidence of usefulness. Nor does mathematical difference from morphology imply empirically distinct information. The central question is therefore whether the compact axial–radial representation improves discrimination of previously unseen garment identities **after a substantially larger morphology representation is already available**.
+measures the strength of second-harmonic angular organization at radius \(r\), while its half-phase,
 
-## 1.2 From representation description to incremental information
+\[
+\alpha_2(r)
+=
+\frac12\operatorname{atan2}\!\left(S_2(r),C_2(r)\right)
+\pmod{\pi},
+\]
+
+describes the corresponding undirected axial orientation.
+
+The choice of \(m=2\) follows from the symmetry of an axis rather than from downstream classification performance. For axial orientation,
+
+\[
+\theta\equiv\theta+\pi.
+\]
+
+Under this reversal,
+
+\[
+e^{-\mathrm{i}m(\theta+\pi)}
+=
+(-1)^m e^{-\mathrm{i}m\theta},
+\]
+
+so \(m=2\) is the lowest non-zero Fourier order invariant to the \(180^\circ\) directional equivalence.
+
+The complete shell field is summarized by a compact 14-dimensional vector. Eight radial coordinates describe the distribution of \(R_2(r)\): integrated magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. Radial extent is excluded because it is algebraically identical to termination radius minus onset radius. Six axial coordinates describe peak and magnitude-weighted orientations using doubled-angle Cartesian pairs,
+
+\[
+(\cos2\alpha,\sin2\alpha),
+\]
+
+together with axial coherence and orientation drift. This encoding respects the \(\pi\)-periodicity of an undirected axis and avoids treating axial angles as ordinary linear scalars.
+
+The representation is therefore explicit and geometrically interpretable, but neither property demonstrates incremental value. That requires a downstream comparison against morphology.
+
+## 1.2 From predictive increment to correspondence
 
 Let
 
@@ -69,17 +104,22 @@ Let
 \mathbf z_M\in\mathbb R^{135}
 \]
 
-denote the frozen morphology representation and let
+denote the frozen morphology representation and
 
 \[
-\mathbf z_R\in\mathbb R^{8},\qquad
-\mathbf z_A\in\mathbb R^{6},\qquad
-\mathbf z_{RA}=\mathbf z_R\oplus\mathbf z_A\in\mathbb R^{14}
+\mathbf z_R\in\mathbb R^{8},
+\qquad
+\mathbf z_A\in\mathbb R^{6},
+\qquad
+\mathbf z_{RA}
+=
+\mathbf z_R\oplus\mathbf z_A
+\in\mathbb R^{14}
 \]
 
-denote the radial, axial, and complete axial–radial representations, respectively.
+denote the radial, axial, and complete axial–radial representations.
 
-The primary experiment compares a classifier receiving morphology alone with the same classifier receiving morphology augmented by the complete axial–radial vector. For a fixed evaluation score \(\mathcal S\), the primary effect is
+For a fixed evaluation score \(\mathcal S\), the preregistered primary effect is
 
 \[
 \boxed{
@@ -92,57 +132,67 @@ The primary experiment compares a classifier receiving morphology alone with the
 \tag{1}
 \]
 
-under identical garment-identity-disjoint folds, preprocessing, and classifier specification.
+under the same garment-identity-disjoint folds, fold-local preprocessing, and classifier specification.
 
-Equation (1) deliberately defines **incremental predictive utility**, not statistical independence. A positive \(\Delta_{RA}\) demonstrates that the augmented representation improves the specified prediction task under the locked protocol. It does not establish that axial–radial geometry is information-theoretically independent of morphology, nor does it identify the level at which the useful structure resides.
+A positive \(\Delta_{RA}\) establishes **incremental predictive utility under the tested protocol**. It does not establish statistical independence between the representations. Both representations originate from the same sketch, and mathematical non-equivalence is not information-theoretic independence.
 
-That distinction leads to a second question. Suppose correctly aligned axial–radial descriptors improve prediction beyond morphology. The improvement could depend on the particular radial–axial geometry of each garment, or it could arise from broader category-conditioned distributions. We distinguish these possibilities using a category-preserving alignment control. Complete axial–radial identity blocks are reassigned among garments within the same category while morphology, category composition, block-size structure, validation folds, and classifier specification remain fixed. This destroys exact garment-level morphology–axial–radial correspondence while preserving category-level axial–radial structure.
-
-The comparison therefore separates two propositions that are easily conflated:
+More importantly, Eq. (1) does not establish that the gain depends on the *correct pairing* of morphology and axial–radial geometry. Suppose \(\mathbf z_{RA,i}\) is the axial–radial representation of garment identity \(i\), and \(\mathbf z_{RA,\pi(i)}\) is reassigned from another identity in the same garment category. A garment-specific complementarity interpretation requires evidence not merely that
 
 \[
-\text{axial–radial descriptors add predictive utility}
+\mathcal S(\mathbf z_{M,i},\mathbf z_{RA,i})
+>
+\mathcal S(\mathbf z_{M,i}),
 \]
 
-from
+but that correct alignment is unusually advantageous relative to category-preserving misalignment:
 
 \[
-\text{their utility requires correct garment-level correspondence}.
+\mathcal S(\mathbf z_{M,i},\mathbf z_{RA,i})
+>
+\mathcal S(\mathbf z_{M,i},\mathbf z_{RA,\pi(i)}).
+\tag{2}
 \]
 
-The former is tested by the incremental contrast in Eq. (1); the latter requires the observed aligned increment to exceed the category-preserving misalignment distribution.
+We test Eq. (2) by permuting complete axial–radial identity blocks within garment category while matching block size. This destroys almost all exact garment-level correspondence while retaining category membership, repeated-sketch block structure, validation design, and the marginal category-conditioned axial–radial distributions. The experiment therefore separates **predictive increment** from **garment-specific correspondence**.
 
-## 1.3 Why the distinction is scientifically important
+## 1.3 Evidence hierarchy
 
-Feature concatenation can produce an apparent performance gain for several reasons. A new feature block may encode genuinely useful instance-specific structure; it may provide a more convenient coordinate system for structure already associated with class; or its apparent benefit may be unstable across particular train/test partitions. Simply reporting that a concatenated model performs better cannot distinguish among these explanations.
+The study is designed as a sequence of increasingly restrictive questions rather than a single performance comparison.
 
-We therefore treat incremental value as a sequence of increasingly restrictive tests. First, radial and axial components are evaluated separately to determine which mathematical component carries the observed utility. Second, complete garment identities rather than sketches are resampled to quantify uncertainty without treating repeated drawings as independent observations. Third, the complete experiment is repeated across multiple category-balanced identity partitions to assess split stability. Finally, category-preserving identity-block permutation tests whether correct garment-level alignment itself contributes beyond the category-level distribution of the added representation.
+First, the seven locked feature sets \(R\), \(A\), \(R+A\), \(M\), \(M+R\), \(M+A\), and \(M+R+A\) establish standalone discrimination, the primary morphology-to-augmented contrast, and radial/axial ablations under one common estimator.
 
-The radial–axial representation is also subjected to independent mathematical and numerical validation. Reconstruction experiments examine what information remains recoverable after explicit harmonic phase is omitted. Rigid-image rotations test the expected invariant behavior of radial magnitude and doubled-angle equivariance of axial orientation. Analytic coordinate-frame controls determine whether phase reconstruction reflects intrinsic magnitude information or shared orientation in the canonical image frame. Parameter-sensitivity analyses distinguish broad radial summaries from localized descriptors that depend more strongly on discretization and radial boundaries. Phase-conditioning analysis further establishes when axial orientation becomes numerically unstable as harmonic magnitude decreases.
+Second, uncertainty in the primary contrast is quantified by resampling complete garment identities. A category-stratified identity bootstrap preserves all 23 garment classes in every replicate and avoids treating repeated sketches as independent units.
 
-These analyses have a different role from the incremental prediction experiment. They establish **what the representation measures, how it transforms, and where it becomes unreliable**. The incremental experiment establishes **whether the resulting measurements contribute predictive structure beyond morphology and at what level that contribution resides**.
+Third, the full comparison is repeated across 10 independently generated category-balanced grouped partitions. This asks whether the increment survives changes in which garment identities define the train/test boundary rather than depending on a favorable deterministic split.
 
-## 1.4 Research questions and contributions
+Fourth, the category-preserving identity-block permutation in Eq. (2) asks the strongest interpretive question: whether exact garment-level morphology–axial–radial correspondence is required for the observed benefit.
 
-The study is organized around three primary research questions:
+These predictive analyses are complemented by representation diagnostics that answer different questions. Rigid-image rotations test the expected invariance of radial magnitude and equivariance of axial orientation. Coordinate-frame randomization tests whether phase reconstruction reflects intrinsic information in magnitude or population-level orientation structure in the canonical image frame. Radial-domain and discretization analyses identify descriptors whose numerical values are sensitive to the measurement specification. Phase-conditioning analysis explains why axial uncertainty increases as harmonic magnitude weakens.
 
-**RQ1 — Geometric representation.** Can garment sketches be represented by a compact and mathematically explicit radial–axial description whose radial and orientation components have defined transformation properties and measurable numerical limitations?
+Together, these analyses distinguish four levels of evidence: **what is measured; whether it transforms as intended; whether it improves prediction; and whether that improvement requires correct garment-level correspondence.**
 
-**RQ2 — Incremental representation value.** Does the 14-dimensional radial–axial representation add reproducible garment-category information beyond a frozen 135-dimensional morphology representation when validation withholds complete garment identities?
+## 1.4 Research questions
 
-**RQ3 — Localization of incremental utility.** Which component of the representation carries the incremental utility, and does that utility require exact garment-level correspondence between morphology and radial–axial geometry, or can it be explained by category-level geometric structure?
+The study addresses three primary research questions.
 
-The contributions are consequently not a new Fourier transform or a claim that handcrafted descriptors outperform learned fashion representations. Instead, the study contributes an explicit second-harmonic radial–axial measurement of garment sketches; a compact 14-dimensional representation with algebraic redundancy removed and axial quantities encoded according to their circular geometry; an identity-disjoint experimental framework for testing its incremental value beyond morphology; mechanistic radial/axial ablations; cluster-aware uncertainty and repeated-partition stability analysis; and a category-preserving identity-alignment control that distinguishes predictive improvement from garment-specific correspondence.
+**RQ1 — Representation validity.** Can sparse garment sketches be summarized by a compact second-harmonic axial–radial representation with explicit geometric meaning, correct axial encoding, defined transformation behavior, and identifiable numerical limitations?
 
-This distinction defines the intended scope of inference. Evidence that
+**RQ2 — Incremental predictive value.** Does the locked 14-dimensional axial–radial representation improve garment-category discrimination beyond a frozen 135-dimensional morphology representation when complete garment identities are withheld from training?
 
-\[
-\mathcal S(\mathbf z_M\oplus\mathbf z_{RA})>\mathcal S(\mathbf z_M)
-\]
+**RQ3 — Localization of the increment.** Is the observed increment concentrated in radial or axial organization, is it reproducible across garment-identity partitions, and does it require exact garment-level correspondence between morphology and axial–radial geometry?
 
-supports incremental predictive utility under the tested task. Evidence that the aligned increment exceeds an appropriate misalignment null would additionally support a role for exact garment-level correspondence. Failure of the latter test would not invalidate the former; instead, it would localize the useful information at a different structural level.
+RQ3 deliberately contains a falsifiable claim boundary. Evidence for RQ2 does not imply a positive answer to the alignment component of RQ3. A representation may contribute reproducible category-conditioned structure even if correct within-category garment pairing is unnecessary.
 
-The resulting framework therefore asks not merely whether an additional geometric representation *works*, but **what it contributes, whether that contribution reproduces under identity-aware validation, and where in the hierarchy from garment instance to garment category the useful geometric structure resides.**
+## 1.5 Contributions and scope
+
+The contribution is not a new Fourier transform, a semantic garment-part model, or a claim that handcrafted descriptors supersede learned fashion representations. It is an auditable representation-and-validation framework for asking what explicit radial–angular geometry contributes beyond morphology.
+
+Specifically, the study contributes: (i) a mathematically defined 14-dimensional second-harmonic axial–radial representation with algebraic redundancy removed and axial quantities encoded in doubled-angle coordinates; (ii) garment-identity reconstruction and category-balanced identity-disjoint validation for all 2,300 CLO-SKET sketches; (iii) a locked incremental test against a 135-dimensional morphology baseline with radial and axial ablations; (iv) category-stratified garment-identity bootstrap uncertainty and repeated grouped-partition stability analysis; (v) a category-preserving identity-level alignment permutation that tests whether predictive gain requires correct garment pairing; and (vi) rotation, reconstruction, sensitivity, harmonic, and conditioning controls that define the representation's mathematical behavior and interpretive limits.
+
+The intended inference is correspondingly bounded. A positive value of Eq. (1) supports incremental predictive utility for the tested garment-category task. A positive alignment test in Eq. (2) would additionally support garment-specific correspondence. Neither result, alone or together, would establish semantic understanding, causality, or information-theoretic independence.
+
+The central methodological premise is therefore simple: **showing that an added representation improves prediction is only the beginning of the analysis. The stronger scientific question is what structure must be preserved for that improvement to survive.**
+
 ---
 
 # 2. Related Work
