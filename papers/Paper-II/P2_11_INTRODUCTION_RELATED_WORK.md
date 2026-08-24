@@ -86,42 +86,86 @@ The contribution is therefore **not a new Fourier transform, DCT, wavelet family
 
 # 2. Related Work
 
-## 2.1 Fourier and polar shape representations
+## 2.1 Spectral shape representation: from global Fourier descriptors to explicit radial–angular structure
 
-Fourier descriptors are established tools for contour- and region-based shape analysis, recognition, and retrieval. Early Fourier contour descriptions established compact harmonic representations of closed curves (Zahn and Roskies, 1972), while elliptic Fourier descriptors provided normalized reconstruction of closed contours (Kuhl and Giardina, 1982). Fourier-derived descriptors have also been used in multivariate morphology analysis (Rohlf and Archie, 1984). Their appeal lies in compact spectral representation and useful transformation properties under suitable normalization, but global descriptors can combine structures occurring at different spatial locations, motivating representations that retain additional spatial organization.
+Fourier representations have a long history in quantitative shape analysis. Early contour-based formulations encoded closed boundaries through Fourier coefficients, including classical Fourier contour descriptors and elliptic Fourier descriptors (Zahn and Roskies, 1972; Kuhl and Giardina, 1982). Such methods established that shape can be represented compactly in the frequency domain and reconstructed from spectral coefficients, but a global contour spectrum does not explicitly retain where variation occurs relative to the interior of the shape.
 
-Polar spectral methods provide one such route. The Generic Fourier Descriptor introduced by Zhang and Lu (2002) applies a two-dimensional Fourier transform to a polar-raster representation so that radial and circular frequency information both contribute to region-based shape description. The Angular Radial Transform similarly uses basis functions defined jointly over radial and angular coordinates and forms part of the MPEG-7 region-shape framework (Ricard et al., 2005). Polar harmonic methods provide further precedent for explicit orthogonal radial-angular harmonic representations (Yap et al., 2010). These methods establish the value—and prior art—of explicit radial-angular spectral structure.
+Region-based polar methods retain more spatial organization. The Generic Fourier Descriptor (GFD) applies a two-dimensional Fourier transform to a polar-raster representation of a shape, thereby incorporating radial and angular frequency information in a common descriptor (Zhang and Lu, 2002). The Angular Radial Transform (ART), adopted within MPEG-7 for region-based shape description, similarly represents shape through radial and angular basis functions; later generalizations extended the formulation for robust 2D and 3D retrieval (Ricard et al., 2005). Polar Harmonic Transforms provide further precedent for orthogonal two-dimensional bases defined in polar coordinates and for selecting discriminative features from a larger radial–angular transform family (Yap et al., 2010).
 
-The present study asks a narrower question. Rather than fixing a single radial-angular basis for the complete descriptor, it retains each angular harmonic as the radial function \(F_k(r)\) and evaluates whether the radial encoding can be reduced differently across prespecified harmonic bands.
+These studies establish that neither polar coordinates nor joint radial–angular spectral analysis are new. CLO-SKET uses a different decomposition for a different question. For sketch \(i\), angular morphology is represented conditionally at each radial shell,
 
-## 2.2 Multiscale and wavelet shape representations
+\[
+P_i(\theta\mid r),
+\]
 
-Wavelet and multiscale Fourier descriptors address limitations of purely global spectral descriptions by introducing localized or scale-dependent structure. Kunttu et al. (2006) developed multiscale Fourier descriptors combining Fourier analysis with wavelet-based multiresolution structure. Fourier-wavelet integration also has direct precedent in the fashion domain: An and Li (2014) used a Wavelet Fourier Descriptor in a fashion-flat-sketch classification pipeline. Prior work therefore establishes that Fourier and wavelet representations can coexist productively within a shape-analysis system.
+and Fourier analysis over \(\theta\) produces, for every harmonic \(k\), an explicit complex radial function
 
-Our distinction lies in how the radial basis is assigned. A wavelet, cosine, or complete radial representation is not assumed to be appropriate across the full harmonic range. Candidate encodings are instead evaluated band by band under the same identity-disjoint validation and inferential framework. The selected representation may consequently contain compressed and uncompressed spectral regions simultaneously.
+\[
+F_{i,k}(r).
+\]
 
-## 2.3 Compact descriptors and evidence-guided preservation
+The radial coordinate is therefore not immediately absorbed into a fixed two-dimensional transform basis. Keeping \(F_k(r)\) explicit allows the radial representation itself to become an object of validation: the study asks whether different angular harmonic ranges support different radial encodings.
 
-Classical descriptor design often emphasizes compactness because storage, matching, and retrieval efficiency are central objectives; compactness is an explicit motivation in established polar and multiscale shape descriptors (Zhang and Lu, 2002; Ricard et al., 2005; Kunttu et al., 2006). Here, dimensional reduction is subject to an additional requirement: a lower-dimensional radial representation is adopted only when its use is supported under the frozen held-out criterion.
+## 2.2 Multiscale, wavelet and compact spectral descriptors
 
-Accordingly, failure to establish compression support is not treated as failure to construct a descriptor. It leads to preservation of the complete radial structure for that band. This design distinguishes evidence-guided representation selection from compression imposed primarily to meet a predetermined dimensionality target. It also does not imply that an unsupported band is intrinsically incompressible; conclusions remain conditional on the tested candidate family and coefficient budgets.
+Spectral shape descriptors have also been extended across scale. Kunttu et al. (2006) proposed multiscale Fourier descriptors for contour-based shape retrieval, demonstrating that Fourier shape information can be organized at multiple resolutions. Fourier and wavelet operations have likewise been combined directly in fashion-flat analysis. An and Li (2014) used a Wavelet Fourier Descriptor together with linear discriminant analysis and an extreme learning machine for multiclass fashion-flat-sketch classification. Consequently, combining Fourier analysis with wavelets is established prior art and is not the contribution claimed here.
 
-## 2.4 Linear and nonlinear latent representations
+The distinction in CLO-SKET concerns **how a basis and coefficient budget are accepted**. Conventional compact-descriptor construction commonly chooses a descriptor family and then controls dimensionality through truncation, scale selection, feature selection, or a fixed coefficient budget. Here, DCT, wavelet and complete radial representations are candidate encodings rather than globally prescribed components. Candidate compression is evaluated separately within prespecified harmonic bands, using training garment identities for selection and held-out garment identities for confirmation. A compact representation is adopted only when its effect survives the frozen inferential criterion and simultaneous error control.
 
-PCA provides an orthogonal, variance-ordered representation with a direct inverse map to the original feature coordinates (Jolliffe and Cadima, 2016). Autoencoders provide nonlinear low-dimensional codes learned through reconstruction (Hinton and Salakhutdinov, 2006), while variational autoencoders provide a probabilistic latent-variable formulation based on variational inference and the reparameterization estimator (Kingma and Welling, 2014). Manifold-oriented methods can characterize nonlinear geometry without necessarily defining a validated task representation; examples include principal curves (Hastie and Stuetzle, 1989), Isomap (Tenenbaum et al., 2000), and diffusion maps (Coifman and Lafon, 2006).
+This creates an important role for a negative result. If tested compression is not supported in a harmonic band, the full 72-shell radial function is retained. Such preservation does **not** establish that the band is intrinsically incompressible; it states only that the tested lower-dimensional alternatives did not earn replacement of the complete representation under the specified data, candidate family, coefficient budgets and validation criterion. Representation construction is therefore governed by evidential sufficiency rather than by a requirement that every spectral region be compressed.
 
-For morphology data, the existence of nonlinear geometry and the usefulness of a nonlinear latent model are distinct empirical questions. The present study therefore evaluates PCA and nonlinear latent alternatives under garment-identity-disjoint task validation while treating nonlinear geometry analyses separately. This prevents a nonlinear visualization or local geometric diagnostic from being interpreted automatically as evidence of superior held-out representation performance.
+## 2.3 Garment sketches: classification, modular design and learned visual representations
 
-## 2.5 Position of the present study
+Garment and fashion sketches have been studied for objectives that include classification, retrieval, design assistance, vectorization and image synthesis. The Wavelet Fourier Descriptor pipeline of An and Li (2014) is particularly relevant because it demonstrates handcrafted spectral shape analysis directly on fashion flat sketches. Other work has treated flats structurally: feature-based CAD systems decompose garments into modules such as bodices, sleeves, collars, cuffs and pockets and assemble new designs from those components (Lee and Kim, 2021). More recent systems use neural image-processing pipelines to extract flat-sketch design elements from clothing imagery through edge detection, vectorization and graph-based shape extraction (Lee et al., 2024).
 
-The methodological components used here—Fourier shape analysis, polar representation, DCT and wavelet bases, PCA, and nonlinear latent models—are established (Zhang and Lu, 2002; Ricard et al., 2005; Kunttu et al., 2006; An and Li, 2014; Jolliffe and Cadima, 2016). The contribution lies in their integration around an evidence-controlled decision rule:
+A parallel literature represents fashion sketches through learned image features for cross-domain retrieval and generation. These approaches are valuable when the target is semantic matching, realistic synthesis or production-oriented image transformation, but their representation objective differs from the present study. CLO-SKET does not attempt to infer garment construction modules, generate realistic garments, or assign semantic meanings to latent coordinates. Its target is narrower: to test how an explicit morphology field should allocate radial representational complexity across angular harmonic scale while preserving a mathematically traceable inverse.
+
+This distinction also motivates the use of garment identity rather than category alone as the held-out unit. Category labels provide coarse semantic grouping, whereas repeated drawings of the same garment identity permit evaluation of whether a representation preserves identity-specific morphology across sketch realizations. The resulting validation question is therefore not simply whether dresses can be separated from trousers, but whether representation decisions transfer to garment identities absent from model fitting and candidate selection.
+
+## 2.4 Linear latent representations, nonlinear encoders and manifold geometry
+
+After representation construction, dimensionality reduction introduces a second complexity decision. PCA supplies an orthogonal variance-ordered coordinate system with a direct linear inverse to the original feature space (Jolliffe and Cadima, 2016). Autoencoders learn nonlinear low-dimensional representations through reconstruction objectives (Hinton and Salakhutdinov, 2006), while variational autoencoders introduce a probabilistic latent-variable formulation optimized through variational inference (Kingma and Welling, 2014). Nonlinear manifold methods—including principal curves, Isomap and diffusion maps—provide additional tools for diagnosing curved or locally low-dimensional structure (Hastie and Stuetzle, 1989; Tenenbaum et al., 2000; Coifman and Lafon, 2006).
+
+The presence of nonlinear geometry, however, is logically distinct from evidence that a nonlinear encoder improves a held-out task. A curved data distribution can be detectable while a simpler linear representation remains competitive or preferable under finite-sample validation. CLO-SKET therefore separates these hypotheses experimentally. Same-dimensional AE and VAE representations are compared with PCA using identity-disjoint held-out retrieval and multiplicity-controlled inference, whereas curvature, local/global dimensionality and other manifold-oriented analyses are treated as separate geometric audits.
+
+This separation prevents either result from being overinterpreted. Failure of a nonlinear encoder to establish task advantage does not prove that the underlying morphology is linear; conversely, evidence of curvature does not by itself justify replacing the task-validated representation with a nonlinear model. In this study, latent complexity is subjected to the same broader principle as radial compression: additional flexibility must be supported by the relevant validation evidence.
+
+## 2.5 Traceability from latent coordinates back to morphology
+
+Interpretability in latent representations can refer to several different properties. One is semantic disentanglement, in which individual coordinates correspond to human-named factors. Another, more limited form is **mathematical traceability**: determining how a latent perturbation changes the original structured representation even when no semantic label is assigned.
+
+PCA is particularly useful for the latter because a displacement along a principal direction can be mapped exactly through the frozen preprocessing and inverse hybrid representation. CLO-SKET uses this path
+
+\[
+PC_j
+\rightarrow
+\Delta x_j
+\rightarrow
+\Delta F_j(r,k)
+\]
+
+and summarizes the resulting perturbation with the sign-invariant field
+
+\[
+E_j(r,k)=|\Delta F_j(r,k)|^2.
+\]
+
+The use of PCA reconstruction or Fourier-domain visualization is not itself presented as new. The methodological role of this analysis is to preserve interpretability after evidence-controlled heterogeneous compression: latent variation remains localizable in the same radial–harmonic coordinates in which representation decisions were made. This is intentionally weaker than semantic disentanglement. A concentration of energy at an outer radial shell or within a harmonic range is a statement about mathematical localization, not evidence that a PC corresponds to a hem, sleeve, silhouette attribute, or other garment concept.
+
+## 2.6 Position of the present study
+
+The individual mathematical ingredients used in CLO-SKET have substantial precedent. Fourier descriptors establish spectral shape encoding; GFD, ART and polar harmonic transforms establish radial–angular spectral representations; multiscale and wavelet Fourier descriptors establish scale-dependent and Fourier–wavelet shape analysis; PCA, autoencoders, VAEs and manifold methods provide established linear and nonlinear latent tools. Fashion-flat research further demonstrates both spectral classification and structural or learned processing of garment sketches.
+
+The gap addressed here lies at the **representation-decision level**. Rather than assuming that one radial basis or one compression budget should apply uniformly across a structured Fourier morphology field, CLO-SKET evaluates radial compression separately across prespecified angular harmonic bands and requires candidate compression to survive garment-identity-disjoint, multiplicity-controlled confirmation. The resulting representation is allowed to be heterogeneous:
 
 \[
 \boxed{
-\text{evaluate radial compression separately across angular harmonic bands}
+\text{compress where support is established;}
+\qquad
+\text{preserve complete structure otherwise.}
 }
 \]
 
-under garment-identity-disjoint validation and multiplicity-controlled inference, with complete radial structure retained wherever tested compression is unsupported.
+The same evidential discipline is then applied to latent-model complexity, while an exact inverse path retains traceability from the selected latent representation back to radial–harmonic morphology coordinates.
 
-The selected representation is then analysed in latent space, while PCA perturbations are mapped exactly back to radial-harmonic coordinates for descriptive localization. This preserves a direct mathematical path from latent variation to the original spectral representation without claiming semantic garment attributes, a universally optimal transform, or a universally valid harmonic-dependent compression law. No literature-wide priority claim is made.
+Accordingly, the paper does **not** claim invention of Fourier descriptors, polar shape representation, DCT or wavelet compression, PCA-based reconstruction, nonlinear latent modelling, or fashion-sketch analysis. Nor does it claim a universally optimal harmonic partition or a universal law of garment morphology. Its contribution is an evidence-controlled framework for deciding **where representational simplification is justified within a structured morphology field**, together with validation safeguards that preserve unsupported structure and distinguish mathematical localization from semantic interpretation.
