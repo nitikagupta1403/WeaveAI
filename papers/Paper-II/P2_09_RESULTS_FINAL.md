@@ -427,7 +427,7 @@ and outer × \(k=5{:}12\),
 24.13\%.
 \]
 
-Peak coordinates across all 64 PCA directions nevertheless remained heterogeneous (Fig. 4E): many axes reached maximum energy near the outermost shells, while others peaked at substantially more internal radial positions and across different harmonic orders.
+The spectral and radial centroids of the 64 retained PCA directions were likewise heterogeneous (Fig. 4E): leading axes were concentrated toward larger radial centroids, while later directions extended toward more internal radial locations and across different harmonic-centroid positions.
 
 These percentages have a strict denominator. They describe **variance-weighted morphology localization within the retained PCA-64 subspace**, which itself represents 44.65% of standardized representation variance. They are not percentages of total garment morphology, the full 3008-dimensional representation, semantic garment parts, or causal morphology factors.
 
