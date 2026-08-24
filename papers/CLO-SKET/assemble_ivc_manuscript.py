@@ -3,27 +3,27 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "CLO_SKET_IVC_Manuscript.md"
 
+# Canonical IVC submission sources only. Do not assemble from the legacy
+# CLO_SKET_Final_* files; those are retained for provenance/archive purposes.
 SECTIONS = [
-    "CLO_SKET_Final_Abstract.md",
-    "CLO_SKET_Final_Introduction.md",
-    "CLO_SKET_Final_Related_Work.md",
-    "CLO_SKET_Final_Methods.md",
-    "CLO_SKET_Final_Results.md",
-    "CLO_SKET_Final_Discussion.md",
-    "CLO_SKET_Final_Conclusion.md",
-    "CLO_SKET_Availability_and_Reproducibility.md",
+    "CLO_SKET_IVC_Abstract.md",
+    "CLO_SKET_IVC_Introduction.md",
+    "CLO_SKET_IVC_Related_Work.md",
+    "CLO_SKET_IVC_Methods.md",
+    "CLO_SKET_IVC_Results.md",
+    "CLO_SKET_IVC_Discussion.md",
+    "CLO_SKET_IVC_Conclusion.md",
 ]
 
-FRONT_MATTER = r'''# CLO-SKET — IVC Submission Manuscript
+FRONT_MATTER = r'''# Garment Sketches: Axial–Radial Geometry and Identity-Aware Validation
 
 > **Submission front matter to complete before journal upload**
 >
-> - Final manuscript title: [TO BE CONFIRMED]
 > - Author names: [TO BE CONFIRMED]
 > - Affiliations: [TO BE CONFIRMED]
 > - Corresponding author and email: [TO BE CONFIRMED]
 >
-> The scientific body below is assembled from the frozen repository source files. Do not edit scientific claims in this master independently; edit the canonical source section and rebuild instead.
+> **Source-of-truth rule:** the files listed in `SECTIONS` above are the canonical IVC scientific sources. `CLO_SKET_IVC_Manuscript.md` is generated from them and should not be edited independently. Legacy `CLO_SKET_Final_*`, `CLO_SKET_IVC_Main.md`, and files under `Reserve/` are retained only for provenance and comparison.
 
 '''
 
@@ -50,6 +50,10 @@ DECLARATIONS = r'''
 ## Ethics statement
 
 [TO BE COMPLETED IF REQUIRED BY THE JOURNAL; DO NOT ADD AN ETHICS APPROVAL CLAIM UNLESS APPLICABLE]
+
+## Data and code availability
+
+[TO BE REBUILT ONLY AFTER THE PUBLIC REPOSITORY CONTENT HAS BEEN VERIFIED. DO NOT CLAIM PUBLIC AVAILABILITY OF THE EXPERIMENT 06 EVIDENCE BUNDLE UNTIL IT IS PRESENT AND ACCESSIBLE.]
 '''
 
 REFERENCES_NOTE = r'''
@@ -80,7 +84,7 @@ def main() -> None:
     OUT.write_text(master, encoding="utf-8")
     print(f"Wrote {OUT.relative_to(ROOT.parent.parent)}")
     print(f"Characters: {len(master):,}")
-    print(f"Source sections: {len(SECTIONS)}")
+    print(f"Canonical scientific source sections: {len(SECTIONS)}")
 
 
 if __name__ == "__main__":
