@@ -250,13 +250,15 @@ This result is deliberately bounded. The five outer test partitions are garment-
 
 ---
 
-## 4.4 Geometry audits identified nonlinear structure without a stable replacement representation
+## 4.4 Geometry audits suggested nonlinear curvature but did not establish a canonical nonlinear replacement
 
-Separate geometric analyses identified departures from a purely linear description of the retained morphology space. The explored nonlinear embeddings showed evidence of local geometric structure, but they did not establish a single stable canonical nonlinear coordinate system suitable for replacing PCA.
+The geometry analyses were treated as characterization rather than as a second model-selection stage. They provided evidence consistent with local nonlinear curvature in the frozen representation, while also showing that this structure did not resolve into a stable low-dimensional nonlinear replacement for PCA.
 
-In particular, principal-curve analysis and its stability audit did not establish a reproducible one-dimensional morphology trajectory as a canonical latent coordinate. Diffusion-map sensitivity analysis likewise did not provide sufficient evidence to replace PCA.
+The corrected dimensionality audit illustrates the distinction between global linear spread and local structure: 613 principal components were required to account for 90% of full standardized-representation variance, whereas the identity-level median local tangent dimension at the prespecified 20-neighbor scale was 15 (IQR 15–15). This large global/local dimensionality difference is consistent with locally lower-dimensional structure, but by itself does not identify a unique manifold or prove that nonlinear unfolding improves held-out representation performance.
 
-These analyses were therefore retained as geometric characterization and sensitivity evidence rather than used to redefine the frozen latent representation.
+Controlled nonlinear embedding analyses therefore compared PCA with nonlinear alternatives at matched embedding dimensions using held-out identities, with neighborhood preservation as the primary geometric criterion and garment-identity retrieval as a secondary quantity. These audits did not establish a nonlinear embedding that warranted replacing the frozen PCA baseline. Principal-curve stability analysis likewise rejected interpretation of a single one-dimensional trajectory as a canonical morphology coordinate, and the terminal diffusion-map sensitivity audit did not establish a superior replacement geometry.
+
+Accordingly, the supported conclusion is deliberately limited: nonlinear curvature is detectable as a geometric property, but no unique or stable canonical nonlinear representation was established. These analyses remain geometric characterization and sensitivity evidence and do not alter the latent-model decision in Section 4.3.
 
 ---
 
