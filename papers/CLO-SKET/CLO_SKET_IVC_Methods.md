@@ -73,7 +73,7 @@ S_i
 }.
 \]
 
-The same scale factor was used for both axes, so portrait sketches were not independently stretched along \(x\) and \(y\).
+The same scale factor was used for both axes, so portrait sketches were not independently stretched along \(x\) and \(y\). This first normalization expresses pixel locations relative to the native image canvas while preserving aspect ratio; it should not be interpreted as establishing physical scale invariance.
 
 The darkness-weighted centroid was
 
@@ -131,7 +131,7 @@ and polar angle
 \right).
 \]
 
-To express radial position relative to the maximum centroid-relative foreground extent represented in each sketch, radius was normalized separately within each image:
+To express radial position relative to the maximum centroid-relative foreground extent represented in each sketch, radius was normalized separately within each image. This second normalization makes radial location relative to the measured foreground extent of that sketch within the fixed preprocessing convention. It removes the absolute radial units of the preceding canvas-relative coordinate system, but it does not by itself establish invariance to arbitrary image rescaling, cropping, padding, or changes in acquisition geometry:
 
 \[
 R_{i,\max}
