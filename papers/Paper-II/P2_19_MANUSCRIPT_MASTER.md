@@ -225,7 +225,7 @@ P_i(\theta\mid r)\geq0,
 \sum_{\theta}P_i(\theta\mid r)=1
 \]
 
-for every occupied radial shell. The representation used 72 radial shells and 72 angular bins. Radial shells containing no sketch morphology were retained as structurally empty rather than assigned an artificial angular probability distribution.
+for every occupied radial shell. The representation used 72 radial shells and 72 angular bins. Radial shells containing no sketch morphology were retained as structurally empty rather than assigned an artificial angular probability distribution. Figure 1 summarizes the resulting probabilistic radial–angular construction, its angular Fourier transformation, and the prespecified harmonic-band partition used for subsequent representation decisions.
 
 ## 3.3 Angular Fourier morphology
 
@@ -1496,8 +1496,6 @@ random seeds, and provenance checks required to reproduce the reported results.
 ---
 
 # Figure Captions
-
-**Status: FINAL CVIU CAPTIONS — CORRECTED AGAINST FROZEN FIGURE OBJECTS**
 
 **Figure 1. Probabilistic radial–angular Fourier representation of garment-sketch morphology.** Sketch morphology is expressed in radial–angular coordinates and normalized within each occupied radial shell to obtain the conditional angular distribution \(P_i(\theta\mid r)\). Angular Fourier transformation then yields the complex radial–harmonic field \(F_{i,k}(r)\), retaining radial position \(r\) explicitly for positive harmonic orders \(k=1,\ldots,36\). The four prespecified harmonic bands \(k=1{:}4\), \(5{:}12\), \(13{:}24\), and \(25{:}36\) define the spectral regions in which radial representation is subsequently evaluated. The construction is mathematical; no semantic garment-part interpretation is assigned to radial shells or harmonic orders.
 
