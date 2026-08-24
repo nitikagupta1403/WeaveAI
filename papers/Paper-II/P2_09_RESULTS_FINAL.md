@@ -4,15 +4,17 @@
 
 **FINAL RESULTS ASSEMBLY: READY FOR MANUSCRIPT INTEGRATION**
 
-This Results section reports only frozen evidence. It separates confirmatory radial-compression inference, validated latent-model comparison, and descriptive retained-subspace morphology localization.
+This Results section reports only frozen evidence. It emphasizes the paper's central scientific contribution: harmonic-conditioned, evidence-controlled radial representation selection, followed by conservative latent-model validation and exact radial-harmonic morphology localization.
 
 ---
 
 # 4. Results
 
-## 4.1 Radial compression support differed across tested angular harmonic bands
+## 4.1 Radial representation requirements differed across angular harmonic scale
 
-Radial representation was evaluated separately across four angular harmonic bands under garment-identity-disjoint validation with family-wise-error-rate-controlled inference. The confirmatory effect statistic was the category-balanced held-out garment-identity separation effect defined in Methods,
+The first question was whether the radial dependence of the Fourier morphology field could be represented uniformly across angular harmonic orders, or whether different harmonic ranges required different radial treatments. Candidate radial representations were therefore evaluated separately within four prespecified harmonic bands under garment-identity-disjoint validation and family-wise-error-rate-controlled inference.
+
+For each band \(b\), the confirmatory statistic measured the category-balanced held-out garment-identity separation difference between the training-selected compressed representation and the complete radial representation,
 
 \[
 T_b
@@ -28,90 +30,78 @@ S^{(\mathrm{full})}_{g,b}
 \right].
 \]
 
-For compactness, the observed value is denoted \(\Delta=T_b\) below.
+We denote the observed value by \(\Delta=T_b\).
 
-For the low harmonic band \(k=1{:}4\), the training-selected four-coefficient DCT representation produced
+For the lowest harmonic band, \(k=1{:}4\), the training-selected four-coefficient DCT representation yielded
 
 \[
 \Delta=0.059306,
 \]
 
-with bootstrap 95% confidence interval
+with bootstrap 95% CI
 
 \[
-[0.023295,\ 0.108196]
+[0.023295,\;0.108196],
 \]
 
-and max-statistic family-wise-error-rate-controlled probability
+and multiplicity-controlled probability
 
 \[
 \boxed{p_{\mathrm{FWER}}=0.000200}.
 \]
 
-Compression was therefore supported, and the retained representation was
+The compact representation was therefore retained:
 
 \[
-\boxed{\mathrm{DCT}_4}.
+\boxed{k=1{:}4\rightarrow\mathrm{DCT}_4}.
 \]
 
-For \(k=5{:}12\), the training-selected four-coefficient wavelet representation produced
+The result differed for the two intermediate harmonic ranges. For \(k=5{:}12\), the training-selected four-coefficient wavelet candidate produced
 
 \[
 \Delta=0.005984,
+\qquad
+95\%\ \mathrm{CI}=[-0.014164,\;0.060361],
 \]
 
-with bootstrap 95% confidence interval
-
-\[
-[-0.014164,\ 0.060361]
-\]
-
-and
+with
 
 \[
 p_{\mathrm{FWER}}=0.608939.
 \]
 
-Compression was not inferentially supported, and the complete radial representation was retained:
-
-\[
-\boxed{\mathrm{RAW}_{72}}.
-\]
-
-For \(k=13{:}24\), the training-selected four-coefficient wavelet representation produced
+For \(k=13{:}24\),
 
 \[
 \Delta=0.010959,
+\qquad
+95\%\ \mathrm{CI}=[-0.003088,\;0.073320],
 \]
 
-with bootstrap 95% confidence interval
-
-\[
-[-0.003088,\ 0.073320]
-\]
-
-and
+with
 
 \[
 p_{\mathrm{FWER}}=0.487751.
 \]
 
-Compression was again not inferentially supported, and the complete radial representation was retained:
+Neither intermediate-band compression survived the prespecified inferential criterion. Complete 72-shell radial structure was therefore preserved in both ranges rather than forcing dimensional reduction:
 
 \[
-\boxed{\mathrm{RAW}_{72}}.
+\boxed{
+k=5{:}12\rightarrow\mathrm{RAW}_{72},
+\qquad
+k=13{:}24\rightarrow\mathrm{RAW}_{72}.
+}
 \]
 
-For the highest tested harmonic band, \(k=25{:}36\), the training-selected four-coefficient db4-wavelet representation produced
+At the highest tested harmonic range, \(k=25{:}36\), the selected four-coefficient db4-wavelet representation again received inferential support:
 
 \[
 \Delta=0.039300,
 \]
 
-with bootstrap 95% confidence interval
-
 \[
-[0.019130,\ 0.091021]
+95\%\ \mathrm{CI}=[0.019130,\;0.091021],
 \]
 
 and
@@ -120,60 +110,71 @@ and
 \boxed{p_{\mathrm{FWER}}=0.019698}.
 \]
 
-Compression was therefore supported, and the retained representation was
+The retained representation was therefore
 
 \[
-\boxed{\mathrm{db4\ wavelet}_4}.
+\boxed{k=25{:}36\rightarrow\mathrm{db4\ wavelet}_4}.
 \]
 
-### Table 1. Confirmatory radial-compression inference
+### Table 1. Confirmatory radial-representation decisions
 
-| Harmonic band | Tested / retained radial representation | \(T_b\) | Bootstrap 95% CI | \(p_{\mathrm{FWER}}\) | Final decision |
+| Harmonic band | Tested compressed representation | \(\Delta=T_b\) | Bootstrap 95% CI | \(p_{\mathrm{FWER}}\) | Retained representation |
 |---|---|---:|---:|---:|---|
-| \(k=1{:}4\) | DCT, \(B=4\) | 0.059306 | [0.023295, 0.108196] | 0.000200 | Compression supported |
-| \(k=5{:}12\) | Wavelet, \(B=4\), tested; RAW retained | 0.005984 | [-0.014164, 0.060361] | 0.608939 | Compression not supported |
-| \(k=13{:}24\) | Wavelet, \(B=4\), tested; RAW retained | 0.010959 | [-0.003088, 0.073320] | 0.487751 | Compression not supported |
-| \(k=25{:}36\) | db4 wavelet, \(B=4\) | 0.039300 | [0.019130, 0.091021] | 0.019698 | Compression supported |
+| \(k=1{:}4\) | DCT, \(B=4\) | 0.059306 | [0.023295, 0.108196] | 0.000200 | \(\mathrm{DCT}_4\) |
+| \(k=5{:}12\) | Wavelet, \(B=4\) | 0.005984 | [-0.014164, 0.060361] | 0.608939 | \(\mathrm{RAW}_{72}\) |
+| \(k=13{:}24\) | Wavelet, \(B=4\) | 0.010959 | [-0.003088, 0.073320] | 0.487751 | \(\mathrm{RAW}_{72}\) |
+| \(k=25{:}36\) | db4 wavelet, \(B=4\) | 0.039300 | [0.019130, 0.091021] | 0.019698 | \(\mathrm{db4\ wavelet}_4\) |
 
-Taken together, the four confirmatory decisions yielded
+The four decisions therefore produced the heterogeneous radial-spectral representation
 
 \[
 \boxed{
-k=1{:}4\rightarrow\mathrm{DCT}_4,
-\quad
-k=5{:}12\rightarrow\mathrm{RAW}_{72},
-\quad
-k=13{:}24\rightarrow\mathrm{RAW}_{72},
-\quad
-k=25{:}36\rightarrow\mathrm{db4\ wavelet}_4
+\mathrm{DCT}_4/
+\mathrm{RAW}_{72}/
+\mathrm{RAW}_{72}/
+\mathrm{db4}_4
 }.
 \]
 
-Thus, under the tested identity-disjoint inferential framework, support for radial compression differed across angular harmonic bands. Failure to establish compression support for \(k=5{:}24\) is not interpreted as evidence that those bands are intrinsically incompressible.
+The important result is not simply that some bands could be compressed. Rather, **support for radial compression was harmonic-dependent under the tested inferential framework**. Compact radial encodings were supported at \(k=1{:}4\) and \(k=25{:}36\), whereas the evidence was insufficient to replace complete radial structure at \(k=5{:}24\). Failure to establish compression support is not interpreted as proof of intrinsic incompressibility; it determines only that compression was not justified by the present validation design. This distinction is central to the evidence-controlled representation strategy.
 
 ---
 
-## 4.2 Evidence-supported hybrid radial-spectral representation
+## 4.2 Evidence-controlled selection produced a heterogeneous hybrid representation
 
-The complete radial-harmonic field contains
+The complete positive-harmonic morphology field contains
 
 \[
 36\times72=2592
 \]
 
-complex coefficients per sketch. The inferentially selected hybrid representation contained
+complex coefficients per sketch. Applying the four evidence-supported representation decisions gave
 
 \[
-4\times4=16,
-\qquad
-8\times72=576,
-\qquad
-12\times72=864,
-\qquad
+4\times4=16
+\]
+
+coefficients for \(k=1{:}4\),
+
+\[
+8\times72=576
+\]
+
+for \(k=5{:}12\),
+
+\[
+12\times72=864
+\]
+
+for \(k=13{:}24\), and
+
+\[
 12\times4=48
 \]
 
-complex coefficients across the four harmonic bands, respectively. The resulting field therefore contained
+for \(k=25{:}36\).
+
+The resulting hybrid representation therefore contained
 
 \[
 16+576+864+48
@@ -181,45 +182,45 @@ complex coefficients across the four harmonic bands, respectively. The resulting
 \boxed{1504}
 \]
 
-complex coefficients per sketch.
-
-Relative to the original 2592-coefficient field, this corresponds to
+complex coefficients per sketch, corresponding to a
 
 \[
 \boxed{41.98\%}
 \]
 
-coefficient reduction and a compression ratio of
+reduction relative to the complete 2592-coefficient field and a compression ratio of
 
 \[
 \boxed{1.7234\times}.
 \]
 
-After exact block-wise real/imaginary packing, the frozen representation contained
+Exact block-wise real/imaginary packing produced a frozen
 
 \[
-\boxed{3008}
+\boxed{3008\text{-dimensional}}
 \]
 
-real dimensions per sketch. This reduction is a representation-dimensionality result and is not interpreted as removal of noise or irrelevant morphology.
+real representation.
+
+This dimensional reduction follows from the inferential decisions in Section 4.1; it was **not** obtained by selecting a global compression rate or by treating discarded coefficients as noise. In particular, the two intermediate harmonic ranges account for most of the retained dimensionality precisely because the tested compression alternatives were not supported there. The final representation therefore preserves heterogeneity in radial representation requirements rather than imposing a uniform basis across the Fourier field.
 
 ---
 
-## 4.3 Nonlinear latent models did not establish a validated task advantage over PCA
+## 4.3 Nonlinear latent models did not earn a validated replacement of PCA
 
-PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at latent dimensions
+We next asked whether the heterogeneous radial-spectral representation required a nonlinear latent model for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
 
 \[
 z\in\{8,16,24,32,64\}
 \]
 
-using held-out garment-identity mean reciprocal rank (MRR) across the same five outer garment-identity-disjoint folds. The ten prespecified same-dimensional AE-versus-PCA and VAE-versus-PCA contrasts were assessed using the exhaustive fold-level sign-flip sensitivity analysis described in Methods, with a maximum statistic across all ten contrasts.
+using held-out garment-identity mean reciprocal rank (MRR) across five identity-disjoint outer folds.
 
-The frozen contrast results were:
+Ten prespecified same-dimensional nonlinear-versus-PCA contrasts were evaluated using exhaustive fold-level sign flips and a maximum statistic across the entire contrast family.
 
-### Table 2. Fold-level nonlinear-versus-PCA MRR sensitivity analysis
+### Table 2. Nonlinear latent-model contrasts relative to same-dimensional PCA
 
-| Contrast | Mean \(\Delta\)MRR | Median \(\Delta\)MRR | Positive / negative / zero folds | Raw one-sided fold-level \(p\) | Max-stat adjusted \(p\) |
+| Contrast | Mean \(\Delta\)MRR | Median \(\Delta\)MRR | \(+\;/\;-\;/\;0\) folds | Raw one-sided \(p\) | Max-stat adjusted \(p\) |
 |---|---:|---:|---:|---:|---:|
 | AE8 − PCA8 | +0.009789 | +0.008696 | 5 / 0 / 0 | 0.03125 | 0.4375 |
 | AE16 − PCA16 | +0.009778 | +0.007625 | 4 / 1 / 0 | 0.09375 | 0.4375 |
@@ -232,133 +233,211 @@ The frozen contrast results were:
 | VAE32 − PCA32 | −0.011527 | −0.008696 | 1 / 4 / 0 | 0.96875 | 1.0000 |
 | VAE64 − PCA64 | −0.018260 | −0.026087 | 0 / 4 / 1 | 1.00000 | 1.0000 |
 
-The largest observed mean nonlinear improvement was
+The largest observed mean improvement was
 
 \[
-\boxed{\mathrm{VAE}_{16}-\mathrm{PCA}_{16}=+0.014341\ \mathrm{MRR}},
+\boxed{
+\mathrm{VAE}_{16}-\mathrm{PCA}_{16}
+=
++0.014341\ \mathrm{MRR}
+},
 \]
 
-with maximum-statistic adjusted fold-level probability
+but its selection-aware adjusted probability was
 
 \[
-\boxed{p=0.2500}.
+\boxed{p_{\mathrm{FWER}}=0.2500}.
 \]
 
-No tested nonlinear contrast survived the multiplicity-controlled fold-level sensitivity analysis. PCA was therefore retained as the practical latent baseline for subsequent morphology interpretation because the frozen validation did not establish evidence sufficient to replace it with AE or VAE.
+None of the ten tested nonlinear contrasts survived multiplicity control. PCA was therefore retained as the **practical validated latent baseline** for morphology interpretation; the experiment did not establish sufficient task evidence to replace it with AE or VAE.
 
-This result is deliberately bounded. The five outer test partitions are garment-identity-disjoint, but the corresponding training sets overlap; moreover, five folds permit only \(2^5=32\) fold-level sign configurations. The analysis is therefore interpreted as conservative validation evidence with coarse probability resolution, not as population-level proof that PCA is superior to nonlinear latent models. It also does not establish that the underlying representation geometry is globally linear.
+This negative result is deliberately narrow. With five outer folds, the exhaustive paired analysis contains only
+
+\[
+2^5=32
+\]
+
+sign configurations, giving coarse probability resolution, and the training portions of the outer folds overlap. The analysis therefore does not prove population-level superiority of PCA, nor does failure of nonlinear-model superiority imply that the morphology geometry itself is linear.
 
 ---
 
-## 4.4 Geometry audits suggested nonlinear curvature but did not establish a canonical nonlinear replacement
+## 4.4 Detectable nonlinear geometry did not imply nonlinear-model utility
 
-The geometry analyses were treated as characterization rather than as a second model-selection stage. They provided evidence consistent with local nonlinear curvature in the frozen representation, while also showing that this structure did not resolve into a stable low-dimensional nonlinear replacement for PCA.
+To separate **geometry** from **model selection**, the validated PCA representation was subsequently examined for nonlinear structure without reopening the PCA/AE/VAE decision.
 
-The corrected dimensionality audit illustrates the distinction between global linear spread and local structure: 613 principal components were required to account for 90% of full standardized-representation variance, whereas the identity-level median local tangent dimension at the prespecified 20-neighbor scale was 15 (IQR 15–15). This large global/local dimensionality difference is consistent with locally lower-dimensional structure, but by itself does not identify a unique manifold or prove that nonlinear unfolding improves held-out representation performance.
+The pairwise curvature audit identified
 
-Controlled nonlinear embedding analyses therefore compared PCA with nonlinear alternatives at matched embedding dimensions using held-out identities, with neighborhood preservation as the primary geometric criterion and garment-identity retrieval as a secondary quantity. These audits did not establish a nonlinear embedding that warranted replacing the frozen PCA baseline. Principal-curve stability analysis likewise rejected interpretation of a single one-dimensional trajectory as a canonical morphology coordinate, and the terminal diffusion-map sensitivity audit did not establish a superior replacement geometry.
+\[
+\boxed{1}
+\]
 
-Accordingly, the supported conclusion is deliberately limited: nonlinear curvature is detectable as a geometric property, but no unique or stable canonical nonlinear representation was established. These analyses remain geometric characterization and sensitivity evidence and do not alter the latent-model decision in Section 4.3.
+FWER-supported quadratic relation among the prespecified PCA-coordinate relations. The strongest held-out quadratic improvement was
+
+\[
+\boxed{\overline{\Delta R^2}=+0.432042}.
+\]
+
+Thus, curvature remained detectable within the retained PCA-coordinate description even though nonlinear encoders had not established a validated retrieval advantage.
+
+The corrected global/local dimensionality audit showed the same distinction from another perspective. The complete standardized representation required
+
+\[
+\boxed{d_{\mathrm{global},90}=613}
+\]
+
+global principal directions to account for 90% of variance. At the prespecified 20-neighbor scale, however, the identity-level median local 90%-variance tangent dimension was
+
+\[
+\boxed{\tilde d_{\mathrm{local},90}=15}
+\]
+
+with IQR
+
+\[
+15\text{–}15,
+\]
+
+corresponding to
+
+\[
+\boxed{
+\frac{\tilde d_{\mathrm{local},90}}
+{d_{\mathrm{global},90}}
+=0.0245
+}.
+\]
+
+The local/global contrast is descriptive and scale-dependent; it does not identify a unique intrinsic dimension.
+
+Additional nonlinear embedding, principal-curve and diffusion-map audits likewise failed to establish a stable nonlinear representation that warranted replacing the practical PCA baseline. The supported conclusion is therefore asymmetric but important:
+
+\[
+\boxed{
+\text{detectable nonlinear geometry}
+\;\not\Rightarrow\;
+\text{validated nonlinear-model advantage}.
+}
+\]
+
+Figure 3 summarizes this separation. The result guards against two opposite errors: treating PCA utility as proof of intrinsically linear morphology, or treating evidence of curvature as sufficient justification for a more complex latent model.
 
 ---
 
-## 4.5 PCA-64 accounted for 44.65% of variance in the standardized frozen representation
+## 4.5 Retained PCA axes mapped to heterogeneous radial–harmonic morphology
 
-The first
-
-\[
-64
-\]
-
-principal components accounted for
+The first 64 PCA components accounted for
 
 \[
 \boxed{44.65\%}
 \]
 
-of variance in the standardized frozen 3008-dimensional representation.
+of variance in the standardized 3008-dimensional hybrid representation. All subsequent morphology localization is therefore conditional on this retained PCA-64 subspace.
 
-All subsequent radial-harmonic morphology localization is therefore explicitly conditional on this retained PCA-64 subspace; it is not a decomposition of the complete representation variance.
+To determine what the latent coordinates represented in the original morphology domain, each PCA direction \(j\) was mapped through the exact frozen inverse representation to obtain
+
+\[
+\Delta F_j(r,k).
+\]
+
+Because PCA eigenvector signs are arbitrary, localization was quantified using the sign-invariant morphology-energy field
+
+\[
+E_j(r,k)
+=
+\left|
+\Delta F_j(r,k)
+\right|^2.
+\]
+
+The selected axes in Fig. 4A–C demonstrate that PCA directions did not correspond to one common spatial-spectral mode. PC1 was strongly outer-radial: 97.59% of its morphology energy occurred in shells 49–72, while 81.68% occurred across the combined intermediate harmonics \(k=5{:}24\). Its maximum-energy coordinate was
+
+\[
+(r,k)=(72,17).
+\]
+
+PC3 showed a similarly strong outer-radial pattern, with 96.47% of its energy in the outer region and 79.61% at \(k=5{:}24\), but with maximum energy at
+
+\[
+(r,k)=(72,13).
+\]
+
+PC15 provided a contrasting morphology mode. Its energy was predominantly inner-radial:
+
+\[
+71.51\%
+\]
+
+occurred in shells 1–24, with maximum energy at
+
+\[
+(r,k)=(5,5).
+\]
+
+These examples establish that the latent representation contains distinct radial–harmonic modes rather than a single uniform morphology pattern. The differences are localization differences only: PC1, PC3 and PC15 are not assigned garment-part, causal or semantic identities.
 
 ---
 
-## 4.6 Retained PCA morphology was concentrated in intermediate harmonic orders
+## 4.6 Retained morphology variation was concentrated in intermediate harmonics and outer radial structure
 
-Each retained PCA direction was mapped through the exact frozen inverse representation to obtain
+We then aggregated morphology localization across all 64 retained components using their PCA explained-variance ratios as within-subspace weights.
 
-\[
-\Delta F_j(r,k),
-\]
+The resulting \(3\times4\) radial-region × harmonic-band distribution (Fig. 4D) was:
 
-with sign-invariant morphology energy
+| Radial region | \(k=1{:}4\) | \(k=5{:}12\) | \(k=13{:}24\) | \(k=25{:}36\) |
+|---|---:|---:|---:|---:|
+| Inner, shells 1–24 | 2.29% | 9.57% | 7.21% | 1.59% |
+| Middle, shells 25–48 | 2.04% | 5.47% | 4.98% | <0.01% |
+| Outer, shells 49–72 | 8.60% | 24.13% | 27.17% | 6.94% |
 
-\[
-E_j(r,k)=|\Delta F_j(r,k)|^2.
-\]
-
-After normalization and variance weighting across the 64 retained components,
+Summed across radial zones,
 
 \[
 \boxed{78.54\%}
 \]
 
-of mapped morphology energy occurred in the intermediate harmonic range
+of variance-weighted mapped morphology energy occurred at intermediate angular harmonics
 
 \[
 k=5{:}24.
 \]
 
-The complementary low and highest harmonic ranges together contained 21.46% of the retained mapped morphology energy. Thus, within the retained PCA-64 subspace, mapped morphology energy was concentrated predominantly in intermediate angular harmonic orders.
-
----
-
-## 4.7 Retained PCA morphology showed strong outer-radial localization
-
-Across radial position,
+Summed across harmonic ranges,
 
 \[
 \boxed{66.84\%}
 \]
 
-of variance-weighted mapped morphology energy occurred in the outer radial zone
+occurred in the outer radial zone.
 
-\[
-r=49{:}72.
-\]
-
-The remaining energy was distributed across the inner and middle radial zones. These radial zones are representation-space partitions; no semantic garment-part or garment-boundary interpretation is assigned to the outer radial region.
-
----
-
-## 4.8 More than half of retained mapped morphology energy occupied the outer-radial × intermediate-harmonic region
-
-Joint radial-harmonic localization showed that
+Most notably, the joint outer-radial × intermediate-harmonic region contained
 
 \[
 \boxed{51.30\%}
 \]
 
-of variance-weighted mapped morphology energy occurred jointly in the outer radial zone and
+of the retained mapped morphology energy. The two largest individual cells were outer × \(k=13{:}24\),
 
 \[
-k=5{:}24.
+27.17\%,
 \]
 
-This is a joint localization quantity. No formal radial-zone-by-harmonic-band interaction hypothesis was tested; the result is therefore not interpreted as evidence of enrichment, synergy, or preferential coupling beyond the observed localization.
+and outer × \(k=5{:}12\),
+
+\[
+24.13\%.
+\]
+
+Peak coordinates across all 64 PCA directions nevertheless remained heterogeneous (Fig. 4E): many axes reached maximum energy near the outermost shells, while others peaked at substantially more internal radial positions and across different harmonic orders.
+
+These percentages have a strict denominator. They describe **variance-weighted morphology localization within the retained PCA-64 subspace**, which itself represents 44.65% of standardized representation variance. They are not percentages of total garment morphology, the full 3008-dimensional representation, semantic garment parts, or causal morphology factors.
 
 ---
 
-## 4.9 Individual principal components exhibited heterogeneous radial-harmonic localization
+## 4.7 Results synthesis
 
-Although the variance-weighted retained-subspace summary was dominated by intermediate harmonics and outer radial structure, individual principal directions were heterogeneous. Leading components were predominantly localized toward outer radial regions, while later retained directions included components with stronger inner-radial localization. Integrated harmonic-band dominance and the location of individual harmonic maxima were also not always identical.
+Taken together, the experiments resolve a sequence of representation questions.
 
-The retained PCA representation therefore contains multiple radial-harmonic modes of variation rather than one uniform spatial-spectral pattern. This result is descriptive and does not assign semantic meaning to individual PCA axes.
-
----
-
-## 4.10 Summary of primary results
-
-The primary confirmatory result is that radial compression support differed across the tested harmonic bands under the identity-disjoint inferential framework. The resulting frozen representation was
+Radial structure did **not** receive uniform compression support across angular harmonic scale. Instead, identity-disjoint, multiplicity-controlled validation produced the heterogeneous representation
 
 \[
 \boxed{
@@ -369,8 +448,10 @@ The primary confirmatory result is that radial compression support differed acro
 },
 \]
 
-reducing the complex coefficient count from 2592 to 1504, or 41.98%.
+reducing the complete Fourier field from 2592 to 1504 complex coefficients while preserving full radial structure in the harmonic ranges where compression was not supported.
 
-Separately, the five-fold PCA/AE/VAE validation did not establish evidence sufficient to replace PCA with a tested nonlinear latent model; the strongest observed contrast was VAE16 − PCA16 (mean \(\Delta\)MRR \(+0.014341\), max-stat adjusted fold-level \(p=0.2500\)). PCA-64 accounted for 44.65% of variance in the standardized frozen representation.
+A second level of validation showed that greater latent-model complexity also had to earn its place. Tested AE and VAE alternatives did not establish a multiplicity-controlled retrieval advantage over same-dimensional PCA, so PCA remained the practical latent baseline. Yet a separate geometry audit detected nonlinear curvature, demonstrating that **lack of validated nonlinear-model utility is not evidence of globally linear morphology**.
 
-Within that retained PCA-64 subspace, 78.54% of mapped morphology energy occurred at intermediate harmonic orders, 66.84% occurred in the outer radial zone, and 51.30% occurred jointly in the outer-radial × intermediate-harmonic region. These localization quantities are descriptive properties of the retained subspace and are not semantic or interaction effects.
+Finally, exact inverse mapping of PCA perturbations returned latent variation to explicit radial–harmonic coordinates. Within the retained PCA-64 subspace, mapped morphology energy was concentrated predominantly in intermediate harmonic orders and outer radial structure, while individual components showed substantially heterogeneous localization.
+
+The overall empirical pattern is therefore not one of uniformly simplifying garment morphology. It is one of **selective representation**: compact encoding where held-out evidence supports it, preservation where it does not, conservative latent-model selection, and explicit mapping of retained latent variation back to the morphology coordinates from which the representation was constructed.
