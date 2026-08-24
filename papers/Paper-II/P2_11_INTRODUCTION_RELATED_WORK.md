@@ -27,10 +27,10 @@ This principle leads naturally to a heterogeneous representation,
 
 where the radial operator \(\mathcal R_b\) is permitted to differ between harmonic bands \(b\). The resulting representation is therefore determined neither by architectural symmetry nor by a prespecified global compression ratio. Instead, complexity is retained selectively according to the evidence available for each spectral region.
 
-A second representation question arises after this radial–spectral structure has been established. High-dimensional morphology can exhibit nonlinear geometry, but the existence of such geometry does not by itself demonstrate that a nonlinear encoder provides a better practical representation. Autoencoders and variational autoencoders can model nonlinear mappings, whereas PCA provides a simpler linear baseline with exact and transparent inverse structure. We therefore separate two questions that are often conflated:
+A second representation question arises after this radial–spectral structure has been established. High-dimensional morphology can exhibit nonlinear predictive structure, but the existence of such geometry does not by itself demonstrate that a nonlinear encoder provides a better practical representation. Autoencoders and variational autoencoders can model nonlinear mappings, whereas PCA provides a simpler linear baseline with exact and transparent inverse structure. We therefore separate two questions that are often conflated:
 
 \[
-\text{Is nonlinear geometry detectable?}
+\text{Is nonlinear predictive structure detectable?}
 \]
 
 and
@@ -39,7 +39,7 @@ and
 \text{Does a nonlinear latent model provide validated task advantage?}
 \]
 
-Nonlinear alternatives are compared directly with same-dimensional PCA representations under garment-identity-disjoint evaluation and multiplicity-controlled inference. Geometric nonlinearity is then audited separately, so that evidence of curvature cannot retrospectively determine the model-selection conclusion. This distinction allows representational complexity, like radial compression, to **earn empirical support rather than being assumed from model flexibility alone**.
+Nonlinear alternatives are compared directly with same-dimensional PCA representations under garment-identity-disjoint evaluation and multiplicity-controlled inference. Nonlinear predictive structure is then audited separately, so that evidence of a quadratic coordinate relationship cannot retrospectively determine the model-selection conclusion. This distinction allows representational complexity, like radial compression, to **earn empirical support rather than being assumed from model flexibility alone**.
 
 A third requirement is traceability. A compact latent coordinate is useful for downstream modelling, but its relationship to the original morphology can become opaque. Because the radial–spectral representation constructed here retains an exact inverse path, a perturbation along principal latent direction \(j\) can be mapped back to the Fourier morphology field,
 
@@ -66,10 +66,10 @@ We study these questions using CLO-SKET (Arnia, 2020), a controlled garment-sket
 The study makes three methodological contributions:
 
 1. **Harmonic-conditioned, evidence-controlled radial representation selection.** We test radial compression separately across angular harmonic regimes and construct a heterogeneous representation in which compact bases are retained only where inferential support is established, while complete radial structure is preserved elsewhere.
-2. **Evidence-controlled latent-complexity selection.** We compare PCA with nonlinear AE and VAE alternatives under the same identity-disjoint validation framework and distinguish predictive utility from the separate question of nonlinear geometry.
+2. **Evidence-controlled latent-complexity selection.** We compare PCA with nonlinear AE and VAE alternatives under the same identity-disjoint validation framework and distinguish predictive utility from the separate question of nonlinear predictive structure.
 3. **Exact latent-to-morphology traceability.** We map retained PCA directions through the inverse hybrid representation into explicit radial–harmonic morphology fields, allowing latent variation to be localized without assigning unsupported semantic meaning.
 
-The resulting experiments show that radial representation requirements are not uniform across the tested harmonic spectrum. Evidence supports compact representations at the lowest and highest tested harmonic ranges but not across the intermediate orders, yielding a DCT/raw/raw/wavelet hybrid rather than a globally imposed basis. Nonlinear encoders subsequently fail to establish a multiplicity-controlled task advantage over same-dimensional PCA despite separately detectable nonlinear geometry. Finally, inverse mapping of the retained PCA representation reveals structured but heterogeneous radial–harmonic localization of latent morphology.
+The resulting experiments show that radial representation requirements are not uniform across the tested harmonic spectrum. Evidence supports compact representations at the lowest and highest tested harmonic ranges but not across the intermediate orders, yielding a DCT/raw/raw/wavelet hybrid rather than a globally imposed basis. Nonlinear encoders subsequently fail to establish a multiplicity-controlled task advantage over same-dimensional PCA despite separately detectable nonlinear predictive structure. Finally, inverse mapping of the retained PCA representation reveals structured but heterogeneous radial–harmonic localization of latent morphology.
 
 Together, these results motivate a general representation principle:
 
@@ -126,9 +126,9 @@ This distinction also motivates the use of garment identity rather than category
 
 After representation construction, dimensionality reduction introduces a second complexity decision. PCA supplies an orthogonal variance-ordered coordinate system with a direct linear inverse to the original feature space (Jolliffe and Cadima, 2016). Autoencoders learn nonlinear low-dimensional representations through reconstruction objectives (Hinton and Salakhutdinov, 2006), while variational autoencoders introduce a probabilistic latent-variable formulation optimized through variational inference (Kingma and Welling, 2014). Nonlinear manifold methods—including principal curves, Isomap and diffusion maps—provide additional tools for diagnosing curved or locally low-dimensional structure (Hastie and Stuetzle, 1989; Tenenbaum et al., 2000; Coifman and Lafon, 2006).
 
-The presence of nonlinear geometry, however, is logically distinct from evidence that a nonlinear encoder improves a held-out task. A curved data distribution can be detectable while a simpler linear representation remains competitive or preferable under finite-sample validation. CLO-SKET therefore separates these hypotheses experimentally. Same-dimensional AE and VAE representations are compared with PCA using identity-disjoint held-out retrieval and multiplicity-controlled inference, whereas curvature, local/global dimensionality and other manifold-oriented analyses are treated as separate geometric audits.
+The presence of nonlinear predictive structure, however, is logically distinct from evidence that a nonlinear encoder improves a held-out task. A curved data distribution can be detectable while a simpler linear representation remains competitive or preferable under finite-sample validation. CLO-SKET therefore separates these hypotheses experimentally. Same-dimensional AE and VAE representations are compared with PCA using identity-disjoint held-out retrieval and multiplicity-controlled inference, whereas fixed quadratic coordinate relationships and other manifold-oriented sensitivity analyses are treated as separate diagnostics.
 
-This separation prevents either result from being overinterpreted. Failure of a nonlinear encoder to establish task advantage does not prove that the underlying morphology is linear; conversely, evidence of curvature does not by itself justify replacing the task-validated representation with a nonlinear model. In this study, latent complexity is subjected to the same broader principle as radial compression: additional flexibility must be supported by the relevant validation evidence.
+This separation prevents either result from being overinterpreted. Failure of a nonlinear encoder to establish task advantage does not prove that all relationships in the representation are linear; conversely, evidence of a quadratic coordinate relationship does not by itself justify replacing the task-validated representation with a nonlinear model. In this study, latent complexity is subjected to the same broader principle as radial compression: additional flexibility must be supported by the relevant validation evidence.
 
 ## 2.5 Traceability from latent coordinates back to morphology
 
