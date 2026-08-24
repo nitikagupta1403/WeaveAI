@@ -197,29 +197,25 @@ The central methodological premise is therefore simple: **showing that an added 
 
 # 2. Related Work
 
-## 2.1 Garment sketches as computational inputs
+## 2.1 Garment sketches in computational fashion
 
-Garment sketches have been used as computational inputs for reconstruction, editing, synthesis, retrieval, and pattern generation. Earlier geometry-oriented systems established that sparse drawings can carry information sufficient for downstream garment construction. Yasseen et al. (2013) converted mannequin-guided sketches into quadrilateral garment meshes. Wang et al. (2018) learned a shared latent space linking sketched fold patterns, sewing-pattern parameters, body shape, and simulated garments. Fondevilla et al. (2021) transferred style from annotated fashion sketches to three-dimensional characters. More recently, SketchTailor maps a single garment sketch to three-dimensional sewing patterns using a Vision Mamba encoder and deformable Transformer decoder (Huang et al., 2025).
+Garment sketches have become established inputs to computational fashion systems, particularly for reconstruction, generation, editing, and retrieval. Geometry-oriented work has shown that sparse drawings can constrain garment form: Yasseen et al. (2013) converted mannequin-guided sketches into garment meshes, Wang et al. (2018) linked sketched fold patterns with sewing-pattern parameters, body shape, and simulated garments, and Fondevilla et al. (2021) transferred fashion-sketch style to three-dimensional characters. More recently, SketchTailor predicts garment patterns from a single sketch using a Vision Mamba encoder and deformable Transformer decoder (Huang et al., 2025).
 
-A parallel line of work treats the sketch principally as a conditioning signal for image synthesis or editing. Multimodal Garment Designer conditions latent-diffusion fashion editing on sketches together with text and human pose (Baldrati et al., 2023). TexControl uses a two-stage diffusion pipeline in which a sketch constrains garment outline before a second stage refines texture (Zhang et al., 2024). FashionSD-X similarly incorporates sketch and text information into a latent-diffusion garment-synthesis framework (Singh and Patras, 2024). Cao et al. (2023) condition compatible clothing generation jointly on user sketches and reference garments.
+A parallel literature treats sketches primarily as conditioning signals for learned image models. Multimodal Garment Designer combines garment sketches with text and human pose for latent-diffusion fashion editing (Baldrati et al., 2023). TexControl uses sketch guidance in a two-stage diffusion pipeline designed to preserve outline before texture refinement (Zhang et al., 2024), while FashionSD-X and related multimodal systems similarly use sketches to constrain fashion synthesis. Recent benchmarks further expand the scale and scope of sketch-conditioned fashion research: GarmentSketch contains 26,249 sketches across 21 garment categories paired with textual descriptions for sketch-guided generation (Bui et al., 2026), and VietFashion studies sketch–text composed retrieval for culturally specific garments using 650 human-drawn sketches and a substantially larger associated image collection (Cao et al., 2026).
 
-The scale and scope of sketch-based fashion benchmarks are also increasing. GarmentSketch contains 26,249 sketches spanning 21 garment categories, paired with detailed textual descriptions and evaluated for sketch-guided fashion image generation (Bui et al., 2026). VietFashion instead studies sketch-text composed retrieval for culturally specific garments, beginning from 650 sketches and expanding the associated image collection to more than 21,000 generated examples (Cao et al., 2026).
+These systems establish that garment sketches are computationally informative. Their principal scientific question, however, is usually whether a sketch can improve or control a downstream task. The present study asks a narrower representation question: **which explicitly measurable geometric organization is present in the sketch, whether it contributes information beyond morphology, and what correspondence must be preserved for that contribution to survive.**
 
-These developments establish that garment sketches are computationally informative, but their dominant objective is task performance: generating an image, reconstructing a garment or sewing pattern, transferring style, or retrieving a compatible target. CLO-SKET addresses a different question. The sketch is treated as an observational geometric object, and the objective is to construct an explicit low-dimensional measurement whose algebraic dependencies, coordinate assumptions, repeated-measure structure, and sensitivity to analysis choices can be examined directly.
+## 2.2 Explicit shape representations and frequency-domain descriptors
 
-## 2.2 Explicit garment-shape and frequency-domain representations
+Explicit numerical representations of garment form predate modern generative models. An and Li (2014) combined wavelet Fourier descriptors with supervised dimensionality reduction for fashion-flat classification, while Tsuru et al. (2021) represented garment silhouettes through standardized measurements and analysed designer collections using multidimensional scaling and clustering. More broadly, Fourier descriptors provide classical representations of periodic outline structure (Zahn and Roskies, 1972), and geometric morphometrics provides established tools for quantitative curve and shape analysis (Bookstein, 1997; McCane, 2013).
 
-Explicit numerical representations of garment form predate current generative systems. An and Li (2014) combined wavelet Fourier descriptors with supervised dimensionality reduction for fashion-flat classification. Tsuru et al. (2021) represented garment silhouettes using standardized measurements and analysed designer collections using multidimensional scaling and clustering. Such work demonstrates that garment outlines can be transformed into interpretable numerical summaries rather than represented only by learned latent embeddings.
+Frequency-domain computation has also been incorporated into contemporary fashion synthesis. Liang et al. (2023), for example, used Fast Fourier Transform features to model periodic texture structure in controllable garment-image generation. That use differs from the present one in both signal and purpose. Here, Fourier analysis is not applied to texture or used as an internal neural-network feature. It is applied to the **angular distribution of foreground sketch geometry at fixed radial distance**, producing explicit measurements whose magnitude and phase have defined geometric interpretations.
 
-More generally, Fourier descriptors provide a classical representation of periodic outline structure (Zahn and Roskies, 1972), while geometric morphometrics provides alternative methods for analysing curves and shapes, including forms without conventional anatomical landmarks (Bookstein, 1997; McCane, 2013). These approaches motivate explicit representations in which geometric assumptions remain inspectable.
+Accordingly, novelty is not claimed for polar coordinates, Fourier analysis, shape descriptors, or circular statistics individually. The relevant contribution is their combination into a compact radial–axial representation whose algebraic dependencies, transformation behavior, numerical sensitivity, incremental predictive value, and alignment dependence are tested separately.
 
-Frequency-domain methods have also appeared in modern garment synthesis. Liang et al. (2023), for example, incorporated Fast Fourier Transform features into a controllable garment-image generator to model periodic texture structure. Their objective and signal differ fundamentally from the present work: the frequency-domain representation is used to improve texture expansion and regularity during synthesis, whereas CLO-SKET applies angular harmonics to the spatial distribution of sketch foreground geometry itself.
+## 2.3 Radial–angular and axial geometry
 
-CLO-SKET therefore does not claim novelty for Fourier analysis, polar coordinates, outline measurement, or statistical shape analysis individually. Its methodological contribution lies in combining centroid-referenced polar occupancy, shell-conditional angular distributions, axial harmonic statistics, repeated-sketch validation, and explicit sensitivity controls in a single auditable measurement framework.
-
-## 2.3 Radial–angular geometry
-
-Let a retained sketch foreground location be represented relative to the foreground centroid \((c_x,c_y)\) by
+Relative to a foreground centroid \((c_x,c_y)\), each retained sketch location can be represented by
 
 \[
 r=\sqrt{(x-c_x)^2+(y-c_y)^2},
@@ -227,9 +223,7 @@ r=\sqrt{(x-c_x)^2+(y-c_y)^2},
 \theta=\operatorname{atan2}(y-c_y,x-c_x).
 \]
 
-The radial coordinate records distance from the centroid, while the angular coordinate records occupancy around it. Polar parameterizations also occur in garment-pattern analysis, although for different representations and objectives (Oh and Kim, 2026).
-
-For radial shell \(r_k\), CLO-SKET constructs the observed conditional angular distribution
+For radial shell \(r_k\), foreground mass defines a conditional angular distribution
 
 \[
 p(\theta_j\mid r_k)
@@ -238,257 +232,180 @@ p(\theta_j\mid r_k)
 {\sum_{j'}H(r_k,\theta_{j'})},
 \]
 
-where \(H(r_k,\theta_j)\) denotes foreground mass in radial bin \(k\) and angular bin \(j\). The shell therefore defines a circular probability distribution from which harmonic structure can be measured directly.
-
-For harmonic order \(m\),
+where \(H(r_k,\theta_j)\) is the foreground mass in the corresponding radial–angular bin. Its circular harmonic of order \(m\) is
 
 \[
 F_m(r_k)
 =
-\sum_j
-p(\theta_j\mid r_k)e^{-\mathrm{i}m\theta_j}.
+\sum_j p(\theta_j\mid r_k)e^{-\mathrm{i}m\theta_j}.
 \]
 
-The primary analysis uses \(m=2\). This choice follows from axial rather than directional geometry. If orientations separated by \(\pi\) denote the same undirected axis,
+The present representation focuses on \(m=2\) because garment orientation at this level is treated as **axial** rather than directional. Axial observations identify directions separated by \(180^\circ\), so \(\theta\equiv\theta+\pi\). Circular-statistical treatment therefore requires doubled angles (Jammalamadaka and SenGupta, 2001). Under a half-turn,
 
 \[
-\theta\equiv\theta+\pi,
+F_m(\theta+\pi)=(-1)^mF_m(\theta),
 \]
 
-then
+making \(m=2\) the lowest non-zero harmonic compatible with axial equivalence.
+
+For
 
 \[
-F_m(\theta+\pi)
-=
-(-1)^m F_m(\theta).
+F_2(r)=C_2(r)-\mathrm{i}S_2(r),
 \]
 
-Odd harmonics change sign under a \(180^\circ\) reversal, whereas even harmonics are invariant. Consequently, \(m=2\) is the lowest non-zero harmonic compatible with axial symmetry. Higher even harmonics such as \(m=4\) are also axially invariant but describe finer angular organization rather than the lowest-order axial structure. This symmetry argument, rather than retrospective predictive performance, determines the primary harmonic order.
-
-A prespecified low-order control over \(m=1,2,3,4\) was subsequently used to assess whether the observed spectrum is consistent with that choice and whether \(m=2\) is redundant with neighbouring harmonics. The control does not treat harmonic order as a post-hoc model-selection parameter.
-
-## 2.4 Axial statistics and second-harmonic representation
-
-For the primary harmonic,
+the magnitude and axial orientation are
 
 \[
-F_2(r_k)
-=
-C_2(r_k)-\mathrm{i}S_2(r_k).
-\]
-
-Axial data require doubled-angle treatment because orientations separated by \(180^\circ\) represent the same undirected axis (Jammalamadaka and SenGupta, 2001). The second-harmonic magnitude and axial orientation are therefore
-
-\[
-R_2(r_k)
-=
-|F_2(r_k)|
-=
-\sqrt{C_2(r_k)^2+S_2(r_k)^2},
+R_2(r)=\sqrt{C_2(r)^2+S_2(r)^2}
 \]
 
 and
 
 \[
-\alpha_2(r_k)
+\alpha_2(r)
 =
-\frac12
-\operatorname{atan2}
-\left(
-S_2(r_k),
-C_2(r_k)
-\right)
+\frac12\operatorname{atan2}\!\left(S_2(r),C_2(r)\right)
 \pmod{\pi}.
 \]
 
-Thus \(R_2\in[0,1]\) measures the strength of shell-level second-harmonic axial organization, while \(\alpha_2\) gives the corresponding undirected orientation.
-
-These quantities are deterministic summaries of the observed conditional angular histogram. In particular,
+This distinction between magnitude and phase is fundamental. \(R_2\) measures the strength of second-harmonic organization; \(\alpha_2\) measures its undirected orientation. Because
 
 \[
-R_2^2=C_2^2+S_2^2
+R_2^2=C_2^2+S_2^2,
 \]
 
-is an algebraic identity, not independent evidence. CLO-SKET does not fit a von Mises distribution, estimate a likelihood-based concentration parameter, or reconstruct the complete angular density from \(F_2\).
+these are not independent empirical measurements of the same phenomenon. The magnitude is algebraically determined by the Cartesian harmonic components.
 
-The final representation aggregates this field into eight radial-magnitude descriptors and six axial-orientation descriptors,
+The final CLO-SKET representation compresses the shell field into eight radial-magnitude descriptors and six axial descriptors. Peak and magnitude-weighted axial directions are encoded as \((\cos2\alpha,\sin2\alpha)\), respecting their \(\pi\)-periodicity. No PCA, learned embedding, or outcome-dependent feature selection is used to construct the 14-dimensional vector.
+
+## 2.4 Transformation behavior and coordinate-frame dependence
+
+Explicit orientation measurements are meaningful only when their behavior under coordinate transformations is clear. For a rigid in-plane rotation by \(\phi\),
 
 \[
-\mathbf{x}
-=
-\left[
-\mathbf{x}_{F_2}^{(8)},
-\mathbf{x}_{\alpha_2}^{(6)}
-\right]
-\in\mathbb{R}^{14}.
+F_2'(r)=e^{-\mathrm{i}2\phi}F_2(r),
 \]
 
-The representation is explicit: each coordinate has a defined geometric construction and no PCA or learned embedding is used to create the 14-dimensional vector.
-
-## 2.5 Coordinate dependence, discretization, and measurement sensitivity
-
-Explicit geometric descriptors remain interpretable only if their dependence on coordinate conventions and numerical design choices is also examined. This issue is especially important for angular statistics because Cartesian harmonic components depend on the image coordinate frame even when the underlying axial structure is unchanged.
-
-For a physical image rotation by \(\phi\),
-
-\[
-F_2'(r)
-=e^{-\,\mathrm{i}2\phi}F_2(r),
-\]
-
-so
+and hence
 
 \[
 R_2'(r)=R_2(r),
-\]
-
-while \((C_2,S_2)\) rotate in doubled-angle Cartesian space. A global-rotation control therefore distinguishes coordinate-dependent component behaviour from coordinate-free vector and magnitude behaviour. A separate garment-identity-randomized rotation control removes population-wide alignment while preserving repeated-sketch identity structure, providing a direct diagnostic of how much reconstruction depends on a shared canonical image frame.
-
-Numerical discretization presents a related issue. The radial and angular histograms require finite binning, while several radial descriptors depend on support thresholds, local windows, and a finite analysis domain. CLO-SKET therefore treats these settings as measurement specifications rather than empirically optimal constants. Sensitivity analyses vary angular resolution, radial resolution, radial domain, support threshold, and concentration-window width while leaving the frozen primary representation unchanged.
-
-This distinction is particularly important for localized radial descriptors. Integrated magnitude, radial centroid, and radial spread summarize broad radial structure. In contrast, onset, termination, concentration, and discrete peak location depend more directly on domain boundaries and resolution. Peak radius is therefore interpreted as a window-dependent localization statistic rather than a universal intrinsic radial scale.
-
-## 2.6 Reconstruction as a shared-source consistency diagnostic
-
-The reconstruction experiment uses the observed shell coordinate and second-harmonic magnitude as predictors,
-
-\[
-(r,R_2(r)),
-\]
-
-and estimates the Cartesian components
-
-\[
-\widehat C_2(r)
-=
-f_C(r,R_2(r)),
 \qquad
-\widehat S_2(r)
-=
-f_S(r,R_2(r)).
+\alpha_2'(r)=\alpha_2(r)+\phi\pmod{\pi}.
 \]
 
-The predicted vector then implies
+Thus second-harmonic magnitude is theoretically rotation invariant, whereas phase is equivariant. In doubled-angle Cartesian form, the axial pair transforms by an ordinary two-dimensional rotation through \(2\phi\).
 
-\[
-\widehat R_2(r)
-=
-\sqrt{
-\widehat C_2(r)^2+
-\widehat S_2(r)^2
-},
-\]
+This distinction is relevant to garment-sketch datasets because sketches are commonly stored in a canonical upright frame. Strong regularity in axial phase can therefore arise from the acquisition coordinate system as well as from garment geometry. A model that reconstructs or predicts orientation successfully in an upright dataset need not retain that ability after identity-specific rotations destroy population-wide alignment.
 
-and
+The present study consequently separates physical rigid-image rotation tests from analytic coordinate-frame randomization. The former asks whether the implemented descriptors approximately obey their theoretical transformation laws despite rasterization and binning. The latter asks whether observed phase recoverability depends on the shared canonical frame. This distinction prevents coordinate-frame regularity from being interpreted as intrinsic phase information.
 
-\[
-\widehat\alpha_2(r)
-=
-\frac12
-\operatorname{atan2}
-\left(
-\widehat S_2(r),
-\widehat C_2(r)
-\right)
-\pmod{\pi}.
-\]
+## 2.5 Measurement sensitivity and conditioning
 
-Because predictors and targets arise from the same observed angular field, reconstruction is explicitly treated as a shared-source consistency diagnostic. It does not demonstrate semantic recognition, recovery of garment parts, reconstruction of the full angular distribution, or a physical radial law.
+Explicit descriptors also depend on their measurement specification. Radial and angular histograms require finite discretization, and localized radial summaries depend on a finite analysis domain, support threshold, and neighborhood definition. These parameters are therefore treated as measurement choices rather than hyperparameters optimized for downstream performance.
 
-The rotation controls further constrain its interpretation. A common global rotation preserves the substantive coordinate-free reconstruction behaviour, whereas independent garment-identity rotations remove the shared absolute orientation frame. The purpose of these controls is not to improve reconstruction performance but to identify which aspects of recoverability arise from intrinsic harmonic magnitude and which depend on population-level coordinate alignment.
+Broad summaries such as integrated magnitude, radial centroid, and radial spread aggregate information across many shells. Peak radius, onset, termination, and local concentration depend more directly on domain boundaries and discretization. A peak located at the largest analysed radius, for example, is inherently censored by the measurement window. Sensitivity analysis is therefore necessary before a localized descriptor can be interpreted as an intrinsic geometric scale.
 
-## 2.7 Phase conditioning and interpretation of angular error
-
-The magnitude of a harmonic vector also determines the numerical conditioning of its orientation. For
+Phase has a separate conditioning problem. For
 
 \[
 \alpha_2
 =
-\frac12
-\operatorname{atan2}(S_2,C_2),
+\frac12\operatorname{atan2}(S_2,C_2),
 \]
 
-a first-order perturbation gives
+a first-order perturbation yields
 
 \[
 d\alpha_2
 =
-\frac{
-C_2\,dS_2-S_2\,dC_2
-}{
-2(C_2^2+S_2^2)
-}
-=
-\frac{
-C_2\,dS_2-S_2\,dC_2
-}{
-2R_2^2
-}.
+\frac{C_2\,dS_2-S_2\,dC_2}{2R_2^2},
 \]
 
-By the Cauchy--Schwarz inequality,
+and therefore
 
 \[
 |d\alpha_2|
 \le
-\frac{
-\sqrt{dC_2^2+dS_2^2}
-}{
-2R_2
-}.
+\frac{\sqrt{dC_2^2+dS_2^2}}{2R_2}.
 \]
 
-Thus phase becomes intrinsically less well-conditioned as \(R_2\rightarrow0\), even for comparable Cartesian perturbations. This geometric fact is important when interpreting associations between harmonic magnitude and reconstruction error. A negative association between \(R_2\) and angular error should not automatically be treated as an independent empirical law: part of the relationship is expected from the geometry of phase estimation itself.
+Orientation is consequently ill-conditioned as harmonic magnitude approaches zero. Associations between \(R_2\) and angular error cannot automatically be interpreted as independent empirical laws; part of that relationship follows from the geometry of phase estimation itself. This motivates analysing Cartesian perturbation magnitude together with \(R_2\), rather than attributing angular error to magnitude alone.
 
-CLO-SKET therefore supplements the magnitude-error association with the Cartesian perturbation norm and the corresponding conditioning quantity
+## 2.6 Repeated observations and identity-aware validation
+
+A separate methodological issue concerns dependency among observations. When several sketches depict the same source garment, individual images are not exchangeable independent garment instances. An image-level random split may therefore place different renderings of one garment in both training and test sets. Performance under such a split can reflect transfer across repeated renderings rather than transfer to unseen garments.
+
+The relevant validation unit should follow the scientific generalization target. In CLO-SKET, the recoverable unit is the source-garment identity. Complete identities are therefore assigned to folds, bootstrap resamples, and alignment permutations. This changes the effective sample size from 2,300 sketch files to 230 garment identities for inferential purposes and makes the reported target explicit: generalization to withheld recovered garment identities within the same dataset.
+
+Group-aware validation is necessary but not sufficient for claims about complementary representations. Even when two feature blocks are evaluated on unseen identities, improved prediction after concatenation does not establish that their useful information is uniquely paired at the identity level. The additional block may instead carry class-conditioned structure that remains useful when paired with another member of the same class.
+
+## 2.7 Predictive complementarity versus instance-specific correspondence
+
+This distinction is the principal methodological gap addressed here.
+
+Suppose a baseline representation \(M_i\) and an added representation \(Z_i\) are extracted from the same observation. If
 
 \[
-\frac{
-\|\Delta(C_2,S_2)\|
-}{
-2R_2
-}.
+\operatorname{Perf}(M_i,Z_i)>\operatorname{Perf}(M_i),
 \]
 
-The role of this analysis is explanatory rather than causal. It tests whether observed out-of-fold angular errors are consistent with the expected conditioning geometry and explicitly avoids treating \(R_2\) alone as a deterministic cause of error.
+then \(Z\) has incremental predictive utility under that evaluation. This is a meaningful result, but it does not determine **why** the additional block helps.
 
-## 2.8 Repeated sketches and identity-aware validation
-
-Repeated observations create another form of dependency that is distinct from algebraic dependence. CLO-SKET contains multiple sketches associated with recovered source-garment identities. An image-level split can therefore place drawings of the same garment in both training and test sets, creating an evaluation that measures unseen image files rather than transfer to unseen garments.
-
-The final validation design assigns complete garment identities to folds. Five category-balanced folds each hold out two identities per category, and train/test garment-identity overlap is zero. Reconstruction is consequently evaluated out of fold on unseen recovered garment identities.
-
-The same principle governs uncertainty and confirmatory inference. Complete garment identities, not individual sketches, form the bootstrap resampling unit. Association analyses first reduce repeated sketches to garment-identity summaries and then perform permutation within category strata. These choices address the measured dependence created by repeated sketches, while inference remains conditional on the recovered garment identities being appropriate independent sampling units.
-
-The distinction matters because increasingly large fashion datasets do not by themselves guarantee an appropriate statistical evaluation unit. GarmentSketch, VietFashion, and recent multimodal fashion datasets expand the scale and diversity of sketch-conditioned tasks (Baldrati et al., 2023; Bui et al., 2026; Cao et al., 2026), whereas the present study emphasizes dependency-aware evaluation within a smaller repeated-sketch dataset.
-
-## 2.9 Research gap and study position
-
-Recent work demonstrates rapid progress in sketch-conditioned fashion generation, editing, retrieval, and sewing-pattern reconstruction. Large generative and multimodal systems increasingly learn how sketches correspond to rendered garments, text, people, or production patterns. Explicit shape-analysis research, in parallel, establishes that garment outlines and periodic geometric signals can be represented numerically.
-
-A narrower gap remains between these two traditions. Comparatively little work treats repeated garment sketches as a statistical measurement population and simultaneously keeps visible
+A stronger claim is that the benefit depends on the exact pairing between \(M_i\) and \(Z_i\). That proposition requires comparison with a restricted misalignment null,
 
 \[
-\text{representation}
-\rightarrow
-\text{algebraic dependency}
-\rightarrow
-\text{coordinate dependence}
-\rightarrow
-\text{parameter sensitivity}
-\rightarrow
-\text{validation unit}
-\rightarrow
-\text{uncertainty}
-\rightarrow
-\text{claim boundary}.
+\operatorname{Perf}(M_i,Z_i)
+\quad\text{versus}\quad
+\operatorname{Perf}(M_i,Z_{\pi(i)}),
 \]
 
-CLO-SKET addresses this measurement problem rather than competing directly with generative fashion systems.
+where the permutation \(\pi\) destroys instance correspondence while preserving nuisance structure that could otherwise make the test trivial. In the present setting, complete axial–radial identity blocks are permuted within garment category and matched by block size. Category information and repeated-measure structure are retained; exact morphology–axial–radial pairing is largely removed.
 
-The study asks whether foreground geometry can be encoded as an explicit 14-dimensional radial--angular representation; whether its second-harmonic field exhibits reproducible structure for unseen garment identities; how reconstruction depends on the canonical coordinate frame; whether the representation is stable to reasonable discretization and parameter perturbations; why the second harmonic is the appropriate lowest-order axial statistic; and how observed harmonic magnitude and Cartesian reconstruction perturbation jointly condition axial error.
+This control asks a different question from ordinary permutation importance, feature ablation, or dimensionality controls. Ablation asks whether a block contributes to prediction. Restricted misalignment asks whether the contribution depends on belonging to the **same garment identity**. The two hypotheses can therefore yield different conclusions without contradiction.
 
-The intended contribution is therefore an auditable geometric measurement and validation framework for repeated garment sketches. It does not establish semantic garment understanding, causal geometric laws, a universally optimal radial window or harmonic order, prospective reliability classification, complete angular-density reconstruction, or human-like interpretation.
+For representation studies, this distinction is consequential. Calling two feature families “complementary” solely because their concatenation improves classification can overstate the evidence. The more precise hierarchy is:
+
+\[
+\text{different construction}
+\not\Rightarrow
+\text{incremental utility}
+\not\Rightarrow
+\text{instance-specific correspondence}
+\not\Rightarrow
+\text{statistical independence}.
+\]
+
+Each implication requires its own empirical or mathematical support.
+
+## 2.8 Position of the present study
+
+The literature establishes three relevant foundations: garment sketches are useful computational signals; explicit geometric and frequency-domain representations can summarize shape; and axial/circular statistics provide the correct mathematics for undirected orientation. What is less commonly combined is a validation framework that asks, in sequence, whether an explicit sketch representation is geometrically well-defined, whether it behaves correctly under transformation and measurement perturbation, whether it adds predictive value beyond another representation under dependency-aware validation, and whether that gain requires correct instance-level alignment.
+
+CLO-SKET is positioned at this intersection. It does not compete with large sketch-conditioned generative or retrieval systems on synthesis quality, nor does it propose Fourier analysis as a new mathematical technique. Instead, it treats repeated garment sketches as a measurement population and uses a compact second-harmonic representation to test a hierarchy of increasingly strong claims.
+
+The study therefore moves through
+
+\[
+\boxed{
+\text{measurement}
+\rightarrow
+\text{transformation validity}
+\rightarrow
+\text{incremental prediction}
+\rightarrow
+\text{partition reproducibility}
+\rightarrow
+\text{alignment dependence}
+\rightarrow
+\text{claim boundary}
+}
+\]
+
+while keeping the garment identity as the unit of generalization.
+
+The intended novelty is this integration. The representation is explicit enough to audit algebraically and geometrically; the evaluation is grouped enough to respect repeated sketches; and the alignment control is restrictive enough to distinguish category-conditioned predictive structure from garment-specific correspondence. This permits a narrower but stronger conclusion than a performance gain alone: the analysis can identify not only whether the added geometry is useful, but also the structural level at which the evidence supports that usefulness.
 
 ---
 
