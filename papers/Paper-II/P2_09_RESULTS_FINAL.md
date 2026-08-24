@@ -12,7 +12,7 @@ This Results section reports only frozen evidence. It emphasizes the paper's cen
 
 ## 4.1 Radial representation requirements differed across angular harmonic scale
 
-The first question was whether the radial dependence of the Fourier morphology field could be represented uniformly across angular harmonic orders, or whether different harmonic ranges required different radial treatments. Candidate radial representations were therefore evaluated separately within four prespecified harmonic bands under garment-identity-disjoint validation and family-wise-error-rate-controlled inference.
+The first question was whether the radial dependence of the Fourier morphology field could be represented uniformly across angular harmonic orders, or whether different harmonic ranges required different radial treatments. Candidate radial representations were therefore evaluated separately within four prespecified harmonic bands under garment-identity-disjoint validation and family-wise-error-rate-controlled inference (Fig. 2).
 
 For each band \(b\), the confirmatory statistic measured the category-balanced held-out garment-identity separation difference between the training-selected compressed representation and the complete radial representation,
 
@@ -174,7 +174,7 @@ for \(k=13{:}24\), and
 
 for \(k=25{:}36\).
 
-The resulting hybrid representation therefore contained
+As summarized in Fig. 2, the resulting hybrid representation therefore contained
 
 \[
 16+576+864+48
