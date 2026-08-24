@@ -24,21 +24,63 @@ Category structure was retained where required by the frozen validation and infe
 
 ## 3.2 Probabilistic radial-angular morphology representation
 
-Each sketch was represented relative to a fixed radial-angular coordinate system centered on the sketch morphology. Let \(r\) denote radial shell and \(\theta\) angular position. For sketch \(i\), angular morphology at radial shell \(r\) was normalized to define
+The radial-angular field was constructed directly from each grayscale TIFF without resizing, rotation, thresholding, or binarization. For an image of width (W) and height (H), grayscale intensity (I(x,y)in[0,255]) was converted to continuous ink weight
 
-\[
-P_i(\theta\mid r),
-\]
+[
+w(x,y)=max{255-I(x,y),0}.
+]
 
-with
+To preserve image aspect ratio, both spatial axes were scaled by the common factor (S=max(W,H)). Pixel coordinates were first expressed relative to the image-canvas center and divided by (S). The morphology center was then defined as the intensity-weighted centroid of these isotropically scaled coordinates,
 
-\[
-P_i(\theta\mid r)\geq0,
-\qquad
-\sum_{\theta}P_i(\theta\mid r)=1
-\]
+[
+c_x=rac{sum_{x,y}w(x,y)X(x,y)}{sum_{x,y}w(x,y)},
+qquad
+c_y=rac{sum_{x,y}w(x,y)Y(x,y)}{sum_{x,y}w(x,y)}.
+]
 
-for every occupied radial shell. The representation used 72 radial shells and 72 angular bins. Radial shells containing no sketch morphology were retained as structurally empty rather than assigned an artificial angular probability distribution. Figure 1 summarizes the resulting probabilistic radial–angular construction, its angular Fourier transformation, and the prespecified harmonic-band partition used for subsequent representation decisions.
+Centroid-relative polar coordinates were
+
+[
+R(x,y)=sqrt{(X(x,y)-c_x)^2+(Y(x,y)-c_y)^2},
+qquad
+Theta(x,y)=operatorname{atan2}(Y(x,y)-c_y,,X(x,y)-c_x).
+]
+
+Radius was normalized separately for each sketch as
+
+[
+R_{mathrm{norm}}(x,y)=rac{R(x,y)}{R_{max}},
+]
+
+where (R_{max}) is the maximum centroid-relative radius over the complete image grid. Thus (R_{mathrm{norm}}in[0,1]) describes a centroid-relative normalized canvas domain; it is not defined by the farthest nonzero-ink pixel.
+
+The normalized radial interval ([0,1]) was divided uniformly into 72 shells and the angular interval ([-pi,pi]) uniformly into 72 bins. Pixels were assigned by hard bin membership; no interpolation or smoothing was applied. Boundary handling retained (R_{mathrm{norm}}=1) in the final radial shell. The normalized radial-shell centers are therefore ((j+1/2)/72,;j=0,ldots,71); downstream code that uses bin-center coordinates (j+1/2) refers to the same 72 shell locations in index units.
+
+Let (W_i(r_j,	heta_n)) denote the continuous ink weight accumulated in radial shell (j) and angular bin (n) for sketch (i). The construction explicitly preserved total ink mass under binning. Before conditional angular normalization, normalized radial mass was defined as
+
+[
+M_i(r_j)=
+rac{sum_n W_i(r_j,	heta_n)}
+     {sum_{j,n} W_i(r_j,	heta_n)}.
+]
+
+A shell was treated as occupied when its unnormalized shell mass exceeded (10^{-14}). For occupied shells, angular morphology was normalized within radius:
+
+[
+P_i(	heta_nmid r_j)=
+rac{W_i(r_j,	heta_n)}
+     {sum_m W_i(r_j,	heta_m)},
+]
+
+so that
+
+[
+P_i(	heta_nmid r_j)ge0,
+qquad
+sum_n P_i(	heta_nmid r_j)=1.
+]
+
+Empty shells were retained as all-zero 72-vectors rather than assigned an artificial angular distribution. The angular Fourier representation used subsequently in this study was obtained by applying the one-sided discrete real Fourier transform along the angular axis of this (72	imes72) conditional field. Figure 1 summarizes the image-to-probability construction, angular Fourier transformation, and prespecified harmonic-band partition used for subsequent representation decisions.
 
 ## 3.3 Angular Fourier morphology
 
