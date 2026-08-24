@@ -10,9 +10,9 @@ No new scientific claim is introduced here. Wording is aligned with the frozen M
 
 # Title
 
-**Garment-Sketch Morphology Radial-Spectral Representation**
+**Garment-Sketch Morphology Radial-Spectral Representation: Evidence-Controlled Conditional Compression**
 
-The title names the subject and representation directly without claiming novelty for Fourier analysis, polar representations, DCT, wavelets, PCA, or nonlinear latent models.
+The title preserves the radial-spectral garment-morphology focus while making the methodological contribution explicit: compression is a conditional, evidence-controlled representation decision rather than a uniform descriptor-design choice.
 
 ---
 
@@ -24,13 +24,13 @@ Garment-sketch morphology is distributed jointly across radial position and angu
 
 # Keywords
 
-garment sketch morphology; Fourier shape analysis; radial-angular representation; spectral compression; garment-identity-disjoint validation; interpretable morphology
+garment sketch morphology; Fourier shape analysis; radial-angular representation; conditional spectral compression; evidence-controlled representation; garment-identity-disjoint validation
 
 ---
 
 # Running title
 
-**Garment-Sketch Radial-Spectral Morphology**
+**Evidence-Controlled Garment Radial-Spectral Morphology**
 
 ---
 
