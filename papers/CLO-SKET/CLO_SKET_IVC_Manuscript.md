@@ -13,7 +13,7 @@
 
 # Abstract
 
-Garment sketches contain geometric structure that can be described through complementary coordinate systems, but improved prediction after feature concatenation does not establish that the added information is specific to the same garment instance. We test this distinction in CLO-SKET using all 2,300 sketches from 23 categories and 230 recovered garment identities. From centroid-relative shell-conditioned angular distributions, we construct a compact 14-dimensional axial–radial representation based on the second circular harmonic,
+Garment sketches contain geometric structure that can be described through distinct geometric coordinate systems, but improved prediction after feature concatenation does not establish that the added information is specific to the same garment instance. We test this distinction in CLO-SKET using all 2,300 sketches from 23 categories and 230 recovered garment identities. From centroid-relative shell-conditioned angular distributions, we construct a compact 14-dimensional axial–radial representation based on the second circular harmonic,
 
 \[
 F_2(r)=\sum_k p(\theta_k\mid r)e^{-2\mathrm{i}\theta_k},
@@ -21,7 +21,7 @@ F_2(r)=\sum_k p(\theta_k\mid r)e^{-2\mathrm{i}\theta_k},
 
 whose magnitude \(R_2(r)=|F_2(r)|\) measures radial second-harmonic organization and whose half-phase \(\alpha_2(r)=\tfrac12\arg F_2(r)\pmod{\pi}\) represents undirected axial orientation. Eight radial descriptors and six doubled-angle axial descriptors form the final representation.
 
-The preregistered primary experiment asked whether these 14 coordinates add garment-category information beyond a frozen 135-dimensional morphology representation under category-balanced, garment-identity-disjoint validation. Morphology alone achieved pooled out-of-fold macro-F1 \(0.2978\) and balanced accuracy \(0.2983\); morphology plus the axial–radial representation achieved \(0.3358\) and \(0.3361\), respectively, yielding \(\Delta F_1=+0.0380\) and \(\Delta BA=+0.0378\). Category-stratified garment-identity bootstrap intervals excluded zero for macro-F1 (95% CI \([+0.0202,+0.0559]\)) and balanced accuracy (\([+0.0200,+0.0562]\)). The macro-F1 increment remained positive across all 10 repeated grouped partitions (mean \(+0.0323\), range \(+0.0206\) to \(+0.0433\)). Ablation localized most direct predictive value to the radial block: adding radial descriptors to morphology increased macro-F1 by \(+0.0268\), compared with \(+0.0023\) for the axial block alone.
+The prospectively locked confirmatory experiment asked whether these 14 coordinates add garment-category information beyond a frozen 135-dimensional morphology representation under category-balanced, garment-identity-disjoint validation. Morphology alone achieved pooled out-of-fold macro-F1 \(0.2978\) and balanced accuracy \(0.2983\); morphology plus the axial–radial representation achieved \(0.3358\) and \(0.3361\), respectively, yielding \(\Delta F_1=+0.0380\) and \(\Delta BA=+0.0378\). Category-stratified garment-identity bootstrap intervals excluded zero for macro-F1 (95% CI \([+0.0202,+0.0559]\)) and balanced accuracy (\([+0.0200,+0.0562]\)). The macro-F1 increment remained positive across all 10 repeated grouped partitions (mean \(+0.0323\), range \(+0.0206\) to \(+0.0433\)). Ablation localized most direct predictive value to the radial block: adding radial descriptors to morphology increased macro-F1 by \(+0.0268\), compared with \(+0.0023\) for the axial block alone.
 
 A stronger category-preserving alignment control materially limited interpretation. Across 2,000 identity-block permutations that destroyed 97.39% of exact garment-level morphology–axial–radial correspondence while preserving category and block-size structure, the correctly aligned increment was not exceptional (null mean macro-F1 increment \(+0.0429\); empirical \(p=0.763\); balanced-accuracy \(p=0.730\)). Thus, the compact representation provides reproducible incremental predictive utility, but the evidence does not support uniquely paired garment-level complementarity. Rotation and sensitivity controls further show that radial magnitudes behave approximately invariantly under tested rigid rotations, axial orientation is equivariant in doubled-angle form, canonical image orientation contributes substantially to phase regularity, and localized radial descriptors are more measurement-sensitive than broad radial summaries.
 
@@ -119,7 +119,7 @@ denote the frozen morphology representation and
 
 denote the radial, axial, and complete axial–radial representations.
 
-For a fixed evaluation score \(\mathcal S\), the preregistered primary effect is
+For a fixed evaluation score \(\mathcal S\), the prospectively locked primary effect is
 
 \[
 \boxed{
@@ -2130,7 +2130,7 @@ The five primary folds were category-balanced and garment-identity-disjoint. Eve
 
 Under the locked out-of-fold classifier, morphology alone achieved macro-F1 \(0.297788\) and balanced accuracy \(0.298261\). The complete compact axial–radial representation alone achieved macro-F1 \(0.219993\) and balanced accuracy \(0.231304\). When the 14 axial–radial coordinates were added to morphology, performance increased to macro-F1 \(0.335765\) and balanced accuracy \(0.336087\).
 
-Thus, the preregistered primary contrast was
+Thus, the prospectively locked primary contrast was
 
 \[
 \Delta_{RA}^{F_1}
@@ -2194,7 +2194,7 @@ whereas the axial increment was
 
 For balanced accuracy, the corresponding increments were \(+0.026957\) and \(+0.002174\). Adding the complete \(R+A\) block produced a larger macro-F1 increment, \(+0.037977\), than either component alone.
 
-These ablations indicate that radial organization carries most of the direct incremental signal in this classifier, while the axial block alone adds little to morphology. The fact that \(M+R+A\) exceeded \(M+R\) descriptively does not constitute a separately preregistered significance test for the axial contribution conditional on \(R\).
+These ablations indicate that radial organization carries most of the direct incremental signal in this classifier, while the axial block alone adds little to morphology. The fact that \(M+R+A\) exceeded \(M+R\) descriptively does not constitute a separately prospectively specified significance test for the axial contribution conditional on \(R\).
 
 ---
 
@@ -2300,7 +2300,7 @@ To visualize what the measured field represents without selecting examples by cl
 
 The selected examples were a Cardigan at the low radial-organization quantile, a Jumpsuit near the median, and a Dress at the high quantile. Their observed shell fields illustrate how \(R_2(r)\) localizes the strength of second-harmonic organization over radius while \(\alpha_2(r)\) records the corresponding undirected axial orientation. This figure is descriptive and is not evidence for category separation.
 
-## 4.6 Study population and primary representation
+## 4.8 Study population and primary representation
 
 The analysis retained all 2,300 CLO-SKET sketches. The conditional angular tensor had dimensions \(2300\times72\times72\), the full second-harmonic field had dimensions \(2300\times72\), and the primary radial analysis comprised 25 shells spanning the fixed shell-coordinate domain
 
@@ -2344,7 +2344,7 @@ Accordingly, \(R_2\) and \(|F_2|\) were not treated as independent evidence.
 
 ---
 
-## 4.7 Rigid-image rotation control of the 14-dimensional representation
+## 4.9 Rigid-image rotation control of the 14-dimensional representation
 
 A separate image-domain perturbation control evaluated whether the final 14-dimensional representation exhibited the intended transformation behavior when the raster sketch itself was rigidly rotated and the complete radial-angular measurement was recomputed.
 
@@ -2358,7 +2358,7 @@ All 2,300 sketches were evaluated at
 
 No garment labels were used and no predictive model was fitted.
 
-### 4.7.1 Stability of the second-harmonic magnitude field
+### 4.9.1 Stability of the second-harmonic magnitude field
 
 Across non-zero rotation conditions, the primary-domain second-harmonic magnitude profile showed small median numerical perturbations relative to the \(0^\circ\) reference.
 
@@ -2380,7 +2380,7 @@ The perturbation was smallest near the reference orientation and increased modes
 **Figure 3. Rigid-rotation control of the CLO-SKET radial–angular representation.**  
 (A) The same canonical sketch after rigid raster rotations of \(-20^\circ\), \(0^\circ\), and \(+20^\circ\), illustrating the image-domain perturbation applied in the control. (B) Stability of the primary-domain second-harmonic radial-magnitude profile, summarized by the median and 95th-percentile normalized mean absolute error relative to the \(0^\circ\) reference. (C) Axial orientation equivariance. Recovered shifts in peak and magnitude-weighted axial orientation closely followed the ideal \(\Delta\alpha=\phi\) relation; across the tested rotations, the maximum 95th-percentile transformation errors were \(4.87^\circ\) and \(0.85^\circ\), respectively. (D) Absolute changes in the intended rotation-invariant directional scalars. Axial coherence remained numerically stable, whereas orientation drift showed small median changes but a wider upper-tail response. Together, the control supports the intended invariant/equivariant organization of the representation over the evaluated rigid rotations without implying exact raster-level invariance or robustness outside the tested perturbations.
 
-### 4.7.2 Axial orientation transformation consistency
+### 4.9.2 Axial orientation transformation consistency
 
 The two doubled-angle orientation pairs followed the expected axial transformation closely.
 
@@ -2408,7 +2408,7 @@ The magnitude-weighted mean orientation was even more stable:
 
 Thus, the doubled-angle orientation coordinates transformed closely according to the expected \(R(2\phi)\) action over the tested rotation range.
 
-### 4.7.3 Rotation-invariant directional scalars
+### 4.9.3 Rotation-invariant directional scalars
 
 Axial coherence showed very small absolute changes across the tested rotations.
 
@@ -2427,7 +2427,7 @@ These results support the intended transformation structure of the representatio
 
 ---
 
-## 4.8 Duplicate-image screening and garment-identity structure
+## 4.10 Duplicate-image screening and garment-identity structure
 
 All 2,300 file paths were unique. SHA-256 hashing detected no repeated raw files, and hashing of decoded pixel arrays detected no repeated decoded images. Perceptual-hash screening identified 11 candidate pairs at Hamming distance 0, 39 at distance at most 2, and 248 at distance at most 4. These candidates were treated as a screen for visual similarity rather than evidence of duplicated files or shared lineage.
 
@@ -2437,7 +2437,7 @@ Recovered garment identity was therefore used as the clustering unit for validat
 
 ---
 
-## 4.9 Garment-identity separation in validation
+## 4.11 Garment-identity separation in validation
 
 An initial image-level cross-validation design did not separate repeated sketches by garment identity: garment identities represented in each test fold were also represented in the corresponding training set. That design therefore evaluated unseen image files rather than unseen garments and was retained only as a sensitivity comparison.
 
@@ -2447,7 +2447,7 @@ Every sketch and every recovered garment identity was held out exactly once. Tra
 
 ---
 
-## 4.10 Garment-identity-disjoint reconstruction of \(C_2\) and \(S_2\)
+## 4.12 Garment-identity-disjoint reconstruction of \(C_2\) and \(S_2\)
 
 Two fixed `HistGradientBoostingRegressor` models reconstructed \(C_2\) and \(S_2\) independently from shell radius and observed second-harmonic magnitude,
 
@@ -2459,7 +2459,7 @@ Two fixed `HistGradientBoostingRegressor` models reconstructed \(C_2\) and \(S_2
 
 Across the five garment-identity-disjoint folds, \(C_2\) RMSE ranged from 0.210938 to 0.228147 and \(S_2\) RMSE ranged from 0.124814 to 0.131585 (Table 1). All 57,500 sketch-shell rows received exactly one out-of-fold prediction.
 
-**Table 1. Garment-identity-disjoint fold performance for component reconstruction.**
+**Table 5. Garment-identity-disjoint fold performance for component reconstruction.**
 
 | Fold | Training identities | Test identities | Identity overlap | \(C_2\) RMSE | \(S_2\) RMSE |
 |---:|---:|---:|---:|---:|---:|
@@ -2471,7 +2471,7 @@ Across the five garment-identity-disjoint folds, \(C_2\) RMSE ranged from 0.2109
 
 Across all held-out rows, the fold-local global baseline produced RMSEs of 0.300420 for \(C_2\) and 0.129034 for \(S_2\). A radius-only model produced RMSEs of 0.287288 and 0.128729, respectively. Adding \(R_2=|F_2|\) to radius reduced \(C_2\) RMSE to 0.218161, an absolute reduction of 0.069127 and a relative reduction of 24.06%. For \(S_2\), RMSE decreased to 0.127405, an absolute reduction of 0.001324 and a relative reduction of 1.03% (Table 2).
 
-**Table 2. Comparator performance and incremental contribution of second-harmonic magnitude.**
+**Table 6. Comparator performance and incremental contribution of second-harmonic magnitude.**
 
 | Model | \(C_2\) RMSE | \(S_2\) RMSE |
 |---|---:|---:|
@@ -2485,7 +2485,7 @@ Because \(R_2\), \(C_2\), and \(S_2\) derive from the same conditional angular d
 
 ---
 
-## 4.11 Sensitivity to the validation unit
+## 4.13 Sensitivity to the validation unit
 
 Changing the validation unit from individual sketches to complete garment identities produced little change in aggregate reconstruction estimates.
 
@@ -2509,7 +2509,7 @@ Thus, correcting the validation unit had little effect on aggregate reconstructi
 
 ---
 
-## 4.12 Garment-cluster uncertainty for reconstruction
+## 4.14 Garment-cluster uncertainty for reconstruction
 
 Bootstrap uncertainty was estimated by resampling complete garment identities.
 
@@ -2574,7 +2574,7 @@ The proportion with error at or below \(15^\circ\) was 78.17% (75.77%–80.60%),
 
 ---
 
-## 4.13 Rotation and coordinate-frame control
+## 4.15 Rotation and coordinate-frame control
 
 The observed second-harmonic field was subjected to analytic rotations in doubled-angle space without image interpolation, resampling, or cropping.
 
@@ -2594,7 +2594,7 @@ R_2'(r)=R_2(r)
 
 while rotating the Cartesian components \(C_2\) and \(S_2\).
 
-### 4.13.1 Global rotation
+### 4.15.1 Global rotation
 
 Global rotations of \(0^\circ\), \(22.5^\circ\), \(45^\circ\), \(67.5^\circ\), and \(90^\circ\) left the substantive coordinate-free reconstruction metrics essentially unchanged.
 
@@ -2616,13 +2616,13 @@ C_2\text{ RMSE at }45^\circ,
 
 with numerical discrepancies below \(10^{-12}\). This demonstrates that the observed \(C_2/S_2\) error asymmetry is coordinate-dependent rather than an intrinsic distinction between the two Cartesian components.
 
-### 4.13.2 Garment-identity-randomized rotation
+### 4.15.2 Garment-identity-randomized rotation
 
 A second control assigned a single random physical rotation to every sketch belonging to the same garment identity, independently across the 230 identities. Ten randomizations were performed. These perturbations preserved radius, observed \(R_2\), garment identity, repeated-sketch structure, and the original validation folds while removing the shared absolute image-axis orientation across identities.
 
 Relative to the original upright data, mean performance across the ten randomized controls changed as follows:
 
-**Table 3. Reconstruction under global and garment-identity-randomized rotations.**
+**Table 7. Reconstruction under global and garment-identity-randomized rotations.**
 
 | Condition | Vector RMSE | \(R_2\) RMSE | \(R_2\) Pearson | Peak \(R_2\) RMSE | Peak \(R_2\) Pearson | Median peak axial error |
 |---|---:|---:|---:|---:|---:|---:|
@@ -2638,21 +2638,21 @@ This result does not invalidate the radial–angular representation; rather, it 
 
 ---
 
-## 4.14 Parameter and discretization sensitivity
+## 4.16 Parameter and discretization sensitivity
 
 Sensitivity analyses varied one construction choice at a time while preserving the primary representation and analysis.
 
-### 4.14.1 Support threshold and concentration width
+### 4.16.1 Support threshold and concentration width
 
 The primary support threshold was \(0.10\,m^\star\). Alternative thresholds of 0.05 and 0.15 left six of the eight radial descriptors exactly unchanged. Changes were confined primarily to onset and termination radii, which were exactly preserved for approximately 95–97% of sketches and remained within two shells for approximately 98–100%.
 
 Changing the concentration half-width from the primary \(\pm4\) shell-coordinate units to \(\pm2\) or \(\pm6\) altered only the concentration coordinate by construction. The remaining seven radial descriptors were identical. Rank correlation of the concentration coordinate with its primary value remained 0.888 at half-width 2 and 0.949 at half-width 6.
 
-### 4.14.2 Angular resolution
+### 4.16.2 Angular resolution
 
 The canonical 72 angular bins were coarsened by exact mass aggregation to 36 and 24 bins, without image interpolation.
 
-**Table 4. Sensitivity of the harmonic field to angular resolution.**
+**Table 8. Sensitivity of the harmonic field to angular resolution.**
 
 | Angular bins | \(R_2\) Spearman vs 72 | \(C_2\) Spearman | \(S_2\) Spearman | Median axial difference | Exact peak-radius agreement | Peak-magnitude Spearman |
 |---:|---:|---:|---:|---:|---:|---:|
@@ -2662,7 +2662,7 @@ The canonical 72 angular bins were coarsened by exact mass aggregation to 36 and
 
 Second-harmonic magnitude was therefore highly stable to substantial reductions in angular resolution. The larger changes in \(S_2\) than \(C_2\) were interpreted as coordinate-component effects rather than distinct physical signals.
 
-### 4.14.3 Radial domain
+### 4.16.3 Radial domain
 
 The primary domain \(3.5\text{--}27.5\) contained endpoint peak locations for 22.04% of sketches. Specifically, 12.70% peaked at the lower endpoint and 9.35% at the upper endpoint.
 
@@ -2672,11 +2672,11 @@ Among the 215 sketches whose primary peak occurred at the upper boundary \(r=27.
 
 Accordingly, peak radius is a window-dependent localization statistic. The endpoint occupancy and outward migration indicate partial boundary censoring, particularly for upper-boundary peaks.
 
-### 4.14.4 Radial resolution
+### 4.16.4 Radial resolution
 
 Radial-resolution sensitivity was assessed after exact mass aggregation from 72 to 36 and 24 radial bins. To isolate resolution from domain mismatch, all three resolutions were compared over the same normalized physical interval, \(1/12\le r_{\mathrm{norm}}\le1/3\).
 
-**Table 5. Radial-resolution rank stability on an exact common physical domain.**
+**Table 9. Radial-resolution rank stability on an exact common physical domain.**
 
 | Feature | 36 bins vs 72 | 24 bins vs 72 |
 |---|---:|---:|
@@ -2695,7 +2695,7 @@ Overall, integrated magnitude, centroid, and spread were substantially more stab
 
 ---
 
-## 4.15 Low-order harmonic spectrum and justification of \(m=2\)
+## 4.17 Low-order harmonic spectrum and justification of \(m=2\)
 
 The primary second harmonic was evaluated against the neighbouring low-order harmonics \(m=1,3,4\), all derived from the same canonical 72-bin conditional angular field.
 
@@ -2711,7 +2711,7 @@ Odd harmonics therefore change sign under a \(180^\circ\) reversal, whereas even
 
 The second harmonic is thus the lowest non-zero harmonic compatible with the axial orientation convention used by the representation. The empirical spectrum was examined as a consistency control rather than as a post-hoc selection criterion.
 
-**Table 6. Low-order harmonic magnitude on the primary radial domain.**
+**Table 10. Low-order harmonic magnitude on the primary radial domain.**
 
 | \(m\) | Symmetry class | Median integrated magnitude | Median peak magnitude | Median fraction of \(m=1\ldots4\) integrated content |
 |---:|---|---:|---:|---:|
@@ -2728,7 +2728,7 @@ These results support the interpretation of \(m=2\) as a substantial, non-redund
 
 ---
 
-## 4.16 Garment-level associations and phase conditioning
+## 4.18 Garment-level associations and phase conditioning
 
 The garment-level association analysis assigned equal weight to each recovered garment identity by reducing its repeated sketches to medians.
 
@@ -2772,7 +2772,7 @@ p_{\mathrm{raw}}=0.030097,
 p_{\mathrm{Holm}}=0.030097.
 \]
 
-**Table 7. Garment-level monotonic associations (\(n=230\) garment identities).**
+**Table 11. Garment-level monotonic associations (\(n=230\) garment identities).**
 
 | Quantity | Spearman \(\rho\) | 95% cluster-bootstrap CI | Raw permutation \(p\) | Holm \(p\) |
 |---|---:|---:|---:|---:|
@@ -2781,7 +2781,7 @@ p_{\mathrm{Holm}}=0.030097.
 
 At the sketch level, the corresponding descriptive Spearman correlations were −0.253366 for observed peak-shell \(R_2\) and −0.271404 for selected peak radius. No inferential probabilities were assigned to these pooled-sketch associations.
 
-### 4.16.1 Conditioning of axial phase
+### 4.18.1 Conditioning of axial phase
 
 The negative \(R_2\)-error association was further examined through the perturbation geometry of axial phase. For
 
@@ -2849,7 +2849,7 @@ The absolute first-order linearized phase perturbation was also strongly associa
 \rho=+0.712.
 \]
 
-**Table 8. Garment-level phase-conditioning associations.**
+**Table 12. Garment-level phase-conditioning associations.**
 
 | Quantity vs median axial error | Spearman \(\rho\) |
 |---|---:|
@@ -2896,7 +2896,7 @@ These results are consistent with the expected conditioning geometry of phase es
 
 ---
 
-## 4.17 Outcome-defined error bands and threshold sensitivity
+## 4.19 Outcome-defined error bands and threshold sensitivity
 
 Under the primary descriptive \(15^\circ/45^\circ\) band definition, 1,798 sketches were in the low-error band, 141 in the intermediate band, and 361 in the high-error band.
 
@@ -2918,7 +2918,7 @@ and Cliff's \(\delta\) was
 
 The same direction persisted across all four tested threshold pairs (Table 9). Median \(R_2\) differences ranged from 0.059442 to 0.072677, and Cliff's \(\delta\) ranged from 0.236987 to 0.300349. All garment-cluster bootstrap intervals remained above zero.
 
-**Table 9. Threshold sensitivity of the descriptive low/high peak-\(R_2\) contrast.**
+**Table 13. Threshold sensitivity of the descriptive low/high peak-\(R_2\) contrast.**
 
 | Low/high thresholds | Low / middle / high \(n\) | Low median \(R_2\) | High median \(R_2\) | Median difference (95% CI) | Cliff's \(\delta\) (95% CI) |
 |---|---:|---:|---:|---:|---:|
@@ -2941,7 +2941,7 @@ The error bands are defined using the observed outcome and overlap substantially
 
 ---
 
-## 4.18 Algebraically coupled calibration diagnostic
+## 4.20 Algebraically coupled calibration diagnostic
 
 At the sketch level, the Spearman correlation between observed peak-shell \(R_2\) and
 
@@ -2961,7 +2961,7 @@ Because the observed value appears algebraically in \(\Delta R_2\), this correla
 
 ## 5.1 Principal finding: incremental value without evidence of garment-specific alignment
 
-The central result of this study is that a compact, explicitly defined axial–radial representation contributes reproducible garment-category information beyond the frozen morphology representation under garment-identity-disjoint validation. Morphology alone achieved macro-F1 \(0.297788\), whereas morphology augmented by the complete 14-dimensional axial–radial block achieved \(0.335765\), giving the preregistered increment
+The central result of this study is that a compact, explicitly defined axial–radial representation contributes reproducible garment-category information beyond the frozen morphology representation under garment-identity-disjoint validation. Morphology alone achieved macro-F1 \(0.297788\), whereas morphology augmented by the complete 14-dimensional axial–radial block achieved \(0.335765\), giving the prospectively locked increment
 
 \[
 \Delta F_1=+0.037977.
@@ -2983,7 +2983,7 @@ The ablation structure helps localize the observed predictive gain. The eight-di
 
 The direct empirical contribution is therefore concentrated primarily in radial organization. This is compatible with the construction of the representation. The radial coordinates summarize where and how strongly second-harmonic angular organization occurs relative to the sketch centroid—through integrated magnitude, centroid, spread, concentration, support limits, peak location, and peak strength. These quantities can vary systematically across garment categories even when exact correspondence to a particular morphology vector is unnecessary.
 
-The axial block should be interpreted differently. Its low standalone performance does not imply that axial geometry is meaningless. Peak and magnitude-weighted orientations are coordinate-frame-dependent equivariant quantities, and the rotation analyses show that the canonical upright frame contains strong population-level orientation structure. Moreover, \(M+R+A\) descriptively exceeded \(M+R\). However, Experiment 06 did not preregister a separate conditional significance test of \(A\) given \(M+R\). We therefore do not claim an independently established axial increment beyond the radial block.
+The axial block should be interpreted differently. Its low standalone performance does not imply that axial geometry is meaningless. Peak and magnitude-weighted orientations are coordinate-frame-dependent equivariant quantities, and the rotation analyses show that the canonical upright frame contains strong population-level orientation structure. Moreover, \(M+R+A\) descriptively exceeded \(M+R\). However, Experiment 06 did not prospectively specify a separate conditional significance test of \(A\) given \(M+R\). We therefore do not claim an independently established axial increment beyond the radial block.
 
 The ablation evidence supports a mechanistic description, not a hierarchy of universal feature importance: within this dataset, classifier, coordinate frame, and locked representation, radial second-harmonic organization accounts for most of the directly observed incremental category signal.
 
@@ -2993,7 +2993,7 @@ The ablation evidence supports a mechanistic description, not a hierarchy of uni
 
 The alignment permutation distinguishes two forms of “complementarity” that are otherwise easy to conflate.
 
-The first is **predictive complementarity**: adding one representation to another improves out-of-fold prediction. Experiment 06 supports this statement. The second is **instance-specific complementarity**: the additional benefit depends on the axial–radial representation belonging to the same garment instance or identity as the morphology representation. The alignment experiment does not support this stronger statement.
+The first is **incremental predictive utility**: adding one representation to another improves out-of-fold prediction. Experiment 06 supports this statement. The second is **instance-specific complementarity**: the additional benefit depends on the axial–radial representation belonging to the same garment instance or identity as the morphology representation. The alignment experiment does not support this stronger statement.
 
 This distinction can be expressed schematically. Let \(M_i\) denote morphology for sketch \(i\), \(Z_i\) its correctly aligned axial–radial representation, and \(Z_{\pi(i)}\) a category-preserving identity-level reassignment. The observed comparison establishes
 
@@ -3088,7 +3088,7 @@ Axial directions cannot be treated as ordinary scalar angles because \(\alpha\eq
 
 which respects axial periodicity and permits ordinary Euclidean learning algorithms to operate on the encoded coordinates without introducing a discontinuity at the angular wrap point.
 
-These choices matter for interpretation of Experiment 06. The observed gain is not obtained by simply appending obvious algebraic duplicates of the morphology baseline. The 14 coordinates are explicit summaries of a separately constructed radial–angular field. At the same time, “separately constructed” does not mean statistically independent: both representations ultimately derive from the same sketch images. The study therefore claims complementary predictive utility under a specified model, not information-theoretic independence.
+These choices matter for interpretation of Experiment 06. The observed gain is not obtained by simply appending obvious algebraic duplicates of the morphology baseline. The 14 coordinates are explicit summaries of a separately constructed radial–angular field. At the same time, “separately constructed” does not mean statistically independent: both representations ultimately derive from the same sketch images. The study therefore claims incremental predictive utility under a specified model, not information-theoretic independence.
 
 ---
 
@@ -3332,19 +3332,33 @@ The public Paper-I package contains five scientific notebooks:
 
 The package also contains `audit_Final_Validation_Shield.ipynb`, retained as an audit/provenance record rather than as the canonical source-to-result execution path.
 
+The primary incremental-representation experiment is additionally frozen as **Experiment 06**. Its permanent evidence bundle contains the master checkpoint `CLO_SKET_EXPERIMENT06_FINAL_CHECKPOINT.pkl` (SHA256 `6e2c600c9cef37c3edcae18300793e37265ba866ee93d83c825aa1b5ad522018`), a final manifest, pooled primary results, ablation contrasts, the category-stratified identity bootstrap, all repeated grouped-CV summaries and fold results, the complete 2,000-permutation alignment null and summary, the evidence ledger, manuscript summary, claim lock, final decision, provenance hashes, and figure metadata. The bundle is the frozen source of record for Experiment 06 numerical claims.
+
 The intended public computational lineage is source-code driven: the official CLO-SKET TIFF images are supplied to Notebook 01, and the downstream validation notebooks operate on the same Paper-I measurement lineage. Large historical runtime-memory pickle snapshots are not treated as the scientific source of record. Where historical checkpoint-loading cells remain for provenance, they should be interpreted as audit/recovery records unless the corresponding checkpoint is explicitly supplied.
 
 Full-harmonic representation-selection, bandwise compression, and latent-geometry analyses belonging to Paper II are intentionally excluded from the Paper-I reproducibility package. The formal ownership boundary is documented in `P1_P2_CLAIM_FIREWALL.md`.
 
 ## Software Environment
 
-The final validation environment recorded by the Paper-I validation shield was:
+Two frozen execution lineages support the reported analyses and are distinguished explicitly rather than collapsed into a single retrospective environment.
+
+The earlier Paper-I validation shield recorded:
 
 - Python 3.12.13;
 - NumPy 2.0.2;
 - pandas 2.2.3;
 - scikit-learn 1.6.1;
 - Linux x86_64 execution environment.
+
+The permanently frozen Experiment 06 confirmatory run recorded:
+
+- Python 3.13.15;
+- NumPy 2.1.3;
+- pandas 2.2.3;
+- scikit-learn 1.6.1;
+- random state 20260820.
+
+The difference reflects separate frozen execution sessions; no claim is made that all analyses were executed under one software image.
 
 The scientific notebooks additionally use SciPy, Matplotlib, Pillow (`PIL`), Joblib, and standard-library modules as declared in their import cells. Pillow is used for TIFF decoding and for the rigid-image rotation control. Because exact SciPy, Matplotlib, Pillow, and Joblib version strings were not written into the frozen validation-shield environment record, no retrospective version number is asserted for those packages here. Their imports and algorithmic roles are explicit in the notebooks, and the manuscript reports the fixed image-rotation operator and interpolation settings used in the rigid-image control.
 
@@ -3358,6 +3372,9 @@ The manuscript-facing stochastic controls currently frozen in the public noteboo
 
 - `HistGradientBoostingRegressor` reconstruction models with `random_state=42`;
 - bootstrap diagnostics in the core notebook with `BOOTSTRAP_SEED=20260820` and `N_BOOT=5000` where those diagnostics are used;
+- Experiment 06 paired garment-identity bootstrap and category-stratified robustness bootstrap with 5,000 replicates and random state `20260820`;
+- Experiment 06 repeated grouped partitions with seeds `20260820, ..., 20260829`;
+- Experiment 06 category-preserving, block-size-matched alignment control with 2,000 permutations and random state `20260820`;
 - held-out permutation-importance diagnostics with fold-specific seeds `42 + fold` and `142 + fold`;
 - analytic garment-identity-randomized rotation control with 10 independent repeats and seeds `20260830, ..., 20260839`;
 - the rigid-image rotation experiment itself is deterministic for a given input image and angle because the tested angles are fixed at `[-20, -10, -5, 0, 5, 10, 20]` degrees and the image operator is fixed.
