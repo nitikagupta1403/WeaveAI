@@ -208,7 +208,7 @@ This dimensional reduction follows from the inferential decisions in Section 4.1
 
 ## 4.3 Nonlinear latent models did not earn a validated replacement of PCA
 
-We next asked whether the heterogeneous radial-spectral representation required a nonlinear latent model for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
+We next asked, **conditional on the heterogeneous radial-spectral representation selected by the preceding full cross-validated band analysis**, whether a nonlinear latent model earned sufficient task evidence to replace PCA for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
 
 \[
 z\in\{8,16,24,32,64\}
@@ -249,7 +249,7 @@ but its selection-aware adjusted probability was
 \boxed{p_{\mathrm{FWER}}=0.2500}.
 \]
 
-None of the ten tested nonlinear contrasts survived multiplicity control. PCA was therefore retained as the **practical validated latent baseline** for morphology interpretation; the experiment did not establish sufficient task evidence to replace it with AE or VAE.
+None of the ten tested nonlinear contrasts survived multiplicity control. Conditional on the previously selected hybrid representation, PCA was therefore retained as the **practical latent baseline** for morphology interpretation; the experiment did not establish sufficient task evidence to replace it with AE or VAE. Because the hybrid itself had been selected using cross-validated evidence from the complete CLO-SKET dataset before this comparison, these results are not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
 
 This negative result is deliberately narrow. With five outer folds, the exhaustive paired analysis contains only
 
@@ -257,7 +257,7 @@ This negative result is deliberately narrow. With five outer folds, the exhausti
 2^5=32
 \]
 
-sign configurations, giving coarse probability resolution, and the training portions of the outer folds overlap. The analysis therefore does not prove population-level superiority of PCA, nor does failure of nonlinear-model superiority imply that the morphology geometry itself is linear.
+sign configurations, giving coarse probability resolution, and the training portions of the outer folds overlap. The analysis therefore does not prove population-level superiority of PCA, does not provide an untouched end-to-end test of the full selection pipeline, and does not imply from failure of nonlinear-model superiority that all relationships in the representation are linear.
 
 ---
 
