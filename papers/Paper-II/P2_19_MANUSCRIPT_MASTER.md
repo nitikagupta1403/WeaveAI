@@ -451,7 +451,7 @@ with deterministic fold/model-specific offsets used by the frozen implementation
 
 The primary held-out benchmark was garment-identity MRR; top-1 retrieval accuracy was retained as a secondary descriptive sensitivity measure.
 
-## 3.12 Multiplicity-controlled nonlinear-model inference
+## 3.12 Multiplicity-controlled fold-level nonlinear-model sensitivity analysis
 
 Nonlinear latent representations were compared directly with PCA at the same latent dimension. The ten prespecified contrasts were
 
@@ -466,23 +466,25 @@ and
 \qquad z\in\{8,16,24,32,64\}.
 \]
 
-For each contrast, the inferential observations were the five paired outer-fold differences in held-out MRR. The primary statistic was the mean paired outer-fold MRR difference.
+For each contrast, the five paired outer-fold differences in held-out MRR were used as the fold-level sensitivity observations, and the summary statistic was the mean paired outer-fold MRR difference. The outer test partitions were garment-identity-disjoint. However, because cross-validation training sets necessarily overlap, the five fitted-model comparisons were not treated as five independent population-level experimental replicates.
 
-Because only five independent outer folds were available, the paired null distribution was enumerated exactly over
+All
 
 \[
 2^5=32
 \]
 
-possible fold-level sign patterns. For each sign pattern, all ten nonlinear-versus-PCA statistics were recomputed and their maximum retained. Each observed contrast was compared with this common maximum-statistic null distribution, providing simultaneous FWER control over all
+possible fold-level sign configurations were exhaustively enumerated. For each sign configuration, all ten nonlinear-versus-PCA mean effects were recomputed and their maximum retained. Each observed contrast was then compared with this common maximum-statistic distribution, controlling selection across the
 
 \[
 2\times5=10
 \]
 
-searched nonlinear contrasts. Accordingly, choosing the best-performing nonlinear family or latent dimension after inspection could not evade multiplicity correction.
+searched nonlinear contrasts within this fold-level sensitivity analysis.
 
-The nonlinear-model comparison tested validated task advantage, not whether the representation possessed nonlinear geometry. Nonlinear geometric structure was therefore examined separately in Section 3.13.
+Because only five outer folds were available, the sign-flip distribution has coarse probability resolution. In addition, overlap among the corresponding training sets limits population-level interpretation of fold-wise resampling. Accordingly, this procedure was used as a **conservative validation sensitivity analysis**, not as an exact population-level inferential test of model-family superiority. Its decision question was whether the frozen five-fold evidence was sufficient to justify replacing PCA with one of the tested AE or VAE configurations.
+
+The nonlinear-model comparison tested validated task advantage, not whether the representation possessed nonlinear geometry. Failure of a nonlinear contrast to survive this analysis was therefore interpreted as absence of sufficient validation evidence to replace PCA, not as evidence that PCA is universally superior or that the representation geometry is globally linear. Nonlinear geometric structure was examined separately in Section 3.13.
 
 ## 3.13 Nonlinear geometry characterization
 
@@ -792,7 +794,7 @@ real dimensions per sketch. This reduction is a representation-dimensionality re
 
 ---
 
-## 4.3 Nonlinear latent models did not establish a multiplicity-controlled task advantage over PCA
+## 4.3 Nonlinear latent models did not establish a validated task advantage over PCA
 
 PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at latent dimensions
 
@@ -800,11 +802,40 @@ PCA, autoencoder (AE), and variational autoencoder (VAE) representations were co
 z\in\{8,16,24,32,64\}
 \]
 
-using held-out garment-identity mean reciprocal rank across five outer identity-disjoint folds. The ten prespecified AE-versus-PCA and VAE-versus-PCA contrasts were evaluated with simultaneous family-wise error control using the exact fold-level sign-flip procedure described in Methods.
+using held-out garment-identity mean reciprocal rank (MRR) across the same five outer garment-identity-disjoint folds. The ten prespecified same-dimensional AE-versus-PCA and VAE-versus-PCA contrasts were assessed using the exhaustive fold-level sign-flip sensitivity analysis described in Methods, with a maximum statistic across all ten contrasts.
 
-Across these confirmatory comparisons, no nonlinear representation established a multiplicity-controlled improvement over PCA. PCA was therefore retained as the practical latent basis for subsequent morphology interpretation.
+The frozen contrast results were:
 
-This negative result concerns validated downstream task utility. It does not establish that PCA is universally superior to nonlinear latent models, nor that the underlying representation geometry is globally linear.
+### Table 2. Fold-level nonlinear-versus-PCA MRR sensitivity analysis
+
+| Contrast | Mean \(\Delta\)MRR | Median \(\Delta\)MRR | Positive / negative / zero folds | Raw one-sided fold-level \(p\) | Max-stat adjusted \(p\) |
+|---|---:|---:|---:|---:|---:|
+| AE8 − PCA8 | +0.009789 | +0.008696 | 5 / 0 / 0 | 0.03125 | 0.4375 |
+| AE16 − PCA16 | +0.009778 | +0.007625 | 4 / 1 / 0 | 0.09375 | 0.4375 |
+| AE24 − PCA24 | −0.006105 | −0.021739 | 2 / 3 / 0 | 0.81250 | 1.0000 |
+| AE32 − PCA32 | −0.016968 | −0.011931 | 0 / 5 / 0 | 1.00000 | 1.0000 |
+| AE64 − PCA64 | −0.016305 | −0.023913 | 1 / 4 / 0 | 0.93750 | 1.0000 |
+| VAE8 − PCA8 | +0.007621 | +0.002169 | 3 / 0 / 2 | 0.12500 | 0.6875 |
+| VAE16 − PCA16 | +0.014341 | +0.015251 | 4 / 1 / 0 | 0.06250 | 0.2500 |
+| VAE24 − PCA24 | −0.001525 | +0.003261 | 3 / 2 / 0 | 0.65625 | 1.0000 |
+| VAE32 − PCA32 | −0.011527 | −0.008696 | 1 / 4 / 0 | 0.96875 | 1.0000 |
+| VAE64 − PCA64 | −0.018260 | −0.026087 | 0 / 4 / 1 | 1.00000 | 1.0000 |
+
+The largest observed mean nonlinear improvement was
+
+\[
+\boxed{\mathrm{VAE}_{16}-\mathrm{PCA}_{16}=+0.014341\ \mathrm{MRR}},
+\]
+
+with maximum-statistic adjusted fold-level probability
+
+\[
+\boxed{p=0.2500}.
+\]
+
+No tested nonlinear contrast survived the multiplicity-controlled fold-level sensitivity analysis. PCA was therefore retained as the practical latent baseline for subsequent morphology interpretation because the frozen validation did not establish evidence sufficient to replace it with AE or VAE.
+
+This result is deliberately bounded. The five outer test partitions are garment-identity-disjoint, but the corresponding training sets overlap; moreover, five folds permit only \(2^5=32\) fold-level sign configurations. The analysis is therefore interpreted as conservative validation evidence with coarse probability resolution, not as population-level proof that PCA is superior to nonlinear latent models. It also does not establish that the underlying representation geometry is globally linear.
 
 ---
 
@@ -927,7 +958,7 @@ The primary confirmatory result is that radial compression support differed acro
 
 reducing the complex coefficient count from 2592 to 1504, or 41.98%.
 
-Separately, validated PCA/AE/VAE comparison did not establish a multiplicity-controlled nonlinear task advantage over PCA. PCA-64 accounted for 44.65% of variance in the standardized frozen representation.
+Separately, the five-fold PCA/AE/VAE validation did not establish evidence sufficient to replace PCA with a tested nonlinear latent model; the strongest observed contrast was VAE16 − PCA16 (mean \(\Delta\)MRR \(+0.014341\), max-stat adjusted fold-level \(p=0.2500\)). PCA-64 accounted for 44.65% of variance in the standardized frozen representation.
 
 Within that retained PCA-64 subspace, 78.54% of mapped morphology energy occurred at intermediate harmonic orders, 66.84% occurred in the outer radial zone, and 51.30% occurred jointly in the outer-radial × intermediate-harmonic region. These localization quantities are descriptive properties of the retained subspace and are not semantic or interaction effects.
 
