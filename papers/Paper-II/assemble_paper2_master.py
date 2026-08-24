@@ -3,7 +3,7 @@ import re
 
 ROOT = Path(__file__).resolve().parent
 
-TITLE = "Garment-Sketch Morphology Radial-Spectral Representation: Evidence-Controlled Conditional Compression"
+TITLE = "Evidence-Controlled Radial–Spectral Representation of Garment-Sketch Morphology"
 AUTHOR = "NITIKA GUPTA"
 OUT = ROOT / "P2_19_MANUSCRIPT_MASTER.md"
 
@@ -74,7 +74,6 @@ for forbidden in [
     "They did not.",
     "radial representation requirements are harmonic-scale dependent",
     "radial representation requirements and retained latent morphology vary systematically",
-    "Evidence-Controlled Radial-Spectral Representation of Garment-Sketch Morphology",
     "Step 9 lock",
     "Results claim boundary",
     "MANUSCRIPT ASSEMBLY DRAFT",
