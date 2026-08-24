@@ -281,7 +281,9 @@ p_i(\theta_k\mid r_j)
 
 Empty radial shells were represented by zeros.
 
-This shell conditioning separates angular organization from the amount of foreground mass present at a given radius. Consequently, radial shells containing more total ink do not dominate the angular statistic solely because they contain more foreground intensity.\n\nThe \\(10^{-14}\\) criterion is an empty-shell numerical guard rather than a substantive foreground-support threshold. In a source-image support audit over the frozen 25-shell primary domain, every retained shell carried at least \\(4.92\\times10^{-4}\\) of total sketch darkness mass and every selected \\(R_2\\)-peak shell at least \\(1.52\\times10^{-3}\\). Peak selection was unchanged for all 2,300 sketches under an audit-only minimum relative shell-mass threshold of \\(10^{-3}\\). Localized support-boundary descriptors were more sensitive to stronger support perturbations and are interpreted accordingly.
+This shell conditioning separates angular organization from the amount of foreground mass present at a given radius. Consequently, radial shells containing more total ink do not dominate the angular statistic solely because they contain more foreground intensity.
+
+The \(10^{-14}\) criterion is an empty-shell numerical guard rather than a substantive foreground-support threshold. To assess whether shell conditioning or peak selection was being driven by numerically nonempty but negligibly supported shells, a post hoc source-image support audit was performed over the frozen 25-shell primary domain. For each sketch, shell darkness mass was expressed as a fraction of total sketch darkness mass. Audit-only minimum relative shell-mass thresholds from \(10^{-5}\) to \(5\times10^{-3}\) were then applied without altering the locked representation or Experiment 06.
 
 ---
 
