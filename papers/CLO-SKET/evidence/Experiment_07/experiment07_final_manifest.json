@@ -1,0 +1,74 @@
+{
+  "experiment": "CLO-SKET Experiment 07 \u2014 conventional HOG baseline",
+  "status": "complete",
+  "purpose": "secondary external standard-CV comparator only",
+  "design_locked_before_outcome": true,
+  "rows": 2300,
+  "categories": 23,
+  "garment_identities": 230,
+  "validation": "authoritative Experiment-06 identity-disjoint fold_id",
+  "fold_test_rows": [
+    459,
+    460,
+    462,
+    460,
+    459
+  ],
+  "primary_comparison": "HOG+RA14 minus HOG",
+  "primary_metric": "pooled OOF Macro-F1",
+  "secondary_metric": "pooled OOF balanced accuracy",
+  "HOG_dimensions": 8100,
+  "RA_dimensions": 14,
+  "model": "StandardScaler(train fold) + LogisticRegression(L2, C=1.0, lbfgs, max_iter=5000, class_weight=None)",
+  "hyperparameter_search": false,
+  "PCA": false,
+  "feature_selection": false,
+  "augmentation": false,
+  "RA_modified": false,
+  "Experiment06_modified": false,
+  "experiment06_checkpoint_sha256": "6e2c600c9cef37c3edcae18300793e37265ba866ee93d83c825aa1b5ad522018",
+  "HOG_npy_sha256": "b76a655de4cb487d7ae130ee730b90709d12024c0e9b6ccb0f2408cda7c99b17",
+  "experiment06_stored_hashes": {
+    "M": "aa31d0559f302f66633eff315b8c3db0e939958c47cc171cd7d2b75c531d33b7",
+    "R": "bcae5739ad7cb62e28ac5305f819f62fcc8f3fdae816725c320b0aec1b540453",
+    "A": "63164eb16b11b43d7d52ba7f29ca396f0432b4c65bd61cc79c45d333fa46ec18",
+    "R+A": "ea660e0c53dc285d48635d9bdca74b7f7dd32eacd9cd225cd336d6147d5c7828",
+    "garment": "8f54e0416dc8e598153464bf4caaf64d12c869f30de3b15a003cd715d4da7434",
+    "category": "5f04a8c39e925e96c85d7175cb2c5b46ca37625d959a9134e5592a2946c45114",
+    "fold": "abe2afb7e23d21b4bec63b45f2dd7c69bc8f8fcffe559e954cfd67228e0a1c22"
+  },
+  "results": [
+    {
+      "feature_set": "HOG",
+      "dimensions": 8100,
+      "macro_f1": 0.6482417573584086,
+      "balanced_accuracy": 0.6504347826086956
+    },
+    {
+      "feature_set": "HOG+RA14",
+      "dimensions": 8114,
+      "macro_f1": 0.6491354117723627,
+      "balanced_accuracy": 0.6513043478260869
+    }
+  ],
+  "contrast": [
+    {
+      "contrast": "HOG+RA14 minus HOG",
+      "delta_macro_f1": 0.0008936544139540592,
+      "delta_balanced_accuracy": 0.0008695652173913437
+    }
+  ],
+  "output_hashes": {
+    "primary_results": "61cd20ee4c1b414429bdef5d9817cd652b0b677c08f1c2922f3a0541c67a212d",
+    "contrast_results": "ed6c18a82bdbd994d5e4af4ec005abb648f1fecd3bc7f7c7e183e5b08877e6a9",
+    "fold_metrics": "26951b32c1ed91beca8602d010b9fa6de153ca6f578f485309abdfb98dc5f9ce",
+    "oof_predictions": "76bab114d8ebd5384f23ebf4aa91681faa45fe8d585651e6fd637d72726665d9"
+  },
+  "software": {
+    "python": "3.13.15 (main, Aug  6 2026, 11:06:23) [GCC 11.4.0]",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.6.1"
+  }
+}

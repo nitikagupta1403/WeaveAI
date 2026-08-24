@@ -1,0 +1,96 @@
+CLO-SKET — EXPERIMENT 06
+FINAL ARTIFACT FREEZE
+====================================================================================================
+
+Timestamp
+----------------------------------------------------------------------------------------------------
+2026-08-24T11:54:43.765484
+
+Experiment
+----------------------------------------------------------------------------------------------------
+Incremental Representation Value
+
+Population
+----------------------------------------------------------------------------------------------------
+Sketches                     : 2300
+Garment identities           : 230
+Categories                   : 23
+Primary grouped folds        : 5
+
+Representation
+----------------------------------------------------------------------------------------------------
+Morphology                   : 135 D
+Radial                       : 8 D
+Axial                        : 6 D
+Axial-radial                 : 14 D
+Morphology + axial-radial    : 149 D
+
+PRIMARY RESULT
+----------------------------------------------------------------------------------------------------
+M Macro-F1                   : 0.297788
+M+R+A Macro-F1               : 0.335765
+Delta Macro-F1               : +0.037977
+
+Identity-bootstrap 95% CI    :
+[+0.020242,
+ +0.055852]
+
+M balanced accuracy          : 0.298261
+M+R+A balanced accuracy      : 0.336087
+Delta balanced accuracy      : +0.037826
+
+Ablation
+----------------------------------------------------------------------------------------------------
+M+R - M Macro-F1             : +0.026752
+M+A - M Macro-F1             : +0.002299
+M+R+A - (M+R) Macro-F1       : +0.011225
+
+Repeated grouped CV
+----------------------------------------------------------------------------------------------------
+Mean Delta Macro-F1          : +0.032253
+SD                            : 0.006805
+Positive repeats             : 10/10
+Positive fold effects        : 44/50
+
+Alignment control
+----------------------------------------------------------------------------------------------------
+Identity misalignment        : 97.3913%
+Observed Delta Macro-F1      : +0.037977
+Null mean Delta Macro-F1     : +0.042896
+Empirical p                  : 0.762619
+
+CLAIM LOCK
+----------------------------------------------------------------------------------------------------
+SUPPORTED:
+The compact 14-D axial-radial representation provides reproducible incremental garment-category predictive utility beyond the frozen 135-D morphology representation under garment-identity-disjoint validation.
+
+SUPPORTED — MECHANISTIC:
+Most of the direct incremental predictive gain is carried by the radial component of the representation.
+
+NOT SUPPORTED:
+The data do not support the claim that the predictive increment depends on exact garment-level correspondence between morphology and axial-radial features.
+
+INTERPRETATION:
+Category-preserving identity misalignment reproduced or exceeded the correctly aligned gain, indicating that category-level axial-radial distributional structure is sufficient to explain the tested downstream improvement.
+
+PROVENANCE HASHES
+----------------------------------------------------------------------------------------------------
+M        : aa31d0559f302f66633eff315b8c3db0e939958c47cc171cd7d2b75c531d33b7
+R        : bcae5739ad7cb62e28ac5305f819f62fcc8f3fdae816725c320b0aec1b540453
+A        : 63164eb16b11b43d7d52ba7f29ca396f0432b4c65bd61cc79c45d333fa46ec18
+R+A      : ea660e0c53dc285d48635d9bdca74b7f7dd32eacd9cd225cd336d6147d5c7828
+garment  : 8f54e0416dc8e598153464bf4caaf64d12c869f30de3b15a003cd715d4da7434
+category : 5f04a8c39e925e96c85d7175cb2c5b46ca37625d959a9134e5592a2946c45114
+fold     : abe2afb7e23d21b4bec63b45f2dd7c69bc8f8fcffe559e954cfd67228e0a1c22
+
+MASTER CHECKPOINT
+----------------------------------------------------------------------------------------------------
+/content/drive/MyDrive/FashionAI/CLO_SKET_Final_Validation_Shield/CLO_SKET_Final_Validation_Shield_Results/Experiment_06_Final/CLO_SKET_EXPERIMENT06_FINAL_CHECKPOINT.pkl
+
+SHA256
+----------------------------------------------------------------------------------------------------
+6e2c600c9cef37c3edcae18300793e37265ba866ee93d83c825aa1b5ad522018
+
+====================================================================================================
+EXPERIMENT 06 FINAL — NO FURTHER OUTCOME-DEPENDENT MODIFICATION PERMITTED
+====================================================================================================

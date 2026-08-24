@@ -1,0 +1,6 @@
+fold,train_rows,test_rows,train_identities,test_identities,overlapping_identities
+0,1841,459,184,46,0
+1,1840,460,184,46,0
+2,1838,462,184,46,0
+3,1840,460,184,46,0
+4,1841,459,184,46,0

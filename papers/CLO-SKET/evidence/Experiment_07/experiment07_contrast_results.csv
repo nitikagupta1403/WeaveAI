@@ -1,0 +1,2 @@
+contrast,delta_macro_f1,delta_balanced_accuracy
+HOG+RA14 minus HOG,0.0008936544139540592,0.0008695652173913437

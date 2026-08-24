@@ -1,0 +1,17 @@
+{
+  "PRIMARY_SUPPORTED_CLAIM": "The compact 14-D axial-radial representation provides reproducible incremental garment-category predictive utility beyond the frozen 135-D morphology representation under garment-identity-disjoint validation.",
+  "SECONDARY_SUPPORTED_CLAIM": "Most of the direct incremental predictive gain is carried by the radial component of the representation.",
+  "ROBUSTNESS_SUPPORTED_CLAIM": "The observed increment is robust to garment-identity cluster resampling and to repeated category-balanced grouped partitions.",
+  "ALIGNMENT_NOT_SUPPORTED": "The data do not support the claim that the predictive increment depends on exact garment-level correspondence between morphology and axial-radial features.",
+  "ALIGNMENT_INTERPRETATION": "Category-preserving identity misalignment reproduced or exceeded the correctly aligned gain, indicating that category-level axial-radial distributional structure is sufficient to explain the tested downstream improvement.",
+  "NOT_CLAIMED": [
+    "information-theoretic independence of morphology and axial-radial geometry",
+    "unique garment-specific information beyond morphology",
+    "causal contribution of radial or axial geometry",
+    "semantic completeness of the 14-D representation",
+    "external-dataset generalization",
+    "superiority to all classical or learned shape representations",
+    "exact sketch-level complementarity",
+    "human-like garment understanding"
+  ]
+}

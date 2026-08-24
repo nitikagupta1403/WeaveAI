@@ -1,0 +1,12 @@
+{
+  "incremental_predictive_utility": true,
+  "garment_identity_bootstrap_supported": true,
+  "repeated_partition_supported": true,
+  "radial_component_dominant": true,
+  "large_independent_axial_increment": false,
+  "exact_garment_alignment_supported": false,
+  "category_level_structure_sufficient_under_alignment_control": true,
+  "information_theoretic_complementarity_claim": false,
+  "garment_specific_complementarity_claim": false,
+  "publication_use": "Use Experiment 06 as evidence of compact, interpretable, incremental predictive utility with explicit negative-control boundaries."
+}

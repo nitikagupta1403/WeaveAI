@@ -1,0 +1,150 @@
+{
+  "bundle": "CLO-SKET public reviewer evidence",
+  "purpose": "Compact public evidence supporting the frozen Experiment 06 and Experiment 07 manuscript results.",
+  "experiment_06_checkpoint_included": false,
+  "experiment_07_hog_matrix_included": false,
+  "excluded_large_intermediates": [
+    "CLO_SKET_EXPERIMENT06_FINAL_CHECKPOINT.pkl",
+    "experiment07_hog_features.npy"
+  ],
+  "files": [
+    {
+      "experiment": "Experiment_06",
+      "file": "CLO_SKET_EXPERIMENT06_FINAL_MANIFEST.txt",
+      "bytes": 4464,
+      "sha256": "1507db38da768a8350925b7cb4321b0a5a8a30e4130fba4e1a3b2671b91c85a6"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_ablation_contrasts.csv",
+      "bytes": 198,
+      "sha256": "baa0aa6d61d50ede3d8ba07be1c5e37ecbc9fec69a539f4efadd412ba23faf55"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_alignment_permutation_summary.csv",
+      "bytes": 427,
+      "sha256": "9c7b5ff04c4ca1c6ad85a7410a0bbd59b1977ef33f53a9bae450dc53be1b0ec1"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_claim_lock.json",
+      "bytes": 1453,
+      "sha256": "812b219a8f377393765fbb35741a604d923720962f56f536cbfee10d47670a2f"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_evidence_ledger.csv",
+      "bytes": 2460,
+      "sha256": "124ad97fe7641c59624cf0521d95d4530bfd9f093d5af9a808f4d6814e7a63f9"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_final_decision.json",
+      "bytes": 594,
+      "sha256": "2c34176e090c0578310c4867b1788e95fd6d6096bc7ebe1d4e1bedb5c7901350"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_manuscript_summary.csv",
+      "bytes": 927,
+      "sha256": "e8184060c4e8647363f2265d99fddec9a5e53c7ca3430a08bdffeac4f6afbe2b"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_primary_results.csv",
+      "bytes": 367,
+      "sha256": "4f9060d9d925d560333f6fb0900d6dd6401f8905dcc7642de4e157412d1e4509"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_provenance_hashes.json",
+      "bytes": 545,
+      "sha256": "2e44c78d07774d9870780cf45c1a80286f5748a67b9b8682cd17fa650096e6f9"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_repeated_grouped_cv.csv",
+      "bytes": 2278,
+      "sha256": "d1c76f4703b8b90bf3049b79f383e68c6690e1ce77b14910c69b8f458e20e3ce"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_repeated_grouped_cv_folds.csv",
+      "bytes": 8411,
+      "sha256": "a06a86b19a2d63e1cf59e5ac1c192b3b315b1c314570f824181ec6556f46afe7"
+    },
+    {
+      "experiment": "Experiment_06",
+      "file": "experiment06_stratified_identity_bootstrap.csv",
+      "bytes": 300,
+      "sha256": "219dc5064fc0c69c5689805bb8850ac62330b61afcdf0c4e4ecf34cf6e63bd9c"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_contrast_results.csv",
+      "bytes": 111,
+      "sha256": "ed6c18a82bdbd994d5e4af4ec005abb648f1fecd3bc7f7c7e183e5b08877e6a9"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_feature_extraction_manifest.json",
+      "bytes": 2927,
+      "sha256": "8bf1b71d3ff6f365edd072ea8f7e8f16b7e77a7fabc54762db6c3c9871519148"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_final_manifest.json",
+      "bytes": 2775,
+      "sha256": "0a957a34d514e1e859ae0b6f189b01d12e750ff54d1d3070e95b478ec02aca4c"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_fold_map.csv",
+      "bytes": 182,
+      "sha256": "f9d47f79829df94f9751fb11fd8cb16adf70fedee7d546efdfa470054346296c"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_fold_metrics.csv",
+      "bytes": 619,
+      "sha256": "26951b32c1ed91beca8602d010b9fa6de153ca6f578f485309abdfb98dc5f9ce"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_identity_bootstrap.csv",
+      "bytes": 622633,
+      "sha256": "b07b1ceffb9d9b40f3f345a5ca39955eb982fcde21c1108d7658a113f2c5b154"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_identity_bootstrap_manifest.json",
+      "bytes": 2015,
+      "sha256": "1b4c898c80bd97c2ced347b77ac3717ea3d503be471fa0b5e54f3e0154d8cbe7"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_identity_bootstrap_summary.csv",
+      "bytes": 496,
+      "sha256": "47079af7e7d400b573b9d43b2c33f499a3627213a7b4864808fb3e5f3162340a"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_oof_predictions.csv",
+      "bytes": 179601,
+      "sha256": "76bab114d8ebd5384f23ebf4aa91681faa45fe8d585651e6fd637d72726665d9"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_primary_results.csv",
+      "bytes": 149,
+      "sha256": "61cd20ee4c1b414429bdef5d9817cd652b0b677c08f1c2922f3a0541c67a212d"
+    },
+    {
+      "experiment": "Experiment_07",
+      "file": "experiment07_row_map.csv",
+      "bytes": 404689,
+      "sha256": "27d84a076afd69e96639388f6a1d576e0c8bc37169a915553e181b02a53f378f"
+    }
+  ]
+}

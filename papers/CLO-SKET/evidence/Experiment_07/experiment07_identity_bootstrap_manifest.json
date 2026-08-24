@@ -1,0 +1,53 @@
+{
+  "experiment": "CLO-SKET Experiment 07 identity-level paired bootstrap",
+  "status": "complete",
+  "source_oof_predictions": "/content/drive/MyDrive/FashionAI/CLO_SKET_Final_Validation_Shield/CLO_SKET_Final_Validation_Shield_Results/Experiment_07_HOG_Baseline/experiment07_oof_predictions.csv",
+  "bootstrap_unit": "garment identity",
+  "n_identities": 230,
+  "paired_resampling": true,
+  "n_bootstrap": 5000,
+  "seed": 20260820,
+  "classifier_refit": false,
+  "feature_recomputation": false,
+  "observed": {
+    "HOG_macro_f1": 0.6482417573584086,
+    "HOG_RA14_macro_f1": 0.6491354117723627,
+    "delta_macro_f1": 0.0008936544139540592,
+    "HOG_balanced_accuracy": 0.6504347826086956,
+    "HOG_RA14_balanced_accuracy": 0.6513043478260869,
+    "delta_balanced_accuracy": 0.0008695652173913437
+  },
+  "summary": [
+    {
+      "metric": "delta_macro_f1",
+      "observed_delta": 0.0008936544139540592,
+      "bootstrap_mean_delta": 0.0009614279287759723,
+      "bootstrap_sd": 0.0016220777393235874,
+      "ci_2.5": -0.0021522919002572778,
+      "ci_50": 0.000905136959178876,
+      "ci_97.5": 0.004342172712693792,
+      "fraction_positive": 0.7282,
+      "fraction_nonpositive": 0.2718,
+      "nonpositive_replicates": 1359,
+      "n_bootstrap": 5000
+    },
+    {
+      "metric": "delta_balanced_accuracy",
+      "observed_delta": 0.0008695652173913437,
+      "bootstrap_mean_delta": 0.000911999719912058,
+      "bootstrap_sd": 0.0016495220609553617,
+      "ci_2.5": -0.002237907020515739,
+      "ci_50": 0.000847705505633789,
+      "ci_97.5": 0.004271699918439088,
+      "fraction_positive": 0.711,
+      "fraction_nonpositive": 0.289,
+      "nonpositive_replicates": 1445,
+      "n_bootstrap": 5000
+    }
+  ],
+  "hashes": {
+    "oof_predictions": "76bab114d8ebd5384f23ebf4aa91681faa45fe8d585651e6fd637d72726665d9",
+    "bootstrap_replicates": "b07b1ceffb9d9b40f3f345a5ca39955eb982fcde21c1108d7658a113f2c5b154",
+    "bootstrap_summary": "47079af7e7d400b573b9d43b2c33f499a3627213a7b4864808fb3e5f3162340a"
+  }
+}
