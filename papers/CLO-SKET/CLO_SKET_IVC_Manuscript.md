@@ -1381,7 +1381,7 @@ and
 
 No feature standardization or other scaling transformation was applied. All unspecified estimator arguments used the defaults of scikit-learn 1.6.1.
 
-The final analysis was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1.
+The earlier representation/reconstruction validation lineage was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1; the separately frozen Experiment 06 confirmatory run used Python 3.13.15, NumPy 2.1.3, pandas 2.2.3, and scikit-learn 1.6.1 (Section 7, Software Environment).
 
 ---
 
