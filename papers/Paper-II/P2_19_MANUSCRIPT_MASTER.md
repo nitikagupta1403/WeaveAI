@@ -8,16 +8,12 @@
 
 Garment-sketch morphology is distributed jointly across radial position and angular harmonic scale, yet spectral compression is often imposed uniformly across a representation. We represent each sketch by a shell-conditional angular distribution \(P_i(\theta\mid r)\), whose Fourier coefficients define complex radial functions \(F_{i,k}(r)\). Using 2,300 sketches from 230 recovered garment identities across 23 categories, candidate radial encodings were evaluated separately over four prespecified harmonic bands under garment-identity-disjoint validation and family-wise-error-rate-controlled inference. Four-coefficient DCT compression was supported for \(k=1{:}4\), and four-coefficient db4-wavelet compression for \(k=25{:}36\); compression was not supported for \(k=5{:}24\), for which the complete 72-shell radial representation was retained. The resulting DCT/raw/raw/wavelet representation reduced the field from 2,592 to 1,504 complex coefficients (41.98%). Across PCA, autoencoder, and variational-autoencoder comparisons, nonlinear models did not establish a multiplicity-controlled held-out task advantage over PCA. PCA-64 accounted for 44.65% of variance in the standardized frozen representation. Within this retained subspace, 78.54% of mapped morphology energy occurred at \(k=5{:}24\), 66.84% in the outer radial zone, and 51.30% jointly in the outer-radial × intermediate-harmonic region. These results support an evidence-controlled representation strategy in which radial compression is adopted where supported and complete radial structure is otherwise preserved.
 
----
-
 
 ---
 
 # Keywords
 
 garment sketch morphology; Fourier shape analysis; radial-angular representation; conditional spectral compression; evidence-controlled representation; garment-identity-disjoint validation
-
----
 
 
 ---
@@ -82,8 +78,6 @@ Using 2,300 sketches representing 230 recovered garment identities across 23 cat
 4. Where is variation within the retained PCA subspace localized across radial position and angular harmonic order?
 
 **The primary contribution is to formulate compression of the structured radial-angular field \(F(r,k)\) as an inferential representation decision rather than a uniform descriptor-design choice.** For each prespecified angular-harmonic band, candidate radial encodings are selected using training identities and adopted only when their effect is supported on held-out garment identities under simultaneous inference; otherwise, the complete radial field is retained. The resulting representation can therefore be heterogeneous by construction, with compressed and uncompressed bands determined by evidence rather than a predetermined global coefficient budget. Two secondary safeguards preserve interpretability: nonlinear geometric structure is separated from validated nonlinear-model utility, and the selected latent representation retains an exact inverse path to radial-harmonic coordinates. The contribution is therefore not a new Fourier, cosine, wavelet, or PCA transform, but an evidence-controlled framework for deciding where a structured spectral representation may be compressed and where its original radial resolution should be preserved. Claims remain restricted to the tested candidate representations, validation criterion, dataset, and retained latent subspace.
-
----
 
 
 ---
@@ -1129,8 +1123,6 @@ Derived representations, analysis code, and figure-generation scripts associated
 with the present study will be linked to the accompanying research repository
 when the submission release is frozen.
 
----
-
 
 ---
 
@@ -1149,8 +1141,6 @@ The analysis repository will provide the implementation of:
 
 The release will include execution order, software-environment information,
 random seeds, and provenance checks required to reproduce the reported results.
-
----
 
 
 ---
