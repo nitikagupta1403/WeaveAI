@@ -20,7 +20,7 @@ The five primary folds were category-balanced and garment-identity-disjoint. Eve
 
 Under the locked out-of-fold classifier, morphology alone achieved macro-F1 \(0.297788\) and balanced accuracy \(0.298261\). The complete compact axial–radial representation alone achieved macro-F1 \(0.219993\) and balanced accuracy \(0.231304\). When the 14 axial–radial coordinates were added to morphology, performance increased to macro-F1 \(0.335765\) and balanced accuracy \(0.336087\).
 
-Thus, the prospectively locked primary contrast was
+Thus, the prespecified and outcome-locked primary contrast was
 
 \[
 \Delta_{RA}^{F_1}
@@ -84,7 +84,7 @@ whereas the axial increment was
 
 For balanced accuracy, the corresponding increments were \(+0.026957\) and \(+0.002174\). Adding the complete \(R+A\) block produced a larger macro-F1 increment, \(+0.037977\), than either component alone.
 
-These ablations indicate that radial organization carries most of the direct incremental signal in this classifier, while the axial block alone adds little to morphology. The fact that \(M+R+A\) exceeded \(M+R\) descriptively does not constitute a separately prospectively specified significance test for the axial contribution conditional on \(R\).
+These ablations indicate that radial organization carries most of the direct incremental signal in this classifier, while the axial block alone adds little to morphology. The fact that \(M+R+A\) exceeded \(M+R\) descriptively does not constitute a separately prespecified significance test for the axial contribution conditional on \(R\).
 
 ---
 
@@ -117,7 +117,7 @@ The bootstrap fraction positive is descriptive and is not interpreted as a permu
 
 ---
 
-## 4.5 The incremental effect reproduced across independent grouped partitions
+## 4.5 The incremental effect reproduced across repeated grouped partitions
 
 The locked comparison was repeated across 10 category-balanced grouped five-fold partitions. The full axial–radial increment was positive in every repeat.
 
@@ -217,7 +217,7 @@ The primary representation comprised eight radial second-harmonic descriptors an
 \in\mathbb R^{14}.
 \]
 
-The resulting matrix had dimensions \(2300\times14\), contained only finite values, and exactly matched an independently reconstructed \(8+6\) concatenation, with maximum absolute difference zero.
+The resulting matrix had dimensions \(2300\times14\), contained only finite values, and exactly matched a separately recomputed \(8+6\) concatenation, with maximum absolute difference zero.
 
 ![Figure 2. Fourteen-dimensional radial–angular representation.](figures/Figure_2_Provenance_Locked_14D_Representation.png)
 
@@ -323,7 +323,7 @@ All 2,300 file paths were unique. SHA-256 hashing detected no repeated raw files
 
 Filename and category structure recovered 230 category-qualified garment identities, exactly 10 identities within each of the 23 categories. Individual garment identities contained 9–11 sketches and 9–11 distinct replicate identifiers. Eight identity–replicate combinations appeared more than once in the filename records.
 
-Recovered garment identity was therefore used as the clustering unit for validation, bootstrap resampling, and confirmatory association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
+Recovered garment identity was therefore used as the clustering unit for validation, bootstrap resampling, and prespecified association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
 
 ---
 
