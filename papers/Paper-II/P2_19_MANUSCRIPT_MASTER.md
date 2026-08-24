@@ -458,6 +458,67 @@ Q_c\geq0.95.
 
 Among eligible candidates, the smallest radial budget \(B\) was selected. If several representation families shared the minimum budget, the candidate with the greatest training reconstruction-energy fraction was retained; remaining ties were resolved deterministically by representation name. Thus basis family and radial coefficient budget were chosen without reference to the outer held-out garment identities.
 
+
+### 3.6.1 Category-restricted prototype retrieval
+
+Category-restricted garment-identity prototype retrieval was used as an evaluation procedure, not as a learned classifier. For a query sketch \(q\) belonging to category \(c_q\), the candidate gallery consisted of the garment identities represented within that same category. In CLO-SKET this yielded ten candidate garment identities per query.
+
+For garment identity \(g\), the prototype was the arithmetic mean of the corresponding representation vectors. The true-garment prototype explicitly excluded the query sketch:
+
+\[
+\mu_{g_q,-q}
+=
+\frac{
+\sum_{i:g_i=g_q}x_i-x_q
+}{
+n_{g_q}-1
+}.
+\]
+
+For every competing garment \(g\neq g_q\), the prototype was
+
+\[
+\mu_g
+=
+\frac{1}{n_g}
+\sum_{i:g_i=g}x_i.
+\]
+
+Thus the query never contributed to its own identity prototype.
+
+Retrieval distance was Euclidean,
+
+\[
+d(q,g)
+=
+\left\|
+x_q-\mu_g
+\right\|_2.
+\]
+
+Candidate garments were ordered by increasing distance. Rare exact ties were resolved deterministically by the stable lexical order of garment identity labels. If \(r_q\) denotes the resulting rank of the true garment for query \(q\), mean reciprocal rank was
+
+\[
+\mathrm{MRR}
+=
+\frac{1}{N}
+\sum_{q=1}^{N}
+\frac{1}{r_q},
+\]
+
+and top-1 retrieval accuracy was
+
+\[
+\mathrm{Top1}
+=
+\frac{1}{N}
+\sum_{q=1}^{N}
+\mathbf 1[r_q=1].
+\]
+
+The coordinate geometry used for retrieval depended on the analysis being performed. During harmonic-order and radial-representation selection, candidates were compared within the common frozen comparison geometry defined for that experiment so that basis or bandwidth changes did not introduce candidate-specific rescaling. In particular, the controlled radial-basis comparisons reconstructed candidate representations into the common radial field before retrieval. By contrast, the later whole-descriptor sensitivity analysis in Section 3.10.1 evaluated the actual retained descriptor coordinates directly, with standardization estimated from the corresponding outer-training identities only. These two retrieval contexts were therefore not treated as interchangeable.
+
+
 ## 3.7 Held-out garment-identity effect
 
 Compression support was evaluated on held-out identities using a category-controlled garment-identity separation statistic.
