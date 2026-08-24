@@ -1623,15 +1623,16 @@ Arnia, F. (2020). *Clo-Sket* (Version 1). Mendeley Data.
 
 DOI: `10.17632/jt533nkhsf.1`
 
-Derived representations, analysis code, and figure-generation scripts associated
-with the present study will be linked to the accompanying research repository
-when the submission release is frozen.
+Manuscript-associated analysis code, figure-generation scripts, and reproducibility
+materials available for the present study are maintained in the accompanying
+public WeaveAI research repository. The original CLO-SKET dataset remains available
+from Mendeley Data under the DOI given above.
 
 ---
 
 # Code Availability
 
-The analysis repository will provide the implementation of:
+The accompanying public WeaveAI research repository contains the manuscript-associated implementation of:
 
 - radial-angular probability construction;
 - angular Fourier morphology;
@@ -1642,8 +1643,8 @@ The analysis repository will provide the implementation of:
 - PCA inverse morphology mapping;
 - manuscript figure generation.
 
-The release will include execution order, software-environment information,
-random seeds, and provenance checks required to reproduce the reported results.
+The repository also records execution order, software-environment information,
+random seeds, and provenance checks used for the reported analyses.
 
 ---
 
