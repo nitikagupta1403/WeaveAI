@@ -10,17 +10,17 @@ This Discussion interprets only the frozen Paper-II evidence and preserves the d
 
 # 5. Discussion
 
-## 5.1 Radial representation requirements differed across the tested angular harmonic bands
+## 5.1 Compression as an evidence-controlled representation decision
 
-The principal finding is that a uniform radial encoding was not supported across the four tested angular harmonic bands. Under garment-identity-disjoint validation with simultaneous family-wise error control, compact radial representations were supported for the lowest and highest tested harmonic ranges, whereas the tested compression of the two intermediate ranges was not supported. The resulting frozen representation was therefore heterogeneous:
+The principal contribution is not the use of DCT, wavelets, Fourier analysis, or a hybrid descriptor in isolation. It is the treatment of radial compression as a **band-conditional inferential decision** over the structured field \(F(r,k)\). Candidate compact encodings were selected using training identities, but entered the frozen representation only when their held-out garment-identity effect survived simultaneous family-wise error control; otherwise, the complete radial field was preserved. This converts negative compression evidence into an explicit representation decision rather than a reason to continue searching until dimensional reduction succeeds.
+
+The empirical consequence was that a uniform radial encoding was not supported across the four tested angular harmonic bands. Compact radial representations were supported for the lowest and highest tested harmonic ranges, whereas the tested compression of the two intermediate ranges was not supported. The resulting frozen representation was therefore heterogeneous by construction:
 
 \[
 \boxed{\mathrm{DCT}_4/\mathrm{RAW}_{72}/\mathrm{RAW}_{72}/\mathrm{db4}_4}.
 \]
 
-This finding is narrower, and more useful, than a claim that one radial transform is generally superior. It shows that, under the present candidate family and validation criterion, compression support differed across angular harmonic scale. A representation strategy that imposed one basis and one coefficient budget on every harmonic order would not reflect the observed evidence.
-
-The result should not be generalized beyond the tested framework. It does not establish a universal mathematical dependence between angular frequency and radial complexity. It establishes an empirical difference in radial representation requirements across the tested harmonic bands of CLO-SKET.
+This finding is narrower, and more useful, than a claim that one radial transform is generally superior. Under the present candidate family and validation criterion, **support for radial compression differed across angular harmonic bands**. A representation strategy that imposed one basis and one coefficient budget on every harmonic order would not reflect the observed evidence. The result does not establish a universal mathematical dependence between angular frequency and radial complexity, and it does not establish that unsupported bands are intrinsically incompressible.
 
 ## 5.2 Unsupported compression appropriately led to preservation
 
@@ -126,7 +126,7 @@ provides a route toward controlled morphology experiments. Perturbations localiz
 
 ## 5.12 Scientific interpretation
 
-Taken together, the evidence supports a bounded conclusion: **radial representation requirements differed across the tested angular harmonic bands under the CLO-SKET identity-disjoint validation framework.** Compact DCT and db4-wavelet encodings were supported at the lowest and highest tested bands, while full radial structure was retained where tested compression was not supported.
+Taken together, the evidence supports a bounded conclusion: **support for radial compression differed across the tested angular harmonic bands under the CLO-SKET identity-disjoint validation framework.** Compact DCT and db4-wavelet encodings were supported at the lowest and highest tested bands, while full radial structure was retained where tested compression was not supported.
 
 The resulting representation reduced coefficient count without assuming uniform compressibility. Subsequent latent validation did not establish a multiplicity-controlled task advantage for the tested nonlinear alternatives over PCA, while separate geometry audits remained compatible with nonlinear local structure. Within the retained PCA-64 subspace, mapped morphology energy was concentrated in intermediate harmonic orders and outer radial positions, but these quantities remain descriptive representation-space measurements rather than semantic garment factors.
 
