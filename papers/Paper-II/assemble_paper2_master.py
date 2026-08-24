@@ -84,6 +84,7 @@ for forbidden in [
     "Peak radial–harmonic coordinates for all 64 retained PCA axes",
     "0.0245",
     "local/global ratio",
+    "This train-only preprocessing prevents information from held-out garment identities entering latent-model construction.",
 ]:
     if forbidden.lower() in master.lower():
         raise RuntimeError(f"Forbidden stale manuscript text detected: {forbidden}")
@@ -107,6 +108,7 @@ required = [
     "1504",
     "41.98%",
     "rank at most 19",
+    "conditional on that previously selected hybrid representation",
     "44.65%",
     "78.54%",
     "66.84%",
