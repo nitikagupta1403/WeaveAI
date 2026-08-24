@@ -53,6 +53,30 @@ The hybrid representation reduced the complex coefficient count from 2592 to 150
 
 ---
 
+
+### 5.2.1 Conditional angular morphology intentionally differs from radial occupancy and mass
+
+The exclusion of \(k=0\) from the frozen hybrid requires a precise interpretation. For an occupied radial shell, conditioning over angle fixes
+
+\[
+F_0(r)=\sum_{\theta}P(\theta\mid r)=1,
+\]
+
+whereas an empty shell has \(F_0(r)=0\). The DC coefficient therefore represents occupancy status under the conditional normalization rather than the amount of ink occurring at that radius. Radial mass,
+
+\[
+M(r),
+\]
+
+is a separate quantity defined before within-shell angular normalization.
+
+This distinction matters because an empty shell and an occupied shell with perfectly uniform angular probability both have zero positive harmonics. The dedicated occupancy sensitivity analysis showed that this theoretical ambiguity had negligible practical consequence for CLO-SKET: 99.8569% of sketch-shell locations were occupied, and appending the complete 72-dimensional occupancy mask slightly decreased mean MRR by 0.000651. The frozen positive-harmonic descriptor therefore does not require an occupancy channel for the present identity-retrieval task.
+
+Radial mass was more informative, but only modestly so. Appending the independently reconstructed and lineage-verified \(M(r)\) profile increased mean MRR by 0.003486 and mean top-1 retrieval by 0.006973. Four of five folds improved, although 2,230 of 2,300 query ranks remained unchanged. Because this was a descriptive sensitivity analysis rather than a prespecified inferential comparison, the gain is not interpreted as statistically established superiority.
+
+The primary 3008-dimensional representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
+
+
 ## 5.3 Nonlinear pairwise structure and nonlinear-model utility are different scientific questions
 
 The latent analysis illustrates a second methodological principle: detectable nonlinear predictive structure does not automatically justify a nonlinear latent model.
@@ -67,7 +91,7 @@ That decision does not imply that every relationship in the representation is li
 
 The appropriate interpretation is **pairwise nonlinear predictability**: for one prespecified directed PC relation, the fixed quadratic predictor improved held-out prediction relative to the corresponding linear predictor. This result is not, by itself, evidence of differential-geometric manifold curvature; category structure or other mixture effects may also generate nonlinear coordinate relationships.
 
-The neighborhood dimensionality calculation is retained only as a scale-conditioned descriptive diagnostic. At 20 neighbours, the identity-level median number of directions required for 90% within-neighborhood variance was 15, but a centered 20-neighbour matrix has rank at most 19 by construction. The value therefore cannot support a quantitative comparison with the global PCA dimension or an intrinsic-dimensionality claim, and the previously reported local/global ratio is retired.
+The neighborhood dimensionality calculation is retained only as a scale-conditioned descriptive diagnostic. At 20 neighbours, the identity-level median number of directions required for 90% within-neighborhood variance was 15, but a centered 20-neighbour matrix has rank at most 19 by construction. The value therefore cannot support a quantitative comparison with the global PCA dimension or an intrinsic-dimensionality claim, and the previously reported ratio between local and global dimensions is retired.
 
 These results are compatible rather than contradictory. Nonlinear pairwise predictability can be present without producing a measurable generalization advantage for a particular nonlinear encoder, dataset size, task, or validation design. Conversely, failure of the tested nonlinear models to outperform PCA is not evidence that all relationships in the morphology representation are linear.
 

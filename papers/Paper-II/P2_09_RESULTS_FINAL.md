@@ -206,6 +206,74 @@ This dimensional reduction follows from the inferential decisions in Section 4.1
 
 ---
 
+
+### 4.2.1 Occupancy and radial mass provided little additional identity-retrieval information
+
+The positive-harmonic hybrid omits the conditional DC coefficient \(F_0(r)\). Because \(F_0(r)\) equals one on occupied shells and zero on empty shells, we first tested whether explicitly restoring the 72-dimensional occupied-shell indicator materially altered garment-identity retrieval.
+
+Shell occupancy was nearly saturated in CLO-SKET:
+
+\[
+\boxed{99.8569\%}
+\]
+
+of the \(2300\times72\) sketch-shell locations were occupied. The mean number of occupied shells was
+
+\[
+71.897/72,
+\]
+
+and the median was \(72/72\).
+
+Appending the occupancy indicator changed mean held-out MRR from
+
+\[
+0.816766
+\]
+
+for the frozen 3008-dimensional hybrid to
+
+\[
+0.816114,
+\]
+
+giving
+
+\[
+\boxed{\Delta\mathrm{MRR}=-0.000651}.
+\]
+
+Mean top-1 retrieval changed from \(0.633531\) to \(0.632229\),
+
+\[
+\boxed{\Delta\mathrm{Top1}=-0.001302}.
+\]
+
+Across the five frozen folds, MRR improved in one fold, decreased in two, and was unchanged in two. At query level, 2,291 of 2,300 ranks were unchanged, three improved, and six worsened. Explicit occupancy therefore provided no material retrieval benefit under this sensitivity design.
+
+Radial ink mass \(M(r)\) contains different information from occupancy and from \(F_0\). Because no canonical \(2300\times72\) radial-mass array had been retained in the analysis checkpoints, \(M(r)\) was deterministically reconstructed from the original TIFFs using the frozen image-to-polar algorithm. The reconstruction reproduced the previously frozen occupancy mask exactly:
+
+\[
+\boxed{0\ \text{mismatched shell cells across 2,300 sketches}}.
+\]
+
+Appending this verified 72-dimensional radial-mass profile increased mean held-out MRR from \(0.816766\) to \(0.820252\),
+
+\[
+\boxed{\Delta\mathrm{MRR}=+0.003486},
+\]
+
+and mean top-1 retrieval from \(0.633531\) to \(0.640504\),
+
+\[
+\boxed{\Delta\mathrm{Top1}=+0.006973}.
+\]
+
+Four of five folds showed positive MRR differences and one showed a decrease. At query level, 2,230 of 2,300 ranks were unchanged, 43 improved, and 27 worsened. The effect is therefore reported descriptively as a small amount of complementary identity information carried by radial mass, not as an inferentially established improvement.
+
+These sensitivities do not change the frozen primary representation. The 3008-dimensional descriptor remains a representation of **conditional angular morphology across radius**; occupancy and radial ink mass are distinct auxiliary quantities.
+
+
 ## 4.3 Nonlinear latent models did not earn a validated replacement of PCA
 
 We next asked, **conditional on the heterogeneous radial-spectral representation selected by the preceding full cross-validated band analysis**, whether a nonlinear latent model earned sufficient task evidence to replace PCA for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
@@ -279,7 +347,7 @@ FWER-supported quadratic PCA-coordinate relation. The strongest held-out improve
 
 This result establishes detectable **pairwise nonlinear predictability** within the retained PCA-coordinate description. It is not interpreted as differential-geometric manifold curvature, a unique nonlinear manifold, or evidence that a nonlinear encoder should replace PCA.
 
-A separate neighborhood-scale dimensionality diagnostic found that, at the prespecified 20-neighbour scale, the identity-level median number of directions required to retain 90% of within-neighborhood variance was 15 (IQR 15–15). Because a centered 20-neighbour matrix has rank at most 19 by construction, this value is reported only as a scale-conditioned descriptive quantity. It is **not** compared with the global 90%-variance PCA dimension, and the previously reported local/global ratio is retired from scientific interpretation.
+A separate neighborhood-scale dimensionality diagnostic found that, at the prespecified 20-neighbour scale, the identity-level median number of directions required to retain 90% of within-neighborhood variance was 15 (IQR 15–15). Because a centered 20-neighbour matrix has rank at most 19 by construction, this value is reported only as a scale-conditioned descriptive quantity. It is **not** compared with the global 90%-variance PCA dimension, and the previously reported ratio between local and global dimensions is retired from scientific interpretation.
 
 Additional nonlinear embedding, principal-curve and diffusion-map audits likewise failed to establish a stable nonlinear representation that warranted replacing the practical PCA baseline. The supported conclusion is therefore deliberately narrow:
 

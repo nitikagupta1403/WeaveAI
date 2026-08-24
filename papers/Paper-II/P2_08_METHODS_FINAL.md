@@ -24,63 +24,111 @@ Category structure was retained where required by the frozen validation and infe
 
 ## 3.2 Probabilistic radial-angular morphology representation
 
-The radial-angular field was constructed directly from each grayscale TIFF without resizing, rotation, thresholding, or binarization. For an image of width (W) and height (H), grayscale intensity (I(x,y)in[0,255]) was converted to continuous ink weight
+The radial-angular field was constructed directly from each grayscale TIFF without resizing, rotation, thresholding, or binarization. For an image of width \(W\) and height \(H\), grayscale intensity \(I(x,y)\in[0,255]\) was converted to continuous ink weight
 
-[
-w(x,y)=max{255-I(x,y),0}.
-]
+\[
+w(x,y)=\max\{255-I(x,y),0\}.
+\]
 
-To preserve image aspect ratio, both spatial axes were scaled by the common factor (S=max(W,H)). Pixel coordinates were first expressed relative to the image-canvas center and divided by (S). The morphology center was then defined as the intensity-weighted centroid of these isotropically scaled coordinates,
+To preserve image aspect ratio, both spatial axes were scaled by the common factor
 
-[
-c_x=rac{sum_{x,y}w(x,y)X(x,y)}{sum_{x,y}w(x,y)},
-qquad
-c_y=rac{sum_{x,y}w(x,y)Y(x,y)}{sum_{x,y}w(x,y)}.
-]
+\[
+S=\max(W,H).
+\]
+
+Pixel coordinates were first expressed relative to the image-canvas center and divided by \(S\). The morphology center was then defined as the intensity-weighted centroid of these isotropically scaled coordinates,
+
+\[
+c_x=
+\frac{\sum_{x,y}w(x,y)X(x,y)}
+     {\sum_{x,y}w(x,y)},
+\qquad
+c_y=
+\frac{\sum_{x,y}w(x,y)Y(x,y)}
+     {\sum_{x,y}w(x,y)}.
+\]
 
 Centroid-relative polar coordinates were
 
-[
-R(x,y)=sqrt{(X(x,y)-c_x)^2+(Y(x,y)-c_y)^2},
-qquad
-Theta(x,y)=operatorname{atan2}(Y(x,y)-c_y,,X(x,y)-c_x).
-]
+\[
+R(x,y)
+=
+\sqrt{
+\left(X(x,y)-c_x\right)^2
++
+\left(Y(x,y)-c_y\right)^2
+},
+\]
+
+\[
+\Theta(x,y)
+=
+\operatorname{atan2}
+\left(
+Y(x,y)-c_y,\,
+X(x,y)-c_x
+\right).
+\]
 
 Radius was normalized separately for each sketch as
 
-[
-R_{mathrm{norm}}(x,y)=rac{R(x,y)}{R_{max}},
-]
+\[
+R_{\mathrm{norm}}(x,y)
+=
+\frac{R(x,y)}{R_{\max}},
+\]
 
-where (R_{max}) is the maximum centroid-relative radius over the complete image grid. Thus (R_{mathrm{norm}}in[0,1]) describes a centroid-relative normalized canvas domain; it is not defined by the farthest nonzero-ink pixel.
+where \(R_{\max}\) is the maximum centroid-relative radius over the complete image grid. Thus \(R_{\mathrm{norm}}\in[0,1]\) describes a centroid-relative normalized canvas domain; it is not defined by the farthest nonzero-ink pixel.
 
-The normalized radial interval ([0,1]) was divided uniformly into 72 shells and the angular interval ([-pi,pi]) uniformly into 72 bins. Pixels were assigned by hard bin membership; no interpolation or smoothing was applied. Boundary handling retained (R_{mathrm{norm}}=1) in the final radial shell. The normalized radial-shell centers are therefore ((j+1/2)/72,;j=0,ldots,71); downstream code that uses bin-center coordinates (j+1/2) refers to the same 72 shell locations in index units.
+The normalized radial interval \([0,1]\) was divided uniformly into 72 shells and the angular interval \([-\pi,\pi]\) uniformly into 72 bins. Pixels were assigned by hard bin membership; no interpolation or smoothing was applied. Boundary handling retained \(R_{\mathrm{norm}}=1\) in the final radial shell. The normalized radial-shell centers are therefore
 
-Let (W_i(r_j,	heta_n)) denote the continuous ink weight accumulated in radial shell (j) and angular bin (n) for sketch (i). The construction explicitly preserved total ink mass under binning. Before conditional angular normalization, normalized radial mass was defined as
+\[
+\frac{j+1/2}{72},
+\qquad
+j=0,\ldots,71.
+\]
 
-[
-M_i(r_j)=
-rac{sum_n W_i(r_j,	heta_n)}
-     {sum_{j,n} W_i(r_j,	heta_n)}.
-]
+Downstream code that uses bin-center coordinates \(j+1/2\) refers to the same 72 shell locations expressed in index units.
 
-A shell was treated as occupied when its unnormalized shell mass exceeded (10^{-14}). For occupied shells, angular morphology was normalized within radius:
+Let \(W_i(r_j,\theta_n)\) denote the continuous ink weight accumulated in radial shell \(j\) and angular bin \(n\) for sketch \(i\). The construction explicitly preserved total ink mass under binning. Before conditional angular normalization, normalized radial mass was defined as
 
-[
-P_i(	heta_nmid r_j)=
-rac{W_i(r_j,	heta_n)}
-     {sum_m W_i(r_j,	heta_m)},
-]
+\[
+M_i(r_j)
+=
+\frac{
+\sum_n W_i(r_j,\theta_n)
+}{
+\sum_{j,n}W_i(r_j,\theta_n)
+}.
+\]
+
+A shell was treated as occupied when its unnormalized shell mass exceeded
+
+\[
+10^{-14}.
+\]
+
+For occupied shells, angular morphology was normalized within radius:
+
+\[
+P_i(\theta_n\mid r_j)
+=
+\frac{
+W_i(r_j,\theta_n)
+}{
+\sum_m W_i(r_j,\theta_m)
+},
+\]
 
 so that
 
-[
-P_i(	heta_nmid r_j)ge0,
-qquad
-sum_n P_i(	heta_nmid r_j)=1.
-]
+\[
+P_i(\theta_n\mid r_j)\geq0,
+\qquad
+\sum_n P_i(\theta_n\mid r_j)=1.
+\]
 
-Empty shells were retained as all-zero 72-vectors rather than assigned an artificial angular distribution. The angular Fourier representation used subsequently in this study was obtained by applying the one-sided discrete real Fourier transform along the angular axis of this (72	imes72) conditional field. Figure 1 summarizes the image-to-probability construction, angular Fourier transformation, and prespecified harmonic-band partition used for subsequent representation decisions.
+Empty shells were retained as all-zero 72-vectors rather than assigned an artificial angular distribution. The angular Fourier representation used subsequently in this study was obtained by applying the one-sided discrete real Fourier transform along the angular axis of this \(72\times72\) conditional field. Figure 1 summarizes the image-to-probability construction, angular Fourier transformation, and prespecified harmonic-band partition used for subsequent representation decisions.
 
 ## 3.3 Angular Fourier morphology
 
@@ -103,6 +151,33 @@ producing a full radial-harmonic field of
 \]
 
 complex coefficients per sketch.
+
+
+### 3.3.1 Occupancy and radial-mass completeness sensitivity
+
+The positive-harmonic field used for representation selection retained \(k=1,\ldots,36\) and excluded the angular DC coefficient. For the conditional angular distribution defined in Section 3.2,
+
+\[
+F_{i,0}(r)
+=
+\sum_{\theta}P_i(\theta\mid r),
+\]
+
+so that \(F_{i,0}(r)=1\) on occupied shells and \(F_{i,0}(r)=0\) on empty shells. Thus \(F_0\) carries shell-occupancy status under the conditional normalization; it does **not** encode radial ink mass. Radial mass is the distinct quantity
+
+\[
+M_i(r)
+=
+\frac{\sum_{\theta}W_i(r,\theta)}
+     {\sum_{r,\theta}W_i(r,\theta)}.
+\]
+
+Because a positive-harmonic-only representation cannot distinguish an empty shell from an occupied shell with a perfectly uniform conditional angular distribution, representation completeness was examined in two fixed post hoc sensitivity analyses. These analyses did not reopen harmonic-band selection or alter the frozen 3008-dimensional hybrid.
+
+First, the frozen hybrid was augmented with the 72-dimensional occupied-shell indicator. Second, it was augmented with the 72-dimensional normalized radial-mass profile \(M_i(r)\). Radial mass was reconstructed deterministically from the original TIFF images using the exact image-to-polar procedure defined in Section 3.2. As a lineage verification, the reconstructed occupied-shell mask was required to reproduce the previously frozen \(2300\times72\) occupancy mask exactly; any mismatch would have invalidated the reconstructed mass profile.
+
+Both sensitivity analyses used the same five frozen garment-identity-disjoint folds. Within each fold, `StandardScaler` parameters were estimated from outer-training identities only and applied unchanged to the outer-test sketches. Retrieval was category-restricted and prototype-based: for each query sketch, the true garment prototype excluded that query, other garment prototypes used all available same-garment test-fold sketches, Euclidean distance determined ranking, and ties were resolved deterministically by garment identity. No hyperparameter optimization, representation reselection, or additional inferential test was introduced. The sensitivity quantities are therefore descriptive comparisons of the frozen hybrid with the corresponding augmented representation.
+
 
 ## 3.4 Harmonic-band partition and evidence-controlled compression rule
 

@@ -6,7 +6,7 @@
 
 # Abstract
 
-Compact spectral shape descriptors commonly apply one encoding rule across the transform domain, although representational requirements may vary with scale. We test this assumption for garment-sketch morphology using a conditional radial-angular representation whose angular Fourier transform yields explicit radial harmonic functions. On 2,300 sketches representing 230 garment identities in 23 categories, candidate radial encodings were evaluated separately across four prespecified harmonic bands using garment-identity-disjoint validation and family-wise-error-rate-controlled inference. Compact four-coefficient DCT and db4-wavelet representations were supported for the lowest and highest tested harmonic bands, respectively, whereas tested compression was not supported for the intermediate harmonics, for which complete 72-shell radial structure was preserved. The resulting heterogeneous DCT/raw/raw/wavelet representation reduced coefficient count by 41.98% without imposing uniform compression. Nonlinear AE/VAE alternatives subsequently failed to establish a multiplicity-controlled task advantage over same-dimensional PCA, despite separately detectable nonlinear geometry. Exact inverse mapping of the retained PCA representation localized latent variation back to radial-harmonic morphology, with most variance-weighted mapped energy concentrated in intermediate harmonics and outer radial shells. These findings introduce an evidence-controlled strategy for allocating representational complexity within a structured morphology field: compression is accepted where held-out evidence supports it, unsupported structure is preserved, and latent variation remains mathematically traceable to the coordinates on which representation decisions were made.
+Compact spectral shape descriptors commonly apply one encoding rule across the transform domain, although representational requirements may vary with scale. We test this assumption for garment-sketch morphology using a conditional radial-angular representation whose angular Fourier transform yields explicit radial harmonic functions. On 2,300 sketches representing 230 garment identities in 23 categories, candidate radial encodings were evaluated separately across four prespecified harmonic bands using garment-identity-disjoint validation and family-wise-error-rate-controlled inference. Compact four-coefficient DCT and db4-wavelet representations were supported for the lowest and highest tested harmonic bands, respectively, whereas tested compression was not supported for the intermediate harmonics, for which complete 72-shell radial structure was preserved. The resulting heterogeneous DCT/raw/raw/wavelet representation reduced coefficient count by 41.98% without imposing uniform compression. Conditional on this selected hybrid representation, nonlinear AE/VAE alternatives subsequently failed to establish a multiplicity-controlled task advantage over same-dimensional PCA, despite separately detectable nonlinear pairwise structure. Exact inverse mapping of the retained PCA representation localized latent variation back to radial-harmonic morphology, with most variance-weighted mapped energy concentrated in intermediate harmonics and outer radial shells. These findings introduce an evidence-controlled strategy for allocating representational complexity within a structured morphology field: compression is accepted where held-out evidence supports it, unsupported structure is preserved, and latent variation remains mathematically traceable to the coordinates on which representation decisions were made.
 
 
 ---
@@ -39,10 +39,10 @@ This principle leads naturally to a heterogeneous representation,
 
 where the radial operator \(\mathcal R_b\) is permitted to differ between harmonic bands \(b\). The resulting representation is therefore determined neither by architectural symmetry nor by a prespecified global compression ratio. Instead, complexity is retained selectively according to the evidence available for each spectral region.
 
-A second representation question arises after this radial–spectral structure has been established. High-dimensional morphology can exhibit nonlinear geometry, but the existence of such geometry does not by itself demonstrate that a nonlinear encoder provides a better practical representation. Autoencoders and variational autoencoders can model nonlinear mappings, whereas PCA provides a simpler linear baseline with exact and transparent inverse structure. We therefore separate two questions that are often conflated:
+A second representation question arises after this radial–spectral structure has been established. High-dimensional morphology can exhibit nonlinear predictive structure, but the existence of such geometry does not by itself demonstrate that a nonlinear encoder provides a better practical representation. Autoencoders and variational autoencoders can model nonlinear mappings, whereas PCA provides a simpler linear baseline with exact and transparent inverse structure. We therefore separate two questions that are often conflated:
 
 \[
-\text{Is nonlinear geometry detectable?}
+\text{Is nonlinear predictive structure detectable?}
 \]
 
 and
@@ -51,7 +51,7 @@ and
 \text{Does a nonlinear latent model provide validated task advantage?}
 \]
 
-Nonlinear alternatives are compared directly with same-dimensional PCA representations under garment-identity-disjoint evaluation and multiplicity-controlled inference. Geometric nonlinearity is then audited separately, so that evidence of curvature cannot retrospectively determine the model-selection conclusion. This distinction allows representational complexity, like radial compression, to **earn empirical support rather than being assumed from model flexibility alone**.
+Conditional on the hybrid representation selected by the preceding cross-validated band analysis, nonlinear alternatives are compared directly with same-dimensional PCA representations under garment-identity-disjoint evaluation and multiplicity-controlled inference. Nonlinear predictive structure is then audited separately, so that evidence of a quadratic coordinate relationship cannot retrospectively determine the model-selection conclusion. This distinction allows representational complexity, like radial compression, to **earn empirical support rather than being assumed from model flexibility alone**.
 
 A third requirement is traceability. A compact latent coordinate is useful for downstream modelling, but its relationship to the original morphology can become opaque. Because the radial–spectral representation constructed here retains an exact inverse path, a perturbation along principal latent direction \(j\) can be mapped back to the Fourier morphology field,
 
@@ -78,10 +78,10 @@ We study these questions using CLO-SKET (Arnia, 2020), a controlled garment-sket
 The study makes three methodological contributions:
 
 1. **Harmonic-conditioned, evidence-controlled radial representation selection.** We test radial compression separately across angular harmonic regimes and construct a heterogeneous representation in which compact bases are retained only where inferential support is established, while complete radial structure is preserved elsewhere.
-2. **Evidence-controlled latent-complexity selection.** We compare PCA with nonlinear AE and VAE alternatives under the same identity-disjoint validation framework and distinguish predictive utility from the separate question of nonlinear geometry.
+2. **Evidence-controlled latent-complexity selection.** We compare PCA with nonlinear AE and VAE alternatives under the same identity-disjoint validation framework and distinguish predictive utility from the separate question of nonlinear predictive structure.
 3. **Exact latent-to-morphology traceability.** We map retained PCA directions through the inverse hybrid representation into explicit radial–harmonic morphology fields, allowing latent variation to be localized without assigning unsupported semantic meaning.
 
-The resulting experiments show that radial representation requirements are not uniform across the tested harmonic spectrum. Evidence supports compact representations at the lowest and highest tested harmonic ranges but not across the intermediate orders, yielding a DCT/raw/raw/wavelet hybrid rather than a globally imposed basis. Nonlinear encoders subsequently fail to establish a multiplicity-controlled task advantage over same-dimensional PCA despite separately detectable nonlinear geometry. Finally, inverse mapping of the retained PCA representation reveals structured but heterogeneous radial–harmonic localization of latent morphology.
+The resulting experiments show that radial representation requirements are not uniform across the tested harmonic spectrum. Evidence supports compact representations at the lowest and highest tested harmonic ranges but not across the intermediate orders, yielding a DCT/raw/raw/wavelet hybrid rather than a globally imposed basis. Nonlinear encoders subsequently fail to establish a multiplicity-controlled task advantage over same-dimensional PCA despite separately detectable nonlinear predictive structure. Finally, inverse mapping of the retained PCA representation reveals structured but heterogeneous radial–harmonic localization of latent morphology.
 
 Together, these results motivate a general representation principle:
 
@@ -139,9 +139,9 @@ This distinction also motivates the use of garment identity rather than category
 
 After representation construction, dimensionality reduction introduces a second complexity decision. PCA supplies an orthogonal variance-ordered coordinate system with a direct linear inverse to the original feature space (Jolliffe and Cadima, 2016). Autoencoders learn nonlinear low-dimensional representations through reconstruction objectives (Hinton and Salakhutdinov, 2006), while variational autoencoders introduce a probabilistic latent-variable formulation optimized through variational inference (Kingma and Welling, 2014). Nonlinear manifold methods—including principal curves, Isomap and diffusion maps—provide additional tools for diagnosing curved or locally low-dimensional structure (Hastie and Stuetzle, 1989; Tenenbaum et al., 2000; Coifman and Lafon, 2006).
 
-The presence of nonlinear geometry, however, is logically distinct from evidence that a nonlinear encoder improves a held-out task. A curved data distribution can be detectable while a simpler linear representation remains competitive or preferable under finite-sample validation. CLO-SKET therefore separates these hypotheses experimentally. Same-dimensional AE and VAE representations are compared with PCA using identity-disjoint held-out retrieval and multiplicity-controlled inference, whereas curvature, local/global dimensionality and other manifold-oriented analyses are treated as separate geometric audits.
+The presence of nonlinear predictive structure, however, is logically distinct from evidence that a nonlinear encoder improves a held-out task. A curved data distribution can be detectable while a simpler linear representation remains competitive or preferable under finite-sample validation. CLO-SKET therefore separates these hypotheses experimentally. Conditional on the previously selected hybrid representation, same-dimensional AE and VAE representations are compared with PCA using identity-disjoint held-out retrieval and multiplicity-controlled inference, whereas fixed quadratic coordinate relationships and other manifold-oriented sensitivity analyses are treated as separate diagnostics.
 
-This separation prevents either result from being overinterpreted. Failure of a nonlinear encoder to establish task advantage does not prove that the underlying morphology is linear; conversely, evidence of curvature does not by itself justify replacing the task-validated representation with a nonlinear model. In this study, latent complexity is subjected to the same broader principle as radial compression: additional flexibility must be supported by the relevant validation evidence.
+This separation prevents either result from being overinterpreted. Failure of a nonlinear encoder to establish task advantage does not prove that all relationships in the representation are linear; conversely, evidence of a quadratic coordinate relationship does not by itself justify replacing the task-validated representation with a nonlinear model. In this study, latent complexity is subjected to the same broader principle as radial compression: additional flexibility must be supported by the relevant validation evidence.
 
 ## 2.5 Traceability from latent coordinates back to morphology
 
@@ -211,21 +211,111 @@ Category structure was retained where required by the frozen validation and infe
 
 ## 3.2 Probabilistic radial-angular morphology representation
 
-Each sketch was represented relative to a fixed radial-angular coordinate system centered on the sketch morphology. Let \(r\) denote radial shell and \(\theta\) angular position. For sketch \(i\), angular morphology at radial shell \(r\) was normalized to define
+The radial-angular field was constructed directly from each grayscale TIFF without resizing, rotation, thresholding, or binarization. For an image of width \(W\) and height \(H\), grayscale intensity \(I(x,y)\in[0,255]\) was converted to continuous ink weight
 
 \[
-P_i(\theta\mid r),
+w(x,y)=\max\{255-I(x,y),0\}.
 \]
 
-with
+To preserve image aspect ratio, both spatial axes were scaled by the common factor
 
 \[
-P_i(\theta\mid r)\geq0,
+S=\max(W,H).
+\]
+
+Pixel coordinates were first expressed relative to the image-canvas center and divided by \(S\). The morphology center was then defined as the intensity-weighted centroid of these isotropically scaled coordinates,
+
+\[
+c_x=
+\frac{\sum_{x,y}w(x,y)X(x,y)}
+     {\sum_{x,y}w(x,y)},
 \qquad
-\sum_{\theta}P_i(\theta\mid r)=1
+c_y=
+\frac{\sum_{x,y}w(x,y)Y(x,y)}
+     {\sum_{x,y}w(x,y)}.
 \]
 
-for every occupied radial shell. The representation used 72 radial shells and 72 angular bins. Radial shells containing no sketch morphology were retained as structurally empty rather than assigned an artificial angular probability distribution. Figure 1 summarizes the resulting probabilistic radial–angular construction, its angular Fourier transformation, and the prespecified harmonic-band partition used for subsequent representation decisions.
+Centroid-relative polar coordinates were
+
+\[
+R(x,y)
+=
+\sqrt{
+\left(X(x,y)-c_x\right)^2
++
+\left(Y(x,y)-c_y\right)^2
+},
+\]
+
+\[
+\Theta(x,y)
+=
+\operatorname{atan2}
+\left(
+Y(x,y)-c_y,\,
+X(x,y)-c_x
+\right).
+\]
+
+Radius was normalized separately for each sketch as
+
+\[
+R_{\mathrm{norm}}(x,y)
+=
+\frac{R(x,y)}{R_{\max}},
+\]
+
+where \(R_{\max}\) is the maximum centroid-relative radius over the complete image grid. Thus \(R_{\mathrm{norm}}\in[0,1]\) describes a centroid-relative normalized canvas domain; it is not defined by the farthest nonzero-ink pixel.
+
+The normalized radial interval \([0,1]\) was divided uniformly into 72 shells and the angular interval \([-\pi,\pi]\) uniformly into 72 bins. Pixels were assigned by hard bin membership; no interpolation or smoothing was applied. Boundary handling retained \(R_{\mathrm{norm}}=1\) in the final radial shell. The normalized radial-shell centers are therefore
+
+\[
+\frac{j+1/2}{72},
+\qquad
+j=0,\ldots,71.
+\]
+
+Downstream code that uses bin-center coordinates \(j+1/2\) refers to the same 72 shell locations expressed in index units.
+
+Let \(W_i(r_j,\theta_n)\) denote the continuous ink weight accumulated in radial shell \(j\) and angular bin \(n\) for sketch \(i\). The construction explicitly preserved total ink mass under binning. Before conditional angular normalization, normalized radial mass was defined as
+
+\[
+M_i(r_j)
+=
+\frac{
+\sum_n W_i(r_j,\theta_n)
+}{
+\sum_{j,n}W_i(r_j,\theta_n)
+}.
+\]
+
+A shell was treated as occupied when its unnormalized shell mass exceeded
+
+\[
+10^{-14}.
+\]
+
+For occupied shells, angular morphology was normalized within radius:
+
+\[
+P_i(\theta_n\mid r_j)
+=
+\frac{
+W_i(r_j,\theta_n)
+}{
+\sum_m W_i(r_j,\theta_m)
+},
+\]
+
+so that
+
+\[
+P_i(\theta_n\mid r_j)\geq0,
+\qquad
+\sum_n P_i(\theta_n\mid r_j)=1.
+\]
+
+Empty shells were retained as all-zero 72-vectors rather than assigned an artificial angular distribution. The angular Fourier representation used subsequently in this study was obtained by applying the one-sided discrete real Fourier transform along the angular axis of this \(72\times72\) conditional field. Figure 1 summarizes the image-to-probability construction, angular Fourier transformation, and prespecified harmonic-band partition used for subsequent representation decisions.
 
 ## 3.3 Angular Fourier morphology
 
@@ -248,6 +338,33 @@ producing a full radial-harmonic field of
 \]
 
 complex coefficients per sketch.
+
+
+### 3.3.1 Occupancy and radial-mass completeness sensitivity
+
+The positive-harmonic field used for representation selection retained \(k=1,\ldots,36\) and excluded the angular DC coefficient. For the conditional angular distribution defined in Section 3.2,
+
+\[
+F_{i,0}(r)
+=
+\sum_{\theta}P_i(\theta\mid r),
+\]
+
+so that \(F_{i,0}(r)=1\) on occupied shells and \(F_{i,0}(r)=0\) on empty shells. Thus \(F_0\) carries shell-occupancy status under the conditional normalization; it does **not** encode radial ink mass. Radial mass is the distinct quantity
+
+\[
+M_i(r)
+=
+\frac{\sum_{\theta}W_i(r,\theta)}
+     {\sum_{r,\theta}W_i(r,\theta)}.
+\]
+
+Because a positive-harmonic-only representation cannot distinguish an empty shell from an occupied shell with a perfectly uniform conditional angular distribution, representation completeness was examined in two fixed post hoc sensitivity analyses. These analyses did not reopen harmonic-band selection or alter the frozen 3008-dimensional hybrid.
+
+First, the frozen hybrid was augmented with the 72-dimensional occupied-shell indicator. Second, it was augmented with the 72-dimensional normalized radial-mass profile \(M_i(r)\). Radial mass was reconstructed deterministically from the original TIFF images using the exact image-to-polar procedure defined in Section 3.2. As a lineage verification, the reconstructed occupied-shell mask was required to reproduce the previously frozen \(2300\times72\) occupancy mask exactly; any mismatch would have invalidated the reconstructed mass profile.
+
+Both sensitivity analyses used the same five frozen garment-identity-disjoint folds. Within each fold, `StandardScaler` parameters were estimated from outer-training identities only and applied unchanged to the outer-test sketches. Retrieval was category-restricted and prototype-based: for each query sketch, the true garment prototype excluded that query, other garment prototypes used all available same-garment test-fold sketches, Euclidean distance determined ranking, and ties were resolved deterministically by garment identity. No hyperparameter optimization, representation reselection, or additional inferential test was introduced. The sensitivity quantities are therefore descriptive comparisons of the frozen hybrid with the corresponding augmented representation.
+
 
 ## 3.4 Harmonic-band partition and evidence-controlled compression rule
 
@@ -475,7 +592,7 @@ For validated latent-model comparisons, standardization was learned exclusively 
 \tilde x_{im}=\frac{x_{im}-\mu_{m,\mathrm{train}}}{\sigma_{m,\mathrm{train}}},
 \]
 
-and the same training-fold parameters were applied unchanged to the corresponding outer test data. This train-only preprocessing prevents information from held-out garment identities entering latent-model construction.
+and the same training-fold parameters were applied unchanged to the corresponding outer test data. Within each latent-validation fold, this train-only preprocessing prevents the corresponding outer-test identities from entering feature standardization or PCA/AE/VAE fitting. The 3008-dimensional hybrid input representation itself, however, had already been frozen from the preceding cross-validated band-selection analysis conducted across the complete CLO-SKET dataset. The downstream latent comparison is therefore **conditional on that previously selected hybrid representation**; it is not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
 
 After model selection was complete, the final descriptive PCA used for morphology interpretation was fitted to the frozen full representation with its corresponding full-data standardization. This final descriptive fit was not used to estimate held-out predictive performance.
 
@@ -493,7 +610,7 @@ at latent dimensions
 z\in\{8,16,24,32,64\}.
 \]
 
-All families were evaluated under the same five outer garment-identity-disjoint folds.
+Conditional on the previously frozen hybrid representation, all three latent families were evaluated under the same five garment-identity-disjoint folds. Within a given fold, latent-model fitting and preprocessing used training identities only; the fold split does not erase the earlier use of the complete dataset in deciding the globally frozen hybrid.
 
 The autoencoder and variational autoencoder used the same encoder/decoder hidden widths,
 
@@ -544,13 +661,13 @@ possible fold-level sign configurations were exhaustively enumerated. For each s
 
 searched nonlinear contrasts within this fold-level sensitivity analysis.
 
-Because only five outer folds were available, the sign-flip distribution has coarse probability resolution. In addition, overlap among the corresponding training sets limits population-level interpretation of fold-wise resampling. Accordingly, this procedure was used as a **conservative validation sensitivity analysis**, not as an exact population-level inferential test of model-family superiority. Its decision question was whether the frozen five-fold evidence was sufficient to justify replacing PCA with one of the tested AE or VAE configurations.
+Because only five outer folds were available, the sign-flip distribution has coarse probability resolution. In addition, overlap among the corresponding training sets limits population-level interpretation of fold-wise resampling. Accordingly, this procedure was used as a **conservative validation sensitivity analysis**, not as an exact population-level inferential test of model-family superiority. Its decision question was whether, **conditional on the previously selected hybrid representation**, the frozen five-fold evidence was sufficient to justify replacing PCA with one of the tested AE or VAE configurations.
 
-The nonlinear-model comparison tested validated task advantage, not whether the representation possessed nonlinear geometry. Failure of a nonlinear contrast to survive this analysis was therefore interpreted as absence of sufficient validation evidence to replace PCA, not as evidence that PCA is universally superior or that the representation geometry is globally linear. Nonlinear geometric structure was examined separately in Section 3.13.
+The nonlinear-model comparison tested validated task advantage, not whether the representation contained detectable nonlinear predictive structure. Failure of a nonlinear contrast to survive this analysis was therefore interpreted as absence of sufficient validation evidence to replace PCA, not as evidence that PCA is universally superior or that all relationships among PCA coordinates are linear. Nonlinear predictive structure was examined separately in Section 3.13.
 
-## 3.13 Nonlinear geometry characterization
+## 3.13 Nonlinear predictive-structure characterization
 
-Nonlinear geometry was evaluated **after and separately from** the PCA/AE/VAE task comparison. The purpose of this audit was not to reopen latent-model selection, but to test whether the frozen radial-spectral representation retained detectable curvature or locally lower-dimensional structure within the validated PCA coordinate system. Accordingly, evidence of curvature was not interpreted as evidence that a nonlinear encoder should replace PCA.
+Nonlinear predictive structure was evaluated **after and separately from** the PCA/AE/VAE task comparison. The purpose of this audit was not to reopen latent-model selection, but to test whether fixed quadratic relationships among PCA coordinates improved held-out prediction relative to corresponding linear relationships. Such evidence was not interpreted as differential-geometric manifold curvature or as evidence that a nonlinear encoder should replace PCA.
 
 ### 3.13.1 Canonical PCA geometry
 
@@ -560,13 +677,13 @@ x_i\in\mathbb R^{3008},
 \]
 for 2,300 sketches from 230 garment identities and 23 categories. The same five garment-identity-disjoint outer-fold assignment used for latent validation was retained. For descriptive visualization only, the complete dataset was standardized and a 64-component PCA was fitted to obtain the eigenspectrum, cumulative explained variance, and leading-PC score plots. These full-population coordinates were **not** used for confirmatory curvature testing.
 
-For the held-out curvature audit, preprocessing was repeated independently within every outer fold. If \(f\in\{1,\ldots,5\}\) denotes the held-out fold, the standardization parameters and PCA basis were estimated exclusively from identities outside \(f\), and the held-out sketches were subsequently transformed using those training-fold quantities. Thus,
+For the held-out quadratic-predictability audit, preprocessing was repeated independently within every outer fold. If \(f\in\{1,\ldots,5\}\) denotes the held-out fold, the standardization parameters and PCA basis were estimated exclusively from identities outside \(f\), and the held-out sketches were subsequently transformed using those training-fold quantities. Thus,
 \[
 G_{\mathrm{train}}^{(f)}\cap G_{\mathrm{test}}^{(f)}=\varnothing,
 \]
 and held-out identities influenced neither feature standardization, PCA-axis estimation, nor regression fitting.
 
-### 3.13.2 Prespecified pairwise curvature family
+### 3.13.2 Prespecified pairwise quadratic-predictability family
 
 The curvature family was fixed to the first eight fold-local principal components before inspection of pairwise results. Every unordered pair was evaluated in both prediction directions, yielding
 \[
@@ -590,7 +707,7 @@ R^{2,(f)}_{ij,\mathrm{lin}}
 \quad\text{and}\quad
 R^{2,(f)}_{ij,\mathrm{quad}}
 \]
-denote their held-out coefficients of determination. The fold-level curvature effect was
+denote their held-out coefficients of determination. The fold-level quadratic-predictability effect was
 \[
 d^{(f)}_{ij}
 =
@@ -644,7 +761,7 @@ p_{\mathrm{FWER},ij}
 M^{(s)}\ge T_{ij}
 \right].
 \]
-A pairwise curvature relation was designated supported only when
+A pairwise quadratic-predictability relation was designated supported only when
 \[
 p_{\mathrm{FWER},ij}\le0.05.
 \]
@@ -652,25 +769,23 @@ This procedure tests whether the fixed quadratic term improves held-out predicti
 
 As in the nonlinear-model sensitivity analysis, the five outer training sets overlap. The sign-flip calculation is therefore used as a conservative fold-level geometry audit rather than as an exact population-level experiment with five independent replicates.
 
-### 3.13.4 Local-versus-global dimensionality diagnostic
+### 3.13.4 Neighborhood dimensionality diagnostic
 
-A complementary descriptive diagnostic compared global and local linear dimensionality at a common 90% variance threshold. Because the earlier descriptive PCA-64 fit did not reach 90% cumulative variance, the matched global/local audit was recomputed from the complete standardized representation using the full admissible PCA spectrum. The global dimension \(d_{\mathrm{global},90}\) was defined as the minimum number of principal directions required to account for 90% of full-representation variance; the corrected audit yielded 613 components. Local neighborhoods were then evaluated in the corresponding 613-dimensional global 90%-variance PCA score space rather than in PCA-64, avoiding an artificial upper bound on local tangent dimension.
+A descriptive neighborhood-scale diagnostic was retained only to characterize within-neighborhood variance concentration. Using Euclidean distance in the global PCA score space, the primary analysis used 20 nearest neighbours per sketch after excluding the sketch itself. Each 20-neighbour score matrix was centered, singular values were computed, and squared singular-value energy was accumulated until 90% of within-neighborhood variance was retained. The resulting sketch-level dimensions were first summarized within garment identity and only then summarized across identities.
 
-Using Euclidean distance, the primary local analysis used 20 nearest neighbours per sketch after excluding the sketch itself. Each 20-neighbour score matrix was centered, singular values were computed, and squared singular-value energy was accumulated until 90% of local variance was retained. The resulting sketch-level local dimensions were first summarized within garment identity and only then summarized across identities by the median and interquartile range. Neighborhood-size sensitivity was examined separately at 10, 20, 30, and 50 neighbours to confirm the expected scale dependence of the local estimate.
-
-This corrected local/global comparison is explicitly descriptive and scale dependent: it depends on the 90%-variance global subspace, neighbourhood definition, and local variance threshold. It was therefore treated as a geometry diagnostic rather than an estimator of a unique intrinsic manifold dimension. The correction affects only the global/local dimensionality audit; the independently held-out pairwise curvature analysis in Sections 3.13.1–3.13.3 is unchanged.
+This quantity is **not** interpreted as an intrinsic dimension and is not compared numerically with the global PCA dimension. With 20 centered neighbours, the local matrix has rank at most 19 by construction; consequently, a local/global dimension ratio would be mechanically constrained by neighborhood size. The previously computed global-versus-local ratio is therefore retired from scientific interpretation. Neighborhood-size sensitivity at 10, 20, 30, and 50 neighbours is retained only as evidence that the descriptive quantity is scale dependent. The independently held-out pairwise quadratic-predictability analysis in Sections 3.13.1–3.13.3 is unaffected.
 
 ### 3.13.5 Interpretation boundary
 
 The geometry audit was governed by
 \[
 \boxed{
-\text{detectable nonlinear geometry}
+\text{detectable nonlinear predictive structure}
 \;\not\equiv\;
 \text{validated nonlinear-model superiority}.
 }
 \]
-Pairwise quadratic predictability and locally reduced tangent dimensionality can demonstrate departures from a globally linear coordinate description, but they do not establish a unique nonlinear manifold, a true intrinsic dimension, causal morphology factors, or superiority of AE/VAE representations. Conversely, absence of a supported AE/VAE task advantage cannot be interpreted as evidence that the morphology geometry is intrinsically linear.
+Held-out improvement from a fixed quadratic relation can demonstrate nonlinear pairwise predictability among PCA coordinates, but it does not establish differential-geometric manifold curvature, a unique nonlinear manifold, a true intrinsic dimension, causal morphology factors, or superiority of AE/VAE representations. Conversely, absence of a supported AE/VAE task advantage cannot be interpreted as evidence that all relationships in the morphology representation are linear.
 
 ## 3.14 PCA morphology perturbation
 
@@ -975,9 +1090,77 @@ This dimensional reduction follows from the inferential decisions in Section 4.1
 
 ---
 
+
+### 4.2.1 Occupancy and radial mass provided little additional identity-retrieval information
+
+The positive-harmonic hybrid omits the conditional DC coefficient \(F_0(r)\). Because \(F_0(r)\) equals one on occupied shells and zero on empty shells, we first tested whether explicitly restoring the 72-dimensional occupied-shell indicator materially altered garment-identity retrieval.
+
+Shell occupancy was nearly saturated in CLO-SKET:
+
+\[
+\boxed{99.8569\%}
+\]
+
+of the \(2300\times72\) sketch-shell locations were occupied. The mean number of occupied shells was
+
+\[
+71.897/72,
+\]
+
+and the median was \(72/72\).
+
+Appending the occupancy indicator changed mean held-out MRR from
+
+\[
+0.816766
+\]
+
+for the frozen 3008-dimensional hybrid to
+
+\[
+0.816114,
+\]
+
+giving
+
+\[
+\boxed{\Delta\mathrm{MRR}=-0.000651}.
+\]
+
+Mean top-1 retrieval changed from \(0.633531\) to \(0.632229\),
+
+\[
+\boxed{\Delta\mathrm{Top1}=-0.001302}.
+\]
+
+Across the five frozen folds, MRR improved in one fold, decreased in two, and was unchanged in two. At query level, 2,291 of 2,300 ranks were unchanged, three improved, and six worsened. Explicit occupancy therefore provided no material retrieval benefit under this sensitivity design.
+
+Radial ink mass \(M(r)\) contains different information from occupancy and from \(F_0\). Because no canonical \(2300\times72\) radial-mass array had been retained in the analysis checkpoints, \(M(r)\) was deterministically reconstructed from the original TIFFs using the frozen image-to-polar algorithm. The reconstruction reproduced the previously frozen occupancy mask exactly:
+
+\[
+\boxed{0\ \text{mismatched shell cells across 2,300 sketches}}.
+\]
+
+Appending this verified 72-dimensional radial-mass profile increased mean held-out MRR from \(0.816766\) to \(0.820252\),
+
+\[
+\boxed{\Delta\mathrm{MRR}=+0.003486},
+\]
+
+and mean top-1 retrieval from \(0.633531\) to \(0.640504\),
+
+\[
+\boxed{\Delta\mathrm{Top1}=+0.006973}.
+\]
+
+Four of five folds showed positive MRR differences and one showed a decrease. At query level, 2,230 of 2,300 ranks were unchanged, 43 improved, and 27 worsened. The effect is therefore reported descriptively as a small amount of complementary identity information carried by radial mass, not as an inferentially established improvement.
+
+These sensitivities do not change the frozen primary representation. The 3008-dimensional descriptor remains a representation of **conditional angular morphology across radius**; occupancy and radial ink mass are distinct auxiliary quantities.
+
+
 ## 4.3 Nonlinear latent models did not earn a validated replacement of PCA
 
-We next asked whether the heterogeneous radial-spectral representation required a nonlinear latent model for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
+We next asked, **conditional on the heterogeneous radial-spectral representation selected by the preceding full cross-validated band analysis**, whether a nonlinear latent model earned sufficient task evidence to replace PCA for practical identity-preserving representation. PCA, autoencoder (AE), and variational autoencoder (VAE) representations were compared at
 
 \[
 z\in\{8,16,24,32,64\}
@@ -1018,7 +1201,7 @@ but its selection-aware adjusted probability was
 \boxed{p_{\mathrm{FWER}}=0.2500}.
 \]
 
-None of the ten tested nonlinear contrasts survived multiplicity control. PCA was therefore retained as the **practical validated latent baseline** for morphology interpretation; the experiment did not establish sufficient task evidence to replace it with AE or VAE.
+None of the ten tested nonlinear contrasts survived multiplicity control. Conditional on the previously selected hybrid representation, PCA was therefore retained as the **practical latent baseline** for morphology interpretation; the experiment did not establish sufficient task evidence to replace it with AE or VAE. Because the hybrid itself had been selected using cross-validated evidence from the complete CLO-SKET dataset before this comparison, these results are not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
 
 This negative result is deliberately narrow. With five outer folds, the exhaustive paired analysis contains only
 
@@ -1026,69 +1209,41 @@ This negative result is deliberately narrow. With five outer folds, the exhausti
 2^5=32
 \]
 
-sign configurations, giving coarse probability resolution, and the training portions of the outer folds overlap. The analysis therefore does not prove population-level superiority of PCA, nor does failure of nonlinear-model superiority imply that the morphology geometry itself is linear.
+sign configurations, giving coarse probability resolution, and the training portions of the outer folds overlap. The analysis therefore does not prove population-level superiority of PCA, does not provide an untouched end-to-end test of the full selection pipeline, and does not imply from failure of nonlinear-model superiority that all relationships in the representation are linear.
 
 ---
 
-## 4.4 Detectable nonlinear geometry did not imply nonlinear-model utility
+## 4.4 Detectable nonlinear pairwise structure did not imply nonlinear-model utility
 
-To separate **geometry** from **model selection**, the validated PCA representation was subsequently examined for nonlinear structure without reopening the PCA/AE/VAE decision.
+To separate **nonlinear predictive structure** from **model selection**, the validated PCA representation was subsequently examined without reopening the PCA/AE/VAE decision.
 
-The pairwise curvature audit identified
+The prespecified pairwise audit identified
 
 \[
 \boxed{1}
 \]
 
-FWER-supported quadratic relation among the prespecified PCA-coordinate relations. The strongest held-out quadratic improvement was
+FWER-supported quadratic PCA-coordinate relation. The strongest held-out improvement of the fixed quadratic predictor over the corresponding linear predictor was
 
 \[
 \boxed{\overline{\Delta R^2}=+0.432042}.
 \]
 
-Thus, curvature remained detectable within the retained PCA-coordinate description even though nonlinear encoders had not established a validated retrieval advantage.
+This result establishes detectable **pairwise nonlinear predictability** within the retained PCA-coordinate description. It is not interpreted as differential-geometric manifold curvature, a unique nonlinear manifold, or evidence that a nonlinear encoder should replace PCA.
 
-The corrected global/local dimensionality audit showed the same distinction from another perspective. The complete standardized representation required
+A separate neighborhood-scale dimensionality diagnostic found that, at the prespecified 20-neighbour scale, the identity-level median number of directions required to retain 90% of within-neighborhood variance was 15 (IQR 15–15). Because a centered 20-neighbour matrix has rank at most 19 by construction, this value is reported only as a scale-conditioned descriptive quantity. It is **not** compared with the global 90%-variance PCA dimension, and the previously reported ratio between local and global dimensions is retired from scientific interpretation.
 
-\[
-\boxed{d_{\mathrm{global},90}=613}
-\]
-
-global principal directions to account for 90% of variance. At the prespecified 20-neighbor scale, however, the identity-level median local 90%-variance tangent dimension was
-
-\[
-\boxed{\tilde d_{\mathrm{local},90}=15}
-\]
-
-with IQR
-
-\[
-15\text{–}15,
-\]
-
-corresponding to
+Additional nonlinear embedding, principal-curve and diffusion-map audits likewise failed to establish a stable nonlinear representation that warranted replacing the practical PCA baseline. The supported conclusion is therefore deliberately narrow:
 
 \[
 \boxed{
-\frac{\tilde d_{\mathrm{local},90}}
-{d_{\mathrm{global},90}}
-=0.0245
-}.
-\]
-
-The local/global contrast is descriptive and scale-dependent; it does not identify a unique intrinsic dimension.
-
-Additional nonlinear embedding, principal-curve and diffusion-map audits likewise failed to establish a stable nonlinear representation that warranted replacing the practical PCA baseline. The supported conclusion is therefore asymmetric but important:
-
-\[
-\boxed{
-\text{detectable nonlinear geometry}
+\text{detectable nonlinear pairwise structure}
 \;\not\Rightarrow\;
 \text{validated nonlinear-model advantage}.
 }
 \]
 
-Figure 3 summarizes this separation. The result guards against two opposite errors: treating PCA utility as proof of intrinsically linear morphology, or treating evidence of curvature as sufficient justification for a more complex latent model.
+Figure 3 summarizes this separation. The result guards against treating PCA utility as proof that all relationships in the representation are linear, while also avoiding the converse error of treating a supported quadratic coordinate relation as sufficient justification for a more complex latent model.
 
 ---
 
@@ -1219,7 +1374,7 @@ Radial structure did **not** receive uniform compression support across angular 
 
 reducing the complete Fourier field from 2592 to 1504 complex coefficients while preserving full radial structure in the harmonic ranges where compression was not supported.
 
-A second level of validation showed that greater latent-model complexity also had to earn its place. Tested AE and VAE alternatives did not establish a multiplicity-controlled retrieval advantage over same-dimensional PCA, so PCA remained the practical latent baseline. Yet a separate geometry audit detected nonlinear curvature, demonstrating that **lack of validated nonlinear-model utility is not evidence of globally linear morphology**.
+A second level of validation showed that greater latent-model complexity also had to earn its place. Tested AE and VAE alternatives did not establish a multiplicity-controlled retrieval advantage over same-dimensional PCA, so PCA remained the practical latent baseline. Yet a separate audit detected nonlinear pairwise predictability, demonstrating that **lack of validated nonlinear-model utility is not evidence that all relationships in the representation are linear**.
 
 Finally, exact inverse mapping of PCA perturbations returned latent variation to explicit radial–harmonic coordinates. Within the retained PCA-64 subspace, mapped morphology energy was concentrated predominantly in intermediate harmonic orders and outer radial structure, while individual components showed substantially heterogeneous localization.
 
@@ -1273,33 +1428,59 @@ The hybrid representation reduced the complex coefficient count from 2592 to 150
 
 ---
 
-## 5.3 Nonlinear geometry and nonlinear-model utility are different scientific questions
 
-The latent analysis illustrates a second methodological principle: detectable nonlinear structure does not automatically justify a nonlinear latent model.
+### 5.2.1 Conditional angular morphology intentionally differs from radial occupancy and mass
 
-At matched latent dimensions, the tested AE and VAE representations did not establish a multiplicity-controlled held-out garment-identity retrieval advantage over PCA. The strongest observed nonlinear contrast was \(\mathrm{VAE}_{16}-\mathrm{PCA}_{16}\), with mean \(\Delta\mathrm{MRR}=+0.014341\), but its max-statistic adjusted fold-level probability was \(p=0.2500\). PCA was therefore retained as the practical latent baseline because the validation did not provide sufficient evidence to replace it.
+The exclusion of \(k=0\) from the frozen hybrid requires a precise interpretation. For an occupied radial shell, conditioning over angle fixes
 
-That decision does not imply globally linear morphology. A separate geometry audit detected one FWER-supported quadratic relation, with best mean held-out improvement
+\[
+F_0(r)=\sum_{\theta}P(\theta\mid r)=1,
+\]
+
+whereas an empty shell has \(F_0(r)=0\). The DC coefficient therefore represents occupancy status under the conditional normalization rather than the amount of ink occurring at that radius. Radial mass,
+
+\[
+M(r),
+\]
+
+is a separate quantity defined before within-shell angular normalization.
+
+This distinction matters because an empty shell and an occupied shell with perfectly uniform angular probability both have zero positive harmonics. The dedicated occupancy sensitivity analysis showed that this theoretical ambiguity had negligible practical consequence for CLO-SKET: 99.8569% of sketch-shell locations were occupied, and appending the complete 72-dimensional occupancy mask slightly decreased mean MRR by 0.000651. The frozen positive-harmonic descriptor therefore does not require an occupancy channel for the present identity-retrieval task.
+
+Radial mass was more informative, but only modestly so. Appending the independently reconstructed and lineage-verified \(M(r)\) profile increased mean MRR by 0.003486 and mean top-1 retrieval by 0.006973. Four of five folds improved, although 2,230 of 2,300 query ranks remained unchanged. Because this was a descriptive sensitivity analysis rather than a prespecified inferential comparison, the gain is not interpreted as statistically established superiority.
+
+The primary 3008-dimensional representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
+
+
+## 5.3 Nonlinear pairwise structure and nonlinear-model utility are different scientific questions
+
+The latent analysis illustrates a second methodological principle: detectable nonlinear predictive structure does not automatically justify a nonlinear latent model.
+
+At matched latent dimensions, the tested AE and VAE representations did not establish a multiplicity-controlled held-out garment-identity retrieval advantage over PCA. This comparison is conditional on the hybrid representation already selected by the preceding cross-validated band analysis; it is not an untouched end-to-end validation of representation selection followed by latent-model selection. The strongest observed nonlinear contrast was \(\mathrm{VAE}_{16}-\mathrm{PCA}_{16}\), with mean \(\Delta\mathrm{MRR}=+0.014341\), but its max-statistic adjusted fold-level probability was \(p=0.2500\). PCA was therefore retained as the practical latent baseline **within the frozen hybrid representation** because the downstream comparison did not provide sufficient evidence to replace it.
+
+That decision does not imply that every relationship in the representation is linear. A separate held-out audit found one FWER-supported quadratic PCA-coordinate relation, with best mean improvement
 
 \[
 \overline{\Delta R^2}=+0.432042.
 \]
 
-The corrected dimensionality audit also showed a large difference between global linear spread and local tangent structure: 613 global principal directions were required to account for 90% of full standardized-representation variance, whereas the identity-level median local 90%-variance tangent dimension at the prespecified 20-neighbor scale was 15, yielding a local/global ratio of approximately 0.0245.
+The appropriate interpretation is **pairwise nonlinear predictability**: for one prespecified directed PC relation, the fixed quadratic predictor improved held-out prediction relative to the corresponding linear predictor. This result is not, by itself, evidence of differential-geometric manifold curvature; category structure or other mixture effects may also generate nonlinear coordinate relationships.
 
-These results are compatible rather than contradictory. Nonlinear curvature can be present without producing a measurable generalization advantage for a particular nonlinear encoder, dataset size, task, or validation design. Conversely, failure of the tested nonlinear models to outperform PCA is not evidence that the underlying morphology space is intrinsically linear.
+The neighborhood dimensionality calculation is retained only as a scale-conditioned descriptive diagnostic. At 20 neighbours, the identity-level median number of directions required for 90% within-neighborhood variance was 15, but a centered 20-neighbour matrix has rank at most 19 by construction. The value therefore cannot support a quantitative comparison with the global PCA dimension or an intrinsic-dimensionality claim, and the previously reported ratio between local and global dimensions is retired.
+
+These results are compatible rather than contradictory. Nonlinear pairwise predictability can be present without producing a measurable generalization advantage for a particular nonlinear encoder, dataset size, task, or validation design. Conversely, failure of the tested nonlinear models to outperform PCA is not evidence that all relationships in the morphology representation are linear.
 
 The principal-curve and diffusion-map sensitivity analyses reinforce this bounded interpretation. They did not establish a single stable nonlinear coordinate system or canonical one-dimensional morphology trajectory that warranted replacing PCA. Accordingly,
 
 \[
 \boxed{
-\text{nonlinear geometry}
+\text{nonlinear pairwise structure}
 \neq
 \text{validated nonlinear-model utility}.
 }
 \]
 
-PCA should therefore be understood here as a validated practical basis, not as a claim about the fundamental geometry of garment morphology.
+PCA should therefore be understood here as a practical validated basis, not as a claim about the fundamental geometry of garment morphology.
 
 ---
 
@@ -1377,7 +1558,7 @@ Second, radial-representation selection is conditional on the candidate family, 
 
 Third, the nonlinear-model conclusion is also model-conditional. It applies to the tested PCA, AE, and VAE configurations, latent dimensions, dataset size, and five-fold outer validation design. With only five outer folds, exhaustive fold-level sign-flip inference has coarse probability resolution, and overlapping training sets limit population-level interpretation. The result therefore supports retention of PCA under the present evidence rather than a general rejection of nonlinear latent modeling.
 
-Fourth, the local dimensionality result is scale-dependent. The median local dimension of 15 was obtained at the prespecified 20-neighbor scale and should not be interpreted as a uniquely identified intrinsic dimension of garment morphology.
+Fourth, the neighborhood dimensionality diagnostic is scale- and sample-size-dependent. At the prespecified 20-neighbour scale, the centered local matrix has rank at most 19; the observed median of 15 is therefore retained only as a descriptive within-neighborhood variance summary and is not interpreted as an intrinsic dimension or compared quantitatively with the global PCA dimension.
 
 Finally, the PCA localization analysis is limited by its 44.65% retained-variance denominator and by the absence of independent semantic or spatial garment annotations. The current study can localize variation mathematically but cannot determine whether particular radial-harmonic patterns correspond reproducibly to named garment features.
 
@@ -1417,7 +1598,7 @@ The strongest conclusion from Paper II is not that one transform is superior to 
 
 Under the CLO-SKET identity-disjoint inferential framework, compact radial representations were supported for the lowest and highest tested harmonic bands, whereas full radial structure was preserved in the intermediate ranges because the tested compression alternatives did not receive sufficient support. The resulting hybrid reduced coefficient count without assuming uniform compressibility.
 
-At the latent level, greater model complexity likewise had to earn empirical support. The tested nonlinear encoders did not establish a multiplicity-controlled task advantage over PCA, even though separate geometry audits detected nonlinear curvature. PCA therefore remained the practical representation for interpretation without being promoted to a claim of intrinsic linearity.
+At the latent level, greater model complexity likewise had to earn empirical support. The tested nonlinear encoders did not establish a multiplicity-controlled task advantage over PCA, even though a separate audit detected nonlinear pairwise predictability. PCA therefore remained the practical representation for interpretation without being promoted to a claim of intrinsic linearity.
 
 Finally, exact inverse mapping retained traceability from latent coordinates back to radial-harmonic morphology. Within the PCA-64 subspace, mapped variation showed strong intermediate-harmonic and outer-radial organization while individual components remained heterogeneous.
 
@@ -1501,7 +1682,7 @@ random seeds, and provenance checks required to reproduce the reported results.
 
 **Figure 2. Harmonic-dependent evidence for radial representation and the resulting frozen hybrid descriptor.** Candidate raw, DCT, and db4-wavelet radial encodings were selected using training identities and evaluated on held-out garment identities. Points show the category-balanced held-out separation effect \(\Delta=T_b\); intervals are 95% garment-identity bootstrap intervals, and decisions use the prespecified family-wise-error-rate-controlled sign-flip test across the four harmonic bands. Compact radial encoding was supported for \(k=1{:}4\) (DCT\(_4\), \(p_{\mathrm{FWER}}=0.000200\)) and \(k=25{:}36\) (db4-wavelet\(_4\), \(p_{\mathrm{FWER}}=0.019698\)), but not for \(k=5{:}12\) or \(k=13{:}24\); complete 72-shell radial structure was therefore preserved in the unsupported bands. The frozen DCT/raw/raw/wavelet representation contains 1,504 complex coefficients versus 2,592 in the complete field, a 41.98% coefficient reduction. Lack of compression support is not interpreted as proof of intrinsic incompressibility.
 
-**Figure 3. Nonlinear morphology geometry is detectable without a validated nonlinear latent-model advantage.** **(A)** Mean held-out MRR differences for AE and VAE relative to same-dimensional PCA across five garment-identity-disjoint outer folds and latent dimensions \(8,16,24,32,64\). None of the ten prespecified nonlinear-versus-PCA contrasts survived the common max-statistic fold-level sensitivity analysis; the largest observed mean improvement was VAE\(_{16}\)−PCA\(_{16}\), \(\Delta\mathrm{MRR}=+0.014341\), with adjusted \(p=0.25\). **(B)** A separate held-out geometry audit detected one FWER-supported quadratic PCA-coordinate relation (best mean \(\Delta R^2=+0.432042\)). In the corrected matched dimensionality audit, 613 global principal directions were required for 90% variance, whereas the garment-identity-level median local 90%-variance dimension at the prespecified 20-neighbour scale was 15 (local/global ratio 0.0245). PCA is therefore retained as the practical validated latent baseline; detectable curvature is not evidence of nonlinear-model superiority, and lack of nonlinear-model advantage is not evidence of intrinsically linear morphology.
+**Figure 3. Conditional latent-model comparison and nonlinear pairwise structure.** **(A)** Conditional on the previously selected hybrid representation, mean held-out MRR differences for AE and VAE relative to same-dimensional PCA across five garment-identity-disjoint outer folds and latent dimensions \(8,16,24,32,64\). None of the ten prespecified nonlinear-versus-PCA contrasts survived the common max-statistic fold-level sensitivity analysis; the largest observed mean improvement was VAE\(_{16}\)−PCA\(_{16}\), \(\Delta\mathrm{MRR}=+0.014341\), with adjusted \(p=0.25\). **(B)** A separate held-out audit detected one FWER-supported fixed quadratic PCA-coordinate relation (best mean \(\Delta R^2=+0.432042\)), establishing pairwise nonlinear predictability rather than differential-geometric manifold curvature. At the prespecified 20-neighbour scale, the identity-level median number of directions required for 90% within-neighborhood variance was 15 (IQR 15–15); because a centered 20-neighbour matrix has rank at most 19, this quantity is shown only as a scale-conditioned descriptive diagnostic and is not compared with the global PCA dimension. PCA is retained as the practical validated latent baseline; detectable nonlinear pairwise structure is not evidence of nonlinear-model superiority.
 
 **Figure 4. Principal latent variation localizes in radial–harmonic morphology space.** **(A–C)** Sign-invariant morphology-energy maps \(E_j(r,k)=|\Delta F_j(r,k)|^2\), obtained by exact inverse mapping of one-score-standard-deviation perturbations for representative retained axes PC1, PC3, and PC15. PC1 and PC3 peak at \((r,k)=(72,17)\) and \((72,13)\), respectively, whereas PC15 peaks at \((5,5)\), illustrating heterogeneous radial–harmonic localization. **(D)** Explained-variance-weighted localization across the retained PCA-64 subspace in the prespecified 3×4 radial-region × harmonic-band partition. **(E)** Spectral-centroid × radial-centroid localization of all 64 retained PCA axes; marker area is proportional to PCA explained-variance ratio. Within PCA-64, which accounts for 44.65% of standardized representation variance, 78.54% of variance-weighted mapped morphology energy lies at \(k=5{:}24\), 66.84% in the outer radial zone (shells 49–72), and 51.30% jointly in outer-radial × \(k=5{:}24\) coordinates. These quantities are descriptive localization within the retained subspace; they do not denote semantic garment regions or a tested radial-by-harmonic interaction.
 
