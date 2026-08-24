@@ -20,7 +20,6 @@ Kuhl, F. P., & Giardina, C. R. (1982). Elliptic Fourier features of a closed con
 
 Kunttu, I., Lepistö, L., Rauhamaa, J., & Visa, A. (2006). Multiscale Fourier descriptors for defect image retrieval. *Pattern Recognition Letters*, 27(2), 123–132. https://doi.org/10.1016/j.patrec.2005.08.022
 
-Lee, J.-M., & Kim, W.-Y. (2012). A new shape description method using angular radial transform. *IEICE Transactions on Information and Systems*, E95-D(6), 1628–1635. https://doi.org/10.1587/transinf.E95.D.1628
 
 Ricard, J., Coeurjolly, D., & Baskurt, A. (2005). Generalizations of angular radial transform for 2D and 3D shape retrieval. *Pattern Recognition Letters*, 26(14), 2174–2186. https://doi.org/10.1016/j.patrec.2005.03.030
 
@@ -47,4 +46,4 @@ Lee, Y., Kang, Y., & Kim, S. (2024). Automatic extraction of flat sketch design 
 
 Lei, H.-P., Chen, S., Wang, M., He, X., Jia, W., & Li, S. (2021). A new algorithm for sketch-based fashion image retrieval based on cross-domain transformation. *Wireless Communications and Mobile Computing*, 2021, 5577735. https://doi.org/10.1155/2021/5577735
 
-Li, J., Ling, Z., Niu, L., & Zhang, L. (2022). Zero-shot sketch-based image retrieval with structure-aware asymmetric disentanglement. *Computer Vision and Image Understanding*, 218, 103412.
+Li, J., Ling, Z., Niu, L., & Zhang, L. (2022). Zero-shot sketch-based image retrieval with structure-aware asymmetric disentanglement. *Computer Vision and Image Understanding*, 218, 103412. https://doi.org/10.1016/j.cviu.2022.103412
