@@ -1,0 +1,11 @@
+# Abstract
+
+Garment sketches encode radial distribution and undirected directional structure, but improved prediction after feature concatenation does not establish that added information is specific to the same garment instance. We evaluate this distinction in CLO-SKET using 2,300 sketches from 23 categories and 230 recovered garment identities. A 14-dimensional axial–radial representation was constructed from centroid-relative shell-conditioned angular distributions using second-harmonic magnitude and doubled-angle axial descriptors.
+
+Under category-balanced, garment-identity-disjoint validation, a frozen 135-dimensional morphology representation achieved macro-F1 0.2978 and balanced accuracy 0.2983. Adding the axial–radial representation increased performance to 0.3358 and 0.3361, yielding increments of +0.0380 and +0.0378. Category-stratified garment-identity bootstrap intervals excluded zero, and the macro-F1 increment remained positive across all 10 repeated grouped partitions. Radial descriptors accounted for most of the direct incremental gain.
+
+A stronger alignment test materially limited interpretation. In 2,000 within-category identity-block permutations that disrupted 97.39% of exact garment-level correspondence while preserving category and block-size structure, the observed aligned increment was not exceptional (empirical p=0.763 for macro-F1; p=0.730 for balanced accuracy).
+
+The contribution is therefore an explicit axial–radial measurement framework and an identity-aware validation strategy that separates predictive increment from garment-specific correspondence. The results support reproducible incremental utility, not uniquely paired complementarity, semantic understanding, or causal structure.
+
+**Keywords:** garment sketches; axial–radial geometry; second harmonic; morphology; grouped cross-validation; identity-aware validation
