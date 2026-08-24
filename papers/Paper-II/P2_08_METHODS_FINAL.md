@@ -2,11 +2,9 @@
 
 ## Status
 
-**FINAL METHODS ASSEMBLY: READY FOR MANUSCRIPT INTEGRATION**
+**FINAL METHODS ASSEMBLY: REPRODUCIBILITY REPAIRED**
 
-This Methods section is assembled from the frozen mathematical and computational contracts.
-
-No new analysis is introduced here.
+This Methods section is assembled from the frozen mathematical and computational contracts. No new analysis is introduced here.
 
 ---
 
@@ -16,531 +14,334 @@ No new analysis is introduced here.
 
 The analysis used 2,300 CLO-SKET garment sketches corresponding to 230 garment identities across 23 garment categories, with 10 garment identities represented within each category.
 
-Garment identity, rather than individual sketch, was treated as the primary grouping unit for validation and statistical inference. This distinction is necessary because repeated sketches originating from the same garment identity cannot be treated as independent examples when evaluating representation generalization.
-
-All grouped evaluation procedures therefore enforced complete garment-identity separation between training and test partitions.
-
-For every validation fold,
+Garment identity, rather than individual sketch, was treated as the primary grouping unit for validation and statistical inference because repeated sketches originating from the same garment identity cannot be treated as independent examples when evaluating representation generalization. All grouped evaluation procedures therefore enforced complete garment-identity separation between training and test partitions:
 
 \[
-G_{\mathrm{train}}
-\cap
-G_{\mathrm{test}}
-=
-\varnothing,
+G_{\mathrm{train}}\cap G_{\mathrm{test}}=\varnothing.
 \]
-
-where \(G_{\mathrm{train}}\) and \(G_{\mathrm{test}}\) denote the sets of garment identities assigned to the respective partitions.
 
 Category structure was retained where required by the frozen validation and inferential procedures.
 
----
-
 ## 3.2 Probabilistic radial-angular morphology representation
 
-Each sketch was represented relative to a fixed radial-angular coordinate system centered on the sketch morphology.
-
-Let
+Each sketch was represented relative to a fixed radial-angular coordinate system centered on the sketch morphology. Let \(r\) denote radial shell and \(\theta\) angular position. For sketch \(i\), angular morphology at radial shell \(r\) was normalized to define
 
 \[
-r
+P_i(\theta\mid r),
 \]
 
-denote radial shell and
-
-\[
-\theta
-\]
-
-denote angular position.
-
-For sketch \(i\), the angular morphology observed at radial shell \(r\) was normalized to define the conditional probability field
-
-\[
-P_i(\theta\mid r).
-\]
-
-For every occupied radial shell,
+with
 
 \[
 P_i(\theta\mid r)\geq0,
+\qquad
+\sum_{\theta}P_i(\theta\mid r)=1
 \]
 
-with normalization
-
-\[
-\sum_{\theta}
-P_i(\theta\mid r)
-=
-1.
-\]
-
-The representation used 72 radial shells and 72 angular bins.
-
-Radial shells containing no sketch morphology were retained as structurally empty rather than being assigned an artificial angular probability distribution.
-
-The resulting field therefore provides a probability-normalized description of angular morphology conditional on radial location.
-
----
+for every occupied radial shell. The representation used 72 radial shells and 72 angular bins. Radial shells containing no sketch morphology were retained as structurally empty rather than assigned an artificial angular probability distribution.
 
 ## 3.3 Angular Fourier morphology
 
-Angular structure at each radial shell was transformed using the discrete Fourier representation
+Angular structure at each radial shell was transformed using
 
 \[
-F_{i,k}(r)
-=
-\sum_{\theta}
-P_i(\theta\mid r)
-\exp(-\mathrm{i}k\theta),
+F_{i,k}(r)=\sum_{\theta}P_i(\theta\mid r)\exp(-\mathrm{i}k\theta),
 \]
 
-where:
-
-- \(i\) indexes sketches;
-- \(r\) indexes radial shells;
-- \(k\) denotes angular harmonic order.
-
-The analysis retained positive harmonics
+where \(i\) indexes sketches, \(r\) radial shells, and \(k\) angular harmonic order. Positive harmonics \(k=1,\ldots,36\) were retained. Thus each harmonic remained an explicit function of radial location,
 
 \[
-k=1,\ldots,36.
+r\mapsto F_{i,k}(r),
 \]
 
-Thus, rather than collapsing the sketch into a single global Fourier descriptor, each harmonic remained an explicit function of radial location:
+producing a full radial-harmonic field of
 
 \[
-r
-\mapsto
-F_{i,k}(r).
-\]
-
-This construction produced a full radial-harmonic field containing
-
-\[
-72\times36
-=
-2592
+72\times36=2592
 \]
 
 complex coefficients per sketch.
-
----
 
 ## 3.4 Harmonic-band partition
 
-To evaluate whether radial representation requirements depended on angular harmonic scale, the 36 retained positive harmonics were partitioned into four frozen bands:
+The 36 retained positive harmonics were partitioned a priori into four bands:
 
 \[
-K_1 = 1{:}4,
+K_1=1{:}4,\qquad K_2=5{:}12,\qquad K_3=13{:}24,\qquad K_4=25{:}36.
 \]
 
-\[
-K_2 = 5{:}12,
-\]
-
-\[
-K_3 = 13{:}24,
-\]
-
-and
-
-\[
-K_4 = 25{:}36.
-\]
-
-The corresponding numbers of harmonics were
-
-\[
-4,\quad8,\quad12,\quad12,
-\]
-
-respectively.
-
-Radial representation was evaluated separately within each band.
-
-The purpose of this partition was not to assign semantic meaning to harmonic ranges, but to test whether one radial encoding strategy was supported uniformly across the Fourier field.
-
----
+The corresponding numbers of harmonics were \(4,8,12,12\). Radial representation was evaluated separately within each band. The partition was not assigned semantic meaning; it was used to test whether radial representation requirements differed across the tested angular harmonic bands.
 
 ## 3.5 Candidate radial representations
 
-For each harmonic band, the radial functions
+For each harmonic band \(K_b\), the complex radial functions \(F_{i,k}(r)\) were evaluated using three alternative radial representation families: uniformly sampled raw radial interpolation, an orthonormal discrete cosine transform (DCT), and a discrete wavelet representation.
+
+All three families were evaluated under the same prespecified radial coefficient budgets,
 
 \[
-F_{i,k}(r)
+B\in\{4,8,12,18,24,36,48,72\}.
 \]
 
-were evaluated under alternative radial representations.
+For the raw representation, \(B\) approximately equally spaced radial samples were retained and linearly interpolated to the complete 72-shell grid. At \(B=72\), this operation is the identity.
 
-The candidate representation families included:
-
-1. full radial structure retained across all 72 shells;
-2. compact discrete-cosine-transform representations;
-3. compact wavelet representations.
-
-For a compact radial representation, only a prescribed number \(B\) of radial coefficients was retained.
-
-The candidate families were treated as alternative encodings of the radial dependence of the angular Fourier field rather than as assumptions about the intrinsic morphology of a harmonic band.
-
-The representation finally retained for each band was determined by the frozen validation and inferential procedure described below.
-
----
-
-## 3.6 Garment-identity-disjoint validation
-
-Representation comparisons were conducted under grouped validation in which complete garment identities were assigned to folds.
-
-For every fold,
+For the DCT representation, a type-II orthonormal DCT was applied along the radial coordinate,
 
 \[
-G_{\mathrm{train}}
-\cap
-G_{\mathrm{test}}
-=
-\varnothing.
+c_{i,k,q}=\operatorname{DCT}_{\mathrm{II}}[F_{i,k}(r)]_q,
 \]
 
-This prevents sketches originating from the same garment identity from appearing in both training and evaluation partitions.
+and only the first \(B\) low-radial-frequency coefficients were retained. Reconstruction used the corresponding orthonormal inverse DCT.
 
-Grouped validation therefore measures generalization to previously unseen garment identities rather than to additional sketches of garments already represented during model construction.
-
-Where category-balanced evaluation was required, category structure was retained within the grouped validation design.
-
----
-
-## 3.7 Compression evaluation and inferential selection
-
-Candidate radial representations were compared using the frozen task-oriented evaluation procedure.
-
-For each harmonic band, the performance of a compact radial representation was evaluated relative to the corresponding full radial structure under garment-identity-disjoint validation.
-
-A category-balanced effect statistic was used to summarize the observed performance difference.
-
-Uncertainty was estimated using bootstrap resampling at the complete garment-identity level.
-
-The primary compression inference used
+The wavelet representation used a Daubechies-4 (`db4`) wavelet with `periodization` boundary handling and the maximum admissible decomposition level for a 72-sample radial signal. Coefficients were flattened in the fixed order
 
 \[
-5000
+[cA_L,cD_L,cD_{L-1},\ldots,cD_1],
 \]
 
-bootstrap replicates.
+from coarse to progressively finer radial structure. The first \(B\) coefficients in this fixed ordering were retained. No sample-specific coefficient ranking or identity-dependent coefficient selection was performed.
 
-To test whether the observed representation effects could arise under the relevant null structure, permutation inference was performed using
+The same representation families and coefficient budgets were evaluated independently within each outer training fold.
+
+## 3.6 Garment-identity-disjoint representation selection
+
+All representation selection was performed within outer garment-identity-disjoint folds. Complete garment identities were assigned to either training or test data such that
 
 \[
-10000
+G_{\mathrm{train}}\cap G_{\mathrm{test}}=\varnothing.
 \]
 
-replicates under the frozen category-preserving permutation design.
+Candidate radial representations were selected using training data only.
 
-Because compression decisions were evaluated simultaneously across multiple harmonic bands, family-wise error was controlled using the frozen max-statistic procedure.
-
-For harmonic band \(b\), let
+Within each harmonic band, the complete 72-shell representation provided the full-radial reference. Candidate representations were evaluated using category-restricted garment-identity prototype retrieval. Mean reciprocal rank (MRR) was used as the training-fold retention criterion. For candidate \(c\),
 
 \[
-\Delta_b
+Q_c=\frac{\operatorname{MRR}_{c,\mathrm{train}}}{\operatorname{MRR}_{\mathrm{full},\mathrm{train}}}.
 \]
 
-denote the observed category-balanced effect.
-
-A compact representation was retained only when the corresponding inferential result survived the family-wise-error-rate criterion at
+A candidate was eligible when
 
 \[
-\alpha=0.05.
+Q_c\geq0.95.
 \]
 
-Failure to establish compression support was treated as a reason to preserve the complete radial representation rather than as evidence that the corresponding band contained no redundancy or no morphology.
+Among eligible candidates, the smallest radial budget \(B\) was selected. If several representation families shared the minimum budget, the candidate with the greatest training reconstruction-energy fraction was retained; remaining ties were resolved deterministically by representation name. Thus basis family and radial coefficient budget were chosen without reference to the outer held-out garment identities.
 
----
+## 3.7 Held-out garment-identity effect
 
-## 3.8 Evidence-selected hybrid radial-spectral representation
+Compression support was evaluated on held-out identities using a category-controlled garment-identity separation statistic.
 
-Application of the inferential selection procedure produced the frozen radial encoding:
+For garment identity \(g\), let \(W_g\) denote the median pairwise Euclidean distance among sketches belonging to \(g\), and let \(B_g\) denote the median distance from sketches of \(g\) to sketches belonging to other garment identities in the same garment category. Relative identity separation was
 
 \[
-k=1{:}4
-\rightarrow
-\mathrm{DCT}_4,
+S_g=\frac{B_g-W_g}{B_g}.
 \]
 
+Larger \(S_g\) indicates greater separation of between-garment variation from within-garment sketch variation.
+
+For harmonic band \(b\), the paired held-out compression effect for garment \(g\) was
+
 \[
-k=5{:}12
-\rightarrow
-\mathrm{RAW}_{72},
+D_{g,b}=S^{(\mathrm{selected})}_{g,b}-S^{(\mathrm{full})}_{g,b}.
 \]
 
+Within category \(c\), garment-level effects were summarized by
+
 \[
-k=13{:}24
-\rightarrow
-\mathrm{RAW}_{72},
+D_{c,b}=\operatorname{median}_{g\in c}D_{g,b},
 \]
 
-and
+and the primary category-balanced statistic was
 
 \[
-k=25{:}36
-\rightarrow
-\mathrm{db4\ wavelet}_4.
+T_b=\operatorname{median}_{c=1}^{23}D_{c,b}.
 \]
 
-Accordingly, the hybrid complex representation for sketch \(i\) was
+Thus \(T_b>0\) indicates that the training-selected compressed representation improved held-out category-controlled garment-identity separation relative to the complete radial representation. Held-out MRR and top-1 retrieval were retained as descriptive validation quantities and were not used as independent observations for the primary compression inference.
+
+## 3.8 Bootstrap uncertainty and simultaneous permutation inference
+
+Uncertainty in \(T_b\) was estimated using a stratified garment-identity bootstrap with 5,000 replicates. Within each category, its ten garment identities were sampled with replacement. The same sampled garment indices were used simultaneously for all four harmonic bands, preserving cross-band dependence. Category medians and the median across the 23 categories were recomputed for every replicate.
+
+The 95% bootstrap interval was defined by the empirical 2.5th and 97.5th percentiles. The bootstrap random-number seed was
 
 \[
-Z_i
-=
-\Big[
-\mathcal C_{\mathrm{DCT},4}
-\{F_{i,k}(r)\}_{k=1}^{4},
-\;
-\{F_{i,k}(r)\}_{k=5}^{12},
-\;
-\{F_{i,k}(r)\}_{k=13}^{24},
-\;
-\mathcal C_{\mathrm{WAV},4}
-\{F_{i,k}(r)\}_{k=25}^{36}
-\Big].
+20260913.
 \]
 
-The four complex blocks contain:
+The confirmatory null hypothesis was that radial compression had no systematic positive paired effect on garment-identity separation. A category-cluster sign-flip procedure was used. For each of 10,000 null replicates, one random sign
 
 \[
-4\times4=16,
+s_c\in\{-1,+1\}
+\]
+
+was assigned to each category and applied jointly to that category's complete four-band effect vector,
+
+\[
+(D_{c,1},D_{c,2},D_{c,3},D_{c,4})\mapsto s_c(D_{c,1},D_{c,2},D_{c,3},D_{c,4}).
+\]
+
+This preserves dependence among harmonic bands within category while removing systematic effect direction. The permutation seed was
+
+\[
+20260914.
+\]
+
+For replicate \(q\), null band statistics \(T_b^{(q)}\) were calculated and the simultaneous maximum statistic was
+
+\[
+M^{(q)}=\max_{b=1,\ldots,4}T_b^{(q)}.
+\]
+
+The one-sided family-wise-error-rate-adjusted probability for observed band \(b\) was
+
+\[
+p_{\mathrm{FWER},b}=\frac{1+\sum_{q=1}^{10000}\mathbf 1[M^{(q)}\geq T_b]}{10001}.
+\]
+
+Compression support was established only when
+
+\[
+p_{\mathrm{FWER},b}\leq0.05.
+\]
+
+Failure to establish support resulted in retention of the complete 72-shell radial representation; it was not interpreted as evidence of absence of radial redundancy or morphology.
+
+## 3.9 Frozen hybrid radial-spectral representation
+
+The inferential procedure yielded the band-specific selections reported in Section 4.1. Those selections were subsequently frozen for all downstream latent analyses:
+
+\[
+k=1{:}4\rightarrow\mathrm{DCT}_4,
 \]
 
 \[
-8\times72=576,
+k=5{:}12\rightarrow\mathrm{RAW}_{72},
 \]
 
 \[
-12\times72=864,
+k=13{:}24\rightarrow\mathrm{RAW}_{72},
 \]
 
-and
-
 \[
-12\times4=48
+k=25{:}36\rightarrow\mathrm{db4\ wavelet}_4.
 \]
 
-complex coefficients, respectively.
-
-The complete frozen representation therefore contains
+Thus,
 
 \[
-16+576+864+48
-=
-1504
+Z_i=\Big[\mathcal C_{\mathrm{DCT},4}(F_{i,1:4}),F_{i,5:12},F_{i,13:24},\mathcal C_{\mathrm{db4},4}(F_{i,25:36})\Big].
 \]
 
-complex coefficients per sketch.
+The resulting coefficient count and reduction relative to the complete radial-harmonic field are reported as Results rather than as prespecified methodological quantities.
 
-Relative to the original
+## 3.10 Complex-to-real packing and standardization
+
+Each complex block \(A\) was converted to real coordinates according to the verified packing convention
 
 \[
-2592
+\rho(A)=[\Re(\operatorname{vec}A),\Im(\operatorname{vec}A)].
 \]
 
-complex coefficients, this corresponds to
+Blocks were concatenated in the fixed order
 
 \[
-41.98\%
+\mathrm{low}\rightarrow\mathrm{mid}\rightarrow\mathrm{high\!-\!mid}\rightarrow\mathrm{high},
 \]
 
-coefficient reduction and a compression ratio of approximately
+giving
 
 \[
-1.7234\times.
+x_i\in\mathbb R^{3008}.
 \]
 
-This reduction is interpreted strictly as representation dimensionality reduction and not as removal of noise.
-
----
-
-## 3.9 Exact complex-to-real representation
-
-Each complex representation block was converted to real form independently.
-
-For a complex block \(A\),
+For validated latent-model comparisons, standardization was learned exclusively from each outer training fold. For feature \(m\),
 
 \[
-\rho(A)
-=
-[
-\Re(\operatorname{vec}(A)),
-\Im(\operatorname{vec}(A))
-].
+\tilde x_{im}=\frac{x_{im}-\mu_{m,\mathrm{train}}}{\sigma_{m,\mathrm{train}}},
 \]
 
-The four packed blocks were concatenated in the frozen order:
+and the same training-fold parameters were applied unchanged to the corresponding outer test data. This train-only preprocessing prevents information from held-out garment identities entering latent-model construction.
+
+After model selection was complete, the final descriptive PCA used for morphology interpretation was fitted to the frozen full representation with its corresponding full-data standardization. This final descriptive fit was not used to estimate held-out predictive performance.
+
+## 3.11 Latent representation comparison
+
+Three latent representation families were evaluated:
 
 \[
-\text{low}
-\rightarrow
-\text{mid}
-\rightarrow
-\text{high-mid}
-\rightarrow
-\text{high}.
+\mathrm{PCA},\qquad\mathrm{AE},\qquad\mathrm{VAE},
 \]
 
-The exact verified packing convention was
+at latent dimensions
 
 \[
-\boxed{
-\texttt{BLOCK\_FLAT\_REAL\_THEN\_IMAG}
-}.
+z\in\{8,16,24,32,64\}.
 \]
 
-The resulting representation is
+All families were evaluated under the same five outer garment-identity-disjoint folds.
+
+The autoencoder and variational autoencoder used the same encoder/decoder hidden widths,
 
 \[
-x_i
-\in
-\mathbb R^{3008}.
+512\rightarrow128,
 \]
 
-The real/complex lineage was verified numerically before latent-space interpretation.
+with batch size 128, maximum 250 epochs, early-stopping patience 20, learning rate \(10^{-3}\), weight decay \(10^{-5}\), and, for the VAE, \(\beta=1\). An internal identity-disjoint split of the outer training data was used for neural-model early stopping.
 
----
-
-## 3.10 Feature standardization
-
-Each real representation coordinate was standardized before latent analysis.
-
-For coordinate \(m\),
+The base reproducibility seed was
 
 \[
-\tilde{x}_{im}
-=
-\frac{x_{im}-\mu_m}{\sigma_m},
+20260821,
 \]
 
-where
+with deterministic fold/model-specific offsets used by the frozen implementation.
+
+The primary held-out benchmark was garment-identity MRR; top-1 retrieval accuracy was retained as a secondary descriptive sensitivity measure.
+
+## 3.12 Multiplicity-controlled nonlinear-model inference
+
+Nonlinear latent representations were compared directly with PCA at the same latent dimension. The ten prespecified contrasts were
 
 \[
-\mu_m
+\mathrm{AE}_z-\mathrm{PCA}_z
 \]
 
 and
 
 \[
-\sigma_m
+\mathrm{VAE}_z-\mathrm{PCA}_z,
+\qquad z\in\{8,16,24,32,64\}.
 \]
 
-denote the empirical mean and standard deviation of feature \(m\).
+For each contrast, the inferential observations were the five paired outer-fold differences in held-out MRR. The primary statistic was the mean paired outer-fold MRR difference.
 
-Equivalently,
+Because only five independent outer folds were available, the paired null distribution was enumerated exactly over
 
 \[
-\tilde{x}_i
-=
-D_\sigma^{-1}
-(x_i-\mu),
+2^5=32
 \]
 
-where
+possible fold-level sign patterns. For each sign pattern, all ten nonlinear-versus-PCA statistics were recomputed and their maximum retained. Each observed contrast was compared with this common maximum-statistic null distribution, providing simultaneous FWER control over all
 
 \[
-D_\sigma
-=
-\operatorname{diag}
-(\sigma_1,\ldots,\sigma_d)
+2\times5=10
 \]
 
-and
+searched nonlinear contrasts. Accordingly, choosing the best-performing nonlinear family or latent dimension after inspection could not evade multiplicity correction.
 
-\[
-d=3008.
-\]
-
----
-
-## 3.11 Principal-component representation
-
-Principal-component analysis was applied to the standardized hybrid representation.
-
-Let
-
-\[
-v_j
-\]
-
-denote loading vector \(j\), and let
-
-\[
-\lambda_j
-\]
-
-denote its associated eigenvalue.
-
-For sketch \(i\), the score on principal component \(j\) is
-
-\[
-z_{ij}
-=
-v_j^\top
-\tilde{x}_i.
-\]
-
-The PCA loading vectors satisfy
-
-\[
-v_j^\top v_l
-=
-\delta_{jl}.
-\]
-
-The first
-
-\[
-64
-\]
-
-principal components were retained for the final morphology interpretation.
-
-PCA was treated as an orthogonal descriptive latent basis.
-
-Orthogonality was not interpreted as semantic, physical, statistical, or causal independence between garment attributes.
-
----
-
-## 3.12 Nonlinear latent-model comparison
-
-PCA was evaluated against the frozen set of nonlinear latent alternatives under the same garment-identity-disjoint validation framework.
-
-The purpose of this comparison was to test whether nonlinear latent representations established a reproducible downstream task advantage over the linear PCA baseline.
-
-Model comparisons used the frozen primary performance metrics and multiplicity-controlled inference.
-
-This analysis was distinct from the nonlinear geometry audit.
-
-A nonlinear model could therefore fail to improve validated task performance even if the representation contained nonlinear geometric structure.
-
----
+The nonlinear-model comparison tested validated task advantage, not whether the representation possessed nonlinear geometry. Nonlinear geometric structure was therefore examined separately in Section 3.13.
 
 ## 3.13 Nonlinear geometry characterization
 
-The geometry of the frozen representation was examined using additional nonlinear analyses including:
+The geometry of the frozen representation was examined using additional nonlinear analyses including Isomap-based neighborhood geometry, principal-curve analysis, principal-curve stability analysis, and diffusion-map sensitivity analysis.
 
-- Isomap-based neighborhood geometry;
-- principal-curve analysis;
-- principal-curve stability analysis;
-- diffusion-map sensitivity analysis.
-
-These analyses were used to characterize departures from a purely linear latent geometry.
-
-They were not used to redefine the frozen representation unless they established a validated and stable replacement for PCA.
-
-The geometric analyses were therefore treated as characterization and sensitivity analyses rather than as a separate representation-selection stage.
-
----
+These analyses characterized departures from a purely linear latent geometry. They were not used to redefine the frozen representation unless they established a validated and stable replacement for PCA, and were therefore treated as characterization and sensitivity analyses rather than a separate representation-selection stage.
 
 ## 3.14 PCA morphology perturbation
 
-To interpret each retained PCA direction in the original radial-harmonic domain, a one-score-standard-deviation displacement was constructed.
+For final descriptive morphology interpretation, PCA was applied to the full standardized frozen hybrid representation. Let \(v_j\) denote loading vector \(j\), \(\lambda_j\) its eigenvalue, and \(z_{ij}=v_j^\top\tilde x_i\) the corresponding score. The first 64 components were retained as the practical descriptive subspace.
 
-For component \(j\), a one-standard-deviation movement in PCA score space is
+To interpret each retained direction in the original radial-harmonic domain, a one-score-standard-deviation displacement was constructed:
 
 \[
 \sqrt{\lambda_j}v_j.
@@ -549,30 +350,10 @@ For component \(j\), a one-standard-deviation movement in PCA score space is
 Mapping this perturbation back to the original hybrid feature units gives
 
 \[
-\Delta x_j
-=
-D_\sigma
-\left[
-\sqrt{\lambda_j}v_j
-\right].
+\Delta x_j=D_\sigma[\sqrt{\lambda_j}v_j].
 \]
 
-The perturbation
-
-\[
-\Delta x_j
-\]
-
-was then unpacked using the exact verified complex-to-real lineage.
-
-The inverse hybrid transformation applied:
-
-- inverse DCT reconstruction for \(k=1{:}4\);
-- identity radial mapping for \(k=5{:}12\);
-- identity radial mapping for \(k=13{:}24\);
-- inverse db4-wavelet reconstruction for \(k=25{:}36\).
-
-This produced
+The perturbation was unpacked using the exact verified complex-to-real lineage. The inverse hybrid transformation applied inverse DCT reconstruction for \(k=1{:}4\), identity radial mapping for \(k=5{:}24\), and inverse db4-wavelet reconstruction for \(k=25{:}36\). This produced
 
 \[
 \Delta F_j(r,k),
@@ -580,346 +361,62 @@ This produced
 
 the radial-angular Fourier perturbation associated with a one-score-standard-deviation movement along principal component \(j\).
 
----
+PCA was treated as an orthogonal descriptive basis. Orthogonality was not interpreted as semantic, physical, statistical, or causal independence between garment attributes.
 
 ## 3.15 Sign-invariant morphology energy
 
-The orientation of a PCA eigenvector is arbitrary:
+Because \(v_j\) and \(-v_j\) represent the same PCA axis, morphology interpretation used squared complex perturbation magnitude,
 
 \[
-v_j
+E_j(r,k)=|\Delta F_j(r,k)|^2,
 \]
 
-and
+which is invariant to PCA sign reversal. For each retained component,
 
 \[
--v_j
+p_j(r,k)=\frac{E_j(r,k)}{\sum_r\sum_kE_j(r,k)},
+\qquad
+\sum_r\sum_kp_j(r,k)=1.
 \]
 
-represent the same principal axis.
-
-Morphology interpretation was therefore based on squared complex perturbation magnitude:
-
-\[
-E_j(r,k)
-=
-|\Delta F_j(r,k)|^2.
-\]
-
-This quantity is invariant to PCA sign reversal.
-
-For each retained component, morphology energy was normalized as
-
-\[
-p_j(r,k)
-=
-\frac{
-E_j(r,k)
-}{
-\sum_r
-\sum_k
-E_j(r,k)
-},
-\]
-
-such that
-
-\[
-\sum_r
-\sum_k
-p_j(r,k)
-=
-1.
-\]
-
-Thus,
-
-\[
-p_j(r,k)
-\]
-
-describes the relative localization of the morphology variation associated with PCA direction \(j\) across radial and harmonic coordinates.
-
----
+Thus \(p_j(r,k)\) describes relative localization of morphology variation associated with PCA direction \(j\) across radial and harmonic coordinates.
 
 ## 3.16 Radial and harmonic localization
 
-For descriptive interpretation, radial space was partitioned into three equal-shell zones:
+For descriptive interpretation, radial space was partitioned into three equal-shell zones,
 
 \[
-R_{\mathrm{inner}}
-=
-1{:}24,
+R_{\mathrm{inner}}=1{:}24,\qquad R_{\mathrm{middle}}=25{:}48,\qquad R_{\mathrm{outer}}=49{:}72.
 \]
+
+The harmonic field retained the four frozen bands \(1{:}4\), \(5{:}12\), \(13{:}24\), and \(25{:}36\). For radial region \(R\) and harmonic band \(B\), component-specific morphology localization was
 
 \[
-R_{\mathrm{middle}}
-=
-25{:}48,
+P_j(R,B)=\sum_{r\in R}\sum_{k\in B}p_j(r,k).
 \]
 
-and
-
-\[
-R_{\mathrm{outer}}
-=
-49{:}72.
-\]
-
-The harmonic field retained the same four frozen bands used during representation selection:
-
-\[
-1{:}4,
-\]
-
-\[
-5{:}12,
-\]
-
-\[
-13{:}24,
-\]
-
-and
-
-\[
-25{:}36.
-\]
-
-For radial region \(R\) and harmonic band \(B\), component-specific morphology localization was defined as
-
-\[
-P_j(R,B)
-=
-\sum_{r\in R}
-\sum_{k\in B}
-p_j(r,k).
-\]
-
-Marginal radial and harmonic localization followed by summing over the complementary coordinate.
-
-The radial zones are representation-space partitions and were not interpreted as semantic garment regions.
-
----
+Marginal radial and harmonic localization followed by summing over the complementary coordinate. The radial zones are representation-space partitions and were not interpreted as semantic garment regions.
 
 ## 3.17 Variance-weighted retained-subspace morphology
 
-Let
+Let \(\eta_j\) denote the explained-variance ratio of PCA component \(j\). Weights were normalized within the retained 64-component subspace,
 
 \[
-\eta_j
+w_j=\frac{\eta_j}{\sum_{\ell=1}^{64}\eta_\ell},
+\qquad
+\sum_{j=1}^{64}w_j=1.
 \]
 
-denote the explained-variance ratio of PCA component \(j\).
-
-Weights were normalized within the retained 64-component subspace:
+The variance-weighted morphology localization was
 
 \[
-w_j
-=
-\frac{
-\eta_j
-}{
-\sum_{\ell=1}^{64}
-\eta_\ell
-},
+\bar P(R,B)=\sum_{j=1}^{64}w_jP_j(R,B).
 \]
 
-with
-
-\[
-\sum_{j=1}^{64}
-w_j
-=
-1.
-\]
-
-The variance-weighted morphology localization was defined as
-
-\[
-\bar{P}(R,B)
-=
-\sum_{j=1}^{64}
-w_j
-P_j(R,B).
-\]
-
-The quantity
-
-\[
-\bar{P}(R,B)
-\]
-
-therefore characterizes where variation represented by the retained PCA subspace is localized in radial-harmonic Fourier coordinates.
-
-It does not constitute a decomposition of:
-
-- the complete 3008-dimensional representation;
-- total garment morphology;
-- semantic garment parts;
-- causal morphology factors.
+This quantity characterizes where variation represented by the retained PCA-64 subspace is localized in radial-harmonic Fourier coordinates. It is not a decomposition of the complete 3008-dimensional representation, total garment morphology, discarded PCA variance, or semantic garment structure.
 
 ---
 
-## 3.18 Numerical and provenance audits
+## Methods claim boundary
 
-All frozen computational representations used for manuscript inference and interpretation were checked for numerical validity.
-
-Required audits included:
-
-\[
-N_{\mathrm{NaN}}=0
-\]
-
-and
-
-\[
-N_{\mathrm{Inf}}=0
-\]
-
-for all primary real and complex representation objects.
-
-The following lineage checks were additionally performed:
-
-- exact sketch-order consistency;
-- zero garment-identity overlap between grouped train/test folds;
-- exact harmonic-band coverage;
-- exact complex-to-real packing;
-- reconstruction of frozen hybrid dimensions;
-- normalization of PCA morphology energy;
-- normalization of retained-PC variance weights;
-- exact reproduction of final radial-harmonic localization quantities from the mathematical definitions.
-
-These checks were used to ensure that the manuscript equations corresponded directly to the computational implementation.
-
----
-
-# Methods claim boundary
-
-The Methods establish the analysis procedure.
-
-They do not by themselves establish that:
-
-- low harmonics are signal;
-- high harmonics are noise;
-- intermediate harmonics are mathematically incompressible;
-- outer radial regions correspond to garment boundaries;
-- PCA axes correspond to semantic garment attributes;
-- PCA describes complete garment morphology;
-- nonlinear morphology is absent.
-
-Those questions are constrained by the Results and Discussion evidence.
-
----
-
-# Final mathematical pipeline
-
-The complete Paper 2 analysis is:
-
-\[
-P_i(\theta\mid r)
-\]
-
-\[
-\downarrow
-\]
-
-\[
-F_{i,k}(r)
-\]
-
-\[
-\downarrow
-\]
-
-\[
-\text{harmonic-conditioned radial representation inference}
-\]
-
-\[
-\downarrow
-\]
-
-\[
-Z_i
-\in
-\mathbb C^{1504}
-\]
-
-\[
-\downarrow
-\]
-
-\[
-x_i
-\in
-\mathbb R^{3008}
-\]
-
-\[
-\downarrow
-\]
-
-\[
-\tilde{x}_i
-\]
-
-\[
-\downarrow
-\]
-
-\[
-PCA_{64}
-\]
-
-\[
-\downarrow
-\]
-
-\[
-\Delta x_j
-\]
-
-\[
-\downarrow
-\]
-
-\[
-\Delta F_j(r,k)
-\]
-
-\[
-\downarrow
-\]
-
-\[
-|\Delta F_j(r,k)|^2
-\]
-
-\[
-\downarrow
-\]
-
-\[
-\bar P(R,B).
-\]
-
----
-
-# Step 8 lock
-
-\[
-\boxed{
-\textbf{PAPER 2 FINAL METHODS — ASSEMBLED}
-}
-\]
-
-Next:
-
-\[
-\boxed{
-\textbf{STEP 9 — FINAL RESULTS ASSEMBLY}
-}
-\]
-
-Results must use only frozen values from the Evidence Ledger and must distinguish inferential findings from descriptive morphology localization.
+The Methods define an evidence-controlled representation-selection and interpretation framework. They do not assume that low harmonics are signal, high harmonics are noise, unsupported compression implies mathematical incompressibility, PCA axes are semantic garment factors, nonlinear models are generally inferior, or radial zones correspond to garment parts.
