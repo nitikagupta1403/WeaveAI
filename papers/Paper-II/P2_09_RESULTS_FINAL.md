@@ -261,65 +261,37 @@ sign configurations, giving coarse probability resolution, and the training port
 
 ---
 
-## 4.4 Detectable nonlinear geometry did not imply nonlinear-model utility
+## 4.4 Detectable nonlinear pairwise structure did not imply nonlinear-model utility
 
-To separate **geometry** from **model selection**, the validated PCA representation was subsequently examined for nonlinear structure without reopening the PCA/AE/VAE decision.
+To separate **nonlinear predictive structure** from **model selection**, the validated PCA representation was subsequently examined without reopening the PCA/AE/VAE decision.
 
-The pairwise curvature audit identified
+The prespecified pairwise audit identified
 
 \[
 \boxed{1}
 \]
 
-FWER-supported quadratic relation among the prespecified PCA-coordinate relations. The strongest held-out quadratic improvement was
+FWER-supported quadratic PCA-coordinate relation. The strongest held-out improvement of the fixed quadratic predictor over the corresponding linear predictor was
 
 \[
 \boxed{\overline{\Delta R^2}=+0.432042}.
 \]
 
-Thus, curvature remained detectable within the retained PCA-coordinate description even though nonlinear encoders had not established a validated retrieval advantage.
+This result establishes detectable **pairwise nonlinear predictability** within the retained PCA-coordinate description. It is not interpreted as differential-geometric manifold curvature, a unique nonlinear manifold, or evidence that a nonlinear encoder should replace PCA.
 
-The corrected global/local dimensionality audit showed the same distinction from another perspective. The complete standardized representation required
+A separate neighborhood-scale dimensionality diagnostic found that, at the prespecified 20-neighbour scale, the identity-level median number of directions required to retain 90% of within-neighborhood variance was 15 (IQR 15–15). Because a centered 20-neighbour matrix has rank at most 19 by construction, this value is reported only as a scale-conditioned descriptive quantity. It is **not** compared with the global 90%-variance PCA dimension, and the previously reported local/global ratio is retired from scientific interpretation.
 
-\[
-\boxed{d_{\mathrm{global},90}=613}
-\]
-
-global principal directions to account for 90% of variance. At the prespecified 20-neighbor scale, however, the identity-level median local 90%-variance tangent dimension was
-
-\[
-\boxed{\tilde d_{\mathrm{local},90}=15}
-\]
-
-with IQR
-
-\[
-15\text{–}15,
-\]
-
-corresponding to
+Additional nonlinear embedding, principal-curve and diffusion-map audits likewise failed to establish a stable nonlinear representation that warranted replacing the practical PCA baseline. The supported conclusion is therefore deliberately narrow:
 
 \[
 \boxed{
-\frac{\tilde d_{\mathrm{local},90}}
-{d_{\mathrm{global},90}}
-=0.0245
-}.
-\]
-
-The local/global contrast is descriptive and scale-dependent; it does not identify a unique intrinsic dimension.
-
-Additional nonlinear embedding, principal-curve and diffusion-map audits likewise failed to establish a stable nonlinear representation that warranted replacing the practical PCA baseline. The supported conclusion is therefore asymmetric but important:
-
-\[
-\boxed{
-\text{detectable nonlinear geometry}
+\text{detectable nonlinear pairwise structure}
 \;\not\Rightarrow\;
 \text{validated nonlinear-model advantage}.
 }
 \]
 
-Figure 3 summarizes this separation. The result guards against two opposite errors: treating PCA utility as proof of intrinsically linear morphology, or treating evidence of curvature as sufficient justification for a more complex latent model.
+Figure 3 summarizes this separation. The result guards against treating PCA utility as proof that all relationships in the representation are linear, while also avoiding the converse error of treating a supported quadratic coordinate relation as sufficient justification for a more complex latent model.
 
 ---
 
@@ -450,7 +422,7 @@ Radial structure did **not** receive uniform compression support across angular 
 
 reducing the complete Fourier field from 2592 to 1504 complex coefficients while preserving full radial structure in the harmonic ranges where compression was not supported.
 
-A second level of validation showed that greater latent-model complexity also had to earn its place. Tested AE and VAE alternatives did not establish a multiplicity-controlled retrieval advantage over same-dimensional PCA, so PCA remained the practical latent baseline. Yet a separate geometry audit detected nonlinear curvature, demonstrating that **lack of validated nonlinear-model utility is not evidence of globally linear morphology**.
+A second level of validation showed that greater latent-model complexity also had to earn its place. Tested AE and VAE alternatives did not establish a multiplicity-controlled retrieval advantage over same-dimensional PCA, so PCA remained the practical latent baseline. Yet a separate audit detected nonlinear pairwise predictability, demonstrating that **lack of validated nonlinear-model utility is not evidence that all relationships in the representation are linear**.
 
 Finally, exact inverse mapping of PCA perturbations returned latent variation to explicit radial–harmonic coordinates. Within the retained PCA-64 subspace, mapped morphology energy was concentrated predominantly in intermediate harmonic orders and outer radial structure, while individual components showed substantially heterogeneous localization.
 
