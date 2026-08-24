@@ -50,11 +50,11 @@ F_{i,k}:r\mapsto\mathbb C.
 
 Keeping \(r\) and \(k\) explicit makes it possible to test whether support for radial compression differs across angular harmonic bands rather than imposing one radial encoding on the complete Fourier field.
 
-Classical Fourier descriptors, polar Fourier representations, Angular Radial Transform methods, and multiscale Fourier-wavelet descriptors establish that spectral, radial, and multiresolution information can all be useful for shape description. The present study does not claim novelty for Fourier analysis, polar representation, DCT compression, wavelets, PCA, or their combination. Instead, it investigates an evidence-controlled representation-selection principle: candidate radial encodings are evaluated separately across prespecified angular harmonic bands under garment-identity-disjoint validation, and full radial structure is preserved whenever tested compression is not supported by multiplicity-controlled inference.
+Classical Fourier descriptors provide longstanding precedent for spectral shape representation (Zahn and Roskies, 1972; Kuhl and Giardina, 1982). Polar Fourier and radial-angular methods further establish that radial and angular spectral organization can be represented jointly: the Generic Fourier Descriptor applies a two-dimensional Fourier transform to a polar-raster shape representation (Zhang and Lu, 2002), while the Angular Radial Transform is an established MPEG-7 region-shape descriptor (Ricard et al., 2005). Multiscale Fourier-wavelet descriptors likewise show that Fourier and multiresolution representations can be combined (Kunttu et al., 2006), including a Wavelet Fourier Descriptor developed specifically for fashion-flat sketch classification (An and Li, 2014). The present study therefore does not claim novelty for Fourier analysis, polar representation, DCT compression, wavelets, PCA, or their combination. Instead, it investigates an evidence-controlled representation-selection principle: candidate radial encodings are evaluated separately across prespecified angular harmonic bands under garment-identity-disjoint validation, and full radial structure is preserved whenever tested compression is not supported by multiplicity-controlled inference.
 
 This principle deliberately allows a heterogeneous representation. A compact basis can be retained where supported without forcing the same transform or coefficient budget on harmonic bands for which the evidence does not justify compression. Negative compression results therefore contribute directly to representation construction rather than triggering an unrestricted search for a lower-dimensional alternative.
 
-A second question concerns the geometry of the selected representation. Detecting nonlinear geometric structure does not imply that a nonlinear latent model improves held-out task performance. We therefore separate **geometric nonlinearity** from **nonlinear-model utility**: PCA, autoencoder, and variational-autoencoder representations are compared under the same garment-identity-disjoint validation logic, while manifold-oriented analyses are treated separately as geometric diagnostics.
+A second question concerns the geometry of the selected representation. Detecting nonlinear geometric structure does not imply that a nonlinear latent model improves held-out task performance. We therefore separate **geometric nonlinearity** from **nonlinear-model utility**: PCA provides the linear reference (Jolliffe and Cadima, 2016), while autoencoder and variational-autoencoder representations provide nonlinear alternatives (Hinton and Salakhutdinov, 2006; Kingma and Welling, 2014). Manifold-oriented analyses are treated separately as geometric diagnostics rather than as automatic evidence for replacing the validated task representation.
 
 Finally, latent variation is mapped back to the original radial-harmonic coordinates. For PCA direction \(j\), a one-score-standard-deviation perturbation is reconstructed through the frozen representation,
 
@@ -92,33 +92,33 @@ Using 2,300 sketches representing 230 recovered garment identities across 23 cat
 
 ## 2.1 Fourier and polar shape representations
 
-Fourier descriptors are established tools for contour- and region-based shape analysis, recognition, and retrieval. Their appeal lies in compact spectral representation and useful transformation properties under suitable normalization. Global Fourier descriptors, however, can combine structures occurring at different spatial locations, motivating representations that retain additional spatial organization.
+Fourier descriptors are established tools for contour- and region-based shape analysis, recognition, and retrieval. Early Fourier contour descriptions established compact harmonic representations of closed curves (Zahn and Roskies, 1972), while elliptic Fourier descriptors provided normalized reconstruction of closed contours (Kuhl and Giardina, 1982). Fourier-derived descriptors have also been used in multivariate morphology analysis (Rohlf and Archie, 1984). Their appeal lies in compact spectral representation and useful transformation properties under suitable normalization, but global descriptors can combine structures occurring at different spatial locations, motivating representations that retain additional spatial organization.
 
-Polar spectral methods provide one such route. The Generic Fourier Descriptor introduced by Zhang and Lu applies Fourier analysis to a polar-raster representation so that radial and angular frequency information both contribute to region-based shape description. The Angular Radial Transform similarly uses basis functions defined jointly over radial and angular coordinates and has been used in MPEG-7 region-based shape representation. These methods establish the value of explicit radial-angular spectral structure.
+Polar spectral methods provide one such route. The Generic Fourier Descriptor introduced by Zhang and Lu (2002) applies a two-dimensional Fourier transform to a polar-raster representation so that radial and circular frequency information both contribute to region-based shape description. The Angular Radial Transform similarly uses basis functions defined jointly over radial and angular coordinates and forms part of the MPEG-7 region-shape framework (Ricard et al., 2005). Polar harmonic methods provide further precedent for explicit orthogonal radial-angular harmonic representations (Yap et al., 2010). These methods establish the value—and prior art—of explicit radial-angular spectral structure.
 
 The present study asks a narrower question. Rather than fixing a single radial-angular basis for the complete descriptor, it retains each angular harmonic as the radial function \(F_k(r)\) and evaluates whether the radial encoding can be reduced differently across prespecified harmonic bands.
 
 ## 2.2 Multiscale and wavelet shape representations
 
-Wavelet and multiscale Fourier descriptors address limitations of purely global spectral descriptions by introducing localized or scale-dependent structure. Prior work therefore establishes that Fourier and wavelet representations can coexist productively within a shape-analysis system.
+Wavelet and multiscale Fourier descriptors address limitations of purely global spectral descriptions by introducing localized or scale-dependent structure. Kunttu et al. (2006) developed multiscale Fourier descriptors combining Fourier analysis with wavelet-based multiresolution structure. Fourier-wavelet integration also has direct precedent in the fashion domain: An and Li (2014) used a Wavelet Fourier Descriptor in a fashion-flat-sketch classification pipeline. Prior work therefore establishes that Fourier and wavelet representations can coexist productively within a shape-analysis system.
 
 Our distinction lies in how the radial basis is assigned. A wavelet, cosine, or complete radial representation is not assumed to be appropriate across the full harmonic range. Candidate encodings are instead evaluated band by band under the same identity-disjoint validation and inferential framework. The selected representation may consequently contain compressed and uncompressed spectral regions simultaneously.
 
 ## 2.3 Compact descriptors and evidence-guided preservation
 
-Classical descriptor design often emphasizes compactness because storage, matching, and retrieval efficiency are central objectives. Here, dimensional reduction is subject to an additional requirement: a lower-dimensional radial representation is adopted only when its use is supported under the frozen held-out criterion.
+Classical descriptor design often emphasizes compactness because storage, matching, and retrieval efficiency are central objectives; compactness is an explicit motivation in established polar and multiscale shape descriptors (Zhang and Lu, 2002; Ricard et al., 2005; Kunttu et al., 2006). Here, dimensional reduction is subject to an additional requirement: a lower-dimensional radial representation is adopted only when its use is supported under the frozen held-out criterion.
 
 Accordingly, failure to establish compression support is not treated as failure to construct a descriptor. It leads to preservation of the complete radial structure for that band. This design distinguishes evidence-guided representation selection from compression imposed primarily to meet a predetermined dimensionality target. It also does not imply that an unsupported band is intrinsically incompressible; conclusions remain conditional on the tested candidate family and coefficient budgets.
 
 ## 2.4 Linear and nonlinear latent representations
 
-PCA provides an orthogonal, variance-ordered representation with a direct inverse map to the original feature coordinates. Autoencoders and variational autoencoders provide nonlinear alternatives that can model more complex mappings, while manifold-oriented methods can characterize nonlinear geometry without necessarily defining a validated task representation.
+PCA provides an orthogonal, variance-ordered representation with a direct inverse map to the original feature coordinates (Jolliffe and Cadima, 2016). Autoencoders provide nonlinear low-dimensional codes learned through reconstruction (Hinton and Salakhutdinov, 2006), while variational autoencoders provide a probabilistic latent-variable formulation based on variational inference and the reparameterization estimator (Kingma and Welling, 2014). Manifold-oriented methods can characterize nonlinear geometry without necessarily defining a validated task representation; examples include principal curves (Hastie and Stuetzle, 1989), Isomap (Tenenbaum et al., 2000), and diffusion maps (Coifman and Lafon, 2006).
 
 For morphology data, the existence of nonlinear geometry and the usefulness of a nonlinear latent model are distinct empirical questions. The present study therefore evaluates PCA and nonlinear latent alternatives under garment-identity-disjoint task validation while treating nonlinear geometry analyses separately. This prevents a nonlinear visualization or local geometric diagnostic from being interpreted automatically as evidence of superior held-out representation performance.
 
 ## 2.5 Position of the present study
 
-The methodological components used here—Fourier shape analysis, polar representation, DCT and wavelet bases, PCA, and nonlinear latent models—are established. The contribution lies in their integration around an evidence-controlled decision rule:
+The methodological components used here—Fourier shape analysis, polar representation, DCT and wavelet bases, PCA, and nonlinear latent models—are established (Zhang and Lu, 2002; Ricard et al., 2005; Kunttu et al., 2006; An and Li, 2014; Jolliffe and Cadima, 2016). The contribution lies in their integration around an evidence-controlled decision rule:
 
 \[
 \boxed{
@@ -128,7 +128,7 @@ The methodological components used here—Fourier shape analysis, polar represen
 
 under garment-identity-disjoint validation and multiplicity-controlled inference, with complete radial structure retained wherever tested compression is unsupported.
 
-The selected representation is then analysed in latent space, while PCA perturbations are mapped exactly back to radial-harmonic coordinates for descriptive localization. This preserves a direct mathematical path from latent variation to the original spectral representation without claiming semantic garment attributes, a universally optimal transform, or a universally valid harmonic-dependent compression law.
+The selected representation is then analysed in latent space, while PCA perturbations are mapped exactly back to radial-harmonic coordinates for descriptive localization. This preserves a direct mathematical path from latent variation to the original spectral representation without claiming semantic garment attributes, a universally optimal transform, or a universally valid harmonic-dependent compression law. No literature-wide priority claim is made.
 
 
 ---
@@ -1155,65 +1155,36 @@ random seeds, and provenance checks required to reproduce the reported results.
 
 # References
 
-An, L., & Li, W. (2014). An integrated approach to fashion flat sketches
-classification. *International Journal of Clothing Science and Technology*,
-26(5), 346–366.
-https://doi.org/10.1108/IJCST-05-2013-0054
+An, L., & Li, W. (2014). An integrated approach to fashion flat sketches classification. *International Journal of Clothing Science and Technology*, 26(5), 346–366. https://doi.org/10.1108/IJCST-05-2013-0054
 
-Arnia, F. (2020). *Clo-Sket* (Version 1) [Data set]. Mendeley Data.
-https://doi.org/10.17632/jt533nkhsf.1
+Arnia, F. (2020). *Clo-Sket* (Version 1) [Data set]. Mendeley Data. https://doi.org/10.17632/jt533nkhsf.1
 
-Coifman, R. R., & Lafon, S. (2006). Diffusion maps.
-*Applied and Computational Harmonic Analysis*, 21(1), 5–30.
-https://doi.org/10.1016/j.acha.2006.04.006
+Coifman, R. R., & Lafon, S. (2006). Diffusion maps. *Applied and Computational Harmonic Analysis*, 21(1), 5–30. https://doi.org/10.1016/j.acha.2006.04.006
 
-Efron, B. (1979). Bootstrap methods: Another look at the jackknife.
-*The Annals of Statistics*, 7(1), 1–26.
-https://doi.org/10.1214/aos/1176344552
+Efron, B. (1979). Bootstrap methods: Another look at the jackknife. *The Annals of Statistics*, 7(1), 1–26. https://doi.org/10.1214/aos/1176344552
 
-Hastie, T., & Stuetzle, W. (1989). Principal curves.
-*Journal of the American Statistical Association*, 84(406), 502–516.
-https://doi.org/10.1080/01621459.1989.10478797
+Hastie, T., & Stuetzle, W. (1989). Principal curves. *Journal of the American Statistical Association*, 84(406), 502–516. https://doi.org/10.1080/01621459.1989.10478797
 
-Kuhl, F. P., & Giardina, C. R. (1982). Elliptic Fourier features of a closed
-contour. *Computer Graphics and Image Processing*, 18(3), 236–258.
-https://doi.org/10.1016/0146-664X(82)90034-X
+Hinton, G. E., & Salakhutdinov, R. R. (2006). Reducing the dimensionality of data with neural networks. *Science*, 313(5786), 504–507. https://doi.org/10.1126/science.1127647
 
-Kunttu, I., Lepistö, L., Rauhamaa, J., & Visa, A. (2006). Multiscale Fourier
-descriptors for defect image retrieval. *Pattern Recognition Letters*, 27(2),
-123–132.
-https://doi.org/10.1016/j.patrec.2005.08.022
+Jolliffe, I. T., & Cadima, J. (2016). Principal component analysis: A review and recent developments. *Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences*, 374(2065), 20150202. https://doi.org/10.1098/rsta.2015.0202
 
-Lee, J.-M., & Kim, W.-Y. (2012). A new shape description method using angular
-radial transform. *IEICE Transactions on Information and Systems*, E95-D(6),
-1628–1635.
-https://doi.org/10.1587/transinf.E95.D.1628
+Kingma, D. P., & Welling, M. (2014). Auto-Encoding Variational Bayes. *International Conference on Learning Representations (ICLR)*. arXiv:1312.6114. https://doi.org/10.48550/arXiv.1312.6114
 
-Ricard, J., Coeurjolly, D., & Baskurt, A. (2005). Generalizations of angular
-radial transform for 2D and 3D shape retrieval. *Pattern Recognition Letters*,
-26(14), 2174–2186.
-https://doi.org/10.1016/j.patrec.2005.03.030
+Kuhl, F. P., & Giardina, C. R. (1982). Elliptic Fourier features of a closed contour. *Computer Graphics and Image Processing*, 18(3), 236–258. https://doi.org/10.1016/0146-664X(82)90034-X
 
-Rohlf, F. J., & Archie, J. W. (1984). A comparison of Fourier methods for the
-description of wing shape in mosquitoes (Diptera: Culicidae).
-*Systematic Zoology*, 33(3), 302–317.
-https://doi.org/10.2307/2413076
+Kunttu, I., Lepistö, L., Rauhamaa, J., & Visa, A. (2006). Multiscale Fourier descriptors for defect image retrieval. *Pattern Recognition Letters*, 27(2), 123–132. https://doi.org/10.1016/j.patrec.2005.08.022
 
-Tenenbaum, J. B., de Silva, V., & Langford, J. C. (2000). A global geometric
-framework for nonlinear dimensionality reduction. *Science*, 290(5500),
-2319–2323.
-https://doi.org/10.1126/science.290.5500.2319
+Lee, J.-M., & Kim, W.-Y. (2012). A new shape description method using angular radial transform. *IEICE Transactions on Information and Systems*, E95-D(6), 1628–1635. https://doi.org/10.1587/transinf.E95.D.1628
 
-Yap, P.-T., Jiang, X., & Kot, A. C. (2010). Two-dimensional polar harmonic
-transforms for invariant image representation.
-*IEEE Transactions on Pattern Analysis and Machine Intelligence*, 32(7),
-1259–1270.
-https://doi.org/10.1109/TPAMI.2009.119
+Ricard, J., Coeurjolly, D., & Baskurt, A. (2005). Generalizations of angular radial transform for 2D and 3D shape retrieval. *Pattern Recognition Letters*, 26(14), 2174–2186. https://doi.org/10.1016/j.patrec.2005.03.030
 
-Zahn, C. T., & Roskies, R. Z. (1972). Fourier descriptors for plane closed
-curves. *IEEE Transactions on Computers*, C-21(3), 269–281.
-https://doi.org/10.1109/TC.1972.5008949
+Rohlf, F. J., & Archie, J. W. (1984). A comparison of Fourier methods for the description of wing shape in mosquitoes (Diptera: Culicidae). *Systematic Zoology*, 33(3), 302–317. https://doi.org/10.2307/2413076
 
-Zhang, D., & Lu, G. (2002). Shape-based image retrieval using generic Fourier
-descriptor. *Signal Processing: Image Communication*, 17(10), 825–848.
-https://doi.org/10.1016/S0923-5965(02)00084-X
+Tenenbaum, J. B., de Silva, V., & Langford, J. C. (2000). A global geometric framework for nonlinear dimensionality reduction. *Science*, 290(5500), 2319–2323. https://doi.org/10.1126/science.290.5500.2319
+
+Yap, P.-T., Jiang, X., & Kot, A. C. (2010). Two-dimensional polar harmonic transforms for invariant image representation. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 32(7), 1259–1270. https://doi.org/10.1109/TPAMI.2009.119
+
+Zahn, C. T., & Roskies, R. Z. (1972). Fourier descriptors for plane closed curves. *IEEE Transactions on Computers*, C-21(3), 269–281. https://doi.org/10.1109/TC.1972.5008949
+
+Zhang, D., & Lu, G. (2002). Shape-based image retrieval using generic Fourier descriptor. *Signal Processing: Image Communication*, 17(10), 825–848. https://doi.org/10.1016/S0923-5965(02)00084-X
