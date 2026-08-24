@@ -28,6 +28,7 @@ discussion = read("P2_10_DISCUSSION_FINAL.md")
 front = read("P2_12_ABSTRACT_TITLE_KEYWORDS.md")
 conclusion = read("P2_13_CONCLUSION_FINAL.md")
 legacy = read("P2_18_CVIU_CITATION_INTEGRATED_MANUSCRIPT.md")
+references = read("P2_14_REFERENCES_FINAL.md")
 
 abstract = section(front, "Abstract", "Keywords")
 keywords = section(front, "Keywords", "Running title")
@@ -39,7 +40,7 @@ discussion_s = section(discussion, "5. Discussion")
 conclusion_s = section(conclusion, "6. Conclusion")
 data_av = section(legacy, "Data Availability", "Code Availability")
 code_av = section(legacy, "Code Availability", "References")
-refs = section(legacy, "References")
+refs = section(references, "References")
 
 master = "\n\n---\n\n".join([
     f"# {TITLE}\n\n**{AUTHOR}**",
@@ -89,6 +90,11 @@ required = [
     "78.54%",
     "66.84%",
     "51.30%",
+    "Zhang and Lu, 2002",
+    "An and Li, 2014",
+    "Jolliffe and Cadima, 2016",
+    "Hinton and Salakhutdinov, 2006",
+    "Kingma and Welling, 2014",
 ]
 for token in required:
     if token not in master:
