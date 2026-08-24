@@ -2,7 +2,7 @@
 
 ## Status
 
-**FINAL METHODS ASSEMBLY: REPRODUCIBILITY REPAIRED**
+**FINAL METHODS ASSEMBLY: EVIDENCE-CONTROLLED REPRESENTATION + REPRODUCIBILITY LOCKED**
 
 This Methods section is assembled from the frozen mathematical and computational contracts. No new analysis is introduced here.
 
@@ -363,9 +363,37 @@ The nonlinear-model comparison tested validated task advantage, not whether the 
 
 ## 3.13 Nonlinear geometry characterization
 
-The geometry of the frozen representation was examined using additional nonlinear analyses including Isomap-based neighborhood geometry, principal-curve analysis, principal-curve stability analysis, and diffusion-map sensitivity analysis.
+Nonlinear geometry was evaluated **after and separately from** the PCA/AE/VAE task comparison. These analyses were not allowed to reopen the latent-model decision in Section 3.12 merely because curvature or local low-dimensional structure was detectable. Their purpose was to test the narrower geometric question of whether the frozen representation was adequately described as globally linear.
 
-These analyses characterized departures from a purely linear latent geometry. They were not used to redefine the frozen representation unless they established a validated and stable replacement for PCA, and were therefore treated as characterization and sensitivity analyses rather than a separate representation-selection stage.
+Three complementary classes of diagnostics were retained.
+
+First, prespecified PCA-coordinate relations were compared under held-out linear and quadratic prediction. For each relation, the geometric effect was summarized as the held-out improvement
+
+\[
+\Delta R^2
+=
+R^2_{\mathrm{quadratic}}
+-
+R^2_{\mathrm{linear}}.
+\]
+
+Multiplicity was controlled across the tested coordinate relations, so evidence for curvature required family-wise-error-rate support rather than selection of the largest unadjusted quadratic improvement. This analysis tested detectable curvature within the PCA coordinate description; it did not test whether an AE, VAE, or other nonlinear encoder improved garment-identity retrieval.
+
+Second, global and local linear dimensionality were contrasted at the same 90%-variance threshold. Global dimensionality was defined as the number of principal directions required to explain 90% of variance in the complete standardized frozen representation. Local tangent dimensionality was estimated at the prespecified 20-neighbor scale and summarized at garment-identity level before reporting the median and interquartile range across identities. The resulting global/local comparison was treated as a scale-dependent geometric diagnostic, not as an estimator of a unique intrinsic manifold dimension.
+
+Third, additional nonlinear-geometry sensitivity analyses included Isomap-based neighborhood geometry, principal-curve analysis and stability assessment, and diffusion-map sensitivity analysis. These analyses asked whether the observed departures from global linearity resolved into a stable nonlinear coordinate system. Neighborhood preservation was treated as the primary geometric criterion in the controlled embedding audits, with garment-identity retrieval retained as a secondary quantity where applicable.
+
+The geometry analyses were therefore governed by the explicit separation
+
+\[
+\boxed{
+\text{detectable nonlinear geometry}
+\;\not\equiv\;
+\text{validated nonlinear-model utility}.
+}
+\]
+
+A nonlinear geometric finding could characterize the representation without establishing a task-validated replacement for PCA. Conversely, failure of the tested AE/VAE configurations to replace PCA could not be interpreted as evidence that the morphology geometry was intrinsically linear.
 
 ## 3.14 PCA morphology perturbation
 
