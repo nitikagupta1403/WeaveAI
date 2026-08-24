@@ -1263,220 +1263,64 @@ The eight radial and six axial coordinates were concatenated in the order define
 
 ## 3.11 Confirmatory incremental representation-value experiment
 
-The central downstream experiment asked whether the frozen compact axial–radial representation adds garment-category information beyond the frozen morphology representation under validation that withholds complete garment identities.
-
-Let
+Experiment 06 tested whether the frozen compact axial–radial representation adds garment-category information beyond the frozen 135-D morphology representation. The seven prespecified feature sets were (R), (A), (R+A), (M), (M+R), (M+A), and (M+R+A), with dimensions 8, 6, 14, 135, 143, 141, and 149. The primary contrast was
 
 \[
-\mathbf z_{R,i}\in\mathbb R^8,
-\qquad
-\mathbf z_{A,i}\in\mathbb R^6,
-\qquad
-\mathbf z_{RA,i}=\mathbf z_{R,i}\oplus\mathbf z_{A,i}\in\mathbb R^{14},
+\Delta F_1=F_1^{\mathrm{macro}}(M+R+A)-F_1^{\mathrm{macro}}(M),
 \]
 
-and let
+with \(\Delta BA=BA(M+R+A)-BA(M)\) secondary. Radial-only and axial-only additions were mechanistic ablations and could not replace the primary contrast.
+
+The experiment was confirmatory for the compact 14-D representation but not historically blind. Before its outcome was computed, frozen metadata had exposed a positive result for an earlier, broader 28-D radial–angular representation (macro-F1 increment +0.070984; balanced-accuracy increment +0.073043). This exposure was disclosed in the design lock. No compact-representation outcome had been computed when its features, primary contrast, estimator, validation unit, bootstrap count, repeated-partition count, or alignment-permutation count were frozen.
+
+## 3.12 Locked estimator and grouped validation
+
+Every feature set used training-fold `StandardScaler` followed by `LogisticRegression` with L2 penalty, \(C=1.0\), `solver=lbfgs`, `max_iter=5000`, `class_weight=None`, and `random_state=20260820`. No hyperparameter search or feature-set-specific classifier change was performed.
+
+Five deterministic category-balanced folds were constructed over the 230 garment identities. Each fold held out exactly two complete identities from each of 23 categories (46 test identities; 184 train identities), with zero identity overlap. Every sketch appeared in exactly one test fold; test-row counts were 459, 460, 462, 460, and 459. Macro-F1 (primary) and balanced accuracy (secondary) were computed from pooled out-of-fold predictions.
+
+## 3.13 Paired garment-identity bootstrap
+
+Primary-effect uncertainty was estimated from paired frozen out-of-fold predictions using 5,000 complete-garment-identity bootstrap replicates (random state 20260820). Sampling an identity included all its sketches for both models.
+
+The prespecified unrestricted bootstrap was retained in the audit trail. Because some replicates omitted an entire category, a category-stratified robustness analysis was added without model refitting or feature changes. It sampled 10 identities with replacement within each of the 23 categories, preserving every category in every replicate. Percentile 95% confidence intervals were the 2.5th and 97.5th percentiles of paired metric differences. Fraction-positive values were descriptive, not permutation probabilities.
+
+## 3.14 Repeated grouped-partition stability
+
+Ten complete repetitions of five-fold category-balanced grouped cross-validation used seeds 20260820 through 20260829. Within each repeat, every category again contributed exactly two identities to each test fold. The estimator, preprocessing, features, and outcomes remained fixed.
+
+The repeated analysis evaluated (M), (M+R), and (M+R+A). For every repeat, pooled out-of-fold macro-F1 and balanced accuracy were computed and the full augmented-minus-morphology difference retained; the (M+R-M) macro-F1 difference was retained as radial-ablation stability. All 10 repeats and all 50 constituent folds were retained.
+
+## 3.15 Category-preserving identity-alignment permutation
+
+A separate control tested whether augmented-model utility required exact garment-level pairing. Complete (R+A) identity blocks were reassigned within garment category while also matching identity block size. Thus category composition and 9-, 10-, or 11-sketch repeated-measure structure were preserved while exact morphology–axial–radial correspondence was disrupted.
+
+Dress, Harem, and Jumpsuit each contained singleton 9-sketch and 11-sketch category-by-size strata, so those six identities necessarily self-mapped. The audited null retained the same identity for 2.6087% of rows and misaligned 97.3913% in every permutation.
+
+For each of 2,000 permutations, the same five frozen grouped folds, fold-local standardization, and locked logistic-regression specification were used to fit and evaluate (M+R+A_{\pi}). The null statistic was its performance increment over the frozen morphology baseline. The one-sided corrected empirical probability was
 
 \[
-\mathbf z_{M,i}\in\mathbb R^{135}
+p=\frac{1+\sum_{b=1}^{B}\mathbf 1[\Delta_b^{\mathrm{null}}\geq\Delta_{\mathrm{obs}}]}{B+1},
+\qquad B=2000.
 \]
 
-denote the independently frozen morphology vector. Seven feature sets were fixed before the compact-representation outcomes were inspected:
+The test was evaluated for macro-F1 and balanced accuracy. It asks whether **correct garment-level alignment is more useful than category-preserving misalignment**, not whether the axial–radial block has incremental predictive utility at all.
+
+## 3.16 Claim hierarchy for Experiment 06
+
+Standalone (R), (A), or (R+A) performance establishes discriminative information only. A positive (M+R+A-M) contrast with garment-identity bootstrap support and repeated-partition stability supports reproducible **incremental predictive utility**. The radial and axial ablations localize the directly observed increment but do not redefine the primary hypothesis. A stronger claim of **garment-specific correspondence** requires the correctly aligned effect to exceed the category-preserving, block-size-matched misalignment null.
+
+Accordingly,
 
 \[
-R,\quad A,\quad R{+}A,\quad M,\quad M{+}R,\quad M{+}A,\quad M{+}R{+}A,
+\text{incremental utility}\not\Rightarrow\text{garment-specific correspondence}.
 \]
 
-with dimensions
-
-\[
-8,\ 6,\ 14,\ 135,\ 143,\ 141,\ 149,
-\]
-
-respectively.
-
-The primary augmented representation was
-
-\[
-\mathbf z_{MRA,i}
-=
-\mathbf z_{M,i}\oplus\mathbf z_{RA,i}.
-\]
-
-For score function \(\mathcal S\), the confirmatory effect was
-
-\[
-\Delta_{RA}
-=
-\mathcal S(M{+}R{+}A)-\mathcal S(M).
-\]
-
-Macro-F1 was the primary metric and balanced accuracy the secondary metric. The radial and axial mechanistic increments were
-
-\[
-\Delta_R
-=
-\mathcal S(M{+}R)-\mathcal S(M),
-\]
-
-and
-
-\[
-\Delta_A
-=
-\mathcal S(M{+}A)-\mathcal S(M).
-\]
-
-These ablations were retained regardless of their observed performance and were not eligible to replace \(\Delta_{RA}\) as the primary comparison.
-
-The experiment was locked against outcome-dependent feature selection, classifier switching, hyperparameter search, category or identity removal, image-level random cross-validation, selective reporting of folds or repeated partitions, and promotion of a more favorable ablation to the primary hypothesis. A historical result from a broader 28-dimensional radial–angular representation had been seen before this experiment; this exposure was explicitly recorded. The compact 14-dimensional representation, its radial/axial decomposition, and the present confirmatory contrast were frozen separately before their scores were computed.
+Neither result establishes statistical independence, information-theoretic uniqueness, semantic understanding, or causality.
 
 ---
 
-## 3.12 Identity-aware validation and fixed estimator
-
-The 230 recovered garment identities were the indivisible grouping units. Five deterministic category-balanced folds were constructed so that each test fold contained exactly two garment identities from each of the 23 categories:
-
-\[
-46\ \text{test identities/fold},
-\qquad
-184\ \text{training identities/fold}.
-\]
-
-All repeated sketches belonging to a garment identity remained on the same side of a fold boundary. Train/test identity overlap was zero, and every sketch appeared in exactly one test fold.
-
-Every feature set used the same estimator pipeline. Features were standardized using \(\texttt{StandardScaler}\) fitted only on the training portion of each fold, followed by multinomial logistic regression with
-
-\[
-\texttt{penalty}=\mathrm{L2},
-\qquad
-C=1.0,
-\qquad
-\texttt{solver}=\texttt{lbfgs},
-\]
-
-\[
-\texttt{max\_iter}=5000,
-\qquad
-\texttt{class\_weight}=\texttt{None},
-\qquad
-\texttt{random\_state}=20260820.
-\]
-
-No classifier or hyperparameter was tuned separately for any feature block. Predictions from the five held-out folds were pooled to obtain the primary out-of-fold macro-F1 and balanced accuracy.
-
----
-
-## 3.13 Identity-cluster uncertainty and repeated-partition stability
-
-Uncertainty in the primary incremental effect was quantified by paired resampling of complete garment identities. Because unrestricted identity bootstrap samples can occasionally omit a garment category, the manuscript-facing robustness interval used a category-stratified identity bootstrap. Within each of the 23 categories, 10 garment identities were sampled with replacement; when an identity was selected, all of its repeated sketches and paired predictions from both \(M\) and \(M{+}R{+}A\) were retained.
-
-For bootstrap replicate \(b\),
-
-\[
-\Delta_{RA}^{(b)}
-=
-\mathcal S^{(b)}(M{+}R{+}A)
--
-\mathcal S^{(b)}(M).
-\]
-
-A total of
-
-\[
-B=5000
-\]
-
-replicates were generated with random state 20260820. Percentile 95% confidence intervals were defined by the 2.5th and 97.5th percentiles of the bootstrap distribution. The fraction of positive bootstrap replicates was treated descriptively and was not reported as a permutation \(p\)-value.
-
-Partition sensitivity was assessed independently using 10 category-balanced grouped five-fold partitions with seeds
-
-\[
-20260820,20260821,\ldots,20260829.
-\]
-
-Within every repeat, each category again contributed two complete identities to each test fold, and the same locked estimator was used. No repeat was discarded. The distribution of \(\Delta_{RA}\), together with the radial increment \(\Delta_R\), was used to assess whether the observed effect depended on a particular deterministic identity partition.
-
----
-
-## 3.14 Category-preserving garment-identity alignment permutation
-
-Incremental predictive utility does not by itself show that the added axial–radial vector must correspond to the same individual garment as the morphology vector. To test this stronger proposition, a category-preserving alignment-permutation control was performed.
-
-The morphology matrix, category labels, validation folds, estimator, and observed outcome labels remained fixed. Complete 14-dimensional axial–radial blocks were reassigned among garment identities **within the same garment category**. Reassignment was additionally restricted to identities with the same number of repeated sketches, so the 9-, 10-, and 11-sketch block structure was preserved exactly. This maintained the marginal category-conditioned axial–radial distribution while breaking exact garment-level correspondence wherever an alternative equal-size identity block existed.
-
-For permutation \(b\), the null augmented effect was
-
-\[
-\Delta_{RA,\mathrm{null}}^{(b)}
-=
-\mathcal S\!\left(M+\pi_b(R{+}A)\right)
--
-\mathcal S(M),
-\]
-
-where \(\pi_b\) denotes the category- and block-size-preserving identity reassignment. Structural audit showed that the procedure misaligned 97.3913% of sketch rows; the residual 2.6087% arose from singleton category-by-block-size groups for which no alternative equal-size identity existed.
-
-The observed statistic was the correctly aligned effect
-
-\[
-\Delta_{RA,\mathrm{obs}}
-=
-\mathcal S(M{+}R{+}A)-\mathcal S(M).
-\]
-
-Using
-
-\[
-B=2000
-\]
-
-permutations and random state 20260820, the one-sided corrected empirical probability was
-
-\[
-p_{\mathrm{align}}
-=
-\frac{
-1+
-\sum_{b=1}^{B}
-\mathbf 1
-\left[
-\Delta_{RA,\mathrm{null}}^{(b)}
-\geq
-\Delta_{RA,\mathrm{obs}}
-\right]
-}{
-B+1
-}.
-\]
-
-This test asks whether **correct garment-level alignment produces a larger increment than category-preserving misalignment**. Failure to reject this null does not negate a positive incremental effect; it limits its interpretation by showing that the observed utility need not depend on exact garment-level morphology–axial–radial correspondence.
-
----
-
-## 3.15 Claim hierarchy for the incremental experiment
-
-The confirmatory experiment was interpreted through an explicit hierarchy.
-
-First, performance of \(R\), \(A\), or \(R{+}A\) alone demonstrates category-discriminative information in that representation under the tested classifier; it does not establish semantic interpretation.
-
-Second,
-
-\[
-\Delta_{RA}>0
-\]
-
-with identity-cluster uncertainty excluding zero and positive effects across repeated grouped partitions supports reproducible **incremental predictive utility** beyond morphology under the locked task.
-
-Third, radial and axial ablations localize which mathematical component carries the observed increment but do not redefine the primary hypothesis.
-
-Fourth, evidence for **garment-specific correspondence** requires the correctly aligned \(\Delta_{RA}\) to exceed the category-preserving identity-misalignment null. Without such evidence, the appropriate interpretation is that the additional predictive utility is compatible with category-level distributional structure rather than exact garment-level complementarity.
-
-None of these tests establishes statistical independence, information-theoretic uniqueness, semantic garment understanding, or causality.
-
----
-
-## 3.16 Garment-identity-disjoint shell-field reconstruction
+## 3.17 Garment-identity-disjoint shell-field reconstruction
 
 The reconstruction experiment interrogated the shell-level second-harmonic field underlying the 14-dimensional summary representation. It did not use the 14-dimensional vector itself as the predictor input.
 
@@ -1541,11 +1385,11 @@ The final analysis was executed with Python 3.12.13, NumPy 2.0.2, and scikit-lea
 
 ---
 
-## 3.17 Rotation and coordinate-frame controls
+## 3.18 Rotation and coordinate-frame controls
 
 Two complementary rotation controls evaluated the dependence of reconstruction on the common image coordinate frame.
 
-### 3.17.1 Analytic harmonic rotation
+### 3.18.1 Analytic harmonic rotation
 
 For a physical image rotation by angle \(\phi\),
 
@@ -1618,7 +1462,7 @@ while axial orientation transforms as
 
 This analytic transformation was used instead of rotating raster images, thereby avoiding interpolation, resampling, and cropping artifacts.
 
-### 3.17.2 Global-rotation control
+### 3.18.2 Global-rotation control
 
 The complete observed harmonic field was rotated by
 
@@ -1638,7 +1482,7 @@ For each rotation, the same predictors, estimator specification, garment-identit
 
 Separate \(C_2\) and \(S_2\) RMSEs were retained to demonstrate their expected coordinate dependence, while vector RMSE, \(R_2\) error, peak-shell \(R_2\) performance, axial error, and coordinate-frame consistency error were used as substantive diagnostics.
 
-### 3.17.3 Garment-identity-randomized rotation
+### 3.18.3 Garment-identity-randomized rotation
 
 A second control removed common population-level alignment while preserving repeated-sketch identity structure.
 
@@ -1706,11 +1550,11 @@ These values were used as reference benchmarks rather than fitted null parameter
 
 ---
 
-## 3.18 Parameter and discretization sensitivity
+## 3.19 Parameter and discretization sensitivity
 
 Sensitivity analyses evaluated dependence of the radial–angular representation on the fixed numerical choices used in the primary measurement specification. The primary configuration was not altered after these analyses.
 
-### 3.18.1 Support threshold
+### 3.19.1 Support threshold
 
 The primary support threshold was
 
@@ -1730,7 +1574,7 @@ Alternative fractions were
 
 All eight radial descriptors were recomputed while holding the radial domain and concentration width fixed.
 
-### 3.18.2 Concentration half-width
+### 3.19.2 Concentration half-width
 
 The primary concentration half-width was
 
@@ -1748,7 +1592,7 @@ h=6.
 
 All other descriptor definitions were unchanged.
 
-### 3.18.3 Radial-domain sensitivity
+### 3.19.3 Radial-domain sensitivity
 
 The primary domain was
 
@@ -1788,7 +1632,7 @@ The canonical full 72-shell radial field was reconstructed directly from the raw
 
 For each domain, descriptor rank stability, peak-location changes, endpoint occupancy, and peak-magnitude changes were quantified relative to the primary specification.
 
-### 3.18.4 Angular-resolution sensitivity
+### 3.19.4 Angular-resolution sensitivity
 
 The canonical 72 angular bins were coarsened to
 
@@ -1802,7 +1646,7 @@ bins by exact aggregation of adjacent angular mass bins. No image interpolation 
 
 For each resolution, \(F_2\), \(C_2\), \(S_2\), \(R_2\), axial orientation, peak magnitude, and peak radius were recomputed. The 72-bin field served as the reference.
 
-### 3.18.5 Radial-resolution sensitivity
+### 3.19.5 Radial-resolution sensitivity
 
 The canonical 72 radial bins were coarsened by exact radial mass aggregation to
 
@@ -1840,7 +1684,7 @@ These sensitivity analyses characterize measurement dependence; they are not par
 
 ---
 
-## 3.19 Low-order harmonic control
+## 3.20 Low-order harmonic control
 
 To place the primary second harmonic within the observed low-order spectrum, harmonics
 
@@ -1874,7 +1718,7 @@ Because Section 3.6 defines \(m=2\) from the axial orientation convention of the
 
 ---
 
-## 3.20 Phase-conditioning analysis
+## 3.21 Phase-conditioning analysis
 
 Axial phase becomes poorly conditioned when the magnitude of its underlying Cartesian vector is small. This relationship was derived explicitly for the second harmonic.
 
@@ -2030,7 +1874,7 @@ These quartiles were descriptive strata rather than independent inferential grou
 
 ---
 
-## 3.21 Garment-level association analysis
+## 3.22 Garment-level association analysis
 
 The principal association analysis evaluated the relationship between observed peak-shell harmonic magnitude and peak-shell axial reconstruction error.
 
@@ -2089,7 +1933,7 @@ The permutation probabilities for the two garment-level association tests were a
 
 ---
 
-## 3.22 Garment-cluster bootstrap
+## 3.23 Garment-cluster bootstrap
 
 Uncertainty intervals were estimated using
 
@@ -2119,7 +1963,7 @@ The bootstrap was applied to reconstruction metrics, peak-shell quantities, garm
 
 ---
 
-## 3.23 Category-stratified permutation inference
+## 3.24 Category-stratified permutation inference
 
 For each of the two garment-level association tests,
 
@@ -2158,7 +2002,7 @@ Because permutation was conditional on garment category, the corresponding null 
 
 ---
 
-## 3.24 Outcome-defined error bands and threshold sensitivity
+## 3.25 Outcome-defined error bands and threshold sensitivity
 
 Peak-shell axial errors were summarized descriptively into low, intermediate, and high bands.
 
@@ -2216,7 +2060,7 @@ Because the error bands are defined using the observed outcome, overlap strongly
 
 ---
 
-## 3.25 Algebraically coupled calibration diagnostic
+## 3.26 Algebraically coupled calibration diagnostic
 
 Peak-shell magnitude error was defined as
 
@@ -2244,7 +2088,7 @@ was reported only as a descriptive calibration diagnostic and was assigned no in
 
 ---
 
-## 3.26 Scope of inference
+## 3.27 Scope of inference
 
 The study supports two distinct classes of claims. The representation-validation analyses support an explicit 14-dimensional second-harmonic description of garment sketches, its expected radial-magnitude and axial-orientation transformation behavior over the tested controls, numerical reconstruction diagnostics on withheld recovered garment identities, phase-conditioning analysis, parameter sensitivity, and cluster-aware garment-level associations.
 
