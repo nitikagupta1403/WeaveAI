@@ -47,6 +47,12 @@ Contains two scientifically distinct rotation-control branches:
 
 These two controls must not be collapsed into a generic claim of "rotation robustness": they answer different scientific questions.
 
+### 06_Experiment_06_Evidence_Record.md
+
+Public manuscript-facing evidence/provenance record for the locked compact-representation experiment. It records the exact feature sets, estimator, garment-identity-disjoint validation design, primary pooled results, identity-bootstrap uncertainty, repeated grouped-partition stability, category-preserving alignment-control result, historical-exposure disclosure, and claim boundary.
+
+This is deliberately an evidence record rather than an executable notebook. The repository does **not** claim that a separate standalone rerunnable Experiment 06 notebook or frozen runtime bundle is present unless one is explicitly deposited.
+
 ### audit_Final_Validation_Shield.ipynb
 
 Historical validation/provenance notebook retained for auditability. It records environment information, integrity checks, and reviewer-oriented validation of frozen result objects. It is **not** intended to be the primary source-to-result execution path and may depend on historical frozen runtime checkpoints.
@@ -81,6 +87,7 @@ For the formal ownership boundary, see:
 
 - Five curated Paper-I scientific notebooks are present.
 - Rotation controls are consolidated into a single notebook while preserving the distinction between image-domain transformation validation and analytic reconstruction coordinate-frame controls.
+- Experiment 06 now has a public evidence/provenance record with explicit non-executable status; no nonexistent standalone runtime bundle is claimed.
 - The validation shield is retained as optional provenance material rather than the primary reproducibility entry point.
 - Source image redistribution is intentionally avoided.
 - Paper-II-only computational material is intentionally excluded.
