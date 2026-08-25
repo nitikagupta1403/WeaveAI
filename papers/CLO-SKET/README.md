@@ -14,6 +14,7 @@ Only the following files are canonical scientific sources for the active IVC man
 - `CLO_SKET_IVC_Discussion.md`
 - `CLO_SKET_IVC_Conclusion.md`
 - `CLO_SKET_References.bib` — canonical bibliography
+- `PAPER_I_FRESH_STUDY_MATHEMATICAL_DESIGN_LOCK.md` — prospective pre-code design for the stronger learned-baseline and compactness study
 
 `assemble_ivc_manuscript.py` assembles these sources into `CLO_SKET_IVC_Manuscript.md`. The assembled manuscript is a generated artifact and must not be edited independently.
 
