@@ -1623,19 +1623,26 @@ Arnia, F. (2020). *Clo-Sket* (Version 1). Mendeley Data.
 
 DOI: `10.17632/jt533nkhsf.1`
 
-Manuscript-associated analysis code, figure-generation scripts, and reproducibility
-materials available for the present study are maintained in the accompanying
-public WeaveAI research repository. The original CLO-SKET dataset remains available
-from Mendeley Data under the DOI given above.
+Hash-verified computational-provenance notebooks supporting the reported analyses
+are publicly available in the Paper-II directory of the WeaveAI research
+repository:
+
+https://github.com/nitikagupta1403/WeaveAI/tree/306d1e6/papers/Paper-II/reproducibility
+
+The original CLO-SKET images are not redistributed by WeaveAI and remain available
+from Mendeley Data under the DOI given above. The current public provenance release
+does not include the historical intermediate checkpoint files, a portable execution
+environment, or publication-figure export scripts.
 
 ---
 
 # Code Availability
 
-The accompanying public WeaveAI research repository preserves the computational
-provenance associated with this study, including the upstream radial–angular
-analysis notebook and the frozen executed notebook underlying the reported
-Paper-II analyses. SHA-256 checksums are provided for integrity verification.
+The public WeaveAI research repository preserves the computational provenance
+associated with this study, including the upstream radial–angular analysis
+notebook and the frozen executed notebook underlying the reported Paper-II
+analyses. The provenance record audited for this manuscript is commit `306d1e6`;
+SHA-256 checksums are provided for integrity verification.
 
 The preserved computational lineage begins with the publicly available CLO-SKET
 image data and includes radial–angular probability construction, angular Fourier
@@ -1646,9 +1653,52 @@ morphology mapping.
 The provenance notebooks retain elements of the original Google Colab/Google
 Drive execution environment and historical intermediate-state workflow.
 Accordingly, they document the computational origin of the reported results but
-should not presently be interpreted as a clean-environment, end-to-end
-reproduction package. Portable execution instructions and publication-figure
-export code will be included with the frozen submission release.
+are not a clean-environment, end-to-end reproduction package. In particular, the
+historical intermediate checkpoint files referenced by the executed workflow are
+not distributed in the current public release. The repository README identifies
+the scope and limitations of the released provenance record.
+
+---
+
+# Funding
+
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+
+---
+
+# Declaration of Competing Interest
+
+The author declares that she has no known competing financial interests or
+personal relationships that could have appeared to influence the work reported
+in this paper.
+
+---
+
+# CRediT Author Statement
+
+Nitika Gupta: Conceptualization, Methodology, Software, Validation, Formal
+analysis, Investigation, Data curation, Visualization, Writing – original draft,
+Writing – review and editing.
+
+---
+
+# Ethics Statement
+
+Ethics approval was not required because this computational study used an
+existing publicly available garment-sketch dataset and involved no human
+participants, personal data, or animals.
+
+---
+
+# Declaration of Generative AI and AI-Assisted Technologies in the Writing Process
+
+During the preparation of this work, the author used OpenAI ChatGPT and Codex to
+assist with manuscript organization, language refinement, consistency checking,
+and review of code and reproducibility documentation. The author reviewed and
+edited all resulting material, independently verified the scientific content,
+numerical results, citations, and claims against the underlying evidence, and
+takes full responsibility for the content of the publication.
 ---
 
 # References

@@ -5,6 +5,8 @@ ROOT = Path(__file__).resolve().parent
 
 TITLE = "Evidence-Controlled Radial–Spectral Representation of Garment-Sketch Morphology"
 AUTHOR = "NITIKA GUPTA"
+AFFILIATION = "Independent Researcher, Hyderabad, Telangana, India"
+CORRESPONDING_EMAIL = "nitikashimla14@gmail.com"
 OUT = ROOT / "P2_19_MANUSCRIPT_MASTER.md"
 
 
@@ -52,12 +54,22 @@ results_s = section(results, "4. Results")
 discussion_s = section(discussion, "5. Discussion")
 conclusion_s = section(conclusion, "6. Conclusion")
 data_av = section(legacy, "Data Availability", "Code Availability")
-code_av = section(legacy, "Code Availability", "References")
+code_av = section(legacy, "Code Availability", "Funding")
+funding = section(legacy, "Funding", "Declaration of Competing Interest")
+competing = section(legacy, "Declaration of Competing Interest", "CRediT Author Statement")
+credit = section(legacy, "CRediT Author Statement", "Ethics Statement")
+ethics = section(legacy, "Ethics Statement", "Declaration of Generative AI and AI-Assisted Technologies in the Writing Process")
+ai_declaration = section(legacy, "Declaration of Generative AI and AI-Assisted Technologies in the Writing Process", "References")
 captions_s = section(figure_captions, "Figure Captions")
 refs = section(references, "References")
 
 master = "\n\n---\n\n".join([
-    f"# {TITLE}\n\n**{AUTHOR}**",
+    (
+        f"# {TITLE}\n\n"
+        f"**{AUTHOR}**\n\n"
+        f"{AFFILIATION}\n\n"
+        f"**Corresponding author:** {CORRESPONDING_EMAIL}"
+    ),
     abstract,
     keywords,
     intro,
@@ -69,6 +81,11 @@ master = "\n\n---\n\n".join([
     data_av,
     code_av,
     captions_s,
+    funding,
+    competing,
+    credit,
+    ethics,
+    ai_declaration,
     refs,
 ]).strip() + "\n"
 
@@ -92,6 +109,8 @@ for forbidden in [
 required = [
     TITLE,
     AUTHOR,
+    AFFILIATION,
+    CORRESPONDING_EMAIL,
     "# Abstract",
     "Compact spectral shape descriptors commonly apply one encoding rule",
     "# 1. Introduction",
@@ -158,11 +177,40 @@ if re.search(r"(?m)^---\s*\n\s*---\s*$", master):
 for heading in [
     "Abstract", "Keywords", "1. Introduction", "2. Related Work", "3. Methods",
     "4. Results", "5. Discussion", "6. Conclusion", "Data Availability",
-    "Code Availability", "Figure Captions", "References",
+    "Code Availability", "Funding", "Declaration of Competing Interest",
+    "CRediT Author Statement", "Ethics Statement",
+    "Declaration of Generative AI and AI-Assisted Technologies in the Writing Process",
+    "Figure Captions", "References",
 ]:
     n = len(re.findall(rf"(?m)^# {re.escape(heading)}\s*$", master))
     if n != 1:
         raise RuntimeError(f"Expected exactly one '# {heading}' heading; found {n}")
+
+# Tables must be numbered in order of first appearance.
+table_numbers = [int(n) for n in re.findall(r"(?m)^### Table (\d+)\.", master)]
+if table_numbers != list(range(1, len(table_numbers) + 1)):
+    raise RuntimeError(f"Out-of-order manuscript table numbering: {table_numbers}")
+
+# Availability language must match the current public provenance release.
+for stale_availability_claim in [
+    "figure-generation scripts, and reproducibility materials available",
+    "Portable execution instructions and publication-figure export code will be included",
+]:
+    if stale_availability_claim.lower() in master.lower():
+        raise RuntimeError(
+            f"Unsupported availability claim detected: {stale_availability_claim}"
+        )
+
+for required_availability_boundary in [
+    "not a clean-environment, end-to-end reproduction package",
+    "historical intermediate checkpoint files referenced by the executed workflow",
+    "not distributed in the current public release",
+    "https://github.com/nitikagupta1403/WeaveAI/tree/306d1e6/papers/Paper-II/reproducibility",
+]:
+    if required_availability_boundary not in master:
+        raise RuntimeError(
+            f"Required availability boundary missing: {required_availability_boundary}"
+        )
 
 OUT.write_text(master, encoding="utf-8")
 print(f"Wrote {OUT}")

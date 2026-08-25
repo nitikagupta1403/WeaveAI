@@ -358,7 +358,7 @@ with
 
 Both uniform compact-transform baselines had lower MRR than the hybrid in all five identity-disjoint folds.
 
-### Table 3. Whole-representation descriptive sensitivity
+### Table 2. Whole-representation descriptive sensitivity
 
 | Representation | Complex coefficients | Real dimension | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
 |---|---:|---:|---:|---:|---:|
@@ -383,7 +383,7 @@ using held-out garment-identity mean reciprocal rank (MRR) across five identity-
 
 Ten prespecified same-dimensional nonlinear-versus-PCA contrasts were evaluated using exhaustive fold-level sign flips and a maximum statistic across the entire contrast family.
 
-### Table 2. Nonlinear latent-model contrasts relative to same-dimensional PCA
+### Table 3. Nonlinear latent-model contrasts relative to same-dimensional PCA
 
 | Contrast | Mean \(\Delta\)MRR | Median \(\Delta\)MRR | \(+\;/\;-\;/\;0\) folds | Raw one-sided \(p\) | Max-stat adjusted \(p\) |
 |---|---:|---:|---:|---:|---:|

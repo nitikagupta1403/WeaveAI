@@ -2,6 +2,23 @@
 
 This directory preserves the computational provenance associated with Paper II.
 
+## Current public-release scope
+
+This directory is a hash-verified provenance record, not a clean-environment,
+end-to-end reproduction package. The current public release contains the two
+notebooks listed below and their checksums. It does **not** contain:
+
+- the CLO-SKET image dataset, which remains available from Mendeley Data at
+  <https://doi.org/10.17632/jt533nkhsf.1>;
+- the historical `.pkl` intermediate checkpoint files referenced by the
+  preserved notebooks;
+- a portable package/environment specification; or
+- publication-figure export scripts or frozen figure-input objects.
+
+The notebooks therefore support audit of computational origin and embedded
+results. They cannot presently be executed end to end from the public contents
+of this directory alone.
+
 ## Scientific evidence lock
 
 The numerical results reported in the manuscript are frozen.
@@ -38,7 +55,10 @@ and retained-PCA morphology analysis
 frozen manuscript evidence
 
 The intermediate checkpoint files are computational state snapshots rather
-than independent scientific inputs.
+than independent scientific inputs. They are not included in the current public
+release. In particular, the downstream notebook expects
+`CLO_SKET_runtime_backup_AFTER_CELL25.pkl`; additional historical checkpoints
+referenced later in the notebook also retain their original Google Drive paths.
 
 ## 1. Upstream radial-angular generator
 
@@ -110,12 +130,15 @@ on another machine.
 The hash-locked provenance notebooks are intentionally preserved rather than
 silently rewritten for portability.
 
-Portable execution instructions and submission-facing figure-export code
-should therefore be treated as a separate reproducibility layer.
+Portable execution instructions and submission-facing figure-export code are a
+separate reproducibility layer and are not represented as part of this public
+provenance release.
 
 ## Figures
 
-Publication-only figure export code will be stored under `figures/`.
+Publication-only figure export code is not included in the current public
+provenance release. When added as a separate reproducibility layer, it should be
+stored under `figures/`.
 
 Figure export must consume frozen results or frozen computational objects.
 It must not retrain models, repeat model selection, retune hyperparameters,

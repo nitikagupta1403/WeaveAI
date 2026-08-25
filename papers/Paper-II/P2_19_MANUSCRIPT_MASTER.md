@@ -2,6 +2,10 @@
 
 **NITIKA GUPTA**
 
+Independent Researcher, Hyderabad, Telangana, India
+
+**Corresponding author:** nitikashimla14@gmail.com
+
 ---
 
 # Abstract
@@ -1354,7 +1358,7 @@ with
 
 Both uniform compact-transform baselines had lower MRR than the hybrid in all five identity-disjoint folds.
 
-### Table 3. Whole-representation descriptive sensitivity
+### Table 2. Whole-representation descriptive sensitivity
 
 | Representation | Complex coefficients | Real dimension | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
 |---|---:|---:|---:|---:|---:|
@@ -1379,7 +1383,7 @@ using held-out garment-identity mean reciprocal rank (MRR) across five identity-
 
 Ten prespecified same-dimensional nonlinear-versus-PCA contrasts were evaluated using exhaustive fold-level sign flips and a maximum statistic across the entire contrast family.
 
-### Table 2. Nonlinear latent-model contrasts relative to same-dimensional PCA
+### Table 3. Nonlinear latent-model contrasts relative to same-dimensional PCA
 
 | Contrast | Mean \(\Delta\)MRR | Median \(\Delta\)MRR | \(+\;/\;-\;/\;0\) folds | Raw one-sided \(p\) | Max-stat adjusted \(p\) |
 |---|---:|---:|---:|---:|---:|
@@ -1882,20 +1886,27 @@ Arnia, F. (2020). *Clo-Sket* (Version 1). Mendeley Data.
 
 DOI: `10.17632/jt533nkhsf.1`
 
-Manuscript-associated analysis code, figure-generation scripts, and reproducibility
-materials available for the present study are maintained in the accompanying
-public WeaveAI research repository. The original CLO-SKET dataset remains available
-from Mendeley Data under the DOI given above.
+Hash-verified computational-provenance notebooks supporting the reported analyses
+are publicly available in the Paper-II directory of the WeaveAI research
+repository:
+
+https://github.com/nitikagupta1403/WeaveAI/tree/306d1e6/papers/Paper-II/reproducibility
+
+The original CLO-SKET images are not redistributed by WeaveAI and remain available
+from Mendeley Data under the DOI given above. The current public provenance release
+does not include the historical intermediate checkpoint files, a portable execution
+environment, or publication-figure export scripts.
 
 
 ---
 
 # Code Availability
 
-The accompanying public WeaveAI research repository preserves the computational
-provenance associated with this study, including the upstream radial–angular
-analysis notebook and the frozen executed notebook underlying the reported
-Paper-II analyses. SHA-256 checksums are provided for integrity verification.
+The public WeaveAI research repository preserves the computational provenance
+associated with this study, including the upstream radial–angular analysis
+notebook and the frozen executed notebook underlying the reported Paper-II
+analyses. The provenance record audited for this manuscript is commit `306d1e6`;
+SHA-256 checksums are provided for integrity verification.
 
 The preserved computational lineage begins with the publicly available CLO-SKET
 image data and includes radial–angular probability construction, angular Fourier
@@ -1906,9 +1917,10 @@ morphology mapping.
 The provenance notebooks retain elements of the original Google Colab/Google
 Drive execution environment and historical intermediate-state workflow.
 Accordingly, they document the computational origin of the reported results but
-should not presently be interpreted as a clean-environment, end-to-end
-reproduction package. Portable execution instructions and publication-figure
-export code will be included with the frozen submission release.
+are not a clean-environment, end-to-end reproduction package. In particular, the
+historical intermediate checkpoint files referenced by the executed workflow are
+not distributed in the current public release. The repository README identifies
+the scope and limitations of the released provenance record.
 
 
 ---
@@ -1922,6 +1934,53 @@ export code will be included with the frozen submission release.
 **Figure 3. Conditional latent-model comparison and nonlinear pairwise structure.** **(A)** Conditional on the previously selected hybrid representation, mean held-out MRR differences for AE and VAE relative to same-dimensional PCA across five garment-identity-disjoint outer folds and latent dimensions \(8,16,24,32,64\). None of the ten prespecified nonlinear-versus-PCA contrasts survived the common max-statistic fold-level sensitivity analysis; the largest observed mean improvement was VAE\(_{16}\)−PCA\(_{16}\), \(\Delta\mathrm{MRR}=+0.014341\), with adjusted \(p=0.25\). **(B)** A separate held-out audit detected one FWER-supported fixed quadratic PCA-coordinate relation (best mean \(\Delta R^2=+0.432042\)), establishing pairwise nonlinear predictability rather than differential-geometric manifold curvature. At the prespecified 20-neighbour scale, the identity-level median number of directions required for 90% within-neighborhood variance was 15 (IQR 15–15); because a centered 20-neighbour matrix has rank at most 19, this quantity is shown only as a scale-conditioned descriptive diagnostic and is not compared with the global PCA dimension. PCA is retained as the practical validated latent baseline; detectable nonlinear pairwise structure is not evidence of nonlinear-model superiority.
 
 **Figure 4. Principal latent variation localizes in radial–harmonic morphology space.** **(A–C)** Sign-invariant morphology-energy maps \(E_j(r,k)=|\Delta F_j(r,k)|^2\), obtained by exact inverse mapping of one-score-standard-deviation perturbations for representative retained axes PC1, PC3, and PC15. PC1 and PC3 peak at \((r,k)=(72,17)\) and \((72,13)\), respectively, whereas PC15 peaks at \((5,5)\), illustrating heterogeneous radial–harmonic localization. **(D)** Explained-variance-weighted localization across the retained PCA-64 subspace in the prespecified 3×4 radial-region × harmonic-band partition. **(E)** Spectral-centroid × radial-centroid localization of all 64 retained PCA axes; marker area is proportional to PCA explained-variance ratio. Within PCA-64, which accounts for 44.65% of standardized representation variance, 78.54% of variance-weighted mapped morphology energy lies at \(k=5{:}24\), 66.84% in the outer radial zone (shells 49–72), and 51.30% jointly in outer-radial × \(k=5{:}24\) coordinates. These quantities are descriptive localization within the retained subspace; they do not denote semantic garment regions or a tested radial-by-harmonic interaction.
+
+
+---
+
+# Funding
+
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+
+
+---
+
+# Declaration of Competing Interest
+
+The author declares that she has no known competing financial interests or
+personal relationships that could have appeared to influence the work reported
+in this paper.
+
+
+---
+
+# CRediT Author Statement
+
+Nitika Gupta: Conceptualization, Methodology, Software, Validation, Formal
+analysis, Investigation, Data curation, Visualization, Writing – original draft,
+Writing – review and editing.
+
+
+---
+
+# Ethics Statement
+
+Ethics approval was not required because this computational study used an
+existing publicly available garment-sketch dataset and involved no human
+participants, personal data, or animals.
+
+
+---
+
+# Declaration of Generative AI and AI-Assisted Technologies in the Writing Process
+
+During the preparation of this work, the author used OpenAI ChatGPT and Codex to
+assist with manuscript organization, language refinement, consistency checking,
+and review of code and reproducibility documentation. The author reviewed and
+edited all resulting material, independently verified the scientific content,
+numerical results, citations, and claims against the underlying evidence, and
+takes full responsibility for the content of the publication.
 
 
 ---
