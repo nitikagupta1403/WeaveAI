@@ -442,6 +442,16 @@ This design is prospective with respect to the new learned-baseline contrasts. E
 
 After the pre-code checklist is completed, any methodological change must be recorded in a dated amendment stating whether it occurred before or after inspection of the affected outcome. The original design must remain in version history.
 
+### Pre-outcome amendment — peripheral annotation audit
+
+Visual inspection of the preprocessing-only 23-category contact sheet revealed handwritten text outside several garment drawings, including apparent category or source-garment annotations. This was discovered before DINOv2 was applied to any CLO-SKET image and before any Experiment 08 predictive outcome existed.
+
+The full-canvas learned representation is therefore retained only as a prespecified annotation-sensitivity control, denoted (L_{\mathrm{raw}}\). The primary learned representation will use a frozen label-blind geometry mask, denoted (L_{\mathrm{geometry}}\), provided that the mask passes a preprocessing-only preservation audit.
+
+The candidate rule uses no category label, filename text, OCR, learned representation, or outcome. Ink is defined by normalized grayscale intensity below 0.95. After one 3×3 binary-dilation iteration, 8-connected components are scored using ink area, two-dimensional extent, and a fixed centre-distance weight. The highest-scoring component defines the principal garment structure. All original pixels inside its bounding box plus a candidate 5% or 10% proportional margin are retained; pixels outside are set to white. The complete source-canvas dimensions and subsequent 224×224 aspect-ratio-preserving resize/pad convention remain unchanged.
+
+The 5% and 10% margins will be compared only by retained-ink summaries and visual geometry/annotation audit on the prespecified first image of each recovered garment identity. The chosen margin must be frozen before any learned feature is extracted. Raw-versus-geometry learned performance will quantify sensitivity to peripheral canvas information rather than being used to choose the mask.
+
 ## 21. Approved pre-code implementation specification
 
 The following decisions were approved before any Experiment 08 learned embedding or predictive outcome was computed.

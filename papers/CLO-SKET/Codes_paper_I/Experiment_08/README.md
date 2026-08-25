@@ -36,3 +36,14 @@ python papers/CLO-SKET/Codes_paper_I/Experiment_08/preprocess_audit.py \
 ```
 
 This verifies one prespecified image per garment identity and creates a 23-category contact sheet. The script deliberately contains no DINOv2 import or classifier code.
+
+If peripheral writing or other annotation is visible, compare the frozen label-blind masking candidates before feature extraction:
+
+```bash
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/annotation_mask_audit.py \
+  --data-root /absolute/path/to/Clo-Sket \
+  --source-manifest /absolute/path/to/experiment08_source_manifest.csv \
+  --output-root /absolute/path/to/experiment08_annotation_mask_audit
+```
+
+The audit compares raw preprocessing with principal-structure masks expanded by 5% and 10%. Selection is based only on preserving garment geometry and removing peripheral annotation; no learned feature or outcome is available at this stage.

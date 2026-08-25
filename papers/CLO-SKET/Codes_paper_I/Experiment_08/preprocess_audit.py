@@ -62,7 +62,7 @@ def resize_and_pad(array: np.ndarray) -> tuple[np.ndarray, dict]:
     scale = CANVAS / max(height, width)
     resized_width = max(1, min(CANVAS, round(width * scale)))
     resized_height = max(1, min(CANVAS, round(height * scale)))
-    image = Image.fromarray(np.round(array * 255.0).astype(np.uint8), mode="L")
+    image = Image.fromarray(np.round(array * 255.0).astype(np.uint8))
     resized = image.resize((resized_width, resized_height), resample=RESAMPLE)
     left = (CANVAS - resized_width) // 2
     top = (CANVAS - resized_height) // 2
@@ -137,7 +137,7 @@ def audit_record(data_root: Path, row: dict) -> tuple[dict, Image.Image]:
         **source,
         **geometry,
     }
-    return record, Image.fromarray(np.round(processed * 255.0).astype(np.uint8), mode="L")
+    return record, Image.fromarray(np.round(processed * 255.0).astype(np.uint8))
 
 
 def contact_sheet(items: list[tuple[str, Image.Image]], path: Path) -> None:
