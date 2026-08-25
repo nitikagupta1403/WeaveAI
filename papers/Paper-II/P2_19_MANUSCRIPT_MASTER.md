@@ -1892,19 +1892,23 @@ from Mendeley Data under the DOI given above.
 
 # Code Availability
 
-The accompanying public WeaveAI research repository contains the manuscript-associated implementation of:
+The accompanying public WeaveAI research repository preserves the computational
+provenance associated with this study, including the upstream radial–angular
+analysis notebook and the frozen executed notebook underlying the reported
+Paper-II analyses. SHA-256 checksums are provided for integrity verification.
 
-- radial-angular probability construction;
-- angular Fourier morphology;
-- grouped radial-representation selection;
-- bootstrap and permutation inference;
-- hybrid representation construction;
-- latent-model validation;
-- PCA inverse morphology mapping;
-- manuscript figure generation.
+The preserved computational lineage begins with the publicly available CLO-SKET
+image data and includes radial–angular probability construction, angular Fourier
+morphology, radial-representation analysis, bootstrap and permutation inference,
+hybrid representation construction, latent-model validation, and PCA-based
+morphology mapping.
 
-The repository also records execution order, software-environment information,
-random seeds, and provenance checks used for the reported analyses.
+The provenance notebooks retain elements of the original Google Colab/Google
+Drive execution environment and historical intermediate-state workflow.
+Accordingly, they document the computational origin of the reported results but
+should not presently be interpreted as a clean-environment, end-to-end
+reproduction package. Portable execution instructions and publication-figure
+export code will be included with the frozen submission release.
 
 
 ---
