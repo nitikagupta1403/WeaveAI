@@ -139,6 +139,7 @@ class Annotator:
             ("Garment [G]", lambda: self.set_mode("garment")),
             ("Text [T]", lambda: self.set_mode("text")),
             ("Accept proposal [A]", self.accept_proposal),
+            ("Accept + next [Return]", self.accept_and_next),
             ("Undo text [U]", self.undo_text),
             ("Clear [C]", self.clear_boxes),
             ("Toggle ambiguity [F]", self.toggle_ambiguity),
@@ -163,6 +164,7 @@ class Annotator:
             "s": lambda _event: self.save(),
             "n": lambda _event: self.next(),
             "p": lambda _event: self.previous(),
+            "<Return>": lambda _event: self.accept_and_next(),
             "<Right>": lambda _event: self.next(),
             "<Left>": lambda _event: self.previous(),
             "q": lambda _event: self.quit(),
@@ -178,6 +180,7 @@ class Annotator:
         if not (0 <= position < len(self.rows)):
             return
         self.position = position
+        self.mode = "garment"
         row = self.record()
         path = self.data_root / row["relative_path"]
         self.current_image = Image.open(path).convert("L")
@@ -340,6 +343,17 @@ class Annotator:
             self.existing_reviewed = False
             self.render()
 
+    def accept_and_next(self) -> None:
+        """Accept the proposal and advance only for a clean, no-text case."""
+        if self.text_boxes or self.ambiguous:
+            messagebox.showwarning(
+                "Existing review marks",
+                "Use Save + next when text boxes or ambiguity are present.",
+            )
+            return
+        self.accept_proposal()
+        self.next()
+
     def undo_text(self) -> None:
         if self.text_boxes:
             self.text_boxes.pop()
@@ -428,13 +442,24 @@ def load_rows(
         requested = selection["relative_path"].tolist()
         if len(requested) != len(set(requested)):
             raise RuntimeError("Selection CSV contains duplicate paths")
-        manifest = (
-            pd.DataFrame({"relative_path": requested})
-            .merge(manifest, on="relative_path", how="left", validate="one_to_one")
+        ordered = pd.DataFrame(
+            {
+                "relative_path": requested,
+                "_selection_order": range(len(requested)),
+            }
+        )
+        manifest = ordered.merge(
+            manifest,
+            on="relative_path",
+            how="left",
+            validate="one_to_one",
         )
         if manifest["sha256"].eq("").any() or manifest["sha256"].isna().any():
             raise RuntimeError("Selection CSV contains paths absent from manifest")
-    return manifest.sort_values("row_index").to_dict(orient="records")
+        manifest = manifest.sort_values("_selection_order")
+    else:
+        manifest = manifest.sort_values("row_index")
+    return manifest.to_dict(orient="records")
 
 
 def main() -> None:
