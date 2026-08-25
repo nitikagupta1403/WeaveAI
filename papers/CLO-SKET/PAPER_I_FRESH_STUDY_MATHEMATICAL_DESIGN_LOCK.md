@@ -452,6 +452,10 @@ The candidate rule uses no category label, filename text, OCR, learned represent
 
 The 5% and 10% margins will be compared only by retained-ink summaries and visual geometry/annotation audit on the prespecified first image of each recovered garment identity. The chosen margin must be frozen before any learned feature is extracted. Raw-versus-geometry learned performance will quantify sensitivity to peripheral canvas information rather than being used to choose the mask.
 
+The first single-component candidates were rejected before feature extraction because both 5% and 10% variants visibly removed approximately half of the garment in the prespecified Cardigan G03 worst-retention case. The rejected candidates remain documented in the audit.
+
+A second pre-outcome candidate therefore defines a multi-component garment envelope. After the same threshold, dilation, and connected-component construction, a component is structural when its height is at least 12.5% of source-image height, it contains at least 1% of total ink, and its normalized centre distance is at most 0.45 of the image diagonal. The union bounding box of all structural components is expanded by 10%, and original pixels inside that box are preserved. If no component qualifies, the earlier principal-component box is used as a recorded fallback. This revision is label-blind and was specified in response to visible geometry truncation, not predictive performance.
+
 ## 21. Approved pre-code implementation specification
 
 The following decisions were approved before any Experiment 08 learned embedding or predictive outcome was computed.

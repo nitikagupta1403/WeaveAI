@@ -46,4 +46,4 @@ python papers/CLO-SKET/Codes_paper_I/Experiment_08/annotation_mask_audit.py \
   --output-root /absolute/path/to/experiment08_annotation_mask_audit
 ```
 
-The audit compares raw preprocessing with principal-structure masks expanded by 5% and 10%. Selection is based only on preserving garment geometry and removing peripheral annotation; no learned feature or outcome is available at this stage.
+The audit preserves the rejected single-component 10% candidate for comparison and adds a multi-component 10% garment envelope. The latter unions substantial vertically extended components before masking. Selection is based only on preserving garment geometry and removing peripheral annotation; no learned feature or outcome is available at this stage.

@@ -25,6 +25,9 @@ from preprocess_audit import (
 
 INK_THRESHOLD = 0.95
 MARGINS = (0.05, 0.10)
+STRUCTURAL_MIN_HEIGHT_FRACTION = 0.125
+STRUCTURAL_MIN_INK_FRACTION = 0.01
+STRUCTURAL_MAX_CENTRE_DISTANCE = 0.45
 EXPECTED_ROWS = 2300
 EXPECTED_IDENTITIES = 230
 EXPECTED_CATEGORIES = 23
@@ -91,6 +94,64 @@ def expanded_box(box: tuple[int, int, int, int], shape: tuple[int, int], margin:
     )
 
 
+def multi_structure_box(array: np.ndarray) -> tuple[int, int, int, int, dict]:
+    """Union all substantial vertically extended, centrally plausible components."""
+    ink = array < INK_THRESHOLD
+    total_ink = int(ink.sum())
+    if total_ink == 0:
+        raise RuntimeError("Image contains no ink under the frozen threshold")
+    expanded = ndimage.binary_dilation(ink, structure=np.ones((3, 3), dtype=bool), iterations=1)
+    labels, count = ndimage.label(expanded, structure=np.ones((3, 3), dtype=np.uint8))
+    height, width = array.shape
+    image_cx = (width - 1) / 2.0
+    image_cy = (height - 1) / 2.0
+    diagonal = math.hypot(width, height)
+    selected = []
+    for label_id in range(1, count + 1):
+        ys, xs = np.nonzero(labels == label_id)
+        if len(xs) == 0:
+            continue
+        left, right = int(xs.min()), int(xs.max()) + 1
+        top, bottom = int(ys.min()), int(ys.max()) + 1
+        component_ink = int(np.sum(ink & (labels == label_id)))
+        height_fraction = (bottom - top) / height
+        ink_fraction = component_ink / total_ink
+        centre_distance = math.hypot(float(xs.mean()) - image_cx, float(ys.mean()) - image_cy) / diagonal
+        if (
+            height_fraction >= STRUCTURAL_MIN_HEIGHT_FRACTION
+            and ink_fraction >= STRUCTURAL_MIN_INK_FRACTION
+            and centre_distance <= STRUCTURAL_MAX_CENTRE_DISTANCE
+        ):
+            selected.append(
+                {
+                    "left": left,
+                    "top": top,
+                    "right": right,
+                    "bottom": bottom,
+                    "component_ink": component_ink,
+                    "height_fraction": height_fraction,
+                    "ink_fraction": ink_fraction,
+                    "centre_distance": centre_distance,
+                }
+            )
+    fallback = False
+    if not selected:
+        left, top, right, bottom, _ = principal_structure_box(array)
+        selected = [{"left": left, "top": top, "right": right, "bottom": bottom}]
+        fallback = True
+    return (
+        min(item["left"] for item in selected),
+        min(item["top"] for item in selected),
+        max(item["right"] for item in selected),
+        max(item["bottom"] for item in selected),
+        {
+            "multi_component_count_total": count,
+            "multi_component_count_selected": len(selected),
+            "multi_component_fallback": fallback,
+        },
+    )
+
+
 def apply_box_mask(array: np.ndarray, box: tuple[int, int, int, int]) -> np.ndarray:
     left, top, right, bottom = box
     masked = np.ones_like(array)
@@ -110,7 +171,7 @@ def make_comparison_sheet(items: list[dict], output: Path) -> None:
     label_width = 155
     heading_height = 30
     row_height = CANVAS + 24
-    variants = ("raw", "margin_5", "margin_10")
+    variants = ("raw", "margin_10", "multi_10")
     sheet = Image.new("RGB", (label_width + len(variants) * CANVAS, heading_height + len(items) * row_height), "white")
     draw = ImageDraw.Draw(sheet)
     for column, variant in enumerate(variants):
@@ -158,6 +219,27 @@ def audit_image(data_root: Path, row: dict) -> tuple[dict, dict[str, Image.Image
         record[f"{key}_bottom"] = box[3]
         record[f"{key}_retained_ink_fraction"] = retained / original_ink
         record[f"{key}_processed_sha256"] = image_sha256(images[key])
+    multi_left, multi_top, multi_right, multi_bottom, multi_details = multi_structure_box(array)
+    multi_box = expanded_box(
+        (multi_left, multi_top, multi_right, multi_bottom), array.shape, 0.10
+    )
+    multi_masked = apply_box_mask(array, multi_box)
+    multi_retained = ink_count(multi_masked)
+    multi_processed, _ = resize_and_pad(multi_masked)
+    images["multi_10"] = Image.fromarray(
+        np.round(multi_processed * 255.0).astype(np.uint8)
+    )
+    record.update(
+        {
+            "multi_10_left": multi_box[0],
+            "multi_10_top": multi_box[1],
+            "multi_10_right": multi_box[2],
+            "multi_10_bottom": multi_box[3],
+            "multi_10_retained_ink_fraction": multi_retained / original_ink,
+            "multi_10_processed_sha256": image_sha256(images["multi_10"]),
+            **multi_details,
+        }
+    )
     return record, images
 
 
@@ -212,6 +294,12 @@ def main() -> None:
         "ink_threshold": INK_THRESHOLD,
         "component_connectivity": 8,
         "dilation_iterations": 1,
+        "multi_structure_rule": {
+            "minimum_height_fraction": STRUCTURAL_MIN_HEIGHT_FRACTION,
+            "minimum_ink_fraction": STRUCTURAL_MIN_INK_FRACTION,
+            "maximum_centre_distance": STRUCTURAL_MAX_CENTRE_DISTANCE,
+            "margin": 0.10,
+        },
         "margin_results": {
             f"margin_{int(margin * 100)}": {
                 "retained_ink_min": min(record[f"margin_{int(margin * 100)}_retained_ink_fraction"] for record in records),
@@ -219,6 +307,15 @@ def main() -> None:
                 "retained_ink_max": max(record[f"margin_{int(margin * 100)}_retained_ink_fraction"] for record in records),
             }
             for margin in MARGINS
+        },
+        "multi_10_results": {
+            "retained_ink_min": min(record["multi_10_retained_ink_fraction"] for record in records),
+            "retained_ink_median": float(np.median([record["multi_10_retained_ink_fraction"] for record in records])),
+            "retained_ink_max": max(record["multi_10_retained_ink_fraction"] for record in records),
+            "selected_components_min": min(record["multi_component_count_selected"] for record in records),
+            "selected_components_median": float(np.median([record["multi_component_count_selected"] for record in records])),
+            "selected_components_max": max(record["multi_component_count_selected"] for record in records),
+            "fallback_count": sum(bool(record["multi_component_fallback"]) for record in records),
         },
         "audit_csv": str(csv_path),
         "audit_csv_sha256": sha256_file(csv_path),
