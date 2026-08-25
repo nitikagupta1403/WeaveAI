@@ -17,11 +17,13 @@ HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent.parent
 DEFAULT_ROW_MAP = PAPER_ROOT / "evidence/Experiment_07/experiment07_row_map.csv"
 DEFAULT_FOLD_MAP = PAPER_ROOT / "evidence/Experiment_07/experiment07_fold_map.csv"
+DEFAULT_IDENTITY_OVERRIDES = HERE / "experiment08_identity_overrides.json"
 
 N_ROWS = 2300
 N_CATEGORIES = 23
 N_IDENTITIES = 230
-EXPECTED_TEST_ROWS = [459, 460, 462, 460, 459]
+HISTORICAL_EXPECTED_TEST_ROWS = [459, 460, 462, 460, 459]
+CORRECTED_EXPECTED_TEST_ROWS = [459, 460, 461, 460, 460]
 EXPECTED_ROW_MAP_SHA256 = "27d84a076afd69e96639388f6a1d576e0c8bc37169a915553e181b02a53f378f"
 EXPECTED_FOLD_MAP_SHA256 = "f9d47f79829df94f9751fb11fd8cb16adf70fedee7d546efdfa470054346296c"
 RECORDED_HISTORICAL_FOLD_ARRAY_HASH = "ccb6138e4bafb9f889c4c7dc92f3a0447c9d17ea870b34fc0f5c9d80ddf809b7"
@@ -98,7 +100,7 @@ def validate_public_maps(row_map_path: Path, fold_map_path: Path) -> tuple[pd.Da
             "test_identities": len(test_ids),
             "overlapping_identities": len(train_ids & test_ids),
         }
-        if record["test_rows"] != EXPECTED_TEST_ROWS[fold]:
+        if record["test_rows"] != HISTORICAL_EXPECTED_TEST_ROWS[fold]:
             raise RuntimeError(f"Fold {fold} test-row mismatch: {record}")
         if record["train_identities"] != 184 or record["test_identities"] != 46:
             raise RuntimeError(f"Fold {fold} identity-count mismatch: {record}")
@@ -119,6 +121,102 @@ def validate_public_maps(row_map_path: Path, fold_map_path: Path) -> tuple[pd.Da
         ),
         "folds": structural,
     }
+
+
+
+def apply_identity_overrides(
+    rows: pd.DataFrame, overrides_path: Path, historical_audit: dict
+) -> tuple[pd.DataFrame, dict]:
+    """Apply frozen, pre-outcome visual identity corrections without renaming files."""
+    specification = json.loads(overrides_path.read_text(encoding="utf-8"))
+    if specification.get("stage") != "PRE_OUTCOME_IDENTITY_AUDIT":
+        raise RuntimeError("Identity overrides are not marked as pre-outcome")
+    if specification.get("source_files_modified") is not False:
+        raise RuntimeError("Identity override specification must preserve source files")
+    if specification.get("selection_used_learned_features") is not False:
+        raise RuntimeError("Identity overrides must not use learned features")
+    if specification.get("selection_used_classifier_outcomes") is not False:
+        raise RuntimeError("Identity overrides must not use classifier outcomes")
+
+    corrected = rows.copy()
+    corrected["relative_path"] = corrected["image_path_runtime"].map(
+        normalized_relative_path
+    )
+    applied = []
+    for override in specification["overrides"]:
+        matches = corrected.index[
+            corrected["relative_path"].str.casefold()
+            == override["relative_path"].casefold()
+        ].tolist()
+        if len(matches) != 1:
+            raise RuntimeError(
+                f"Identity override must match exactly one row: {override}"
+            )
+        index = matches[0]
+        observed_id = corrected.at[index, "garment_id"]
+        observed_fold = int(corrected.at[index, "fold_id"])
+        if observed_id != override["historical_garment_id"]:
+            raise RuntimeError(
+                f"Historical garment mismatch for {override['relative_path']}: "
+                f"{observed_id}"
+            )
+        if observed_fold != int(override["historical_fold_id"]):
+            raise RuntimeError(
+                f"Historical fold mismatch for {override['relative_path']}: "
+                f"{observed_fold}"
+            )
+        corrected.at[index, "garment_id"] = override["corrected_garment_id"]
+        corrected.at[index, "fold_id"] = int(override["corrected_fold_id"])
+        applied.append(override)
+
+    counts = corrected.groupby("garment_id").size()
+    distribution = {
+        str(int(size)): int(number)
+        for size, number in counts.value_counts().sort_index().items()
+    }
+    if distribution != {"9": 1, "10": 228, "11": 1}:
+        raise RuntimeError(f"Unexpected corrected identity-size distribution: {distribution}")
+    preserved = specification["preserved_imbalance"]
+    for garment_id in ("Jumpsuit__G02", "Jumpsuit__G06"):
+        if int(counts[garment_id]) != int(preserved[garment_id]):
+            raise RuntimeError(f"Preserved Jumpsuit count mismatch: {garment_id}")
+
+    structural = []
+    for fold in range(5):
+        test = corrected[corrected["fold_id"] == fold]
+        train = corrected[corrected["fold_id"] != fold]
+        test_ids = set(test["garment_id"])
+        train_ids = set(train["garment_id"])
+        record = {
+            "fold": fold,
+            "train_rows": len(train),
+            "test_rows": len(test),
+            "train_identities": len(train_ids),
+            "test_identities": len(test_ids),
+            "overlapping_identities": len(train_ids & test_ids),
+        }
+        if record["test_rows"] != CORRECTED_EXPECTED_TEST_ROWS[fold]:
+            raise RuntimeError(f"Corrected fold {fold} row mismatch: {record}")
+        if record["train_identities"] != 184 or record["test_identities"] != 46:
+            raise RuntimeError(f"Corrected fold {fold} identity mismatch: {record}")
+        if record["overlapping_identities"] != 0:
+            raise RuntimeError(f"Corrected fold {fold} has identity leakage: {record}")
+        structural.append(record)
+
+    return corrected.drop(columns=["relative_path"]), {
+        "row_map_sha256": historical_audit["row_map_sha256"],
+        "fold_map_sha256": historical_audit["fold_map_sha256"],
+        "historical_public_map_audit": historical_audit,
+        "identity_overrides_path": str(overrides_path),
+        "identity_overrides_sha256": sha256_file(overrides_path),
+        "identity_override_count": len(applied),
+        "identity_size_distribution": distribution,
+        "experiment08_fold_array_sha256": canonical_array_sha256(
+            corrected["fold_id"].to_numpy(dtype=np.int64)
+        ),
+        "folds": structural,
+    }
+
 
 
 def enumerate_dataset(data_root: Path) -> list[Path]:
@@ -217,13 +315,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data-root", type=Path, required=True)
     parser.add_argument("--row-map", type=Path, default=DEFAULT_ROW_MAP)
     parser.add_argument("--fold-map", type=Path, default=DEFAULT_FOLD_MAP)
+    parser.add_argument("--identity-overrides", type=Path, default=DEFAULT_IDENTITY_OVERRIDES)
     parser.add_argument("--output-root", type=Path, required=True)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    rows, fold_audit = validate_public_maps(args.row_map, args.fold_map)
+    historical_rows, historical_audit = validate_public_maps(args.row_map, args.fold_map)
+    rows, fold_audit = apply_identity_overrides(
+        historical_rows, args.identity_overrides, historical_audit
+    )
     files = enumerate_dataset(args.data_root)
     source_manifest = join_and_manifest(args.data_root, files, rows)
     math_audit = analytic_rotation_tests()
