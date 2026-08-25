@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "stage": "PRE_OUTCOME_IDENTITY_AUDIT",
+  "source_files_modified": false,
+  "selection_used_learned_features": false,
+  "selection_used_classifier_outcomes": false,
+  "overrides": [
+    {
+      "relative_path": "Dress/1-3.tif",
+      "historical_garment_id": "Dress__G01",
+      "corrected_garment_id": "Dress__G10",
+      "historical_fold_id": 0,
+      "corrected_fold_id": 4,
+      "evidence": "Visual identity audit: tiered ruffled silhouette matches the nine Dress__G10 drawings and not the fitted Dress__G01 drawings."
+    },
+    {
+      "relative_path": "Harem/6-6.tif",
+      "historical_garment_id": "Harem__G06",
+      "corrected_garment_id": "Harem__G02",
+      "historical_fold_id": 2,
+      "corrected_fold_id": 0,
+      "evidence": "Visual identity audit: plain draped silhouette matches the nine Harem__G02 drawings and not the pocketed drawstring Harem__G06 drawings."
+    }
+  ],
+  "preserved_imbalance": {
+    "Jumpsuit__G02": 9,
+    "Jumpsuit__G06": 11,
+    "reason": "All drawings visually match their assigned garment identity; no reassignment is supported."
+  }
+}
