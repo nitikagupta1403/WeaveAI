@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source": "P2_19_MANUSCRIPT_MASTER.md",
+  "radial_representation": [
+    {"band": "k=1:4", "representation": "DCT_4", "delta": 0.059306, "ci_low": 0.023295, "ci_high": 0.108196, "p_fwer": 0.000200},
+    {"band": "k=5:12", "representation": "RAW_72", "delta": 0.005984, "ci_low": -0.014164, "ci_high": 0.060361, "p_fwer": 0.608939},
+    {"band": "k=13:24", "representation": "RAW_72", "delta": 0.010959, "ci_low": -0.003088, "ci_high": 0.073320, "p_fwer": 0.487751},
+    {"band": "k=25:36", "representation": "db4_4", "delta": 0.039300, "ci_low": 0.019130, "ci_high": 0.091021, "p_fwer": 0.019698}
+  ],
+  "representation_dimensions": {"full_complex": 2592, "hybrid_complex": 1504, "full_real": 5184, "hybrid_real": 3008, "reduction_percent": 41.98},
+  "latent_summary": {"largest_contrast": "VAE16-PCA16", "delta_mrr": 0.014341, "adjusted_p": 0.25, "best_quadratic_delta_r2": 0.432042, "local_dimension_median": 15, "local_dimension_iqr": [15, 15]},
+  "pca64_localization": {"variance_retained": 0.446455, "intermediate_harmonics": 0.785350, "outer_radial": 0.668410, "outer_by_intermediate": 0.513031}
+}

@@ -12,12 +12,14 @@ notebooks listed below and their checksums. It does **not** contain:
   <https://doi.org/10.17632/jt533nkhsf.1>;
 - the historical `.pkl` intermediate checkpoint files referenced by the
   preserved notebooks;
-- a portable package/environment specification; or
-- publication-figure export scripts or frozen figure-input objects.
+- an exact lock of the historical Google Colab environment; or
+- the complete frozen objects and final export code needed to regenerate all
+  publication-figure panels.
 
 The notebooks therefore support audit of computational origin and embedded
 results. They cannot presently be executed end to end from the public contents
-of this directory alone.
+of this directory alone. `environment.yml` supplies a portable inspection/helper
+environment without claiming to recreate the exact historical runtime.
 
 ## Scientific evidence lock
 
@@ -136,13 +138,29 @@ provenance release.
 
 ## Figures
 
-Publication-only figure export code is not included in the current public
-provenance release. When added as a separate reproducibility layer, it should be
-stored under `figures/`.
+The `figures/` layer records manuscript-reported frozen values and can export
+them as audit tables. It deliberately does not redraw incomplete approximations
+of the publication figures. See `figures/README.md` for the exact frozen objects
+still needed for faithful panel-by-panel regeneration.
 
 Figure export must consume frozen results or frozen computational objects.
 It must not retrain models, repeat model selection, retune hyperparameters,
 or alter the inferential evidence reported in the manuscript.
+
+## Portable audit
+
+From this directory, run:
+
+```bash
+python scripts/audit_release.py
+```
+
+The audit verifies notebook hashes and structural contracts, 22 high-specificity
+manuscript/notebook evidence anchors, table order, reported-value schema and
+discoverability of the frozen seeds. It performs no model fitting or inference.
+
+See `DEPENDENCY_INVENTORY.md`, `manifests/README.md` and `figures/README.md` for
+the remaining boundaries and the validated export paths.
 
 ## Integrity
 

@@ -1,0 +1,17 @@
+name: weaveai-paper2-audit
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - matplotlib
+  - numpy
+  - pandas
+  - pillow
+  - pywavelets
+  - scikit-learn
+  - scipy
+  - tifffile
+  - pytorch
+
+# This environment supports provenance inspection and portable helper scripts.
+# It is not represented as the exact historical Google Colab environment.

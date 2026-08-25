@@ -1893,9 +1893,11 @@ repository:
 https://github.com/nitikagupta1403/WeaveAI/tree/306d1e6/papers/Paper-II/reproducibility
 
 The original CLO-SKET images are not redistributed by WeaveAI and remain available
-from Mendeley Data under the DOI given above. The current public provenance release
-does not include the historical intermediate checkpoint files, a portable execution
-environment, or publication-figure export scripts.
+from Mendeley Data under the DOI given above. The repository includes a portable
+audit/helper environment and machine-verifiable reported-value exports. It does
+not include the historical intermediate checkpoint files, an exact lock of the
+original Colab environment, or the complete frozen objects required to regenerate
+all final publication-figure panels.
 
 
 ---
@@ -1920,7 +1922,8 @@ Accordingly, they document the computational origin of the reported results but
 are not a clean-environment, end-to-end reproduction package. In particular, the
 historical intermediate checkpoint files referenced by the executed workflow are
 not distributed in the current public release. The repository README identifies
-the scope and limitations of the released provenance record.
+the scope and limitations of the released provenance record and provides a
+non-executing audit of notebook integrity and manuscript evidence anchors.
 
 
 ---
