@@ -424,20 +424,168 @@ Headline manuscript values must be generated from these artifacts rather than co
 
 ## 19. Pre-code freeze checklist
 
-Coding may begin only after the following are recorded:
+Outcome-capable feature extraction or model fitting may begin only after the following are recorded. Non-executing validation scaffolds may be written earlier, but must terminate before extracting learned features or fitting a classifier.
 
-- [ ] exact DINOv2 model identifier and immutable weight provenance;
-- [ ] exact image preprocessing and pooling rule;
-- [ ] dataset acquisition and file-order specification;
-- [ ] authoritative row/identity/fold hash verification;
-- [ ] bootstrap, permutation, and repeated-partition seeds;
-- [ ] mechanical-test rotations and numerical tolerances;
-- [ ] software environment specification;
-- [ ] output schema and manifest format;
-- [ ] confirmation that no new learned-baseline outcomes have been inspected.
+- [~] exact DINOv2 model identifier approved; repository commit and downloaded-weight SHA-256 must be recorded at acquisition;
+- [x] exact image preprocessing and pooling rule;
+- [x] dataset acquisition and file-order specification;
+- [~] authoritative row/identity/fold hash specified; clean-checkout verification remains required;
+- [x] bootstrap, permutation, repeated-partition, PCA, and determinism seeds;
+- [x] mechanical-test rotations and numerical tolerances;
+- [~] software-environment policy approved; resolved package versions and lockfile remain required;
+- [x] output schema and manifest format;
+- [x] confirmation that no new learned-baseline outcomes have been inspected.
 
 ## 20. Freeze declaration
 
 This design is prospective with respect to the new learned-baseline contrasts. Existing morphology, axial–radial, HOG, alignment-control, and diagnostic results are acknowledged as previously observed and cannot be treated as prospectively blind.
 
 After the pre-code checklist is completed, any methodological change must be recorded in a dated amendment stating whether it occurred before or after inspection of the affected outcome. The original design must remain in version history.
+
+## 21. Approved pre-code implementation specification
+
+The following decisions were approved before any Experiment 08 learned embedding or predictive outcome was computed.
+
+### 21.1 Frozen learned encoder
+
+- Primary model identifier: `dinov2_vits14`.
+- Architecture: original distilled DINOv2 ViT-S/14 without registers.
+- Output: 384-dimensional final normalized class-token embedding.
+- Weights: official pretrained backbone only; no pretrained classification head.
+- Training status: evaluation mode, frozen weights, no CLO-SKET fine-tuning.
+- Pooling: class token only; no patch-token mean, layer concatenation, multi-crop aggregation, or layer selection.
+- Provenance gate: the exact DINOv2 source commit, official weight source, downloaded filename, byte size, and SHA-256 must be written to the extraction manifest before the first dataset embedding is produced.
+
+No alternative DINOv2 size, register variant, CLIP model, ResNet model, crop policy, layer, or pooling rule may replace the primary encoder after outcomes are observed.
+
+### 21.2 Frozen image preprocessing
+
+For each source TIFF:
+
+1. apply encoded image orientation metadata;
+2. convert deterministically to floating-point grayscale;
+3. determine foreground/background polarity using one dataset-independent documented rule;
+4. replicate the grayscale channel three times;
+5. preserve the complete uncropped source canvas;
+6. resize the longest side to 224 pixels with bicubic interpolation;
+7. centre-pad the shorter side to (224\times224) using the estimated background value;
+8. apply the standard ImageNet channel normalization associated with DINOv2 inference;
+9. apply no stochastic or deterministic augmentation beyond the declared resize/pad operation.
+
+Foreground cropping is prohibited. The preprocessing implementation must be tested on synthetic black-on-white and white-on-black images before dataset extraction.
+
+### 21.3 Dataset enumeration and row identity
+
+- Recursively enumerate `.tif` and `.tiff` files case-insensitively.
+- Store paths relative to the supplied dataset root.
+- Normalize separators to `/` and sort lexicographically.
+- Reject duplicate normalized paths.
+- Join to the authoritative Paper I row map using explicit category, filename, and recovered-identity fields.
+- Require exactly 2,300 rows, 23 categories, 230 identities, and a one-to-one join.
+- Record relative path, byte size, SHA-256, category, identity, authoritative row index, and fold ID.
+- Stop on any unmatched, duplicated, silently reordered, or non-finite row.
+
+### 21.4 Authoritative folds
+
+The primary fold map must reproduce test-row counts
+
+\[
+(459,460,462,460,459),
+\]
+
+with 46 held-out identities, 184 training identities, and zero identity overlap per fold. The recorded authoritative fold-array audit hash is
+
+`ccb6138e4bafb9f889c4c7dc92f3a0447c9d17ea870b34fc0f5c9d80ddf809b7`.
+
+The implementation must verify both this hash and the structural counts. It must stop if either check fails.
+
+### 21.5 Frozen random seeds
+
+| Operation | Seed |
+|---|---:|
+| Primary classifier | `20260820` |
+| Category-stratified identity bootstrap | `20260821` |
+| Category-preserving alignment permutations | `20260822` |
+| Repeated grouped partitions | `20260823` |
+| PCA, if a randomized solver is used | `20260824` |
+| Determinism audit | `20260825` |
+
+Feature extraction must run without stochastic augmentation. Seed recording does not substitute for environment and deterministic-backend recording.
+
+### 21.6 Coordinate and rotation convention
+
+The frozen RA14 values and historical angular-bin-index convention are preserved. The resulting fixed 2.5° absolute reference offset is disclosed and is not retrospectively corrected inside RA14.
+
+Before dataset-level rotation controls, a synthetic horizontal axis must establish the implementation convention. For Cartesian geometry, image row displacement must be converted using
+
+\[
+\Delta y=c_y-y.
+\]
+
+A visual counterclockwise rotation by (+30^\circ) must then produce an axial change of (+30^\circ\pmod\pi). If an upstream routine uses native downward-positive image coordinates, that difference must be converted explicitly rather than repaired by changing signs after results are seen.
+
+Analytic transformation tests use
+
+\[
+\phi\in\{-90^\circ,-60^\circ,-45^\circ,-30^\circ,-15^\circ,
++15^\circ,+30^\circ,+45^\circ,+60^\circ,+90^\circ\}.
+\]
+
+They require
+
+\[
+\max|R'_2-R_2|<10^{-12}
+\]
+
+and
+
+\[
+\max\|u'_2-R(2\phi)u_2\|_2<10^{-12}.
+\]
+
+Raster controls use one prespecified sketch per recovered identity and the same rotation angles. A supported shell requires (R_2(r)\ge0.05) and shell foreground mass at least 0.1% of total foreground mass. The frozen descriptive gates are:
+
+- median relative magnitude error at most 5%;
+- 95th-percentile relative magnitude error at most 15%;
+- median axial error at most 5°;
+- 95th-percentile axial error at most 15°.
+
+Low-support shells are reported separately and are not silently removed from the audit.
+
+### 21.7 Environment policy
+
+- Python 3.12 reference environment.
+- Exact versions of PyTorch, torchvision, NumPy, pandas, SciPy, scikit-learn, Pillow, and tifffile must be resolved and locked before feature extraction.
+- DINOv2 source must be pinned to an exact Git commit.
+- Final evidence generation uses a recorded CPU reference execution with deterministic PyTorch algorithms enabled.
+- Operating system, processor, thread settings, package lock hash, and model-weight hash are recorded.
+- GPU extraction is a permitted acceleration only after a prespecified CPU/GPU embedding concordance audit; final inference remains reproducible on CPU.
+
+### 21.8 Experiment 08 evidence schema
+
+All new artifacts are written under `evidence/Experiment_08/` and must include:
+
+```text
+experiment08_design_lock.json
+experiment08_environment.json
+experiment08_source_manifest.csv
+experiment08_row_map.csv
+experiment08_fold_map.csv
+experiment08_dinov2_manifest.json
+experiment08_dinov2_vits14_embeddings.npy
+experiment08_primary_results.csv
+experiment08_secondary_results.csv
+experiment08_fold_metrics.csv
+experiment08_oof_predictions.csv
+experiment08_identity_bootstrap.csv
+experiment08_identity_bootstrap_summary.csv
+experiment08_alignment_permutations.csv
+experiment08_alignment_summary.csv
+experiment08_compactness_results.csv
+experiment08_repeated_grouped_cv.csv
+experiment08_mechanical_validation.csv
+experiment08_final_decision.json
+experiment08_public_manifest.json
+```
+
+The embedding matrix is included in the public evidence bundle unless an actual repository constraint arises before execution. Every published artifact receives a byte count and SHA-256 entry. Headline manuscript values must be generated from these files.

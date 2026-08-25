@@ -57,6 +57,10 @@ This is deliberately an evidence record rather than an executable notebook. The 
 
 Historical validation/provenance notebook retained for auditability. It records environment information, integrity checks, and reviewer-oriented validation of frozen result objects. It is **not** intended to be the primary source-to-result execution path and may depend on historical frozen runtime checkpoints.
 
+### Experiment_08/
+
+Prospective learned-baseline study governed by `../PAPER_I_FRESH_STUDY_MATHEMATICAL_DESIGN_LOCK.md`. Its current preflight validates public row/fold provenance, deterministic source-image mapping, and analytic angular/rotation conventions, then stops before DINOv2 extraction or classifier fitting. Outcome-capable execution remains locked until model-weight and environment provenance are complete.
+
 ## Data
 
 The source image data are not redistributed in this repository. Obtain CLO-SKET from the official Mendeley Data record cited in the manuscript (Fitri Arnia, 2020, Version 1, doi:10.17632/jt533nkhsf.1).
