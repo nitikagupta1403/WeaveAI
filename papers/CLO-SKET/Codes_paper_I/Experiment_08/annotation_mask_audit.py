@@ -153,15 +153,25 @@ def multi_structure_box(array: np.ndarray) -> tuple[int, int, int, int, dict]:
 
 
 
-def component_geometry_mask(array: np.ndarray) -> tuple[np.ndarray, dict]:
+def component_geometry_mask(
+    array: np.ndarray, dilation_iterations: int = 1
+) -> tuple[np.ndarray, dict]:
     """Keep garment components and enclosed details; remove every exterior component."""
     ink = array < INK_THRESHOLD
     total_ink = int(ink.sum())
     if total_ink == 0:
         raise RuntimeError("Image contains no ink under the frozen threshold")
 
-    expanded = ndimage.binary_dilation(
-        ink, structure=np.ones((3, 3), dtype=bool), iterations=1
+    if dilation_iterations < 0:
+        raise ValueError("dilation_iterations must be non-negative")
+    expanded = (
+        ink.copy()
+        if dilation_iterations == 0
+        else ndimage.binary_dilation(
+            ink,
+            structure=np.ones((3, 3), dtype=bool),
+            iterations=dilation_iterations,
+        )
     )
     labels, count = ndimage.label(
         expanded, structure=np.ones((3, 3), dtype=np.uint8)
@@ -247,6 +257,7 @@ def component_geometry_mask(array: np.ndarray) -> tuple[np.ndarray, dict]:
     masked = np.ones_like(array)
     masked[keep] = array[keep]
     return masked, {
+        "geometry_dilation_iterations": dilation_iterations,
         "geometry_component_count_total": count,
         "geometry_component_count_structural": len(structural),
         "geometry_component_count_enclosed": len(
@@ -280,7 +291,7 @@ def make_comparison_sheet(items: list[dict], output: Path) -> None:
     label_width = 155
     heading_height = 30
     row_height = CANVAS + 24
-    variants = ("raw", "multi_10", "geometry")
+    variants = ("raw", "geometry", "geometry_zero")
     sheet = Image.new("RGB", (label_width + len(variants) * CANVAS, heading_height + len(items) * row_height), "white")
     draw = ImageDraw.Draw(sheet)
     for column, variant in enumerate(variants):
@@ -361,6 +372,25 @@ def audit_image(data_root: Path, row: dict) -> tuple[dict, dict[str, Image.Image
             "geometry_removed_ink_fraction": 1.0 - geometry_retained / original_ink,
             "geometry_processed_sha256": image_sha256(images["geometry"]),
             **geometry_details,
+        }
+    )
+    zero_masked, zero_details = component_geometry_mask(
+        array, dilation_iterations=0
+    )
+    zero_retained = ink_count(zero_masked)
+    zero_processed, _ = resize_and_pad(zero_masked)
+    images["geometry_zero"] = Image.fromarray(
+        np.round(zero_processed * 255.0).astype(np.uint8)
+    )
+    record.update(
+        {
+            "geometry_zero_retained_ink_fraction": zero_retained / original_ink,
+            "geometry_zero_removed_ink_fraction": 1.0 - zero_retained / original_ink,
+            "geometry_zero_processed_sha256": image_sha256(images["geometry_zero"]),
+            **{
+                key.replace("geometry_", "geometry_zero_", 1): value
+                for key, value in zero_details.items()
+            },
         }
     )
     return record, images
@@ -457,6 +487,17 @@ def main() -> None:
             "structural_components_max": max(record["geometry_component_count_structural"] for record in records),
             "enclosed_detail_components_median": float(np.median([record["geometry_component_count_enclosed"] for record in records])),
             "fallback_count": sum(bool(record["geometry_component_fallback"]) for record in records),
+        },
+        "geometry_zero_dilation_results": {
+            "retained_ink_min": min(record["geometry_zero_retained_ink_fraction"] for record in records),
+            "retained_ink_median": float(np.median([record["geometry_zero_retained_ink_fraction"] for record in records])),
+            "retained_ink_max": max(record["geometry_zero_retained_ink_fraction"] for record in records),
+            "removed_ink_median": float(np.median([record["geometry_zero_removed_ink_fraction"] for record in records])),
+            "structural_components_min": min(record["geometry_zero_component_count_structural"] for record in records),
+            "structural_components_median": float(np.median([record["geometry_zero_component_count_structural"] for record in records])),
+            "structural_components_max": max(record["geometry_zero_component_count_structural"] for record in records),
+            "enclosed_detail_components_median": float(np.median([record["geometry_zero_component_count_enclosed"] for record in records])),
+            "fallback_count": sum(bool(record["geometry_zero_component_fallback"]) for record in records),
         },
         "audit_csv": str(csv_path),
         "audit_csv_sha256": sha256_file(csv_path),
