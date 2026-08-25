@@ -46,4 +46,6 @@ python papers/CLO-SKET/Codes_paper_I/Experiment_08/annotation_mask_audit.py \
   --output-root /absolute/path/to/experiment08_annotation_mask_audit
 ```
 
-The audit preserves the rejected single-component 10% candidate for comparison and adds a multi-component 10% garment envelope. The latter unions substantial vertically extended components before masking. Selection is based only on preserving garment geometry and removing peripheral annotation; no learned feature or outcome is available at this stage.
+The audit preserves the rejected single-component 10% candidate and the intermediate multi-component 10% rectangular envelope. It also evaluates a stricter component-only geometry mask: retain the frozen structural garment components and disconnected components wholly enclosed by their unexpanded union, while whitening every exterior component. This avoids retaining nearby writing merely because it falls inside a rectangular context margin. The rule is label-blind and uses no OCR. Selection is based only on preserving garment geometry and removing peripheral annotation; no learned feature or outcome is available at this stage.
+
+Do not approve a mask from retained-ink summaries alone. Inspect the category sheet and the lowest-retention identities. Component-connected handwriting cannot be separated by this rule and must be disclosed and tested through raw-versus-geometry sensitivity analyses.
