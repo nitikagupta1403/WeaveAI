@@ -152,6 +152,115 @@ def multi_structure_box(array: np.ndarray) -> tuple[int, int, int, int, dict]:
     )
 
 
+
+def component_geometry_mask(array: np.ndarray) -> tuple[np.ndarray, dict]:
+    """Keep garment components and enclosed details; remove every exterior component."""
+    ink = array < INK_THRESHOLD
+    total_ink = int(ink.sum())
+    if total_ink == 0:
+        raise RuntimeError("Image contains no ink under the frozen threshold")
+
+    expanded = ndimage.binary_dilation(
+        ink, structure=np.ones((3, 3), dtype=bool), iterations=1
+    )
+    labels, count = ndimage.label(
+        expanded, structure=np.ones((3, 3), dtype=np.uint8)
+    )
+    height, width = array.shape
+    image_cx = (width - 1) / 2.0
+    image_cy = (height - 1) / 2.0
+    diagonal = math.hypot(width, height)
+    components = []
+
+    for label_id in range(1, count + 1):
+        ys, xs = np.nonzero(labels == label_id)
+        if len(xs) == 0:
+            continue
+        left, right = int(xs.min()), int(xs.max()) + 1
+        top, bottom = int(ys.min()), int(ys.max()) + 1
+        component_ink = int(np.sum(ink & (labels == label_id)))
+        height_fraction = (bottom - top) / height
+        ink_fraction = component_ink / total_ink
+        centre_distance = (
+            math.hypot(float(xs.mean()) - image_cx, float(ys.mean()) - image_cy)
+            / diagonal
+        )
+        components.append(
+            {
+                "label_id": label_id,
+                "left": left,
+                "top": top,
+                "right": right,
+                "bottom": bottom,
+                "component_ink": component_ink,
+                "height_fraction": height_fraction,
+                "ink_fraction": ink_fraction,
+                "centre_distance": centre_distance,
+            }
+        )
+
+    structural = [
+        item
+        for item in components
+        if (
+            item["height_fraction"] >= STRUCTURAL_MIN_HEIGHT_FRACTION
+            and item["ink_fraction"] >= STRUCTURAL_MIN_INK_FRACTION
+            and item["centre_distance"] <= STRUCTURAL_MAX_CENTRE_DISTANCE
+        )
+    ]
+    fallback = False
+    if not structural:
+        left, top, right, bottom, _ = principal_structure_box(array)
+        structural = [
+            item
+            for item in components
+            if (
+                item["left"] == left
+                and item["top"] == top
+                and item["right"] == right
+                and item["bottom"] == bottom
+            )
+        ]
+        fallback = True
+    if not structural:
+        raise RuntimeError("Principal-component fallback could not be recovered")
+
+    union = (
+        min(item["left"] for item in structural),
+        min(item["top"] for item in structural),
+        max(item["right"] for item in structural),
+        max(item["bottom"] for item in structural),
+    )
+    left, top, right, bottom = union
+    enclosed = [
+        item
+        for item in components
+        if (
+            item["left"] >= left
+            and item["top"] >= top
+            and item["right"] <= right
+            and item["bottom"] <= bottom
+        )
+    ]
+    keep_ids = {item["label_id"] for item in structural + enclosed}
+    keep = ink & np.isin(labels, list(keep_ids))
+    masked = np.ones_like(array)
+    masked[keep] = array[keep]
+    return masked, {
+        "geometry_component_count_total": count,
+        "geometry_component_count_structural": len(structural),
+        "geometry_component_count_enclosed": len(
+            {item["label_id"] for item in enclosed} - {item["label_id"] for item in structural}
+        ),
+        "geometry_component_count_kept": len(keep_ids),
+        "geometry_component_fallback": fallback,
+        "geometry_left": left,
+        "geometry_top": top,
+        "geometry_right": right,
+        "geometry_bottom": bottom,
+    }
+
+
 def apply_box_mask(array: np.ndarray, box: tuple[int, int, int, int]) -> np.ndarray:
     left, top, right, bottom = box
     masked = np.ones_like(array)
@@ -171,7 +280,7 @@ def make_comparison_sheet(items: list[dict], output: Path) -> None:
     label_width = 155
     heading_height = 30
     row_height = CANVAS + 24
-    variants = ("raw", "margin_10", "multi_10")
+    variants = ("raw", "multi_10", "geometry")
     sheet = Image.new("RGB", (label_width + len(variants) * CANVAS, heading_height + len(items) * row_height), "white")
     draw = ImageDraw.Draw(sheet)
     for column, variant in enumerate(variants):
@@ -238,6 +347,20 @@ def audit_image(data_root: Path, row: dict) -> tuple[dict, dict[str, Image.Image
             "multi_10_retained_ink_fraction": multi_retained / original_ink,
             "multi_10_processed_sha256": image_sha256(images["multi_10"]),
             **multi_details,
+        }
+    )
+    geometry_masked, geometry_details = component_geometry_mask(array)
+    geometry_retained = ink_count(geometry_masked)
+    geometry_processed, _ = resize_and_pad(geometry_masked)
+    images["geometry"] = Image.fromarray(
+        np.round(geometry_processed * 255.0).astype(np.uint8)
+    )
+    record.update(
+        {
+            "geometry_retained_ink_fraction": geometry_retained / original_ink,
+            "geometry_removed_ink_fraction": 1.0 - geometry_retained / original_ink,
+            "geometry_processed_sha256": image_sha256(images["geometry"]),
+            **geometry_details,
         }
     )
     return record, images
@@ -316,6 +439,24 @@ def main() -> None:
             "selected_components_median": float(np.median([record["multi_component_count_selected"] for record in records])),
             "selected_components_max": max(record["multi_component_count_selected"] for record in records),
             "fallback_count": sum(bool(record["multi_component_fallback"]) for record in records),
+        },
+        "geometry_component_rule": {
+            "minimum_height_fraction": STRUCTURAL_MIN_HEIGHT_FRACTION,
+            "minimum_ink_fraction": STRUCTURAL_MIN_INK_FRACTION,
+            "maximum_centre_distance": STRUCTURAL_MAX_CENTRE_DISTANCE,
+            "exterior_context_margin": 0.0,
+            "keep_disconnected_components_fully_enclosed_by_structural_union": True,
+        },
+        "geometry_results": {
+            "retained_ink_min": min(record["geometry_retained_ink_fraction"] for record in records),
+            "retained_ink_median": float(np.median([record["geometry_retained_ink_fraction"] for record in records])),
+            "retained_ink_max": max(record["geometry_retained_ink_fraction"] for record in records),
+            "removed_ink_median": float(np.median([record["geometry_removed_ink_fraction"] for record in records])),
+            "structural_components_min": min(record["geometry_component_count_structural"] for record in records),
+            "structural_components_median": float(np.median([record["geometry_component_count_structural"] for record in records])),
+            "structural_components_max": max(record["geometry_component_count_structural"] for record in records),
+            "enclosed_detail_components_median": float(np.median([record["geometry_component_count_enclosed"] for record in records])),
+            "fallback_count": sum(bool(record["geometry_component_fallback"]) for record in records),
         },
         "audit_csv": str(csv_path),
         "audit_csv_sha256": sha256_file(csv_path),
