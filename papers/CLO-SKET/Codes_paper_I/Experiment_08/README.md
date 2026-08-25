@@ -25,3 +25,14 @@ The preflight:
 - terminates before any learned feature or classifier can be computed.
 
 Feature extraction remains blocked until the exact DINOv2 source commit, downloaded weight hash, and resolved environment lock are recorded.
+
+After preflight, run the preprocessing-only audit:
+
+```bash
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/preprocess_audit.py \
+  --data-root /absolute/path/to/Clo-Sket \
+  --source-manifest /absolute/path/to/experiment08_source_manifest.csv \
+  --output-root /absolute/path/to/experiment08_preprocessing_audit
+```
+
+This verifies one prespecified image per garment identity and creates a 23-category contact sheet. The script deliberately contains no DINOv2 import or classifier code.
