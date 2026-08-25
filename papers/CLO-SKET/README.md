@@ -49,7 +49,7 @@ The contribution is an explicit measurement-and-validation framework for garment
 
 ## Data and code availability
 
-Do not state that the Experiment 06 evidence bundle is publicly available until the corresponding frozen artifacts have been added to the public repository and verified from a clean checkout. Availability wording in the submission manuscript must match the repository state exactly.
+The compact Experiment 06 and Experiment 07 reviewer-evidence bundles are publicly available under `evidence/` and are integrity-locked by `evidence/PUBLIC_EVIDENCE_MANIFEST.json`. The historical Experiment 06 runtime checkpoint and the Experiment 07 HOG feature matrix are not redistributed. Availability wording in the submission manuscript must preserve this distinction and match the repository state exactly.
 
 ## Dataset
 

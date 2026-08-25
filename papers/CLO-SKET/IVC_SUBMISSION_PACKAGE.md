@@ -4,16 +4,19 @@
 
 The submission manuscript is assembled from the following frozen scientific sources, in this order:
 
-1. `CLO_SKET_Final_Abstract.md`
-2. `CLO_SKET_Final_Introduction.md`
-3. `CLO_SKET_Final_Related_Work.md`
-4. `CLO_SKET_Final_Methods.md`
-5. `CLO_SKET_Final_Results.md`
-6. `CLO_SKET_Final_Discussion.md`
-7. `CLO_SKET_Final_Conclusion.md`
-8. `CLO_SKET_Availability_and_Reproducibility.md`
+1. `CLO_SKET_IVC_Abstract.md`
+2. `CLO_SKET_IVC_Introduction.md`
+3. `CLO_SKET_IVC_Related_Work.md`
+4. `CLO_SKET_IVC_Methods.md`
+5. `CLO_SKET_IVC_Methods_Experiment_07.md`
+6. `CLO_SKET_IVC_Results.md`
+7. `CLO_SKET_IVC_Results_Experiment_07.md`
+8. `CLO_SKET_IVC_Discussion.md`
+9. `CLO_SKET_IVC_Discussion_Experiment_07.md`
+10. `CLO_SKET_IVC_Conclusion.md`
+11. `CLO_SKET_IVC_References.md`
 
-Canonical bibliography: `CLO_SKET_References.bib`.
+Canonical bibliography data: `CLO_SKET_References.bib`. Submission-formatted references: `CLO_SKET_IVC_References.md`.
 
 ## Deterministic assembly
 
@@ -44,21 +47,9 @@ The final manuscript figure directory is `papers/CLO-SKET/figures/` and uses the
 
 Code is maintained under `papers/CLO-SKET/Codes_paper_I/`. The code README and `CLO_SKET_Availability_and_Reproducibility.md` define the intended execution and reproducibility boundary.
 
-## Front/back matter still requiring author confirmation
+## Confirmed front/back matter
 
-Before journal upload, complete only with verified information:
-
-- final title;
-- complete author list and order;
-- affiliations;
-- corresponding-author email/address;
-- funding statement;
-- competing-interests declaration;
-- CRediT author contributions;
-- acknowledgements, if applicable;
-- any journal-required ethics declaration, if applicable.
-
-Do not infer or fabricate these fields.
+The generated manuscript contains the confirmed single-author identity, independent-researcher affiliation, corresponding-author email, funding statement, competing-interest declaration, CRediT roles, acknowledgements, ethics statement, and transparent ChatGPT/Codex writing-assistance disclosure.
 
 ## Submission freeze rule
 
