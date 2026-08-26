@@ -6,6 +6,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -19,6 +20,7 @@ EXPECTED_MANIFEST_SHA256 = (
     "c464feafbb382c8e9d111433047298d8f42e1c661e018735e3df0b6016eaff4d"
 )
 OUTPUT_SIZE = 224
+MAX_ABS_ROTATION_DEGREES = 14.0
 
 
 def parse_args() -> argparse.Namespace:
@@ -85,9 +87,15 @@ def localize(
 
 def resize_and_pad(image: Image.Image) -> tuple[Image.Image, int, int, int, int]:
     width, height = image.size
-    scale = OUTPUT_SIZE / max(width, height)
-    resized_width = max(1, round(width * scale))
-    resized_height = max(1, round(height * scale))
+    theta = math.radians(MAX_ABS_ROTATION_DEGREES)
+    cosine = math.cos(theta)
+    sine = math.sin(theta)
+    scale = min(
+        OUTPUT_SIZE / (width * cosine + height * sine),
+        OUTPUT_SIZE / (width * sine + height * cosine),
+    )
+    resized_width = max(1, math.floor(width * scale))
+    resized_height = max(1, math.floor(height * scale))
     resized = image.resize((resized_width, resized_height), Image.Resampling.BICUBIC)
     left = (OUTPUT_SIZE - resized_width) // 2
     top = (OUTPUT_SIZE - resized_height) // 2
@@ -167,6 +175,14 @@ def main() -> None:
                 "resized_height": resized_height,
                 "pad_left": pad_left,
                 "pad_top": pad_top,
+                "rotation_safe_width_at_max_angle": (
+                    resized_width * math.cos(math.radians(MAX_ABS_ROTATION_DEGREES))
+                    + resized_height * math.sin(math.radians(MAX_ABS_ROTATION_DEGREES))
+                ),
+                "rotation_safe_height_at_max_angle": (
+                    resized_width * math.sin(math.radians(MAX_ABS_ROTATION_DEGREES))
+                    + resized_height * math.cos(math.radians(MAX_ABS_ROTATION_DEGREES))
+                ),
                 "selection_cohort": record["selection_cohort"],
                 "localization_source": record["localization_source"],
                 "ambiguous_overlap": bool(record["ambiguous_overlap"]),
@@ -189,9 +205,11 @@ def main() -> None:
         "predictive_outcome_computed": False,
         "images": len(rows),
         "output_size": [OUTPUT_SIZE, OUTPUT_SIZE],
+        "maximum_absolute_rotation_degrees": MAX_ABS_ROTATION_DEGREES,
         "localization_policy": (
             "Crop to the frozen garment box, whiten intersecting reviewed text "
-            "boxes, then aspect-preserving resize and white-pad to 224x224"
+            "boxes, then use analytic rotation-safe aspect-preserving scaling "
+            "and white-pad to 224x224"
         ),
         "inverted_images": inverted_count,
         "preprocessing_manifest_sha256": observed_manifest_hash,
