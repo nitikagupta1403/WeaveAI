@@ -603,3 +603,16 @@ experiment08_public_manifest.json
 ```
 
 The embedding matrix is included in the public evidence bundle unless an actual repository constraint arises before execution. Every published artifact receives a byte count and SHA-256 entry. Headline manuscript values must be generated from these files.
+
+### Pre-outcome amendment — reviewed localization and architecture-aligned padding (2026-08-26)
+
+This amendment was written before any CLO-SKET DINOv2 embedding, classifier fit, or predictive outcome was computed. It supersedes the complete-canvas prohibition in Section 21.2 for the primary learned representation and supersedes the earlier automatic geometry-mask candidate as the primary localization rule.
+
+Dataset-wide preprocessing review produced frozen garment boxes for all 2,300 sketches: 928 boxes were human reviewed (all 628 mandatory cases plus a deterministic category-stratified quality-control sample of 300), and 1,372 automatic proposals were accepted after the quality-control sample showed zero material failures. Reviewed handwriting boxes are preprocessing metadata, not training targets. All 22 geometric garment/text overlaps received explicit before/after visual approval.
+
+The primary learned representation is now (L_{\mathrm{localized}}). After orientation and polarity normalization, each image is cropped to its frozen reviewed garment box; only the intersections of frozen handwriting boxes with that crop are whitened. The crop is resized bicubically with its longest side equal to 196 pixels and centered on a white (224\times224) canvas. Because DINOv2 ViT-S/14 uses 14-pixel patches, 196 pixels span 14 patches and the remaining 28 pixels provide one 14-pixel patch of border on each side of the longest axis. This rule was selected from preprocessing-only integrity and visual audits, not learned features or outcomes.
+
+DINOv2 feature extraction uses no stochastic or deterministic rotation augmentation. The 14 in RA14 denotes representation dimensionality, and the 14 in ViT-S/14 denotes patch size; neither denotes a 14-degree rotation. The separately frozen RA14 mechanical raster controls retain the angles (-90^circ,-60^circ,-45^circ,-30^circ,-15^circ,+15^circ,+30^circ,+45^circ,+60^circ,+90^circ).
+
+The original complete-canvas representation (L_{\mathrm{raw}}) remains a prespecified annotation-and-localization sensitivity control and cannot replace the amended primary representation based on predictive results. Materialization attempts V1–V3 remain in versioned provenance as preprocessing-development evidence; V3 is explicitly superseded because it incorrectly treated 14 degrees as a rotation limit.
+

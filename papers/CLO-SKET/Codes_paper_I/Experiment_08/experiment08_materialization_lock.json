@@ -1,13 +1,16 @@
 {
   "experiment": "CLO-SKET Experiment 08",
-  "stage": "PRE_OUTCOME_IMAGE_MATERIALIZATION_LOCK",
+  "stage": "SUPERSEDED_PRE_OUTCOME_IMAGE_MATERIALIZATION_LOCK",
   "learned_features_extracted": false,
   "classifier_fitted": false,
   "predictive_outcome_computed": false,
   "input": {
     "images": 2300,
-    "output_size": [224, 224],
-    "maximum_absolute_rotation_degrees": 14.0,
+    "output_size": [
+      224,
+      224
+    ],
+    "maximum_absolute_rotation_degrees": 14,
     "inverted_images": 0,
     "preprocessing_manifest_sha256": "c464feafbb382c8e9d111433047298d8f42e1c661e018735e3df0b6016eaff4d"
   },
@@ -23,5 +26,8 @@
     "maximum_rotated_height": 223.85466057211832,
     "bound_violations": 0
   },
-  "approval_boundary": "Frozen after integrity and category-level visual audits and before any CLO-SKET DINOv2 embedding, classifier fit, or predictive outcome was computed."
+  "approval_boundary": "Superseded before any CLO-SKET DINOv2 embedding, classifier fit, or predictive outcome was computed.",
+  "superseded": true,
+  "superseded_reason": "The V3 materializer incorrectly interpreted the number 14 as a maximum rotation angle. In the approved design, RA14 is 14-dimensional, ViT-S/14 has 14-pixel patches, DINOv2 augmentation is none, and RA14 raster controls use separately frozen angles.",
+  "superseded_by": "architecture-aligned 196-pixel content extent on a 224-pixel canvas; replacement hash lock to be written after V4 materialization"
 }

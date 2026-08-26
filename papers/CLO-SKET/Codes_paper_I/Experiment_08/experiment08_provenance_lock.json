@@ -26,9 +26,9 @@
     "input_mode": "floating-point grayscale in [0,1]",
     "polarity_rule": "estimate background as median border intensity; invert iff border median < 0.5",
     "channels": "replicate normalized grayscale into three identical channels",
-    "crop": "whiten outside the frozen garment box while preserving the source canvas dimensions",
-    "resize": "longest side to 224 pixels, bicubic",
-    "padding": "center shorter side to 224x224 using white background after polarity normalization",
+    "crop": "crop to the frozen reviewed garment box after polarity normalization; whiten only reviewed text-box intersections",
+    "resize": "resize the localized crop so its longest side is 196 pixels (14 ViT-S/14 patches), bicubic",
+    "padding": "center on a 224x224 white canvas, leaving a total 28-pixel margin on the longest axis (one 14-pixel ViT patch per side)",
     "network_normalization_mean": [
       0.485,
       0.456,
@@ -39,10 +39,13 @@
       0.224,
       0.225
     ],
-    "augmentation": "none",
+    "augmentation": "none; RA14 raster-rotation controls are a separate mechanical-validation procedure and are not DINOv2 augmentation",
     "pooling": "final normalized class token only",
     "localization": "2,300-row frozen coarse spatial manifest: 928 human-reviewed boxes and 1,372 automatic proposals accepted by deterministic category-stratified QC",
-    "text_removal": "whiten reviewed handwriting boxes; all 22 geometric garment/text overlaps received before/after visual approval"
+    "text_removal": "whiten reviewed handwriting boxes; all 22 geometric garment/text overlaps received before/after visual approval",
+    "primary_representation": "L_localized",
+    "sensitivity_control": "L_raw retains the complete source canvas under the original frozen resize/pad rule",
+    "amendment": "Pre-outcome localization and patch-border amendment dated 2026-08-26"
   },
   "approval_boundary": "Recorded before any CLO-SKET DINOv2 embedding or learned-baseline outcome was computed.",
   "preprocessing_decision_lock": "experiment08_preprocessing_decision_lock.json"
