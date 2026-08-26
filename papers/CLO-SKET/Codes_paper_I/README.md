@@ -53,6 +53,8 @@ Public manuscript-facing evidence/provenance record for the locked compact-repre
 
 This is deliberately an evidence record rather than an executable notebook. The repository does **not** claim that a separate standalone rerunnable Experiment 06 notebook or frozen runtime bundle is present unless one is explicitly deposited.
 
+Experiment 06 is preserved as a frozen historical experiment package. The public evidence bundle is hash-verifiable, and the bundled verifier checks internal provenance and evidence consistency only. It does not reconstruct M/R/A from source TIFFs, fit classifiers, regenerate OOF predictions, or recompute scientific outcomes. The original integrated historical execution pipeline is not preserved in the repository, and no attempt is made to infer missing historical execution semantics. Fresh executable reproducibility work begins with Experiment 08.
+
 ### audit_Final_Validation_Shield.ipynb
 
 Historical validation/provenance notebook retained for auditability. It records environment information, integrity checks, and reviewer-oriented validation of frozen result objects. It is **not** intended to be the primary source-to-result execution path and may depend on historical frozen runtime checkpoints.
