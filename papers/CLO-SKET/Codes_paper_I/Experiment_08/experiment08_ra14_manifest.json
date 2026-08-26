@@ -1,0 +1,33 @@
+{
+  "array_sha256": "01ea6937783792d0d9295ca92db863d932db4b57f5ad4b61ca78a2c97eb88a3c",
+  "category_labels_used_for_feature_extraction": false,
+  "classifier_fitted": false,
+  "columns": [
+    "F2_integral",
+    "F2_radial_centroid",
+    "F2_radial_spread",
+    "F2_radial_concentration",
+    "F2_onset_radius",
+    "F2_termination_radius",
+    "F2_peak_radius",
+    "F2_peak_magnitude",
+    "alpha2_peak_cos2",
+    "alpha2_peak_sin2",
+    "alpha2_weighted_mean_cos2",
+    "alpha2_weighted_mean_sin2",
+    "alpha2_axial_coherence",
+    "alpha2_orientation_drift_deg"
+  ],
+  "dataset_root_runtime": "/Users/nitikagupta/Desktop/Clo-Sket",
+  "dtype": "float64",
+  "experiment": "Experiment_08",
+  "max_conditional_normalization_error": 4.440892098500626e-16,
+  "max_relative_mass_error": 0.0,
+  "n_features": 14,
+  "population": 2300,
+  "predictive_outcome_computed": false,
+  "representation": "RA14",
+  "saved_npy_sha256": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033",
+  "source_manifest_sha256": "8af72e8af82c4937b5b231137b85bbb0a4d9f0ff61473372099da4b8865cc56e",
+  "source_rule": "original TIFF -> grayscale L -> continuous darkness 255-I -> intensity-weighted centroid -> 72x72 radial-angular mass -> conditional P(theta|r) -> rFFT harmonic 2 -> 25-shell primary domain 3.5..27.5"
+}
