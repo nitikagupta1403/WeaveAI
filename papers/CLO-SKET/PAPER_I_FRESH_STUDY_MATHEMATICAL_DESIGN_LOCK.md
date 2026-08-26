@@ -201,6 +201,36 @@ These contrasts are secondary. Their bootstrap p-values, if reported, will be mu
 
 Balanced accuracy is secondary for every comparison. No model or representation may be selected because it improves the secondary metric.
 
+### Pre-result compactness amendment (locked before any compactness outcome)
+
+This amendment freezes only the two previously unresolved compactness decisions and does not alter any other compactness decision, margin, estimand, metric, bootstrap design, multiplicity rule, fold rule, representation, or classifier specification.
+
+For the learned compact representation \(L^{(14)}\):
+
+1. Within each frozen identity-disjoint fold, fit PCA with 14 components on the RAW frozen DINOv2 training-fold representation only.
+2. Transform the training and held-out rows using that training-fitted PCA.
+3. Then fit StandardScaler on the 14-D PCA training scores only.
+4. Transform the held-out PCA scores with that same training-fitted scaler.
+5. Fit the already-frozen LogisticRegression classifier on the scaled 14-D training scores.
+
+Therefore the ordering is explicitly frozen as:
+
+\[
+\text{raw } L \rightarrow \text{training-fold PCA}_{14} \rightarrow \text{training-fold StandardScaler} \rightarrow \text{frozen LogisticRegression}.
+\]
+
+No full-dataset PCA or scaler fitting is permitted. The frozen explicit RA14 representation retains its already-frozen training-fold StandardScaler \rightarrow LogisticRegression treatment.
+
+The compactness paired identity-bootstrap seed is frozen as:
+
+\[
+\texttt{20260821}
+\]
+
+This deliberately reuses the already-established Experiment-08 identity-bootstrap seed and is fixed before any compactness outcome is computed.
+
+PRE-RESULT AMENDMENT: no RA14-vs-DINOv2-PCA14 prediction, metric, bootstrap result, or affected outcome had been computed or inspected when this amendment was frozen.
+
 ## 8. Compactness comparison
 
 To separate interpretability from raw dimensional advantage, compare (G\) with fold-locally reduced baselines:
