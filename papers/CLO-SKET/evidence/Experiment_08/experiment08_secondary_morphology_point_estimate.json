@@ -1,0 +1,21 @@
+{
+  "classifier": {
+    "C": 1.0,
+    "max_iter": 5000,
+    "model": "multinomial logistic regression",
+    "penalty": "l2",
+    "scaler": "training-fold StandardScaler",
+    "solver": "lbfgs"
+  },
+  "classifier_seed": 20260820,
+  "delta_G_given_M": 0.025312807052534025,
+  "fold_array_sha256": "e3fb0cf57b886bc303333795de42ecfc38cb1da9728d4d5cc365b47a91504c1f",
+  "identity_bootstrap_completed": false,
+  "inferential_claim_permitted": false,
+  "macro_f1_M": 0.29591237413184013,
+  "macro_f1_M_plus_G": 0.32122518118437415,
+  "morphology_npy_sha256": "f202d5b05524686815480539488ecd5c5fafbe9e89a51dfe50ff03b00c43fb92",
+  "morphology_raw_array_sha256": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+  "secondary_estimand": "macro_F1(M_plus_G) - macro_F1(M)",
+  "stage": "SECONDARY_MORPHOLOGY_POINT_ESTIMATE"
+}
