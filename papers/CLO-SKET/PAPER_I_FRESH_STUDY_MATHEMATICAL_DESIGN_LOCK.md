@@ -616,3 +616,66 @@ DINOv2 feature extraction uses no stochastic or deterministic rotation augmentat
 
 The original complete-canvas representation (L_{\mathrm{raw}}) remains a prespecified annotation-and-localization sensitivity control and cannot replace the amended primary representation based on predictive results. Materialization attempts V1–V3 remain in versioned provenance as preprocessing-development evidence; V3 is explicitly superseded because it incorrectly treated 14 degrees as a rotation limit.
 
+
+---
+
+## 22. Pre-outcome Experiment 08 fold-map amendment — 2026-08-26
+
+This amendment was recorded before any Experiment 08 classifier was fitted and
+before any Experiment 08 predictive outcome was computed.
+
+Section 21.4 records the historical public fold assignment inherited from the
+earlier evidence lineage. Its recorded row counts are
+
+\[
+(459,460,462,460,459),
+\]
+
+with historical fold-array audit hash
+
+`ccb6138e4bafb9f889c4c7dc92f3a0447c9d17ea870b34fc0f5c9d80ddf809b7`.
+
+That historical object is retained unchanged as provenance evidence.
+
+A frozen pre-outcome identity audit subsequently corrected one row-level
+identity/fold assignment for Experiment 08 without modifying source images and
+without using learned features, classifier predictions, or predictive outcomes.
+
+Therefore, for Experiment 08 only, the active primary fold assignment is the
+corrected identity-disjoint map with test-row counts
+
+\[
+(459,460,461,460,460).
+\]
+
+Each corrected fold contains exactly 46 held-out garment identities and
+184 training garment identities, with zero train/test identity overlap.
+
+The active Experiment 08 canonical fold-array SHA-256 is
+
+`e3fb0cf57b886bc303333795de42ecfc38cb1da9728d4d5cc365b47a91504c1f`.
+
+### Execution rule
+
+All Experiment 08 primary and secondary outcome-producing analyses must:
+
+1. preserve the historical fold hash above as provenance only;
+2. use the corrected Experiment 08 fold map for model fitting and evaluation;
+3. require corrected test-row counts `(459,460,461,460,460)`;
+4. require 46 held-out and 184 training identities per fold;
+5. require zero train/test identity overlap;
+6. require the active Experiment 08 canonical fold-array hash
+   `e3fb0cf57b886bc303333795de42ecfc38cb1da9728d4d5cc365b47a91504c1f`;
+7. stop execution if any of these corrected structural checks fails.
+
+This amendment supersedes Section 21.4 only with respect to the active
+Experiment 08 fold assignment. It does not alter the historical public fold
+object or its recorded provenance hash.
+
+At the time of this amendment:
+
+- RA14 extraction was frozen;
+- DINOv2 extraction was frozen;
+- RA14/DINO row correspondence was verified for all 2,300 sketches;
+- no Experiment 08 classifier had been fitted;
+- no Experiment 08 predictive outcome had been computed.
