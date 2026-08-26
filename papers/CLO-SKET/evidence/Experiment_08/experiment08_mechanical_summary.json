@@ -1,0 +1,87 @@
+{
+  "analytic": {
+    "magnitude_tolerance": 1e-12,
+    "max_doubled_angle_vector_error": 7.447602459741819e-16,
+    "max_magnitude_error": 5.551115123125783e-17,
+    "passed": true,
+    "vector_tolerance": 1e-12
+  },
+  "angles_deg": [
+    -90.0,
+    -60.0,
+    -45.0,
+    -30.0,
+    -15.0,
+    15.0,
+    30.0,
+    45.0,
+    60.0,
+    90.0
+  ],
+  "experiment": "CLO-SKET Experiment 08",
+  "inputs": {
+    "corrected_fold_array_sha256": "e3fb0cf57b886bc303333795de42ecfc38cb1da9728d4d5cc365b47a91504c1f",
+    "ra14_features_npy_sha256": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033",
+    "ra14_lock_sha256": "8e6b2cfabcd8724ef18cddd8ed90ab22288dbed34c232bece180f5307d3acd94",
+    "ra14_script_sha256": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9",
+    "ra14_source_manifest_sha256": "8af72e8af82c4937b5b231137b85bbb0a4d9f0ff61473372099da4b8865cc56e"
+  },
+  "population": {
+    "n_categories": 23,
+    "n_identities": 230,
+    "selection": "first authoritative row_index per garment_id"
+  },
+  "predictive_outcomes_used_to_select_mechanical_settings": false,
+  "predictive_results_already_frozen": true,
+  "primary_radial_domain": {
+    "max": 27.5,
+    "min": 3.5,
+    "n_shells": 25
+  },
+  "ra14_matrix_audit": {
+    "array_sha256": "01ea6937783792d0d9295ca92db863d932db4b57f5ad4b61ca78a2c97eb88a3c",
+    "finite": true,
+    "range_checks_pass": true,
+    "saved_npy_sha256": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033",
+    "shape": [
+      2300,
+      14
+    ]
+  },
+  "ra14_mechanical_pass": false,
+  "raster": {
+    "axial_failure_rate": 0.005981416957026713,
+    "axial_gate_pass": true,
+    "combined_failure_rate": 0.08188153310104529,
+    "low_support_observations": 5840,
+    "magnitude_failure_rate": 0.0807975222609369,
+    "magnitude_gate_pass": false,
+    "median_axial_error_deg": 0.2860438065174402,
+    "median_relative_magnitude_error": 0.013132274868110791,
+    "p95_axial_error_deg": 4.207509223257722,
+    "p95_relative_magnitude_error": 0.2133200878431202,
+    "raster_gate_pass": false,
+    "supported_observations": 51660
+  },
+  "raster_operator": {
+    "expand": false,
+    "fillcolor": 255,
+    "resample": "BILINEAR",
+    "rotation": "PIL.Image.rotate",
+    "safe_canvas": "ceil(sqrt(h^2+w^2)) square with historical parity adjustment"
+  },
+  "stage": "RA14_MECHANICAL_VALIDATION",
+  "supported_shell_definition": {
+    "minimum_R2": 0.05,
+    "minimum_shell_mass_fraction": 0.001
+  },
+  "synthetic_coordinate_sign": {
+    "minus_phi_error_deg": 0.03245383792045686,
+    "observed_shift_deg": -29.967546162079543,
+    "plus_phi_error_deg": 59.96754616207954,
+    "reference_alpha_deg": 177.5,
+    "relation": "alpha_rot - alpha_ref \u2248 -phi",
+    "rotated_alpha_deg": 147.53245383792046,
+    "sign": -1.0
+  }
+}
