@@ -1,0 +1,45 @@
+{
+  "experiment": "CLO-SKET Experiment 08",
+  "stage": "LABEL_BLIND_DINOV2_FEATURE_LOCK",
+  "version": 1,
+  "learned_features_extracted": true,
+  "classifier_fitted": false,
+  "predictive_outcome_computed": false,
+  "labels_used_during_extraction": false,
+  "extraction": {
+    "device": "cpu",
+    "deterministic_algorithms": true,
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "batch_size": 16,
+    "model": "dinov2_vits14",
+    "pooling": "final LayerNorm class token (x_norm_clstoken), without additional L2 normalization",
+    "augmentation": "none",
+    "rows": 2300,
+    "dimensions": 384,
+    "dtype": "float32"
+  },
+  "provenance": {
+    "python": "3.12.13",
+    "torch": "2.11.0",
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "dinov2_source_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "weight_bytes": 88283115,
+    "weight_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+    "materialized_manifest_sha256": "071ee7b6c535361951f9eb0044ff166c9a4d42b0ef55a3c0a72aab27af2af6a4"
+  },
+  "outputs": {
+    "embedding_npy_sha256": "6958b8b05eee66304ecda038cc5fedef33eecd139dccc20c12dc6d223c614d97",
+    "embedding_raw_c_array_sha256": "83e02d21c7ef37889754e337824d30c328bc494bf312605e6705c9d7d72c02fe",
+    "row_csv_sha256": "072f08ae9fb8328fe73a2566c1d5e812560cd4b007bf1c88550adbb082a6a4d9"
+  },
+  "repeatability": {
+    "independent_runs": 2,
+    "npy_sha_identical": true,
+    "raw_array_sha_identical": true,
+    "row_map_sha_identical": true,
+    "arrays_exactly_equal": true,
+    "maximum_absolute_difference": 0.0
+  },
+  "approval_boundary": "Frozen after two byte-identical, label-blind CPU extractions and before any classifier fit, hyperparameter selection, or predictive outcome was computed."
+}
