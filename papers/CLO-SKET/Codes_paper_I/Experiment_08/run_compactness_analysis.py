@@ -117,7 +117,7 @@ def build_L14_pipeline() -> Pipeline:
     ])
 
 
-def validate_pre_outcome_provenance() -> dict:
+def validate_pre_outcome_provenance(dino_features_path: Path, dino_rows_path: Path) -> dict:
     """Validate provenance and lock conditions before any compactness outcome boundary is crossed.
 
     This function is structural and read-only: it enforces the frozen gates but does not execute
@@ -128,8 +128,8 @@ def validate_pre_outcome_provenance() -> dict:
         RA14_ROW_MANIFEST,
         RA14_LOCK,
         DINO_LOCK,
-        DINO_PATH,
-        DINO_ROWS,
+        dino_features_path,
+        dino_rows_path,
         PREFLIGHT_PATH,
     ]
     missing = [str(path) for path in required_paths if not path.is_file()]
@@ -137,8 +137,8 @@ def validate_pre_outcome_provenance() -> dict:
         raise FileNotFoundError("Required compactness provenance artifact(s) missing: " + ", ".join(missing))
 
     ra14_file_sha = sha256_file(RA14_PATH)
-    dino_file_sha = sha256_file(DINO_PATH)
-    dino_rows_sha = sha256_file(DINO_ROWS)
+    dino_file_sha = sha256_file(dino_features_path)
+    dino_rows_sha = sha256_file(dino_rows_path)
     if ra14_file_sha != EXPECTED_RA14_FILE_SHA:
         raise RuntimeError(f"RA14 SHA-256 mismatch: {ra14_file_sha}")
     if dino_file_sha != EXPECTED_DINO_FILE_SHA:
@@ -169,7 +169,7 @@ def validate_pre_outcome_provenance() -> dict:
         raise RuntimeError(f"Expected frozen test rows {EXPECTED_TEST_ROWS}, got {observed_test_rows}")
 
     ra14_rows = pd.read_csv(RA14_ROW_MANIFEST, keep_default_na=False)
-    dino_rows_df = pd.read_csv(DINO_ROWS, keep_default_na=False)
+    dino_rows_df = pd.read_csv(dino_rows_path, keep_default_na=False)
     authoritative_paths = rows["image_path_runtime"].map(pf.normalized_relative_path).tolist()
     if ra14_rows["row_index"].tolist() != list(range(EXPECTED_ROWS)):
         raise RuntimeError("RA14 row_index is not 0..2299.")
@@ -387,15 +387,34 @@ def build_compactness_plan() -> dict:
     }
 
 
-def execute_frozen_compactness_analysis(output_json: Path | None = None) -> int:
+def execute_frozen_compactness_analysis(
+    output_json: Path | None = None,
+    *,
+    dino_features_path: Path | None = None,
+    dino_rows_path: Path | None = None,
+) -> int:
     """Run the already-frozen compactness analysis path.
 
     This is the explicit scientific execution entry point for the implementation already
     audited against the design lock. The path itself is not executed in this session.
     """
-    provenance = validate_pre_outcome_provenance()
+    if dino_features_path is None or dino_rows_path is None:
+        raise ValueError("--dino-features and --dino-rows are required for --execute.")
+    if not dino_features_path.is_file():
+        raise FileNotFoundError(f"DINOv2 feature file not found: {dino_features_path}")
+    if not dino_rows_path.is_file():
+        raise FileNotFoundError(f"DINOv2 rows file not found: {dino_rows_path}")
+
+    dino_features_sha = sha256_file(dino_features_path)
+    dino_rows_sha = sha256_file(dino_rows_path)
+    if dino_features_sha != EXPECTED_DINO_FILE_SHA:
+        raise RuntimeError(f"DINOv2 SHA-256 mismatch: {dino_features_sha}")
+    if dino_rows_sha != EXPECTED_DINO_ROW_SHA:
+        raise RuntimeError(f"DINO row-manifest SHA-256 mismatch: {dino_rows_sha}")
+
+    provenance = validate_pre_outcome_provenance(dino_features_path, dino_rows_path)
     G = np.load(RA14_PATH)
-    L = np.load(DINO_PATH)
+    L = np.load(dino_features_path)
     fold_id = provenance["fold_id"]
     y = provenance["y"]
 
@@ -448,6 +467,18 @@ def main() -> int:
         help="Execute the already-frozen compactness analysis path and write the predetermined outputs.",
     )
     parser.add_argument(
+        "--dino-features",
+        type=Path,
+        default=None,
+        help="Required with --execute: exact frozen DINOv2 embedding NPY path.",
+    )
+    parser.add_argument(
+        "--dino-rows",
+        type=Path,
+        default=None,
+        help="Required with --execute: exact frozen DINOv2 row-manifest CSV path.",
+    )
+    parser.add_argument(
         "--output-json",
         type=Path,
         default=None,
@@ -456,14 +487,15 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.validate_only:
-        validate_pre_outcome_provenance()
         print("Experiment-08 compactness runner loaded in structural validation mode.")
         print("Scientific analysis remains disabled in this session.")
         print(json.dumps(build_compactness_plan(), indent=2, sort_keys=True))
         return 0
 
     if args.execute:
-        return execute_frozen_compactness_analysis(args.output_json)
+        if args.dino_features is None or args.dino_rows is None:
+            parser.error("--execute requires both --dino-features and --dino-rows.")
+        return execute_frozen_compactness_analysis(args.output_json, dino_features_path=args.dino_features, dino_rows_path=args.dino_rows)
 
     # Execution is intentionally disabled in this session.
     print("COMPACTNESS ANALYSIS BLOCKED BY DESIGN.")
