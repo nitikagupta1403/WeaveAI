@@ -82,3 +82,18 @@ python papers/CLO-SKET/Codes_paper_I/Experiment_08/freeze_preprocessing_manifest
 
 The command verifies every frozen evidence hash and terminates before loading
 DINOv2 or computing a predictive outcome.
+
+
+Materialize the frozen images only after the manifest freeze succeeds:
+
+```bash
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/materialize_preprocessed_images.py \
+  --data-root /absolute/path/to/Clo-Sket \
+  --preprocessing-manifest /absolute/path/to/experiment08_preprocessing_manifest.csv \
+  --output-root /absolute/path/to/experiment08_materialized
+```
+
+The materializer applies orientation, polarity normalization, frozen spatial
+localization and handwriting blanking, bicubic longest-side resize, and centered
+white padding. It writes deterministic 224x224 grayscale PNGs plus per-file and
+ordered pixel-array hashes. It imports neither Torch nor DINOv2.
