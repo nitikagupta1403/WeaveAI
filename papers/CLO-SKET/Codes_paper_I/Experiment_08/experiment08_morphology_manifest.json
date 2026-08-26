@@ -1,0 +1,38 @@
+{
+  "approval_boundary": "Canonical morphology reconstructed from the historical frozen extractor and accepted only after exact SHA-256 reproduction.",
+  "canonical_hash_match": true,
+  "canonical_raw_array_sha256": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+  "category_labels_used_for_feature_extraction": false,
+  "classifier_fitted": false,
+  "dataset_root_runtime": "/Users/nitikagupta/Desktop/Clo-Sket",
+  "dtype": "float32",
+  "expected_canonical_raw_array_sha256": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+  "experiment": "CLO-SKET Experiment 08",
+  "feature_definition": {
+    "foreground_rule": "array < 0.8",
+    "global_dimensions": 7,
+    "global_features": [
+      "centroid_x",
+      "centroid_y",
+      "bbox_width",
+      "bbox_height",
+      "aspect_ratio",
+      "left_right_symmetry",
+      "mask_mean"
+    ],
+    "grayscale": "PIL convert('L')",
+    "horizontal_occupancy_dimensions": 64,
+    "intensity_normalization": "array / 255.0",
+    "mask_resize": "PIL Image.resize((64,64)) with historical default resampling",
+    "vertical_occupancy_dimensions": 64
+  },
+  "finite": true,
+  "n_features": 135,
+  "population": 2300,
+  "predictive_outcome_computed": false,
+  "representation": "M",
+  "representation_name": "Frozen 135-D morphology",
+  "saved_npy_sha256": "f202d5b05524686815480539488ecd5c5fafbe9e89a51dfe50ff03b00c43fb92",
+  "source_manifest_sha256": "8af72e8af82c4937b5b231137b85bbb0a4d9f0ff61473372099da4b8865cc56e",
+  "source_row_order": "experiment08_ra14_source_manifest.csv"
+}
