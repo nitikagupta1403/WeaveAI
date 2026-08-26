@@ -387,13 +387,71 @@ def build_compactness_plan() -> dict:
     }
 
 
+def execute_frozen_compactness_analysis(output_json: Path | None = None) -> int:
+    """Run the already-frozen compactness analysis path.
+
+    This is the explicit scientific execution entry point for the implementation already
+    audited against the design lock. The path itself is not executed in this session.
+    """
+    provenance = validate_pre_outcome_provenance()
+    G = np.load(RA14_PATH)
+    L = np.load(DINO_PATH)
+    fold_id = provenance["fold_id"]
+    y = provenance["y"]
+
+    predictions = make_prediction_matrix(G, L, fold_id, y, validate=False)
+    metrics_G = compute_pooled_metrics(y, predictions["G"])
+    metrics_L14 = compute_pooled_metrics(y, predictions["L14"])
+    estimand = compute_estimand(y, predictions["G"], predictions["L14"])
+    bootstrap = paired_identity_bootstrap(
+        y,
+        pd.Series(provenance["rows"]["garment_id"].to_numpy(), name="garment_id"),
+        predictions["G"],
+        predictions["L14"],
+        provenance["rows"]["category"],
+        n_bootstrap=10000,
+        seed=BOOTSTRAP_SEED,
+    )
+
+    result = {
+        "baseline_commit": "9b1c5cd",
+        "amendment_commit": "30a0d37",
+        "metrics_G": metrics_G,
+        "metrics_L14": metrics_L14,
+        "estimand": estimand,
+        "bootstrap": bootstrap,
+        "plan": build_compactness_plan(),
+    }
+
+    resolved_output = output_json if output_json is not None else E8 / "experiment08_compactness_results.json"
+    resolved_output.parent.mkdir(parents=True, exist_ok=True)
+    resolved_output.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
+
+    output_text = json.dumps(result, indent=2, sort_keys=True)
+    print(output_text)
+    print(f"Saved compactness result JSON to: {resolved_output}")
+    return 0
+
+
 def main() -> int:
     """Parse arguments and validate the compactness runner without executing scientific analysis."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
+    mode_group = parser.add_mutually_exclusive_group(required=False)
+    mode_group.add_argument(
         "--validate-only",
         action="store_true",
         help="Static validation of the compactness-runner contract; no scientific execution occurs.",
+    )
+    mode_group.add_argument(
+        "--execute",
+        action="store_true",
+        help="Execute the already-frozen compactness analysis path and write the predetermined outputs.",
+    )
+    parser.add_argument(
+        "--output-json",
+        type=Path,
+        default=None,
+        help="Optional JSON output path for the frozen compactness result. Defaults to Experiment_08/experiment08_compactness_results.json.",
     )
     args = parser.parse_args()
 
@@ -403,6 +461,9 @@ def main() -> int:
         print("Scientific analysis remains disabled in this session.")
         print(json.dumps(build_compactness_plan(), indent=2, sort_keys=True))
         return 0
+
+    if args.execute:
+        return execute_frozen_compactness_analysis(args.output_json)
 
     # Execution is intentionally disabled in this session.
     print("COMPACTNESS ANALYSIS BLOCKED BY DESIGN.")
