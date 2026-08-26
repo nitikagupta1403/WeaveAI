@@ -1,0 +1,33 @@
+{
+  "experiment": "CLO-SKET Experiment 08",
+  "stage": "PRE_OUTCOME_PREPROCESSING_DECISION_LOCK",
+  "learned_features_extracted": false,
+  "classifier_fitted": false,
+  "predictive_outcome_computed": false,
+  "localization": {
+    "total_images": 2300,
+    "mandatory_human_review": 628,
+    "deterministic_category_stratified_quality_control": 300,
+    "automatic_remainder": 1372,
+    "quality_control_material_failures": 0,
+    "quality_control_nonmaterial_padding_changes": 5,
+    "material_failure_definition": "garment truncation, structural-detail loss, or interfering annotation",
+    "zero_failure_approximate_95_percent_upper_bound": 0.01
+  },
+  "annotation": {
+    "method": "human-reviewed coarse spatial garment and handwriting localization",
+    "training_target": false,
+    "reviewed_images": 928,
+    "text_boxes": 593,
+    "ambiguous_geometric_overlaps": 22,
+    "ambiguous_before_after_visual_approvals": 22,
+    "policy": "Whiten outside the selected garment box and whiten every reviewed handwriting box. All geometrically overlapping cases require an ambiguity flag and explicit before/after visual approval."
+  },
+  "evidence": {
+    "proposal_csv_sha256": "6db98417617eb4a69ed11421cfd9ec9bc457c191cd5b7072b7bc7e68d40308ae",
+    "selection_csv_sha256": "b42413bafd67183092315669cfa93cc9892813d95389a3f083d073e57b0c07c7",
+    "annotations_jsonl_sha256": "9a756cc47932d7f8f61508ddf067f3e44cf4c7ff761c484f7feb25223bab407c",
+    "audit_csv_sha256": "fdabfbf61b8d35827a98611061dd616268139c2c77406df4455956799438e880"
+  },
+  "approval_boundary": "Frozen before any CLO-SKET DINOv2 embedding, classifier fit, or predictive outcome was computed."
+}

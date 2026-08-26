@@ -26,13 +26,24 @@
     "input_mode": "floating-point grayscale in [0,1]",
     "polarity_rule": "estimate background as median border intensity; invert iff border median < 0.5",
     "channels": "replicate normalized grayscale into three identical channels",
-    "crop": "none; preserve complete source canvas",
+    "crop": "whiten outside the frozen garment box while preserving the source canvas dimensions",
     "resize": "longest side to 224 pixels, bicubic",
     "padding": "center shorter side to 224x224 using white background after polarity normalization",
-    "network_normalization_mean": [0.485, 0.456, 0.406],
-    "network_normalization_std": [0.229, 0.224, 0.225],
+    "network_normalization_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "network_normalization_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
     "augmentation": "none",
-    "pooling": "final normalized class token only"
+    "pooling": "final normalized class token only",
+    "localization": "2,300-row frozen coarse spatial manifest: 928 human-reviewed boxes and 1,372 automatic proposals accepted by deterministic category-stratified QC",
+    "text_removal": "whiten reviewed handwriting boxes; all 22 geometric garment/text overlaps received before/after visual approval"
   },
-  "approval_boundary": "Recorded before any CLO-SKET DINOv2 embedding or learned-baseline outcome was computed."
+  "approval_boundary": "Recorded before any CLO-SKET DINOv2 embedding or learned-baseline outcome was computed.",
+  "preprocessing_decision_lock": "experiment08_preprocessing_decision_lock.json"
 }

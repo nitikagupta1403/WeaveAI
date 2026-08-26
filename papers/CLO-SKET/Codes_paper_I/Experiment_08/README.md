@@ -49,3 +49,36 @@ python papers/CLO-SKET/Codes_paper_I/Experiment_08/annotation_mask_audit.py \
 The audit preserves the rejected single-component 10% candidate and the intermediate multi-component 10% rectangular envelope. It also evaluates a stricter component-only geometry mask: retain the frozen structural garment components and disconnected components wholly enclosed by their unexpanded union, while whitening every exterior component. This avoids retaining nearby writing merely because it falls inside a rectangular context margin. The rule is label-blind and uses no OCR. Selection is based only on preserving garment geometry and removing peripheral annotation; no learned feature or outcome is available at this stage.
 
 Do not approve a mask from retained-ink summaries alone. Inspect the category sheet and the lowest-retention identities. Component-connected handwriting cannot be separated by this rule and must be disclosed and tested through raw-versus-geometry sensitivity analyses.
+
+
+## Frozen coarse-localization review
+
+Before feature extraction, generate the dataset-wide box proposals, freeze the
+review cohort, and complete the dual-box review. The frozen design reviews all
+628 proposals with retained ink below 0.98 or an image-boundary contact, plus a
+deterministic category-stratified quality-control sample of 300 apparently safe
+proposals. A material failure is garment truncation, structural-detail loss, or
+interfering annotation; a coordinate-only padding change is not a material
+failure. The quality-control sample contained zero material failures and five
+non-material padding changes, giving the prespecified rule-of-three approximate
+95% upper bound of 1% for material failure in the automatic remainder.
+
+The 928 reviewed records contain 593 handwriting boxes. All 22 geometric
+garment/text-box overlaps were flagged and approved by before/after visual
+inspection. These annotations are preprocessing metadata, not training targets.
+
+After the review audit passes, freeze the complete 2,300-row localization
+manifest:
+
+```bash
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/freeze_preprocessing_manifest.py \
+  --source-manifest /absolute/path/to/experiment08_source_manifest.csv \
+  --proposal-csv /absolute/path/to/experiment08_box_proposals.csv \
+  --selection-csv /absolute/path/to/experiment08_box_review_selection.csv \
+  --annotations-jsonl /absolute/path/to/review_annotations.jsonl \
+  --audit-csv /absolute/path/to/dual_box_pilot_audit.csv \
+  --output-root /absolute/path/to/experiment08_preprocessing_freeze
+```
+
+The command verifies every frozen evidence hash and terminates before loading
+DINOv2 or computing a predictive outcome.
