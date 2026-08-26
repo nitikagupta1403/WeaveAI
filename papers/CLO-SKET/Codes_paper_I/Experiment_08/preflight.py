@@ -5,8 +5,11 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import importlib.metadata as metadata
 import json
 import math
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -29,6 +32,22 @@ EXPECTED_FOLD_MAP_SHA256 = "f9d47f79829df94f9751fb11fd8cb16adf70fedee7d546efdfa4
 RECORDED_HISTORICAL_FOLD_ARRAY_HASH = "ccb6138e4bafb9f889c4c7dc92f3a0447c9d17ea870b34fc0f5c9d80ddf809b7"
 ROTATIONS_DEG = [-90, -60, -45, -30, -15, 15, 30, 45, 60, 90]
 ALGEBRA_TOLERANCE = 1e-12
+EXPECTED_DINOV2_REPO = "https://github.com/facebookresearch/dinov2.git"
+EXPECTED_DINOV2_COMMIT = "7764ea0f912e53c92e82eb78a2a1631e92725fc8"
+EXPECTED_WEIGHT_BYTES = 88283115
+EXPECTED_WEIGHT_SHA256 = "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9"
+EXPECTED_FEATURE_ROWS = 2300
+EXPECTED_FEATURE_DIMENSIONS = 384
+EXPECTED_FEATURE_DTYPE = "float32"
+EXPECTED_PYTHON_VERSION = "3.12.13"
+REQUIRED_PACKAGES = {
+    "numpy": "2.1.3",
+    "pillow": "11.3.0",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0",
+}
 
 
 def sha256_file(path: Path, block_size: int = 1 << 20) -> str:
@@ -310,18 +329,87 @@ def write_manifest(path: Path, records: list[dict]) -> None:
         writer.writerows(records)
 
 
+def get_version(name: str) -> str:
+    try:
+        return metadata.version(name)
+    except metadata.PackageNotFoundError:
+        raise RuntimeError(f"Required package not installed: {name}")
+
+
+def git_output(repo: Path, *args: str) -> str:
+    return subprocess.check_output(["git", "-C", str(repo), *args], text=True).strip()
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", type=Path, required=True)
     parser.add_argument("--row-map", type=Path, default=DEFAULT_ROW_MAP)
     parser.add_argument("--fold-map", type=Path, default=DEFAULT_FOLD_MAP)
     parser.add_argument("--identity-overrides", type=Path, default=DEFAULT_IDENTITY_OVERRIDES)
+    parser.add_argument("--dinov2-root", type=Path, default=None)
+    parser.add_argument("--weights", type=Path, default=None)
     parser.add_argument("--output-root", type=Path, required=True)
     return parser.parse_args()
 
 
+def validate_environment() -> dict:
+    observed_python = sys.version.split()[0]
+    if observed_python != EXPECTED_PYTHON_VERSION:
+        raise RuntimeError(f"Python version mismatch: {observed_python} != {EXPECTED_PYTHON_VERSION}")
+
+    observed = {}
+    for package, expected in REQUIRED_PACKAGES.items():
+        version = get_version(package)
+        observed[package] = version
+        if version != expected:
+            raise RuntimeError(f"Package version mismatch: {package}={version} != {expected}")
+
+    return {"python": observed_python, "packages": observed}
+
+
+def validate_dinov2_repo(repo: Path | None) -> dict:
+    if repo is None:
+        return {"status": "SKIPPED", "reason": "No --dinov2-root supplied; repo pin not checked in read-only preflight."}
+    if not repo.exists():
+        raise RuntimeError(f"DINOv2 repo path does not exist: {repo}")
+    if not (repo / ".git").exists():
+        raise RuntimeError(f"DINOv2 path is not a git repository: {repo}")
+    commit = git_output(repo, "rev-parse", "HEAD")
+    if commit != EXPECTED_DINOV2_COMMIT:
+        raise RuntimeError(f"DINOv2 source commit mismatch: {commit} != {EXPECTED_DINOV2_COMMIT}")
+    if git_output(repo, "status", "--short"):
+        raise RuntimeError("DINOv2 source worktree is not clean")
+    return {
+        "status": "PASS",
+        "repository": EXPECTED_DINOV2_REPO,
+        "commit": commit,
+        "clean_worktree": True,
+    }
+
+
+def validate_weight(path: Path | None) -> dict:
+    if path is None:
+        return {"status": "SKIPPED", "reason": "No --weights supplied; checkpoint hash not checked in read-only preflight."}
+    if not path.exists():
+        raise RuntimeError(f"Weight path does not exist: {path}")
+    size = path.stat().st_size
+    digest = sha256_file(path)
+    if size != EXPECTED_WEIGHT_BYTES:
+        raise RuntimeError(f"Weight byte count mismatch: {size} != {EXPECTED_WEIGHT_BYTES}")
+    if digest != EXPECTED_WEIGHT_SHA256:
+        raise RuntimeError(f"Weight SHA-256 mismatch: {digest} != {EXPECTED_WEIGHT_SHA256}")
+    return {
+        "status": "PASS",
+        "path": str(path),
+        "bytes": size,
+        "sha256": digest,
+        "model_identifier": "dinov2_vits14",
+    }
+
+
 def main() -> None:
     args = parse_args()
+    environment = validate_environment()
     historical_rows, historical_audit = validate_public_maps(args.row_map, args.fold_map)
     rows, fold_audit = apply_identity_overrides(
         historical_rows, args.identity_overrides, historical_audit
@@ -329,6 +417,8 @@ def main() -> None:
     files = enumerate_dataset(args.data_root)
     source_manifest = join_and_manifest(args.data_root, files, rows)
     math_audit = analytic_rotation_tests()
+    dinov2_repo = validate_dinov2_repo(args.dinov2_root)
+    weight = validate_weight(args.weights)
     args.output_root.mkdir(parents=True, exist_ok=True)
     manifest_path = args.output_root / "experiment08_source_manifest.csv"
     write_manifest(manifest_path, source_manifest)
@@ -338,15 +428,26 @@ def main() -> None:
         "learned_features_extracted": False,
         "classifier_fitted": False,
         "predictive_outcome_computed": False,
+        "environment": environment,
+        "dinov2_repo": dinov2_repo,
+        "pretrained_weight": weight,
+        "expected_model": {
+            "identifier": "dinov2_vits14",
+            "repository": EXPECTED_DINOV2_REPO,
+            "commit": EXPECTED_DINOV2_COMMIT,
+            "weight_filename": "dinov2_vits14_pretrain.pth",
+            "expected_weight_sha256": EXPECTED_WEIGHT_SHA256,
+            "expected_weight_bytes": EXPECTED_WEIGHT_BYTES,
+            "expected_feature_rows": EXPECTED_FEATURE_ROWS,
+            "expected_feature_dimensions": EXPECTED_FEATURE_DIMENSIONS,
+            "expected_dtype": EXPECTED_FEATURE_DTYPE,
+            "pooling": "final normalized class token (x_norm_clstoken)",
+            "preprocessing": "frozen Experiment-08 provenance lock",
+        },
         "source_manifest": str(manifest_path),
         "source_manifest_sha256": sha256_file(manifest_path),
         "fold_audit": fold_audit,
         "analytic_rotation_audit": math_audit,
-        "remaining_gates": [
-            "pin exact DINOv2 source commit",
-            "record official weight byte size and SHA-256",
-            "resolve and hash the Python environment lock",
-        ],
     }
     report_path = args.output_root / "experiment08_preflight.json"
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")

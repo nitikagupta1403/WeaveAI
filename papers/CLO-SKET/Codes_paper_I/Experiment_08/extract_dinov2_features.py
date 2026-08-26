@@ -65,14 +65,37 @@ def load_batch(paths: list[Path]) -> torch.Tensor:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--materialized-root", type=Path, required=True)
-    parser.add_argument("--materialized-manifest", type=Path, required=True)
-    parser.add_argument("--dinov2-repo", type=Path, required=True)
-    parser.add_argument("--weight", type=Path, required=True)
-    parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument("--data-root", dest="materialized_root", type=Path, help="Root directory containing materialized 224x224 TIFF-derived PNGs.")
+    parser.add_argument("--materialized-root", dest="materialized_root_legacy", type=Path, help=argparse.SUPPRESS)
+    parser.add_argument("--materialized-manifest", type=Path, help="Frozen materialized-image manifest CSV.")
+    parser.add_argument("--dinov2-root", dest="dinov2_repo", type=Path, help="Local checkout of facebookresearch/dinov2 at the pinned commit.")
+    parser.add_argument("--dinov2-repo", dest="dinov2_repo_legacy", type=Path, help=argparse.SUPPRESS)
+    parser.add_argument("--weights", dest="weight", type=Path, help="Exact pretrained dinov2_vits14 checkpoint.")
+    parser.add_argument("--weight", dest="weight_legacy", type=Path, help=argparse.SUPPRESS)
+    parser.add_argument("--output-dir", dest="output_root", type=Path, help="Directory for extracted embeddings and provenance report.")
+    parser.add_argument("--output-root", dest="output_root_legacy", type=Path, help=argparse.SUPPRESS)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--threads", type=int, default=1)
     args = parser.parse_args()
+
+    if args.materialized_root is None:
+        args.materialized_root = args.materialized_root_legacy
+    if args.dinov2_repo is None:
+        args.dinov2_repo = args.dinov2_repo_legacy
+    if args.weight is None:
+        args.weight = args.weight_legacy
+    if args.output_root is None:
+        args.output_root = args.output_root_legacy
+
+    for name, value in {
+        "data-root/materialized-root": args.materialized_root,
+        "materialized-manifest": args.materialized_manifest,
+        "dinov2-root/dinov2-repo": args.dinov2_repo,
+        "weights/weight": args.weight,
+        "output-dir/output-root": args.output_root,
+    }.items():
+        if value is None:
+            raise SystemExit(f"Missing required argument: {name}. Use the portable clean-checkout flags: --data-root --dinov2-root --weights --output-dir.")
 
     if args.batch_size < 1 or args.threads < 1:
         raise ValueError("batch-size and threads must be positive")

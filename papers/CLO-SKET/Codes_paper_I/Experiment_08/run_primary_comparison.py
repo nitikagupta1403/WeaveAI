@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -27,15 +28,17 @@ DINO_LOCK = E8 / "experiment08_dinov2_feature_lock.json"
 PREFLIGHT_PATH = E8 / "preflight.py"
 
 DINO_PATH = Path(
-    "/Users/nitikagupta/Research/"
-    "experiment08_dinov2_features/"
-    "experiment08_dinov2_vits14_embeddings.npy"
+    os.environ.get(
+        "CLO_SKET_DINO_FEATURE_PATH",
+        E8 / "experiment08_dinov2_vits14_embeddings.npy",
+    )
 )
 
 DINO_ROWS = Path(
-    "/Users/nitikagupta/Research/"
-    "experiment08_dinov2_features/"
-    "experiment08_dinov2_embedding_rows.csv"
+    os.environ.get(
+        "CLO_SKET_DINO_ROW_PATH",
+        E8 / "experiment08_dinov2_embedding_rows.csv",
+    )
 )
 
 EXPECTED_ROWS = 2300

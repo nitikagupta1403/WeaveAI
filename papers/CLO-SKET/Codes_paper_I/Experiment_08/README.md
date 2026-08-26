@@ -5,6 +5,93 @@ This directory implements the fresh-study mathematical design in
 
 The current stage is deliberately limited to preflight validation. It does not load DINOv2, extract dataset embeddings, fit a classifier, or compute a learned-baseline outcome.
 
+## Reproducible learned-baseline preflight
+
+The frozen learned baseline uses:
+
+- DINOv2 model variant: `dinov2_vits14`
+- upstream repo: `https://github.com/facebookresearch/dinov2.git`
+- pinned commit: `7764ea0f912e53c92e82eb78a2a1631e92725fc8`
+- pretrained checkpoint: `dinov2_vits14_pretrain.pth`
+- canonical weight SHA-256: `b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9`
+- frozen output contract: 2300 x 384 float32, no additional normalization beyond the final LayerNorm class token (`x_norm_clstoken`)
+
+Environment requirements (see [requirements-lock.txt](requirements-lock.txt)):
+
+- Python 3.12.13
+- NumPy 2.1.3
+- Pillow 11.3.0
+- scikit-learn 1.6.1
+- torch 2.11.0
+- torchvision 0.26.0
+- pandas 2.2.3
+
+The repo does not bundle weights. Download the exact checkpoint from the authoritative DINOv2 release URL and verify the SHA-256 before any extraction step.
+
+Preflight command:
+
+```bash
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/preflight.py \
+  --data-root /absolute/path/to/Clo-Sket \
+  --row-map papers/CLO-SKET/evidence/Experiment_07/experiment07_row_map.csv \
+  --fold-map papers/CLO-SKET/evidence/Experiment_07/experiment07_fold_map.csv \
+  --identity-overrides papers/CLO-SKET/Codes_paper_I/Experiment_08/experiment08_identity_overrides.json \
+  --dinov2-root /absolute/path/to/dinov2 \
+  --weights /absolute/path/to/dinov2_vits14_pretrain.pth \
+  --output-root /absolute/path/to/experiment08_preflight
+```
+
+This read-only gate checks, before any feature extraction:
+
+- TIFF count and canonical order against the frozen Experiment-08 manifest
+- DINOv2 repo commit and cleanliness
+- pretrained weight bytes and SHA-256
+- Python/package version lock
+- preprocessing contract from the provenance lock
+- model/output contract (ViT-S/14, class-token output, 384 dimensions, float32)
+- frozen provenance hashes
+
+If any gate fails, the preflight exits immediately.
+
+Feature-extraction command (portable, no machine-specific defaults):
+
+```bash
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/extract_dinov2_features.py \
+  --data-root /absolute/path/to/experiment08_materialized \
+  --materialized-manifest /absolute/path/to/experiment08_materialized/experiment08_materialized_images.csv \
+  --dinov2-root /absolute/path/to/dinov2 \
+  --weights /absolute/path/to/dinov2_vits14_pretrain.pth \
+  --output-dir /absolute/path/to/experiment08_dinov2_features
+```
+
+Expected frozen L characteristics:
+
+- shape: `(2300, 384)`
+- dtype: `float32`
+- source: label-blind DINOv2 ViT-S/14 class token (`x_norm_clstoken`)
+- no classifier fit and no predictive metric computed as part of extraction
+
+`run_primary_comparison.py` expects the frozen DINO feature matrix and row manifest at either the repository-relative default paths:
+
+- `papers/CLO-SKET/Codes_paper_I/Experiment_08/experiment08_dinov2_vits14_embeddings.npy`
+- `papers/CLO-SKET/Codes_paper_I/Experiment_08/experiment08_dinov2_embedding_rows.csv`
+
+or via the environment variables:
+
+- `CLO_SKET_DINO_FEATURE_PATH`
+- `CLO_SKET_DINO_ROW_PATH`
+
+Example:
+
+```bash
+export CLO_SKET_DINO_FEATURE_PATH=/absolute/path/to/experiment08_dinov2_vits14_embeddings.npy
+export CLO_SKET_DINO_ROW_PATH=/absolute/path/to/experiment08_dinov2_embedding_rows.csv
+
+python papers/CLO-SKET/Codes_paper_I/Experiment_08/run_primary_comparison.py
+```
+
+This path configuration does not alter the frozen feature bytes, model, folds, or estimator.
+
 Run from the repository root:
 
 ```bash
