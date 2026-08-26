@@ -16,7 +16,7 @@ from preprocess_audit import sha256_file
 
 
 EXPECTED_MANIFEST_SHA256 = (
-    "c464feafbb382c8e9d111433047298d8f42e1c6b1e018735e3df0b6016eaff4d"
+    "c464feafbb382c8e9d111433047298d8f42e1c661e018735e3df0b6016eaff4d"
 )
 OUTPUT_SIZE = 224
 
