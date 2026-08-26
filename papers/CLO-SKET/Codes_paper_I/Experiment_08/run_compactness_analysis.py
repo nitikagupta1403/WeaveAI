@@ -387,6 +387,25 @@ def build_compactness_plan() -> dict:
     }
 
 
+def json_safe(value):
+    """Convert NumPy scalars/arrays to JSON-native Python values without altering scientific results."""
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, np.integer):
+        return value.item()
+    if isinstance(value, np.floating):
+        return value.item()
+    if isinstance(value, np.bool_):
+        return bool(value)
+    if isinstance(value, dict):
+        return {str(key): json_safe(val) for key, val in value.items()}
+    if isinstance(value, list):
+        return [json_safe(item) for item in value]
+    if isinstance(value, tuple):
+        return [json_safe(item) for item in value]
+    return value
+
+
 def execute_frozen_compactness_analysis(
     output_json: Path | None = None,
     *,
@@ -397,6 +416,9 @@ def execute_frozen_compactness_analysis(
 
     This is the explicit scientific execution entry point for the implementation already
     audited against the design lock. The path itself is not executed in this session.
+
+    Provenance note: the first execution attempt reached result construction but failed before
+    persistence/exposure because NumPy arrays inside the result were not JSON serializable.
     """
     if dino_features_path is None or dino_rows_path is None:
         raise ValueError("--dino-features and --dino-rows are required for --execute.")
@@ -442,11 +464,12 @@ def execute_frozen_compactness_analysis(
         "plan": build_compactness_plan(),
     }
 
+    json_payload = json_safe(result)
     resolved_output = output_json if output_json is not None else E8 / "experiment08_compactness_results.json"
     resolved_output.parent.mkdir(parents=True, exist_ok=True)
-    resolved_output.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
+    resolved_output.write_text(json.dumps(json_payload, indent=2, sort_keys=True), encoding="utf-8")
 
-    output_text = json.dumps(result, indent=2, sort_keys=True)
+    output_text = json.dumps(json_payload, indent=2, sort_keys=True)
     print(output_text)
     print(f"Saved compactness result JSON to: {resolved_output}")
     return 0
