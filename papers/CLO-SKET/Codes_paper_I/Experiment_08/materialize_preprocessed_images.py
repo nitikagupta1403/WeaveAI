@@ -62,11 +62,24 @@ def localize(
     text_boxes: list[list[int]],
 ) -> Image.Image:
     left, top, right, bottom = map(int, garment_box)
-    output = Image.new("L", image.size, 255)
-    output.paste(image.crop((left, top, right, bottom)), (left, top))
+    output = image.crop((left, top, right, bottom))
     draw = ImageDraw.Draw(output)
     for box in text_boxes:
-        draw.rectangle(tuple(map(int, box)), fill=255)
+        text_left, text_top, text_right, text_bottom = map(int, box)
+        overlap_left = max(left, text_left)
+        overlap_top = max(top, text_top)
+        overlap_right = min(right, text_right)
+        overlap_bottom = min(bottom, text_bottom)
+        if overlap_left < overlap_right and overlap_top < overlap_bottom:
+            draw.rectangle(
+                (
+                    overlap_left - left,
+                    overlap_top - top,
+                    overlap_right - left,
+                    overlap_bottom - top,
+                ),
+                fill=255,
+            )
     return output
 
 
@@ -146,6 +159,8 @@ def main() -> None:
                 "output_pixel_sha256": pixel_sha256(processed),
                 "source_width": width,
                 "source_height": height,
+                "crop_width": garment_box[2] - garment_box[0],
+                "crop_height": garment_box[3] - garment_box[1],
                 "border_median": median,
                 "inverted": inverted,
                 "resized_width": resized_width,
@@ -174,6 +189,10 @@ def main() -> None:
         "predictive_outcome_computed": False,
         "images": len(rows),
         "output_size": [OUTPUT_SIZE, OUTPUT_SIZE],
+        "localization_policy": (
+            "Crop to the frozen garment box, whiten intersecting reviewed text "
+            "boxes, then aspect-preserving resize and white-pad to 224x224"
+        ),
         "inverted_images": inverted_count,
         "preprocessing_manifest_sha256": observed_manifest_hash,
         "materialized_manifest_sha256": sha256_file(output_manifest),
