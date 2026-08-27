@@ -1,0 +1,151 @@
+{
+  "amendment": {
+    "commit": "6e62d94d7a29088f92ec0c6d617bbf265d2810c1",
+    "path": "docs/experiment-08/post-outcome-predictive-controls-amendment.md"
+  },
+  "balanced_accuracy_delta_values": [
+    0.0047826086956520575,
+    0.007391304347826311,
+    0.004347826086956608,
+    0.003043478260869592,
+    -1.1102230246251565e-16,
+    0.00043478260869567187,
+    0.012173913043478035,
+    -0.0021739130434782483,
+    0.0017391304347825765,
+    0.006521739130434745,
+    0.0017391304347827985,
+    -0.003478260869565042,
+    -0.005652173913043512,
+    0.002608695652173698,
+    0.0017391304347825765,
+    0.0013043478260870156,
+    0.013478260869565273,
+    0.009130434782608554,
+    0.010000000000000231,
+    0.00043478260869567187
+  ],
+  "canonical_frozen_partition_result": {
+    "delta_G_given_L": 0.0009466521822523166,
+    "macro_f1_L": 0.7380200305882273,
+    "macro_f1_L_plus_G": 0.7389666827704796,
+    "reported_separately": true
+  },
+  "control": "repeated_identity_grouped_partitions",
+  "csv_output": "papers/CLO-SKET/evidence/Experiment_08/experiment08_repeated_grouped_partitions.csv",
+  "csv_sha256": "fe44c90436005164dc1be6a865301f3ca84fc3dcc09b90868edd3eb79a8b6d1f",
+  "data": {
+    "canonical_fold_array_sha256": "e3fb0cf57b886bc303333795de42ecfc38cb1da9728d4d5cc365b47a91504c1f",
+    "dino_dimension": 384,
+    "dino_row_map_sha256": "072f08ae9fb8328fe73a2566c1d5e812560cd4b007bf1c88550adbb082a6a4d9",
+    "dino_sha256": "6958b8b05eee66304ecda038cc5fedef33eecd139dccc20c12dc6d223c614d97",
+    "n_categories": 23,
+    "n_garment_identities": 230,
+    "n_rows": 2300,
+    "ra14_dimension": 14,
+    "ra14_sha256": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033"
+  },
+  "execution": {
+    "execution_head_commit": "73eaa1a51dc9840884148b93ec6c2a470953e2af",
+    "runner_relative_path": "papers/CLO-SKET/Codes_paper_I/Experiment_08/run_post_outcome_predictive_controls.py",
+    "runner_source_commit": "dcc5a29b4bcfc5b522b6b127d370e9ad92eaacdc"
+  },
+  "metric_definition": {
+    "primary": "pooled out-of-fold macro-F1; Delta_G|L = F1(L+G) - F1(L)",
+    "secondary": "pooled out-of-fold balanced accuracy difference"
+  },
+  "model": {
+    "C": 1.0,
+    "classifier": "LogisticRegression",
+    "classifier_seed": 20260820,
+    "max_iter": 5000,
+    "penalty": "l2",
+    "scaler": "training-fold StandardScaler",
+    "solver": "lbfgs"
+  },
+  "partition_algorithm": {
+    "class": "sklearn.model_selection.StratifiedGroupKFold",
+    "group": "garment_id",
+    "manual_posthoc_fold_repair": false,
+    "n_repeats": 20,
+    "n_splits": 5,
+    "outcome_dependent_partition_selection": false,
+    "random_state": "seed",
+    "seeds": [
+      20260823,
+      20260824,
+      20260825,
+      20260826,
+      20260827,
+      20260828,
+      20260829,
+      20260830,
+      20260831,
+      20260832,
+      20260833,
+      20260834,
+      20260835,
+      20260836,
+      20260837,
+      20260838,
+      20260839,
+      20260840,
+      20260841,
+      20260842
+    ],
+    "shuffle": true,
+    "stratification_label": "category",
+    "unique_exact_partition_hashes": 20
+  },
+  "primary_delta_distribution": {
+    "maximum": 0.0140545603514044,
+    "mean": 0.003927456181713002,
+    "median": 0.002580754931087559,
+    "minimum": -0.00581427160322634,
+    "n_positive": 17,
+    "quantile_0_025": -0.004329725078960567,
+    "quantile_0_975": 0.01325764759058405,
+    "quantile_method": "numpy default linear",
+    "standard_deviation": 0.005057883269142741,
+    "standard_deviation_ddof": 1,
+    "values": [
+      0.005417689842713402,
+      0.007457302083109685,
+      0.005060867731684682,
+      0.0034198829319330715,
+      0.0009240236072300956,
+      0.000953359819062749,
+      0.01237684927599314,
+      -0.0011224340523652288,
+      0.0017169291938455844,
+      0.0067303339527585715,
+      0.002245053969979871,
+      -0.002688910499508923,
+      -0.00581427160322634,
+      0.0029164558921952466,
+      0.002231981018892659,
+      0.0013516613340543993,
+      0.0140545603514044,
+      0.009377135725905261,
+      0.010954961310182476,
+      0.0009856917484152294
+    ]
+  },
+  "representations": {
+    "G": "frozen RA14 14-D representation",
+    "L": "frozen DINOv2 384-D representation",
+    "L_plus_G": "concatenated frozen DINOv2 + RA14"
+  },
+  "scientific_boundary": {
+    "canonical_frozen_partition_replaced": false,
+    "confirmatory_claim_permitted": false,
+    "experiment08_status": "EXPLORATORY / POST-OUTCOME",
+    "frozen_mechanical_gate": "FAIL"
+  },
+  "status": "POST_OUTCOME_EXPLORATORY_ONLY",
+  "structural_clarification": {
+    "commit": "7b4b283f0070b67817c71982526b3ed64034be4e",
+    "path": "docs/experiment-08/post-outcome-predictive-controls-clarification.md"
+  },
+  "summary_output": "papers/CLO-SKET/evidence/Experiment_08/experiment08_repeated_grouped_partitions_summary.json"
+}
