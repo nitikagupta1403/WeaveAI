@@ -61,7 +61,21 @@ Historical validation/provenance notebook retained for auditability. It records 
 
 ### Experiment_08/
 
-Prospective learned-baseline study governed by `../PAPER_I_FRESH_STUDY_MATHEMATICAL_DESIGN_LOCK.md`. Its current preflight validates public row/fold provenance, deterministic source-image mapping, and analytic angular/rotation conventions, then stops before DINOv2 extraction or classifier fitting. Outcome-capable execution remains locked until model-weight and environment provenance are complete.
+Fresh executable reproducibility study governed by `../PAPER_I_FRESH_STUDY_MATHEMATICAL_DESIGN_LOCK.md` and the Experiment-08 governance records in `../../../docs/experiment-08/`.
+
+The frozen RA14 mechanical-validity gate failed on the raster harmonic-magnitude P95 criterion. Analytic rotation checks and raster axial-angle checks passed, but those passing subcomponents do not override the failed gate. Consequently, all predictive Experiment-08 results are classified as **post-outcome / exploratory** and must not be presented as confirmatory RA14 validation.
+
+The frozen-partition primary additive comparison gave `Delta_G|L = +0.0009466521822523166`. The category-stratified garment-identity bootstrap for that primary comparison remains computationally valid, but its interpretation is exploratory because prediction occurred after the failed mechanical gate.
+
+The historical compactness bootstrap inference was later found to destroy bootstrap multiplicity by deduplicating identities sampled with replacement. Historical compactness confidence intervals and non-inferiority inference are therefore invalid/superseded. The corrected multiplicity-preserving analysis gives `D_G,L14 = -0.49330945434360446`, paired 95% bootstrap CI `[-0.5322598503022689, -0.45316390290724373]`, and non-inferiority **FALSE**.
+
+Two separately authorized post-outcome controls are also deposited. A 1,000-replicate within-category garment-identity correspondence permutation gave an upper-tail empirical probability of `0.999000999000999`, which does not support dependence of the observed additive RA14 effect on correct garment-instance correspondence. Twenty additional `StratifiedGroupKFold` identity-grouped partitions gave mean `Delta_G|L = +0.003927456181713002`, median `+0.002580754931087559`, range `[-0.00581427160322634, +0.0140545603514044]`, with 17/20 positive repeats; the effect is therefore small, usually positive, and partition-sensitive rather than a robust fixed gain.
+
+The public evidence/provenance map is:
+
+`../../../docs/experiment-08/EXPERIMENT08_EVIDENCE_PROVENANCE_MANIFEST.md`
+
+The final Experiment-08 interpretation boundary is: mechanical gate **FAIL**; experiment status **EXPLORATORY / POST-OUTCOME**; confirmatory RA14 claim **NO**; corrected compactness non-inferiority **FALSE**. No further predictive analysis is authorized without a separately committed prospective amendment.
 
 ## Data
 
