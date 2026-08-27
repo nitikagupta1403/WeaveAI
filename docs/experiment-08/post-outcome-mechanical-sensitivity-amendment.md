@@ -249,6 +249,46 @@ Spearman analyses involving `E_rel` use only observations where `E_rel` is mathe
 
 ---
 
+## Aborted-Execution Chronology Note
+
+The shell-support operational definition below was written into the working tree before the first attempted sensitivity execution but had not yet been committed.
+
+That attempted execution replayed the frozen raster population in memory but terminated during the replay-verification stage because of an implementation error in the dataframe column-name comparison. No replay verification was completed, no sensitivity summary or regression was produced, no sensitivity evidence file was written, and no diagnostic result was inspected.
+
+This note records that chronology explicitly. The operational definition below is not being changed in response to any sensitivity result.
+
+---
+
+## Shell-Support Operational Definition
+
+For this sensitivity analysis, the support variable
+
+\[
+m
+\]
+
+is operationalized as the **reference shell-mass fraction**
+
+\[
+m
+=
+\frac{\text{reference shell mass}}
+{\text{reference total foreground mass}}.
+\]
+
+This is the quantity already recorded in the frozen mechanical-validation evidence as `shell_mass_fraction`.
+
+The following rules are fixed:
+
+- use the reference, not rotated, shell-mass fraction;
+- use the continuous shell-mass fraction, not the Boolean `supported_shell` flag, for association and regression analyses;
+- do not threshold \(m\) for the sensitivity associations or descriptive model;
+- do not exclude observations because their shell-mass fraction is below the original mechanical support threshold.
+
+The original Boolean supported-shell definition and its frozen threshold remain unchanged and continue to describe the original mechanical gate only.
+
+---
+
 ## Association Analyses
 
 Two descriptive Spearman associations are prespecified:
