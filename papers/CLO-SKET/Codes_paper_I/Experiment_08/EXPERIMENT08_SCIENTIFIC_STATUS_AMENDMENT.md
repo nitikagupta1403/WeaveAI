@@ -54,9 +54,37 @@ Any existing RA14-versus-DINOv2, RA14 compactness, additive-value, ablation, or 
 
 ## Compactness-output invalidation
 
-Commit `e9e4f220c9d036e05a0de88adad1bda94830c87f` corrected the paired identity-bootstrap implementation so that repeated garment-identity blocks sampled with replacement retain their multiplicity.
+Commit `bce2bb7` corrected the paired identity-bootstrap implementation so that repeated garment-identity blocks sampled with replacement retain their multiplicity.
 
-Any Experiment 08 compactness result generated before that correction is invalid and must not be cited, copied into the manuscript, or treated as a reproducible result. The correction authorizes no automatic rerun and does not restore confirmatory status.
+Any Experiment 08 compactness bootstrap confidence interval or non-inferiority inference generated before that correction is invalid and must not be cited, copied into the manuscript, or treated as a reproducible inferential result.
+
+### Corrected-bootstrap chronology
+
+After the implementation correction was committed as `bce2bb7`, the corrected 10,000-replicate paired identity bootstrap was executed and recorded in commit `41ca373`.
+
+This rerun occurred without the separate prospective analysis amendment required by the rule below. That chronology is recorded here explicitly rather than being treated as prospectively authorized.
+
+The corrected computation therefore remains post-outcome / exploratory evidence only. Its numerical result is retained for auditability, but it does not regain confirmatory or non-inferiority status.
+
+The corrected evidence is:
+
+`papers/CLO-SKET/evidence/Experiment_08/experiment08_compactness_corrected_bootstrap.json`
+
+with:
+
+- `D_{G,L14} = -0.49330945434360446`
+- corrected paired 95% bootstrap CI `[-0.5322598503022689, -0.45316390290724373]`
+- `non_inferior = false`
+- 10,000 bootstrap replicates
+- seed `20260821`
+
+The dedicated correction record is:
+
+`docs/experiment-08/compactness-bootstrap-correction-record.md`
+
+committed as `13e13ad`.
+
+This corrected exploratory result supersedes the defective bootstrap inference only. It does not alter the failed mechanical gate and does not authorize any further predictive analysis.
 
 ## Rules for the next analysis
 
