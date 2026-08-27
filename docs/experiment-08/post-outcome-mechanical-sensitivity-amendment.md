@@ -194,6 +194,61 @@ For every stratum report:
 
 ---
 
+## Zero-\(R_2\) Domain Rule
+
+The full mechanical-validation population remains in scope, including observations with \(R_2=0\).
+
+The diagnostic measures are defined as follows:
+
+\[
+E_{\mathrm{abs}}
+=
+|R_2'-R_2|
+\]
+
+for all observations.
+
+\[
+E_{\mathrm{sym}}
+=
+\frac{2|R_2'-R_2|}
+{R_2'+R_2}
+\]
+
+is used when \(R_2'+R_2>0\). If \(R_2'=R_2=0\), define
+
+\[
+E_{\mathrm{sym}}=0.
+\]
+
+The original relative error
+
+\[
+E_{\mathrm{rel}}
+=
+\frac{|R_2'-R_2|}{R_2}
+\]
+
+is mathematically defined only where \(R_2>0\).
+
+For observations with \(R_2=0\):
+
+- retain the observation in the full-population count;
+- report `E_abs`;
+- report `E_sym`;
+- record `E_rel` as undefined / NA;
+- do not replace the denominator with an epsilon;
+- do not delete the observation.
+
+All summaries involving `E_rel` must report both:
+
+- the total number of observations in the relevant population/stratum; and
+- the number of observations for which `E_rel` is defined.
+
+Spearman analyses involving `E_rel` use only observations where `E_rel` is mathematically defined. This is a domain restriction of the ratio, not outcome-based filtering.
+
+---
+
 ## Association Analyses
 
 Two descriptive Spearman associations are prespecified:
