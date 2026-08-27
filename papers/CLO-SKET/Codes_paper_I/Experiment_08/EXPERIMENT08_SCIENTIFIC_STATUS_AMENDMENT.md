@@ -20,13 +20,13 @@ Canonical evidence: `papers/CLO-SKET/evidence/Experiment_08/experiment08_mechani
 | Gate or diagnostic | Frozen result | Interpretation |
 |---|---:|---|
 | Analytic transformation audit | pass | The symbolic/doubled-angle implementation satisfies the analytic tolerance. |
-| Maximum doubled-angle vector error | (7.45\times10^{-16}) | Within the frozen (10^{-12}) tolerance. |
+| Maximum doubled-angle vector error | (7.45\times10^{-16}) | Within the frozen `1 × 10^-12` tolerance. |
 | Raster axial gate | pass | Axial error alone meets its frozen raster criterion. |
 | Median axial error | (0.286^\circ) | Descriptive diagnostic. |
 | 95th-percentile axial error | (4.208^\circ) | Descriptive diagnostic. |
 | Raster magnitude gate | **fail** | Magnitude stability does not meet the frozen raster criterion. |
-| Magnitude failure rate | (0.08080) | 8.08% of supported observations fail the magnitude criterion. |
-| Combined raster failure rate | (0.08188) | The overall raster gate fails. |
+| Magnitude failure rate | `0.08080` | 8.08% of supported observations fail the magnitude criterion. |
+| Combined raster failure rate | `0.08188` | The overall raster gate fails. |
 | Overall RA14 mechanical gate | **fail** | Confirmatory interpretation is blocked. |
 
 The audit also records a coordinate-convention discrepancy: the synthetic raster test observes
