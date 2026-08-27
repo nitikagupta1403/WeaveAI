@@ -1,7 +1,7 @@
 # CLO-SKET Experiment 08 — Consolidated Decision Record
 
-**Date:** 2026-08-27  
-**Scope:** Paper I / CLO-SKET / Experiment 08  
+**Date:** 2026-08-27
+**Scope:** Paper I / CLO-SKET / Experiment 08
 **Status:** Post-outcome consolidated scientific record
 
 ## Overall decision
