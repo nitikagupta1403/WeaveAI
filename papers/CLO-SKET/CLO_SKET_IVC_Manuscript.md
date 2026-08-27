@@ -103,7 +103,7 @@ This design separates three questions that are often conflated: **what geometric
 
 This study evaluates an explicit axial–radial representation of garment-sketch geometry and, as its central prespecified evaluation, tests whether that representation contributes reproducible garment-category information beyond a frozen morphology representation when complete source-garment identities are withheld from validation.
 
-The study contains two linked but inferentially distinct components. First, a **representation-validation component** establishes the mathematical construction and numerical behavior of the axial–radial measurement: centroid-relative polar transformation, shell-conditioned angular distributions, second-harmonic magnitude and axial orientation, compact descriptor construction, reconstruction diagnostics, rotation controls, discretization and parameter sensitivity, phase conditioning, and garment-level association analysis. These analyses determine what the representation measures, how it transforms, and where its numerical limitations arise.
+The study contains two linked but inferentially distinct components. First, a **representation-diagnostic component** characterizes the mathematical construction and numerical behavior of the axial–radial measurement: centroid-relative polar transformation, shell-conditioned angular distributions, second-harmonic magnitude and axial orientation, compact descriptor construction, reconstruction diagnostics, rotation controls, discretization and parameter sensitivity, phase conditioning, and garment-level association analysis. These analyses characterize what the representation measures, how it behaves under the tested transformations, and where its numerical limitations arise; they are not treated as proof of universal mechanical validity.
 
 Second, a **locked incremental-value experiment** compares the frozen 135-dimensional morphology representation with the same representation augmented by the compact 14-dimensional axial–radial vector. This experiment uses identical category-balanced, garment-identity-disjoint folds, identical preprocessing, and one fixed classifier across all feature sets. Its primary estimand is the change in macro-F1 produced by adding the complete axial–radial representation to morphology. Radial-only and axial-only additions are mechanistic ablations and cannot replace the primary contrast.
 
@@ -388,7 +388,7 @@ The \(10^{-14}\) criterion is an empty-shell numerical guard rather than a subst
 
 ## 3.4 Rigid-image rotation control of the 14-dimensional representation
 
-The analytic rotation controls described later test coordinate-frame dependence directly in second-harmonic space. A separate image-domain perturbation control was performed to verify that the final 14-dimensional representation exhibits the intended invariant and equivariant behavior when the input sketch itself is rigidly rotated and the complete radial-angular measurement is recomputed.
+The analytic rotation controls described later test coordinate-frame dependence directly in second-harmonic space. A separate image-domain perturbation control was performed to evaluate whether the final 14-dimensional representation exhibits the intended invariant and equivariant behavior when the input sketch itself is rigidly rotated and the complete radial-angular measurement is recomputed. These earlier controls are descriptive transformation diagnostics; a later prospectively gated mechanical audit is reported separately.
 
 All 2,300 sketches were evaluated at the physical rotation angles
 
@@ -1007,6 +1007,14 @@ Accordingly,
 \]
 
 Neither result establishes statistical independence, information-theoretic uniqueness, semantic understanding, or causality.
+
+## 3.9 Fresh reproducibility audit: Experiment 08
+
+After the frozen Experiment 06 and Experiment 07 analyses, a separate fresh executable study was conducted to audit RA14 under a prospectively frozen mechanical gate and a frozen learned-feature comparison. Experiment 08 used the same 2,300 sketches, 230 recovered garment identities, and frozen 14-dimensional RA14 representation, together with independently frozen DINOv2 ViT-S/14 features. Two additional predictive controls were specified later, after Experiment 08 had already become post-outcome / exploratory, and were committed before their own execution.
+
+The mechanical gate was intended to determine whether outcome-capable predictive analysis could proceed. Analytic harmonic rotation checks passed, and raster axial-angle errors satisfied their locked criteria. The raster harmonic-magnitude criterion failed: median relative magnitude error was 1.3132%, while the 95th percentile was 21.332%, exceeding the prespecified 15% threshold. The overall frozen mechanical gate was therefore **FAIL**. Predictive analysis nevertheless proceeded after that failure; those outcomes cannot retain confirmatory status.
+
+All Experiment-08 predictive results are consequently classified as **post-outcome / exploratory**. Neither the frozen DINOv2 comparison nor the later correspondence and repeated-partition controls reopen or rescue the failed mechanical gate.
 
 ---
 
@@ -2145,7 +2153,7 @@ Axial coherence showed very small absolute changes across the tested rotations.
 
 Orientation drift also showed small median changes, ranging from approximately \(1.11^\circ\) to \(1.42^\circ\), but with substantially larger upper-tail variation. The 95th-percentile absolute changes ranged from approximately \(24.69^\circ\) to \(29.39^\circ\).
 
-These results support the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved as invariant scalar descriptors. The results do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
+These results are broadly consistent with the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations in this earlier diagnostic, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved approximately as intended scalar descriptors. These observations do not establish mechanical validation of RA14; a later prospectively gated Experiment-08 audit failed its raster harmonic-magnitude P95 criterion. They also do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
 
 ---
 
@@ -2763,6 +2771,19 @@ The result does not contradict Experiment 06. Rather, it shows that the incremen
 
 ---
 
+
+## 4.22 Fresh Experiment-08 audit did not pass the mechanical gate
+
+Experiment 08 passed its analytic transformation checks and locked raster axial-angle criteria but failed the raster harmonic-magnitude P95 criterion. The overall frozen mechanical gate therefore remained **FAIL**. Predictive analysis nevertheless proceeded after the failed gate, so all Experiment-08 predictive outcomes are classified as **post-outcome / exploratory**.
+
+For the frozen DINOv2 comparison, pooled out-of-fold macro-F1 was 0.738020 for DINOv2 alone and 0.738967 after appending RA14, yielding an exploratory increment of +0.000947. The category-stratified garment-identity bootstrap interval crossed zero.
+
+The corrected compactness comparison gave a paired difference of -0.493309 with 95% bootstrap interval [-0.532260, -0.453164], and the prespecified non-inferiority criterion was false. Historical compactness bootstrap intervals and non-inferiority inference from the multiplicity-destroying implementation are invalid and superseded; the earlier point-estimate workflow is not invalidated solely by that bootstrap defect.
+
+The later 1,000-replicate within-category, block-size-preserving correspondence control gave an upper-tail empirical probability of 0.999001. This does not show that RA14 is harmful or devoid of category information; it shows that the correctly aligned exploratory increment was not unusually high under the prescribed correspondence control. Across 20 additional identity-grouped `StratifiedGroupKFold` partitions, the exploratory increment had mean +0.003927, median +0.002581, minimum -0.005814, maximum +0.014055, and was positive in 17/20 repeats. These summaries are descriptive rather than a formal confidence interval and indicate a small, usually positive but partition-sensitive effect.
+
+None of these post-outcome analyses rescues the failed mechanical gate or restores confirmatory status.
+
 # 5. Discussion
 
 ## 5.1 Principal finding: incremental value without evidence of garment-specific alignment
@@ -3121,7 +3142,7 @@ The ablations localize most of the directly observed increment to radial organiz
 
 The alignment-permutation control places the strongest boundary on interpretation. Correctly aligned \(M+R+A\) did not outperform a category-preserving identity-level misalignment null unusually strongly: the empirical probabilities were \(p=0.762619\) for macro-F1 and \(p=0.729635\) for balanced accuracy. Consequently, the improvement over morphology cannot be attributed, on the present evidence, to exact garment-specific correspondence between the morphology and axial–radial representations. The supported claim is narrower: the compact axial–radial representation contains reproducible **category-conditioned predictive structure** that is useful alongside morphology, but the experiment does not demonstrate uniquely paired garment-level complementarity, statistical independence, or information-theoretic uniqueness.
 
-The complementary geometric controls explain why such caution is necessary. Rigid-image rotation experiments supported the intended invariant/equivariant transformation structure of the representation over the tested perturbations, while garment-identity-specific analytic rotations caused peak-shell axial reconstruction error to approach the \(45^\circ\) chance expectation. Thus, strong phase regularities in upright CLO-SKET sketches depend substantially on the common image coordinate frame. Sensitivity analyses further showed that broad radial summaries are more stable than localized quantities such as peak radius, onset, termination, and concentration, which remain conditional on radial domain and discretization.
+The complementary geometric controls explain why such caution is necessary. Earlier rigid-image rotation experiments were broadly consistent with the intended invariant/equivariant organization over their tested perturbations, but a subsequent fresh mechanical audit (Experiment 08) failed its frozen raster harmonic-magnitude P95 gate. Those earlier rotation observations are therefore retained as descriptive diagnostics rather than treated as mechanical validation. Experiment-08 predictive comparisons are post-outcome / exploratory and do not rescue the failed gate. Garment-identity-specific analytic rotations also caused peak-shell axial reconstruction error to approach the \(45^\circ\) chance expectation. Thus, strong phase regularities in upright CLO-SKET sketches depend substantially on the common image coordinate frame. Sensitivity analyses further showed that broad radial summaries are more stable than localized quantities such as peak radius, onset, termination, and concentration, which remain conditional on radial domain and discretization.
 
 Taken together, the evidence supports an explicit but bounded contribution. CLO-SKET contains radial–angular geometric structure that can be measured compactly, transferred to withheld garment identities, and used to improve category discrimination beyond a morphology baseline. The study also shows that predictive improvement alone is insufficient to establish instance-specific representational complementarity: a category-preserving alignment control is required to test that stronger interpretation, and here that test was negative.
 

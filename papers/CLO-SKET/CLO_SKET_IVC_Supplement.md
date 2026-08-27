@@ -761,7 +761,7 @@ was reported only as a descriptive calibration diagnostic and was assigned no in
 ---
 
 ## S9. Scope of supplementary inference
-The study supports two distinct classes of claims. The representation-validation analyses support an explicit 14-dimensional second-harmonic description of garment sketches, its expected radial-magnitude and axial-orientation transformation behavior over the tested controls, numerical reconstruction diagnostics on withheld recovered garment identities, phase-conditioning analysis, parameter sensitivity, and cluster-aware garment-level associations.
+The study supports distinct classes of claims. The representation-diagnostic analyses support an explicit 14-dimensional second-harmonic description of garment sketches and characterize its radial-magnitude and axial-orientation behavior over the tested controls, together with numerical reconstruction diagnostics on withheld recovered garment identities, phase-conditioning analysis, parameter sensitivity, and cluster-aware garment-level associations. These diagnostics are not treated as proof of universal mechanical validity; the later Experiment-08 mechanical gate failed.
 
 The central confirmatory experiment supports a narrower downstream claim: under the locked logistic-regression protocol and garment-identity-disjoint validation, the compact axial–radial representation can be tested for reproducible incremental garment-category utility beyond the frozen 135-dimensional morphology representation. Bootstrap and repeated-partition analyses quantify uncertainty and split stability of that increment. Radial/axial ablations identify where the increment is concentrated.
 
@@ -900,7 +900,7 @@ Axial coherence showed very small absolute changes across the tested rotations.
 
 Orientation drift also showed small median changes, ranging from approximately \(1.11^\circ\) to \(1.42^\circ\), but with substantially larger upper-tail variation. The 95th-percentile absolute changes ranged from approximately \(24.69^\circ\) to \(29.39^\circ\).
 
-These results support the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved as invariant scalar descriptors. The results do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
+These results are broadly consistent with the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations in this earlier diagnostic, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved approximately as intended scalar descriptors. These observations do not establish mechanical validation of RA14; the later Experiment-08 mechanical gate failed its raster harmonic-magnitude P95 criterion. They also do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
 
 ---
 
@@ -909,7 +909,7 @@ All 2,300 file paths were unique. SHA-256 hashing detected no repeated raw files
 
 Filename and category structure recovered 230 category-qualified garment identities, exactly 10 identities within each of the 23 categories. Individual garment identities contained 9–11 sketches and 9–11 distinct replicate identifiers. Eight identity–replicate combinations appeared more than once in the filename records.
 
-Recovered garment identity was therefore used as the clustering unit for validation, bootstrap resampling, and confirmatory association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
+Recovered garment identity was therefore used as the clustering unit for validation, bootstrap resampling, and prespecified association analysis. The available metadata do not establish that the 230 recovered garment identities constitute mutually independent sampling units; population-level inference remains conditional on that assumption.
 
 ---
 An initial image-level cross-validation design did not separate repeated sketches by garment identity: garment identities represented in each test fold were also represented in the corresponding training set. That design therefore evaluated unseen image files rather than unseen garments and was retained only as a sensitivity comparison.
@@ -1420,3 +1420,13 @@ Because the observed value appears algebraically in \(\Delta R_2\), this correla
 # Supplementary provenance
 
 All numerical values and inferential decisions in this supplement trace to the frozen master manuscript and its associated Paper-I/Experiment-06 evidence lineage. The frozen master remains authoritative if an editorial projection ever diverges.
+
+---
+
+## Supplementary Experiment-08 status
+
+Experiment 08 was a later fresh executable audit of RA14. Its prospectively frozen mechanical gate **FAILED** because the raster harmonic-magnitude 95th-percentile relative error exceeded the prespecified threshold, despite passing analytic harmonic-rotation and raster axial-angle subchecks.
+
+Predictive calculations proceeded after the failed gate and are therefore **post-outcome / exploratory**. The frozen DINOv2 additive macro-F1 increment was +0.000947 and its category-stratified garment-identity bootstrap interval crossed zero. A corrected compactness analysis did not support non-inferiority. A later category/block-size-preserving correspondence control did not show the correctly aligned increment to be unusually high under its restricted null, and 20 additional grouped partitions showed a small, usually positive but partition-sensitive additive effect.
+
+Historical compactness bootstrap intervals and non-inferiority inference from the multiplicity-destroying implementation are invalid and superseded; the earlier point-estimate workflow is not invalidated solely by that bootstrap defect. None of the later Experiment-08 analyses rescues the failed mechanical gate or supports a confirmatory RA14 validation claim.

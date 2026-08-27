@@ -313,7 +313,7 @@ Axial coherence showed very small absolute changes across the tested rotations.
 
 Orientation drift also showed small median changes, ranging from approximately \(1.11^\circ\) to \(1.42^\circ\), but with substantially larger upper-tail variation. The 95th-percentile absolute changes ranged from approximately \(24.69^\circ\) to \(29.39^\circ\).
 
-These results support the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved as invariant scalar descriptors. The results do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
+These results are broadly consistent with the intended transformation structure of the representation over the tested rigid rotations: the radial-magnitude block showed small numerical perturbations in this earlier diagnostic, the doubled-angle orientation pairs followed the expected axial transformation, and coherence and orientation drift behaved approximately as intended scalar descriptors. These observations do not establish mechanical validation of RA14; a later prospectively gated Experiment-08 audit failed its raster harmonic-magnitude P95 criterion. They also do not imply exact invariance under raster rotation or robustness beyond the evaluated perturbations.
 
 ---
 
@@ -848,3 +848,21 @@ was \(+0.1714\).
 Because the observed value appears algebraically in \(\Delta R_2\), this correlation is mathematically coupled and cannot be interpreted as an independent association. It is retained only as a descriptive calibration diagnostic and receives no inferential \(p\)-value.
 
 ---
+
+---
+
+## 4.21 Fresh Experiment-08 audit did not pass the mechanical gate
+
+Experiment 08 subjected the frozen RA14 representation to a separately prospectively specified mechanical gate. Analytic harmonic-rotation checks passed to numerical precision, and the locked raster axial-angle criteria passed. The raster harmonic-magnitude criterion did not: median relative magnitude error was 1.3132%, whereas the 95th percentile was 21.332%, exceeding the prespecified 15% threshold. The overall mechanical gate was therefore **FAIL**. Passing analytic and axial-angle subchecks do not override that result.
+
+Predictive analysis nevertheless proceeded after the failed gate. Those results are consequently classified as **post-outcome / exploratory** and cannot retain confirmatory status.
+
+For the frozen DINOv2 comparison, pooled out-of-fold macro-F1 was 0.738020 for DINOv2 alone and 0.738967 after appending RA14, giving an exploratory increment of +0.000947. The category-stratified garment-identity bootstrap interval for this additive comparison crossed zero.
+
+A corrected compactness comparison gave a paired difference of -0.493309 with 95% bootstrap interval [-0.532260, -0.453164]; the prespecified non-inferiority criterion was false. Earlier compactness bootstrap intervals and non-inferiority inference produced by the multiplicity-destroying bootstrap implementation are invalid and superseded. The earlier point-estimate workflow is not invalidated solely by that bootstrap defect.
+
+The later post-outcome correspondence control used 1,000 within-category, block-size-preserving garment-identity permutations. The correctly aligned exploratory increment (+0.000947) was not unusually high under this restricted control distribution; the prespecified upper-tail empirical probability was 0.999001. Because category structure was preserved, this control addresses garment-instance correspondence rather than removal of all category-associated RA14 information.
+
+Across 20 additional identity-grouped `StratifiedGroupKFold` partitions, the exploratory additive increment had mean +0.003927, median +0.002581, minimum -0.005814, maximum +0.014055, and was positive in 17 of 20 repeats. These are descriptive repeated-partition summaries, not a formal confidence interval. The effect was small, usually positive, and partition-sensitive.
+
+None of the Experiment-08 predictive analyses rescues the failed mechanical gate or supports a confirmatory RA14 mechanical-validation claim.
