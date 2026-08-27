@@ -316,7 +316,8 @@ def paired_identity_bootstrap(
             sampled_ids = rng.choice(ids_for_cat, size=len(ids_for_cat), replace=True)
             for chosen_id in sampled_ids:
                 sampled_rows.extend(idx[garment_id.iloc[idx].to_numpy() == chosen_id].tolist())
-        # Preserve repeated identity blocks: bootstrap sampling is with replacement.\n        sampled_rows = np.asarray(sampled_rows, dtype=int)
+        # Preserve repeated identity blocks: bootstrap sampling is with replacement.
+        sampled_rows = np.asarray(sampled_rows, dtype=int)
         if len(sampled_rows) == 0:
             continue
         sampled_y = y[sampled_rows]
