@@ -92,7 +92,7 @@ R_{2,i}(r)=|F_{2,i}(r)|,
 \pmod{\pi}.
 \]
 
-Under an ideal rigid rotation by (\phi), the adopted convention requires
+Under an ideal rigid rotation by (\phi), the Cartesian-coordinate convention requires
 
 \[
 F'_{2,i}(r)=e^{-2\mathrm{i}\phi}F_{2,i}(r),
@@ -105,6 +105,37 @@ R'_{2,i}(r)=R_{2,i}(r),
 \qquad
 \alpha'_{2,i}(r)=\alpha_{2,i}(r)+\phi\pmod{\pi}.
 \]
+
+### Post-outcome coordinate-convention clarification (2026-08-27)
+
+The equations immediately above use Cartesian coordinates, with the vertical axis positive upward. The frozen raster implementation uses native image coordinates, with the vertical axis positive downward. Under a visual counterclockwise rotation by \(\phi\), its angular coordinate therefore transforms as
+
+\[
+\theta'_{\mathrm{img}}=\theta_{\mathrm{img}}-\phi.
+\]
+
+For the frozen image-coordinate implementation,
+
+\[
+F'_{2,\mathrm{img}}(r)
+=
+e^{+2\mathrm{i}\phi}F_{2,\mathrm{img}}(r),
+\qquad
+R'_{2,\mathrm{img}}(r)=R_{2,\mathrm{img}}(r),
+\]
+
+and hence
+
+\[
+\alpha'_{2,\mathrm{img}}(r)
+=
+\alpha_{2,\mathrm{img}}(r)-\phi
+\pmod{\pi}.
+\]
+
+Thus the synthetic raster observation
+\(\alpha'_{2,\mathrm{img}}-\alpha_{2,\mathrm{img}}\approx-\phi\)
+is the expected image-coordinate form of the same axial equivariance, not a sign error in the frozen feature bytes. This clarification was written after predictive results were frozen. It changes neither code, feature values, hashes, thresholds, nor outcomes. It resolves only the coordinate notation; the failed raster magnitude gate and the overall failed RA14 mechanical gate remain unchanged, and Experiment 08 remains exploratory under the scientific-status amendment.
 
 Axial comparisons must use doubled-angle coordinates or the axial distance
 
