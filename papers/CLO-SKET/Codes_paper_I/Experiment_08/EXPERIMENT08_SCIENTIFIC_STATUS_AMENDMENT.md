@@ -29,11 +29,17 @@ Canonical evidence: `papers/CLO-SKET/evidence/Experiment_08/experiment08_mechani
 | Combined raster failure rate | `0.08188` | The overall raster gate fails. |
 | Overall RA14 mechanical gate | **fail** | Confirmatory interpretation is blocked. |
 
-The audit also records a coordinate-convention discrepancy: the synthetic raster test observes
+The apparent rotation-sign discrepancy is now resolved algebraically and documented in the mathematical design lock. The original `+phi` equation is the Cartesian-coordinate form, with the vertical axis positive upward. The frozen raster implementation uses native image coordinates, with the vertical axis positive downward. For a visual counterclockwise rotation by `phi`, it therefore obeys
 
-`alpha_rot - alpha_ref ≈ -phi`
+`theta_img' = theta_img - phi`,
 
-whereas the mathematical design lock states `+phi`. This may arise from mathematical Cartesian coordinates versus image coordinates with a downward-positive vertical axis, but it is not treated as resolved by assertion. The convention must be reconciled explicitly in code, equations, and documentation before any qualified mechanical claim is made.
+`F2_img' = exp(+2 i phi) F2_img`,
+
+and
+
+`alpha_img' = alpha_img - phi (mod pi)`.
+
+Accordingly, the synthetic observation `alpha_rot - alpha_ref ≈ -phi` is expected for the frozen image-coordinate implementation. This post-outcome clarification changes no code, feature bytes, hashes, thresholds, or predictive results. It resolves only the sign convention. It does **not** repair the failed raster magnitude gate or the overall failed RA14 mechanical gate.
 
 ## Chronology and inferential consequence
 
@@ -57,7 +63,7 @@ Any Experiment 08 compactness result generated before that correction is invalid
 No revised predictive outcome may be computed until a separate, dated analysis amendment is committed that:
 
 1. defines the exact mechanically qualified population or sensitivity strata without consulting revised predictive outcomes;
-2. reconciles the rotation-sign convention between mathematical and raster coordinates;
+2. uses and reports the now-explicit Cartesian-to-image-coordinate mapping consistently in code, equations, and outputs;
 3. fixes all thresholds, estimands, metrics, multiplicity handling, and reporting rules;
 4. preserves the frozen identity-disjoint folds and train-only fitting of PCA, scaling, and classifiers;
 5. requires the corrected paired bootstrap with replacement multiplicity preserved;
@@ -71,7 +77,7 @@ A permissible qualified analysis may stratify or filter using mechanical diagnos
 Until the requirements above are met, the submission manuscript must do one of the following:
 
 - omit Experiment 08 from confirmatory claims and primary conclusions; or
-- present it in a clearly labelled exploratory/post-outcome section that discloses the failed raster magnitude gate, the sign-convention issue, and the invalidated pre-fix compactness bootstrap output.
+- present it in a clearly labelled exploratory/post-outcome section that discloses the failed raster magnitude gate, the resolved coordinate-convention clarification, and the invalidated pre-fix compactness bootstrap output.
 
 The manuscript must not use “validated,” “mechanically verified,” “non-inferior,” or equivalent language for RA14 based on the current Experiment 08 evidence.
 
