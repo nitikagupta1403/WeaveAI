@@ -1,0 +1,85 @@
+{
+  "amendment": {
+    "commit": "6e62d94d7a29088f92ec0c6d617bbf265d2810c1",
+    "path": "docs/experiment-08/post-outcome-predictive-controls-amendment.md"
+  },
+  "control": "correspondence_permutation",
+  "csv_output": "papers/CLO-SKET/evidence/Experiment_08/experiment08_correspondence_permutation.csv",
+  "csv_sha256": "1ff1e76a054ae08a3e0cd8bd8f8fa89514887e134ab65ab452acb1c384ccb049",
+  "data": {
+    "dino_dimension": 384,
+    "dino_row_map_sha256": "072f08ae9fb8328fe73a2566c1d5e812560cd4b007bf1c88550adbb082a6a4d9",
+    "dino_sha256": "6958b8b05eee66304ecda038cc5fedef33eecd139dccc20c12dc6d223c614d97",
+    "fold_array_sha256": "e3fb0cf57b886bc303333795de42ecfc38cb1da9728d4d5cc365b47a91504c1f",
+    "n_categories": 23,
+    "n_garment_identities": 230,
+    "n_rows": 2300,
+    "ra14_dimension": 14,
+    "ra14_sha256": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033"
+  },
+  "execution": {
+    "execution_head_commit": "dcc5a29b4bcfc5b522b6b127d370e9ad92eaacdc",
+    "runner_relative_path": "papers/CLO-SKET/Codes_paper_I/Experiment_08/run_post_outcome_predictive_controls.py",
+    "runner_source_commit": "dcc5a29b4bcfc5b522b6b127d370e9ad92eaacdc"
+  },
+  "interpretation": "Conservative post-outcome correspondence control; unequal-size singleton identities remain structurally fixed.",
+  "metric_definition": {
+    "primary": "pooled out-of-fold macro-F1; Delta_G|L = F1(L+G) - F1(L)",
+    "secondary": "pooled out-of-fold balanced accuracy difference"
+  },
+  "model": {
+    "C": 1.0,
+    "classifier": "LogisticRegression",
+    "classifier_seed": 20260820,
+    "max_iter": 5000,
+    "penalty": "l2",
+    "scaler": "training-fold StandardScaler",
+    "solver": "lbfgs"
+  },
+  "observed_exploratory_result": {
+    "delta_G_given_L": 0.0009466521822523166,
+    "macro_f1_L": 0.7380200305882273,
+    "macro_f1_L_plus_G": 0.7389666827704796
+  },
+  "permutation_design": {
+    "L_baseline_computed_once": true,
+    "L_baseline_reason": "L and frozen folds are invariant to RA14 correspondence permutation.",
+    "master_seed": 20260822,
+    "n_permutations": 1000,
+    "permutation_eligible_identities": 228,
+    "rng_scheme": "one numpy.random.default_rng(master_seed); permutations consumed sequentially in sorted (category, block_size) stratum order",
+    "strata": "(category, identity_block_size)",
+    "structurally_fixed_identities": 2,
+    "structurally_fixed_identity_ids": [
+      "Jumpsuit__G02",
+      "Jumpsuit__G06"
+    ],
+    "within_identity_row_order": "ascending authoritative row index"
+  },
+  "permutation_distribution": {
+    "empirical_probability_formula": "(1 + count(T_perm >= T_obs)) / (1 + B)",
+    "empirical_upper_tail_probability": 0.999000999000999,
+    "mean": 0.013596323290899682,
+    "median": 0.013688493815160296,
+    "quantile_0_025": 0.005085149860362126,
+    "quantile_0_975": 0.021671779289126402,
+    "quantile_method": "numpy default linear"
+  },
+  "representations": {
+    "G": "frozen RA14 14-D representation",
+    "L": "frozen DINOv2 384-D representation",
+    "L_plus_G": "concatenated frozen DINOv2 + RA14"
+  },
+  "scientific_boundary": {
+    "confirmatory_claim_permitted": false,
+    "experiment08_status": "EXPLORATORY / POST-OUTCOME",
+    "frozen_mechanical_gate": "FAIL",
+    "mechanical_validity_restored": false
+  },
+  "status": "POST_OUTCOME_EXPLORATORY_ONLY",
+  "structural_clarification": {
+    "commit": "7b4b283f0070b67817c71982526b3ed64034be4e",
+    "path": "docs/experiment-08/post-outcome-predictive-controls-clarification.md"
+  },
+  "summary_output": "papers/CLO-SKET/evidence/Experiment_08/experiment08_correspondence_permutation_summary.json"
+}
