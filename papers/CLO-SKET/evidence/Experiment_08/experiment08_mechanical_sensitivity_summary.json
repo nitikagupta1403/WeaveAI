@@ -1,0 +1,103 @@
+{
+  "associations": {
+    "n_E_rel_defined": 57500,
+    "n_total": 57500,
+    "spearman_R2_vs_E_rel": {
+      "rho": -0.4221310948752098
+    },
+    "spearman_shell_mass_fraction_vs_E_rel": {
+      "rho": -0.16945657236775666
+    }
+  },
+  "descriptive_regression": {
+    "model": "log1p(E_rel) ~ log1p(reference_R2) + log1p(shell_mass_fraction) + categorical(rotation_deg)",
+    "n": 57500,
+    "n_parameters": 12,
+    "rank": 12,
+    "reference_rotation_deg": -90.0,
+    "residual_rmse": 0.19312887598863457,
+    "singular_values": [
+      259.1222721582799,
+      75.82875444051558,
+      75.82875444051555,
+      75.82875444051555,
+      75.82875444051554,
+      75.82875444051552,
+      75.82875444051552,
+      75.8287544405155,
+      75.8287544405155,
+      37.419145939288384,
+      22.91916564483138,
+      3.8661743977214056
+    ],
+    "sum_squared_residuals": 2144.6788575864202
+  },
+  "experiment": "CLO-SKET Experiment 08",
+  "full_population_summary": {
+    "median_E_abs": 0.003995495917232694,
+    "median_E_rel": 0.015501175111537637,
+    "median_E_sym": 0.015497127921875475,
+    "median_shell_mass_fraction": 0.029262033434471993,
+    "n_E_rel_defined": 57500,
+    "n_total": 57500,
+    "p95_E_abs": 0.042499410582291834,
+    "p95_E_rel": 0.47196599636471886,
+    "p95_E_sym": 0.4498542083979724,
+    "proportion_E_rel_gt_0p15_among_defined": 0.13779130434782608
+  },
+  "inputs": {
+    "amendment": "/Users/nitikagupta/Research/WeaveAI/docs/experiment-08/post-outcome-mechanical-sensitivity-amendment.md",
+    "amendment_sha256": "879f530cf4f3c40bb47292e24db84ad44abe21d0001e0f72278c71c2f235028d",
+    "frozen_mechanical_csv": "/Users/nitikagupta/Research/WeaveAI/papers/CLO-SKET/evidence/Experiment_08/experiment08_mechanical_validation.csv",
+    "frozen_mechanical_csv_sha256": "3a51a9045a70bfcd87ce9a96756385e25db9e0908b854bc66a5a515edf45ca71",
+    "mechanical_script": "/Users/nitikagupta/Research/WeaveAI/papers/CLO-SKET/Codes_paper_I/Experiment_08/run_mechanical_validation.py",
+    "mechanical_script_sha256": "ef4d0f54baa6a6a488da9523f2ef007960e1f7d7cfe15704c74d16ef8732c0db"
+  },
+  "original_mechanical_gate_remains_failed": true,
+  "original_relative_error_threshold": 0.15,
+  "outputs": {
+    "observations": "/Users/nitikagupta/Research/WeaveAI/papers/CLO-SKET/evidence/Experiment_08/experiment08_mechanical_sensitivity_observations.csv",
+    "regression": "/Users/nitikagupta/Research/WeaveAI/papers/CLO-SKET/evidence/Experiment_08/experiment08_mechanical_sensitivity_regression.csv",
+    "strata": "/Users/nitikagupta/Research/WeaveAI/papers/CLO-SKET/evidence/Experiment_08/experiment08_mechanical_sensitivity_strata.csv"
+  },
+  "population": {
+    "n_E_rel_defined": 57500,
+    "n_identities": 230,
+    "n_primary_shells": 25,
+    "n_reference_R2_zero": 0,
+    "n_rotation_angles": 10,
+    "n_total": 57500
+  },
+  "replay_audit": {
+    "reference_R2": {
+      "max_absolute_difference": 1.1102230246251565e-16,
+      "passed": true
+    },
+    "relative_magnitude_error": {
+      "max_absolute_difference": 3.552713678800501e-15,
+      "passed": true
+    },
+    "shell_mass_fraction": {
+      "max_absolute_difference": 9.974659986866641e-17,
+      "passed": true
+    },
+    "supported_shell": {
+      "exact_match": true,
+      "passed": true
+    }
+  },
+  "retroactive_gate_change_permitted": false,
+  "stage": "POST_OUTCOME_MECHANICAL_SENSITIVITY",
+  "status": "DIAGNOSTIC_ONLY",
+  "support_variable": {
+    "boolean_supported_shell_used_in_association_or_regression": false,
+    "operational_definition": "reference shell_mass_fraction = reference shell mass / reference total foreground mass",
+    "symbol": "m"
+  },
+  "zero_R2_rule": {
+    "E_abs": "defined for all observations",
+    "E_rel": "undefined/NA when reference_R2 == 0",
+    "E_sym": "2*abs(R2_prime-R2)/(R2_prime+R2); defined as 0 when both magnitudes are exactly 0",
+    "epsilon_denominator_used": false
+  }
+}
