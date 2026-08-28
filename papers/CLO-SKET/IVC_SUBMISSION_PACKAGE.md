@@ -51,6 +51,12 @@ The Supplementary Material uses six figures, numbered independently as S1–S6:
 
 The shared files for S1–S3 intentionally reuse the corresponding main-manuscript artwork; supplementary numbering refers to their placement in the Supplementary Material rather than to separate image files.
 
+## Submission extras
+
+`CLO_SKET_IVC_Highlights.md` contains the five journal Highlights for separate upload. Each bullet is constrained to the current manuscript claim boundaries and to the Elsevier 85-character limit.
+
+No graphical abstract is included in the current submission package.
+
 ## Reproducibility package
 
 Code is maintained under `papers/CLO-SKET/Codes_paper_I/`. The code README and `CLO_SKET_Availability_and_Reproducibility.md` define the intended execution and reproducibility boundary.
