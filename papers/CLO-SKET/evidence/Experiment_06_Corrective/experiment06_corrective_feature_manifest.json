@@ -1,0 +1,90 @@
+{
+  "bootstrap_computed": false,
+  "classifier_fitted": false,
+  "conditions": {
+    "CLEAN": "frozen Experiment-08 annotation-controlled materialized-v4 field + corrected true identity/fold map; confirmatory condition",
+    "RAW": "native source canvases + corrected true identity/fold map; diagnostic only"
+  },
+  "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
+  "feature_definitions": {
+    "M135": "exact frozen 64 horizontal + 64 vertical + 7 global morphology implementation",
+    "RA14": "exact frozen shell-conditioned second-harmonic 14-D implementation"
+  },
+  "historical_reproduction_checks": {
+    "raw_m135_exact_match": true,
+    "raw_m135_expected_array_sha256": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+    "raw_m135_observed_array_sha256": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+    "raw_ra14_exact_match": true,
+    "raw_ra14_expected_array_sha256": "01ea6937783792d0d9295ca92db863d932db4b57f5ad4b61ca78a2c97eb88a3c",
+    "raw_ra14_observed_array_sha256": "01ea6937783792d0d9295ca92db863d932db4b57f5ad4b61ca78a2c97eb88a3c"
+  },
+  "input_hashes": {
+    "annotation_status_sha256": "b83b74b6ff0f25fa8bb4474265d2f06c900bbcd3243b2cc332152e3c74cde55e",
+    "m135_source_sha256": "48ad35ee5014cf8ba431051525bdff69ca91d136abdd4a7a79ff2912d2554774",
+    "ra14_source_sha256": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9"
+  },
+  "outcome_execution_unlocked": false,
+  "outputs": {
+    "clean_m135": {
+      "array_sha256": "eccc922726a433f95bd235f61a5f591034cd012b6b67b3acea575ad00c1b3a8d",
+      "dtype": "float32",
+      "path": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrective_clean_m135.npy",
+      "saved_npy_sha256": "5174c89253a15db8cfee651725df542390a64765a85b32c8138506cb37d994cf",
+      "shape": [
+        2300,
+        135
+      ]
+    },
+    "clean_ra14": {
+      "array_sha256": "c233af755d9833c0a472490fd98b33a121083c647c0559e41bd5d673ce8ce9d4",
+      "dtype": "float64",
+      "path": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrective_clean_ra14.npy",
+      "saved_npy_sha256": "7f1f9ccb68e9604659b8899a1b4f8067e29b9f6bc2d0f49d2356f3b523e8c35e",
+      "shape": [
+        2300,
+        14
+      ]
+    },
+    "raw_m135": {
+      "array_sha256": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+      "dtype": "float32",
+      "path": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrective_raw_m135.npy",
+      "saved_npy_sha256": "f202d5b05524686815480539488ecd5c5fafbe9e89a51dfe50ff03b00c43fb92",
+      "shape": [
+        2300,
+        135
+      ]
+    },
+    "raw_ra14": {
+      "array_sha256": "01ea6937783792d0d9295ca92db863d932db4b57f5ad4b61ca78a2c97eb88a3c",
+      "dtype": "float64",
+      "path": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrective_raw_ra14.npy",
+      "saved_npy_sha256": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033",
+      "shape": [
+        2300,
+        14
+      ]
+    }
+  },
+  "permutation_computed": false,
+  "prediction_computed": false,
+  "predictive_metric_computed": false,
+  "ra14_diagnostics": {
+    "CLEAN": {
+      "max_conditional_normalization_error": 4.440892098500626e-16,
+      "max_relative_mass_error": 0.0,
+      "nonempty_shell_fraction": 0.7701207729468599,
+      "normalized_radial_centers_count": 72
+    },
+    "RAW": {
+      "max_conditional_normalization_error": 4.440892098500626e-16,
+      "max_relative_mass_error": 0.0,
+      "nonempty_shell_fraction": 0.9985688405797102,
+      "normalized_radial_centers_count": 72
+    }
+  },
+  "rows": 2300,
+  "schema_version": 1,
+  "stage": "PRE_OUTCOME_FEATURE_MATERIALIZATION",
+  "stop": "PRE-OUTCOME STOP: feature matrices and hashes only. Do not fit the corrective Experiment-06 classifier until the feature artifacts and execution implementation are frozen."
+}

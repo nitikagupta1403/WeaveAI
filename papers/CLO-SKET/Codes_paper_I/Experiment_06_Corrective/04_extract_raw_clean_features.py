@@ -215,8 +215,13 @@ def extract_ra14(rows, ra14_module):
 
 def save_npy(path: Path, array: np.ndarray) -> dict:
     np.save(path, array, allow_pickle=False)
+    try:
+        portable_path = path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        portable_path = path.name
+
     return {
-        "path": path.as_posix(),
+        "path": portable_path,
         "shape": list(array.shape),
         "dtype": str(array.dtype),
         "array_sha256": sha256_array(array),
