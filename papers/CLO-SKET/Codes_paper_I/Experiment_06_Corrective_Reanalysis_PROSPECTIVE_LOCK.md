@@ -61,8 +61,10 @@ The corrected recovered garment identities are the validation unit.
 
 At minimum, the authoritative corrected map must encode the two pre-outcome corrections already documented in the repository audit:
 
-- `Dress/1-3.tif`: historical `DressG01` -> corrected `DressG10`;
-- `Harem/6-6.tif`: historical `HaremG06` -> corrected `HaremG02`.
+- `Dress/1-3.tif`: historical `DressG01` / historical Fold 0 -> corrected `DressG10` / corrected Fold 4;
+- `Harem/6-6.tif`: historical `HaremG06` / historical Fold 2 -> corrected `HaremG02` / corrected Fold 0.
+
+These fold reassignments follow the corrected identities so that each corrected source garment remains indivisible within one fold.
 
 Before any predictive outcome is computed:
 
@@ -127,6 +129,30 @@ All final garment-only masks or equivalent deterministic preprocessing artifacts
 
 No cleaning rule may be changed after corrected predictive outcomes are inspected.
 
+## Prespecified raw-versus-clean annotation diagnostic
+
+Because the historical raw-canvas Experiment-06 result is confounded simultaneously by the historical identity map and annotation exposure, it must **not** be used by itself as the quantitative annotation-effect comparator.
+
+To isolate the effect of annotation control under the repaired validation design, the corrective package will compute, after the full pre-outcome checkpoint is frozen, two runs using the **same corrected identity map, same corrected folds, same estimator, same row order, and same representation definitions**:
+
+1. **Corrected-map RAW diagnostic:** features re-extracted from the original native canvases without annotation removal, using corrected true garment identities and corrected folds. This run is diagnostic/sensitivity evidence only and cannot support the garment-only construct claim.
+2. **Corrected-map CLEAN confirmatory run:** features re-extracted from the frozen annotation-controlled garment-only field, using the identical corrected identities and corrected folds. This is the sole confirmatory corrected Experiment-06 analysis.
+
+The prespecified annotation-impact table will report, for `M` and `M+R+A` at minimum:
+
+- pooled macro-F1 under corrected-map RAW;
+- pooled macro-F1 under corrected-map CLEAN;
+- pooled balanced accuracy under corrected-map RAW;
+- pooled balanced accuracy under corrected-map CLEAN;
+- the RA14 incremental contrast `M+R+A - M` in each preprocessing condition;
+- CLEAN minus RAW change in the absolute baseline score;
+- CLEAN minus RAW change in the absolute augmented score;
+- CLEAN minus RAW change in the incremental contrast.
+
+These quantities are descriptive diagnostics of annotation sensitivity. No additional hypothesis test, threshold, optimization, or preprocessing selection will be introduced based on them. The CLEAN confirmatory result governs the manuscript's corrected scientific claim regardless of whether the RAW diagnostic looks better or worse.
+
+The existing historical raw-canvas / historical-map result remains provenance only and may be shown separately as the superseded candidate result; it is not a clean estimate of annotation impact.
+
 ## Estimator lock
 
 The historical estimator specification remains fixed:
@@ -146,11 +172,11 @@ No hyperparameter search or feature-set-specific classifier change is permitted.
 
 Primary outcome:
 
-- pooled out-of-fold macro-F1 difference `M+R+A - M`.
+- pooled out-of-fold macro-F1 difference `M+R+A - M` from the **corrected-map CLEAN confirmatory run**.
 
 Secondary outcome:
 
-- pooled out-of-fold balanced-accuracy difference `M+R+A - M`.
+- pooled out-of-fold balanced-accuracy difference `M+R+A - M` from the **corrected-map CLEAN confirmatory run**.
 
 The analysis must report the absolute scores of both feature sets as well as the differences.
 
@@ -200,14 +226,16 @@ The corrected Experiment-06 package must be end-to-end auditable from source ima
 - annotation-status table for all 2,300 images;
 - frozen garment-only masks or deterministic equivalent preprocessing artifacts;
 - preprocessing manifest and hashes;
-- frozen 135-D morphology matrix and 14-D RA14 matrix with row order;
+- frozen corrected-map RAW feature matrices used for the annotation diagnostic;
+- frozen corrected-map CLEAN 135-D morphology matrix and 14-D RA14 matrix with identical row order;
 - feature-matrix hashes;
 - environment/package lock;
 - executable feature-extraction code;
 - executable five-fold model-fitting code;
-- row-level OOF predictions for `M` and `M+R+A` at minimum;
+- row-level OOF predictions for `M` and `M+R+A` for both RAW diagnostic and CLEAN confirmatory conditions;
 - primary pooled and foldwise metric outputs;
-- bootstrap code and output;
+- prespecified raw-versus-clean annotation-impact table;
+- bootstrap code and output for the CLEAN confirmatory analysis;
 - any retained alignment/permutation and repeated-partition code/output;
 - final manifest connecting every manuscript number to an immutable artifact.
 
@@ -245,17 +273,17 @@ Experiment 08 failed its prospective mechanical gate. Predictive outputs already
 
 ## Governance checkpoint
 
-Before running the corrected predictive analysis, the repository must contain a committed pre-outcome checkpoint containing:
+Before running either the corrected-map RAW diagnostic or the corrected-map CLEAN confirmatory predictive analysis, the repository must contain a committed pre-outcome checkpoint containing:
 
 1. this protocol;
 2. corrected identity table and fold map;
 3. complete annotation-control manifest and garment-only preprocessing artifacts;
-4. executable corrective Experiment-06 script;
+4. executable corrective Experiment-06 script supporting both prespecified preprocessing conditions;
 5. environment lock;
-6. hashes of the input row order, feature matrices or their deterministic pre-outcome generation pipeline, and fold array;
-7. a machine-generated statement that **no corrected predictive outcome has yet been computed**.
+6. hashes of the input row order, deterministic preprocessing artifacts, feature-generation implementation, and fold array;
+7. a machine-generated statement that **no corrected-map RAW or CLEAN predictive outcome has yet been computed**.
 
-Only after that checkpoint is committed may the corrected Experiment-06 outcomes be computed.
+Only after that checkpoint is committed may either corrected predictive condition be computed. The RAW diagnostic must not be inspected and then used to alter the CLEAN preprocessing or protocol.
 
 ## Historical-result quarantine
 
