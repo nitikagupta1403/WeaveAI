@@ -2,19 +2,17 @@
 
 ## Canonical manuscript sources
 
-The submission manuscript is assembled from the following frozen scientific sources, in this order:
+The submission manuscript is assembled from the following seven canonical scientific section files, in this order:
 
 1. `CLO_SKET_IVC_Abstract.md`
 2. `CLO_SKET_IVC_Introduction.md`
 3. `CLO_SKET_IVC_Related_Work.md`
 4. `CLO_SKET_IVC_Methods.md`
-5. `CLO_SKET_IVC_Methods_Experiment_07.md`
-6. `CLO_SKET_IVC_Results.md`
-7. `CLO_SKET_IVC_Results_Experiment_07.md`
-8. `CLO_SKET_IVC_Discussion.md`
-9. `CLO_SKET_IVC_Discussion_Experiment_07.md`
-10. `CLO_SKET_IVC_Conclusion.md`
-11. `CLO_SKET_IVC_References.md`
+5. `CLO_SKET_IVC_Results.md`
+6. `CLO_SKET_IVC_Discussion.md`
+7. `CLO_SKET_IVC_Conclusion.md`
+
+The standalone `CLO_SKET_IVC_*_Experiment_07.md` fragments are retained for provenance and historical comparison only and are not assembler inputs. `CLO_SKET_IVC_References.md` is appended separately from the canonical bibliography data in `CLO_SKET_References.bib`.
 
 Canonical bibliography data: `CLO_SKET_References.bib`. Submission-formatted references: `CLO_SKET_IVC_References.md`.
 
@@ -34,14 +32,24 @@ The generated master must not become an independent scientific source. Scientifi
 
 ## Figure package
 
-The final manuscript figure directory is `papers/CLO-SKET/figures/` and uses the locked sequence:
+The active artwork directory is `papers/CLO-SKET/figures/`.
+
+The main manuscript uses three figures:
 
 1. `Figure_1_Radial_Angular_Construction.png`
 2. `Figure_2_Provenance_Locked_14D_Representation.png`
 3. `Figure_3_Rigid_Rotation_Control.png`
-4. `Figure_4_Identity_Disjoint_Reconstruction_Validation.png`
-5. `Figure_5_Garment_Identity_Inference.png`
-6. `Figure_6_Bootstrap_Permutation_Inference.png`
+
+The Supplementary Material uses six figures, numbered independently as S1–S6:
+
+- S1 → `Figure_1_Radial_Angular_Construction.png`
+- S2 → `Figure_2_Provenance_Locked_14D_Representation.png`
+- S3 → `Figure_3_Rigid_Rotation_Control.png`
+- S4 → `Figure_4_Identity_Disjoint_Reconstruction_Validation.png`
+- S5 → `Figure_5_Garment_Identity_Inference.png`
+- S6 → `Figure_6_Bootstrap_Permutation_Inference.png`
+
+The shared files for S1–S3 intentionally reuse the corresponding main-manuscript artwork; supplementary numbering refers to their placement in the Supplementary Material rather than to separate image files.
 
 ## Reproducibility package
 

@@ -66,7 +66,7 @@ and
 
 No feature standardization or other scaling transformation was applied. All unspecified estimator arguments used the defaults of scikit-learn 1.6.1.
 
-The earlier representation/reconstruction validation lineage was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1; the separately frozen Experiment 06 confirmatory run used Python 3.13.15, NumPy 2.1.3, pandas 2.2.3, and scikit-learn 1.6.1 (Section 7, Software Environment).
+The earlier representation/reconstruction validation lineage was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1; the separately frozen Experiment 06 confirmatory run used Python 3.13.15, NumPy 2.1.3, pandas 2.2.3, and scikit-learn 1.6.1 (see Data and Code Availability and the accompanying reproducibility record).
 
 ---
 
@@ -396,7 +396,7 @@ and the fraction of integrated magnitude carried by that order relative to the s
 
 Rank correlations between \(m=2\) and neighbouring harmonic magnitudes were used to assess whether the second harmonic duplicated other low-order structure.
 
-Because Section 3.5 defines \(m=2\) from the axial orientation convention of the measurement, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
+Because Section 3.5 of the main manuscript defines \(m=2\) from the axial orientation convention of the measurement, these comparisons were interpreted as consistency and non-redundancy controls rather than a search for the empirically best harmonic order.
 
 ---
 
@@ -792,7 +792,7 @@ The construction from a representative sketch to the centroid-relative polar fie
 
 ![Supplementary Figure S1. Radial–angular construction and second-harmonic interpretation.](figures/Figure_1_Radial_Angular_Construction.png)
 
-**Supplementary Figure S1. Radial–angular construction and second-harmonic interpretation.** (A) Representative CLO-SKET sketch with intensity-weighted centroid. (B) Centroid-relative polar geometry used to accumulate foreground intensity by radius and angle. (C) Conditional angular distribution \(p(\theta\mid r)\); the shaded interval marks the 25-shell primary radial domain \(r=3.5,\ldots,27.5\). (D) Second-harmonic magnitude \(R_2(r)=|F_2(r)|\), with the selected observed peak shell marked. (E) Axial orientation \(\alpha_2(r)\) over the primary domain. The second harmonic represents axial orientation because \(\alpha\equiv\alpha+\pi\).
+**Supplementary Figure S1. Radial–angular construction and second-harmonic interpretation.** The upper schematic contrasts the first three angular harmonics and highlights the two-fold second harmonic used here for axial orientation, together with the definitions of \(F_m(r)\), \(R_2(r)\), and \(\alpha_2(r)\). (A) Representative CLO-SKET sketch with intensity-weighted centroid. (B) Centroid-relative polar geometry used to accumulate foreground intensity by radius and angle. (C) Conditional angular distribution \(p(\theta\mid r)\). (D) Second-harmonic magnitude \(R_2(r)=|F_2(r)|\); the shaded interval marks the 25-shell primary radial domain \(r=3.5,\ldots,27.5\), and the selected observed peak shell is marked. (E) Axial orientation \(\alpha_2(r)\) over the primary domain. The second harmonic represents axial orientation because \(\alpha\equiv\alpha+\pi\).
 
 The primary representation comprised eight radial second-harmonic descriptors and six axial descriptors (Supplementary Figure S2),
 
@@ -951,7 +951,7 @@ Across all held-out rows, the fold-local global baseline produced RMSEs of 0.300
 | Radius only | 0.287288 | 0.128729 |
 | Radius + \(R_2\) | **0.218161** | **0.127405** |
 
-The component-specific gains were strongly asymmetric. However, the rotation analysis in Section 4.8 shows that separate \(C_2\) and \(S_2\) errors are coordinate-dependent quantities and should not be interpreted as intrinsic differences between cosine-like and sine-like garment structure.
+The component-specific gains were strongly asymmetric. However, the rotation analysis in Section 4.8 of the main manuscript shows that separate \(C_2\) and \(S_2\) errors are coordinate-dependent quantities and should not be interpreted as intrinsic differences between cosine-like and sine-like garment structure.
 
 Because \(R_2\), \(C_2\), and \(S_2\) derive from the same conditional angular distribution, reconstruction remains a shared-source consistency diagnostic rather than recovery of an independent physical or semantic target.
 
