@@ -1,0 +1,130 @@
+{
+  "alignment_permutations": 2000,
+  "bootstrap_computed": true,
+  "bootstrap_replicates": 5000,
+  "classifier_fitted": true,
+  "clean_alignment_permutation": {
+    "balanced_accuracy": {
+      "empirical_p_one_sided": 0.6856571714142928,
+      "null_2_5": 0.030869565217391315,
+      "null_97_5": 0.061315217391304286,
+      "null_mean": 0.04624043478260866,
+      "null_sd": 0.0078005905593965625,
+      "observed": 0.042608695652173845
+    },
+    "macro_f1": {
+      "empirical_p_one_sided": 0.7226386806596702,
+      "null_2_5": 0.03243730171310904,
+      "null_97_5": 0.06272646320375617,
+      "null_mean": 0.04742269545489545,
+      "null_sd": 0.007776001957929436,
+      "observed": 0.04282663678767468
+    },
+    "self_mapped_fraction": 0.008695652173913044,
+    "self_mapped_rows": 20
+  },
+  "clean_identity_bootstrap": {
+    "balanced_accuracy": {
+      "bootstrap_mean": 0.04278222669962853,
+      "observed": 0.042608695652173845,
+      "percentile_2_5": 0.025639504072821798,
+      "percentile_97_5": 0.060861170899698724,
+      "positive_replicates": 5000,
+      "replicates": 5000
+    },
+    "macro_f1": {
+      "bootstrap_mean": 0.04291450329420636,
+      "observed": 0.04282663678767468,
+      "percentile_2_5": 0.025798186273095734,
+      "percentile_97_5": 0.060559155705799526,
+      "positive_replicates": 5000,
+      "replicates": 5000
+    }
+  },
+  "clean_repeated_partitions": {
+    "balanced_accuracy": {
+      "max": 0.038260869565217404,
+      "mean": 0.02817391304347827,
+      "min": 0.018695652173913058,
+      "positive_repeats": 10,
+      "sd": 0.00688306629012791
+    },
+    "macro_f1": {
+      "max": 0.0359100659669781,
+      "mean": 0.027676307318794186,
+      "min": 0.0202135788017917,
+      "positive_repeats": 10,
+      "sd": 0.0063928893589700895
+    }
+  },
+  "committed_execution_preflight_sha256": "ff739596eaf47b0d9614816171a8f1ffcd1235e0fc554e4d5fd7319847e83496",
+  "decision_rule_result": "CONFIRMATORY_POSITIVE_INCREMENT_SUPPORTED",
+  "estimator": {
+    "C": 1.0,
+    "class_weight": null,
+    "max_iter": 5000,
+    "penalty": "l2",
+    "random_state": 20260820,
+    "solver": "lbfgs"
+  },
+  "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
+  "input_hashes": {
+    "annotation_status_sha256": "b83b74b6ff0f25fa8bb4474265d2f06c900bbcd3243b2cc332152e3c74cde55e",
+    "feature_array_sha256": {
+      "clean_m135": "eccc922726a433f95bd235f61a5f591034cd012b6b67b3acea575ad00c1b3a8d",
+      "clean_ra14": "c233af755d9833c0a472490fd98b33a121083c647c0559e41bd5d673ce8ce9d4",
+      "raw_m135": "66ae04156ee3fbf3f2605f382a16fc41cf19af34b50e59dd43f6c9427d96b2ee",
+      "raw_ra14": "01ea6937783792d0d9295ca92db863d932db4b57f5ad4b61ca78a2c97eb88a3c"
+    },
+    "feature_manifest_sha256": "0340cb29cbb77f3561cb5897981a2ca96e4298f5c22919ac6b52d7a86dc91a87"
+  },
+  "output_sha256": {
+    "alignment": "c5652ba9b2663833dd0966635c06af0521ac8bca6676af8fb341bc8265cf11d0",
+    "annotation_impact": "d4b859b28f08ee39d895ffedf090568b47280af0f70aa60694a61356323d5021",
+    "bootstrap": "1eb05372b09b0fe090ae8a82e8821a8293f4f48944b87c6faf767a0b7bafbf41",
+    "fold_metrics": "0868cb45bc2473df1679215f7ff21d8795cc2fb3e6af32726c35e9b1f61688e7",
+    "oof_predictions": "762335635a63488e10aa37cbff3b3f6612c8c56e4196922e4e786f6cb5d334ff",
+    "pooled_metrics": "953cd9b49a209ea1b4b578e085096d2bcd45dbc4a5849c0abdd6242d8a438631",
+    "repeated": "bdd7c7f916f2d584b6e76ac99397ee08418eec87d44c26b60e44bf9553c90922"
+  },
+  "permutation_computed": true,
+  "prediction_computed": true,
+  "predictive_metric_computed": true,
+  "primary_condition": "CLEAN",
+  "primary_results": {
+    "CLEAN": {
+      "aug_balanced_accuracy": 0.31565217391304345,
+      "aug_macro_f1": 0.3142559792110737,
+      "condition": "CLEAN",
+      "delta_balanced_accuracy": 0.042608695652173845,
+      "delta_macro_f1": 0.04282663678767468,
+      "m_balanced_accuracy": 0.2730434782608696,
+      "m_macro_f1": 0.271429342423399
+    },
+    "RAW": {
+      "aug_balanced_accuracy": 0.3208695652173913,
+      "aug_macro_f1": 0.32122518118437415,
+      "condition": "RAW",
+      "delta_balanced_accuracy": 0.024347826086956514,
+      "delta_macro_f1": 0.025312807052534025,
+      "m_balanced_accuracy": 0.2965217391304348,
+      "m_macro_f1": 0.29591237413184013
+    }
+  },
+  "raw_condition_status": "diagnostic_only",
+  "repeated_partition_seeds": [
+    20260820,
+    20260821,
+    20260822,
+    20260823,
+    20260824,
+    20260825,
+    20260826,
+    20260827,
+    20260828,
+    20260829
+  ],
+  "repeated_partitions_computed": true,
+  "schema_version": 1,
+  "stage": "CORRECTIVE_OUTCOME_COMPLETE"
+}
