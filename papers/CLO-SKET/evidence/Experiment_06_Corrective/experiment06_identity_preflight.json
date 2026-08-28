@@ -1,0 +1,101 @@
+{
+  "authoritative_overrides": [
+    {
+      "corrected_fold_id": 4,
+      "corrected_garment_id": "Dress__G10",
+      "historical_fold_id": 0,
+      "historical_garment_id": "Dress__G01",
+      "relative_path": "Dress/1-3.tif"
+    },
+    {
+      "corrected_fold_id": 0,
+      "corrected_garment_id": "Harem__G02",
+      "historical_fold_id": 2,
+      "historical_garment_id": "Harem__G06",
+      "relative_path": "Harem/6-6.tif"
+    }
+  ],
+  "checks": {
+    "declared_preserved_imbalance_verified": true,
+    "no_predictive_analysis_performed": true,
+    "one_category_per_corrected_identity": true,
+    "one_fold_per_corrected_identity": true,
+    "row_indices_exactly_0_to_2299": true,
+    "ten_corrected_identities_per_category": true,
+    "two_corrected_identities_per_category_per_fold": true,
+    "unique_relative_paths": true,
+    "zero_corrected_identity_train_test_overlap_all_folds": true
+  },
+  "classifier_fitted": false,
+  "counts": {
+    "categories": 23,
+    "corrected_identities": 230,
+    "declared_overrides_applied": 2,
+    "folds": 5,
+    "rows": 2300
+  },
+  "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
+  "feature_matrix_generated": false,
+  "fold_summary": [
+    {
+      "fold": 0,
+      "overlapping_corrected_identities": 0,
+      "test_identities": 46,
+      "test_rows": 459,
+      "train_identities": 184,
+      "train_rows": 1841
+    },
+    {
+      "fold": 1,
+      "overlapping_corrected_identities": 0,
+      "test_identities": 46,
+      "test_rows": 460,
+      "train_identities": 184,
+      "train_rows": 1840
+    },
+    {
+      "fold": 2,
+      "overlapping_corrected_identities": 0,
+      "test_identities": 46,
+      "test_rows": 461,
+      "train_identities": 184,
+      "train_rows": 1839
+    },
+    {
+      "fold": 3,
+      "overlapping_corrected_identities": 0,
+      "test_identities": 46,
+      "test_rows": 460,
+      "train_identities": 184,
+      "train_rows": 1840
+    },
+    {
+      "fold": 4,
+      "overlapping_corrected_identities": 0,
+      "test_identities": 46,
+      "test_rows": 460,
+      "train_identities": 184,
+      "train_rows": 1840
+    }
+  ],
+  "inputs": {
+    "historical_row_map": "papers/CLO-SKET/evidence/Experiment_07/experiment07_row_map.csv",
+    "historical_row_map_sha256": "27d84a076afd69e96639388f6a1d576e0c8bc37169a915553e181b02a53f378f",
+    "identity_overrides": "papers/CLO-SKET/Codes_paper_I/Experiment_08/experiment08_identity_overrides.json",
+    "identity_overrides_sha256": "c4c30b04be44955ccccd90b9f49bfe2dcae47527f247b9c1475a9ede25d2c20f"
+  },
+  "outputs": {
+    "corrected_fold_summary": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrected_fold_summary.csv",
+    "corrected_fold_summary_sha256": "7d0df33b09f9e47857877003e7d59705d87e9b922a8cf21a2c8a9c4889bef0d7",
+    "corrected_identity_fold_map": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrected_identity_fold_map.csv",
+    "corrected_identity_fold_map_sha256": "82cda5ce42be46cb939bf15b50171d21c2b62df3d3e065eb8a32bc4e587cca3b",
+    "corrected_identity_map": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrected_identity_map.csv",
+    "corrected_identity_map_sha256": "c2510fb74b452da22d3b4e9badb46cfe4cbd2653c0ee99acb573942262c1ac2b"
+  },
+  "predictive_outcome_computed": false,
+  "preflight_passed": true,
+  "schema_version": 1,
+  "source_candidate_commit": "60063623eedde05ed7c351c3c947a605f6be5344",
+  "stage": "PRE_OUTCOME_IDENTITY_PREFLIGHT",
+  "stop": "PRE-OUTCOME STOP: identity/fold integrity only. No feature extraction, classifier fitting, prediction, metric, bootstrap, or permutation outcome computed."
+}
