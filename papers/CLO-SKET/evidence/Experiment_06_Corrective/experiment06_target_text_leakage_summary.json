@@ -1,0 +1,32 @@
+{
+  "affected_categories": [
+    "Cardigan",
+    "Tunic"
+  ],
+  "affected_category_count": 2,
+  "affected_corrected_identities": 2,
+  "affected_folds": [
+    0
+  ],
+  "annotation_status_sha256": "b83b74b6ff0f25fa8bb4474265d2f06c900bbcd3243b2cc332152e3c74cde55e",
+  "classifier_fitted": false,
+  "clean_images_modified": false,
+  "decision_rule": "CLEARED only if EXACT=0, PARTIAL_OR_ABBREVIATED=0, and AMBIGUOUS=0 across all 2,300 frozen CLEAN images.",
+  "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
+  "other_text_visible_rows": 0,
+  "population_reviewed": 2300,
+  "prediction_computed": false,
+  "predictive_metric_computed": false,
+  "review_csv_sha256": "eb8885613e8a32390a9bd9984ad284d0653b4dc9acdd540547797694af28eb12",
+  "review_status_counts": {
+    "AMBIGUOUS": 0,
+    "EXACT": 2,
+    "NONE": 2298,
+    "PARTIAL_OR_ABBREVIATED": 0
+  },
+  "schema_version": 1,
+  "stage": "POST_OUTCOME_TARGET_TEXT_LEAKAGE_AUDIT_COMPLETE",
+  "target_identifying_or_ambiguous_fraction": 0.0008695652173913044,
+  "target_identifying_or_ambiguous_rows": 2,
+  "target_text_leakage_cleared": false
+}
