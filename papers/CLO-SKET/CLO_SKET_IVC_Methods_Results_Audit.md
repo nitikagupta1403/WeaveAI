@@ -27,12 +27,12 @@ This audit checks whether each manuscript-facing result has a corresponding pres
 
 | Result family | Methods specification | Audit |
 |---|---|---|
-| 14-D representation = 8 radial + 6 axial coordinates | §§3.8–3.10 | PASS |
-| 72 radial bins and 72 angular bins; 25-shell primary domain 3.5–27.5 | §§3.3, 3.7 | PASS |
-| Rigid-image rotations at ±5°, ±10°, ±20° and 0° | §3.4 | PASS |
-| Second-harmonic axial convention and doubled-angle encoding | §§3.5–3.6, 3.9 | PASS |
-| Garment-identity-disjoint C2/S2 reconstruction | §3.17 | PASS |
-| Analytic/global and identity-randomized rotation controls | §3.18 | PASS |
+| 14-D representation = 8 radial + 6 axial coordinates | §§3.7–3.9 | PASS |
+| 72 radial bins and 72 angular bins; 25-shell primary domain 3.5–27.5 | §§3.3, 3.6 | PASS |
+| Rigid-image rotations at ±5°, ±10°, ±20° and 0° | §3.10 | PASS |
+| Second-harmonic axial convention and doubled-angle encoding | §§3.4–3.5, 3.8 | PASS |
+| Garment-identity-disjoint C2/S2 reconstruction | §3.18 | PASS |
+| Analytic/global and identity-randomized rotation controls | §3.19 | PASS |
 | Parameter/discretization sensitivity | subsequent Methods sensitivity sections | PASS |
 | Low-order harmonic control m∈{1,2,3,4} | low-order harmonic control section | PASS |
 | Phase-conditioning analysis | phase-conditioning section | PASS |

@@ -10,11 +10,8 @@ SECTIONS = [
     "CLO_SKET_IVC_Introduction.md",
     "CLO_SKET_IVC_Related_Work.md",
     "CLO_SKET_IVC_Methods.md",
-    "CLO_SKET_IVC_Methods_Experiment_07.md",
     "CLO_SKET_IVC_Results.md",
-    "CLO_SKET_IVC_Results_Experiment_07.md",
     "CLO_SKET_IVC_Discussion.md",
-    "CLO_SKET_IVC_Discussion_Experiment_07.md",
     "CLO_SKET_IVC_Conclusion.md",
 ]
 
@@ -26,7 +23,7 @@ Independent Researcher, Hyderabad, Telangana, India
 
 Corresponding author: Nitika Gupta, nitikashimla14@gmail.com
 
-> **Source-of-truth rule:** the files listed in `SECTIONS` above are the canonical IVC scientific sources. `CLO_SKET_IVC_Manuscript.md` is generated from them and should not be edited independently. Legacy `CLO_SKET_Final_*`, `CLO_SKET_IVC_Main.md`, and files under `Reserve/` are retained only for provenance and comparison.
+> **Source-of-truth rule:** the files listed in `SECTIONS` above are the canonical IVC scientific sources. `CLO_SKET_IVC_Manuscript.md` is generated from them and should not be edited independently. Legacy `CLO_SKET_Final_*`, `CLO_SKET_IVC_Main.md`, the standalone `CLO_SKET_IVC_*_Experiment_07.md` fragments, and files under `Reserve/` are retained only for provenance and comparison.
 
 '''
 

@@ -62,7 +62,17 @@ The important methodological point is broader: an increase after feature concate
 
 ---
 
-## 5.4 The second harmonic as an explicit axial measurement
+## 5.4 Interpretation of the conventional HOG comparator
+
+Experiment 07 sharpens the scope of the main predictive claim. The compact axial–radial representation produced a clear increment over the frozen 135-dimensional morphology baseline in Experiment 06, but it produced only a negligible point increase when appended to an 8,100-dimensional HOG descriptor. The paired garment-identity bootstrap interval for the HOG+RA14-minus-HOG macro-F1 contrast crossed zero, as did the corresponding balanced-accuracy interval. The present evidence therefore does not support describing RA14 as a general-purpose accuracy booster across feature families.
+
+Instead, the combined experiments support **representation-dependent complementarity**. The explicit radial–axial coordinates contain category-discriminative structure not fully exploited by the morphology baseline, while much of that same predictive structure appears already encoded by the higher-dimensional gradient representation. This is compatible with the role of HOG: local gradient histograms provide a dense description of edge orientation and spatial shape, whereas RA14 compresses a targeted second-harmonic radial–axial measurement into only 14 interpretable coordinates.
+
+The HOG result also clarifies the contribution of the study. The axial–radial representation is not claimed to outperform a conventional image descriptor in raw classification accuracy. Its value lies in providing a compact and mathematically explicit measurement of where second-harmonic organization occurs radially, how strong it is, and how its axial orientation behaves under controlled transformations, together with an identity-aware validation framework that distinguishes predictive utility from stronger alignment claims.
+
+Accordingly, Experiment 06 and Experiment 07 should be read together. Experiment 06 establishes reproducible incremental value relative to the prespecified morphology representation but does not support garment-specific alignment. Experiment 07 shows that this increment is largely redundant with a high-dimensional HOG descriptor. The scientifically supported conclusion is therefore narrower than universal feature complementarity and stronger than a purely descriptive geometry result: the radial–axial representation is an interpretable, compact measurement whose downstream incremental value depends on the baseline information already available.
+
+## 5.5 The second harmonic as an explicit axial measurement
 
 The predictive experiment sits within a representation whose geometric meaning is defined independently of category performance. For each radial shell,
 
@@ -111,7 +121,7 @@ The representation is geometric rather than semantic. A high \(R_2\) does not id
 
 ---
 
-## 5.5 Algebraic dependence and representation discipline
+## 5.6 Algebraic dependence and representation discipline
 
 A central design principle was to keep deterministic relationships separate from empirical evidence. In particular,
 
@@ -133,7 +143,7 @@ These choices matter for interpretation of Experiment 06. The observed gain is n
 
 ---
 
-## 5.6 Transformation behavior and the role of the canonical image frame
+## 5.7 Transformation behavior and the role of the canonical image frame
 
 The representation contains both invariant and equivariant quantities under rigid in-plane rotation. For a physical rotation by \(\phi\),
 
@@ -159,7 +169,7 @@ Thus, radius and \(R_2\) do not intrinsically determine harmonic phase. Strong p
 
 ---
 
-## 5.7 Garment identity defines the internal generalization target
+## 5.8 Garment identity defines the internal generalization target
 
 CLO-SKET contains repeated drawings of common source garments. Treating all 2,300 sketches as independent would therefore overstate the effective independence of the dataset and could allow different renderings of the same garment to occur in both training and test sets.
 
@@ -173,7 +183,7 @@ The identity labels themselves were reconstructed from filename and category str
 
 ---
 
-## 5.8 Reconstruction is a consistency experiment, not independent target prediction
+## 5.9 Reconstruction is a consistency experiment, not independent target prediction
 
 The earlier reconstruction analysis remains useful, but its role is secondary to the incremental-representation experiment. It asks whether the Cartesian harmonic components \(C_2\) and \(S_2\) can be statistically reconstructed from radius and observed magnitude \(R_2\) under identity-disjoint validation.
 
@@ -193,7 +203,7 @@ This distinction also explains why reconstruction and Experiment 06 answer diffe
 
 ---
 
-## 5.9 Robustness is stronger for broad radial summaries than localized coordinates
+## 5.10 Robustness is stronger for broad radial summaries than localized coordinates
 
 The sensitivity analyses reveal a consistent hierarchy of numerical robustness. Integrated magnitude, radial centroid, and radial spread were comparatively stable across changes in radial domain and discretization. Localized descriptors—particularly peak radius, onset, termination, and concentration—were more dependent on analysis boundaries and resolution.
 
@@ -207,7 +217,7 @@ Accordingly, the 14-dimensional representation is best regarded as a reproducibl
 
 ---
 
-## 5.10 Harmonic magnitude conditions axial uncertainty
+## 5.11 Harmonic magnitude conditions axial uncertainty
 
 The observed relationship between harmonic magnitude and axial reconstruction error has a direct perturbation-theoretic explanation. For
 
@@ -247,7 +257,7 @@ This provides an explanatory geometric account of the magnitude–error associat
 
 ---
 
-## 5.11 Inferential scope
+## 5.12 Inferential scope
 
 The analysis deliberately separates mathematical identities, descriptive patterns, uncertainty estimates, and permutation-based hypothesis tests.
 
@@ -261,7 +271,7 @@ No result in the study establishes information-theoretic independence between mo
 
 ---
 
-## 5.12 Scientific contribution
+## 5.13 Scientific contribution
 
 The individual mathematical tools used here—polar coordinates, Fourier moments, axial statistics, regularized classification, bootstrap resampling, and permutation testing—are established. The contribution lies in assembling them into an auditable representation-and-validation framework for sparse garment sketches and then testing progressively stronger interpretations of that representation.
 
@@ -279,7 +289,7 @@ This claim boundary is itself part of the methodological contribution. The study
 
 ---
 
-## 5.13 Limitations
+## 5.14 Limitations
 
 Several limitations constrain interpretation.
 
@@ -303,7 +313,7 @@ Finally, no garment-part annotations, independent physical measurements, causal 
 
 ---
 
-## 5.14 Future work
+## 5.15 Future work
 
 The most important next step is external validation on independently curated garment-sketch collections with explicit garment, designer, and collection identifiers. The 14-dimensional representation, morphology baseline, estimator, and evaluation protocol should be fixed before examining those data.
 
