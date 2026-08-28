@@ -1,0 +1,68 @@
+{
+  "classifier_fitted": false,
+  "environment": {
+    "implementation": "CPython",
+    "machine": "arm64",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "pillow": "11.3.0",
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.13",
+    "scikit_learn": "1.6.1",
+    "scipy": "1.15.1"
+  },
+  "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
+  "feature_artifact_file_sha256": {
+    "clean_m135": "5174c89253a15db8cfee651725df542390a64765a85b32c8138506cb37d994cf",
+    "clean_ra14": "7f1f9ccb68e9604659b8899a1b4f8067e29b9f6bc2d0f49d2356f3b523e8c35e",
+    "feature_manifest": "0340cb29cbb77f3561cb5897981a2ca96e4298f5c22919ac6b52d7a86dc91a87",
+    "raw_m135": "f202d5b05524686815480539488ecd5c5fafbe9e89a51dfe50ff03b00c43fb92",
+    "raw_ra14": "2e9b7d6ddd144c6b85b66cd44ae60cbb72c84f0029e8f50afff77a833edbd033"
+  },
+  "feature_matrix_generated": true,
+  "implementation_source_sha256": {
+    "annotation_preflight_code": "a3d0119fda318f8d5a2bba67f16779b31cd0086a52bfb6a5f0f218fd763b37ff",
+    "core_ra14_notebook": "c30683b2000b88ef6cad13d4eb35f1da9a709dc7c525fcba3ca3029e211fd848",
+    "corrective_outcome_runner": "26a7f63db8c44a537af937fe9a2c4c08177e2fb87b328114c0502fddaf8730c1",
+    "execution_implementation_lock": "6852f4a9ebdee872894c90fc3c745b32993f96131ee980f1cbff214d8a14b4d1",
+    "execution_preflight_code": "3e9d09434a8eedc83787ac2206bacfb147e33c7e74adb9ab5d3216e0519e0c0b",
+    "historical_e06_evidence_record": "fe27d13384645c5fb246169d300061f6258b8d84ec3e41f73bc79d4822021bcf",
+    "historical_m135_definition_lock": "fe50dc835eb427639d3e5277793f61363407373aa062278eb16b6b68ba10cc28",
+    "identity_builder": "32595b89a2585fd29596528b9693a13190602cb027c7f943d836f19d468ea165",
+    "prospective_lock": "58d4ca260cdbd45449bed81e2147dd85e28f6a6fa34541c3ee3740106cd63e85",
+    "raw_clean_feature_extractor": "d7d43d9279dd8c5b758ab00921d52f1e1a8bd4adc6c1149588bd162ac87d1b12"
+  },
+  "missing_feature_artifacts": [],
+  "missing_required_implementation": [],
+  "outcome_execution_unlocked": true,
+  "predictive_outcome_computed": false,
+  "preflight_passed": true,
+  "prerequisite_checks": {
+    "annotation_control_preflight_passed": true,
+    "annotation_status_hash_locked": true,
+    "corrected_fold_summary_hash_locked": true,
+    "corrected_identity_fold_map_hash_locked": true,
+    "corrected_identity_map_hash_locked": true,
+    "corrected_test_row_counts_verified": true,
+    "feature_manifest_no_classifier": true,
+    "feature_manifest_no_metric": true,
+    "feature_manifest_no_prediction": true,
+    "feature_manifest_outcome_locked": true,
+    "feature_manifest_present": true,
+    "historical_raw_m135_exact_match": true,
+    "historical_raw_ra14_exact_match": true,
+    "row_order_consistent": true,
+    "zero_corrected_identity_overlap": true
+  },
+  "prerequisite_hashes": {
+    "annotation_control_preflight_sha256": "b5ee8032cb075ec8c03daf3fa95faf9c0a24df1a5b1a502e4191b2c8d907561f",
+    "annotation_status_sha256": "b83b74b6ff0f25fa8bb4474265d2f06c900bbcd3243b2cc332152e3c74cde55e",
+    "corrected_fold_summary_sha256": "7d0df33b09f9e47857877003e7d59705d87e9b922a8cf21a2c8a9c4889bef0d7",
+    "corrected_identity_fold_map_sha256": "82cda5ce42be46cb939bf15b50171d21c2b62df3d3e065eb8a32bc4e587cca3b",
+    "corrected_identity_map_sha256": "c2510fb74b452da22d3b4e9badb46cfe4cbd2653c0ee99acb573942262c1ac2b"
+  },
+  "schema_version": 2,
+  "source_candidate_commit": "60063623eedde05ed7c351c3c947a605f6be5344",
+  "stage": "PRE_OUTCOME_EXECUTION_IMPLEMENTATION_PREFLIGHT",
+  "stop": "PRE-OUTCOME STOP: implementation/provenance/hash inspection only. Frozen feature matrices already exist, but no classifier fitting, prediction, predictive metric, bootstrap, repeated partition, or alignment permutation was computed by this preflight."
+}
