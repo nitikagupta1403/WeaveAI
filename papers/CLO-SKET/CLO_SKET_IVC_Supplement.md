@@ -23,7 +23,7 @@ R_{2,i}(r_j)
 =
 \left[
 r_j,\,
-|F_{2,i}(r_j)|
+\lvert F_{2,i}(r_j)\rvert
 \right].
 \]
 
@@ -381,7 +381,7 @@ For each \(m\), the following descriptive quantities were calculated:
 \[
 R_m(r)
 =
-|F_m(r)|,
+\lvert F_m(r)\rvert,
 \]
 
 integrated radial harmonic magnitude,
@@ -444,7 +444,7 @@ S_2\,dC_2
 By the Cauchy--Schwarz inequality,
 
 \[
-|C_2\,dS_2-S_2\,dC_2|
+\lvert C_2\,dS_2-S_2\,dC_2\rvert
 \leq
 R_2
 \sqrt{
@@ -455,7 +455,7 @@ dC_2^2+dS_2^2
 giving
 
 \[
-|d\alpha_2|
+\lvert d\alpha_2\rvert
 \leq
 \frac{
 \sqrt{
@@ -659,9 +659,9 @@ p
 \sum_{b=1}^{B}
 \mathbf 1
 \left(
-|T_b|
+\lvert T_b\rvert
 \geq
-|T_{\mathrm{obs}}|
+\lvert T_{\mathrm{obs}}\rvert
 \right)
 }{
 B+1
@@ -790,7 +790,7 @@ r=3.5,4.5,\ldots,27.5.
 
 The construction from a representative sketch to the centroid-relative polar field, conditional angular distribution, second-harmonic magnitude, and axial orientation is illustrated in Supplementary Figure S1.
 
-![Supplementary Figure S1. Radial–angular construction and second-harmonic interpretation.](figures/Figure_1_Radial_Angular_Construction.png)
+![](figures/Figure_1_Radial_Angular_Construction.png)
 
 **Supplementary Figure S1. Radial–angular construction and second-harmonic interpretation.** The upper schematic contrasts the first three angular harmonics and highlights the two-fold second harmonic used here for axial orientation, together with the definitions of \(F_m(r)\), \(R_2(r)\), and \(\alpha_2(r)\). (A) Representative CLO-SKET sketch with intensity-weighted centroid. (B) Centroid-relative polar geometry used to accumulate foreground intensity by radius and angle. (C) Conditional angular distribution \(p(\theta\mid r)\). (D) Second-harmonic magnitude \(R_2(r)=|F_2(r)|\); the shaded interval marks the 25-shell primary radial domain \(r=3.5,\ldots,27.5\), and the selected observed peak shell is marked. (E) Axial orientation \(\alpha_2(r)\) over the primary domain. The second harmonic represents axial orientation because \(\alpha\equiv\alpha+\pi\).
 
@@ -809,7 +809,7 @@ The primary representation comprised eight radial second-harmonic descriptors an
 
 The resulting matrix had dimensions \(2300\times14\), contained only finite values, and exactly matched an independently reconstructed \(8+6\) concatenation, with maximum absolute difference zero.
 
-![Supplementary Figure S2. Fourteen-dimensional axial–radial representation (RA14).](figures/Figure_2_Provenance_Locked_14D_Representation.png)
+![](figures/Figure_2_Provenance_Locked_14D_Representation.png)
 
 **Supplementary Figure S2. Fourteen-dimensional axial–radial representation (RA14).** The radial block comprises integrated second-harmonic magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. The axial block represents peak and magnitude-weighted mean orientations through doubled-angle cosine/sine coordinates together with axial coherence and orientation drift. Radial extent is excluded because it is exactly termination radius minus onset radius.
 
@@ -852,7 +852,7 @@ The median normalized mean absolute errors were:
 
 The perturbation was smallest near the reference orientation and increased modestly toward the largest tested rotations, consistent with interpolation and finite-bin effects rather than exact raster-level invariance. Supplementary Figure S3 summarizes this rigid-rotation control.
 
-![Supplementary Figure S3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).](figures/Figure_3_Rigid_Rotation_Control.png)
+![](figures/Figure_3_Rigid_Rotation_Control.png)
 
 **Supplementary Figure S3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).**
 (A) The same canonical sketch under three raster-rotation conditions. The raw Pillow argument is \(\beta\), while the corresponding native measurement-coordinate increment is \(\phi=-\beta\). (B) Stability of the primary-domain second-harmonic radial-magnitude profile, summarized by the median and 95th-percentile normalized mean absolute error relative to the \(0^\circ\) reference. (C) Axial orientation equivariance. Recovered shifts in peak and magnitude-weighted axial orientation closely followed the ideal \(\Delta\alpha=\phi\) relation when expressed in the measurement-coordinate convention; across the tested rotations, the maximum 95th-percentile transformation errors were \(4.87^\circ\) and \(0.85^\circ\), respectively. (D) Absolute changes in the intended rotation-invariant directional scalars. Axial coherence remained numerically stable, whereas orientation drift showed small median changes but a wider upper-tail response. Together, the control supports the intended invariant/equivariant organization of the representation over the evaluated rigid rotations without implying exact raster-level invariance or robustness outside the tested perturbations.
@@ -1033,7 +1033,7 @@ Median peak-shell axial error was
 
 The proportion with error at or below \(15^\circ\) was 78.17% (75.77%–80.60%), the proportion between \(15^\circ\) and \(45^\circ\) was 6.13% (5.13%–7.17%), and the proportion above \(45^\circ\) was 15.70% (13.50%–17.95%). Supplementary Figure S4 summarizes the identity-disjoint reconstruction results.
 
-![Supplementary Figure S4. Garment-identity-disjoint reconstruction validation.](figures/Figure_4_Identity_Disjoint_Reconstruction_Validation.png)
+![](figures/Figure_4_Identity_Disjoint_Reconstruction_Validation.png)
 
 **Supplementary Figure S4. Garment-identity-disjoint reconstruction validation.**
 (A) Observed versus reconstructed \(R_2\) over all 57,500 held-out sketch-shell rows (RMSE 0.145610; Pearson \(r=0.926390\)). (B) Observed versus reconstructed \(R_2\) at each sketch's observed peak shell (\(n=2,300\); RMSE 0.148303; Pearson \(r=0.810543\)). (C) Axial reconstruction error at the observed peak shell; the dashed line marks the median \(4.104^\circ\). (D) The five category-balanced folds withheld complete recovered garment identities, with 184 training identities, 46 test identities, all 23 categories represented in every test fold, and zero train/test identity overlap.
@@ -1278,7 +1278,7 @@ C_2\,dS_2-S_2\,dC_2
 with the bound
 
 \[
-|d\alpha_2|
+\lvert d\alpha_2\rvert
 \le
 \frac{
 \sqrt{dC_2^2+dS_2^2}
@@ -1362,13 +1362,13 @@ These results are consistent with the expected conditioning geometry of phase es
 
 Supplementary Figure S5 summarizes the association between second-harmonic organization and axial reconstruction error.
 
-![Supplementary Figure S5. Association between second-harmonic organization and axial reconstruction error.](figures/Figure_5_Garment_Identity_Inference.png)
+![](figures/Figure_5_Garment_Identity_Inference.png)
 
 **Supplementary Figure S5. Association between second-harmonic organization and axial reconstruction error.** (A) Across 230 garment-identity medians, observed peak-shell \(R_2\) was negatively associated with axial reconstruction error (Spearman \(\rho=-0.355875\), 95% garment-cluster bootstrap CI \([-0.455749,-0.248336]\), Holm-adjusted \(p=0.000200\)). (B) Selected peak radius showed a weaker, secondary association (\(\rho=-0.207675\), 95% CI \([-0.322472,-0.095626]\), Holm-adjusted \(p=0.030097\)); interpretation is sensitivity-qualified because peak location depends on the finite radial domain. (C) Garment-identity quartiles show decreasing median axial error with increasing peak \(R_2\). (D) Across four tested sketch-level low/high axial-error threshold pairs, the low-error group had higher median peak \(R_2\) in every comparison; threshold groups are descriptive rather than prospective reliability classes.
 
 Supplementary Figure S6 summarizes the identity-aware uncertainty and category-stratified permutation analyses.
 
-![Supplementary Figure S6. Identity-aware uncertainty and category-stratified permutation inference.](figures/Figure_6_Bootstrap_Permutation_Inference.png)
+![](figures/Figure_6_Bootstrap_Permutation_Inference.png)
 
 **Supplementary Figure S6. Garment-identity-aware uncertainty and category-stratified permutation inference for the two garment-level association tests.** (A,C) Garment-cluster bootstrap distributions from 5,000 replicates for the peak-shell \(R_2\) and selected peak-radius Spearman associations; dashed lines mark percentile 95% intervals and solid lines the observed statistics. (B,D) Null distributions from 10,000 permutations performed within garment category, with observed statistics marked. Because permutations were restricted within category, the conditional null distributions need not be centered at zero; the procedure preserves category structure while breaking within-category identity-level correspondence.
 
