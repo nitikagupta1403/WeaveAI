@@ -229,12 +229,41 @@ def main() -> None:
     overlap_flags = [as_bool(v) for v in preprocessing["ambiguous_overlap"]]
     overlap_count = sum(overlap_flags)
 
-    # The frozen E08 review design contained 928 reviewed records. The remainder was
-    # retained through the frozen automatic/QC localization path. We infer reviewer
-    # status only from the already-frozen selection/localization metadata; no new
-    # image-content decision is made here.
-    reviewed_mask = preprocessing["selection_cohort"].astype(str).str.len() > 0
+    # Reviewer status is determined only from the frozen localization provenance.
+    # In the original pre-outcome E08 manifest:
+    #   human_reviewed       = 628 mandatory + 300 QC = 928
+    #   automatic_qc_accepted = 1372 automatic-remainder rows
+    # Every row has a non-empty selection_cohort, so selection_cohort non-emptiness
+    # must NOT be used to identify reviewed records.
+    reviewed_mask = (
+        preprocessing["localization_source"].astype(str) == "human_reviewed"
+    )
     reviewed_count = int(reviewed_mask.sum())
+
+    cohort_counts = preprocessing["selection_cohort"].astype(str).value_counts().to_dict()
+    localization_counts = (
+        preprocessing["localization_source"].astype(str).value_counts().to_dict()
+    )
+
+    expected_cohorts = {
+        "mandatory": 628,
+        "quality_control": 300,
+        "automatic_remainder": 1372,
+    }
+    expected_localization = {
+        "human_reviewed": 928,
+        "automatic_qc_accepted": 1372,
+    }
+
+    if cohort_counts != expected_cohorts:
+        raise RuntimeError(
+            f"Frozen selection-cohort counts mismatch: {cohort_counts} != {expected_cohorts}"
+        )
+    if localization_counts != expected_localization:
+        raise RuntimeError(
+            "Frozen localization-source counts mismatch: "
+            f"{localization_counts} != {expected_localization}"
+        )
 
     if reviewed_count != EXPECTED_REVIEWED_IMAGES:
         raise RuntimeError(

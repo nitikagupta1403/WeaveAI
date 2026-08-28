@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
+  "stage": "PRE_OUTCOME_ANNOTATION_CONTROL_PREFLIGHT",
+  "source_candidate_commit": "60063623eedde05ed7c351c3c947a605f6be5344",
+  "policy": "Reuse the frozen Experiment-08 preprocessing/materialization v4 exactly; no new annotation-control choice is made after historical Experiment-06 outcomes.",
+  "counts": {
+    "rows": 2300,
+    "categories": 23,
+    "corrected_identities": 230,
+    "human_reviewed_images": 928,
+    "automatic_remainder_after_frozen_qc": 1372,
+    "images_with_reviewed_annotation_boxes": 582,
+    "reviewed_text_boxes": 593,
+    "ambiguous_geometric_overlaps": 22
+  },
+  "checks": {
+    "corrected_identity_map_hash_locked": true,
+    "preprocessing_manifest_hash_locked": true,
+    "materialized_manifest_hash_locked": true,
+    "row_order_and_paths_identical": true,
+    "all_2300_clean_images_present": true,
+    "all_png_hashes_verified": true,
+    "all_pixel_hashes_verified": true,
+    "ordered_pixel_array_hash_verified": true,
+    "no_feature_extraction_performed": true,
+    "no_classifier_fitted": true,
+    "no_predictive_outcome_computed": true
+  },
+  "inputs": {
+    "corrected_identity_map": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_corrected_identity_map.csv",
+    "corrected_identity_map_sha256": "c2510fb74b452da22d3b4e9badb46cfe4cbd2653c0ee99acb573942262c1ac2b",
+    "preprocessing_manifest": "/Users/nitikagupta/Research/experiment08_preprocessing_freeze/experiment08_preprocessing_manifest.csv",
+    "preprocessing_manifest_sha256": "c464feafbb382c8e9d111433047298d8f42e1c661e018735e3df0b6016eaff4d",
+    "materialized_manifest": "/Users/nitikagupta/Research/experiment08_materialized_v4/experiment08_materialized_images.csv",
+    "materialized_manifest_sha256": "071ee7b6c535361951f9eb0044ff166c9a4d42b0ef55a3c0a72aab27af2af6a4",
+    "ordered_pixel_array_sha256": "30006ee3661f18b4cc3925c753c2ada6e3eb6ea7bf7f56326e5edf7cb7be5703"
+  },
+  "output": {
+    "annotation_status": "papers/CLO-SKET/evidence/Experiment_06_Corrective/experiment06_annotation_status.csv",
+    "annotation_status_sha256": "b83b74b6ff0f25fa8bb4474265d2f06c900bbcd3243b2cc332152e3c74cde55e"
+  },
+  "feature_matrix_generated": false,
+  "classifier_fitted": false,
+  "predictive_outcome_computed": false,
+  "preflight_passed": true,
+  "stop": "PRE-OUTCOME STOP: annotation-control provenance and clean-image integrity only. No RA14/morphology feature extraction, classifier fitting, prediction, metric, bootstrap, permutation, or annotation-sensitivity outcome computed."
+}
