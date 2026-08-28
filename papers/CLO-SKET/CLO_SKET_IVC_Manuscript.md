@@ -897,13 +897,21 @@ The eight radial and six axial coordinates were concatenated in the order define
 
 Before testing predictive value, we examined how the completed 14-dimensional representation behaves when the input sketch itself is rigidly rotated and the full radial–angular measurement is recomputed. This image-domain perturbation complements the later analytic coordinate-frame controls by testing the representation after image interpolation, padding, and complete remeasurement. The control is descriptive; the separate prospectively gated mechanical audit is reported in Section 3.18.
 
-All 2,300 sketches were evaluated at the physical rotation angles
+All 2,300 sketches were evaluated using Pillow raster rotation arguments
 
 \[
-\phi
+\beta
 \in
 \{-20^\circ,-10^\circ,-5^\circ,0^\circ,5^\circ,10^\circ,20^\circ\}.
 \]
+
+The value \(\beta\) was passed directly to `PIL.Image.rotate`. The radial–angular measurement itself uses native image coordinates in which pixel row increases downward. Consequently, the angular increment in the measurement coordinate system has the opposite sign,
+
+\[
+\phi=-\beta.
+\]
+
+The transformation equations below are written in terms of this measurement-coordinate increment \(\phi\). Equivalently, a positive Pillow raster angle \(\beta\) produces an ideal axial shift of \(-\beta\) in the native image-coordinate angular convention.
 
 This control was label-free and did not fit or refit any predictive model.
 
@@ -935,7 +943,7 @@ The \(0^\circ\) condition used the same padded canvas without interpolation.
 
 After rotation, the complete radial-angular construction was rerun from the rotated grayscale image using the same frozen measurement procedure as for the primary representation. No descriptor definition, radial domain, angular discretization, or post-processing rule was changed for the rotation control.
 
-For second-harmonic magnitude, a rigid physical rotation ideally satisfies
+Writing the transformation in terms of the measurement-coordinate increment \(\phi=-\beta\), the second harmonic ideally satisfies
 
 \[
 F_2'(r)
@@ -996,7 +1004,7 @@ and orientation drift,
 
 were treated as rotation-invariant scalar descriptors because they depend on relative rather than absolute axial orientation.
 
-Numerical stability of the radial-magnitude field was summarized by the normalized mean absolute error of the primary-domain \(R_2(r)\) profile relative to the \(0^\circ\) reference. Axial equivariance was evaluated by decoding the rotated doubled-angle orientation pairs and comparing the observed orientation shift with the imposed physical rotation. Coherence and orientation drift were evaluated by their absolute changes from the reference condition.
+Numerical stability of the radial-magnitude field was summarized by the normalized mean absolute error of the primary-domain \(R_2(r)\) profile relative to the \(0^\circ\) reference. Axial equivariance was evaluated by decoding the rotated doubled-angle orientation pairs and comparing the observed orientation shift with the expected measurement-coordinate increment \(\phi=-\beta\). Coherence and orientation drift were evaluated by their absolute changes from the reference condition.
 
 The rotation control therefore characterizes empirical behavior over the tested angle range. Exact transformation behavior is examined separately by the analytic and prospectively gated controls described later.
 
@@ -1434,7 +1442,7 @@ An earlier rigid-image rotation control recomputed the full representation after
 
 ![Figure 3. Rigid-rotation control of the CLO-SKET radial–angular representation.](figures/Figure_3_Rigid_Rotation_Control.png)
 
-**Figure 3. Rigid-rotation control of the CLO-SKET radial–angular representation.** (A) The same canonical sketch after rigid raster rotations of \(-20^\circ\), \(0^\circ\), and \(+20^\circ\). (B) Stability of the primary-domain second-harmonic radial-magnitude profile relative to the \(0^\circ\) reference. (C) Peak and magnitude-weighted axial orientations follow the expected \(\Delta\alpha=\phi\) transformation over the tested range. (D) Axial coherence remains numerically stable, while orientation drift shows small median changes with a wider upper-tail response. This earlier control is descriptive; the separately prospectively gated Experiment-08 mechanical audit is reported in Section 4.10.
+**Figure 3. Rigid-rotation control of the CLO-SKET radial–angular representation.** (A) The same canonical sketch under three raster-rotation conditions. The raw Pillow rotation argument is denoted \(\beta\), while the corresponding angular increment in the native image-coordinate measurement is \(\phi=-\beta\) (Methods, Section 3.10). (B) Stability of the primary-domain second-harmonic radial-magnitude profile relative to the \(0^\circ\) reference. (C) Peak and magnitude-weighted axial orientations follow the expected \(\Delta\alpha=\phi\) transformation when expressed in the measurement-coordinate convention. (D) Axial coherence remains numerically stable, while orientation drift shows small median changes with a wider upper-tail response. This earlier control is descriptive; the separately prospectively gated Experiment-08 mechanical audit is reported in Section 4.10.
 
 Analytic coordinate-frame controls separated intrinsic behavior from the orientation of the common image axes. Global rotations of the complete harmonic field left coordinate-free reconstruction metrics essentially unchanged: across \(0^\circ,22.5^\circ,45^\circ,67.5^\circ,\) and \(90^\circ\), vector RMSE varied by only 0.000103 and median peak-shell axial error by \(0.0556^\circ\). At \(45^\circ\), the \(C_2\) and \(S_2\) component errors exchanged to numerical precision, confirming that their apparent asymmetry is coordinate-dependent. In contrast, assigning an independent physical rotation to each recovered garment identity drove median axial reconstruction error to \(44.675^\circ\), close to the \(45^\circ\) expectation for unrelated axial orientations. Radius and \(R_2\) therefore do not determine phase by themselves; the strong upright-data phase reconstruction depends substantially on population-level orientation relative to the common image frame.
 
@@ -1677,7 +1685,7 @@ The same discipline applies algebraically. \(R_2=\sqrt{C_2^2+S_2^2}\) is an iden
 
 ## 5.6 Transformation behaviour separates intrinsic structure from coordinate-frame structure
 
-Under an ideal physical rotation by \(\phi\),
+Writing rotation in terms of the measurement-coordinate increment \(\phi\) defined in Methods (\(\phi=-\beta\) for raw Pillow raster angle \(\beta\)), the ideal transformation is
 
 \[
 F_2'(r)=e^{-i2\phi}F_2(r),

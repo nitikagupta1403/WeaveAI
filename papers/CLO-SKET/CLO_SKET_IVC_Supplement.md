@@ -75,7 +75,7 @@ Two complementary rotation controls evaluated the dependence of reconstruction o
 
 ### SM2.1 Analytic harmonic rotation
 
-For a physical image rotation by angle \(\phi\),
+Let \(\beta\) denote the raw Pillow raster-rotation argument. Because the measurement uses native image coordinates with pixel row increasing downward, the corresponding angular increment is \(\phi=-\beta\). Written in terms of \(\phi\), the analytic transformation is
 
 \[
 \theta'
@@ -855,13 +855,13 @@ The perturbation was smallest near the reference orientation and increased modes
 ![Supplementary Figure S3. Rigid-rotation control of the CLO-SKET radial–angular representation.](figures/Figure_3_Rigid_Rotation_Control.png)
 
 **Supplementary Figure S3. Rigid-rotation control of the CLO-SKET radial–angular representation.**
-(A) The same canonical sketch after rigid raster rotations of \(-20^\circ\), \(0^\circ\), and \(+20^\circ\), illustrating the image-domain perturbation applied in the control. (B) Stability of the primary-domain second-harmonic radial-magnitude profile, summarized by the median and 95th-percentile normalized mean absolute error relative to the \(0^\circ\) reference. (C) Axial orientation equivariance. Recovered shifts in peak and magnitude-weighted axial orientation closely followed the ideal \(\Delta\alpha=\phi\) relation; across the tested rotations, the maximum 95th-percentile transformation errors were \(4.87^\circ\) and \(0.85^\circ\), respectively. (D) Absolute changes in the intended rotation-invariant directional scalars. Axial coherence remained numerically stable, whereas orientation drift showed small median changes but a wider upper-tail response. Together, the control supports the intended invariant/equivariant organization of the representation over the evaluated rigid rotations without implying exact raster-level invariance or robustness outside the tested perturbations.
+(A) The same canonical sketch under three raster-rotation conditions. The raw Pillow argument is \(\beta\), while the corresponding native measurement-coordinate increment is \(\phi=-\beta\). (B) Stability of the primary-domain second-harmonic radial-magnitude profile, summarized by the median and 95th-percentile normalized mean absolute error relative to the \(0^\circ\) reference. (C) Axial orientation equivariance. Recovered shifts in peak and magnitude-weighted axial orientation closely followed the ideal \(\Delta\alpha=\phi\) relation when expressed in the measurement-coordinate convention; across the tested rotations, the maximum 95th-percentile transformation errors were \(4.87^\circ\) and \(0.85^\circ\), respectively. (D) Absolute changes in the intended rotation-invariant directional scalars. Axial coherence remained numerically stable, whereas orientation drift showed small median changes but a wider upper-tail response. Together, the control supports the intended invariant/equivariant organization of the representation over the evaluated rigid rotations without implying exact raster-level invariance or robustness outside the tested perturbations.
 
 ### SR1.2 Axial orientation transformation consistency
 
 The two doubled-angle orientation pairs followed the expected axial transformation closely.
 
-For the peak axial orientation, median observed shifts closely matched the imposed physical rotations:
+For the peak axial orientation, median observed shifts closely matched the expected measurement-coordinate increments \(\phi=-\beta\):
 
 | Rotation | Median observed shift | Median transformation error | 95th percentile error |
 |---:|---:|---:|---:|
@@ -1043,7 +1043,7 @@ The proportion with error at or below \(15^\circ\) was 78.17% (75.77%–80.60%),
 ## SR4. Rotation and coordinate-frame reconstruction controls
 The observed second-harmonic field was subjected to analytic rotations in doubled-angle space without image interpolation, resampling, or cropping.
 
-For a global physical rotation by \(\phi\),
+For a global analytic rotation by measurement-coordinate angle \(\phi\),
 
 \[
 F_2'(r)

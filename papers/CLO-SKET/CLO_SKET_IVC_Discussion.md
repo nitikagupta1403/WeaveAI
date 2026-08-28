@@ -119,7 +119,7 @@ The same discipline applies algebraically. \(R_2=\sqrt{C_2^2+S_2^2}\) is an iden
 
 ## 5.6 Transformation behaviour separates intrinsic structure from coordinate-frame structure
 
-Under an ideal physical rotation by \(\phi\),
+Writing rotation in terms of the measurement-coordinate increment \(\phi\) defined in Methods (\(\phi=-\beta\) for raw Pillow raster angle \(\beta\)), the ideal transformation is
 
 \[
 F_2'(r)=e^{-i2\phi}F_2(r),
