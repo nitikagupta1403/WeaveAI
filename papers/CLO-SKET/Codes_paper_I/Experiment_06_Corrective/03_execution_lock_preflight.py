@@ -1,8 +1,8 @@
 """Pre-outcome implementation preflight for corrective Experiment 06.
 
-This script verifies frozen corrective prerequisites and records implementation
-hashes/environment metadata. It MUST NOT extract CLO-SKET predictive features,
-fit a classifier, or compute any predictive outcome.
+This script verifies frozen corrective prerequisites, frozen feature artifacts,
+and final implementation hashes/environment metadata. It MUST NOT fit a
+classifier or compute a predictive outcome.
 """
 
 from __future__ import annotations
@@ -11,11 +11,11 @@ import argparse
 import hashlib
 import json
 import platform
-import sys
 from importlib import metadata
 from pathlib import Path
 
 import pandas as pd
+
 
 EXPECTED = {
     "rows": 2300,
@@ -29,16 +29,15 @@ EXPECTED = {
     "test_rows": [459, 460, 461, 460, 460],
     "test_identities": 46,
 }
-
 SOURCE_CANDIDATE_COMMIT = "60063623eedde05ed7c351c3c947a605f6be5344"
 
 
 def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
 
 
 def package_version(name: str) -> str:
@@ -49,18 +48,18 @@ def package_version(name: str) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
+    p = argparse.ArgumentParser()
+    p.add_argument(
         "--evidence-root",
         type=Path,
         default=Path("papers/CLO-SKET/evidence/Experiment_06_Corrective"),
     )
-    parser.add_argument(
+    p.add_argument(
         "--code-root",
         type=Path,
         default=Path("papers/CLO-SKET/Codes_paper_I"),
     )
-    parser.add_argument(
+    p.add_argument(
         "--output",
         type=Path,
         default=Path(
@@ -68,7 +67,7 @@ def parse_args() -> argparse.Namespace:
             "experiment06_execution_lock_preflight.json"
         ),
     )
-    return parser.parse_args()
+    return p.parse_args()
 
 
 def require_hash(path: Path, expected: str, label: str) -> str:
@@ -82,12 +81,14 @@ def main() -> None:
     args = parse_args()
     evidence = args.evidence_root
     code = args.code_root
+    corrective = code / "Experiment_06_Corrective"
 
     identity_map = evidence / "experiment06_corrected_identity_map.csv"
     identity_fold_map = evidence / "experiment06_corrected_identity_fold_map.csv"
     fold_summary = evidence / "experiment06_corrected_fold_summary.csv"
     annotation_status = evidence / "experiment06_annotation_status.csv"
     annotation_preflight = evidence / "experiment06_annotation_control_preflight.json"
+    feature_manifest = evidence / "experiment06_corrective_feature_manifest.json"
 
     identity_hash = require_hash(
         identity_map, EXPECTED["identity_map_sha256"], "corrected identity map"
@@ -128,11 +129,14 @@ def main() -> None:
     identity = identity.sort_values("row_index").reset_index(drop=True)
     annotation = annotation.sort_values("row_index").reset_index(drop=True)
     if identity["relative_path"].tolist() != annotation["relative_path"].tolist():
-        raise RuntimeError("Identity and annotation-status path order mismatch")
+        raise RuntimeError("Identity and annotation path order mismatch")
     if identity["corrected_garment_id"].tolist() != annotation["corrected_garment_id"].tolist():
-        raise RuntimeError("Identity and annotation-status garment IDs mismatch")
-    if identity["corrected_fold_id"].astype(int).tolist() != annotation["corrected_fold_id"].astype(int).tolist():
-        raise RuntimeError("Identity and annotation-status fold IDs mismatch")
+        raise RuntimeError("Identity and annotation garment IDs mismatch")
+    if (
+        identity["corrected_fold_id"].astype(int).tolist()
+        != annotation["corrected_fold_id"].astype(int).tolist()
+    ):
+        raise RuntimeError("Identity and annotation fold IDs mismatch")
 
     folds = folds.sort_values("fold").reset_index(drop=True)
     observed_test_rows = folds["test_rows"].astype(int).tolist()
@@ -140,48 +144,76 @@ def main() -> None:
         raise RuntimeError(
             f"Corrected primary test-row counts mismatch: {observed_test_rows}"
         )
-    if not (folds["test_identities"].astype(int) == EXPECTED["test_identities"]).all():
+    if not (
+        folds["test_identities"].astype(int) == EXPECTED["test_identities"]
+    ).all():
         raise RuntimeError("Corrected test-identity count mismatch")
-    if not (folds["overlapping_corrected_identities"].astype(int) == 0).all():
+    if not (
+        folds["overlapping_corrected_identities"].astype(int) == 0
+    ).all():
         raise RuntimeError("Corrected identity overlap is non-zero")
 
-    source_files = {
+    required_implementation = {
         "core_ra14_notebook": code / "01_Core_Radial_Angular_14D_and_Reconstruction.ipynb",
         "historical_e06_evidence_record": code / "06_Experiment_06_Evidence_Record.md",
         "prospective_lock": code / "Experiment_06_Corrective_Reanalysis_PROSPECTIVE_LOCK.md",
-        "execution_implementation_lock": code
-        / "Experiment_06_Corrective"
-        / "EXECUTION_IMPLEMENTATION_LOCK.md",
-        "identity_builder": code
-        / "Experiment_06_Corrective"
-        / "01_build_corrected_identity_map.py",
-        "annotation_preflight_code": code
-        / "Experiment_06_Corrective"
-        / "02_annotation_control_preflight.py",
-        "execution_preflight_code": code
-        / "Experiment_06_Corrective"
-        / "03_execution_lock_preflight.py",
+        "execution_implementation_lock": corrective / "EXECUTION_IMPLEMENTATION_LOCK.md",
+        "identity_builder": corrective / "01_build_corrected_identity_map.py",
+        "annotation_preflight_code": corrective / "02_annotation_control_preflight.py",
+        "execution_preflight_code": corrective / "03_execution_lock_preflight.py",
+        "historical_m135_definition_lock": corrective / "M135_HISTORICAL_DEFINITION_LOCK.md",
+        "raw_clean_feature_extractor": corrective / "04_extract_raw_clean_features.py",
+        "corrective_outcome_runner": corrective / "05_run_corrective_experiment06.py",
     }
-    missing = [name for name, path in source_files.items() if not path.is_file()]
-    if missing:
-        raise RuntimeError(f"Required implementation source files missing: {missing}")
+    missing_implementation = [
+        name for name, path in required_implementation.items() if not path.is_file()
+    ]
 
-    source_hashes = {name: sha256_file(path) for name, path in source_files.items()}
-
-    # Intentionally unresolved until the exact historical 135-D implementation and
-    # final RAW/CLEAN extractor/runner are deposited. Their absence MUST block outcome.
-    required_future = {
-        "historical_m135_definition_lock": code
-        / "Experiment_06_Corrective"
-        / "M135_HISTORICAL_DEFINITION_LOCK.md",
-        "raw_clean_feature_extractor": code
-        / "Experiment_06_Corrective"
-        / "04_extract_raw_clean_features.py",
-        "corrective_outcome_runner": code
-        / "Experiment_06_Corrective"
-        / "05_run_corrective_experiment06.py",
+    feature_artifacts = {
+        "feature_manifest": feature_manifest,
+        "raw_m135": evidence / "experiment06_corrective_raw_m135.npy",
+        "raw_ra14": evidence / "experiment06_corrective_raw_ra14.npy",
+        "clean_m135": evidence / "experiment06_corrective_clean_m135.npy",
+        "clean_ra14": evidence / "experiment06_corrective_clean_ra14.npy",
     }
-    unresolved = [name for name, path in required_future.items() if not path.is_file()]
+    missing_features = [
+        name for name, path in feature_artifacts.items() if not path.is_file()
+    ]
+
+    feature_checks = {
+        "feature_manifest_present": not missing_features,
+        "historical_raw_m135_exact_match": False,
+        "historical_raw_ra14_exact_match": False,
+        "feature_manifest_no_classifier": False,
+        "feature_manifest_no_prediction": False,
+        "feature_manifest_no_metric": False,
+        "feature_manifest_outcome_locked": False,
+    }
+
+    if feature_manifest.is_file():
+        feature_report = json.loads(feature_manifest.read_text(encoding="utf-8"))
+        hist = feature_report.get("historical_reproduction_checks", {})
+        feature_checks.update(
+            {
+                "historical_raw_m135_exact_match": hist.get("raw_m135_exact_match") is True,
+                "historical_raw_ra14_exact_match": hist.get("raw_ra14_exact_match") is True,
+                "feature_manifest_no_classifier": feature_report.get("classifier_fitted") is False,
+                "feature_manifest_no_prediction": feature_report.get("prediction_computed") is False,
+                "feature_manifest_no_metric": feature_report.get("predictive_metric_computed") is False,
+                "feature_manifest_outcome_locked": feature_report.get("outcome_execution_unlocked") is False,
+            }
+        )
+
+    implementation_hashes = {
+        name: sha256_file(path)
+        for name, path in required_implementation.items()
+        if path.is_file()
+    }
+    feature_file_hashes = {
+        name: sha256_file(path)
+        for name, path in feature_artifacts.items()
+        if path.is_file()
+    }
 
     environment = {
         "python": platform.python_version(),
@@ -195,9 +227,11 @@ def main() -> None:
         "pillow": package_version("Pillow"),
     }
 
-    preflight_passed = len(unresolved) == 0
+    feature_gate_passed = not missing_features and all(feature_checks.values())
+    preflight_passed = not missing_implementation and feature_gate_passed
+
     report = {
-        "schema_version": 1,
+        "schema_version": 2,
         "experiment": "CLO-SKET Experiment 06 corrective reanalysis",
         "stage": "PRE_OUTCOME_EXECUTION_IMPLEMENTATION_PREFLIGHT",
         "source_candidate_commit": SOURCE_CANDIDATE_COMMIT,
@@ -210,6 +244,7 @@ def main() -> None:
             "row_order_consistent": True,
             "zero_corrected_identity_overlap": True,
             "corrected_test_row_counts_verified": True,
+            **feature_checks,
         },
         "prerequisite_hashes": {
             "corrected_identity_map_sha256": identity_hash,
@@ -218,37 +253,48 @@ def main() -> None:
             "annotation_status_sha256": annotation_status_hash,
             "annotation_control_preflight_sha256": sha256_file(annotation_preflight),
         },
-        "implementation_source_sha256": source_hashes,
+        "implementation_source_sha256": implementation_hashes,
+        "feature_artifact_file_sha256": feature_file_hashes,
         "environment": environment,
-        "required_before_outcome": {
-            name: str(path) for name, path in required_future.items()
-        },
-        "unresolved_required_implementation": unresolved,
-        "feature_matrix_generated": False,
+        "missing_required_implementation": missing_implementation,
+        "missing_feature_artifacts": missing_features,
+        "feature_matrix_generated": True,
         "classifier_fitted": False,
         "predictive_outcome_computed": False,
         "outcome_execution_unlocked": preflight_passed,
         "preflight_passed": preflight_passed,
         "stop": (
-            "PRE-OUTCOME STOP: implementation/provenance inspection only. "
-            "No CLO-SKET feature extraction, classifier fitting, prediction, metric, "
-            "bootstrap, permutation, or corrected predictive outcome computed."
+            "PRE-OUTCOME STOP: implementation/provenance/hash inspection only. "
+            "Frozen feature matrices already exist, but no classifier fitting, "
+            "prediction, predictive metric, bootstrap, repeated partition, or "
+            "alignment permutation was computed by this preflight."
         ),
     }
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
     if preflight_passed:
         print("Experiment 06 execution implementation preflight: PASS")
-        print("Outcome execution prerequisites are present, but remain blocked until this report is committed.")
+        print(
+            "All implementation and frozen-feature prerequisites are present. "
+            "Outcome execution remains blocked until this PASS report is committed."
+        )
     else:
-        print("Experiment 06 execution implementation preflight: BLOCKED (expected at this stage)")
-        print("Still required before any outcome:")
-        for item in unresolved:
-            print(f"- {item}: {required_future[item]}")
+        print("Experiment 06 execution implementation preflight: BLOCKED")
+        if missing_implementation:
+            print("Missing implementation:", ", ".join(missing_implementation))
+        if missing_features:
+            print("Missing feature artifacts:", ", ".join(missing_features))
+        failed_feature_checks = [k for k, v in feature_checks.items() if not v]
+        if failed_feature_checks:
+            print("Failed feature checks:", ", ".join(failed_feature_checks))
+
     print(f"Report: {args.output}")
-    print("STOP — no feature extraction or predictive outcome was computed.")
+    print("STOP — no classifier or predictive outcome was computed.")
 
 
 if __name__ == "__main__":
