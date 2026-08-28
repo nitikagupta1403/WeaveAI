@@ -850,7 +850,7 @@ The median normalized mean absolute errors were:
 | \(+10^\circ\) | 0.026253 | 0.083533 |
 | \(+20^\circ\) | 0.033446 | 0.114846 |
 
-The perturbation was smallest near the reference orientation and increased modestly toward the largest tested rotations, consistent with interpolation and finite-bin effects rather than exact raster-level invariance.
+The perturbation was smallest near the reference orientation and increased modestly toward the largest tested rotations, consistent with interpolation and finite-bin effects rather than exact raster-level invariance. Supplementary Figure S3 summarizes this rigid-rotation control.
 
 ![Supplementary Figure S3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).](figures/Figure_3_Rigid_Rotation_Control.png)
 
@@ -1031,7 +1031,7 @@ Median peak-shell axial error was
 (95\%~\mathrm{CI}:~3.815065^\circ\text{--}4.511576^\circ).
 \]
 
-The proportion with error at or below \(15^\circ\) was 78.17% (75.77%–80.60%), the proportion between \(15^\circ\) and \(45^\circ\) was 6.13% (5.13%–7.17%), and the proportion above \(45^\circ\) was 15.70% (13.50%–17.95%).
+The proportion with error at or below \(15^\circ\) was 78.17% (75.77%–80.60%), the proportion between \(15^\circ\) and \(45^\circ\) was 6.13% (5.13%–7.17%), and the proportion above \(45^\circ\) was 15.70% (13.50%–17.95%). Supplementary Figure S4 summarizes the identity-disjoint reconstruction results.
 
 ![Supplementary Figure S4. Garment-identity-disjoint reconstruction validation.](figures/Figure_4_Identity_Disjoint_Reconstruction_Validation.png)
 
@@ -1087,6 +1087,8 @@ A second control assigned a single random physical rotation to every sketch belo
 
 Relative to the original upright data, mean performance across the ten randomized controls changed as follows:
 
+Supplementary Table S3 summarizes reconstruction under global and garment-identity-randomized rotations.
+
 **Supplementary Table S3. Reconstruction under global and garment-identity-randomized rotations.**
 
 | Condition | Vector RMSE | \(R_2\) RMSE | \(R_2\) Pearson | Peak \(R_2\) RMSE | Peak \(R_2\) Pearson | Median peak axial error |
@@ -1116,6 +1118,8 @@ Changing the concentration half-width from the primary \(\pm4\) shell-coordinate
 
 The canonical 72 angular bins were coarsened by exact mass aggregation to 36 and 24 bins, without image interpolation.
 
+Supplementary Table S4 summarizes sensitivity to angular resolution.
+
 **Supplementary Table S4. Sensitivity of the harmonic field to angular resolution.**
 
 | Angular bins | \(R_2\) Spearman vs 72 | \(C_2\) Spearman | \(S_2\) Spearman | Median axial difference | Exact peak-radius agreement | Peak-magnitude Spearman |
@@ -1139,6 +1143,8 @@ Accordingly, peak radius is a window-dependent localization statistic. The endpo
 ### SR5.4 Radial resolution
 
 Radial-resolution sensitivity was assessed after exact mass aggregation from 72 to 36 and 24 radial bins. To isolate resolution from domain mismatch, all three resolutions were compared over the same normalized physical interval, \(1/12\le r_{\mathrm{norm}}\le1/3\).
+
+Supplementary Table S5 summarizes radial-resolution rank stability on the common physical domain.
 
 **Supplementary Table S5. Radial-resolution rank stability on an exact common physical domain.**
 
@@ -1173,6 +1179,8 @@ F_m(\theta+\pi)
 Odd harmonics therefore change sign under a \(180^\circ\) reversal, whereas even harmonics remain invariant. The observed fields reproduced this transformation numerically to better than \(5\times10^{-16}\).
 
 The second harmonic is thus the lowest non-zero harmonic compatible with the axial orientation convention used by the representation. The empirical spectrum was examined as a consistency control rather than as a post-hoc selection criterion.
+
+Supplementary Table S6 summarizes low-order harmonic magnitude over the primary radial domain.
 
 **Supplementary Table S6. Low-order harmonic magnitude on the primary radial domain.**
 
@@ -1233,6 +1241,8 @@ p_{\mathrm{raw}}=0.030097,
 \qquad
 p_{\mathrm{Holm}}=0.030097.
 \]
+
+Supplementary Table S7 summarizes the garment-level monotonic association analyses.
 
 **Supplementary Table S7. Garment-level monotonic associations (\(n=230\) garment identities).**
 
@@ -1311,6 +1321,8 @@ The absolute first-order linearized phase perturbation was also strongly associa
 \rho=+0.712.
 \]
 
+Supplementary Table S8 summarizes the garment-level phase-conditioning associations.
+
 **Supplementary Table S8. Garment-level phase-conditioning associations.**
 
 | Quantity vs median axial error | Spearman \(\rho\) |
@@ -1348,9 +1360,13 @@ The weakest-harmonic quartile therefore had approximately 2.05 times the median 
 
 These results are consistent with the expected conditioning geometry of phase estimation: small harmonic magnitude increases angular sensitivity, but \(R_2\) alone does not determine reconstruction error because the Cartesian prediction perturbation also varies.
 
+Supplementary Figure S5 summarizes the association between second-harmonic organization and axial reconstruction error.
+
 ![Supplementary Figure S5. Association between second-harmonic organization and axial reconstruction error.](figures/Figure_5_Garment_Identity_Inference.png)
 
 **Supplementary Figure S5. Association between second-harmonic organization and axial reconstruction error.** (A) Across 230 garment-identity medians, observed peak-shell \(R_2\) was negatively associated with axial reconstruction error (Spearman \(\rho=-0.355875\), 95% garment-cluster bootstrap CI \([-0.455749,-0.248336]\), Holm-adjusted \(p=0.000200\)). (B) Selected peak radius showed a weaker, secondary association (\(\rho=-0.207675\), 95% CI \([-0.322472,-0.095626]\), Holm-adjusted \(p=0.030097\)); interpretation is sensitivity-qualified because peak location depends on the finite radial domain. (C) Garment-identity quartiles show decreasing median axial error with increasing peak \(R_2\). (D) Across four tested sketch-level low/high axial-error threshold pairs, the low-error group had higher median peak \(R_2\) in every comparison; threshold groups are descriptive rather than prospective reliability classes.
+
+Supplementary Figure S6 summarizes the identity-aware uncertainty and category-stratified permutation analyses.
 
 ![Supplementary Figure S6. Identity-aware uncertainty and category-stratified permutation inference.](figures/Figure_6_Bootstrap_Permutation_Inference.png)
 
