@@ -34,7 +34,7 @@ Recovered garment identity was treated as the indivisible clustering unit for cr
 
 ## 3.3 Raw-image radial–angular construction
 
-The radial–angular representation was constructed directly from the original grayscale TIFF images at native spatial resolution. Rather than first extracting a binary contour, the construction retains continuous foreground darkness. No thresholding, binarization, resizing, rotation, straightening, or principal-axis alignment was applied.
+The radial–angular construction was computed directly from the original grayscale TIFF images at native spatial resolution. Rather than first extracting a binary contour, the construction retains continuous foreground darkness. No thresholding, binarization, resizing, rotation, straightening, or principal-axis alignment was applied.
 
 For sketch \(i\), let \(I_{ip}\in[0,255]\) denote the grayscale intensity of pixel \(p\). Continuous foreground darkness was defined as
 
@@ -921,7 +921,7 @@ The interpretation therefore distinguishes predictive increment from exact garme
 
 To address the reviewer-facing question of whether the compact axial–radial representation adds predictive information beyond a conventional image descriptor, a secondary post-audit baseline was frozen before any Experiment 07 outcome was computed. This analysis did not alter Experiment 06, its features, folds, estimator, or claims.
 
-The conventional descriptor was histogram of oriented gradients (HOG). Each native grayscale TIFF sketch was converted to an aspect-ratio-preserving 256×256 representation by isotropic bilinear resizing followed by centered white padding; images were not geometrically stretched. Pixel values were scaled to [0,1]. HOG used 9 orientations, 16×16-pixel cells, 2×2-cell blocks, L2-Hys block normalization, `transform_sqrt=False`, `feature_vector=True`, and no channel axis, producing 8,100 features per sketch. No HOG hyperparameter search, PCA, feature selection, augmentation, or outcome-dependent preprocessing was performed.
+The conventional descriptor was histogram of oriented gradients (HOG; Dalal and Triggs, 2005). Each native grayscale TIFF sketch was converted to an aspect-ratio-preserving 256×256 representation by isotropic bilinear resizing followed by centered white padding; images were not geometrically stretched. Pixel values were scaled to [0,1]. HOG used 9 orientations, 16×16-pixel cells, 2×2-cell blocks, L2-Hys block normalization, `transform_sqrt=False`, `feature_vector=True`, and no channel axis, producing 8,100 features per sketch. No HOG hyperparameter search, PCA, feature selection, augmentation, or outcome-dependent preprocessing was performed.
 
 The exact 2,300×14 axial–radial matrix, category labels, garment identities, and row-level fold assignment were recovered from the frozen Experiment 06 checkpoint. The checkpoint fold map was adopted as authoritative because it reproduced the locked Experiment 06 pooled results to numerical precision: morphology macro-F1 0.297788 and balanced accuracy 0.298261; morphology plus the complete axial–radial block macro-F1 0.335765 and balanced accuracy 0.336087. The authoritative Experiment 07 test-fold sizes were 459, 460, 462, 460, and 459 sketches, with 46 held-out garment identities per fold, 184 training identities, and zero train/test garment-identity overlap in every fold.
 
@@ -947,7 +947,7 @@ Experiment 07 is interpreted strictly as a secondary conventional-descriptor com
 
 ## 3.18 Fresh reproducibility audit: Experiment 08
 
-After the frozen Experiment 06 and Experiment 07 analyses, Experiment 08 provided a fresh executable audit of RA14 under a prospectively frozen mechanical gate and a frozen learned-feature comparison. It used the same 2,300 sketches, 230 recovered garment identities, and frozen 14-dimensional RA14 representation, together with independently frozen DINOv2 ViT-S/14 features. Two additional predictive controls were specified later, after Experiment 08 had already entered a post-outcome exploratory phase, and were committed before their own execution.
+After the frozen Experiment 06 and Experiment 07 analyses, Experiment 08 provided a fresh executable audit of RA14 under a prospectively frozen mechanical gate and a frozen learned-feature comparison. It used the same 2,300 sketches, 230 recovered garment identities, and frozen 14-dimensional RA14 representation, together with independently frozen DINOv2 ViT-S/14 features (Oquab et al., 2024). Two additional predictive controls were specified later, after Experiment 08 had already entered a post-outcome exploratory phase, and were committed before their own execution.
 
 The mechanical gate determined whether the subsequent predictive comparison could be interpreted confirmatorily. Analytic harmonic rotation checks passed, and raster axial-angle errors satisfied their locked criteria. The raster harmonic-magnitude criterion did not: median relative magnitude error was 1.3132%, while the 95th percentile was 21.332%, exceeding the prespecified 15% threshold. The overall frozen mechanical gate therefore failed.
 

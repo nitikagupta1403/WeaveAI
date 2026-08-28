@@ -809,9 +809,9 @@ The primary representation comprised eight radial second-harmonic descriptors an
 
 The resulting matrix had dimensions \(2300\times14\), contained only finite values, and exactly matched an independently reconstructed \(8+6\) concatenation, with maximum absolute difference zero.
 
-![Supplementary Figure S2. Fourteen-dimensional radial–angular representation.](figures/Figure_2_Provenance_Locked_14D_Representation.png)
+![Supplementary Figure S2. Fourteen-dimensional axial–radial representation (RA14).](figures/Figure_2_Provenance_Locked_14D_Representation.png)
 
-**Supplementary Figure S2. Fourteen-dimensional radial–angular representation.** The radial block comprises integrated second-harmonic magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. The axial block represents peak and magnitude-weighted mean orientations through doubled-angle cosine/sine coordinates together with axial coherence and orientation drift. Radial extent is excluded because it is exactly termination radius minus onset radius.
+**Supplementary Figure S2. Fourteen-dimensional axial–radial representation (RA14).** The radial block comprises integrated second-harmonic magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. The axial block represents peak and magnitude-weighted mean orientations through doubled-angle cosine/sine coordinates together with axial coherence and orientation drift. Radial extent is excluded because it is exactly termination radius minus onset radius.
 
 The observed fields \(C_2\), \(S_2\), \(R_2\), and \(\alpha_2\), together with their reconstructed counterparts, each had dimensions \(2300\times25\). At the observed peak shell, the maximum absolute discrepancy between \(R_2\) and \(|F_2|\) was \(6.661\times10^{-16}\), numerically confirming the identity
 
@@ -852,9 +852,9 @@ The median normalized mean absolute errors were:
 
 The perturbation was smallest near the reference orientation and increased modestly toward the largest tested rotations, consistent with interpolation and finite-bin effects rather than exact raster-level invariance.
 
-![Supplementary Figure S3. Rigid-rotation control of the CLO-SKET radial–angular representation.](figures/Figure_3_Rigid_Rotation_Control.png)
+![Supplementary Figure S3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).](figures/Figure_3_Rigid_Rotation_Control.png)
 
-**Supplementary Figure S3. Rigid-rotation control of the CLO-SKET radial–angular representation.**
+**Supplementary Figure S3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).**
 (A) The same canonical sketch under three raster-rotation conditions. The raw Pillow argument is \(\beta\), while the corresponding native measurement-coordinate increment is \(\phi=-\beta\). (B) Stability of the primary-domain second-harmonic radial-magnitude profile, summarized by the median and 95th-percentile normalized mean absolute error relative to the \(0^\circ\) reference. (C) Axial orientation equivariance. Recovered shifts in peak and magnitude-weighted axial orientation closely followed the ideal \(\Delta\alpha=\phi\) relation when expressed in the measurement-coordinate convention; across the tested rotations, the maximum 95th-percentile transformation errors were \(4.87^\circ\) and \(0.85^\circ\), respectively. (D) Absolute changes in the intended rotation-invariant directional scalars. Axial coherence remained numerically stable, whereas orientation drift showed small median changes but a wider upper-tail response. Together, the control supports the intended invariant/equivariant organization of the representation over the evaluated rigid rotations without implying exact raster-level invariance or robustness outside the tested perturbations.
 
 ### SR1.2 Axial orientation transformation consistency

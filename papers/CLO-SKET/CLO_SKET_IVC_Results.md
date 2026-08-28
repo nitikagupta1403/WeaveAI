@@ -40,7 +40,7 @@ with corresponding balanced-accuracy increment
 +0.037826.
 \]
 
-The macro-F1 increment was positive in all five primary folds, ranging from \(+0.011157\) to \(+0.085268\). Balanced-accuracy differences were likewise positive in all five folds.
+The macro-F1 increment was positive in all five primary folds, ranging from \(+0.011157\) to \(+0.085268\). Balanced-accuracy differences were likewise positive in all five folds. Table 1 summarizes the locked pooled out-of-fold results.
 
 **Table 1. Locked pooled out-of-fold category-discrimination performance.**
 
@@ -104,7 +104,7 @@ All 5,000 bootstrap replicates produced a positive macro-F1 difference. Balanced
 
 again with no non-positive replicate.
 
-An unrestricted identity-cluster bootstrap, retained as an audit analysis, produced closely similar intervals: \([+0.019230,+0.055573]\) for macro-F1 and \([+0.019221,+0.057648]\) for balanced accuracy. The category-stratified analysis is emphasized because unrestricted resampling occasionally omitted an entire category.
+An unrestricted identity-cluster bootstrap, retained as an audit analysis, produced closely similar intervals: \([+0.019230,+0.055573]\) for macro-F1 and \([+0.019221,+0.057648]\) for balanced accuracy. The category-stratified analysis is emphasized because unrestricted resampling occasionally omitted an entire category. Table 2 summarizes the prespecified category-stratified identity bootstrap.
 
 **Table 2. Category-stratified garment-identity bootstrap for the primary contrast.**
 
@@ -133,7 +133,7 @@ SD=0.006805,
 
 with repeat-level values ranging from \(+0.020620\) to \(+0.043275\). Balanced-accuracy increments were also positive in all 10 repeats, with mean \(+0.031565\), standard deviation \(0.007362\), and range \(+0.019565\) to \(+0.043913\).
 
-At the individual-fold level, 44 of 50 macro-F1 differences were positive and six were negative. The radial increment was positive in all 10 repeated partitions, with mean macro-F1 increment \(+0.028850\).
+At the individual-fold level, 44 of 50 macro-F1 differences were positive and six were negative. The radial increment was positive in all 10 repeated partitions, with mean macro-F1 increment \(+0.028850\). Table 3 summarizes repeat-level stability of the primary increment.
 
 **Table 3. Stability of the primary increment across repeated garment-identity partitions.**
 
@@ -169,7 +169,7 @@ standard deviation \(0.007141\), and 2.5th, 50th, and 97.5th percentiles \(+0.02
 p_{\mathrm{align}}=0.762619.
 \]
 
-Balanced accuracy gave the same conclusion: observed increment \(+0.037826\), null mean \(+0.042258\), and empirical \(p_{\mathrm{align}}=0.729635\).
+Balanced accuracy gave the same conclusion: observed increment \(+0.037826\), null mean \(+0.042258\), and empirical \(p_{\mathrm{align}}=0.729635\). Table 4 summarizes the category-preserving garment-identity alignment control.
 
 **Table 4. Category-preserving garment-identity alignment control.**
 
@@ -192,11 +192,11 @@ Figure 1 illustrates the construction before considering its downstream behavior
 
 **Figure 1. Radial–angular construction and second-harmonic interpretation.** The upper schematic contrasts the first three angular harmonics and highlights the two-fold second harmonic used here for axial orientation, together with the definitions of \(F_m(r)\), \(R_2(r)\), and \(\alpha_2(r)\). (A) Representative CLO-SKET sketch with intensity-weighted centroid. (B) Centroid-relative polar geometry used to accumulate foreground intensity by radius and angle. (C) Conditional angular distribution \(p(\theta\mid r)\). (D) Second-harmonic magnitude \(R_2(r)=|F_2(r)|\); the shaded interval marks the 25-shell primary radial domain \(r=3.5,\ldots,27.5\), and the selected observed peak shell is marked. (E) Axial orientation \(\alpha_2(r)\) over the primary domain. The second harmonic represents axial orientation because \(\alpha\equiv\alpha+\pi\).
 
-Across the primary radial domain, eight descriptors summarize where second-harmonic magnitude is concentrated and how it is distributed, while six axial descriptors summarize peak and mean orientation, coherence, and orientation drift. Together they form the compact 14-dimensional representation used in Experiment 06.
+Across the primary radial domain, eight descriptors summarize where second-harmonic magnitude is concentrated and how it is distributed, while six axial descriptors summarize peak and mean orientation, coherence, and orientation drift. Together they form the compact 14-dimensional axial–radial representation (RA14) used in Experiment 06, summarized in Figure 2.
 
-![Figure 2. Fourteen-dimensional radial–angular representation.](figures/Figure_2_Provenance_Locked_14D_Representation.png)
+![Figure 2. Fourteen-dimensional axial–radial representation (RA14).](figures/Figure_2_Provenance_Locked_14D_Representation.png)
 
-**Figure 2. Fourteen-dimensional radial–angular representation.** The radial block comprises integrated second-harmonic magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. The axial block represents peak and magnitude-weighted mean orientations through doubled-angle cosine/sine coordinates together with axial coherence and orientation drift. Radial extent is excluded because it is exactly termination radius minus onset radius.
+**Figure 2. Fourteen-dimensional axial–radial representation (RA14).** The radial block comprises integrated second-harmonic magnitude, radial centroid, radial spread, radial concentration, onset radius, termination radius, peak radius, and peak magnitude. The axial block represents peak and magnitude-weighted mean orientations through doubled-angle cosine/sine coordinates together with axial coherence and orientation drift. Radial extent is excluded because it is exactly termination radius minus onset radius.
 
 ---
 
@@ -204,11 +204,11 @@ Across the primary radial domain, eight descriptors summarize where second-harmo
 
 The representation was examined through complementary image-domain, analytic, sensitivity, harmonic, reconstruction, and phase-conditioning controls. These analyses characterize how the measurement behaves; they are separate from the primary Experiment-06 predictive contrast.
 
-An earlier rigid-image rotation control recomputed the full representation after rotating all 2,300 raster sketches through \(-20^\circ\) to \(+20^\circ\). The doubled-angle orientation coordinates followed the expected axial transformation closely. Across the tested rotations, the largest 95th-percentile transformation error was \(4.87^\circ\) for peak orientation and \(0.85^\circ\) for the magnitude-weighted mean orientation. The radial-magnitude field showed small median raster perturbations that increased toward the largest tested rotations, consistent with interpolation and finite-bin effects rather than exact raster-level invariance.
+Figure 3 summarizes an earlier rigid-image rotation control that recomputed the full representation after rotating all 2,300 raster sketches through \(-20^\circ\) to \(+20^\circ\). The doubled-angle orientation coordinates followed the expected axial transformation closely. Across the tested rotations, the largest 95th-percentile transformation error was \(4.87^\circ\) for peak orientation and \(0.85^\circ\) for the magnitude-weighted mean orientation. The radial-magnitude field showed small median raster perturbations that increased toward the largest tested rotations, consistent with interpolation and finite-bin effects rather than exact raster-level invariance.
 
-![Figure 3. Rigid-rotation control of the CLO-SKET radial–angular representation.](figures/Figure_3_Rigid_Rotation_Control.png)
+![Figure 3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).](figures/Figure_3_Rigid_Rotation_Control.png)
 
-**Figure 3. Rigid-rotation control of the CLO-SKET radial–angular representation.** (A) The same canonical sketch under three raster-rotation conditions. The raw Pillow rotation argument is denoted \(\beta\), while the corresponding angular increment in the native image-coordinate measurement is \(\phi=-\beta\) (Methods, Section 3.10). (B) Stability of the primary-domain second-harmonic radial-magnitude profile relative to the \(0^\circ\) reference. (C) Peak and magnitude-weighted axial orientations follow the expected \(\Delta\alpha=\phi\) transformation when expressed in the measurement-coordinate convention. (D) Axial coherence remains numerically stable, while orientation drift shows small median changes with a wider upper-tail response. This earlier control is descriptive; the separately prospectively gated Experiment-08 mechanical audit is reported in Section 4.10.
+**Figure 3. Rigid-rotation control of the CLO-SKET axial–radial representation (RA14).** (A) The same canonical sketch under three raster-rotation conditions. The raw Pillow rotation argument is denoted \(\beta\), while the corresponding angular increment in the native image-coordinate measurement is \(\phi=-\beta\) (Methods, Section 3.10). (B) Stability of the primary-domain second-harmonic radial-magnitude profile relative to the \(0^\circ\) reference. (C) Peak and magnitude-weighted axial orientations follow the expected \(\Delta\alpha=\phi\) transformation when expressed in the measurement-coordinate convention. (D) Axial coherence remains numerically stable, while orientation drift shows small median changes with a wider upper-tail response. This earlier control is descriptive; the separately prospectively gated Experiment-08 mechanical audit is reported in Section 4.10.
 
 Analytic coordinate-frame controls separated intrinsic behavior from the orientation of the common image axes. Global rotations of the complete harmonic field left coordinate-free reconstruction metrics essentially unchanged: across \(0^\circ,22.5^\circ,45^\circ,67.5^\circ,\) and \(90^\circ\), vector RMSE varied by only 0.000103 and median peak-shell axial error by \(0.0556^\circ\). At \(45^\circ\), the \(C_2\) and \(S_2\) component errors exchanged to numerical precision, confirming that their apparent asymmetry is coordinate-dependent. In contrast, assigning an independent physical rotation to each recovered garment identity drove median axial reconstruction error to \(44.675^\circ\), close to the \(45^\circ\) expectation for unrelated axial orientations. Radius and \(R_2\) therefore do not determine phase by themselves; the strong upright-data phase reconstruction depends substantially on population-level orientation relative to the common image frame.
 
@@ -295,6 +295,8 @@ and 72.82% of replicates were positive. For balanced accuracy, the bootstrap mea
 \]
 
 and 71.10% of replicates were positive.
+
+Table 5 summarizes the frozen HOG and HOG+RA14 performance under the authoritative Experiment-06 folds, and Table 6 reports the paired garment-identity bootstrap for their contrast.
 
 **Table 5. Secondary conventional HOG baseline under the authoritative Experiment 06 garment-identity folds.**
 
