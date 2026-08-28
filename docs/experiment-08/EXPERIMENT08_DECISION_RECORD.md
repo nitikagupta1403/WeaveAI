@@ -232,3 +232,79 @@ Any new predictive sensitivity, filtering, stratification, or revised estimand r
 **Corrected compactness non-inferiority: FALSE**
 
 **Confirmatory RA14 claim permitted: NO**
+
+---
+
+## Chronology-preserving addendum — post-outcome predictive controls
+
+**Addendum date:** 2026-08-28
+
+This addendum records predictive-control work that occurred **after** the consolidated decision above. It does not revise the original Experiment-08 decision chronology, reopen the failed mechanical gate, or change the scientific status of any Experiment-08 predictive result.
+
+After Experiment 08 was already classified as post-outcome / exploratory, two additional predictive controls were prospectively authorized in `docs/experiment-08/post-outcome-predictive-controls-amendment.md` (commit `6e62d94`) and structurally clarified before execution in `docs/experiment-08/post-outcome-predictive-controls-clarification.md` (commit `7b4b283`). Their implementation was then committed before the corresponding outcomes were computed.
+
+### A. Category/block-size-preserving correspondence permutation
+
+The first control tested whether the correctly aligned RA14-to-DINOv2 correspondence produced an unusually large additive macro-F1 increment relative to identity-block reassignments that preserved garment category and identity-block size.
+
+The observed exploratory DINOv2 + RA14 macro-F1 increment was:
+
+`+0.0009466521822523166`
+
+Across `B = 1000` prespecified correspondence permutations, the empirical upper-tail probability was:
+
+`p = 0.999000999000999`
+
+The permutation distribution had mean increment `0.013596323290899682`, median `0.013688493815160296`, 2.5th percentile `0.005085149860362126`, and 97.5th percentile `0.021671779289126402`.
+
+All prespecified correspondence invariants passed. Two singleton `(category, identity_block_size)` strata were structurally fixed, while the remaining eligible identity blocks were reassigned within their frozen strata.
+
+Interpretation is deliberately narrow. Because the permutation preserves category structure, it does **not** remove all category-associated information in RA14 and therefore does not test whether RA14 contains category signal in general. It tests whether the correctly paired garment-instance correspondence yields an unusually large additive gain relative to category/block-size-preserving reassignment. On that question, the aligned increment was not unusually high.
+
+This result must not be interpreted as proof of harm, absence of all RA14 information, or evidence that category-conditioned RA14 structure is useless.
+
+Canonical evidence commit:
+
+`73eaa1a` — correspondence-control evidence
+
+### B. Repeated identity-grouped partitions
+
+The second control repeated the exploratory DINOv2 versus DINOv2 + RA14 comparison over 20 prespecified identity-grouped `StratifiedGroupKFold` partitions, using random-state seeds `20260823` through `20260842` exactly once each.
+
+Across the 20 repeats, the exploratory macro-F1 increment had:
+
+- mean: `+0.003927456181713002`
+- median: `+0.002580754931087559`
+- minimum: `-0.00581427160322634`
+- maximum: `+0.0140545603514044`
+- sample standard deviation: `0.005057883269142741`
+- descriptive 2.5th percentile: `-0.004329725078960567`
+- descriptive 97.5th percentile: `+0.01325764759058405`
+- positive repeats: `17 / 20`
+
+All frozen grouping and fold-integrity checks passed, and all 20 partition hashes were distinct.
+
+These repeated-partition quantiles are descriptive summaries, **not a confidence interval**. The result is best interpreted as a small and partition-sensitive exploratory increment; three of the 20 repeats were negative. The canonical frozen-partition increment of `+0.0009466521822523166` lies toward the lower end of the repeated-partition distribution and was not an unusually favorable split.
+
+Canonical evidence commit:
+
+`17c3382` — repeated-partition evidence
+
+### C. Scientific status after the controls
+
+Neither predictive control changes the Experiment-08 decision boundary.
+
+- the frozen mechanical gate remains **FAIL**;
+- all Experiment-08 predictive results remain **post-outcome / exploratory**;
+- the correspondence permutation does not establish garment-instance-specific additive information;
+- the repeated-partition results do not establish a stable fixed gain;
+- the corrected compactness non-inferiority result remains **FALSE**;
+- no confirmatory RA14 claim is restored.
+
+The complete Experiment-08 evidence chronology, commit relationships, hashes, supersession rules, and claim boundaries are recorded in `docs/experiment-08/EXPERIMENT08_EVIDENCE_PROVENANCE_MANIFEST.md` (commit `778d351`).
+
+The manuscript-facing reconciliation was subsequently committed as:
+
+`0eb6730` — Reconcile Experiment 08 manuscript claims
+
+This addendum is documentation-only. It authorizes no new predictive analysis and does not alter any frozen evidence or outcome.
