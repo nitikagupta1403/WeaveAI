@@ -154,13 +154,13 @@ Full diagnostic results and uncertainty analyses are retained in the Supplementa
 
 ## 4.9 HOG showed no clear incremental benefit from RA14
 
-Under the same garment-identity-disjoint folds, HOG alone achieved macro-F1 0.648242 and balanced accuracy 0.650435. HOG+RA14 achieved 0.649135 and 0.651304, yielding pooled increments of +0.000894 and +0.000870.
+Under Experiment 07's own frozen historical Experiment-06-derived garment-identity-disjoint folds, HOG alone achieved macro-F1 0.648242 and balanced accuracy 0.650435. HOG+RA14 achieved 0.649135 and 0.651304, yielding pooled increments of +0.000894 and +0.000870. These folds predate the corrective Experiment-06 identity-map repair and are not the corrected primary E06 folds.
 
 Fold-level macro-F1 values were 0.637525, 0.661015, 0.615841, 0.660780, and 0.643949 for HOG and 0.637661, 0.656870, 0.621629, 0.663732, and 0.644240 for HOG+RA14; the small pooled positive contrast was therefore not uniformly positive across folds.
 
 The paired 5,000-replicate garment-identity bootstrap gave macro-F1 mean contrast +0.000961 with 95% interval [−0.002152, +0.004342] and 72.82% positive replicates. Balanced accuracy gave mean +0.000912 with interval [−0.002238, +0.004272] and 71.10% positive replicates.
 
-**Table 5. Secondary conventional HOG baseline under the authoritative Experiment 06 garment-identity folds.**
+**Table 5. Secondary conventional HOG baseline under the frozen historical Experiment-06-derived folds used by Experiment 07.**
 
 | Feature set | Dimensions | Macro-F1 | Balanced accuracy |
 |---|---:|---:|---:|
@@ -174,7 +174,7 @@ The paired 5,000-replicate garment-identity bootstrap gave macro-F1 mean contras
 | Macro-F1 | +0.000894 | +0.000961 | [−0.002152, +0.004342] | 3641 / 5000 |
 | Balanced accuracy | +0.000870 | +0.000912 | [−0.002238, +0.004272] | 3555 / 5000 |
 
-Both intervals included zero. Experiment 07 therefore provides no clear evidence that RA14 adds predictive benefit beyond HOG under the tested protocol. This does not contradict Experiment 06; it shows that RA14's incremental value is representation-dependent.
+Both intervals included zero. Experiment 07 therefore provides no clear evidence that RA14 adds predictive benefit beyond HOG under its tested historical protocol. This does not contradict the corrective Experiment-06 primary result: the experiments use different frozen fold provenance and different baseline representations. Experiment 07 is therefore a secondary comparator rather than a same-fold rerun of corrected CLEAN Experiment 06.
 
 ---
 

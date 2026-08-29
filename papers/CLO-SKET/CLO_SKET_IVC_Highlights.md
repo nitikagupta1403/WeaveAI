@@ -1,7 +1,7 @@
 # Highlights
 
-- RA14 gives an explicit 14-D axial–radial garment-sketch representation.
-- Corrected garment-identity-disjoint validation prevents source-garment leakage.
-- Corrective CLEAN Experiment 06 supports added predictive value beyond morphology.
-- The target-text sensitivity retained the increment but is post-outcome evidence.
-- Correct garment-specific correspondence is not supported by the alignment control.
+- A compact shape descriptor captures radial position and undirected orientation.
+- Source-garment grouping blocks train-test overlap among recovered garments.
+- The descriptor adds predictive value beyond the frozen morphology baseline.
+- A text-exclusion sensitivity retains the gain but remains post-outcome.
+- Alignment tests do not support exact garment-level correspondence.

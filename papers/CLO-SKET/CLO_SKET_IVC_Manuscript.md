@@ -10,15 +10,15 @@ Corresponding author: Nitika Gupta, nitikashimla14@gmail.com
 
 # Abstract
 
-Garment sketches encode more than global outline shape: their foreground evidence is distributed across radial position and undirected orientation. We capture this structure with a compact 14-dimensional axial–radial representation derived from shell-conditioned second-harmonic magnitude and doubled-angle axial orientation.
+Garment sketches encode geometric structure across radial position and undirected orientation. We represent this structure with a compact 14-dimensional axial–radial descriptor derived from shell-conditioned second-harmonic magnitude and doubled-angle axial orientation.
 
-We evaluate the representation on all 2,300 CLO-SKET sketches from 23 garment categories while treating the 230 recovered source garments—not individual image files—as the unit of validation. In the corrective annotation-controlled Experiment 06 analysis, a frozen 135-dimensional morphology representation achieved macro-F1 0.2714 and balanced accuracy 0.2730. Adding the frozen axial–radial representation increased performance to 0.3143 and 0.3157, corresponding to gains of +0.0428 and +0.0426. Category-stratified garment-identity bootstrap intervals excluded zero, and the macro-F1 increment remained positive across all 10 repeated grouped partitions.
+We evaluate all 2,300 CLO-SKET sketches from 23 categories while treating 230 recovered source garments as the validation units. In the corrective annotation-controlled Experiment 06 analysis, morphology alone achieved macro-F1 0.2714; adding RA14 increased macro-F1 to 0.3143, an increment of +0.0428. Category-stratified garment-identity bootstrap intervals excluded zero, and the increment remained positive across all 10 repeated grouped partitions.
 
-Predictive improvement alone does not determine whether the added information is tied to the exact same garment instance. In 2,000 within-category identity-block permutations preserving category and block-size structure, the correctly aligned corrective increment was not exceptional (empirical \(p=0.723\) for macro-F1 and \(p=0.686\) for balanced accuracy). The evidence therefore supports reproducible incremental predictive utility beyond morphology, but not uniquely garment-specific complementarity.
+A category-preserving identity-block permutation tested whether this gain required exact garment-level pairing. The correctly aligned increment was not unusually large relative to the restricted misalignment null (\(p=0.723\)), supporting incremental predictive utility beyond morphology but not uniquely garment-specific correspondence.
 
-A post-outcome audit of the frozen CLEAN image field identified two images containing exact target-category text. In a separately frozen sensitivity analysis excluding the two affected garment identities, the macro-F1 increment remained +0.0364; all 5,000 identity-bootstrap replicates and all 10 repeated grouped partitions remained positive. This sensitivity is descriptive post-outcome evidence and does not replace the corrective confirmatory result. A subsequent fresh Experiment-08 reproducibility audit also failed its prespecified raster harmonic-magnitude mechanical gate, so later Experiment-08 learned-feature comparisons remain post-outcome and exploratory.
+A post-outcome audit identified two CLEAN images containing exact target-category text. Excluding the two affected garment identities left a +0.0364 macro-F1 increment; this sensitivity is descriptive post-outcome evidence and does not replace the corrective primary result. A later Experiment 08 reproducibility audit failed its prespecified raster harmonic-magnitude mechanical gate, so subsequent Experiment 08 predictive analyses remain post-outcome and exploratory.
 
-The overall contribution is both representational and methodological: an explicit axial–radial description of garment-sketch geometry together with an identity-aware evaluation framework that separates predictive increment from instance-specific correspondence.
+The contribution is a specific compact shell-conditioned second-harmonic representation together with dependency-aware evaluation that separates predictive increment from exact garment-level correspondence.
 
 **Keywords:** garment sketches; axial–radial geometry; second harmonic; morphology; grouped cross-validation; identity-aware validation
 
@@ -125,6 +125,12 @@ Our interest begins one step earlier: **what geometric organization is present i
 Explicit shape descriptions provide a natural language for this question. Fourier descriptors and geometric morphometrics have long represented periodic outlines, curves, and shape variation numerically [13–15], including applications to fashion-flat classification [16]. Related fashion work has also treated silhouette geometry as an object of explicit classification [17] and used geometric relationships for garment-pattern construction [18]. These approaches motivate representing shape through quantities whose geometric meaning remains visible rather than only through downstream prediction.
 
 The axial–radial representation developed here follows this tradition but changes the object being summarized. Rather than applying a harmonic descriptor only to an external contour, we condition foreground sketch evidence on radial distance from the centroid and examine its angular organization within each shell. The resulting description therefore asks not only **what direction is present**, but also **where in the sketch that directional organization occurs**.
+
+### 2.1.1 Relation to established polar and harmonic shape descriptors
+
+Polar and harmonic shape representations substantially predate the present work. The MPEG-7 region-shape family includes the Angular Radial Transform (ART), which represents normalized region shape through complex orthogonal basis functions on a disk [22]. Generic Fourier Descriptor (GFD) maps a polar-rasterized shape image into radial and angular frequency components using a two-dimensional Fourier transform [23]. Shape contexts instead summarize the relative distribution of boundary points in log-polar bins for correspondence and matching [24]. Angular Radial Edge Histogram (AREH) descriptors pool edge density over angular and radial coordinates and use Fourier processing to handle rotation [25]. ART has also been generalized beyond its original formulation [26], and later phase-aware variants combine coefficient magnitude with aligned phase rather than discarding phase information [27].
+
+The contribution here is therefore not the invention of polar coordinates, radial-angular shape representation, harmonic shape analysis, or a general Fourier descriptor class. The present construction differs in the specific quantity and inferential use that are frozen for CLO-SKET: the foreground angular distribution is normalized separately within each centroid-relative radial shell; the second circular harmonic is selected from the axial-symmetry condition \(\theta\equiv\theta+\pi\); selected axial orientations are represented using doubled-angle Cartesian coordinates; and the resulting shell field is compressed into a fixed 14-dimensional summary. The accompanying evaluation framework then treats recovered source garments as dependency units and separately tests incremental predictive utility and exact garment-level correspondence.
 
 ## 2.2 Axial organization as a circular-geometry problem
 
@@ -487,7 +493,7 @@ F_1^{\mathrm{macro}}(M),
 
 with balanced-accuracy change secondary.
 
-The corrective analysis repaired the garment-identity map and applied a prospectively frozen annotation-control policy before corrected predictive outcomes were computed. Two measurement conditions were materialized using the same corrected row order, identity map, folds, representations, estimator, and analysis machinery: a RAW diagnostic condition and an annotation-controlled CLEAN condition. RAW is diagnostic only; the CLEAN condition governs the corrected confirmatory claim.
+The corrective analysis repaired the garment-identity map and applied a prospectively frozen annotation-control policy before corrected predictive outcomes were computed. Two measurement conditions were materialized using the same corrected row order, identity map, folds, representations, estimator, and analysis machinery: a RAW diagnostic condition and an annotation-controlled CLEAN condition. RAW is diagnostic only; the CLEAN condition governs the corrected confirmatory claim. Here, corrective confirmatory means prospectively locked with respect to the corrected outcome; the superseded historical Experiment-06 outcome was already known when the corrective protocol was specified.
 
 The estimator specification, corrected validation unit, bootstrap count, repeated-partition seed schedule, alignment-permutation count, annotation-control policy, and CLEAN feature matrices were frozen before the corrective predictive outcome was computed. The historical Experiment-06 result remains part of the provenance record but is superseded for the manuscript-facing primary claim by the corrected CLEAN analysis.
 
@@ -571,11 +577,11 @@ Broader semantic or causal interpretations are outside the tested design.
 
 ## 3.17 Secondary conventional-image-descriptor baseline (Experiment 07)
 
-Experiment 07 provided a secondary conventional-image-descriptor comparison that was frozen before its own outcomes were computed. It did not alter Experiment 06 or replace its primary claim.
+Experiment 07 provided a secondary conventional-image-descriptor comparison that was frozen before its own outcomes were computed. It predates the later corrective Experiment-06 identity-map repair and retains its own historical Experiment-06-derived fold provenance. It did not alter the then-frozen historical Experiment-06 package and does not replace the current corrective primary claim.
 
 The comparator was histogram of oriented gradients (HOG) [20]. Each native grayscale sketch was converted to an aspect-ratio-preserving 256×256 image by isotropic bilinear resizing and centered white padding. HOG used 9 orientations, 16×16-pixel cells, 2×2-cell blocks, L2-Hys normalization, and produced 8,100 features per sketch. No HOG hyperparameter search, PCA, feature selection, or augmentation was used.
 
-The exact frozen 2,300×14 RA14 matrix, category labels, garment identities, row order, and Experiment-06 fold assignment were reused. Two feature sets were evaluated:
+The exact frozen 2,300×14 RA14 matrix, category labels, historical garment identities, row order, and historical Experiment-06-derived fold assignment frozen for Experiment 07 were reused. These folds are authoritative for Experiment 07 itself and are not the later corrected Experiment-06 primary folds. Two feature sets were evaluated:
 
 \[
 \mathrm{HOG}_{8100}
@@ -589,9 +595,9 @@ and
 \mathbf z_{RA,14}.
 \]
 
-Both used the same fold-local standardization and locked logistic-regression specification as Experiment 06. The primary Experiment-07 contrast was pooled out-of-fold macro-F1 for HOG+RA14 minus HOG; balanced accuracy was secondary. Uncertainty was quantified by a paired bootstrap over the 230 garment identities using 5,000 replicates.
+Both used the same numerical fold-local standardization and locked logistic-regression specification as the historical Experiment-06 package from which Experiment 07 was derived; the fold provenance itself is distinct from the later corrective Experiment-06 analysis. The primary Experiment-07 contrast was pooled out-of-fold macro-F1 for HOG+RA14 minus HOG; balanced accuracy was secondary. Uncertainty was quantified by a paired bootstrap over the 230 historical garment identities using 5,000 replicates.
 
-Experiment 07 is interpreted strictly as a secondary comparator: it tests whether RA14 adds measurable predictive benefit after a high-dimensional local-gradient representation is already present. It is not a new primary hypothesis and does not replace the morphology-based Experiment-06 comparison.
+Experiment 07 is interpreted strictly as a secondary comparator under its own frozen historical Experiment-06-derived fold provenance. It tests whether RA14 adds measurable predictive benefit after a high-dimensional local-gradient representation is already present. It is not a new primary hypothesis, is not a same-fold rerun of the later corrective CLEAN Experiment-06 analysis, and does not replace the corrected morphology-based primary comparison.
 
 ---
 
@@ -787,13 +793,13 @@ Full diagnostic results and uncertainty analyses are retained in the Supplementa
 
 ## 4.9 HOG showed no clear incremental benefit from RA14
 
-Under the same garment-identity-disjoint folds, HOG alone achieved macro-F1 0.648242 and balanced accuracy 0.650435. HOG+RA14 achieved 0.649135 and 0.651304, yielding pooled increments of +0.000894 and +0.000870.
+Under Experiment 07's own frozen historical Experiment-06-derived garment-identity-disjoint folds, HOG alone achieved macro-F1 0.648242 and balanced accuracy 0.650435. HOG+RA14 achieved 0.649135 and 0.651304, yielding pooled increments of +0.000894 and +0.000870. These folds predate the corrective Experiment-06 identity-map repair and are not the corrected primary E06 folds.
 
 Fold-level macro-F1 values were 0.637525, 0.661015, 0.615841, 0.660780, and 0.643949 for HOG and 0.637661, 0.656870, 0.621629, 0.663732, and 0.644240 for HOG+RA14; the small pooled positive contrast was therefore not uniformly positive across folds.
 
 The paired 5,000-replicate garment-identity bootstrap gave macro-F1 mean contrast +0.000961 with 95% interval [−0.002152, +0.004342] and 72.82% positive replicates. Balanced accuracy gave mean +0.000912 with interval [−0.002238, +0.004272] and 71.10% positive replicates.
 
-**Table 5. Secondary conventional HOG baseline under the authoritative Experiment 06 garment-identity folds.**
+**Table 5. Secondary conventional HOG baseline under the frozen historical Experiment-06-derived folds used by Experiment 07.**
 
 | Feature set | Dimensions | Macro-F1 | Balanced accuracy |
 |---|---:|---:|---:|
@@ -807,7 +813,7 @@ The paired 5,000-replicate garment-identity bootstrap gave macro-F1 mean contras
 | Macro-F1 | +0.000894 | +0.000961 | [−0.002152, +0.004342] | 3641 / 5000 |
 | Balanced accuracy | +0.000870 | +0.000912 | [−0.002238, +0.004272] | 3555 / 5000 |
 
-Both intervals included zero. Experiment 07 therefore provides no clear evidence that RA14 adds predictive benefit beyond HOG under the tested protocol. This does not contradict Experiment 06; it shows that RA14's incremental value is representation-dependent.
+Both intervals included zero. Experiment 07 therefore provides no clear evidence that RA14 adds predictive benefit beyond HOG under its tested historical protocol. This does not contradict the corrective Experiment-06 primary result: the experiments use different frozen fold provenance and different baseline representations. Experiment 07 is therefore a secondary comparator rather than a same-fold rerun of corrected CLEAN Experiment 06.
 
 ---
 
@@ -987,7 +993,7 @@ The author thanks the creators and maintainers of the publicly available CLO-SKE
 
 This study analyzed a publicly available garment-sketch dataset and involved no human participants, animals, identifiable personal data, or intervention. Ethics approval and informed consent were therefore not applicable.
 
-## Declaration of generative AI and AI-assisted technologies in the writing process
+## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 
 During preparation of this work, the author used ChatGPT and OpenAI Codex to assist with language editing, manuscript organization, and code and documentation review. The author reviewed and edited all resulting material and takes full responsibility for the content of the publication.
 
@@ -995,11 +1001,11 @@ During preparation of this work, the author used ChatGPT and OpenAI Codex to ass
 
 The image data analyzed in this study are from the publicly available CLO-SKET dataset released through Mendeley Data (Version 1; doi:10.17632/jt533nkhsf.1). The original images are not redistributed in this repository and should be obtained from the official dataset record.
 
-Code, manuscript-supporting materials, and reviewer-facing numerical evidence are available in the public WeaveAI repository at https://github.com/nitikagupta1403/WeaveAI under `papers/CLO-SKET/`. Historical Experiment-06 and Experiment-07 evidence is retained for provenance. The manuscript-facing corrective Experiment-06 workflow is separately deposited under `Codes_paper_I/Experiment_06_Corrective/`, with its corrected identity/fold artifacts, annotation-control records, frozen outcomes, target-text audit, and separately frozen post-outcome target-text sensitivity under `evidence/Experiment_06_Corrective/`.
+Code, manuscript-supporting materials, and reviewer-facing numerical evidence are pinned to the versioned public WeaveAI release tag `paper-i-ivc-submission-2026-08-29` at https://github.com/nitikagupta1403/WeaveAI/tree/paper-i-ivc-submission-2026-08-29/papers/CLO-SKET. Historical Experiment-06 and Experiment-07 evidence is retained for provenance. The manuscript-facing corrective Experiment-06 workflow is separately deposited under `Codes_paper_I/Experiment_06_Corrective/`, with its corrected identity/fold artifacts, annotation-control records, frozen outcomes, target-text audit, and separately frozen post-outcome target-text sensitivity under `evidence/Experiment_06_Corrective/`.
 
 Experiment 07 remains a frozen secondary conventional-descriptor comparator under its historical Experiment-06-derived fold provenance. Experiment-08 executable materials are maintained separately under `Codes_paper_I/Experiment_08/`, with its evidence chronology recorded in `docs/experiment-08/EXPERIMENT08_EVIDENCE_PROVENANCE_MANIFEST.md`. Experiment 08 failed its frozen mechanical gate; all subsequent Experiment-08 predictive results remain explicitly post-outcome / exploratory.
 
-The public evidence is intended for numerical audit, provenance verification, and reproduction of explicitly executable corrective workflows rather than as a self-contained replacement for the original dataset or every historical computational intermediate. The historical Experiment-06 runtime checkpoint and the 2,300 × 8,100 Experiment-07 HOG feature matrix are intentionally not redistributed through Git. The absence of that historical Experiment-06 checkpoint does not affect the executable status of the later corrective Experiment-06 pathway. `PUBLIC_EVIDENCE_MANIFEST.json` records the older public Experiment-06/07 evidence bundle; the corrective Experiment-06 evidence is additionally deposited under `evidence/Experiment_06_Corrective/`, and Experiment-08 evidence is maintained separately under `evidence/Experiment_08/`. No private image dataset or unpublished manual annotation is required for the reported analyses.
+The public evidence is intended for numerical audit, provenance verification, and reproduction of explicitly executable corrective workflows rather than as a self-contained replacement for the original dataset or every historical computational intermediate. The historical Experiment-06 runtime checkpoint and the 2,300 × 8,100 Experiment-07 HOG feature matrix are intentionally not redistributed through Git. The absence of that historical Experiment-06 checkpoint does not affect the executable status of the later corrective Experiment-06 pathway. `PUBLIC_EVIDENCE_MANIFEST.json` records the older public Experiment-06/07 evidence bundle; the corrective Experiment-06 evidence is additionally deposited under `evidence/Experiment_06_Corrective/`, and Experiment-08 evidence is maintained separately under `evidence/Experiment_08/`. No private image dataset is required. Derived manual preprocessing annotations used by the corrective annotation-controlled image field are deposited as public evidence and form part of the reproducibility provenance.
 
 ---
 
@@ -1021,13 +1027,13 @@ The public evidence is intended for numerical audit, provenance verification, an
 
 [8] Singh, A.K., Patras, I., 2024. FashionSD-X: Multimodal fashion garment synthesis using latent diffusion. arXiv:2404.18591. https://doi.org/10.48550/arXiv.2404.18591.
 
-[9] Baldrati, A., Morelli, D., Cartella, G., Cornia, M., Bertini, M., Cucchiara, R., 2023. Multimodal garment designer: Human-centric latent diffusion models for fashion image editing. In: *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pp. 23393–23402. https://doi.org/10.1109/ICCV51070.2023.02138.
+[9] Baldrati, A., Morelli, D., Cartella, G., Cornia, M., Bertini, M., Cucchiara, R., 2023. Multimodal garment designer: Human-centric latent diffusion models for fashion image editing. In: *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pp. 23336–23345. https://doi.org/10.1109/ICCV51070.2023.02138.
 
 [10] Huang, D., Wang, Y., Qu, J., Wang, A., Tang, Y., 2025. SketchTailor: Lightweight sketch-driven modeling for high-fidelity garment pattern reconstruction. *Computers & Graphics* 131, 104345. https://doi.org/10.1016/j.cag.2025.104345.
 
 [11] Bui, D.-D.-K., Pham, M.-T., Nguyen, T.V., Tran, M.-T., Le, T.-N., 2026. GarmentSketch: Large-scale sketch-to-fashion benchmark. arXiv:2606.14025. https://doi.org/10.48550/arXiv.2606.14025.
 
-[12] Cao, H.-N., Bui, L.-H., Vo, D.-K., Tran, M.-T., Le, T.-N., 2026. VietFashion: Benchmarking sketch-text composed image retrieval for cultural outfits. arXiv:2606.13427. https://doi.org/10.48550/arXiv.2606.13427.
+[12] Cao, H.-N., Bui, L.-H., Vo, D.-K., Tran, M.-T., Le, T.-N., 2026. VietFashion: Benchmarking sketch-text composed image retrieval for cultural outfits. In: *Proceedings of the 2026 International Conference on Multimedia Retrieval (ICMR)*, pp. 2588–2596. https://doi.org/10.1145/3805622.3810590.
 
 [13] Zahn, C.T., Roskies, R.Z., 1972. Fourier descriptors for plane closed curves. *IEEE Transactions on Computers* C-21(3), 269–281. https://doi.org/10.1109/TC.1972.5008949.
 
@@ -1046,3 +1052,15 @@ The public evidence is intended for numerical audit, provenance verification, an
 [20] Dalal, N., Triggs, B., 2005. Histograms of oriented gradients for human detection. In: *Proceedings of the 2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR)*, vol. 1, pp. 886–893. https://doi.org/10.1109/CVPR.2005.177.
 
 [21] Oquab, M., Darcet, T., Moutakanni, T., Vo, H.V., Szafraniec, M., Khalidov, V., Fernandez, P., Haziza, D., Massa, F., El-Nouby, A., Assran, M., Ballas, N., Galuba, W., Howes, R., Huang, P.-Y., Li, S.-W., Misra, I., Rabbat, M., Sharma, V., Synnaeve, G., Xu, H., Jégou, H., Mairal, J., Labatut, P., Joulin, A., Bojanowski, P., 2024. DINOv2: Learning robust visual features without supervision. *Transactions on Machine Learning Research*.
+
+[22] Bober, M., 2001. MPEG-7 visual shape descriptors. *IEEE Transactions on Circuits and Systems for Video Technology* 11(6), 716–719. https://doi.org/10.1109/76.927426.
+
+[23] Zhang, D., Lu, G., 2002. Shape-based image retrieval using generic Fourier descriptor. *Signal Processing: Image Communication* 17(10), 825–848. https://doi.org/10.1016/S0923-5965(02)00084-X.
+
+[24] Belongie, S., Malik, J., Puzicha, J., 2002. Shape matching and object recognition using shape contexts. *IEEE Transactions on Pattern Analysis and Machine Intelligence* 24(4), 509–522. https://doi.org/10.1109/34.993558.
+
+[25] Rafkind, B., Chang, S.-F., 2006. Angular Radial Edge Histogram. Columbia University ADVENT Technical Report 218-2006-4.
+
+[26] Ricard, J., Coeurjolly, D., Baskurt, A., 2005. Generalizations of angular radial transform for 2D and 3D shape retrieval. *Pattern Recognition Letters* 26(14), 2174–2186. https://doi.org/10.1016/j.patrec.2005.03.030.
+
+[27] Lee, J.-M., Kim, W.-Y., 2012. A new shape description method using angular radial transform. *IEICE Transactions on Information and Systems* E95-D(6), 1628–1635. https://doi.org/10.1587/transinf.E95.D.1628.

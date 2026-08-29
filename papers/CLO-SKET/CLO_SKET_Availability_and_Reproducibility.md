@@ -2,13 +2,17 @@
 
 The image data analyzed in this study are from the publicly available CLO-SKET dataset originally released by Fitri Arnia (2020) through Mendeley Data (Version 1; doi:10.17632/jt533nkhsf.1). This study did not collect a new image dataset and does not claim ownership of CLO-SKET. All 2,300 sketches available in the dataset were included in the analysis.
 
-Garment identities used for dependency-aware validation were reconstructed from the category-qualified source identifiers encoded in the original CLO-SKET filenames, as described in the Methods. No additional private, proprietary, or manually annotated image dataset was used in the reported analyses.
+Garment identities used for dependency-aware validation were reconstructed from the category-qualified source identifiers encoded in the original CLO-SKET filenames, as described in the Methods. No additional private or proprietary image dataset is required for the reported analyses. The corrective annotation-controlled image field does use derived manual preprocessing metadata that are deposited with the public evidence, including review status for 928 images, 593 handwriting-box annotations, and adjudication of 22 geometric garment/text overlaps. These derived annotations are preprocessing provenance rather than a separate private image dataset.
 
 Derived analysis code, representation-construction procedures, validation routines, and manuscript-supporting materials are maintained separately from the source image data so that redistribution of the original dataset is not required. The original CLO-SKET images should be obtained from the dataset's official Mendeley Data record.
 
 ## Code Availability
 
-The curated computational materials supporting CLO-SKET Paper I are available in this repository under:
+The submission-facing computational record for CLO-SKET Paper I is pinned to the versioned Git tag `paper-i-ivc-submission-2026-08-29`:
+
+https://github.com/nitikagupta1403/WeaveAI/tree/paper-i-ivc-submission-2026-08-29/papers/CLO-SKET
+
+The curated computational materials are available under:
 
 ```text
 papers/CLO-SKET/Codes_paper_I/
@@ -36,15 +40,16 @@ Full-harmonic representation-selection, bandwise compression, and latent-geometr
 
 ## Software Environment
 
-The final validation environment recorded by the Paper-I validation shield was:
+The project contains several frozen computational lineages and does not retroactively treat them as one homogeneous runtime environment.
 
-- Python 3.12.13;
-- NumPy 2.0.2;
-- pandas 2.2.3;
-- scikit-learn 1.6.1;
-- Linux x86_64 execution environment.
+| Analysis lineage | Recorded environment |
+|---|---|
+| Historical Paper-I notebooks / validation shield | Python 3.12.13; NumPy 2.0.2; pandas 2.2.3; scikit-learn 1.6.1; Linux x86_64 |
+| Corrective Experiment 06 | Python 3.12.13; NumPy 2.1.3; pandas 2.2.3; Pillow 11.3.0; scikit-learn 1.6.1; SciPy 1.15.1; macOS arm64 |
+| Experiment 07 HOG comparator | Python 3.13.15; NumPy 2.1.3; pandas 2.2.3; scikit-learn 1.6.1; scikit-image 0.25.2; Pillow 11.3.0; Linux x86_64 |
+| Experiment 08 | Separately pinned executable environment under `Codes_paper_I/Experiment_08/`; the frozen lock includes PyTorch 2.11.0 and torchvision 0.26.0. |
 
-The scientific notebooks additionally use SciPy, Matplotlib, Pillow (`PIL`), Joblib, and standard-library modules as declared in their import cells. Pillow is used for TIFF decoding and for the rigid-image rotation control. Because exact SciPy, Matplotlib, Pillow, and Joblib version strings were not written into the frozen validation-shield environment record, no retrospective version number is asserted for those packages here. Their imports and algorithmic roles are explicit in the notebooks, and the manuscript reports the fixed image-rotation operator and interpolation settings used in the rigid-image control.
+The historical scientific notebooks additionally use SciPy, Matplotlib, Pillow (`PIL`), Joblib, and standard-library modules as declared in their import cells. Where exact package versions were not written into a frozen historical environment record, no retrospective version number is asserted. Corrective Experiment 06, Experiment 07, and Experiment 08 retain their own recorded or pinned environments and must not be inferred from the historical validation-shield environment.
 
 The canonical source notebook supports a configurable dataset location through `CLO_SKET_DATA_ROOT`; its historical Colab path is only the default used during the reported execution.
 

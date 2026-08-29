@@ -16,13 +16,13 @@
 
 [8] Singh, A.K., Patras, I., 2024. FashionSD-X: Multimodal fashion garment synthesis using latent diffusion. arXiv:2404.18591. https://doi.org/10.48550/arXiv.2404.18591.
 
-[9] Baldrati, A., Morelli, D., Cartella, G., Cornia, M., Bertini, M., Cucchiara, R., 2023. Multimodal garment designer: Human-centric latent diffusion models for fashion image editing. In: *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pp. 23393–23402. https://doi.org/10.1109/ICCV51070.2023.02138.
+[9] Baldrati, A., Morelli, D., Cartella, G., Cornia, M., Bertini, M., Cucchiara, R., 2023. Multimodal garment designer: Human-centric latent diffusion models for fashion image editing. In: *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pp. 23336–23345. https://doi.org/10.1109/ICCV51070.2023.02138.
 
 [10] Huang, D., Wang, Y., Qu, J., Wang, A., Tang, Y., 2025. SketchTailor: Lightweight sketch-driven modeling for high-fidelity garment pattern reconstruction. *Computers & Graphics* 131, 104345. https://doi.org/10.1016/j.cag.2025.104345.
 
 [11] Bui, D.-D.-K., Pham, M.-T., Nguyen, T.V., Tran, M.-T., Le, T.-N., 2026. GarmentSketch: Large-scale sketch-to-fashion benchmark. arXiv:2606.14025. https://doi.org/10.48550/arXiv.2606.14025.
 
-[12] Cao, H.-N., Bui, L.-H., Vo, D.-K., Tran, M.-T., Le, T.-N., 2026. VietFashion: Benchmarking sketch-text composed image retrieval for cultural outfits. arXiv:2606.13427. https://doi.org/10.48550/arXiv.2606.13427.
+[12] Cao, H.-N., Bui, L.-H., Vo, D.-K., Tran, M.-T., Le, T.-N., 2026. VietFashion: Benchmarking sketch-text composed image retrieval for cultural outfits. In: *Proceedings of the 2026 International Conference on Multimedia Retrieval (ICMR)*, pp. 2588–2596. https://doi.org/10.1145/3805622.3810590.
 
 [13] Zahn, C.T., Roskies, R.Z., 1972. Fourier descriptors for plane closed curves. *IEEE Transactions on Computers* C-21(3), 269–281. https://doi.org/10.1109/TC.1972.5008949.
 
@@ -41,3 +41,15 @@
 [20] Dalal, N., Triggs, B., 2005. Histograms of oriented gradients for human detection. In: *Proceedings of the 2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR)*, vol. 1, pp. 886–893. https://doi.org/10.1109/CVPR.2005.177.
 
 [21] Oquab, M., Darcet, T., Moutakanni, T., Vo, H.V., Szafraniec, M., Khalidov, V., Fernandez, P., Haziza, D., Massa, F., El-Nouby, A., Assran, M., Ballas, N., Galuba, W., Howes, R., Huang, P.-Y., Li, S.-W., Misra, I., Rabbat, M., Sharma, V., Synnaeve, G., Xu, H., Jégou, H., Mairal, J., Labatut, P., Joulin, A., Bojanowski, P., 2024. DINOv2: Learning robust visual features without supervision. *Transactions on Machine Learning Research*.
+
+[22] Bober, M., 2001. MPEG-7 visual shape descriptors. *IEEE Transactions on Circuits and Systems for Video Technology* 11(6), 716–719. https://doi.org/10.1109/76.927426.
+
+[23] Zhang, D., Lu, G., 2002. Shape-based image retrieval using generic Fourier descriptor. *Signal Processing: Image Communication* 17(10), 825–848. https://doi.org/10.1016/S0923-5965(02)00084-X.
+
+[24] Belongie, S., Malik, J., Puzicha, J., 2002. Shape matching and object recognition using shape contexts. *IEEE Transactions on Pattern Analysis and Machine Intelligence* 24(4), 509–522. https://doi.org/10.1109/34.993558.
+
+[25] Rafkind, B., Chang, S.-F., 2006. Angular Radial Edge Histogram. Columbia University ADVENT Technical Report 218-2006-4.
+
+[26] Ricard, J., Coeurjolly, D., Baskurt, A., 2005. Generalizations of angular radial transform for 2D and 3D shape retrieval. *Pattern Recognition Letters* 26(14), 2174–2186. https://doi.org/10.1016/j.patrec.2005.03.030.
+
+[27] Lee, J.-M., Kim, W.-Y., 2012. A new shape description method using angular radial transform. *IEICE Transactions on Information and Systems* E95-D(6), 1628–1635. https://doi.org/10.1587/transinf.E95.D.1628.

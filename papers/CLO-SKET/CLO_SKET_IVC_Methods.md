@@ -337,7 +337,7 @@ F_1^{\mathrm{macro}}(M),
 
 with balanced-accuracy change secondary.
 
-The corrective analysis repaired the garment-identity map and applied a prospectively frozen annotation-control policy before corrected predictive outcomes were computed. Two measurement conditions were materialized using the same corrected row order, identity map, folds, representations, estimator, and analysis machinery: a RAW diagnostic condition and an annotation-controlled CLEAN condition. RAW is diagnostic only; the CLEAN condition governs the corrected confirmatory claim.
+The corrective analysis repaired the garment-identity map and applied a prospectively frozen annotation-control policy before corrected predictive outcomes were computed. Two measurement conditions were materialized using the same corrected row order, identity map, folds, representations, estimator, and analysis machinery: a RAW diagnostic condition and an annotation-controlled CLEAN condition. RAW is diagnostic only; the CLEAN condition governs the corrected confirmatory claim. Here, corrective confirmatory means prospectively locked with respect to the corrected outcome; the superseded historical Experiment-06 outcome was already known when the corrective protocol was specified.
 
 The estimator specification, corrected validation unit, bootstrap count, repeated-partition seed schedule, alignment-permutation count, annotation-control policy, and CLEAN feature matrices were frozen before the corrective predictive outcome was computed. The historical Experiment-06 result remains part of the provenance record but is superseded for the manuscript-facing primary claim by the corrected CLEAN analysis.
 
@@ -421,11 +421,11 @@ Broader semantic or causal interpretations are outside the tested design.
 
 ## 3.17 Secondary conventional-image-descriptor baseline (Experiment 07)
 
-Experiment 07 provided a secondary conventional-image-descriptor comparison that was frozen before its own outcomes were computed. It did not alter Experiment 06 or replace its primary claim.
+Experiment 07 provided a secondary conventional-image-descriptor comparison that was frozen before its own outcomes were computed. It predates the later corrective Experiment-06 identity-map repair and retains its own historical Experiment-06-derived fold provenance. It did not alter the then-frozen historical Experiment-06 package and does not replace the current corrective primary claim.
 
 The comparator was histogram of oriented gradients (HOG) [20]. Each native grayscale sketch was converted to an aspect-ratio-preserving 256×256 image by isotropic bilinear resizing and centered white padding. HOG used 9 orientations, 16×16-pixel cells, 2×2-cell blocks, L2-Hys normalization, and produced 8,100 features per sketch. No HOG hyperparameter search, PCA, feature selection, or augmentation was used.
 
-The exact frozen 2,300×14 RA14 matrix, category labels, garment identities, row order, and Experiment-06 fold assignment were reused. Two feature sets were evaluated:
+The exact frozen 2,300×14 RA14 matrix, category labels, historical garment identities, row order, and historical Experiment-06-derived fold assignment frozen for Experiment 07 were reused. These folds are authoritative for Experiment 07 itself and are not the later corrected Experiment-06 primary folds. Two feature sets were evaluated:
 
 \[
 \mathrm{HOG}_{8100}
@@ -439,9 +439,9 @@ and
 \mathbf z_{RA,14}.
 \]
 
-Both used the same fold-local standardization and locked logistic-regression specification as Experiment 06. The primary Experiment-07 contrast was pooled out-of-fold macro-F1 for HOG+RA14 minus HOG; balanced accuracy was secondary. Uncertainty was quantified by a paired bootstrap over the 230 garment identities using 5,000 replicates.
+Both used the same numerical fold-local standardization and locked logistic-regression specification as the historical Experiment-06 package from which Experiment 07 was derived; the fold provenance itself is distinct from the later corrective Experiment-06 analysis. The primary Experiment-07 contrast was pooled out-of-fold macro-F1 for HOG+RA14 minus HOG; balanced accuracy was secondary. Uncertainty was quantified by a paired bootstrap over the 230 historical garment identities using 5,000 replicates.
 
-Experiment 07 is interpreted strictly as a secondary comparator: it tests whether RA14 adds measurable predictive benefit after a high-dimensional local-gradient representation is already present. It is not a new primary hypothesis and does not replace the morphology-based Experiment-06 comparison.
+Experiment 07 is interpreted strictly as a secondary comparator under its own frozen historical Experiment-06-derived fold provenance. It tests whether RA14 adds measurable predictive benefit after a high-dimensional local-gradient representation is already present. It is not a new primary hypothesis, is not a same-fold rerun of the later corrective CLEAN Experiment-06 analysis, and does not replace the corrected morphology-based primary comparison.
 
 ---
 
