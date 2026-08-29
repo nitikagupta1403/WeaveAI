@@ -1,40 +1,42 @@
 # 5. Discussion
 
-## 5.1 A compact geometric representation adds information beyond morphology
+## 5.1 Corrective Experiment 06 supports incremental utility beyond morphology
 
-The main result is that RA14 contributes reproducible category-discriminative information beyond the frozen morphology baseline under garment-identity-disjoint validation. Morphology alone achieved macro-F1 \(0.297788\), whereas morphology+RA14 achieved \(0.335765\), giving
+The manuscript-facing Experiment-06 result is the corrected annotation-controlled CLEAN analysis. Morphology alone achieved macro-F1 \(0.271429\), whereas morphology+RA14 achieved \(0.314256\), giving
 
 \[
-\Delta F_1=+0.037977,
+\Delta F_1=+0.042827,
 \]
 
-with balanced-accuracy increment \(+0.037826\). Category-stratified garment-identity bootstrap intervals excluded zero, and the macro-F1 increment remained positive across all 10 repeated grouped partitions.
+with balanced-accuracy increment \(+0.042609\). Category-stratified corrected-garment-identity bootstrap intervals excluded zero, and the increment remained positive across all 10 corrected repeated grouped partitions.
 
-This identifies a specific role for RA14: a compact, explicit geometric summary that contributes useful information beyond morphology under dependency-aware evaluation. It does not imply that the representation is statistically independent of morphology, because both are derived from the same images.
+This identifies a specific and bounded role for RA14: the complete frozen 14-dimensional representation contributes reproducible category-discriminative information beyond the frozen morphology representation under corrected garment-identity-disjoint evaluation. It does not imply statistical independence of the two representations, because both are derived from the same underlying images.
 
-## 5.2 Most of the directly observed increment lies in radial organization
+A post-outcome target-text audit identified two affected CLEAN images. Excluding their two complete garment identities reduced the macro-F1 increment from \(+0.042827\) to \(+0.036402\), while all 5,000 sensitivity bootstrap replicates and all 10 repeated grouped partitions remained positive. We therefore interpret the sensitivity as persistence with modest attenuation, not as evidence that the two target-text cases account for the existence of the corrected incremental effect. Because this analysis was specified after outcome exposure, it remains descriptive post-outcome evidence.
 
-The ablations localize most directly observed utility to the radial block. Standalone macro-F1 was \(0.206831\) for the eight-dimensional radial block and \(0.081165\) for the six-dimensional axial block. Added to morphology, their respective macro-F1 increments were \(+0.026752\) and \(+0.002299\), while complete RA14 produced \(+0.037977\).
+## 5.2 The corrected analysis does not localize the increment to radial or axial sub-blocks
 
-The radial coordinates summarize where second-harmonic organization occurs relative to the sketch centroid through integrated magnitude, radial centroid, spread, concentration, support limits, peak location, and peak strength. These quantities can differ systematically by garment category without requiring exact garment-level correspondence.
+The historical Experiment-06 package contained radial-only, axial-only, and combined ablations. Those analyses were generated under the historical raw-canvas and historical identity-map configuration and were not rerun under the corrected CLEAN confirmatory design.
 
-The axial block alone added little to morphology. Although the complete representation descriptively exceeded \(M+R\), Experiment 06 did not prespecify a separate conditional test of the axial contribution given \(M+R\). The supported interpretation is therefore a radial-dominant increment rather than an independently established axial effect.
+Consequently, the corrected manuscript does not use the historical ablations to claim that the current \(+0.042827\) increment is predominantly radial or to establish an independent axial contribution. The supported confirmatory claim concerns the complete frozen RA14 block. Historical ablations may motivate future decomposition studies, but they do not define the inferential interpretation of the corrected result.
 
-## 5.3 The HOG comparator reveals representation-dependent complementarity
+This distinction is important because repairing the identity map and annotation-controlled measurement field changes the confirmatory analysis population and preprocessing context. A component-level claim would require a separately locked corrected analysis rather than inheritance from superseded historical values.
 
-Experiment 07 provides a stricter conventional-image-descriptor comparison. HOG alone achieved macro-F1 \(0.648242\), and HOG+RA14 achieved \(0.649135\). The paired garment-identity bootstrap interval crossed zero.
+## 5.3 The HOG comparator remains secondary and representation-dependent
 
-RA14 should therefore not be interpreted as a general-purpose accuracy booster. Its additional value depends on what the baseline already represents. The morphology baseline leaves useful radial-angular structure unexploited, whereas HOG appears to encode much of the same category-relevant edge and orientation information in a much higher-dimensional form.
+Experiment 07 provides a secondary conventional-image-descriptor comparison. HOG alone achieved macro-F1 \(0.648242\), and HOG+RA14 achieved \(0.649135\); the paired garment-identity bootstrap interval crossed zero.
 
-The combined Experiment-06 and Experiment-07 evidence supports **representation-dependent complementarity**: RA14 adds information beyond morphology, while no clear additional benefit is established beyond HOG under the tested protocol.
+Experiment 07 was frozen under its own historical Experiment-06-derived fold provenance before the later corrective Experiment-06 identity-map repair. It is therefore retained as a secondary external baseline rather than treated as a same-fold rerun of the corrected CLEAN primary analysis.
 
-## 5.4 Predictive increment and garment-specific correspondence are different questions
+The qualitative conclusion remains narrow: RA14 should not be interpreted as a universal accuracy booster. A clear increment is supported relative to the corrected morphology baseline, whereas no clear additional benefit was established beyond the tested high-dimensional HOG descriptor under Experiment 07's frozen protocol.
 
-The alignment experiment tested a stronger claim than predictive improvement. Experiment 06 established that correctly aligned morphology+RA14 outperformed morphology alone. The restricted permutation then asked whether correct garment-level pairing performed unusually well relative to category-preserving, block-size-matched RA14 reassignment.
+## 5.4 Predictive increment and garment-specific correspondence remain different questions
 
-It did not. Empirical alignment probabilities were \(p=0.762619\) for macro-F1 and \(p=0.729635\) for balanced accuracy.
+The corrected alignment experiment tested a stronger claim than predictive improvement. The CLEAN primary analysis established that correctly aligned morphology+RA14 outperformed morphology alone. The restricted permutation then asked whether correct garment-level pairing performed unusually well relative to category-preserving, block-size-matched RA14 reassignment.
 
-Thus the predictive increment is reproducible, but the evidence does not localize it to exact garment-level morphology–RA14 correspondence. Category-conditioned radial-angular structure can remain informative even when RA14 comes from another garment in the same category.
+It did not. Corrected empirical alignment probabilities were \(p=0.722639\) for macro-F1 and \(p=0.685657\) for balanced accuracy.
+
+Thus the corrected predictive increment is reproducible, but the evidence does not localize it to exact garment-level morphology–RA14 correspondence. Category-conditioned RA14 structure remains compatible with the observed predictive gain even after exact correspondence is largely disrupted.
 
 This distinction is methodologically important: feature concatenation, incremental predictive utility, and instance-specific complementarity are not equivalent claims.
 

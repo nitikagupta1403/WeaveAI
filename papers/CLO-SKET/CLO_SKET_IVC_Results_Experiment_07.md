@@ -1,6 +1,6 @@
 ## 4.21 Conventional HOG baseline showed negligible incremental benefit from RA14
 
-The frozen conventional-image-descriptor baseline substantially outperformed the lower-dimensional morphology baseline on the same garment-identity-disjoint folds. HOG alone achieved pooled out-of-fold macro-F1
+Under Experiment 07's frozen historical garment-identity-disjoint folds, the conventional-image-descriptor baseline achieved substantially higher classification performance than the historical lower-dimensional morphology baseline. HOG alone achieved pooled out-of-fold macro-F1
 
 \[
 0.648242
@@ -56,7 +56,7 @@ and 72.82% of replicates were positive. For balanced accuracy, the bootstrap mea
 
 and 71.10% of replicates were positive.
 
-**Table 14. Secondary conventional HOG baseline under the authoritative Experiment 06 garment-identity folds.**
+**Table 14. Secondary conventional HOG baseline under the frozen historical Experiment-06-derived folds used by Experiment 07.**
 
 | Feature set | Dimensions | Macro-F1 | Balanced accuracy |
 |---|---:|---:|---:|
@@ -72,6 +72,6 @@ and 71.10% of replicates were positive.
 
 Both intervals included zero. Experiment 07 therefore provides no clear evidence that appending the compact axial–radial vector yields additional predictive benefit once the high-dimensional HOG descriptor is already present. This negative result is retained without changing the HOG configuration, axial–radial representation, classifier, or validation design.
 
-The result does not contradict Experiment 06. Rather, it shows that the incremental value of the axial–radial representation is baseline-dependent: the same 14 coordinates produced a substantially larger gain when appended to the frozen 135-dimensional morphology representation, whereas their additional contribution over HOG was negligible under the tested protocol.
+The result does not contradict the corrective Experiment-06 primary result. The two experiments retain different frozen fold provenance and different baseline representations. Experiment 07 therefore supports only the narrower secondary conclusion that no clear additional benefit from RA14 was established beyond HOG under its tested historical protocol; it must not be interpreted as a same-fold comparison with the corrected CLEAN morphology experiment.
 
 ---

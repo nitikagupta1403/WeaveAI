@@ -1,113 +1,116 @@
 # 4. Results
 
-## 4.1 Study population and locked representations
+## 4.1 Corrected study population and frozen representations
 
-All 2,300 CLO-SKET sketches were retained. Filename reconstruction yielded 230 garment identities, exactly 10 per category across 23 categories; each identity contained 9–11 repeated sketches and was treated as the indivisible validation and resampling unit.
+The corrective Experiment-06 analysis retained all 2,300 CLO-SKET sketches and used the corrected map of 230 garment identities, exactly 10 per category across 23 categories. Complete corrected garment identity was the indivisible unit for the primary train/test split, bootstrap, and alignment permutation.
 
-The frozen morphology representation contained 135 coordinates. RA14 contained eight radial and six axial coordinates,
+The frozen morphology representation contained 135 coordinates and the frozen RA14 representation contained eight radial and six axial coordinates,
 
 \[
 \mathbf z_{RA}
 =
 \mathbf z_R\oplus\mathbf z_A
-\in\mathbb R^{14},
+\in\mathbb R^{14}.
 \]
 
-and reproduced the previously locked representation hash exactly. Seven feature sets entered Experiment 06 without outcome-dependent modification: \(R\), \(A\), \(R+A\), \(M\), \(M+R\), \(M+A\), and \(M+R+A\).
+The corrective feature matrices reproduced the locked representation definitions and passed the pre-outcome feature-hash checks. The corrected CLEAN confirmatory comparison evaluated \(M\) against \(M+R+A\); historical standalone and radial/axial ablation outcomes are retained as provenance but are not used as corrected confirmatory evidence.
 
-The five primary folds were category-balanced and garment-identity-disjoint. Each test fold contained 46 identities—two per category—with zero train/test identity overlap.
+The five corrected primary folds were category-balanced and garment-identity-disjoint. Each test fold contained 46 identities—two per category—with zero train/test identity overlap. Test-row counts were 459, 460, 461, 460, and 460.
 
 ---
 
-## 4.2 RA14 added predictive utility beyond morphology
+## 4.2 Corrected CLEAN analysis supported incremental predictive utility
 
-Morphology alone achieved macro-F1 0.297788 and balanced accuracy 0.298261. RA14 alone achieved 0.219993 and 0.231304, respectively. Adding RA14 to morphology increased performance to macro-F1 0.335765 and balanced accuracy 0.336087, giving the prespecified contrasts
+Under the frozen annotation-controlled CLEAN condition, morphology alone achieved macro-F1 0.271429 and balanced accuracy 0.273043. Adding the complete frozen RA14 representation increased performance to macro-F1 0.314256 and balanced accuracy 0.315652, giving the corrected prespecified contrasts
 
 \[
-\Delta_{RA}^{F_1}=+0.037977,
+\Delta_{RA}^{F_1}=+0.042827,
 \qquad
-\Delta_{RA}^{BA}=+0.037826.
+\Delta_{RA}^{BA}=+0.042609.
 \]
 
-The macro-F1 increment was positive in all five primary folds, ranging from +0.011157 to +0.085268; balanced-accuracy differences were also positive in all five folds.
+The historical raw-canvas Experiment-06 result is retained for provenance but does not govern the corrected manuscript claim.
 
-**Table 1. Locked pooled out-of-fold category-discrimination performance.**
+**Table 1. Corrective CLEAN pooled out-of-fold category-discrimination performance.**
 
 | Feature set | Dimensions | Macro-F1 | Balanced accuracy |
 |---|---:|---:|---:|
-| \(R\) | 8 | 0.206831 | 0.224348 |
-| \(A\) | 6 | 0.081165 | 0.106522 |
-| \(R+A\) | 14 | 0.219993 | 0.231304 |
-| \(M\) | 135 | 0.297788 | 0.298261 |
-| \(M+R\) | 143 | 0.324540 | 0.325217 |
-| \(M+A\) | 141 | 0.300087 | 0.300435 |
-| **\(M+R+A\)** | **149** | **0.335765** | **0.336087** |
+| \(M\) | 135 | 0.271429 | 0.273043 |
+| **\(M+R+A\)** | **149** | **0.314256** | **0.315652** |
+| **Increment** | — | **+0.042827** | **+0.042609** |
 
-The result establishes incremental predictive utility under the locked task; by itself it does not establish statistical independence or garment-specific complementarity.
+The result supports incremental predictive utility under the corrected locked task; by itself it does not establish statistical independence or garment-specific complementarity.
 
 ---
 
-## 4.3 Mechanistic ablation localized most direct utility to the radial block
+## 4.3 Historical ablations do not define the corrected confirmatory interpretation
 
-The radial block was more discriminative alone than the axial block: macro-F1 was 0.206831 for \(R\) and 0.081165 for \(A\), while \(R+A\) reached 0.219993.
+The earlier Experiment-06 package included standalone \(R\), \(A\), and \(R+A\) results and morphology-plus-radial and morphology-plus-axial ablations. Those values were generated under the historical raw-canvas/historical-map analysis and were not rerun as part of the corrected CLEAN confirmatory package.
 
-When added to morphology, the macro-F1 increments were +0.026752 for \(R\) and +0.002299 for \(A\); balanced-accuracy increments were +0.026957 and +0.002174. The complete \(R+A\) block produced the larger macro-F1 increment of +0.037977.
-
-Thus most directly observed incremental utility was associated with radial organization. Although \(M+R+A\) exceeded \(M+R\) descriptively, no separately prespecified significance test was defined for the axial contribution conditional on \(R\).
+Accordingly, the corrected manuscript does not use those historical ablations to claim that the present \(+0.042827\) macro-F1 increment is predominantly radial or independently axial. The confirmatory inference concerns the complete frozen RA14 block added to morphology. Historical ablations remain available as provenance and hypothesis-generating context only.
 
 ---
 
-## 4.4 Identity-cluster uncertainty supported a positive increment
+## 4.4 Corrected-identity bootstrap supported a positive increment
 
-The category-stratified garment-identity bootstrap used 5,000 paired replicates. Mean macro-F1 increment was +0.037909 with percentile 95% interval [+0.020242, +0.055852]; all 5,000 replicates were positive. Balanced accuracy had mean increment +0.037968 with interval [+0.020000, +0.056239], again with no non-positive replicate.
+The category-stratified corrected-garment-identity bootstrap used 5,000 paired replicates. For macro-F1, the observed increment was +0.042827, the bootstrap mean was +0.042915, and the percentile 95% interval was [+0.025798, +0.060559]; all 5,000 replicates were positive.
 
-The unrestricted identity-cluster audit gave closely similar intervals: [+0.019230, +0.055573] for macro-F1 and [+0.019221, +0.057648] for balanced accuracy. The category-stratified result is emphasized because unrestricted resampling could omit an entire category.
+For balanced accuracy, the observed increment was +0.042609, the bootstrap mean was +0.042782, and the percentile interval was [+0.025640, +0.060861]; again all 5,000 replicates were positive.
 
-**Table 2. Category-stratified garment-identity bootstrap for the primary contrast.**
+**Table 2. Category-stratified corrected-garment-identity bootstrap for the CLEAN primary contrast.**
 
-| Metric | Observed \(\Delta\) | Bootstrap mean \(\Delta\) | 95% CI | Positive replicates |
+| Metric | Observed \(\Delta\) | Bootstrap mean \(\Delta\) | 95% interval | Positive replicates |
 |---|---:|---:|---:|---:|
-| Macro-F1 | +0.037977 | +0.037909 | [+0.020242, +0.055852] | 5000 / 5000 |
-| Balanced accuracy | +0.037826 | +0.037968 | [+0.020000, +0.056239] | 5000 / 5000 |
+| Macro-F1 | +0.042827 | +0.042915 | [+0.025798, +0.060559] | 5000 / 5000 |
+| Balanced accuracy | +0.042609 | +0.042782 | [+0.025640, +0.060861] | 5000 / 5000 |
 
-The fraction positive is descriptive and is not interpreted as a permutation probability.
+These intervals are paired uncertainty summaries conditional on the frozen out-of-fold predictions; they are not model-refitting confidence intervals. The fraction positive is descriptive and is not interpreted as a permutation probability.
 
 ---
 
-## 4.5 The increment reproduced across repeated grouped partitions
+## 4.5 The corrected increment remained positive across repeated grouped partitions
 
-Across 10 category-balanced grouped five-fold partitions, the complete RA14 increment was positive in every repeat. Macro-F1 increment had mean +0.032253, SD 0.006805, and range +0.020620 to +0.043275. Balanced-accuracy increment had mean +0.031565, SD 0.007362, and range +0.019565 to +0.043913.
+Across the 10 corrected category-balanced grouped five-fold partitions, the complete RA14 increment was positive in every repeat.
 
-At the individual-fold level, 44 of 50 macro-F1 differences were positive and six were negative. The radial increment was positive in all 10 repeated partitions, with mean macro-F1 increment +0.028850.
+Macro-F1 increment had mean +0.027676, SD 0.006393, and range +0.020214 to +0.035910. Balanced-accuracy increment had mean +0.028174, SD 0.006883, and range +0.018696 to +0.038261.
 
-**Table 3. Stability of the primary increment across repeated garment-identity partitions.**
+**Table 3. Stability of the corrective CLEAN increment across repeated corrected-identity partitions.**
 
 | Quantity | Mean | SD | Minimum | Maximum | Positive repeats |
 |---|---:|---:|---:|---:|---:|
-| \(\Delta_{RA}\), Macro-F1 | +0.032253 | 0.006805 | +0.020620 | +0.043275 | 10 / 10 |
-| \(\Delta_{RA}\), balanced accuracy | +0.031565 | 0.007362 | +0.019565 | +0.043913 | 10 / 10 |
-| \(\Delta_R\), Macro-F1 | +0.028850 | — | — | — | 10 / 10 |
+| \(\Delta_{RA}\), Macro-F1 | +0.027676 | 0.006393 | +0.020214 | +0.035910 | 10 / 10 |
+| \(\Delta_{RA}\), balanced accuracy | +0.028174 | 0.006883 | +0.018696 | +0.038261 | 10 / 10 |
 
-The positive increment was therefore not confined to the primary deterministic partition.
+The positive corrected increment was therefore not confined to the primary deterministic partition.
 
 ---
 
-## 4.6 Category-preserving misalignment did not support garment-specific correspondence
+## 4.6 Corrected alignment control did not support garment-specific correspondence
 
-In 2,000 permutations, complete RA14 identity blocks were reassigned within category while matching block size, breaking exact morphology–RA14 correspondence for 97.3913% of rows while retaining category-conditioned RA14 structure.
+In 2,000 permutations, complete RA14 identity blocks were reassigned within category while matching block size. Twenty of 2,300 rows necessarily self-mapped, so 99.1304% of rows were misaligned in each permutation while category and block-size structure were preserved.
 
-For macro-F1, the correctly aligned increment was +0.037977. The misalignment null had mean +0.042896, SD 0.007141, and 2.5th, median, and 97.5th percentiles +0.029088, +0.043094, and +0.056838. Of 2,000 null permutations, 1,525 equalled or exceeded the observed increment, giving \(p_{\mathrm{align}}=0.762619\).
+For macro-F1, the correctly aligned increment was +0.042827. The misalignment null had mean +0.047423, SD 0.007776, 2.5th percentile +0.032437, and 97.5th percentile +0.062726. The corrected one-sided empirical probability was \(p_{\mathrm{align}}=0.722639\).
 
-Balanced accuracy gave the same conclusion: observed increment +0.037826, null mean +0.042258, and \(p_{\mathrm{align}}=0.729635\).
+Balanced accuracy gave the same conclusion: observed increment +0.042609, null mean +0.046240, SD 0.007801, 2.5th percentile +0.030870, 97.5th percentile +0.061315, and \(p_{\mathrm{align}}=0.685657\).
 
-**Table 4. Category-preserving garment-identity alignment control.**
+**Table 4. Corrective category-preserving garment-identity alignment control.**
 
 | Metric | Observed \(\Delta\) | Null mean | Null SD | Null 2.5% | Null 97.5% | Empirical \(p\) |
 |---|---:|---:|---:|---:|---:|---:|
-| Macro-F1 | +0.037977 | +0.042896 | 0.007141 | +0.029088 | +0.056838 | 0.762619 |
-| Balanced accuracy | +0.037826 | +0.042258 | 0.007145 | +0.028261 | +0.056522 | 0.729635 |
+| Macro-F1 | +0.042827 | +0.047423 | 0.007776 | +0.032437 | +0.062726 | 0.722639 |
+| Balanced accuracy | +0.042609 | +0.046240 | 0.007801 | +0.030870 | +0.061315 | 0.685657 |
 
-Correct alignment therefore did not produce an unusually large increment relative to category-preserving misalignment. Experiment 06 supports reproducible incremental predictive utility but not the stronger claim of garment-specific morphology–RA14 complementarity. The null mean being slightly larger than the observed effect is not evidence that misalignment is intrinsically beneficial; the control only tests whether correct garment pairing is unusually useful.
+Correct alignment therefore did not produce an unusually large increment relative to category-preserving misalignment. The corrected Experiment-06 evidence supports reproducible incremental predictive utility but not the stronger claim of garment-specific morphology–RA14 complementarity.
+
+### Post-outcome target-text sensitivity
+
+The subsequent frozen review of all 2,300 CLEAN images identified exactly two images with visible text exactly matching the garment-category target: one in corrected identity `Cardigan__G02` and one in `Tunic__G02`. No partial/abbreviated or ambiguous target-text cases were identified.
+
+A separately frozen post-outcome sensitivity analysis excluded exactly those two complete identities, removing 20 rows and retaining 2,280 sketches from 228 garment identities. The morphology-only macro-F1 was 0.279058 and morphology+RA14 macro-F1 was 0.315460, giving an increment of +0.036402; balanced accuracy increased from 0.280338 to 0.316329, giving +0.035990.
+
+The sensitivity identity bootstrap remained positive in all 5,000 replicates. Its macro-F1 percentile interval was [+0.019588, +0.052819], and all 10 repeated grouped partitions retained positive pooled macro-F1 increments (mean +0.029800; range +0.022971 to +0.039338).
+
+This represents persistence with modest attenuation relative to the frozen corrective primary increment. Because the sensitivity was specified only after the target-text audit and after the corrective primary outcome already existed, it is descriptive post-outcome evidence only and does not replace or create a confirmatory result.
 
 ---
 

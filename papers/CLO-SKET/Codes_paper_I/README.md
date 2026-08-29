@@ -49,19 +49,23 @@ These two controls must not be collapsed into a generic claim of "rotation robus
 
 ### 06_Experiment_06_Evidence_Record.md
 
-Public manuscript-facing evidence/provenance record for the locked compact-representation experiment. It records the exact feature sets, estimator, garment-identity-disjoint validation design, primary pooled results, identity-bootstrap uncertainty, repeated grouped-partition stability, category-preserving alignment-control result, historical-exposure disclosure, and claim boundary.
+Historical Experiment-06 manuscript-facing evidence/provenance record for the originally frozen compact-representation experiment. It records the historical feature sets, estimator, garment-identity-disjoint validation design, pooled results, identity-bootstrap uncertainty, repeated grouped-partition stability, category-preserving alignment-control result, historical-exposure disclosure, and claim boundary.
 
-This is deliberately an evidence record rather than an executable notebook. The repository does **not** claim that a separate standalone rerunnable Experiment 06 notebook or frozen runtime bundle is present unless one is explicitly deposited.
+This historical record is deliberately an evidence/provenance document rather than a reconstructed standalone execution pipeline. The original integrated historical Experiment-06 runtime is not preserved in the repository, and no attempt is made to infer missing execution semantics.
 
-Experiment 06 is preserved as a frozen historical experiment package. The public evidence bundle is hash-verifiable, and the bundled verifier checks internal provenance and evidence consistency only. It does not reconstruct M/R/A from source TIFFs, fit classifiers, regenerate OOF predictions, or recompute scientific outcomes. The original integrated historical execution pipeline is not preserved in the repository, and no attempt is made to infer missing historical execution semantics. Fresh executable reproducibility work begins with Experiment 08.
+The manuscript-facing primary Experiment-06 result is now governed by the separately frozen **corrective Experiment-06 workflow** under `Experiment_06_Corrective/`. That corrective lineage provides executable validation, feature generation, model fitting, corrected identity-disjoint folds, RAW diagnostic and CLEAN confirmatory outcomes, alignment control, and the separately frozen post-outcome target-text sensitivity. Its evidence is deposited under `../evidence/Experiment_06_Corrective/`. The historical package and corrective package therefore have distinct provenance and must not be conflated.
 
 ### audit_Final_Validation_Shield.ipynb
 
 Historical validation/provenance notebook retained for auditability. It records environment information, integrity checks, and reviewer-oriented validation of frozen result objects. It is **not** intended to be the primary source-to-result execution path and may depend on historical frozen runtime checkpoints.
 
+### Experiment_06_Corrective/
+
+Executable corrective workflow governing the current manuscript-facing Experiment-06 primary analysis. Its chronology prospectively froze the corrected garment-identity map, annotation controls, implementation and environment, and pre-outcome checkpoint before the corrective outcomes were computed. The CLEAN analysis is confirmatory; RAW is diagnostic. The later target-text exclusion analysis is explicitly post-outcome sensitivity only.
+
 ### Experiment_08/
 
-Fresh executable reproducibility study governed by `../PAPER_I_FRESH_STUDY_MATHEMATICAL_DESIGN_LOCK.md` and the Experiment-08 governance records in `../../../docs/experiment-08/`.
+Separately governed executable study under `../PAPER_I_FRESH_STUDY_MATHEMATICAL_DESIGN_LOCK.md` and the Experiment-08 governance records in `../../../docs/experiment-08/`.
 
 The frozen RA14 mechanical-validity gate failed on the raster harmonic-magnitude P95 criterion. Analytic rotation checks and raster axial-angle checks passed, but those passing subcomponents do not override the failed gate. Consequently, all predictive Experiment-08 results are classified as **post-outcome / exploratory** and must not be presented as confirmatory RA14 validation.
 
@@ -107,7 +111,7 @@ For the formal ownership boundary, see:
 
 - Five curated Paper-I scientific notebooks are present.
 - Rotation controls are consolidated into a single notebook while preserving the distinction between image-domain transformation validation and analytic reconstruction coordinate-frame controls.
-- Experiment 06 now has a public evidence/provenance record with explicit non-executable status; no nonexistent standalone runtime bundle is claimed.
+- The historical Experiment-06 package remains provenance-only, while the later `Experiment_06_Corrective/` lineage provides the executable pathway for the current manuscript-facing primary analysis.
 - The validation shield is retained as optional provenance material rather than the primary reproducibility entry point.
 - Source image redistribution is intentionally avoided.
 - Paper-II-only computational material is intentionally excluded.

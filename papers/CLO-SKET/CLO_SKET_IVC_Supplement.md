@@ -66,7 +66,7 @@ and
 
 No feature standardization or other scaling transformation was applied. All unspecified estimator arguments used the defaults of scikit-learn 1.6.1.
 
-The earlier representation/reconstruction validation lineage was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1; the separately frozen Experiment 06 confirmatory run used Python 3.13.15, NumPy 2.1.3, pandas 2.2.3, and scikit-learn 1.6.1 (see Data and Code Availability and the accompanying reproducibility record).
+The earlier representation/reconstruction validation lineage was executed with Python 3.12.13, NumPy 2.0.2, and scikit-learn 1.6.1. The separately frozen historical Experiment-06 run used Python 3.13.15, NumPy 2.1.3, pandas 2.2.3, and scikit-learn 1.6.1. That historical environment record is retained for provenance and is distinct from the later executable corrective Experiment-06 lineage described in Data and Code Availability.
 
 ---
 
@@ -914,7 +914,7 @@ Recovered garment identity was therefore used as the clustering unit for validat
 ---
 An initial image-level cross-validation design did not separate repeated sketches by garment identity: garment identities represented in each test fold were also represented in the corresponding training set. That design therefore evaluated unseen image files rather than unseen garments and was retained only as a sensitivity comparison.
 
-The primary validation used five category-balanced, garment-identity-disjoint folds. Each test fold contained 46 complete garment identities—two identities from each of the 23 categories—and each training fold contained the remaining 184 identities. Test-row counts were 459, 460, 462, 460, and 459 sketches because the number of repeated sketches per garment identity varied slightly.
+The historical reconstruction/diagnostic validation lineage used five category-balanced, garment-identity-disjoint folds. Each test fold contained 46 complete historical garment identities—two identities from each of the 23 categories—and each training fold contained the remaining 184 identities. Test-row counts were 459, 460, 462, 460, and 459 sketches because the number of repeated sketches per historical garment identity varied slightly. These folds remain provenance for the reconstruction analyses in this supplement and must not be confused with the later corrected Experiment-06 primary folds, whose test-row counts are 459, 460, 461, 460, and 460.
 
 Every sketch and every recovered garment identity was held out exactly once. Train/test garment-identity overlap was zero in all five folds.
 
@@ -1435,7 +1435,7 @@ Because the observed value appears algebraically in \(\Delta R_2\), this correla
 
 # Supplementary provenance
 
-All numerical values and inferential decisions in this supplement trace to the frozen master manuscript and its associated Paper-I/Experiment-06 evidence lineage. The frozen master remains authoritative if an editorial projection ever diverges.
+Numerical values and inferential decisions in this supplement retain the provenance of the specific analysis from which they were derived. Historical reconstruction and diagnostic analyses remain frozen under their original lineage, whereas the manuscript-facing Experiment-06 primary predictive claim is governed by the separately frozen corrective CLEAN analysis and its corrective evidence record. Editorial projections must preserve these chronology and claim boundaries rather than treating the historical master as overriding the corrective lineage.
 
 ---
 

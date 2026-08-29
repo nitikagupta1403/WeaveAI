@@ -2,19 +2,23 @@
 
 ## Purpose
 
-This directory contains compact reviewer-facing evidence supporting the
-frozen Experiment 06 and Experiment 07 results reported in the IVC
-manuscript.
+This directory contains reviewer-facing evidence for the historical
+Experiment-06 and Experiment-07 lineages together with the separately
+frozen corrective Experiment-06 evidence that governs the current
+manuscript-facing primary predictive claim.
 
 The bundle is intended for numerical audit, provenance verification,
 and inspection of the reported validation outcomes. It is not presented
 as a self-contained replacement for the original CLO-SKET dataset or
 for all frozen computational intermediates.
 
-## Experiment 06
+## Historical Experiment 06
 
-Experiment 06 evaluates the incremental contribution of the frozen
-radial and axial descriptors under garment-identity-disjoint validation.
+The original frozen Experiment-06 package evaluated the incremental
+contribution of the radial and axial descriptors under its historical
+garment-identity-disjoint validation design. That package is retained
+for provenance and no longer defines the current manuscript-facing
+primary Experiment-06 result.
 
 The public evidence includes:
 
@@ -29,15 +33,33 @@ The public evidence includes:
 - provenance hashes; and
 - the final Experiment-06 manifest.
 
-The frozen Experiment-06 checkpoint
+The historical Experiment-06 checkpoint
 `CLO_SKET_EXPERIMENT06_FINAL_CHECKPOINT.pkl` is intentionally not
 included in this compact repository bundle.
+
+## Corrective Experiment 06
+
+The current manuscript-facing Experiment-06 primary analysis is governed
+by the separately frozen corrective lineage under
+`Experiment_06_Corrective/`.
+
+That evidence includes the corrected 2,300-row identity/fold map,
+annotation-control artifacts, pre-outcome execution locks, frozen RAW
+diagnostic and CLEAN confirmatory outcomes, corrected bootstrap and
+alignment-control results, the complete target-text leakage audit, and
+the separately frozen post-outcome target-text sensitivity.
+
+The corrective CLEAN analysis is the primary confirmatory result.
+The target-text sensitivity is descriptive post-outcome evidence and
+does not replace or create a confirmatory result.
 
 ## Experiment 07
 
 Experiment 07 is the frozen conventional-image-descriptor comparator
-using HOG and HOG+RA14 under the authoritative Experiment-06
-garment-identity fold assignment.
+using HOG and HOG+RA14 under its historical Experiment-06-derived
+garment-identity fold assignment. These folds remain authoritative for
+Experiment 07 itself but are not the later corrected Experiment-06
+primary folds.
 
 The public evidence includes:
 
@@ -74,13 +96,15 @@ and access conditions.
 
 ## Interpretation boundary
 
-Experiment 06 supports incremental predictive value of the compact
-radial-axial representation relative to the frozen morphology baseline.
+The corrective CLEAN Experiment-06 analysis supports reproducible
+incremental predictive utility of the complete RA14 representation
+relative to the frozen morphology representation. Its corrected
+alignment control does not establish uniquely garment-specific
+morphology-RA14 correspondence.
 
 Experiment 07 does not establish a general predictive improvement over
 conventional image descriptors. HOG+RA14 produced only a negligible
 point increase over HOG, and the paired garment-identity bootstrap
-intervals included zero.
-
-The two experiments therefore support representation-dependent
-complementarity rather than universal classification improvement.
+intervals included zero. Because Experiment 07 retains its historical
+fold provenance, it is treated as a secondary comparator rather than a
+same-fold rerun of the corrected Experiment-06 primary analysis.
