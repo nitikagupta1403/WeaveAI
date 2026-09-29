@@ -581,7 +581,7 @@ and compression ratio:
 \boxed{1.7234\times}.
 \]
 
-These values must be generated programmatically rather than typed manually into figures.
+These nominal coefficient-slot values must be generated programmatically rather than typed manually into figures. The 41.98% reduction refers to nominal spectral coefficient slots. After accounting for the real-valued Nyquist harmonic, the nonredundant real-scalar reduction is \(1-3004/5112=41.24\%\).
 
 ---
 
@@ -615,11 +615,19 @@ The block ranges in the final real vector must correspond to:
 - high-middle;
 - high.
 
-Required total dimension:
+Required packed array width:
 
 \[
 \boxed{3008}.
 \]
+
+Because \(N_\theta=72\), \(k=36\) is the Nyquist harmonic and its imaginary component is structurally zero for the real-valued angular input field. The compressed \(k=36\) profile contributes four such zero imaginary coordinates, so the frozen hybrid contains
+
+\[
+\boxed{3004}
+\]
+
+nonredundant real scalar coordinates. The complete \(\mathrm{RAW}_{72}\) field correspondingly contains 5112 nonredundant real scalar coordinates within a 5184-coordinate packed array, and a uniform \(B=42\) descriptor contains 2982 within a 3024-coordinate packed array.
 
 ## Exact audit
 
