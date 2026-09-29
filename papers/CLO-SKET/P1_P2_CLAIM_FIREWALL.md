@@ -272,9 +272,9 @@ The papers may use the same substrate while asking different scientific question
 | \(k=5{:}12\rightarrow RAW_{72}\) | — | ✓ | PAPER-2 ONLY |
 | \(k=13{:}24\rightarrow RAW_{72}\) | — | ✓ | PAPER-2 ONLY |
 | \(k=25{:}36\rightarrow db4_4\) | — | ✓ | PAPER-2 ONLY |
-| 2592 → 1504 complex coefficients | — | ✓ | PAPER-2 ONLY |
+| 2592 → 1504 nominal spectral coefficient slots | — | ✓ | PAPER-2 ONLY |
 | 41.98% coefficient reduction | — | ✓ | PAPER-2 ONLY |
-| 3008-dimensional real packing | — | ✓ | PAPER-2 ONLY |
+| 3008-coordinate real packing (3004 nonredundant real scalar coordinates after Nyquist accounting) | — | ✓ | PAPER-2 ONLY |
 
 ---
 
@@ -373,19 +373,19 @@ Paper 2 also exclusively owns:
 2592\rightarrow1504
 \]
 
-complex coefficients,
+nominal spectral coefficient slots,
 
 \[
 41.98\%
 \]
 
-coefficient reduction,
+nominal coefficient-slot reduction,
 
 \[
 3008
 \]
 
-real dimensions,
+packed real coordinates (3004 nonredundant real scalar coordinates after Nyquist accounting),
 
 \[
 PCA_{64}=44.65\%
