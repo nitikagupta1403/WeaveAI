@@ -1,6 +1,6 @@
 # P2-R0-03 — Nyquist / Dimensionality Audit
 
-**Status:** GREEN after accounting clarification  
+**Status:** AMBER — core Nyquist property computationally verified; exact frozen db4 high-block numeric check still pending  
 **Scope:** Paper II positive-harmonic representation with 72 angular bins.
 
 ## Finding
@@ -112,3 +112,31 @@ Use:
 - **nonredundant real scalar coordinates** for 5112, 3004, and 2982.
 
 Do not describe 3008 as 3008 independent real dimensions.
+
+
+## Computational verification performed before closure
+
+Using the uploaded canonical runtime checkpoint with SHA-256
+
+`4e7d6ea942b3fd4b506c330f624178e154022683756e6edcffcf7aa65bd69f9f`,
+
+the following checks were executed directly on `conditional_angular`:
+
+- shape: `(2300, 72, 72)`;
+- dtype: real-valued `float64`;
+- recomputed `np.fft.rfft(..., axis=-1)` shape: `(2300, 72, 37)`;
+- `max(abs(Im(F[...,36]))) = 0.0`;
+- `max(abs(Im(F[...,35]))) = 0.9142568589369724`, confirming that the zero imaginary component is specific to the Nyquist bin rather than a general artifact;
+- packing the complete non-DC field into 5184 real coordinates gives exactly 72 zero-variance coordinates;
+- those 72 coordinates are exactly the final 72 packed imaginary coordinates, corresponding to the 72 radial samples of `k=36`;
+- `StandardScaler` maps all 72 coordinates to exact zeros and reports exactly 72 zero-variance features.
+
+The saved executed downstream notebook independently reports `Zero-IQR dimensions: 72` for the full 5184-coordinate shared geometry, consistent with the direct checkpoint audit.
+
+### Remaining closure check
+
+The frozen Cell-14 code transforms real and imaginary radial profiles separately with PyWavelets (`db4`, periodization) and retains the first four coefficients. Since the directly verified `k=36` imaginary radial profile is identically zero, linear wavelet transformation implies four retained zero imaginary coefficients. Nevertheless, the audit remains AMBER until the exact PyWavelets Cell-14 construction is rerun and the saved high-block object is checked numerically:
+
+`max(abs(Im(Z_high_WAV4_complex_14[:,11,:]))) == 0`
+
+or floating-point-equivalent zero.
