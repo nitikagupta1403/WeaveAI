@@ -52,7 +52,7 @@ The retained latent morphology showed a similarly non-monotonic organization. Wi
 
 The two supported compact bases also differed. The lowest harmonic band retained four DCT coefficients, whereas the highest band retained four db4-wavelet coefficients. The contrast is consistent with different radial organizations being represented efficiently by different basis families, but the experiment does not establish an intrinsic physical correspondence between low harmonics and global smoothness or between high harmonics and wavelet-like structure.
 
-The hybrid representation reduced the complex coefficient count from 2592 to 1504, a 41.98% reduction. That value is strictly a representation-dimensionality result. It is not an estimate of removed noise, redundant morphology, irrelevant geometry, or semantic content.
+The hybrid representation reduced the nominal spectral coefficient-slot count from 2592 to 1504, a 41.98% reduction. In nonredundant real-scalar terms, the count changes from 5112 to 3004, a 41.24% reduction. The 41.98% figure therefore refers to nominal coefficient slots in the frozen complex-array representation. It is not an estimate of removed noise, redundant morphology, irrelevant geometry, or semantic content.
 
 ---
 
@@ -77,13 +77,13 @@ This distinction matters because an empty shell and an occupied shell with perfe
 
 Radial mass was more informative, but only modestly so. Appending the independently reconstructed and lineage-verified \(M(r)\) profile increased mean MRR by 0.003486 and mean top-1 retrieval by 0.006973. Four of five folds improved, although 2,230 of 2,300 query ranks remained unchanged. Because this was a descriptive sensitivity analysis rather than a prespecified inferential comparison, the gain is not interpreted as statistically established superiority.
 
-The primary 3008-dimensional representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
+The primary 3008-coordinate packed representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
 
 
 
 ### 5.2.2 Whole-representation baselines support heterogeneity without establishing universal superiority
 
-The descriptor-level sensitivity analysis provides an important complement to the band-wise inferential results. The heterogeneous hybrid did not exceed the complete \(\mathrm{RAW}_{72}\) representation in mean retrieval: full radial structure was descriptively higher by 0.002607 MRR. However, the complete representation required 5184 real coordinates, compared with 3008 for the hybrid. The central benefit of the hybrid is therefore not maximum raw retrieval score, but substantial dimensional reduction with little loss in the present identity-retrieval task.
+The descriptor-level sensitivity analysis provides an important complement to the band-wise inferential results. The heterogeneous hybrid did not exceed the complete \(\mathrm{RAW}_{72}\) representation in mean retrieval: full radial structure was descriptively higher by 0.002607 MRR. However, the complete representation required 5184 packed real coordinates compared with 3008 for the hybrid; after removing structurally zero Nyquist-imaginary coordinates, the corresponding nonredundant counts are 5112 and 3004. The central benefit of the hybrid is therefore not maximum raw retrieval score, but substantial dimensional reduction with little loss in the present identity-retrieval task.
 
 The nearly dimension-matched uniform \(\mathrm{RAW}_{42}\) descriptor was also competitive, differing from the hybrid by only \(-0.000870\) mean MRR. This result prevents an overly strong claim that heterogeneous encoding is uniquely necessary for competitive retrieval. A simple uniformly subsampled radial representation can preserve much of the same identity information at a similar dimensionality.
 
@@ -176,7 +176,7 @@ The first 64 principal components accounted for 44.65% of variance in the standa
 
 Within this subspace, 78.54% of variance-weighted mapped morphology energy occurred at intermediate harmonic orders \(k=5{:}24\), 66.84% occurred in the outer radial zone \(r=49{:}72\), and 51.30% occurred jointly in the outer-radial × intermediate-harmonic region. The largest individual radial-harmonic cells were outer × \(k=13{:}24\) and outer × \(k=5{:}12\).
 
-These numbers describe how variation represented by PCA-64 is localized after exact inverse mapping. They are not percentages of total garment morphology, not percentages of the complete 3008-dimensional representation, and not estimates of semantic garment-part contribution.
+These numbers describe how variation represented by PCA-64 is localized after exact inverse mapping. They are not percentages of total garment morphology, not percentages of the complete 3008-coordinate packed representation, and not estimates of semantic garment-part contribution.
 
 The radial coordinates themselves also remain morphological rather than semantic. In particular,
 
