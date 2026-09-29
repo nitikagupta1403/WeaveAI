@@ -359,7 +359,7 @@ M_i(r)
      {\sum_{r,\theta}W_i(r,\theta)}.
 \]
 
-Because a positive-harmonic-only representation cannot distinguish an empty shell from an occupied shell with a perfectly uniform conditional angular distribution, representation completeness was examined in two fixed post hoc sensitivity analyses. These analyses did not reopen harmonic-band selection or alter the frozen 3008-dimensional hybrid.
+Because a positive-harmonic-only representation cannot distinguish an empty shell from an occupied shell with a perfectly uniform conditional angular distribution, representation completeness was examined in two fixed post hoc sensitivity analyses. These analyses did not reopen harmonic-band selection or alter the frozen 3008-coordinate packed hybrid.
 
 First, the frozen hybrid was augmented with the 72-dimensional occupied-shell indicator. Second, it was augmented with the 72-dimensional normalized radial-mass profile \(M_i(r)\). Radial mass was reconstructed deterministically from the original TIFF images using the exact image-to-polar procedure defined in Section 3.2. As a lineage verification, the reconstructed occupied-shell mask was required to reproduce the previously frozen \(2300\times72\) occupancy mask exactly; any mismatch would have invalidated the reconstructed mass profile.
 
@@ -653,13 +653,15 @@ giving
 x_i\in\mathbb R^{3008}.
 \]
 
+Here, 3008 is the **packed storage width**, not the number of independent real scalar degrees of freedom. Because the angular grid has 72 bins, \(k=36\) is the Nyquist harmonic. For real-valued \(P_i(\theta\mid r)\), \(F_{i,36}(r)\) is real-valued (up to floating-point roundoff), and the real-valued radial DCT/wavelet operators preserve this property. The four packed imaginary coordinates associated with the compressed \(k=36\) high-band profile are therefore structurally zero. The frozen hybrid consequently has 3008 packed real coordinates but 3004 nonredundant real scalar coordinates. The complete \(\mathrm{RAW}_{72}\) field analogously has 5184 packed coordinates but 5112 nonredundant real scalar coordinates, and each uniform \(B=42\) descriptor has 3024 packed coordinates but 2982 nonredundant real scalar coordinates. This accounting clarification does not alter any frozen retrieval, inference, or latent-model result.
+
 For validated latent-model comparisons, standardization was learned exclusively from each outer training fold. For feature \(m\),
 
 \[
 \tilde x_{im}=\frac{x_{im}-\mu_{m,\mathrm{train}}}{\sigma_{m,\mathrm{train}}},
 \]
 
-and the same training-fold parameters were applied unchanged to the corresponding outer test data. Within each latent-validation fold, this train-only preprocessing prevents the corresponding outer-test identities from entering feature standardization or PCA/AE/VAE fitting. The 3008-dimensional hybrid input representation itself, however, had already been frozen from the preceding cross-validated band-selection analysis conducted across the complete CLO-SKET dataset. The downstream latent comparison is therefore **conditional on that previously selected hybrid representation**; it is not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
+and the same training-fold parameters were applied unchanged to the corresponding outer test data. Within each latent-validation fold, this train-only preprocessing prevents the corresponding outer-test identities from entering feature standardization or PCA/AE/VAE fitting. The 3008-coordinate packed hybrid input representation itself, however, had already been frozen from the preceding cross-validated band-selection analysis conducted across the complete CLO-SKET dataset. The downstream latent comparison is therefore **conditional on that previously selected hybrid representation**; it is not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
 
 After model selection was complete, the final descriptive PCA used for morphology interpretation was fitted to the frozen full representation with its corresponding full-data standardization. This final descriptive fit was not used to estimate held-out predictive performance.
 
@@ -679,13 +681,13 @@ Five representations were compared:
 \mathrm{db4}_4,
 \]
 
-with 1504 complex coefficients (3008 real coordinates);
+with 1504 nominal spectral coefficient slots stored in complex arrays (3008 packed real coordinates; 3004 nonredundant real scalar coordinates);
 
 \[
 \mathrm{FULL\ RAW}_{72},
 \]
 
-with \(36\times72=2592\) complex coefficients (5184 real coordinates); and three approximately dimension-matched uniform representations with a fixed radial budget \(B=42\),
+with \(36\times72=2592\) nominal spectral coefficient slots (5184 packed real coordinates; 5112 nonredundant real scalar coordinates); and three approximately dimension-matched uniform representations with a fixed radial budget \(B=42\),
 
 \[
 \mathrm{UNIFORM\ RAW}_{42},
@@ -1193,13 +1195,19 @@ reduction relative to the complete 2592-coefficient field and a compression rati
 \boxed{1.7234\times}.
 \]
 
-Exact block-wise real/imaginary packing produced a frozen
+Exact block-wise real/imaginary packing produced a frozen representation with
 
 \[
-\boxed{3008\text{-dimensional}}
+\boxed{3008}
 \]
 
-real representation.
+packed real coordinates. Because four Nyquist-imaginary coordinates are structurally zero, the corresponding nonredundant real-scalar count is
+
+\[
+\boxed{3004}.
+\]
+
+Thus the previously reported 3008 value is retained as the exact packed array width, not as a claim of 3008 independent degrees of freedom.
 
 This dimensional reduction follows from the inferential decisions in Section 4.1; it was **not** obtained by selecting a global compression rate or by treating discarded coefficients as noise. In particular, the two intermediate harmonic ranges account for most of the retained dimensionality precisely because the tested compression alternatives were not supported there. The final representation therefore preserves heterogeneity in radial representation requirements rather than imposing a uniform basis across the Fourier field.
 
@@ -1230,7 +1238,7 @@ Appending the occupancy indicator changed mean held-out MRR from
 0.816766
 \]
 
-for the frozen 3008-dimensional hybrid to
+for the frozen 3008-coordinate packed hybrid to
 
 \[
 0.816114,
@@ -1276,7 +1284,7 @@ These sensitivities do not change the frozen primary representation. The 3008-di
 
 ### 4.2.2 The heterogeneous descriptor matched full radial retrieval closely and avoided losses from uniform compact transforms
 
-We next compared the frozen heterogeneous hybrid with complete and uniform whole-representation baselines. The hybrid contained 1504 complex coefficients (3008 real coordinates), whereas the complete \(\mathrm{RAW}_{72}\) field contained 2592 complex coefficients (5184 real coordinates). The dimension-matched uniform descriptors used 1512 complex coefficients (3024 real coordinates), only 0.532% more than the hybrid.
+We next compared the frozen heterogeneous hybrid with complete and uniform whole-representation baselines. The hybrid contained 1504 nominal spectral coefficient slots (3008 packed real coordinates; 3004 nonredundant real scalar coordinates), whereas the complete \(\mathrm{RAW}_{72}\) field contained 2592 nominal spectral coefficient slots (5184 packed real coordinates; 5112 nonredundant real scalar coordinates). The approximately dimension-matched uniform descriptors used 1512 nominal coefficient slots (3024 packed real coordinates; 2982 nonredundant real scalar coordinates). Thus they are 0.532% larger than the hybrid by packed storage width but 0.732% smaller by nonredundant real-scalar count because the Nyquist component contributes one rather than two independent real values.
 
 Mean held-out retrieval for the complete radial field was
 
@@ -1306,7 +1314,7 @@ and
 \Delta\mathrm{Top1}=+0.005215,
 \]
 
-while requiring 5184 rather than 3008 real coordinates.
+while requiring 5184 rather than 3008 packed real coordinates (5112 versus 3004 nonredundant real scalar coordinates).
 
 The dimension-matched uniform raw descriptor was similarly close:
 
@@ -1356,13 +1364,13 @@ Both uniform compact-transform baselines had lower MRR than the hybrid in all fi
 
 ### Table 3. Whole-representation descriptive sensitivity
 
-| Representation | Complex coefficients | Real dimension | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
-|---|---:|---:|---:|---:|---:|
-| Full \(\mathrm{RAW}_{72}\) | 2592 | 5184 | 0.819373 | 0.638746 | +0.002607 |
-| Frozen heterogeneous hybrid | 1504 | 3008 | 0.816766 | 0.633531 | 0 |
-| Uniform \(\mathrm{RAW}_{42}\) | 1512 | 3024 | 0.815896 | 0.631792 | -0.000870 |
-| Uniform db4-wavelet-42 | 1512 | 3024 | 0.789378 | 0.578755 | -0.027388 |
-| Uniform DCT-42 | 1512 | 3024 | 0.783503 | 0.567006 | -0.033263 |
+| Representation | Nominal spectral coefficient slots | Packed real coordinates | Nonredundant real scalar coordinates | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
+|---|---:|---:|---:|---:|---:|---:|
+| Full \(\mathrm{RAW}_{72}\) | 2592 | 5184 | 5112 | 0.819373 | 0.638746 | +0.002607 |
+| Frozen heterogeneous hybrid | 1504 | 3008 | 3004 | 0.816766 | 0.633531 | 0 |
+| Uniform \(\mathrm{RAW}_{42}\) | 1512 | 3024 | 2982 | 0.815896 | 0.631792 | -0.000870 |
+| Uniform db4-wavelet-42 | 1512 | 3024 | 2982 | 0.789378 | 0.578755 | -0.027388 |
+| Uniform DCT-42 | 1512 | 3024 | 2982 | 0.783503 | 0.567006 | -0.033263 |
 
 These comparisons are descriptive post-selection sensitivities rather than a new inferential family. They therefore do not establish population-level superiority of the hybrid over every alternative descriptor. They do show that the heterogeneous representation preserved nearly the retrieval behaviour of the complete radial field at substantially lower dimensionality, while avoiding the larger losses observed when a single compact DCT or wavelet representation was imposed uniformly across the harmonic field. Uniform \(\mathrm{RAW}_{42}\) remained a competitive simple baseline and is reported explicitly.
 
@@ -1464,7 +1472,7 @@ The first 64 PCA components accounted for
 \boxed{44.65\%}
 \]
 
-of variance in the standardized 3008-dimensional hybrid representation. All subsequent morphology localization is therefore conditional on this retained PCA-64 subspace.
+of variance in the standardized 3008-coordinate packed hybrid representation. All subsequent morphology localization is therefore conditional on this retained PCA-64 subspace.
 
 To determine what the latent coordinates represented in the original morphology domain, each PCA direction \(j\) was mapped through the exact frozen inverse representation to obtain
 
@@ -1562,7 +1570,7 @@ and outer × \(k=5{:}12\),
 
 The spectral and radial centroids of the 64 retained PCA directions were likewise heterogeneous (Fig. 4E): leading axes were concentrated toward larger radial centroids, while later directions extended toward more internal radial locations and across different harmonic-centroid positions.
 
-These percentages have a strict denominator. They describe **variance-weighted morphology localization within the retained PCA-64 subspace**, which itself represents 44.65% of standardized representation variance. They are not percentages of total garment morphology, the full 3008-dimensional representation, semantic garment parts, or causal morphology factors.
+These percentages have a strict denominator. They describe **variance-weighted morphology localization within the retained PCA-64 subspace**, which itself represents 44.65% of standardized representation variance. They are not percentages of total garment morphology, the full 3008-coordinate packed representation, semantic garment parts, or causal morphology factors.
 
 ---
 
@@ -1636,7 +1644,7 @@ The retained latent morphology showed a similarly non-monotonic organization. Wi
 
 The two supported compact bases also differed. The lowest harmonic band retained four DCT coefficients, whereas the highest band retained four db4-wavelet coefficients. The contrast is consistent with different radial organizations being represented efficiently by different basis families, but the experiment does not establish an intrinsic physical correspondence between low harmonics and global smoothness or between high harmonics and wavelet-like structure.
 
-The hybrid representation reduced the complex coefficient count from 2592 to 1504, a 41.98% reduction. That value is strictly a representation-dimensionality result. It is not an estimate of removed noise, redundant morphology, irrelevant geometry, or semantic content.
+The hybrid representation reduced the nominal spectral coefficient-slot count from 2592 to 1504, a 41.98% reduction. In nonredundant real-scalar terms, the corresponding count changes from 5112 to 3004, a 41.24% reduction. The 41.98% value therefore refers specifically to nominal coefficient slots in the frozen complex-array representation. It is not an estimate of removed noise, redundant morphology, irrelevant geometry, or semantic content.
 
 ---
 
@@ -1661,7 +1669,7 @@ This distinction matters because an empty shell and an occupied shell with perfe
 
 Radial mass was more informative, but only modestly so. Appending the independently reconstructed and lineage-verified \(M(r)\) profile increased mean MRR by 0.003486 and mean top-1 retrieval by 0.006973. Four of five folds improved, although 2,230 of 2,300 query ranks remained unchanged. Because this was a descriptive sensitivity analysis rather than a prespecified inferential comparison, the gain is not interpreted as statistically established superiority.
 
-The primary 3008-dimensional representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
+The primary 3008-coordinate packed representation is therefore retained unchanged. Its scope is deliberately narrower than a complete reconstruction of sketch ink: it represents angular morphology conditional on radial location. The radial-mass result indicates that \(M(r)\) contains modest complementary identity information and may be useful as an auxiliary channel in future extensions, but it does not invalidate the evidence-controlled positive-harmonic representation studied here.
 
 
 
