@@ -172,7 +172,7 @@ M_i(r)
      {\sum_{r,\theta}W_i(r,\theta)}.
 \]
 
-Because a positive-harmonic-only representation cannot distinguish an empty shell from an occupied shell with a perfectly uniform conditional angular distribution, representation completeness was examined in two fixed post hoc sensitivity analyses. These analyses did not reopen harmonic-band selection or alter the frozen 3008-dimensional hybrid.
+Because a positive-harmonic-only representation cannot distinguish an empty shell from an occupied shell with a perfectly uniform conditional angular distribution, representation completeness was examined in two fixed post hoc sensitivity analyses. These analyses did not reopen harmonic-band selection or alter the frozen 3008-coordinate packed hybrid.
 
 First, the frozen hybrid was augmented with the 72-dimensional occupied-shell indicator. Second, it was augmented with the 72-dimensional normalized radial-mass profile \(M_i(r)\). Radial mass was reconstructed deterministically from the original TIFF images using the exact image-to-polar procedure defined in Section 3.2. As a lineage verification, the reconstructed occupied-shell mask was required to reproduce the previously frozen \(2300\times72\) occupancy mask exactly; any mismatch would have invalidated the reconstructed mass profile.
 
@@ -466,13 +466,15 @@ giving
 x_i\in\mathbb R^{3008}.
 \]
 
+The value 3008 is the exact packed array width. Because 72 angular bins make \(k=36\) the Nyquist harmonic, \(F_{i,36}(r)\) is real-valued for the real angular input field. The four packed imaginary coordinates associated with the compressed \(k=36\) profile are therefore structurally zero, leaving 3004 nonredundant real scalar coordinates. For the complete \(\mathrm{RAW}_{72}\) field, the corresponding counts are 5184 packed and 5112 nonredundant coordinates; for each uniform \(B=42\) descriptor they are 3024 packed and 2982 nonredundant coordinates. This bookkeeping clarification leaves the frozen representation arrays and all downstream analyses unchanged.
+
 For validated latent-model comparisons, standardization was learned exclusively from each outer training fold. For feature \(m\),
 
 \[
 \tilde x_{im}=\frac{x_{im}-\mu_{m,\mathrm{train}}}{\sigma_{m,\mathrm{train}}},
 \]
 
-and the same training-fold parameters were applied unchanged to the corresponding outer test data. Within each latent-validation fold, this train-only preprocessing prevents the corresponding outer-test identities from entering feature standardization or PCA/AE/VAE fitting. The 3008-dimensional hybrid input representation itself, however, had already been frozen from the preceding cross-validated band-selection analysis conducted across the complete CLO-SKET dataset. The downstream latent comparison is therefore **conditional on that previously selected hybrid representation**; it is not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
+and the same training-fold parameters were applied unchanged to the corresponding outer test data. Within each latent-validation fold, this train-only preprocessing prevents the corresponding outer-test identities from entering feature standardization or PCA/AE/VAE fitting. The 3008-coordinate packed hybrid input representation itself, however, had already been frozen from the preceding cross-validated band-selection analysis conducted across the complete CLO-SKET dataset. The downstream latent comparison is therefore **conditional on that previously selected hybrid representation**; it is not an independent end-to-end validation of the combined representation-selection and latent-model-selection pipeline.
 
 After model selection was complete, the final descriptive PCA used for morphology interpretation was fitted to the frozen full representation with its corresponding full-data standardization. This final descriptive fit was not used to estimate held-out predictive performance.
 
@@ -492,13 +494,13 @@ Five representations were compared:
 \mathrm{db4}_4,
 \]
 
-with 1504 complex coefficients (3008 real coordinates);
+with 1504 nominal spectral coefficient slots (3008 packed real coordinates; 3004 nonredundant real scalar coordinates);
 
 \[
 \mathrm{FULL\ RAW}_{72},
 \]
 
-with \(36\times72=2592\) complex coefficients (5184 real coordinates); and three approximately dimension-matched uniform representations with a fixed radial budget \(B=42\),
+with \(36\times72=2592\) nominal spectral coefficient slots (5184 packed real coordinates; 5112 nonredundant real scalar coordinates); and three approximately dimension-matched uniform representations with a fixed radial budget \(B=42\),
 
 \[
 \mathrm{UNIFORM\ RAW}_{42},
