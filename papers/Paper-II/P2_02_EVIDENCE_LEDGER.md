@@ -39,7 +39,7 @@ and
 \[
 Z_i\in\mathbb{C}^{1504}
 \rightarrow
-x_i\in\mathbb{R}^{3008}.
+x_i\in\mathbb{R}^{3008}\ \text{(packed storage)}.
 \]
 
 These are mathematical or computational facts, not statistical findings.
@@ -495,7 +495,7 @@ Therefore,
 \boxed{1504}
 \]
 
-complex coefficients per sketch.
+nominal spectral coefficient slots per sketch.
 
 The complete uncompressed field contains
 
@@ -505,7 +505,7 @@ The complete uncompressed field contains
 \boxed{2592}
 \]
 
-complex coefficients.
+nominal spectral coefficient slots.
 
 Thus,
 
@@ -537,7 +537,7 @@ coefficient reduction, with compression ratio
 
 ## Supported wording
 
-> The evidence-guided hybrid representation reduced the complex coefficient count by 41.98%.
+> The evidence-guided hybrid representation reduced the nominal spectral coefficient-slot count by 41.98%.
 
 ## Not supported
 
@@ -583,6 +583,8 @@ x_i\in\mathbb R^{3008}
 \]
 
 The packing lineage was numerically verified exactly before latent morphology inversion.
+
+Because the angular grid has 72 bins, \(k=36\) is the Nyquist harmonic. For real-valued angular inputs, its Fourier coefficient is real-valued, so the imaginary coordinate is structurally zero. The frozen hybrid therefore has 3008 packed real coordinates but 3004 nonredundant real scalar coordinates. The complete \(\mathrm{RAW}_{72}\) field has 5184 packed coordinates but 5112 nonredundant real scalar coordinates. A uniform \(B=42\) descriptor has 3024 packed coordinates but 2982 nonredundant real scalar coordinates. These are mathematical accounting facts and do not alter the frozen empirical results.
 
 ## Evidence type
 
@@ -1037,8 +1039,8 @@ This remains a qualified scientific interpretation, not a universal theorem.
 | C3 | Tested compression is not supported for \(k=5{:}12\) | I | Negative supported boundary |
 | C4 | Tested compression is not supported for \(k=13{:}24\) | I | Negative supported boundary |
 | C5 | db4-wavelet \(B=4\) compression is supported for \(k=25{:}36\) | I | Supported |
-| C6 | Frozen hybrid representation contains 1504 complex / 3008 real coefficients | M | Established |
-| C7 | Hybrid representation reduces complex coefficient count by 41.98% | M | Established |
+| C6 | Frozen hybrid representation contains 1504 nominal spectral coefficient slots / 3008 packed real coordinates; 3004 are nonredundant real scalar coordinates because the \(k=36\) imaginary component is structurally zero | M | Established |
+| C7 | Hybrid representation reduces nominal spectral coefficient-slot count by 41.98%; the corresponding nonredundant real-scalar reduction is 41.24% | M | Established |
 | C8 | PCA-64 retains 44.65% of standardized representation variance | D | Descriptive |
 | C9 | Tested nonlinear models do not establish multiplicity-controlled task superiority over PCA | I | Negative supported boundary |
 | C10 | Nonlinear geometric structure is detectable | D/Q | Qualified |

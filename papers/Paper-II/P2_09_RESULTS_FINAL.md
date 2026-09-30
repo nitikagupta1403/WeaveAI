@@ -197,13 +197,19 @@ reduction relative to the complete 2592-coefficient field and a compression rati
 \boxed{1.7234\times}.
 \]
 
-Exact block-wise real/imaginary packing produced a frozen
+Exact block-wise real/imaginary packing produced a frozen representation with
 
 \[
-\boxed{3008\text{-dimensional}}
+\boxed{3008}
 \]
 
-real representation.
+packed real coordinates. Four Nyquist-imaginary coordinates are structurally zero, so the nonredundant real-scalar count is
+
+\[
+\boxed{3004}.
+\]
+
+This is an accounting clarification only; the frozen arrays and all reported retrieval and inferential results are unchanged.
 
 This dimensional reduction follows from the inferential decisions in Section 4.1; it was **not** obtained by selecting a global compression rate or by treating discarded coefficients as noise. In particular, the two intermediate harmonic ranges account for most of the retained dimensionality precisely because the tested compression alternatives were not supported there. The final representation therefore preserves heterogeneity in radial representation requirements rather than imposing a uniform basis across the Fourier field.
 
@@ -280,7 +286,7 @@ These sensitivities do not change the frozen primary representation. The 3008-di
 
 ### 4.2.2 The heterogeneous descriptor matched full radial retrieval closely and avoided losses from uniform compact transforms
 
-We next compared the frozen heterogeneous hybrid with complete and uniform whole-representation baselines. The hybrid contained 1504 complex coefficients (3008 real coordinates), whereas the complete \(\mathrm{RAW}_{72}\) field contained 2592 complex coefficients (5184 real coordinates). The dimension-matched uniform descriptors used 1512 complex coefficients (3024 real coordinates), only 0.532% more than the hybrid.
+We next compared the frozen heterogeneous hybrid with complete and uniform whole-representation baselines. The hybrid contained 1504 nominal spectral coefficient slots (3008 packed real coordinates; 3004 nonredundant real scalar coordinates), whereas the complete \(\mathrm{RAW}_{72}\) field contained 2592 nominal spectral coefficient slots (5184 packed real coordinates; 5112 nonredundant real scalar coordinates). The approximately dimension-matched uniform descriptors used 1512 nominal coefficient slots (3024 packed real coordinates; 2982 nonredundant real scalar coordinates). They are therefore 0.532% larger by packed width but 0.732% smaller by nonredundant real-scalar count.
 
 Mean held-out retrieval for the complete radial field was
 
@@ -310,7 +316,7 @@ and
 \Delta\mathrm{Top1}=+0.005215,
 \]
 
-while requiring 5184 rather than 3008 real coordinates.
+while requiring 5184 rather than 3008 packed real coordinates (5112 versus 3004 nonredundant real scalar coordinates).
 
 The dimension-matched uniform raw descriptor was similarly close:
 
@@ -360,13 +366,13 @@ Both uniform compact-transform baselines had lower MRR than the hybrid in all fi
 
 ### Table 3. Whole-representation descriptive sensitivity
 
-| Representation | Complex coefficients | Real dimension | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
-|---|---:|---:|---:|---:|---:|
-| Full \(\mathrm{RAW}_{72}\) | 2592 | 5184 | 0.819373 | 0.638746 | +0.002607 |
-| Frozen heterogeneous hybrid | 1504 | 3008 | 0.816766 | 0.633531 | 0 |
-| Uniform \(\mathrm{RAW}_{42}\) | 1512 | 3024 | 0.815896 | 0.631792 | -0.000870 |
-| Uniform db4-wavelet-42 | 1512 | 3024 | 0.789378 | 0.578755 | -0.027388 |
-| Uniform DCT-42 | 1512 | 3024 | 0.783503 | 0.567006 | -0.033263 |
+| Representation | Nominal spectral coefficient slots | Packed real coordinates | Nonredundant real scalar coordinates | Mean MRR | Mean Top-1 | Mean \(\Delta\)MRR vs hybrid |
+|---|---:|---:|---:|---:|---:|---:|
+| Full \(\mathrm{RAW}_{72}\) | 2592 | 5184 | 5112 | 0.819373 | 0.638746 | +0.002607 |
+| Frozen heterogeneous hybrid | 1504 | 3008 | 3004 | 0.816766 | 0.633531 | 0 |
+| Uniform \(\mathrm{RAW}_{42}\) | 1512 | 3024 | 2982 | 0.815896 | 0.631792 | -0.000870 |
+| Uniform db4-wavelet-42 | 1512 | 3024 | 2982 | 0.789378 | 0.578755 | -0.027388 |
+| Uniform DCT-42 | 1512 | 3024 | 2982 | 0.783503 | 0.567006 | -0.033263 |
 
 These comparisons are descriptive post-selection sensitivities rather than a new inferential family. They therefore do not establish population-level superiority of the hybrid over every alternative descriptor. They do show that the heterogeneous representation preserved nearly the retrieval behaviour of the complete radial field at substantially lower dimensionality, while avoiding the larger losses observed when a single compact DCT or wavelet representation was imposed uniformly across the harmonic field. Uniform \(\mathrm{RAW}_{42}\) remained a competitive simple baseline and is reported explicitly.
 
