@@ -1,6 +1,6 @@
 # P2-R0-03 — Nyquist / Dimensionality Audit
 
-**Status:** AMBER — core Nyquist property computationally verified; exact frozen db4 high-block numeric check still pending  
+**Status:** GREEN — direct Nyquist and frozen db4 high-block checks verified  
 **Scope:** Paper II positive-harmonic representation with 72 angular bins.
 
 ## Finding
@@ -133,10 +133,26 @@ the following checks were executed directly on `conditional_angular`:
 
 The saved executed downstream notebook independently reports `Zero-IQR dimensions: 72` for the full 5184-coordinate shared geometry, consistent with the direct checkpoint audit.
 
-### Remaining closure check
+### Closure check — PASSED
 
-The frozen Cell-14 code transforms real and imaginary radial profiles separately with PyWavelets (`db4`, periodization) and retains the first four coefficients. Since the directly verified `k=36` imaginary radial profile is identically zero, linear wavelet transformation implies four retained zero imaginary coefficients. Nevertheless, the audit remains AMBER until the exact PyWavelets Cell-14 construction is rerun and the saved high-block object is checked numerically:
+The frozen Cell-14 high-band wavelet construction was rerun from the canonical checkpoint using the preserved settings:
 
-`max(abs(Im(Z_high_WAV4_complex_14[:,11,:]))) == 0`
+- wavelet: `db4`
+- signal length: `72`
+- DWT level: `3`
+- boundary mode: `periodization`
+- retained budget: `4`
 
-or floating-point-equivalent zero.
+Observed outputs:
+
+- `high_complex.shape == (2300, 12, 72)`
+- `Z_high_WAV4.shape == (2300, 12, 4)`
+- `max |Im F36| = 0.0`
+- `max |Im F35| = 0.914256858937`
+- `max |Nyquist wavelet imag| = 0.0`
+- `nonzero Nyquist imag count = 0`
+- `max |Nyquist wavelet real| = 1.838485670885`
+
+Thus the `k=36` compressed coefficients are demonstrably real-valued in the frozen pipeline, while the neighboring harmonic remains genuinely complex. The four packed imaginary coordinates associated with compressed `k=36` are therefore structurally redundant.
+
+**Final audit status: GREEN.**
