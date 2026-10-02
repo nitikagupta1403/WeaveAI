@@ -1,0 +1,48 @@
+{
+  "protocol": "P2-R0-05K2-DESCRIPTOR-SOURCE-LOCK-v1.0",
+  "status": "FROZEN_BEFORE_05K_DESCRIPTOR_REPLAY",
+
+  "raster_relative_geometry": {
+    "source": "papers/CLO-SKET/Codes_paper_I/Experiment_08/extract_ra14_features.py",
+    "sha256": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9",
+    "function": "recover_geometry",
+    "image_weight": "w = 255.0 - grayscale",
+    "coordinate_scale": "S = max(width, height)",
+    "centroid": "continuous-darkness weighted centroid",
+    "radial_normalization": "R / max(R)",
+    "field": "72x72 radial-angular conditional field"
+  },
+
+  "spectral_reduction": {
+    "source": "papers/Paper-II/reproducibility/audits/P2_R0_05I2_objective_real_garment_candidate_selection.py",
+    "sha256": "802325ae23b3896bd0bf51bed49fd0bf5218583d73f76d1bae69f6f70e9fa3e3",
+    "function": "angular_band_fractions",
+    "fft": "np.fft.rfft(conditional, axis=2)",
+    "spectral_quantity": "|F|^2",
+    "radial_aggregation": "sum across radial shells",
+    "denominator": "total non-DC angular energy over k=1..36",
+    "bands": {
+      "low_1_4": [1, 2, 3, 4],
+      "mid_5_12": [5, 6, 7, 8, 9, 10, 11, 12],
+      "highmid_13_24": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+      "high_25_36": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+    }
+  },
+
+  "object_relative_geometry": {
+    "source": "papers/Paper-II/reproducibility/audits/P2_R0_05H1_intrinsic_coordinate_field.py",
+    "sha256": "1ce3c0dd7f34e75c806777bff9c5142814f179a0b6fef48f927fbfeb1b4d1642",
+    "mask": "grayscale intensity < 250",
+    "radial_bins": 72,
+    "angular_bins": 72,
+    "centroid": "mean foreground x/y coordinates",
+    "scale": "maximum foreground-pixel radius",
+    "field": "72x72 shell-conditionally-normalized radial-angular histogram"
+  },
+
+  "anti_peeking": {
+    "05k_s_gt_1_descriptor_execution": false,
+    "05k_support_trajectory_opened": false,
+    "h1_h2_h3_tested": false
+  }
+}
