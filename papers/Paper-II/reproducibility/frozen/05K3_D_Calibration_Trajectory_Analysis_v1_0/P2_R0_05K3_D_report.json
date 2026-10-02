@@ -1,0 +1,68 @@
+{
+  "analysis_boundary": {
+    "bootstrap": false,
+    "full_2300_primary_experiment": false,
+    "mechanism_proof_claim": false,
+    "p_values": false,
+    "population_inference": false
+  },
+  "calibration_cases": 230,
+  "categories": 23,
+  "category_median_endpoint_direction_counts_of_23": {
+    "high_25_36": 23,
+    "highmid_13_24": 23,
+    "low_1_4": 23
+  },
+  "four_band_l1_nondecreasing": {
+    "count": 120,
+    "percent": 52.17391304347826
+  },
+  "full_trajectory_monotonicity_counts_of_230": {
+    "high_25_36": 80,
+    "highmid_13_24": 88,
+    "low_1_4": 107
+  },
+  "full_trajectory_monotonicity_percent": {
+    "high_25_36": 34.78260869565217,
+    "highmid_13_24": 38.26086956521739,
+    "low_1_4": 46.52173913043478
+  },
+  "interpretation_boundary": "05K3-D is an intermediate calibration analysis over one deterministically selected sketch per canonical garment identity. Results describe calibration behavior and heterogeneity but do not constitute population-level inference.",
+  "materiality": {
+    "reason": "No operational materiality threshold was frozen before descriptor outcomes were opened.",
+    "threshold_applied": false
+  },
+  "object_relative_control": {
+    "all_1610_band_vectors_exact": true,
+    "all_1610_fields_exact": true,
+    "max_band_difference": 0.0,
+    "max_field_difference": 0.0
+  },
+  "preregistered_canvas_enlargement_direction": {
+    "high_25_36": "decrease",
+    "highmid_13_24": "decrease",
+    "low_1_4": "increase",
+    "mid_5_12": "no directional prediction"
+  },
+  "s3_endpoint_concordance_counts_of_230": {
+    "high_25_36": 194,
+    "highmid_13_24": 200,
+    "low_1_4": 208
+  },
+  "s3_endpoint_concordance_percent": {
+    "high_25_36": 84.34782608695652,
+    "highmid_13_24": 86.95652173913044,
+    "low_1_4": 90.43478260869566
+  },
+  "stage": "P2_R0_05K3_D_CALIBRATION_TRAJECTORY_ANALYSIS",
+  "status": "COMPLETE_DESCRIPTIVE_CALIBRATION_ANALYSIS",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ]
+}
