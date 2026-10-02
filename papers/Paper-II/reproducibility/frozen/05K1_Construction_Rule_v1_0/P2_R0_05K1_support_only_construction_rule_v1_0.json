@@ -1,0 +1,59 @@
+{
+  "protocol": "P2-R0-05K1-SUPPORT-ONLY-CONSTRUCTION-v1.0",
+  "status": "FROZEN_BEFORE_CANVAS_MATERIALIZATION",
+  "source_representation": "Frozen V3_CROP_ONLY raster",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ],
+  "dimension_rule": {
+    "height": "Hs = H + 2*ceil(((s-1)*H)/2)",
+    "width": "Ws = W + 2*ceil(((s-1)*W)/2)",
+    "padding": "symmetric integer padding"
+  },
+  "background_fill_rule": {
+    "source_field": "V3_CROP_ONLY.materialized_manifest.csv:border_median",
+    "formula": "b_i = int(rint(255 * border_median_i))",
+    "scope": "per source image",
+    "historical_status": "NEW_05K_INTERVENTION_RULE",
+    "rationale": "V3_CROP_ONLY contains no padding operation and no reusable historical fill rule was located in inspected pre-05K artifacts. The rule therefore uses a pre-existing frozen per-image background statistic rather than a post-outcome quantity."
+  },
+  "construction_constraints": {
+    "resize": false,
+    "interpolation": false,
+    "antialiasing": false,
+    "rethresholding": false,
+    "crop_recomputation": false,
+    "contour_retracing": false,
+    "post_padding_resize": false,
+    "source_patch_modified": false
+  },
+  "integrity_requirements": [
+    "Inserted V3 source patch must be pixel-identical to the frozen source raster.",
+    "Inserted patch SHA256 must equal the frozen V3 output_pixel_sha256.",
+    "No source pixel may be clipped.",
+    "Padding offsets must equal the frozen symmetric integer construction rule.",
+    "s=1.00 must reproduce the original V3 raster exactly.",
+    "Foreground/intensity invariants are diagnostic checks only and must not redefine the construction."
+  ],
+  "background_diagnostics_not_used_as_definition": [
+    "corner value",
+    "perimeter mode",
+    "perimeter mode fraction"
+  ],
+  "preflight_observation": {
+    "nine_sentinels_background_value": 254,
+    "S07_background_value": 253,
+    "corner_and_perimeter_mode_agreed_with_frozen_border_median_rule": true
+  },
+  "anti_peeking": {
+    "05k_spectral_trajectories_opened": false,
+    "h1_h2_h3_tested": false,
+    "sentinel_ids_already_frozen": true
+  }
+}
