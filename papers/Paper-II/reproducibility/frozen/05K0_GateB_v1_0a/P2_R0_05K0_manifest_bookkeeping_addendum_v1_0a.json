@@ -1,0 +1,19 @@
+{
+  "addendum_version": "P2-R0-05K0-MANIFEST-BOOKKEEPING-v1.0a",
+  "applies_to_rules_sha256": "f957f2afd81071374ec1eb1c3602e3feaa64093fa87c36bfe9dde59e6905a445",
+  "status": "FROZEN_BEFORE_SENTINEL_SELECTION",
+  "definitions": {
+    "global_metric_rank": "Deterministic ordinal rank over the full valid 2300-sketch historical population for the role metric and predeclared direction. Exact metric ties are resolved by stable_tie_key ascending.",
+    "eligible_pool_rank": "Deterministic ordinal rank after applying the role's predeclared eligibility restriction, using the same metric direction and stable_tie_key tie-break.",
+    "restricted_roles": {
+      "S01": "Eligible sketches belong to identities whose canonical H3 test fold is 3.",
+      "S08": "Eligible sketches belong to the frozen 582-row I4 text-positive pool."
+    },
+    "unrestricted_roles": "For S02-S07, S09, and S10, global_metric_rank and eligible_pool_rank are identical.",
+    "collision_rule": "Identity-collision skips do not alter either rank. Each skipped higher-ranked candidate and the already-selected conflicting sentinel role are logged separately."
+  },
+  "scientific_effect": "Bookkeeping only. This addendum does not change any role metric, eligibility rule, selection order, tie-break rule, or sentinel-selection outcome.",
+  "sentinel_selection_performed_at_freeze": false,
+  "sentinel_ids_opened_at_freeze": false,
+  "new_05k_spectral_outcomes_opened_at_freeze": false
+}
