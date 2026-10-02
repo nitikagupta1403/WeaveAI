@@ -1,0 +1,49 @@
+{
+  "analysis_boundary": {
+    "directional_hypotheses_tested": false,
+    "inferential_statistics": false,
+    "materiality_threshold_applied": false,
+    "mechanism_verdict": false,
+    "monotonicity_tested": false,
+    "population_inference": false
+  },
+  "conditions": 16100,
+  "field_storage": {
+    "full_fields_saved": false,
+    "reason": "Primary fields were executed exactly but not accumulated into large NPZ archives. Frozen input canvases, source implementations, band outputs, and numerical controls reproduce the computation."
+  },
+  "historical_s1_replay": {
+    "images_within_1e12": 2300,
+    "max_abs_band_difference": 2.220446049250313e-16,
+    "source_sha256": "a9a096b4aafe89be79b5d3c35fd3e4dc4e6de046c30326f108d0cbe3601c39e2"
+  },
+  "input_integrity": {
+    "path": "/Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/P2_R0_05K4_A_integrity_16100.csv",
+    "sha256": "235991a193f5164a3fed3b0f2074a192601f5148b6fcaddb8ea5dc81d2b4fa80"
+  },
+  "numerical_controls": {
+    "intrinsic_exact_band_conditions": 16100,
+    "intrinsic_exact_field_conditions": 16100,
+    "intrinsic_max_band_diff_from_s1": 0.0,
+    "intrinsic_max_field_diff_from_s1": 0.0,
+    "raster_max_band_diff_from_s1": 0.2863660043133772,
+    "raster_max_field_diff_from_s1": 1.0
+  },
+  "source_hashes": {
+    "H1": "1ce3c0dd7f34e75c806777bff9c5142814f179a0b6fef48f927fbfeb1b4d1642",
+    "I2": "802325ae23b3896bd0bf51bed49fd0bf5218583d73f76d1bae69f6f70e9fa3e3",
+    "RA14": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9"
+  },
+  "source_images": 2300,
+  "stage": "P2_R0_05K4_B_PRIMARY_DESCRIPTOR_EXECUTION",
+  "status": "COMPLETE_DESCRIPTOR_EXECUTION_ONLY",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ]
+}
