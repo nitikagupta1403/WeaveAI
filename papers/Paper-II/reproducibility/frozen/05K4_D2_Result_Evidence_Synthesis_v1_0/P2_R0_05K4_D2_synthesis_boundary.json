@@ -1,0 +1,14 @@
+{
+  "heterogeneity_boundary": "The endpoint effect is broad and category-consistent, but individual trajectories are not universally monotonic.",
+  "matched_control_conclusion": "The tested object-relative normalization eliminates this support dependence exactly under the same intervention.",
+  "prohibited_claims": [
+    "Raster support is the sole determinant of angular spectral behavior.",
+    "Every image changes monotonically with increasing support.",
+    "All Fourier or shape descriptors are inherently canvas-sensitive.",
+    "The object-relative representation is invariant to arbitrary transformations.",
+    "The results automatically generalize beyond the tested dataset and frozen implementation.",
+    "The support audit by itself establishes methodological novelty."
+  ],
+  "remaining_scientific_gap": "The tested dependency is established for the frozen representation. Residual image-level heterogeneity remains unexplained, but resolving that heterogeneity is not necessary for the current support-dependence claim.",
+  "supported_core_conclusion": "Under the frozen historical raster-relative coordinate normalization, raster support is a demonstrated dependency of angular spectral allocation in the tested dataset and same-pixel support intervention."
+}
