@@ -1,0 +1,124 @@
+{
+  "categories": 23,
+  "image_level_descriptive_endpoint": {
+    "direction_concordance_counts_of_2300": {
+      "high_25_36": 2008,
+      "highmid_13_24": 2059,
+      "low_1_4": 2104
+    },
+    "direction_concordance_percent": {
+      "high_25_36": 87.30434782608695,
+      "highmid_13_24": 89.52173913043478,
+      "low_1_4": 91.47826086956522
+    },
+    "four_band_l1_nondecreasing_count": 1296,
+    "four_band_l1_nondecreasing_percent": 56.34782608695652,
+    "trajectory_monotonicity_counts_of_2300": {
+      "high_25_36": 869,
+      "highmid_13_24": 1015,
+      "low_1_4": 1171
+    },
+    "trajectory_monotonicity_percent": {
+      "high_25_36": 37.78260869565217,
+      "highmid_13_24": 44.130434782608695,
+      "low_1_4": 50.91304347826087
+    }
+  },
+  "images_per_category": 100,
+  "inference": {
+    "familywise_control": "max-T across the 3 preregistered directional bands",
+    "n_units": 23,
+    "one_sided": true,
+    "results": [
+      {
+        "band": "low_1_4",
+        "categories": 23,
+        "category_medians_direction_concordant": 23,
+        "expected_direction": "increase",
+        "maxT_FWER_exact_p": 1.430511474609375e-06,
+        "maxT_exceeding_configurations": 12,
+        "mean_directionalized_category_effect": 0.07081619742183236,
+        "mean_original_category_effect": 0.07081619742183236,
+        "median_directionalized_category_effect": 0.052497414826953984,
+        "median_original_category_effect": 0.052497414826953984,
+        "observed_studentized_T": 8.876062868835168,
+        "raw_exceeding_configurations": 1,
+        "raw_one_sided_exact_p": 1.1920928955078125e-07,
+        "total_sign_configurations": 8388608
+      },
+      {
+        "band": "highmid_13_24",
+        "categories": 23,
+        "category_medians_direction_concordant": 23,
+        "expected_direction": "decrease",
+        "maxT_FWER_exact_p": 1.1920928955078125e-07,
+        "maxT_exceeding_configurations": 1,
+        "mean_directionalized_category_effect": 0.03790102912553821,
+        "mean_original_category_effect": -0.03790102912553821,
+        "median_directionalized_category_effect": 0.035073545951907883,
+        "median_original_category_effect": -0.035073545951907883,
+        "observed_studentized_T": 11.942573093860933,
+        "raw_exceeding_configurations": 1,
+        "raw_one_sided_exact_p": 1.1920928955078125e-07,
+        "total_sign_configurations": 8388608
+      },
+      {
+        "band": "high_25_36",
+        "categories": 23,
+        "category_medians_direction_concordant": 23,
+        "expected_direction": "decrease",
+        "maxT_FWER_exact_p": 1.1920928955078125e-07,
+        "maxT_exceeding_configurations": 1,
+        "mean_directionalized_category_effect": 0.05317355000851556,
+        "mean_original_category_effect": -0.05317355000851556,
+        "median_directionalized_category_effect": 0.04622322165028605,
+        "median_original_category_effect": -0.04622322165028605,
+        "observed_studentized_T": 15.210772528988832,
+        "raw_exceeding_configurations": 1,
+        "raw_one_sided_exact_p": 1.1920928955078125e-07,
+        "total_sign_configurations": 8388608
+      }
+    ],
+    "same_sign_vector_across_bands": true,
+    "sign_configurations": 8388608,
+    "test": "exact joint sign-flip studentized max-T",
+    "unit": "category",
+    "within_category_endpoint_estimator": "median across 100 images"
+  },
+  "materiality": {
+    "reason": "No operational materiality threshold was frozen before outcomes were opened.",
+    "threshold_applied": false
+  },
+  "mid_band": "descriptive only",
+  "object_relative_control": {
+    "all_16100_band_vectors_exact": true,
+    "all_16100_fields_exact": true,
+    "max_band_difference": 0.0,
+    "max_field_difference": 0.0
+  },
+  "primary_endpoint": "s=3.00 minus s=1.00 band-fraction change",
+  "scope_boundary": {
+    "category_level_inference": true,
+    "external_population_generalization": false,
+    "image_rows_treated_as_independent_inferential_units": false,
+    "mechanism_wording": "Any supported conclusion is limited to support dependence under the frozen raster-relative coordinate normalization.",
+    "universal_monotonic_mechanism_claim": false
+  },
+  "source_images": 2300,
+  "stage": "P2_R0_05K4_C_PRIMARY_TRAJECTORY_AND_INFERENCE",
+  "status": "COMPLETE_PRIMARY_ANALYSIS",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ],
+  "tested_directional_bands": {
+    "high_25_36": "decrease",
+    "highmid_13_24": "decrease",
+    "low_1_4": "increase"
+  }
+}
