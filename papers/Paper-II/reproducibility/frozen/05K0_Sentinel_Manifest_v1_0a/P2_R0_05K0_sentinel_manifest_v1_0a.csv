@@ -1,0 +1,11 @@
+role,role_name,row_index,relative_path,category,identity,canonical_test_fold,eligibility_rule,metric,metric_direction,metric_value,global_metric_rank,eligible_pool_rank,stable_tie_key,identity_collision_skips_before_selection,selection_algorithm_version
+S01,Fold-3 representative,781,Harem/8-10.tif,Harem,Harem::8,3,fold3,population_centre_distance,ascending,0.081215948222911699,2,1,Harem|Harem::8|Harem/8-10.tif|000781,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S08,Text-sensitive case,1349,Pencil/4-9.tif,Pencil,Pencil::4,4,text_positive,raw_to_text_band_l1_change,descending,0.30072833106475277,1,1,Pencil|Pencil::4|Pencil/4-9.tif|001349,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S02,LOW extreme,1086,Jumpsuit/8_2.tif,Jumpsuit,Jumpsuit::8,2,all,crop_low_1_4_fraction,descending,0.42671644562601913,1,1,Jumpsuit|Jumpsuit::8|Jumpsuit/8_2.tif|001086,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S03,HIGH extreme,1625,Skinny/2-5.tif,Skinny,Skinny::2,3,all,crop_high_25_36_fraction,descending,0.30124937940380148,1,1,Skinny|Skinny::2|Skinny/2-5.tif|001625,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S04,Large robust support,1024,Jumpsuit/2_5.tif,Jumpsuit,Jumpsuit::2,3,all,crop_q99_radius_to_grid,descending,0.9775354035458822,1,1,Jumpsuit|Jumpsuit::2|Jumpsuit/2_5.tif|001024,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S05,Small robust support,432,Circle/3_2.tif,Circle,Circle::3,0,all,crop_q99_radius_to_grid,ascending,0.64426070086257048,1,1,Circle|Circle::3|Circle/3_2.tif|000432,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S06,Strong redistribution,1824,Suit/2-4.tif,Suit,Suit::2,3,all,raw_crop_band_l1,descending,0.49153001449219508,1,1,Suit|Suit::2|Suit/2-4.tif|001824,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S07,Stable redistribution control,185,Bermuda/8-5.tif,Bermuda,Bermuda::8,1,all,raw_crop_band_l1,ascending,0.0087957807546018008,1,1,Bermuda|Bermuda::8|Bermuda/8-5.tif|000185,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S09,Speck/outlier-sensitive support,1591,Shirt/9_10.tif,Shirt,Shirt::9,4,all,s09_outlier_score,descending,0.7107485494499679,1,1,Shirt|Shirt::9|Shirt/9_10.tif|001591,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
+S10,Typical control,2007,Tunic/10_7.tif,Tunic,Tunic::10,1,all,population_centre_distance,ascending,0.069552988055496298,1,1,Tunic|Tunic::10|Tunic/10_7.tif|002007,0,P2-R0-05K0-SENTINEL-SELECTION-v1.0a
