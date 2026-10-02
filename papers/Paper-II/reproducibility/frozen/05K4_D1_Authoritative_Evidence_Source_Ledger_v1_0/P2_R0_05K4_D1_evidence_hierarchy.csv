@@ -1,0 +1,7 @@
+level,stage,role,evidence_class,causal_strength
+1,05F2,Localization: determine where in the preprocessing pipeline the high-band change appears.,preprocessing_ablation,component_localization_not_mechanism_proof
+2,05G1,Geometry characterization: determine what changes in the raster/support geometry after cropping.,descriptive_geometry,descriptive_only
+3,05G2/05J,Population association: test whether magnitude of support change tracks magnitude/direction of spectral redistribution.,observational_association,association_not_causation
+4,05K2-B2,Sentinel same-pixel support intervention: verify numerical behavior before scaling.,controlled_intervention_diagnostic,interventional_but_not_population_inference
+5,05K3-D,230-case deterministic calibration of the same-pixel support intervention.,controlled_intervention_calibration,interventional_descriptive
+6,05K4-C,Full 2300-image same-pixel support intervention with category-level exact inferential analysis.,controlled_primary_intervention,supports_dependency_under_tested_representation_and_intervention
