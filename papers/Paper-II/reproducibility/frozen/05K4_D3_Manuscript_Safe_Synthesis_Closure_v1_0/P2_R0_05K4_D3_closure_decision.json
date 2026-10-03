@@ -1,0 +1,22 @@
+{
+  "audit": "P2-R0-05K raster-support dependency audit",
+  "decision": "CLOSED_FOR_CURRENT_SUPPORT_DEPENDENCE_QUESTION",
+  "decision_basis": [
+    "05F localized the dominant high-band change to the crop/new-raster-support transition.",
+    "05G showed that retained pixels and source-coordinate centroid were preserved while raster-relative geometry changed.",
+    "05G/05J showed population-level association between raster-relative support change and spectral redistribution.",
+    "05K2 and 05K3 reproduced the predicted intervention direction in sentinel and calibration stages.",
+    "05K4 reproduced the preregistered endpoint direction over the complete 2,300-image dataset.",
+    "All 23 category medians agreed with the primary directional hypotheses and exact category-level max-T inference supported all three directional bands.",
+    "The matched object-relative representation remained exactly invariant across all 16,100 support conditions."
+  ],
+  "future_work_status": "Image-level heterogeneity may be investigated as a separate future study. It is not required to establish the current support-dependence result.",
+  "literature_status": "NOT_ASSESSED_IN_D3. Literature integration and novelty assessment must be performed separately before manuscript novelty claims are written.",
+  "no_additional_support_only_experiment_required": true,
+  "unresolved_but_nonblocking": [
+    "Why individual-image trajectories are frequently non-monotonic.",
+    "Which garment-level geometric properties explain intervention response heterogeneity.",
+    "Whether analogous support dependence appears in other datasets or other raster-relative descriptors.",
+    "How the present finding relates to prior methodological literature and whether it contributes novelty."
+  ]
+}

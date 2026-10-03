@@ -1,0 +1,10 @@
+question_id,question,status,resolution,support
+Q01,Where does the historical high-band change enter?,RESOLVED,Primarily at crop-only/new-raster-support transition.,05F2
+Q02,Are retained-pixel modification or centroid displacement required?,RESOLVED,No.,05G1
+Q03,Does raster-relative support change track spectral change at population scale?,RESOLVED_AS_ASSOCIATION,Yes.,05G2/05J
+Q04,Can support alone alter the historical raster-relative representation when garment pixels are fixed?,RESOLVED_BY_CONTROLLED_INTERVENTION,Yes.,05K2/05K3/05K4
+Q05,Is the full-population endpoint response supported at category-level inferential units?,RESOLVED,"Yes for low, highmid, and high directional endpoints.",05K4-C
+Q06,Does the matched object-relative representation retain the same support dependence?,RESOLVED,No; exact invariance under tested support intervention.,05K4-C intrinsic control
+Q07,Are individual trajectories universally monotonic?,RESOLVED_NEGATIVE,No.,05K4-C
+Q08,Why do individual trajectories differ?,OPEN_NONBLOCKING,Not explained by the current audit; separate heterogeneity question.,Future work
+Q09,Is the support-dependence result methodologically novel relative to prior literature?,OPEN_REQUIRES_LITERATURE,Not assessed in 05K.,Literature review required
