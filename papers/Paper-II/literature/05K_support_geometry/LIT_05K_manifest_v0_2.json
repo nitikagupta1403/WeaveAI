@@ -1,0 +1,18 @@
+{
+  "files": {
+    "LIT_05K_GFD_vs_05H_vs_Historical_comparison_v0_2.csv": "4c9dd469a074d50fe8ed28d366917abe30181f45cc302b64aa32a59c555cc2c0",
+    "LIT_05K_literature_ledger_v0_2.csv": "07e6a0c38319f4ef6bd5efb05167f0db142c3d50e5e551f61c6057030602508c",
+    "LIT_05K_novelty_boundary_v0_2.csv": "95a23013f44a353318159e8b1c3309c714c5e092eafe3caaeebfa5bc03bd0290",
+    "LIT_05K_working_notes_v0_2.md": "9a5298547fa26854d6d39b868ca8990f61fb8d997f72c0fe7680c3aaf46b012a"
+  },
+  "literature_complete": false,
+  "material_change": "Object-centred polar Fourier representation is now explicitly treated as strong prior art. Potential contribution boundary shifts toward the controlled same-pixel raster-support audit rather than the broad representation family.",
+  "new_experiment_performed": false,
+  "new_primary_focus": "Zhang_Lu_2002_Generic_Fourier_Descriptor",
+  "novelty_assessed": false,
+  "novelty_boundary_updated": true,
+  "paper_count": 6,
+  "parent_version": "v0.1",
+  "status": "WORKING_LITERATURE_CAPTURE",
+  "version": "v0.2"
+}

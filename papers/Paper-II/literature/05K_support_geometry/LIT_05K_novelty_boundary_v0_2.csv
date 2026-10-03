@@ -1,0 +1,8 @@
+claim_id,candidate_claim,status,reason
+NB01,Object-centred shape coordinates are novel.,PROHIBITED,Centroid/object-derived coordinate normalization is established prior art.
+NB02,Object-radius normalization is novel.,PROHIBITED,Classical invariant shape descriptors and GFD-type methods already use object-derived normalization.
+NB03,Polar/radial-angular Fourier shape representation is novel.,PROHIBITED,Zhang & Lu GFD is direct prior art for an object-centred polar-raster Fourier descriptor.
+NB04,Object-relative normalization should remove blank-canvas dependence.,GENERAL PRIOR-ART PRINCIPLE,"If coordinates depend only on object centroid and object-derived scale, outer blank support is absent from the coordinate definition by construction."
+NB05,The frozen historical raster-relative representation systematically redistributes angular spectral evidence when only surrounding support changes while embedded garment pixels remain fixed.,WEAVEAI EMPIRICAL RESULT; NOVELTY NOT YET FINAL,Demonstrated by the controlled 05K same-pixel support intervention. Current literature review has not yet identified a direct equivalent experiment.
+NB06,Matched raster-relative versus object-relative representations can be contrasted under the same bit-identical foreground support sweep.,POTENTIALLY DISTINCTIVE EXPERIMENTAL DESIGN,05K directly isolates frame/support dependence while holding embedded pixels unchanged. Novelty relative to literature remains open until the audit is broader.
+NB07,WeaveAI's four angular-frequency bands constitute a new generic Fourier descriptor.,DO NOT CLAIM,"They are a project-specific analysis/aggregation of the frozen representation, not evidence of a new generic Fourier theory."
