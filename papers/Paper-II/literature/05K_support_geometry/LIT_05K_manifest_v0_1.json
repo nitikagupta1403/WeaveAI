@@ -1,0 +1,11 @@
+{
+  "files": {
+    "LIT_05K_literature_ledger_v0_1.csv": "c67b484708d9c34916e1635e7e8ee40b16e4fa68c37a61f253d7725dc94801f4",
+    "LIT_05K_working_notes_v0_1.md": "21a150d2618431b17c16f33724f8abdfd9de7e9e8e24b6b5f2584a8a4c991808"
+  },
+  "literature_complete": false,
+  "novelty_assessed": false,
+  "paper_count": 5,
+  "status": "WORKING_LITERATURE_CAPTURE",
+  "version": "v0.1"
+}
