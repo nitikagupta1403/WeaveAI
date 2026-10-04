@@ -1,0 +1,6 @@
+concept,equation_or_model,unknowns,key_assumption,weaveai_use
+Classical MCA,x = Σ_k Φ_k α_k,sparse coefficients α_k / component reconstructions,each morphology is sparse in a preferred sufficiently distinct dictionary,start with minimal fixed interpretable dictionaries
+RPCA,D = L + S; minimize ||L||_* + λ||S||_1,low-rank L and sparse S,shared structure is low-rank; deviations are sparse,comparator to morphology-driven factorization
+Dictionary learning,"min_{Φ,A} ||X-ΦA||² + λ||A||_1",dictionary Φ and sparse codes A,data admits an adaptive sparse basis,only after fixed dictionaries prove inadequate
+GMCA,X = AS + N with sparse source representations,mixing A and latent sources S,sources have morphological diversity across mixtures,future only if genuine multichannel mixing exists
+Context / graph interpretation,components → relations/graph → semantics,semantic role,meaning depends on topology/connectivity/context,use after morphology when local geometry is ambiguous

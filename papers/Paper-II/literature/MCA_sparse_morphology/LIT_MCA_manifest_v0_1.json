@@ -1,0 +1,34 @@
+{
+  "version": "v0_1",
+  "project": "WeaveAI",
+  "topic": "MCA / sparse morphological decomposition cross-domain literature",
+  "generated_utc": "2026-10-04T18:27:56.910523+00:00",
+  "status": "WORKING_LITERATURE_CHECKPOINT_NOT_FINAL_NOVELTY_SYNTHESIS",
+  "paper_ii_integration_status": "NOT_COMMITTED",
+  "garment_mca_experiment_status": "NOT_RUN",
+  "specific_dictionary_pair_status": "NOT_FROZEN",
+  "novelty_status": "OPEN",
+  "record_counts": {
+    "literature": 14,
+    "concepts": 5,
+    "claim_boundaries": 12
+  },
+  "files": {
+    "LIT_MCA_literature_ledger_v0_1.csv": {
+      "sha256": "f535334765e73a587758ef0ae2bfd70fb4ee4577b695d2e3fe52449a69d88214",
+      "bytes": 7757
+    },
+    "LIT_MCA_concept_map_v0_1.csv": {
+      "sha256": "b45fda8bc0976f014cd0326a8a49e4cba38421062f20be80d2438b96d8119fb4",
+      "bytes": 998
+    },
+    "LIT_MCA_claim_boundary_v0_1.csv": {
+      "sha256": "ae8097dbbe13f7fc727621ed679de320b44e7bfdf91b6479709dc638ffea8916",
+      "bytes": 1384
+    },
+    "LIT_MCA_working_notes_v0_1.md": {
+      "sha256": "1b2f04ea3db97afcb2c6f12b87f9a831ff705ae05271d8118fbaebf19f3dc25a",
+      "bytes": 3425
+    }
+  }
+}

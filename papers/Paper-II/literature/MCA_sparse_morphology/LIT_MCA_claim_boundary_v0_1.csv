@@ -1,0 +1,13 @@
+boundary_id,status,statement
+MCA-CB-001,LOCK,"MCA is component separation, not inherently semantic classification."
+MCA-CB-002,LOCK,MCA is additive; component reconstructions need not have mutually exclusive pixel ownership.
+MCA-CB-003,LOCK,"Frequency alone is not morphology; scale, orientation, locality, elongation and coherence matter."
+MCA-CB-004,LOCK,"Do not call a component silhouette, intricacy, text or noise until garment data supports that interpretation."
+MCA-CB-005,LOCK,Use the minimum dictionary set that yields stable interpretable separation.
+MCA-CB-006,LOCK,Start with generic fixed dictionaries before learned garment-specific dictionaries.
+MCA-CB-007,LOCK,"Residual structure, not enthusiasm, should justify adding another dictionary."
+MCA-CB-008,LOCK,"MCA can support nuisance separation, structural factorization, or multi-branch representation."
+MCA-CB-009,LOCK,Morphology may tell what a structure looks like; context/topology may be required to tell what it means.
+MCA-CB-010,OPEN HYPOTHESIS,Garment sketches may admit a useful factorization into global structural geometry and localized internal/detail structure.
+MCA-CB-011,OPEN HYPOTHESIS,A two-dictionary fixed MCA may be sufficient for an initial garment experiment.
+MCA-CB-012,NOT FROZEN,No specific pair such as curvelet+wavelet or curvelet+DCT is yet designated as the garment solution.
