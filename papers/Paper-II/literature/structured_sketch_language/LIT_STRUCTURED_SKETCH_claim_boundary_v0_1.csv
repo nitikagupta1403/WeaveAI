@@ -1,0 +1,16 @@
+claim_id,status,claim,basis,boundary
+CB-01,SUPPORTED,Instances within one structured object need not be treated as i.i.d.,Zhou et al. 2009 directly motivates relational MIL.,Do not generalize to every task without testing.
+CB-02,SUPPORTED,Relations among instances can carry useful structural information.,"Supported conceptually by relational MIL, SketchGraphs, scene-graph and grammar traditions.",This does not prove garment relations are recoverable.
+CB-03,SUPPORTED,Primitive geometry alone is insufficient for semantics.,Contextual sketch-recognition literature supports this distinction.,Do not claim a specific garment semantic ontology is established.
+CB-04,SUPPORTED,Graphs can encode typed geometric or semantic relations rather than only similarity.,"Supported by CAD constraints, scene graphs, grammar literature.",Do not reduce relation inference to Euclidean proximity.
+CB-05,SUPPORTED,Incorrect graph structure can harm learning.,Explicitly cautioned in Zhou et al. 2009 image categorization discussion.,"This is a design warning, not a quantified WeaveAI result."
+CB-06,SUPPORTED,"Programs can represent hierarchy, attachment, repetition, symmetry and parameterized structure.","Supported by graphics-program, Vitruvion and ShapeAssembly traditions.",Do not claim garment-program recovery has been demonstrated.
+CB-07,SUPPORTED,Probabilistic program induction is a precedent for structured few-shot concept learning.,Supported by Bayesian Program Learning.,Do not claim identical few-shot behavior will transfer to garments.
+CB-08,WORKING_HYPOTHESIS,MCA + probability + geometry may provide a useful node representation for garment sketches.,This is our synthesis across sparse morphology and structured sketch literature.,Requires experiment; not established by cited papers.
+CB-09,WORKING_HYPOTHESIS,Typed garment relations may be modeled as latent probabilistic edge variables.,Motivated by NRI and probabilistic graphical modeling.,Static garment sketches differ from interacting dynamical systems.
+CB-10,WORKING_HYPOTHESIS,Graph-structured MIL may be useful under garment-level supervision.,Motivated by relational MIL and weak-supervision needs.,Requires a validated graph and suitable bag semantics.
+CB-11,PROHIBITED,WeaveAI has already established a novel garment grammar.,No empirical evidence or novelty audit supports this.,Do not claim.
+CB-12,PROHIBITED,"MCA components correspond directly to silhouette, seam, fold, text, or ornament.",Morphological separation is not semantic labeling.,Do not claim without direct evidence.
+CB-13,PROHIBITED,A GNN is required for WeaveAI.,No demonstrated failure of simpler graph methods yet.,Graph kernel / explicit rules / probabilistic models remain viable baselines.
+CB-14,PROHIBITED,The final WeaveAI architecture is MCA + Bayesian inference + GNN + MIL + grammar + program synthesis.,"Current work is a conceptual synthesis, not an architecture freeze.",Do not present as final architecture.
+CB-15,PROHIBITED,Edge existence can be determined solely by distance in embedding space.,Our synthesis explicitly distinguishes similarity from structural relation.,Do not use as default assumption.

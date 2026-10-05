@@ -1,0 +1,11 @@
+concept_id,layer,symbol,representation,research_question,candidate_method_family,boundary
+C01,Raster / signal,Observed sketch x,pixels / intensity / stroke image,What morphologies are present?,"MCA, sparse transforms, probabilistic signal models",Do not assign garment semantics here
+C02,Morphological components,S,component evidence + uncertainty,Which structures are coherent/localized/noise-like?,sparse decomposition / posterior over components,Component ≠ semantic part
+C03,Geometric primitives,G,line/arc/circle/ellipse/curve/polyline/junction,What primitive geometry explains the evidence?,primitive fitting / stroke recognition,Primitive ≠ garment meaning
+C04,Node representation,V,geometry + morphology + position + uncertainty,What should each graph node contain?,feature engineering / probabilistic embeddings,Node definition not frozen
+C05,Relation inference,R,typed pairwise relation,"Are two nodes related, and how?",geometry rules / probabilistic pair model / constraint inference,Similarity alone is insufficient
+C06,Graph,"G=(V,E)",nodes + typed edges,What structure does this sketch instantiate?,explicit graph / graph kernel / GNN later if justified,Graph quality must be validated first
+C07,Weak supervision,bag label / garment label,bag of relational instances,Can garment labels supervise unlabeled parts?,MIL / graph-structured MIL,MIL does not replace relation modeling
+C08,Grammar,Γ,valid compositions / alternatives,Which structures are permissible or likely?,shape grammar / And-Or grammar / domain grammar,Do not hand-invent ontology prematurely
+C09,Program,H,executable structural description,What compact generative explanation accounts for the sketch?,program synthesis / assembly DSL,Program representation not frozen
+C10,Probabilistic semantics,"P(H,R,Y,S|x)",posterior over structure and meaning,Which explanation is most plausible?,Bayesian inference / probabilistic programming,Do not imply full end-to-end Bayesian implementation yet

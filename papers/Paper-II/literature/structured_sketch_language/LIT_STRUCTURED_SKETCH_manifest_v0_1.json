@@ -1,0 +1,41 @@
+{
+  "checkpoint_id": "LIT_STRUCTURED_SKETCH_v0_1",
+  "status": "CONCEPTUAL_LITERATURE_CHECKPOINT",
+  "scope": "primitive -> relation -> graph -> grammar -> program -> probabilistic semantic understanding",
+  "provenance_note": "Generated from the WeaveAI master/research discussion and the user-provided Zhou, Sun & Li (2009) MIL paper. This is not a final novelty synthesis and not a frozen architecture.",
+  "frozen_boundaries": {
+    "is_final_architecture": false,
+    "is_novelty_claim": false,
+    "node_definition_frozen": false,
+    "edge_ontology_frozen": false,
+    "mca_dictionary_frozen": false,
+    "bayesian_formulation_frozen": false,
+    "mil_formulation_frozen": false,
+    "gnn_choice_frozen": false,
+    "grammar_frozen": false,
+    "garment_program_language_frozen": false
+  },
+  "core_principles": [
+    "When data is limited, encode what is already known structurally and learn only what remains uncertain.",
+    "Geometry supplies evidence; structure supplies constraints; probability manages uncertainty.",
+    "Earn the nodes -> earn the edges -> earn the graph -> then choose the learner."
+  ],
+  "files": {
+    "LIT_STRUCTURED_SKETCH_synthesis_v0_1.md": {
+      "sha256": "6b66e230b49268acb87fee2ebce84ca94b2eb5c9093576e0a4eaab7bfbe45801",
+      "bytes": 10539
+    },
+    "LIT_STRUCTURED_SKETCH_ledger_v0_1.csv": {
+      "sha256": "226015e885fd33128668a28dce1b3cd9ae1d40c2f595abb6e27bfb21a36f9843",
+      "bytes": 4859
+    },
+    "LIT_STRUCTURED_SKETCH_concept_map_v0_1.csv": {
+      "sha256": "483a1dd0dbce5037e8906af94e2f28e2b501c313aaaefe0efe09c38a038e3862",
+      "bytes": 1987
+    },
+    "LIT_STRUCTURED_SKETCH_claim_boundary_v0_1.csv": {
+      "sha256": "1a1d0f59619556bf8949da6ba4cba38918078c95f97d1db565c375550cddf722",
+      "bytes": 3177
+    }
+  }
+}
