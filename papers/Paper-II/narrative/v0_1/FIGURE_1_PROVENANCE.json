@@ -1,0 +1,22 @@
+{
+  "purpose": "Illustrative teaching example, not population evidence",
+  "selection": "First archived sentinel S01; no effect-based selection",
+  "original_relative_path": "Harem/8-10.tif",
+  "row_index": 781,
+  "condition_index": 0,
+  "support_factor": 1.0,
+  "pixel_source": "reproducibility/frozen/05K1_Sentinel_Materialization_v1_0/canvases/S01/S01__row0781__s1p00.png",
+  "pixel_sha256": "88313423804e74e186411df91dc3c655b54d5206ce54523d75b7474c0c7195a7",
+  "field_source": "reproducibility/frozen/05K2_B1_Sentinel_Descriptor_Sweep_v1_0/P2_R0_05K2_B1_raster_fields_70.npz",
+  "field_sha256": "d494f99b0d8e91e838ea01aac4bb149dec69787122b1a1973ed95076a1d0aaa5",
+  "pixel_field_replay_max_abs_error": 0.0,
+  "selected_shell_1_based": 36,
+  "shell_selection": "Occupied shell nearest zero-based index 35",
+  "transform": "numpy.fft.rfft along angular dimension; no rescaling",
+  "display": "Positive harmonics 1\u201336; amplitude only, phase not displayed",
+  "coordinate_convention": "Image y increases downward; angle in [-pi,pi]; radial extent from complete raster grid",
+  "outputs": {
+    "FIGURE_1_TEACHING_TRAIL.png": "76fa093b72b6aa499b8452939be2f8baef8e13c7a49cf7d4cd3e63ed3ae6951b",
+    "FIGURE_1_TEACHING_TRAIL.svg": "6fb273f9d70ae5dd3c80674d44953a04d8e19a2a1e8f72cfef0295cbb7bb75a0"
+  }
+}
