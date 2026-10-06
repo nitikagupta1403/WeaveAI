@@ -1,0 +1,5 @@
+Raster support alters angular spectra under the tested raster-relative construction
+A matched object-relative control is invariant under the same support intervention
+Held-out evidence supports radial compression differently across harmonic bands
+The heterogeneous representation reduces complex coefficient count by 41.98%
+Retained latent variation maps exactly back to radial-harmonic coordinates
