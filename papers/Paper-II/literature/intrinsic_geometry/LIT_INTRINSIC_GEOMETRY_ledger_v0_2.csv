@@ -1,0 +1,10 @@
+authors,paper_or_family,core_idea,weaveai_relevance,priority
+Bronstein et al.,"Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges","Native domains, symmetries, geometric inductive biases",General foundation for structure-native learning,VERY HIGH
+Hanocka et al.,MeshCNN: A Network with an Edge,Edge-based convolution and topology-aware pooling on meshes,Shows connectivity can be the computational substrate,VERY HIGH
+Masci et al.,Geodesic Convolutional Neural Networks on Riemannian Manifolds,Geodesic local neighborhoods on curved manifolds,Intrinsic neighborhoods instead of ambient/raster neighborhoods,VERY HIGH
+Sharp et al.,DiffusionNet: Discretization Agnostic Learning on Surfaces,Intrinsic diffusion at learned scales,Structural propagation robust to discretization,VERY HIGH
+Gauge-equivariant mesh CNN family,Gauge-equivariant convolutional networks on manifolds / meshes,Consistency under arbitrary local tangent-frame choice,Separates intrinsic structure from coordinate-frame artifacts,HIGH
+"Sharp, Soliman & Crane",The Vector Heat Method,Intrinsic transport/diffusion of directional information,Orientation-aware structural reasoning,HIGH
+"Hammond, Vandergheynst & Gribonval",Wavelets on Graphs via Spectral Graph Theory,Graph-Laplacian spectral wavelets,Bridge from Fourier/wavelet thinking to graph-structural frequency,VERY HIGH
+Coifman & Lafon,Diffusion Maps,Diffusion distance and intrinsic coordinates from multistep connectivity,Strong pre-deep structural embedding; hidden-gem status for WeaveAI,VERY HIGH
+Belkin & Niyogi,Laplacian Eigenmaps for Dimensionality Reduction and Data Representation,Local-neighborhood-preserving graph embedding,Coordinates emerge from meaningful adjacency,VERY HIGH

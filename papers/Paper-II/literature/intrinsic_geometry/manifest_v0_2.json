@@ -1,0 +1,11 @@
+{
+  "checkpoint": "WeaveAI Intrinsic Geometry & Structural Spectral Learning v0.2",
+  "status": "conceptual checkpoint; architecture not frozen",
+  "files": {
+    "LIT_INTRINSIC_GEOMETRY_claim_boundary_v0_2.md": "d88a773b0d31246a5abbae3367bb5a83756b53d56292b2bc31e01e24ed581aea",
+    "LIT_INTRINSIC_GEOMETRY_concept_map_v0_2.md": "3c1787e0eab95b4c593df4c3355f467258e2a42336ff0d85b46291671da6b164",
+    "LIT_INTRINSIC_GEOMETRY_ledger_v0_2.csv": "8cea25945b0ecd5733e166a27fd55a01b4df828d35df9c1960e53fe83803aa57",
+    "LIT_INTRINSIC_GEOMETRY_synthesis_v0_2.md": "9ee7c720dae74b0d9dc89b2299f8961df11cbfcbfc827691706f58b019e12302",
+    "README.md": "cf9486373bce3ae86d28d796743a59e3db15fe095777205d1f20f90484b96455"
+  }
+}
