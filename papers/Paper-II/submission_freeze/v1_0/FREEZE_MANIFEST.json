@@ -1,0 +1,81 @@
+{
+  "freeze_id": "P2_SUBMISSION_FREEZE_v1_0",
+  "date": "2026-10-06",
+  "branch": "paper-ii-05k-support-audit",
+  "base_commit": "23d0da8d21d3d25fa52f3a785a42db3c39eba424",
+  "audit_verdict": "PASS_FOR_SUBMISSION_FREEZE",
+  "scope": "Exact audited v0.7 manuscript and final audit; existing figures pinned without modification.",
+  "artifacts": [
+    {
+      "path": "papers/Paper-II/P2_FINAL_MANUSCRIPT_ASSEMBLY_v0_7_SUBMISSION_CANDIDATE.md",
+      "sha256": "3af5ca3baa9331f2227d2c121f13efb7f60046d3769c899383b1e7a4133ee870",
+      "size_bytes": 153629,
+      "git_blob_sha": "4f83003e61699eaf2e8adf2ccf833ad6ef01aa1b"
+    },
+    {
+      "path": "papers/Paper-II/P2_16_FINAL_SUBMISSION_AUDIT_v1_0.md",
+      "sha256": "90e751a67ff4fc91bb7d201143e06f2af3d11c253f1ee98a6e3f407257e559cd",
+      "size_bytes": 5609,
+      "git_blob_sha": "5e8bc78a01d8413c2fcdca0337b609ea3e7ef736"
+    },
+    {
+      "path": "papers/Paper-II/P2_FIGURE_1_RADIAL_ANGULAR_REPRESENTATION_v1_0.png",
+      "sha256": "9527dec6f6309c5313fe98fb84a7f4bb4f350583b6b3639fa8c8fbee9ceb194f",
+      "size_bytes": 223022,
+      "role": "existing figure; unchanged"
+    },
+    {
+      "path": "papers/Paper-II/P2_FIGURE_2_SUPPORT_DEPENDENCE_v1_0.png",
+      "sha256": "85b47d8da0c12684bf9909f09131814b9841da3d0890ea4a9a6f4a07f2744e1f",
+      "size_bytes": 283823,
+      "role": "existing figure; unchanged"
+    },
+    {
+      "path": "papers/Paper-II/P2_FIGURE_3_REPRESENTATION_SELECTION_v1_0.png",
+      "sha256": "ef2cecc630113ed05f2eb004d70d17f54caf4a16f147b02ad9da148a0e3244ff",
+      "size_bytes": 280715,
+      "role": "existing figure; unchanged"
+    },
+    {
+      "path": "papers/Paper-II/P2_FIGURE_4_NONLINEAR_LATENT_VALIDATION_v1_0.png",
+      "sha256": "ba800b480262364c53cc99534871c46fc5b71754b8107ff218b1f145836f7797",
+      "size_bytes": 237189,
+      "role": "existing figure; unchanged"
+    },
+    {
+      "path": "papers/Paper-II/P2_FIGURE_5_LATENT_MORPHOLOGY_LOCALIZATION_v1_0.png",
+      "sha256": "88436fe61b444bbb79ecba1627db522cef490c5fb7ed054db8cce4d68d04c042",
+      "size_bytes": 226198,
+      "role": "existing figure; unchanged"
+    }
+  ],
+  "preserved_reproducibility_git_tree": "016f52bfc4a48e0e4e876aaa8f65ba8e2d70005e",
+  "claim_boundaries": [
+    "Support dependence is restricted to the tested historical raster-relative representation under the controlled same-pixel intervention.",
+    "The object-relative construction is a matched control/counterfactual, not a retroactive replacement.",
+    "RAW-to-CROP frequency-stage localization is separate from causal support-dependence testing.",
+    "Whole-representation comparisons are descriptive post-selection sensitivity analyses.",
+    "Localization is mathematical/frequency-stage localization, not semantic garment-part localization.",
+    "No universal-law, first-ever, or absolute-priority novelty claim."
+  ],
+  "audit_cited_companions_not_in_snapshot": [
+    {
+      "filename": "P2_14_REFERENCES_FINAL_v1_1.md",
+      "audit_recorded_sha256": "97793290a5810fc68dc2ba16dfd26fdd0d80853d4e6547d800218af21dc0f0e9",
+      "status": "Exact standalone file not recovered; bibliography is included in the frozen manuscript."
+    },
+    {
+      "filename": "P2_15_REVIEWER_PROOFING_RECONCILIATION_v1_0.md",
+      "audit_recorded_sha256": "89671213ad245277499a3727481c74f461fcab13475330b82e7dddb79b09d87d",
+      "status": "Exact v1.0 file not recovered; v1.1 is not substituted."
+    }
+  ],
+  "verification": [
+    "Manuscript SHA-256 matches final audit target.",
+    "Final audit SHA-256 matches user-provided screenshot.",
+    "All five referenced figure files exist.",
+    "Tables 1-5 present; no TODO/TBD/FIXME markers.",
+    "All existing tracked files must remain byte-identical to base commit."
+  ],
+  "reopening_policy": "Create a separately versioned amendment if a genuine contradiction appears; preserve this snapshot."
+}
