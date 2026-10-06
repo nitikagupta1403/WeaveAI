@@ -1,0 +1,216 @@
+{
+  "package": "WeaveAI_PaperII_External_Audit_Package_v1_0",
+  "purpose": "Independent ChatGPT Deep Research + Gemini pre-submission audit",
+  "files": [
+    {
+      "path": "00_README_FIRST.md",
+      "sha256": "b4ee248edf9f7e0b3ed8bd069a328a48139ebfce324aa886a37634513aea97d1",
+      "bytes": 1837
+    },
+    {
+      "path": "01_manuscript/P2_FINAL_MANUSCRIPT_ASSEMBLY_v0_5_FIGURES_INTEGRATED.md",
+      "sha256": "3283976f0493bdfe3238d6d29c79fc8793e3ddfbb961b56a2b46fa5f3942ba99",
+      "bytes": 152063
+    },
+    {
+      "path": "02_figures/P2_FIGURE_1_CAPTION_v1_0.md",
+      "sha256": "0f332b481a7f6ae2e04047a89cf495477b80416958dccf28e23a6438b0ffa058",
+      "bytes": 1368
+    },
+    {
+      "path": "02_figures/P2_FIGURE_1_RADIAL_ANGULAR_REPRESENTATION_v1_0.png",
+      "sha256": "9527dec6f6309c5313fe98fb84a7f4bb4f350583b6b3639fa8c8fbee9ceb194f",
+      "bytes": 223022
+    },
+    {
+      "path": "02_figures/P2_FIGURE_1_RADIAL_ANGULAR_REPRESENTATION_v1_0.svg",
+      "sha256": "573e3c4cc5b829fdc5a149b62743e7fa2c3900d62024e00728512d52a69810eb",
+      "bytes": 118623
+    },
+    {
+      "path": "02_figures/P2_FIGURE_1_SOURCE_CLAIM_AUDIT_v1_0.md",
+      "sha256": "a39d183d7622eb9e8d1ccf699746b0beed1880fccb6452518cc1f06a30570390",
+      "bytes": 1222
+    },
+    {
+      "path": "02_figures/P2_FIGURE_2_CAPTION_v1_0.md",
+      "sha256": "94139a8b7dfe323cf57d5b41fec495097859898f1cbe903e91cfb1465ee66307",
+      "bytes": 1944
+    },
+    {
+      "path": "02_figures/P2_FIGURE_2_SOURCE_CLAIM_AUDIT_v1_0.md",
+      "sha256": "1d3f1675cc209e88b3e2483c3296cc704624845d6ca28d99d33100ac064cbef9",
+      "bytes": 1673
+    },
+    {
+      "path": "02_figures/P2_FIGURE_2_SUPPORT_DEPENDENCE_v1_0.png",
+      "sha256": "85b47d8da0c12684bf9909f09131814b9841da3d0890ea4a9a6f4a07f2744e1f",
+      "bytes": 283823
+    },
+    {
+      "path": "02_figures/P2_FIGURE_2_SUPPORT_DEPENDENCE_v1_0.svg",
+      "sha256": "7aed6a34ebec72feba501a4be4e097427844697100d675c1ef8b7e7c874ae0a8",
+      "bytes": 12860
+    },
+    {
+      "path": "02_figures/P2_FIGURE_3_CAPTION_v1_0.md",
+      "sha256": "ad5929606e3dd8fbf6991cb6fe1a19f7889d589092581d4bcbfa35316f1f3a85",
+      "bytes": 1867
+    },
+    {
+      "path": "02_figures/P2_FIGURE_3_REPRESENTATION_SELECTION_v1_0.png",
+      "sha256": "ef2cecc630113ed05f2eb004d70d17f54caf4a16f147b02ad9da148a0e3244ff",
+      "bytes": 280715
+    },
+    {
+      "path": "02_figures/P2_FIGURE_3_REPRESENTATION_SELECTION_v1_0.svg",
+      "sha256": "aa5b5ec2b86abd3d444006d056c5df9c51366b5f723eea913dde5419f700addc",
+      "bytes": 9650
+    },
+    {
+      "path": "02_figures/P2_FIGURE_3_SOURCE_CLAIM_AUDIT_v1_0.md",
+      "sha256": "8db2deaa489c273834b8e3342fd2c10d06dce27dda2665647b6256636adddd55",
+      "bytes": 1353
+    },
+    {
+      "path": "02_figures/P2_FIGURE_4_CAPTION_v1_0.md",
+      "sha256": "c2682d6c361a58d0b06045747bd734db61a9ef6b0d3b5a8adec839e6893ffa7b",
+      "bytes": 1744
+    },
+    {
+      "path": "02_figures/P2_FIGURE_4_NONLINEAR_LATENT_VALIDATION_v1_0.png",
+      "sha256": "ba800b480262364c53cc99534871c46fc5b71754b8107ff218b1f145836f7797",
+      "bytes": 237189
+    },
+    {
+      "path": "02_figures/P2_FIGURE_4_NONLINEAR_LATENT_VALIDATION_v1_0.svg",
+      "sha256": "3858c417015eec7439443631fab9d81f811ff1f9fc878948b463ddfa93069eb4",
+      "bytes": 8649
+    },
+    {
+      "path": "02_figures/P2_FIGURE_4_SOURCE_CLAIM_AUDIT_v1_0.md",
+      "sha256": "1ca947cb256b93c21dc3c7cddb70959b9cd398b2488beb3c0207a2524dfc7d84",
+      "bytes": 1439
+    },
+    {
+      "path": "02_figures/P2_FIGURE_5_CAPTION_v1_0.md",
+      "sha256": "6e61c6acc41b40452306905e792ccbaeb978eafc8cd568d120327036fb4bd828",
+      "bytes": 1797
+    },
+    {
+      "path": "02_figures/P2_FIGURE_5_LATENT_MORPHOLOGY_LOCALIZATION_v1_0.png",
+      "sha256": "88436fe61b444bbb79ecba1627db522cef490c5fb7ed054db8cce4d68d04c042",
+      "bytes": 226198
+    },
+    {
+      "path": "02_figures/P2_FIGURE_5_LATENT_MORPHOLOGY_LOCALIZATION_v1_0.svg",
+      "sha256": "bcefc686467a93658c2b19ed04c5dd4922df1a664e6ee6848ac598e7a45f6e1b",
+      "bytes": 8884
+    },
+    {
+      "path": "02_figures/P2_FIGURE_5_SOURCE_CLAIM_AUDIT_v1_0.md",
+      "sha256": "6bb736866ae098f1b721507596e5f800decbfb903adfc77e587596c636af442f",
+      "bytes": 1187
+    },
+    {
+      "path": "03_frozen_sources/P2_08_METHODS_RECONCILED_v1_1_FREEZE_READY.md",
+      "sha256": "e2ab6fd5a2a438cd6da86c56baf32954d6eee978c1da5e9aafb09e6bc90da6a3",
+      "bytes": 46461
+    },
+    {
+      "path": "03_frozen_sources/P2_09_RESULTS_RECONCILED_v1_1_FREEZE_READY.md",
+      "sha256": "e05b130fd11e49100e7bc78cfa6369f468c86348431f58be8c00ecc7d90f7ad0",
+      "bytes": 29704
+    },
+    {
+      "path": "03_frozen_sources/P2_10_DISCUSSION_RECONCILED_v1_1_FREEZE_READY.md",
+      "sha256": "6c62a5fae5fa1cb07acf35fd326b2fc499c2dcbf5d36a0c389e3ae0bce6c5a53",
+      "bytes": 29371
+    },
+    {
+      "path": "03_frozen_sources/P2_11_INTRODUCTION_RELATED_WORK_RECONCILED_v1_1_FREEZE_READY.md",
+      "sha256": "f1e73d6db70c75b3924648c822af6e25a967c88147e46d06dabe8bf47b9d0da4",
+      "bytes": 27960
+    },
+    {
+      "path": "03_frozen_sources/P2_12_ABSTRACT_TITLE_KEYWORDS_RECONCILED_v1_1_FREEZE_READY.md",
+      "sha256": "0c8ea7359ba6c4f806329068aed51ad7dc996a530cf748a1d33169bb40235a3c",
+      "bytes": 5017
+    },
+    {
+      "path": "03_frozen_sources/P2_13_05K_SUPPORT_DEPENDENCE_AND_CLAIM_RECONCILIATION_v1_0.md",
+      "sha256": "c35b8d500ef81c3d0d2806d3e6e3bb72ed2b1896a0e8506d7afc8fe775941747",
+      "bytes": 43662
+    },
+    {
+      "path": "04_internal_audits/P2_08_METHODS_THREE_WAY_AUDIT_v1_0.md",
+      "sha256": "4f03f256e919cc6e1b43c5341dc64bddb541eab6c60f2cbc4dfaf084dad45654",
+      "bytes": 5202
+    },
+    {
+      "path": "04_internal_audits/P2_09_RESULTS_THREE_WAY_AUDIT_v1_0.md",
+      "sha256": "bf6611da7ff7c2cf110e049ad39591c587a73dcfb96cf2a8acbfdeec33630a77",
+      "bytes": 6678
+    },
+    {
+      "path": "04_internal_audits/P2_10_DISCUSSION_THREE_WAY_AUDIT_v1_0.md",
+      "sha256": "5793fbf66b64ae8ae7457477a80dcb155685ae585d74dc7c84ab936bf111aa0c",
+      "bytes": 4934
+    },
+    {
+      "path": "04_internal_audits/P2_11_INTRO_RELATED_WORK_AUDIT_v1_0.md",
+      "sha256": "fd44ecf01f75c5c4ab0ff64e16c13e8de081f4f475abb09d2b48e680bdf83060",
+      "bytes": 4956
+    },
+    {
+      "path": "04_internal_audits/P2_12_FINAL_CLAIM_TITLE_ABSTRACT_AUDIT_v1_0.md",
+      "sha256": "0778996b6a48b26b8d4f0b2882810c235a703621d01ab4ff0ab4669d1179bcb5",
+      "bytes": 4831
+    },
+    {
+      "path": "04_internal_audits/P2_CITATION_REFERENCE_VERIFICATION_v0_3.md",
+      "sha256": "45f2c38bfbdb582ebeff00371b36c977fea5cec676dd4aa3cbaca8772856539b",
+      "bytes": 1534
+    },
+    {
+      "path": "04_internal_audits/P2_FIGURE_TABLE_ARCHITECTURE_RECONCILED_v1_0.md",
+      "sha256": "d25570f221c2d5323d20fa8c5ab9a4aa72237c09daf7639d07f1b26791f9dd8d",
+      "bytes": 4483
+    },
+    {
+      "path": "04_internal_audits/P2_FINAL_FIGURE_INTEGRATION_CROSSREF_AUDIT_v0_5.md",
+      "sha256": "69c8fb5d98a0143e6167d235e0bf2939849cb32325bb340883963de5b07e1da1",
+      "bytes": 2073
+    },
+    {
+      "path": "04_internal_audits/P2_FINAL_INTEGRATION_CONSISTENCY_AUDIT_v1_0.md",
+      "sha256": "715bdc64d1700155f733617b3d62221e64d7ce7d32e728857fee895a0366b963",
+      "bytes": 7124
+    },
+    {
+      "path": "05_prompts/00_COMMON_AUDIT_RUBRIC_AND_OUTPUT_SCHEMA.md",
+      "sha256": "3d9bcf5d67d3d0880051cbc297d066507e5bc260477456d1378c251c7c7f057d",
+      "bytes": 4570
+    },
+    {
+      "path": "05_prompts/01_DEEP_RESEARCH_EXTERNAL_AUDIT_PROMPT.md",
+      "sha256": "36625c4ac72b848b876a67c89719c0fa045a16bbde931493f2a141484e845861",
+      "bytes": 6289
+    },
+    {
+      "path": "05_prompts/02_GEMINI_INDEPENDENT_AUDIT_PROMPT.md",
+      "sha256": "78350875cea52f43906f716761a75a459fb47dcd203c713f066de585b90b842a",
+      "bytes": 4664
+    },
+    {
+      "path": "05_prompts/03_AUDIT_RECONCILIATION_PROMPT.md",
+      "sha256": "26d75f73adb6756e1d6517b052adb37a8526c4053805a4c77daa2eede4ac9f4d",
+      "bytes": 1068
+    },
+    {
+      "path": "05_prompts/04_FROZEN_CLAIM_BOUNDARY_SUMMARY.md",
+      "sha256": "d69af0daeca223f0d16b234019fb82a3e3f2c17539c245be9d1ad3c02c0e1893",
+      "bytes": 2866
+    }
+  ]
+}

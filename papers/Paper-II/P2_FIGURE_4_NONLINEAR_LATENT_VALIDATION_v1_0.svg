@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1180" viewBox="0 0 1600 1180">
+<rect width="100%" height="100%" fill="white"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#111}.title{font-size:34px;font-weight:700}.panel{font-size:24px;font-weight:700}.label{font-size:18px}.small{font-size:15px}.tiny{font-size:13px}.axis{stroke:#111;stroke-width:1.6}.grid{stroke:#bbb;stroke-width:1;stroke-dasharray:4 5}.zero{stroke:#555;stroke-width:1.2;stroke-dasharray:5 5}.bar{fill:#ddd;stroke:#111;stroke-width:1.2}.bar2{fill:white;stroke:#111;stroke-width:1.2}.point{fill:#111}.box{fill:white;stroke:#111;stroke-width:1.6}.soft{fill:#f4f4f4;stroke:#111;stroke-width:1.2}.line{stroke:#111;stroke-width:2;fill:none}</style>
+<text x="60" y="52" class="title">Figure 4. Nonlinear structure does not establish nonlinear latent-model utility</text>
+<text x="60" y="105" class="panel">A  Nonlinear latent models versus same-dimensional PCA</text>
+<line x1="577.5" y1="155" x2="577.5" y2="535" class="zero"/>
+<line x1="252.5" y1="535" x2="252.5" y2="541" class="axis"/>
+<text x="252.5" y="560" text-anchor="middle" class="tiny">-0.02</text>
+<line x1="415.0" y1="535" x2="415.0" y2="541" class="axis"/>
+<text x="415.0" y="560" text-anchor="middle" class="tiny">-0.01</text>
+<line x1="577.5" y1="535" x2="577.5" y2="541" class="axis"/>
+<text x="577.5" y="560" text-anchor="middle" class="tiny">+0.00</text>
+<line x1="740.0" y1="535" x2="740.0" y2="541" class="axis"/>
+<text x="740.0" y="560" text-anchor="middle" class="tiny">+0.01</text>
+<line x1="220" y1="535" x2="870" y2="535" class="axis"/>
+<rect x="577.5" y="170" width="159.1" height="18" class="bar"/>
+<text x="205" y="185" text-anchor="end" class="small">AE8</text>
+<text x="744.6" y="185" text-anchor="start" class="tiny">+0.009789</text>
+<rect x="577.5" y="204" width="158.9" height="18" class="bar"/>
+<text x="205" y="219" text-anchor="end" class="small">AE16</text>
+<text x="744.4" y="219" text-anchor="start" class="tiny">+0.009778</text>
+<rect x="478.3" y="238" width="99.2" height="18" class="bar2"/>
+<text x="205" y="253" text-anchor="end" class="small">AE24</text>
+<text x="470.3" y="253" text-anchor="end" class="tiny">-0.006105</text>
+<rect x="301.8" y="272" width="275.7" height="18" class="bar2"/>
+<text x="205" y="287" text-anchor="end" class="small">AE32</text>
+<text x="293.8" y="287" text-anchor="end" class="tiny">-0.016968</text>
+<rect x="312.5" y="306" width="265.0" height="18" class="bar2"/>
+<text x="205" y="321" text-anchor="end" class="small">AE64</text>
+<text x="304.5" y="321" text-anchor="end" class="tiny">-0.016305</text>
+<rect x="577.5" y="340" width="123.8" height="18" class="bar"/>
+<text x="205" y="355" text-anchor="end" class="small">VAE8</text>
+<text x="709.3" y="355" text-anchor="start" class="tiny">+0.007621</text>
+<rect x="577.5" y="374" width="233.0" height="18" class="bar"/>
+<text x="205" y="389" text-anchor="end" class="small">VAE16</text>
+<text x="818.5" y="389" text-anchor="start" class="tiny">+0.014341</text>
+<rect x="552.7" y="408" width="24.8" height="18" class="bar2"/>
+<text x="205" y="423" text-anchor="end" class="small">VAE24</text>
+<text x="544.7" y="423" text-anchor="end" class="tiny">-0.001525</text>
+<rect x="390.2" y="442" width="187.3" height="18" class="bar2"/>
+<text x="205" y="457" text-anchor="end" class="small">VAE32</text>
+<text x="382.2" y="457" text-anchor="end" class="tiny">-0.011527</text>
+<rect x="280.8" y="476" width="296.7" height="18" class="bar2"/>
+<text x="205" y="491" text-anchor="end" class="small">VAE64</text>
+<text x="272.8" y="491" text-anchor="end" class="tiny">-0.018260</text>
+<text x="545.0" y="587" text-anchor="middle" class="small">mean ΔMRR relative to same-dimensional PCA</text>
+<text x="940" y="105" class="panel">B  Multiplicity-controlled evidence</text>
+<line x1="1020" y1="170" x2="1020" y2="480" class="grid"/>
+<text x="1020" y="504" text-anchor="middle" class="tiny">0.00</text>
+<line x1="1150.0" y1="170" x2="1150.0" y2="480" class="grid"/>
+<text x="1150.0" y="504" text-anchor="middle" class="tiny">0.25</text>
+<line x1="1280.0" y1="170" x2="1280.0" y2="480" class="grid"/>
+<text x="1280.0" y="504" text-anchor="middle" class="tiny">0.50</text>
+<line x1="1410.0" y1="170" x2="1410.0" y2="480" class="grid"/>
+<text x="1410.0" y="504" text-anchor="middle" class="tiny">0.75</text>
+<line x1="1540.0" y1="170" x2="1540.0" y2="480" class="grid"/>
+<text x="1540.0" y="504" text-anchor="middle" class="tiny">1.00</text>
+<line x1="1046.0" y1="170" x2="1046.0" y2="480" class="zero"/>
+<text x="1051.0" y="162" class="tiny">0.05</text>
+<circle cx="1247.5" cy="188" r="5" class="point"/>
+<text x="1008" y="193" text-anchor="end" class="tiny">AE8</text>
+<text x="1255.5" y="193" class="tiny">0.4375</text>
+<circle cx="1247.5" cy="217" r="5" class="point"/>
+<text x="1008" y="222" text-anchor="end" class="tiny">AE16</text>
+<text x="1255.5" y="222" class="tiny">0.4375</text>
+<circle cx="1540.0" cy="246" r="5" class="point"/>
+<text x="1008" y="251" text-anchor="end" class="tiny">AE24</text>
+<text x="1548.0" y="251" class="tiny">1.0000</text>
+<circle cx="1540.0" cy="275" r="5" class="point"/>
+<text x="1008" y="280" text-anchor="end" class="tiny">AE32</text>
+<text x="1548.0" y="280" class="tiny">1.0000</text>
+<circle cx="1540.0" cy="304" r="5" class="point"/>
+<text x="1008" y="309" text-anchor="end" class="tiny">AE64</text>
+<text x="1548.0" y="309" class="tiny">1.0000</text>
+<circle cx="1377.5" cy="333" r="5" class="point"/>
+<text x="1008" y="338" text-anchor="end" class="tiny">VAE8</text>
+<text x="1385.5" y="338" class="tiny">0.6875</text>
+<circle cx="1150.0" cy="362" r="5" class="point"/>
+<text x="1008" y="367" text-anchor="end" class="tiny">VAE16</text>
+<text x="1158.0" y="367" class="tiny">0.2500</text>
+<circle cx="1540.0" cy="391" r="5" class="point"/>
+<text x="1008" y="396" text-anchor="end" class="tiny">VAE24</text>
+<text x="1548.0" y="396" class="tiny">1.0000</text>
+<circle cx="1540.0" cy="420" r="5" class="point"/>
+<text x="1008" y="425" text-anchor="end" class="tiny">VAE32</text>
+<text x="1548.0" y="425" class="tiny">1.0000</text>
+<circle cx="1540.0" cy="449" r="5" class="point"/>
+<text x="1008" y="454" text-anchor="end" class="tiny">VAE64</text>
+<text x="1548.0" y="454" class="tiny">1.0000</text>
+<line x1="1020" y1="480" x2="1540" y2="480" class="axis"/>
+<text x="1280.0" y="530" text-anchor="middle" class="small">max-stat adjusted p</text>
+<text x="980" y="570" class="label">No adjusted p-value ≤ 0.05</text>
+<text x="980" y="600" class="small">Strongest observed contrast: VAE16 − PCA16</text>
+<text x="980" y="625" class="small">ΔMRR = +0.014341; adjusted p = 0.25</text>
+<text x="60" y="620" class="panel">C  Nonlinear predictive structure was nevertheless detectable</text>
+<rect x="80" y="665" width="690" height="250" rx="10" class="soft"/>
+<text x="425" y="710" text-anchor="middle" class="label">Fixed quadratic pairwise-coordinate audit</text>
+<text x="425" y="765" text-anchor="middle" class="title">1 FWER-supported relation</text>
+<text x="425" y="815" text-anchor="middle" class="label">strongest mean ΔR² = +0.432042</text>
+<text x="425" y="860" text-anchor="middle" class="small">Interpretation: pairwise nonlinear predictability</text>
+<text x="425" y="888" text-anchor="middle" class="small">Not evidence by itself for manifold curvature or nonlinear-encoder necessity</text>
+<text x="850" y="620" class="panel">D  Local dimensionality diagnostic is descriptive only</text>
+<rect x="880" y="665" width="620" height="250" rx="10" class="box"/>
+<text x="1190" y="720" text-anchor="middle" class="small">20-neighbor local PCA</text>
+<text x="1190" y="775" text-anchor="middle" class="title">median = 15</text>
+<text x="1190" y="820" text-anchor="middle" class="label">IQR = 15–15</text>
+<text x="1190" y="860" text-anchor="middle" class="small">20-neighbor centered rank cap = 19</text>
+<text x="1190" y="890" text-anchor="middle" class="tiny">Scale- and sample-size-conditioned; not an intrinsic-dimension estimate</text>
+<line x1="60" y1="980" x2="1540" y2="980" class="axis"/>
+<text x="800" y="1025" text-anchor="middle" class="title">nonlinear structure ≠ validated nonlinear-model advantage</text>
+<text x="800" y="1065" text-anchor="middle" class="label">PCA retained as the practical latent baseline under the tested identity-disjoint, multiplicity-controlled comparison</text>
+<text x="800" y="1110" text-anchor="middle" class="small">Claim boundary: PCA is not asserted to be universally superior, and AE/VAE non-superiority is not interpreted as proof that garment morphology is globally linear.</text>
+</svg>

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1180" viewBox="0 0 1600 1180">
+<rect width="100%" height="100%" fill="white"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#111}.title{font-size:34px;font-weight:700}.panel{font-size:24px;font-weight:700}.label{font-size:18px}.small{font-size:15px}.tiny{font-size:13px}.axis{stroke:#111;stroke-width:1.6}.grid{stroke:#bbb;stroke-width:1;stroke-dasharray:4 5}.box{fill:white;stroke:#111;stroke-width:1.6}.soft{fill:#f3f3f3;stroke:#111;stroke-width:1.2}.point{fill:#111}.ci{stroke:#111;stroke-width:2}.zero{stroke:#555;stroke-width:1.2;stroke-dasharray:5 5}.bar{fill:#ddd;stroke:#111;stroke-width:1.2}.bar2{fill:white;stroke:#111;stroke-width:1.2}.arrow{stroke:#111;stroke-width:1.8;fill:none;marker-end:url(#a)}</style>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#111"/></marker></defs>
+<text x="60" y="52" class="title">Figure 3. Evidence-controlled radial representation differs across harmonic scale</text>
+<text x="60" y="100" class="panel">A  Identity-disjoint representation-selection design</text>
+<rect x="80" y="145" width="250" height="120" rx="8" class="soft"/>
+<text x="205" y="178" text-anchor="middle" class="label">2,300 sketches</text>
+<text x="205" y="208" text-anchor="middle" class="small">230 garment identities</text>
+<text x="205" y="234" text-anchor="middle" class="small">23 categories</text>
+<line x1="330" y1="205" x2="420" y2="205" class="arrow"/>
+<rect x="435" y="135" width="320" height="140" rx="8" class="box"/>
+<text x="595" y="168" text-anchor="middle" class="label">5 identity-disjoint folds</text>
+<text x="595" y="198" text-anchor="middle" class="small">8 train identities/category/fold</text>
+<text x="595" y="226" text-anchor="middle" class="small">2 held-out identities/category/fold</text>
+<text x="595" y="252" text-anchor="middle" class="tiny">G_train ∩ G_test = ∅</text>
+<line x1="755" y1="205" x2="845" y2="205" class="arrow"/>
+<rect x="860" y="135" width="300" height="140" rx="8" class="box"/>
+<text x="1010" y="168" text-anchor="middle" class="label">Candidate radial encodings</text>
+<text x="1010" y="198" text-anchor="middle" class="small">RAW • DCT • db4 wavelet</text>
+<text x="1010" y="226" text-anchor="middle" class="small">training admissibility Qc ≥ 0.95</text>
+<text x="1010" y="252" text-anchor="middle" class="tiny">selection by train MRR; confirmation on held-out S_g</text>
+<line x1="1160" y1="205" x2="1250" y2="205" class="arrow"/>
+<rect x="1265" y="135" width="260" height="140" rx="8" class="soft"/>
+<text x="1395" y="168" text-anchor="middle" class="label">Confirmatory decision</text>
+<text x="1395" y="198" text-anchor="middle" class="small">category-level sign-flip</text>
+<text x="1395" y="226" text-anchor="middle" class="small">family-wise error control</text>
+<text x="1395" y="252" text-anchor="middle" class="tiny">compress only where supported</text>
+<text x="60" y="340" class="panel">B  Held-out band-specific effects and multiplicity-controlled decisions</text>
+<line x1="362.9" y1="395" x2="362.9" y2="680" class="zero"/>
+<line x1="248.6" y1="680" x2="248.6" y2="686" class="axis"/>
+<text x="248.6" y="706" text-anchor="middle" class="tiny">-0.02</text>
+<line x1="362.9" y1="680" x2="362.9" y2="686" class="axis"/>
+<text x="362.9" y="706" text-anchor="middle" class="tiny">+0.00</text>
+<line x1="477.1" y1="680" x2="477.1" y2="686" class="axis"/>
+<text x="477.1" y="706" text-anchor="middle" class="tiny">+0.02</text>
+<line x1="591.4" y1="680" x2="591.4" y2="686" class="axis"/>
+<text x="591.4" y="706" text-anchor="middle" class="tiny">+0.04</text>
+<line x1="705.7" y1="680" x2="705.7" y2="686" class="axis"/>
+<text x="705.7" y="706" text-anchor="middle" class="tiny">+0.06</text>
+<line x1="820.0" y1="680" x2="820.0" y2="686" class="axis"/>
+<text x="820.0" y="706" text-anchor="middle" class="tiny">+0.08</text>
+<line x1="934.3" y1="680" x2="934.3" y2="686" class="axis"/>
+<text x="934.3" y="706" text-anchor="middle" class="tiny">+0.10</text>
+<line x1="220" y1="680" x2="1020" y2="680" class="axis"/>
+<text x="200" y="443" text-anchor="end" class="label">k=1–4</text>
+<line x1="496.0" y1="437" x2="981.1" y2="437" class="ci"/>
+<line x1="496.0" y1="431" x2="496.0" y2="443" class="ci"/>
+<line x1="981.1" y1="431" x2="981.1" y2="443" class="ci"/>
+<circle cx="701.7" cy="437" r="6" class="point"/>
+<text x="1042" y="430" class="small">Δ = 0.059306; FWER p = 0.000200</text>
+<text x="1042" y="454" class="label">retain DCT₄</text>
+<text x="200" y="505" text-anchor="end" class="label">k=5–12</text>
+<line x1="281.9" y1="499" x2="707.8" y2="499" class="ci"/>
+<line x1="281.9" y1="493" x2="281.9" y2="505" class="ci"/>
+<line x1="707.8" y1="493" x2="707.8" y2="505" class="ci"/>
+<circle cx="397.1" cy="499" r="6" class="point"/>
+<text x="1042" y="492" class="small">Δ = 0.005984; FWER p = 0.608939</text>
+<text x="1042" y="516" class="label">retain RAW₇₂</text>
+<text x="200" y="567" text-anchor="end" class="label">k=13–24</text>
+<line x1="345.2" y1="561" x2="781.8" y2="561" class="ci"/>
+<line x1="345.2" y1="555" x2="345.2" y2="567" class="ci"/>
+<line x1="781.8" y1="555" x2="781.8" y2="567" class="ci"/>
+<circle cx="425.5" cy="561" r="6" class="point"/>
+<text x="1042" y="554" class="small">Δ = 0.010959; FWER p = 0.487751</text>
+<text x="1042" y="578" class="label">retain RAW₇₂</text>
+<text x="200" y="629" text-anchor="end" class="label">k=25–36</text>
+<line x1="472.2" y1="623" x2="883.0" y2="623" class="ci"/>
+<line x1="472.2" y1="617" x2="472.2" y2="629" class="ci"/>
+<line x1="883.0" y1="617" x2="883.0" y2="629" class="ci"/>
+<circle cx="587.4" cy="623" r="6" class="point"/>
+<text x="1042" y="616" class="small">Δ = 0.039300; FWER p = 0.019698</text>
+<text x="1042" y="640" class="label">retain db4₄</text>
+<text x="620.0" y="732" text-anchor="middle" class="small">held-out effect Δ = T_b (bootstrap 95% CI)</text>
+<text x="1185" y="620" class="small">Supported compact bands:</text>
+<text x="1185" y="648" class="label">low → DCT₄</text>
+<text x="1185" y="675" class="label">high → db4₄</text>
+<text x="60" y="735" class="panel">C  Frozen heterogeneous radial-spectral representation</text>
+<rect x="90" y="790" width="230" height="105" class="soft"/>
+<text x="205.0" y="820" text-anchor="middle" class="small">k=1–4</text>
+<text x="205.0" y="852" text-anchor="middle" class="label">DCT₄</text>
+<text x="205.0" y="877" text-anchor="middle" class="tiny">16 complex</text>
+<rect x="320" y="790" width="360" height="105" class="soft"/>
+<text x="500.0" y="820" text-anchor="middle" class="small">k=5–12</text>
+<text x="500.0" y="852" text-anchor="middle" class="label">RAW₇₂</text>
+<text x="500.0" y="877" text-anchor="middle" class="tiny">576 complex</text>
+<rect x="680" y="790" width="470" height="105" class="soft"/>
+<text x="915.0" y="820" text-anchor="middle" class="small">k=13–24</text>
+<text x="915.0" y="852" text-anchor="middle" class="label">RAW₇₂</text>
+<text x="915.0" y="877" text-anchor="middle" class="tiny">864 complex</text>
+<rect x="1150" y="790" width="260" height="105" class="soft"/>
+<text x="1280.0" y="820" text-anchor="middle" class="small">k=25–36</text>
+<text x="1280.0" y="852" text-anchor="middle" class="label">db4₄</text>
+<text x="1280.0" y="877" text-anchor="middle" class="tiny">48 complex</text>
+<text x="760" y="930" text-anchor="middle" class="label">1504 complex coefficients = 3008 real coordinates</text>
+<text x="760" y="958" text-anchor="middle" class="small">full RAW72: 2592 complex → hybrid: 1504 complex</text>
+<text x="760" y="986" text-anchor="middle" class="label">41.98% coefficient reduction • 1.7234× compression ratio</text>
+<text x="1080" y="735" class="panel">D  Descriptive whole-representation sensitivity</text>
+<rect x="1100" y="815" width="381.6" height="19" class="bar"/>
+<text x="1090" y="830" text-anchor="end" class="tiny">Full RAW72</text>
+<text x="1489.6" y="830" class="tiny">0.819373</text>
+<rect x="1100" y="855" width="359.2" height="19" class="bar"/>
+<text x="1090" y="870" text-anchor="end" class="tiny">Hybrid</text>
+<text x="1467.2" y="870" class="tiny">0.816766</text>
+<rect x="1100" y="895" width="351.7" height="19" class="bar"/>
+<text x="1090" y="910" text-anchor="end" class="tiny">Uniform RAW42</text>
+<text x="1459.7" y="910" class="tiny">0.815896</text>
+<rect x="1100" y="935" width="123.7" height="19" class="bar"/>
+<text x="1090" y="950" text-anchor="end" class="tiny">Uniform db4-42</text>
+<text x="1231.7" y="950" class="tiny">0.789378</text>
+<rect x="1100" y="975" width="73.1" height="19" class="bar"/>
+<text x="1090" y="990" text-anchor="end" class="tiny">Uniform DCT42</text>
+<text x="1181.1" y="990" class="tiny">0.783503</text>
+<text x="1315.0" y="1035" text-anchor="middle" class="small">mean MRR (descriptive)</text>
+<text x="1100" y="1080" class="small">Hybrid vs uniform RAW42: ΔMRR = +0.000870</text>
+<text x="1100" y="1108" class="small">Hybrid vs uniform db4-42: +0.027388</text>
+<text x="1100" y="1136" class="small">Hybrid vs uniform DCT42: +0.033263</text>
+<text x="1100" y="1173" class="tiny">Interpretation: not a retrieval-performance breakthrough; supports heterogeneous encoding as an evidence-controlled design choice.</text>
+<line x1="60" y1="1120" x2="1540" y2="1120" class="axis"/>
+<text x="60" y="1152" class="small">Claim boundary: compression was retained only where supported under the frozen identity-disjoint inferential design; unsupported bands were preserved rather than declared intrinsically incompressible.</text>
+</svg>

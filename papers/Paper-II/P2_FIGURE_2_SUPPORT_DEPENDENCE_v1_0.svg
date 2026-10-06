@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1180" viewBox="0 0 1600 1180">
+<rect width="100%" height="100%" fill="white"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#111;}
+.title{font-size:34px;font-weight:700}.panel{font-size:24px;font-weight:700}.label{font-size:18px}.small{font-size:15px}.tiny{font-size:13px}.axis{stroke:#111;stroke-width:1.6}.grid{stroke:#bbb;stroke-width:1;stroke-dasharray:4 5}.series{fill:none;stroke:#111;stroke-width:2.2}.series2{fill:none;stroke:#111;stroke-width:2.2;stroke-dasharray:7 5}.series3{fill:none;stroke:#111;stroke-width:2.2;stroke-dasharray:2 4}.series4{fill:none;stroke:#111;stroke-width:2.2;stroke-dasharray:10 4 2 4}.box{fill:none;stroke:#111;stroke-width:1.8}.soft{fill:#f5f5f5;stroke:#111;stroke-width:1.2}.bar{fill:#ddd;stroke:#111;stroke-width:1.2}.bar2{fill:white;stroke:#111;stroke-width:1.2;stroke-dasharray:4 3}.point{fill:#111}.zero{stroke:#555;stroke-width:1.2;stroke-dasharray:5 5}
+</style>
+<text x="60" y="52" class="title">Figure 2. Raster-support dependence under a controlled same-pixel intervention</text>
+<text x="60" y="95" class="panel">A  Same garment patch, larger raster support</text>
+<rect x="115.0" y="115.0" width="150" height="150" class="soft"/>
+<rect x="145.0" y="134.0" width="90" height="112" class="box"/>
+<path d="M 162 155 L 180 140 L 200 140 L 218 155 L 208 235 L 172 235 Z" class="series"/>
+<text x="190" y="293.0" text-anchor="middle" class="label">s = 1.0</text>
+<rect x="325.0" y="85.0" width="210" height="210" class="soft"/>
+<rect x="385.0" y="134.0" width="90" height="112" class="box"/>
+<path d="M 402 155 L 420 140 L 440 140 L 458 155 L 448 235 L 412 235 Z" class="series"/>
+<text x="430" y="323.0" text-anchor="middle" class="label">s = 1.5</text>
+<rect x="550.0" y="40.0" width="300" height="300" class="soft"/>
+<rect x="655.0" y="134.0" width="90" height="112" class="box"/>
+<path d="M 672 155 L 690 140 L 710 140 L 728 155 L 718 235 L 682 235 Z" class="series"/>
+<text x="700" y="368.0" text-anchor="middle" class="label">s = 3.0</text>
+<text x="60" y="380" class="small">Garment pixels fixed • symmetric blank support enlarged • no resize, interpolation, antialiasing, retracing, rethresholding, or recropping</text>
+<text x="60" y="407" class="small">Primary population: 2,300 sketches × 7 support levels = 16,100 conditions</text>
+<text x="845" y="95" class="panel">B  Population median spectral redistribution</text>
+<line x1="915" y1="395.0" x2="1510" y2="395.0" class="grid"/>
+<text x="905" y="400.0" text-anchor="end" class="tiny">-0.06</text>
+<line x1="915" y1="357.3" x2="1510" y2="357.3" class="grid"/>
+<text x="905" y="362.3" text-anchor="end" class="tiny">-0.04</text>
+<line x1="915" y1="319.6" x2="1510" y2="319.6" class="grid"/>
+<text x="905" y="324.6" text-anchor="end" class="tiny">-0.02</text>
+<line x1="915" y1="281.9" x2="1510" y2="281.9" class="grid"/>
+<text x="905" y="286.9" text-anchor="end" class="tiny">+0.00</text>
+<line x1="915" y1="244.2" x2="1510" y2="244.2" class="grid"/>
+<text x="905" y="249.2" text-anchor="end" class="tiny">+0.02</text>
+<line x1="915" y1="206.5" x2="1510" y2="206.5" class="grid"/>
+<text x="905" y="211.5" text-anchor="end" class="tiny">+0.04</text>
+<line x1="915" y1="168.8" x2="1510" y2="168.8" class="grid"/>
+<text x="905" y="173.8" text-anchor="end" class="tiny">+0.06</text>
+<line x1="915" y1="395" x2="1510" y2="395" class="axis"/>
+<line x1="915" y1="150" x2="915" y2="395" class="axis"/>
+<line x1="915.0" y1="395" x2="915.0" y2="400" class="axis"/>
+<text x="915.0" y="418" text-anchor="middle" class="tiny">1</text>
+<line x1="944.8" y1="395" x2="944.8" y2="400" class="axis"/>
+<text x="944.8" y="418" text-anchor="middle" class="tiny">1.1</text>
+<line x1="989.4" y1="395" x2="989.4" y2="400" class="axis"/>
+<text x="989.4" y="418" text-anchor="middle" class="tiny">1.25</text>
+<line x1="1063.8" y1="395" x2="1063.8" y2="400" class="axis"/>
+<text x="1063.8" y="418" text-anchor="middle" class="tiny">1.5</text>
+<line x1="1212.5" y1="395" x2="1212.5" y2="400" class="axis"/>
+<text x="1212.5" y="418" text-anchor="middle" class="tiny">2</text>
+<line x1="1361.2" y1="395" x2="1361.2" y2="400" class="axis"/>
+<text x="1361.2" y="418" text-anchor="middle" class="tiny">2.5</text>
+<line x1="1510.0" y1="395" x2="1510.0" y2="400" class="axis"/>
+<text x="1510.0" y="418" text-anchor="middle" class="tiny">3</text>
+<text x="1212.5" y="442" text-anchor="middle" class="small">support level s</text>
+<text x="863" y="272.5" text-anchor="middle" transform="rotate(-90 863 272.5)" class="small">Δ band fraction</text>
+<line x1="915" y1="281.9" x2="1510" y2="281.9" class="zero"/>
+<path d="M 915.0 281.9 L 944.8 255.2 L 989.4 236.6 L 1063.8 222.4 L 1212.5 203.1 L 1361.2 185.7 L 1510.0 168.8" class="series"/>
+<circle cx="915.0" cy="281.9" r="3.2" class="point"/>
+<circle cx="944.8" cy="255.2" r="3.2" class="point"/>
+<circle cx="989.4" cy="236.6" r="3.2" class="point"/>
+<circle cx="1063.8" cy="222.4" r="3.2" class="point"/>
+<circle cx="1212.5" cy="203.1" r="3.2" class="point"/>
+<circle cx="1361.2" cy="185.7" r="3.2" class="point"/>
+<circle cx="1510.0" cy="168.8" r="3.2" class="point"/>
+<path d="M 915.0 281.9 L 944.8 274.0 L 989.4 272.9 L 1063.8 269.4 L 1212.5 259.7 L 1361.2 254.1 L 1510.0 250.8" class="series2"/>
+<circle cx="915.0" cy="281.9" r="3.2" class="point"/>
+<circle cx="944.8" cy="274.0" r="3.2" class="point"/>
+<circle cx="989.4" cy="272.9" r="3.2" class="point"/>
+<circle cx="1063.8" cy="269.4" r="3.2" class="point"/>
+<circle cx="1212.5" cy="259.7" r="3.2" class="point"/>
+<circle cx="1361.2" cy="254.1" r="3.2" class="point"/>
+<circle cx="1510.0" cy="250.8" r="3.2" class="point"/>
+<path d="M 915.0 281.9 L 944.8 298.5 L 989.4 308.1 L 1063.8 315.8 L 1212.5 326.4 L 1361.2 336.8 L 1510.0 347.6" class="series3"/>
+<circle cx="915.0" cy="281.9" r="3.2" class="point"/>
+<circle cx="944.8" cy="298.5" r="3.2" class="point"/>
+<circle cx="989.4" cy="308.1" r="3.2" class="point"/>
+<circle cx="1063.8" cy="315.8" r="3.2" class="point"/>
+<circle cx="1212.5" cy="326.4" r="3.2" class="point"/>
+<circle cx="1361.2" cy="336.8" r="3.2" class="point"/>
+<circle cx="1510.0" cy="347.6" r="3.2" class="point"/>
+<path d="M 915.0 281.9 L 944.8 304.2 L 989.4 320.0 L 1063.8 334.6 L 1212.5 354.5 L 1361.2 368.9 L 1510.0 381.7" class="series4"/>
+<circle cx="915.0" cy="281.9" r="3.2" class="point"/>
+<circle cx="944.8" cy="304.2" r="3.2" class="point"/>
+<circle cx="989.4" cy="320.0" r="3.2" class="point"/>
+<circle cx="1063.8" cy="334.6" r="3.2" class="point"/>
+<circle cx="1212.5" cy="354.5" r="3.2" class="point"/>
+<circle cx="1361.2" cy="368.9" r="3.2" class="point"/>
+<circle cx="1510.0" cy="381.7" r="3.2" class="point"/>
+<line x1="925" y1="162" x2="961" y2="162" class="series"/>
+<text x="970" y="167" class="tiny">Low</text>
+<line x1="925" y1="185" x2="961" y2="185" class="series2"/>
+<text x="970" y="190" class="tiny">Mid</text>
+<line x1="925" y1="208" x2="961" y2="208" class="series3"/>
+<text x="970" y="213" class="tiny">High-mid</text>
+<line x1="925" y1="231" x2="961" y2="231" class="series4"/>
+<text x="970" y="236" class="tiny">High</text>
+<text x="60" y="470" class="panel">C  Exact category-level endpoint inference (s = 3 vs s = 1)</text>
+<line x1="456.9" y1="525" x2="456.9" y2="765" class="zero"/>
+<line x1="192.1" y1="765" x2="192.1" y2="770" class="axis"/>
+<text x="192.1" y="789" text-anchor="middle" class="tiny">-0.06</text>
+<line x1="280.3" y1="765" x2="280.3" y2="770" class="axis"/>
+<text x="280.3" y="789" text-anchor="middle" class="tiny">-0.04</text>
+<line x1="368.6" y1="765" x2="368.6" y2="770" class="axis"/>
+<text x="368.6" y="789" text-anchor="middle" class="tiny">-0.02</text>
+<line x1="456.9" y1="765" x2="456.9" y2="770" class="axis"/>
+<text x="456.9" y="789" text-anchor="middle" class="tiny">+0.00</text>
+<line x1="545.2" y1="765" x2="545.2" y2="770" class="axis"/>
+<text x="545.2" y="789" text-anchor="middle" class="tiny">+0.02</text>
+<line x1="633.4" y1="765" x2="633.4" y2="770" class="axis"/>
+<text x="633.4" y="789" text-anchor="middle" class="tiny">+0.04</text>
+<line x1="721.7" y1="765" x2="721.7" y2="770" class="axis"/>
+<text x="721.7" y="789" text-anchor="middle" class="tiny">+0.06</text>
+<line x1="810.0" y1="765" x2="810.0" y2="770" class="axis"/>
+<text x="810.0" y="789" text-anchor="middle" class="tiny">+0.08</text>
+<line x1="170" y1="765" x2="810" y2="765" class="axis"/>
+<line x1="456.9" y1="570" x2="769.5" y2="570" class="axis"/>
+<circle cx="769.5" cy="570" r="6" class="point"/>
+<text x="154" y="576" text-anchor="end" class="label">Low</text>
+<text x="830" y="566" class="small">mean = +0.070816</text>
+<text x="830" y="588" class="tiny">median = +0.052497; T = 8.876; FWER p = 1.43×10⁻⁶</text>
+<line x1="456.9" y1="640" x2="289.6" y2="640" class="axis"/>
+<circle cx="289.6" cy="640" r="6" class="point"/>
+<text x="154" y="646" text-anchor="end" class="label">High-mid</text>
+<text x="830" y="636" class="small">mean = -0.037901</text>
+<text x="830" y="658" class="tiny">median = -0.035074; T = 11.943; FWER p = 1.19×10⁻⁷</text>
+<line x1="456.9" y1="710" x2="222.2" y2="710" class="axis"/>
+<circle cx="222.2" cy="710" r="6" class="point"/>
+<text x="154" y="716" text-anchor="end" class="label">High</text>
+<text x="830" y="706" class="small">mean = -0.053174</text>
+<text x="830" y="728" class="tiny">median = -0.046223; T = 15.211; FWER p = 1.19×10⁻⁷</text>
+<text x="490.0" y="815" text-anchor="middle" class="small">category-level endpoint effect</text>
+<text x="840" y="560" class="small">23 / 23 category medians followed the prespecified direction</text>
+<text x="840" y="591" class="small">Exact joint sign-flip enumeration: 2²³ configurations</text>
+<text x="840" y="622" class="small">Studentized max-T controls FWER across directional bands</text>
+<text x="840" y="680" class="small">Matched object-relative control:</text>
+<text x="840" y="710" class="label">16,100 / 16,100 conditions invariant</text>
+<text x="840" y="743" class="small">s = 1 replay: 2,300 / 2,300</text>
+<text x="840" y="767" class="tiny">maximum discrepancy ≈ 2.22 × 10⁻¹⁶</text>
+<text x="60" y="815" class="panel">D  Broad endpoint response does not imply universal monotonicity</text>
+<line x1="170" y1="913" x2="950" y2="913" class="grid"/>
+<rect x="170" y="895" width="713.7" height="16" class="bar"/>
+<rect x="170" y="919" width="397.0" height="16" class="bar2"/>
+<text x="154" y="909" text-anchor="end" class="label">Low</text>
+<text x="891.7" y="908" class="tiny">91.5% endpoint concordance</text>
+<text x="575.0" y="933" class="tiny">50.9% fully monotonic</text>
+<line x1="170" y1="975" x2="950" y2="975" class="grid"/>
+<rect x="170" y="957" width="698.1" height="16" class="bar"/>
+<rect x="170" y="981" width="344.0" height="16" class="bar2"/>
+<text x="154" y="971" text-anchor="end" class="label">High-mid</text>
+<text x="876.1" y="970" class="tiny">89.5% endpoint concordance</text>
+<text x="522.0" y="995" class="tiny">44.1% fully monotonic</text>
+<line x1="170" y1="1037" x2="950" y2="1037" class="grid"/>
+<rect x="170" y="1019" width="680.9" height="16" class="bar"/>
+<rect x="170" y="1043" width="294.8" height="16" class="bar2"/>
+<text x="154" y="1033" text-anchor="end" class="label">High</text>
+<text x="858.9" y="1032" class="tiny">87.3% endpoint concordance</text>
+<text x="472.8" y="1057" class="tiny">37.8% fully monotonic</text>
+<line x1="170.0" y1="1070" x2="170.0" y2="1076" class="axis"/>
+<text x="170.0" y="1095" text-anchor="middle" class="tiny">0%</text>
+<line x1="365.0" y1="1070" x2="365.0" y2="1076" class="axis"/>
+<text x="365.0" y="1095" text-anchor="middle" class="tiny">25%</text>
+<line x1="560.0" y1="1070" x2="560.0" y2="1076" class="axis"/>
+<text x="560.0" y="1095" text-anchor="middle" class="tiny">50%</text>
+<line x1="755.0" y1="1070" x2="755.0" y2="1076" class="axis"/>
+<text x="755.0" y="1095" text-anchor="middle" class="tiny">75%</text>
+<line x1="950.0" y1="1070" x2="950.0" y2="1076" class="axis"/>
+<text x="950.0" y="1095" text-anchor="middle" class="tiny">100%</text>
+<line x1="170" y1="1070" x2="950" y2="1070" class="axis"/>
+<text x="1050" y="898" class="small">Interpretation boundary</text>
+<text x="1050" y="932" class="label">Population endpoint effect: supported</text>
+<text x="1050" y="967" class="label">Universal per-image monotonic law: not supported</text>
+<text x="1050" y="1016" class="small">L1 redistribution fully monotonic:</text>
+<text x="1050" y="1044" class="label">56.3% of images</text>
+<line x1="60" y1="1110" x2="1540" y2="1110" class="axis"/>
+<text x="60" y="1142" class="small">Claim boundary: the intervention demonstrates raster support as a dependency of the tested raster-relative representation; it does not imply that padding creates frequency content or that support fully explains natural preprocessing differences.</text>
+</svg>
