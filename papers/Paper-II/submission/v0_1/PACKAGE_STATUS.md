@@ -8,23 +8,25 @@ Status: **scientific cover-letter draft and highlights prepared; package incompl
 
 - [HIGHLIGHTS.txt](HIGHLIGHTS.txt): five highlights, each at most 85 characters including spaces. The first highlight retains the tested raster-relative scope and the control is qualified to the same intervention.
 - [COVER_LETTER_SCIENTIFIC_DRAFT.md](COVER_LETTER_SCIENTIFIC_DRAFT.md): scientific rationale with historical chronology, RAW42 boundary, conditional nonlinear result, and mathematical interpretation scope.
+- [TITLE_PAGE.md](TITLE_PAGE.md): confirmed sole author Nitika Gupta, Independent Researcher, corresponding email nitikashimla14@gmail.com.
+- [AUTHOR_DECLARATIONS.md](AUTHOR_DECLARATIONS.md): author-confirmed absence of funding and competing interests.
 - [Reviewer-objection matrix](../../P2_17_REVIEWER_OBJECTION_MATRIX_v1_0.md): existing manuscript responses and remaining evidence limitations.
 
 The [frozen v0.7 manuscript](../../P2_FINAL_MANUSCRIPT_ASSEMBLY_v0_7_FINAL_AUDITED.md) remains the scientific source. Its SHA-256 is `3af5ca3baa9331f2227d2c121f13efb7f60046d3769c899383b1e7a4133ee870`. No submission-format derivative or manuscript rewrite has been created at this stage.
 
-## Needed from authors
+## Author information and remaining confirmations
 
 | Item | Required information |
 |---|---|
-| Author list | Full names in final order; actual affiliations; ORCIDs if available |
-| Corresponding author | Name, email, and affiliation/contact address |
+| Author list | Confirmed: Nitika Gupta, sole author, Independent Researcher. ORCID not supplied. |
+| Corresponding author | Confirmed: Nitika Gupta, nitikashimla14@gmail.com. Postal address not supplied. |
 | Contributions | Actual roles for each author; no inferred role assignments |
-| Funding | Verified funder/grant information or confirmed absence of dedicated funding |
-| Competing interests | Actual declarations from the authors |
+| Funding | Confirmed by author: no funding. Declaration prepared. |
+| Competing interests | Confirmed by author: none. Declaration prepared. |
 | Submission assurances | Author approval, publication history, related manuscripts/preprints, and concurrent-submission status |
 | AI-use disclosure | Accurate description of applicable assistance under the current publisher policy |
 
-These facts are not filled from assumptions. The scientific cover letter does not assert originality of publication, exclusive submission, author approval, absence of conflicts, or absence of funding.
+Author metadata, funding, and competing-interest statements were confirmed directly by Nitika Gupta on 2026-10-06. Contributions and submission assurances are not inferred from sole authorship. The cover letter does not assert originality of publication, exclusive submission, or final author approval.
 
 ## Remaining production work
 
