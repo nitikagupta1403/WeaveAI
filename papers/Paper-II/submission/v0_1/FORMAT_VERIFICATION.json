@@ -1,0 +1,35 @@
+{
+  "source_commit": "057972b2dcbc7949bdc93b9266a875625ce530c5",
+  "source_sha256": "3af5ca3baa9331f2227d2c121f13efb7f60046d3769c899383b1e7a4133ee870",
+  "changes": [
+    "Remove repeated section 3.3 heading",
+    "Repair section 3.4.7 heading",
+    "Adjust five image paths for derivative location",
+    "Replace unsupported multiline-math newline commands with gathered layout; words unchanged"
+  ],
+  "markdown_and_docx_structure": {
+    "Math": 536,
+    "Table": 7,
+    "Image": 5
+  },
+  "embedded_images_byte_identical_to_frozen": true,
+  "bibliography_entries": 27,
+  "pdf_pages": 64,
+  "visual_pages_inspected": [
+    1,
+    45,
+    63
+  ],
+  "visual_inspection_scope": "Sample only: first page, Table 3 and concluding formula/references. Full visual/page-break and journal-format review pending.",
+  "known_layout_limitations": [
+    "Preservation-oriented layout is 64 pages; not an edited journal-length manuscript.",
+    "PDF figure placement can separate images and captions; a final layout pass remains necessary."
+  ],
+  "output_sha256": {
+    "MANUSCRIPT_FORMATTED.md": "fa8077d7460c834e17d34493d445810a822ac34d67356187255ab34418705b10",
+    "MANUSCRIPT.docx": "1d38c22c42555d757535f7d398e5e0cdcf5dba2a839c16a955e719d48daa197a",
+    "MANUSCRIPT_REVIEW.pdf": "54350faee48c52e6e4a751768fdb088c201ee37747ad0e2863ab2adba0a7edc5"
+  },
+  "new_experiments": false,
+  "scientific_results_changed": false
+}
