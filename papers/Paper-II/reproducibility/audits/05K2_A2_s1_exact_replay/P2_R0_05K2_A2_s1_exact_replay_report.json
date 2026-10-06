@@ -1,0 +1,36 @@
+{
+  "anti_peeking": {
+    "05k_support_trajectory_opened": false,
+    "h1_h2_h3_tested": false,
+    "s_gt_1_descriptor_execution": false
+  },
+  "intrinsic": {
+    "band_fractions_exact": true,
+    "max_abs_band_fraction_diff": 0.0,
+    "max_abs_field_diff": 0.0,
+    "ten_fields_exact": true
+  },
+  "raster": {
+    "full_population_A_vs_B_exact": true,
+    "full_population_max_abs_field_diff": 0.0,
+    "historical_i2_max_abs_band_diff_all": 1.6653345369377348e-16,
+    "historical_i2_max_abs_band_diff_sentinels": 1.1102230246251565e-16,
+    "historical_i2_tolerance": 1e-12,
+    "sentinel_field_exact": true,
+    "sentinel_max_abs_field_diff": 0.0
+  },
+  "raster_execution_population": 2300,
+  "s_gt_1_images_loaded": false,
+  "sentinels": 10,
+  "source_sha256": {
+    "H1": "1ce3c0dd7f34e75c806777bff9c5142814f179a0b6fef48f927fbfeb1b4d1642",
+    "H1_field": "aaa69c8a6a416979dc037ae6c0197d5c62f1959eb41cc0482c8b5a3bdde21c03",
+    "I2": "802325ae23b3896bd0bf51bed49fd0bf5218583d73f76d1bae69f6f70e9fa3e3",
+    "I2_per_image": "a9a096b4aafe89be79b5d3c35fd3e4dc4e6de046c30326f108d0cbe3601c39e2",
+    "RA14": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9",
+    "V3_manifest": "19ab60c21c71de7918472142c36174ded9f8fae888eeb3320983ca2cc66a545e"
+  },
+  "stage": "P2_R0_05K2_A2_S1_EXACT_REPLAY",
+  "status": "PASS",
+  "support_trajectory_computed": false
+}

@@ -1,0 +1,45 @@
+{
+  "analysis_boundary": {
+    "descriptor_execution": false,
+    "directional_hypotheses": false,
+    "materiality_threshold": false,
+    "mechanism_verdict": false,
+    "population_inference": false,
+    "spectral_analysis": false,
+    "trajectory_analysis": false
+  },
+  "categories": 23,
+  "conditions_materialized": 16100,
+  "construction_rule": {
+    "dimension_rule": "Hs = H + 2*ceil(((s-1)*H)/2); Ws = W + 2*ceil(((s-1)*W)/2)",
+    "padding_rule": "b_i = int(rint(255 * border_median_i))",
+    "path": "/Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K1_Construction_Rule_v1_0/P2_R0_05K1_support_only_construction_rule_v1_0.json",
+    "sha256": "a2f38fbed518d7e9371bb5f517b39aaf6d97c34be4ea476ebc455a64d5a6101f"
+  },
+  "integrity": {
+    "all_embedded_patch_array_sha_match": true,
+    "all_no_clipping": true,
+    "all_padding_exact": true,
+    "all_saved_reloaded_exact": true,
+    "all_source_patches_array_equal": true,
+    "maximum_padding_value": 255,
+    "minimum_padding_value": 253,
+    "s1_exact_replay": true
+  },
+  "source_images": 2300,
+  "stage": "P2_R0_05K4_A_PRIMARY_SUPPORT_MATERIALIZATION",
+  "status": "PASS_CONSTRUCTION_AND_INTEGRITY_ONLY",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ],
+  "v3_manifest": {
+    "path": "/Users/nitikagupta/Research/paper2_r0_05f_crop_vs_resampling/V3_CROP_ONLY/materialized_manifest.csv",
+    "sha256": "19ab60c21c71de7918472142c36174ded9f8fae888eeb3320983ca2cc66a545e"
+  }
+}

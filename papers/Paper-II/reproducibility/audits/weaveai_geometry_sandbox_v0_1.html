@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WeaveAI Geometry Sandbox v0.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg:#f5f0e6;
+    --panel:#fffdf8;
+    --ink:#252525;
+    --muted:#777;
+    --line:#d7d0c5;
+    --accent:#5c5c5c;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  header {
+    padding:22px 28px 14px;
+    border-bottom:1px solid var(--line);
+    background:var(--panel);
+  }
+  h1 { font-size:22px; margin:0 0 5px; }
+  .sub { color:var(--muted); font-size:13px; }
+  main {
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:18px;
+    padding:18px;
+  }
+  .panel {
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px;
+  }
+  .controls label {
+    display:block;
+    font-size:12px;
+    margin-top:12px;
+    color:var(--muted);
+  }
+  select, input[type=file] {
+    width:100%;
+    margin-top:5px;
+    padding:8px;
+  }
+  .metric {
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    padding:7px 0;
+    border-bottom:1px solid #eee8dd;
+    font-size:13px;
+  }
+  .metric:last-child { border-bottom:0; }
+  .grid {
+    display:grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap:18px;
+  }
+  canvas {
+    width:100%;
+    height:auto;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .title {
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .legend {
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.45;
+  }
+  .status {
+    margin-top:12px;
+    padding:10px;
+    border-radius:10px;
+    background:#f1ece2;
+    font-size:12px;
+    line-height:1.4;
+  }
+  @media (max-width: 900px) {
+    main { grid-template-columns:1fr; }
+    .grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>WeaveAI Geometry Sandbox v0.1</h1>
+  <div class="sub">
+    Visual debugger only. Python JSON is the scientific source of record.
+  </div>
+</header>
+
+<main>
+  <section class="panel controls">
+    <div class="title">Load authoritative JSON</div>
+    <input type="file" id="fileInput" accept=".json">
+
+    <label>Case</label>
+    <select id="caseSelect"></select>
+
+    <label>Normalization</label>
+    <select id="normSelect">
+      <option value="grid">grid-relative</option>
+      <option value="object">object-relative</option>
+    </select>
+
+    <div style="height:14px"></div>
+    <div id="metrics"></div>
+
+    <div class="status">
+      <b>Interpretation rule</b><br>
+      Same centroid does not imply same spectrum. Compare grid-relative vs
+      object-relative coordinates to separate support effects from object
+      mass/intensity changes.
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <div class="title">Synthetic object + centroid</div>
+      <canvas id="objectCanvas" width="520" height="520"></canvas>
+    </div>
+
+    <div class="panel">
+      <div class="title">Radial histogram</div>
+      <canvas id="radialCanvas" width="520" height="280"></canvas>
+    </div>
+
+    <div class="panel">
+      <div class="title">Angular histogram</div>
+      <canvas id="angularCanvas" width="520" height="280"></canvas>
+    </div>
+
+    <div class="panel">
+      <div class="title">Fourier magnitude by harmonic</div>
+      <canvas id="fftCanvas" width="520" height="280"></canvas>
+    </div>
+  </section>
+</main>
+
+<script>
+let DATA = null;
+
+const fileInput = document.getElementById("fileInput");
+const caseSelect = document.getElementById("caseSelect");
+const normSelect = document.getElementById("normSelect");
+const metrics = document.getElementById("metrics");
+
+fileInput.addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const text = await file.text();
+  DATA = JSON.parse(text);
+
+  caseSelect.innerHTML = "";
+  Object.keys(DATA.cases).forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    caseSelect.appendChild(opt);
+  });
+
+  render();
+});
+
+caseSelect.addEventListener("change", render);
+normSelect.addEventListener("change", render);
+
+function clearCanvas(c) {
+  const ctx = c.getContext("2d");
+  ctx.clearRect(0, 0, c.width, c.height);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, c.width, c.height);
+  return ctx;
+}
+
+function render() {
+  if (!DATA) return;
+
+  const name = caseSelect.value;
+  const norm = normSelect.value;
+  const item = DATA.cases[name];
+  const rep = item.representations[norm];
+
+  renderObject(item);
+  renderBars(document.getElementById("radialCanvas"), rep.radial_histogram, "radial bin");
+  renderBars(document.getElementById("angularCanvas"), rep.angular_histogram, "angle bin");
+  renderBars(document.getElementById("fftCanvas"), rep.fft_magnitude_by_harmonic, "harmonic k");
+
+  metrics.innerHTML = "";
+
+  const rows = [
+    ["shape", item.shape.join(" × ")],
+    ["mass", item.mass.toFixed(2)],
+    ["foreground px", item.foreground_pixels],
+    ["centroid", `${item.centroid[0].toFixed(2)}, ${item.centroid[1].toFixed(2)}`],
+    ["max fg radius", item.max_foreground_radius.toFixed(3)],
+    ["grid radius", item.grid_radius.toFixed(3)],
+    ["fg/grid ratio", item.foreground_radius_to_grid_radius.toFixed(4)],
+    ["norm denom", rep.meta.normalization_denominator.toFixed(3)],
+    ["nonempty shells", rep.meta.nonempty_radial_shells],
+    ["low fraction", rep.band_fraction.low_1_4.toFixed(4)],
+    ["mid fraction", rep.band_fraction.mid_5_12.toFixed(4)],
+    ["high-mid fraction", rep.band_fraction.highmid_13_24.toFixed(4)],
+    ["high fraction", rep.band_fraction.high_25_36.toFixed(4)],
+  ];
+
+  rows.forEach(([k,v]) => {
+    const d = document.createElement("div");
+    d.className = "metric";
+    d.innerHTML = `<span>${k}</span><b>${v}</b>`;
+    metrics.appendChild(d);
+  });
+}
+
+function renderObject(item) {
+  const canvas = document.getElementById("objectCanvas");
+  const ctx = clearCanvas(canvas);
+
+  const H = item.shape[0];
+  const W = item.shape[1];
+  const s = Math.min(canvas.width / W, canvas.height / H);
+  const ox = (canvas.width - W*s)/2;
+  const oy = (canvas.height - H*s)/2;
+
+  ctx.fillStyle = "#222";
+  item.preview_points.forEach(([x,y,v]) => {
+    const a = Math.max(0.15, Math.min(1, v));
+    ctx.globalAlpha = a;
+    ctx.fillRect(ox + x*s, oy + y*s, Math.max(1,s), Math.max(1,s));
+  });
+  ctx.globalAlpha = 1;
+
+  const [cx, cy] = item.centroid;
+  ctx.strokeStyle = "#a33";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(ox + cx*s - 8, oy + cy*s);
+  ctx.lineTo(ox + cx*s + 8, oy + cy*s);
+  ctx.moveTo(ox + cx*s, oy + cy*s - 8);
+  ctx.lineTo(ox + cx*s, oy + cy*s + 8);
+  ctx.stroke();
+}
+
+function renderBars(canvas, arr, xlabel) {
+  const ctx = clearCanvas(canvas);
+  const pad = 34;
+  const W = canvas.width - 2*pad;
+  const H = canvas.height - 2*pad;
+  const maxV = Math.max(...arr, 1e-12);
+
+  ctx.strokeStyle = "#999";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad, pad);
+  ctx.lineTo(pad, pad+H);
+  ctx.lineTo(pad+W, pad+H);
+  ctx.stroke();
+
+  ctx.fillStyle = "#444";
+  const bw = W / arr.length;
+
+  arr.forEach((v,i) => {
+    const h = H * v / maxV;
+    ctx.fillRect(pad + i*bw, pad+H-h, Math.max(1,bw*0.8), h);
+  });
+
+  ctx.fillStyle = "#666";
+  ctx.font = "12px sans-serif";
+  ctx.fillText(xlabel, pad, canvas.height-8);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "version": "v0_3",
+  "project": "WeaveAI Paper II",
+  "topic": "05K support geometry literature",
+  "generated_utc": "2026-10-03T13:52:25.641441+00:00",
+  "parent_version": "v0_2",
+  "parent_bytes_verified_in_this_run": false,
+  "literature_ids": [
+    "LIT-05K-001",
+    "LIT-05K-002",
+    "LIT-05K-003",
+    "LIT-05K-004",
+    "LIT-05K-005",
+    "LIT-05K-006",
+    "LIT-05K-007",
+    "LIT-05K-008",
+    "LIT-05K-009",
+    "LIT-05K-010",
+    "LIT-05K-011",
+    "LIT-05K-012"
+  ],
+  "record_counts": {
+    "literature_ledger": 12,
+    "representation_families": 6,
+    "claim_boundaries": 13
+  },
+  "status": "WORKING_CHECKPOINT_NOT_NOVELTY_FREEZE",
+  "scientific_boundary": {
+    "current_supported_result": "Raster support is a demonstrated dependency of the frozen historical raster-relative angular spectral allocation under the tested same-pixel support intervention; matched object-relative implementation is exactly invariant under the same intervention.",
+    "novelty_status": "OPEN",
+    "benchmark_suite_status": "NOT_FROZEN"
+  },
+  "files": {
+    "LIT_05K_literature_ledger_v0_3.csv": {
+      "sha256": "a1bce196e548587726064e1f19b972ddd41a79e35ce9b9b4879195cba175719f",
+      "bytes": 13471
+    },
+    "LIT_05K_representation_family_map_v0_3.csv": {
+      "sha256": "2118867590c8f8994575799cf346f4499351428a77a828e2582a4bcfc30c2d1b",
+      "bytes": 2866
+    },
+    "LIT_05K_claim_boundary_v0_3.csv": {
+      "sha256": "d2e246e66854f5e806e86885dc7dedbc731377f1d1da05853d58fa14e85059dc",
+      "bytes": 3696
+    },
+    "LIT_05K_working_notes_v0_3.md": {
+      "sha256": "4dae046c934e0340261d71f3d3fd1ad1b12928969da3baf141f63cfc17276789",
+      "bytes": 7274
+    },
+    "create_LIT_05K_v0_3.py": {
+      "sha256": "460f3390b858210b27e411e1188efbeaa37ac1904f2b1768ab01056d79881861",
+      "bytes": 41197
+    }
+  }
+}

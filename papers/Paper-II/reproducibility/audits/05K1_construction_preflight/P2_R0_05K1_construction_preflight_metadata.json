@@ -1,0 +1,43 @@
+{
+  "anti_peeking": {
+    "05k_intervention_trajectory_opened": false,
+    "band_fraction_computed": false,
+    "h1_h2_h3_tested": false,
+    "spectral_descriptor_computed": false
+  },
+  "audit": "P2-R0-05K1 construction preflight",
+  "background_rule": {
+    "assumed_value": null,
+    "explicitly_not_assumed": [
+      255,
+      "perimeter_mode",
+      "corner_value",
+      "manifest_border_median"
+    ],
+    "status": "MUST_RECOVER_FROM_HISTORICAL_PREPROCESSING"
+  },
+  "canvas_dimension_rule": {
+    "height": "H + 2*ceil(((s-1)*H)/2)",
+    "padding": "symmetric integer padding",
+    "width": "W + 2*ceil(((s-1)*W)/2)"
+  },
+  "counts": {
+    "planned_conditions": 70,
+    "sentinels": 10,
+    "support_levels": 7
+  },
+  "frozen_inputs": {
+    "P2_R0_05K0_sentinel_manifest_v1_0a.csv": "b9a1978d8a98744ecc349b038f24a8aa0078b409a1789ce006dcb0d17e3b2384",
+    "materialized_manifest.csv": "19ab60c21c71de7918472142c36174ded9f8fae888eeb3320983ca2cc66a545e"
+  },
+  "status": "BACKGROUND_RULE_NOT_YET_ASSUMED",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ]
+}

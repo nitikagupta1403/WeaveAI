@@ -1,0 +1,9 @@
+{
+  "historical_source": "/Users/nitikagupta/Research/paper2_r0_05i_real_garment_canvas/P2_R0_05I2_per_image_band_fraction_change.csv",
+  "historical_source_sha256": "a9a096b4aafe89be79b5d3c35fd3e4dc4e6de046c30326f108d0cbe3601c39e2",
+  "images_checked": 2300,
+  "images_within_tolerance": 2300,
+  "max_abs_band_difference": 2.220446049250313e-16,
+  "status": "PASS",
+  "tolerance": 1e-12
+}

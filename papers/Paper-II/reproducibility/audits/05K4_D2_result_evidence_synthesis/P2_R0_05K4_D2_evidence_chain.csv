@@ -1,0 +1,7 @@
+chain_step,stage,question,answer_status,answer,evidence_class
+1,05F2,Where does the high-band change enter?,SUPPORTED,Primarily at the crop-only/new-raster-support transition.,preprocessing_ablation
+2,05G1,What changes geometrically?,SUPPORTED,Frame-relative garment occupancy/support geometry changes while retained crop pixels and source-coordinate centroid remain unchanged.,descriptive_geometry
+3,05G2/05J,Does the magnitude of raster-relative support change track spectral redistribution?,SUPPORTED_AS_ASSOCIATION,Yes. Robust raster-relative extent change is associated with systematic band redistribution at population scale.,observational_association
+4,05K2/05K3,Does directly changing support with garment pixels held fixed produce the predicted response?,SUPPORTED_DESCRIPTIVELY,"Yes in sentinel and calibration interventions, with substantial individual trajectory heterogeneity.",controlled_intervention_calibration
+5,05K4-C,"Does the support-only intervention remain supported over the complete 2,300-image dataset?",SUPPORTED_WITH_PRIMARY_INFERENCE,Yes. All 23 category medians agree with the preregistered direction and exact joint sign-flip inference supports all three tested bands.,controlled_primary_intervention
+6,05K4-C_INTRINSIC_CONTROL,Does the same support intervention affect an object-relative version of the representation?,NO_CHANGE_OBSERVED,"No. The intrinsic field and band vectors are exactly invariant across all 16,100 support conditions.",matched_intervention_control

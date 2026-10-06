@@ -1,0 +1,8 @@
+id,prohibited,reason
+P01,Cropping changes the spectrum because interpolation destroys high-frequency information.,05F falsified interpolation/resampling as the dominant transition; most change already occurred at crop-only.
+P02,Centroid instability caused the RAW→CROP spectral change.,05G found zero centroid map-back error.
+P03,Border gradients caused the spectral redistribution.,Border-gradient changes were descriptive and were not the strongest population-level support correlate.
+P04,Raster support completely explains spectral behavior.,Observed associations were moderate and individual trajectories remained heterogeneous.
+P05,Every image responds monotonically to increasing support.,Full image-level monotonicity occurred only in subsets of the population.
+P06,Object-relative normalization is invariant to all image transformations.,Only the tested same-pixel support manipulation was audited.
+P07,This audit establishes a novel Fourier method.,Novelty requires separate literature comparison and is outside the evidentiary scope of 05K.

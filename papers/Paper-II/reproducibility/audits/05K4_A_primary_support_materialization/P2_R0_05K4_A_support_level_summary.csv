@@ -1,0 +1,8 @@
+support_factor,conditions,unique_images,categories,all_patch_exact,all_padding_exact,all_no_clipping,all_save_reload_exact,min_padding_value,max_padding_value,min_output_height,max_output_height,min_output_width,max_output_width
+1.0,2300,2300,23,True,True,True,True,253,255,115,1247,88,1045
+1.1,2300,2300,23,True,True,True,True,253,255,127,1373,98,1151
+1.25,2300,2300,23,True,True,True,True,253,255,145,1559,110,1307
+1.5,2300,2300,23,True,True,True,True,253,255,173,1871,132,1569
+2.0,2300,2300,23,True,True,True,True,253,255,231,2495,176,2091
+2.5,2300,2300,23,True,True,True,True,253,255,289,3119,220,2613
+3.0,2300,2300,23,True,True,True,True,253,255,345,3741,264,3135

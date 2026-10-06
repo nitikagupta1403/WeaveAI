@@ -1,0 +1,45 @@
+{
+  "analysis_boundary": {
+    "directional_hypotheses_tested": false,
+    "dose_response_model_fit": false,
+    "inferential_statistics_run": false,
+    "materiality_threshold_applied": false,
+    "mechanism_conclusion_made": false,
+    "monotonicity_evaluated": false
+  },
+  "conditions": 70,
+  "execution": {
+    "raster_full_population_runs": 7,
+    "raster_population_rows_per_run": 2300,
+    "raster_total_population_rows_processed": 16100,
+    "sentinel_conditions": 70
+  },
+  "implementation_sha256": {
+    "H1": "1ce3c0dd7f34e75c806777bff9c5142814f179a0b6fef48f927fbfeb1b4d1642",
+    "H1_field": "aaa69c8a6a416979dc037ae6c0197d5c62f1959eb41cc0482c8b5a3bdde21c03",
+    "I2": "802325ae23b3896bd0bf51bed49fd0bf5218583d73f76d1bae69f6f70e9fa3e3",
+    "RA14": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9",
+    "V3_manifest": "19ab60c21c71de7918472142c36174ded9f8fae888eeb3320983ca2cc66a545e"
+  },
+  "interpretation_boundary": "P2-R0-05K2-B1 executes the frozen raster-relative and object-relative descriptor systems over the 70 preregistered sentinel support conditions and records numerical controls. It does not evaluate directional hypotheses, monotonicity, materiality, statistical significance, or mechanism.",
+  "numerical_controls": {
+    "intrinsic_band_exact_vs_s1_count": 70,
+    "intrinsic_band_max_abs_diff_from_s1_any_condition": 0.0,
+    "intrinsic_field_exact_vs_s1_count": 70,
+    "intrinsic_field_max_abs_diff_from_s1_any_condition": 0.0,
+    "raster_band_max_abs_diff_from_s1_any_condition": 0.20450632524732082,
+    "raster_field_max_abs_diff_from_s1_any_condition": 0.8050961330285795
+  },
+  "sentinels": 10,
+  "stage": "P2_R0_05K2_B1_SENTINEL_DESCRIPTOR_SWEEP",
+  "status": "COMPLETE_DESCRIPTOR_EXECUTION_ONLY",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ]
+}

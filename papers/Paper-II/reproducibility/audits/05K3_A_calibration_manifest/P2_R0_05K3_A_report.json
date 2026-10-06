@@ -1,0 +1,44 @@
+{
+  "categories": 23,
+  "descriptor_execution": false,
+  "identities": 230,
+  "identity_size_distribution": {
+    "9": 3,
+    "10": 224,
+    "11": 3
+  },
+  "identity_size_max": 11,
+  "identity_size_min": 9,
+  "identity_source": {
+    "artifact": "/Users/nitikagupta/Research/paper2_r0_05i_real_garment_canvas/P2_R0_05I2_per_image_band_fraction_change.csv",
+    "column_used": "garment_identity",
+    "sha256": "a9a096b4aafe89be79b5d3c35fd3e4dc4e6de046c30326f108d0cbe3601c39e2"
+  },
+  "population_inference": false,
+  "selected_rows": 230,
+  "selected_rows_per_category": 10,
+  "selection_inputs_explicitly_not_used": [
+    "spectral band fractions",
+    "RAW-to-CROP spectral changes",
+    "support geometry metrics",
+    "fold difficulty",
+    "retrieval performance",
+    "visual judgment",
+    "05K2 sentinel outcomes"
+  ],
+  "selection_inputs_used": [
+    "category",
+    "garment_identity",
+    "relative_path",
+    "row_index"
+  ],
+  "selection_rule": "Within the frozen 2300-row V3/I2 identity universe, sort by category | garment_identity | relative_path | row_index using stable mergesort, then select the first row within each garment_identity.",
+  "source_population_rows": 2300,
+  "stage": "P2_R0_05K3_A_DETERMINISTIC_CALIBRATION_MANIFEST",
+  "status": "PASS",
+  "support_canvas_generation": false,
+  "v3_source": {
+    "artifact": "/Users/nitikagupta/Research/paper2_r0_05f_crop_vs_resampling/V3_CROP_ONLY/materialized_manifest.csv",
+    "sha256": "19ab60c21c71de7918472142c36174ded9f8fae888eeb3320983ca2cc66a545e"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "analysis_boundary": {
+    "inferential_statistics": false,
+    "mechanism_proof_claim": false,
+    "population_generalization": false,
+    "sentinel_selection_used_for_inference": false
+  },
+  "endpoint_s3_direction_concordance_counts_of_10": {
+    "high_25_36": 8,
+    "highmid_13_24": 9,
+    "low_1_4": 8
+  },
+  "four_band_l1_nondecreasing_counts_of_10": 6,
+  "full_trajectory_monotone_in_predicted_direction_counts_of_10": {
+    "high_25_36": 4,
+    "highmid_13_24": 6,
+    "low_1_4": 5
+  },
+  "interpretation_boundary": "B2 describes the preregistered support trajectories of the ten frozen diagnostic sentinels. Directional and monotonicity summaries are descriptive controls, not population-level statistical inference.",
+  "materiality": {
+    "reason": "A 0.005 band-fraction value at s=3 was discussed previously but was not frozen as an operational decision rule before descriptor results were opened.",
+    "threshold_applied": false
+  },
+  "object_relative_control": {
+    "all_70_exactly_invariant": true,
+    "max_abs_band_delta": 0.0,
+    "max_four_band_l1": 0.0
+  },
+  "population_inference": false,
+  "raster_preregistered_direction": {
+    "high_25_36": "decrease with canvas support",
+    "highmid_13_24": "decrease with canvas support",
+    "low_1_4": "increase with canvas support",
+    "mid_5_12": "no directional requirement"
+  },
+  "sentinels": 10,
+  "stage": "P2_R0_05K2_B2_SENTINEL_TRAJECTORY_ANALYSIS",
+  "status": "COMPLETE_DESCRIPTIVE_SENTINEL_ANALYSIS",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ]
+}

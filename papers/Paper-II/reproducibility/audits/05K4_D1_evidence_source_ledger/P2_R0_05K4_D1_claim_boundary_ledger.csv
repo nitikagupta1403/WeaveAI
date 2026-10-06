@@ -1,0 +1,7 @@
+claim_id,claim,minimum_required_stage,status,prohibited_overreach
+CB01,Cropping/localization is the preprocessing stage where the historical high-band behavior changes.,05F2,eligible_for_result_verification,Do not attribute the change to interpolation merely because localization includes resampling elsewhere.
+CB02,Raster-relative support geometry changes when the garment crop changes the frame.,05G1,eligible_for_result_verification,Do not infer spectral causation from geometry descriptives alone.
+CB03,Support-change magnitude is associated with spectral redistribution.,05G2/05J,eligible_for_result_verification,Association is not causal proof.
+CB04,Changing raster support alone while holding embedded garment pixels unchanged alters the historical raster-relative representation.,05K4-C,eligible_for_result_verification,"Do not generalize beyond the tested representation, dataset, and intervention."
+CB05,The matched object-relative representation is invariant to the tested same-pixel support intervention.,05K4-C,eligible_for_result_verification,Do not claim universal invariance to arbitrary transformations.
+CB06,The primary support response is broad at the endpoint but not universally monotonic image-by-image.,05K4-C,eligible_for_result_verification,Do not describe support factor as a deterministic monotonic law for every image.

@@ -1,0 +1,8 @@
+Python: 3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]
+Executable: /opt/anaconda3/envs/weaveai-05f-replay-clean/bin/python
+NumPy: 2.2.6
+pandas: 2.3.3
+SciPy: 1.17.1
+scikit-learn: 1.9.1
+PyWavelets: 1.8.0
+Pillow: 12.3.0

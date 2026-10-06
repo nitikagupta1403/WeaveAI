@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WeaveAI Geometry Sandbox v0.2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#f5f0e6; --panel:#fffdf8; --ink:#222; --muted:#777;
+    --line:#d8d1c6; --soft:#efe9de;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+  header{padding:20px 26px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
+  h1{margin:0 0 4px;font-size:22px}
+  .sub{font-size:13px;color:var(--muted)}
+  main{display:grid;grid-template-columns:330px 1fr;gap:16px;padding:16px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px}
+  .controls label{display:block;font-size:12px;color:var(--muted);margin-top:12px}
+  select,input[type=file],input[type=range]{width:100%;margin-top:5px}
+  select,input[type=file]{padding:8px}
+  .compare-head{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .badge{background:var(--soft);border-radius:10px;padding:10px;font-size:12px;line-height:1.45}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .title{font-size:13px;font-weight:700;margin-bottom:8px}
+  canvas{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:white}
+  .metric{display:grid;grid-template-columns:1fr auto;gap:8px;padding:7px 0;border-bottom:1px solid #eee7dc;font-size:13px}
+  .metric:last-child{border-bottom:0}
+  .verdict{margin-top:14px;background:#f0ebe2;border-radius:10px;padding:11px;font-size:12px;line-height:1.45}
+  .big{font-size:17px;font-weight:700}
+  @media(max-width:950px){main{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>WeaveAI Geometry Sandbox v0.2</h1>
+  <div class="sub">Human-readable comparison view — Python JSON remains the scientific source of record.</div>
+</header>
+
+<main>
+  <section class="panel controls">
+    <div class="title">1. Load the Python JSON</div>
+    <input type="file" id="fileInput" accept=".json">
+
+    <label>Before case</label>
+    <select id="caseA"></select>
+
+    <label>After case</label>
+    <select id="caseB"></select>
+
+    <label>Normalization</label>
+    <select id="norm">
+      <option value="grid">grid-relative</option>
+      <option value="object">object-relative</option>
+    </select>
+
+    <label>Fourier harmonic k</label>
+    <input id="kSlider" type="range" min="1" max="36" step="1" value="4">
+    <div class="metric"><span>selected k</span><b id="kValue">4</b></div>
+
+    <div id="metrics"></div>
+    <div id="verdict" class="verdict">Load JSON to begin.</div>
+  </section>
+
+  <section>
+    <div class="compare-head">
+      <div class="badge">
+        <b>BEFORE</b><br>
+        <span id="nameA">—</span>
+      </div>
+      <div class="badge">
+        <b>AFTER</b><br>
+        <span id="nameB">—</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="title">Object view — BEFORE</div>
+        <canvas id="objA" width="520" height="430"></canvas>
+      </div>
+
+      <div class="panel">
+        <div class="title">Object view — AFTER</div>
+        <canvas id="objB" width="520" height="430"></canvas>
+      </div>
+
+      <div class="panel">
+        <div class="title">Radial histogram — BEFORE vs AFTER</div>
+        <canvas id="radial" width="520" height="280"></canvas>
+      </div>
+
+      <div class="panel">
+        <div class="title">Fourier magnitude — BEFORE vs AFTER</div>
+        <canvas id="fft" width="520" height="280"></canvas>
+      </div>
+
+      <div class="panel">
+        <div class="title">What harmonic k means</div>
+        <canvas id="wave" width="520" height="280"></canvas>
+      </div>
+
+      <div class="panel">
+        <div class="title">Band fractions</div>
+        <canvas id="bands" width="520" height="280"></canvas>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+let DATA=null;
+
+const fileInput=document.getElementById("fileInput");
+const caseA=document.getElementById("caseA");
+const caseB=document.getElementById("caseB");
+const norm=document.getElementById("norm");
+const kSlider=document.getElementById("kSlider");
+const kValue=document.getElementById("kValue");
+const metrics=document.getElementById("metrics");
+const verdict=document.getElementById("verdict");
+
+fileInput.addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f)return;
+  DATA=JSON.parse(await f.text());
+  const names=Object.keys(DATA.cases);
+  [caseA,caseB].forEach(sel=>{
+    sel.innerHTML="";
+    names.forEach(n=>{
+      const o=document.createElement("option");
+      o.value=n;o.textContent=n;sel.appendChild(o);
+    });
+  });
+  caseA.value="circle_base";
+  caseB.value=names.includes("circle_extra_canvas")?"circle_extra_canvas":names[1];
+  render();
+});
+[caseA,caseB,norm].forEach(x=>x.addEventListener("change",render));
+kSlider.addEventListener("input",()=>{kValue.textContent=kSlider.value;renderWave();});
+
+function clear(c){
+  const ctx=c.getContext("2d");
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);
+  return ctx;
+}
+
+function renderObject(canvas,item){
+  const ctx=clear(canvas);
+  const H=item.shape[0],W=item.shape[1];
+  const s=Math.min(canvas.width/W,canvas.height/H)*0.88;
+  const ox=(canvas.width-W*s)/2,oy=(canvas.height-H*s)/2;
+
+  ctx.fillStyle="#222";
+  item.preview_points.forEach(([x,y,v])=>{
+    ctx.globalAlpha=Math.max(.12,Math.min(1,v));
+    ctx.fillRect(ox+x*s,oy+y*s,Math.max(1,s),Math.max(1,s));
+  });
+  ctx.globalAlpha=1;
+
+  const [cx,cy]=item.centroid;
+  ctx.strokeStyle="#b33";ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.moveTo(ox+cx*s-8,oy+cy*s);ctx.lineTo(ox+cx*s+8,oy+cy*s);
+  ctx.moveTo(ox+cx*s,oy+cy*s-8);ctx.lineTo(ox+cx*s,oy+cy*s+8);
+  ctx.stroke();
+
+  ctx.fillStyle="#666";ctx.font="12px sans-serif";
+  ctx.fillText(`centroid = (${cx.toFixed(2)}, ${cy.toFixed(2)})`,14,canvas.height-14);
+}
+
+function renderLines(canvas,a,b){
+  const ctx=clear(canvas),pad=35,W=canvas.width-2*pad,H=canvas.height-2*pad;
+  const maxV=Math.max(...a,...b,1e-12);
+  ctx.strokeStyle="#aaa";ctx.beginPath();ctx.moveTo(pad,pad);ctx.lineTo(pad,pad+H);ctx.lineTo(pad+W,pad+H);ctx.stroke();
+
+  function line(arr, dash){
+    ctx.setLineDash(dash);ctx.lineWidth=2;ctx.strokeStyle="#333";ctx.beginPath();
+    arr.forEach((v,i)=>{
+      const x=pad+W*(i/(arr.length-1));
+      const y=pad+H-H*(v/maxV);
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    });
+    ctx.stroke();ctx.setLineDash([]);
+  }
+  line(a,[]);
+  line(b,[6,4]);
+
+  ctx.fillStyle="#555";ctx.font="12px sans-serif";
+  ctx.fillText("solid = BEFORE",pad,16);
+  ctx.fillText("dashed = AFTER",pad+120,16);
+}
+
+function renderBands(canvas,a,b){
+  const ctx=clear(canvas),pad=40,W=canvas.width-2*pad,H=canvas.height-2*pad;
+  const labels=["low_1_4","mid_5_12","highmid_13_24","high_25_36"];
+  ctx.strokeStyle="#aaa";ctx.beginPath();ctx.moveTo(pad,pad);ctx.lineTo(pad,pad+H);ctx.lineTo(pad+W,pad+H);ctx.stroke();
+  const groupW=W/labels.length;
+  labels.forEach((lab,i)=>{
+    const x0=pad+i*groupW;
+    const va=a[lab],vb=b[lab];
+    ctx.fillStyle="#333";ctx.fillRect(x0+groupW*.18,pad+H-va*H,groupW*.22,va*H);
+    ctx.fillStyle="#888";ctx.fillRect(x0+groupW*.48,pad+H-vb*H,groupW*.22,vb*H);
+    ctx.fillStyle="#555";ctx.font="10px sans-serif";
+    ctx.save();ctx.translate(x0+groupW*.5,canvas.height-8);ctx.rotate(-0.35);ctx.fillText(lab,0,0);ctx.restore();
+  });
+}
+
+function renderWave(){
+  const canvas=document.getElementById("wave"),ctx=clear(canvas);
+  const k=parseInt(kSlider.value),pad=35,W=canvas.width-2*pad,H=canvas.height-2*pad;
+  ctx.strokeStyle="#aaa";ctx.beginPath();ctx.moveTo(pad,pad+H/2);ctx.lineTo(pad+W,pad+H/2);ctx.stroke();
+
+  function wave(fn,dash,label,yLabel){
+    ctx.setLineDash(dash);ctx.strokeStyle="#333";ctx.lineWidth=2;ctx.beginPath();
+    for(let i=0;i<=360;i++){
+      const th=i*Math.PI/180;
+      const v=fn(k*th);
+      const x=pad+W*(i/360);
+      const y=pad+H/2-v*(H*.38);
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();ctx.setLineDash([]);
+  }
+  wave(Math.cos,[],"cos","");
+  wave(Math.sin,[5,4],"sin","");
+  ctx.fillStyle="#555";ctx.font="12px sans-serif";
+  ctx.fillText(`cos(${k}θ) solid`,pad,16);
+  ctx.fillText(`sin(${k}θ) dashed`,pad+120,16);
+  ctx.fillText(`${k} cycles around 360°`,pad,canvas.height-10);
+}
+
+function render(){
+  if(!DATA)return;
+  const A=DATA.cases[caseA.value],B=DATA.cases[caseB.value],n=norm.value;
+  const rA=A.representations[n],rB=B.representations[n];
+
+  document.getElementById("nameA").textContent=caseA.value;
+  document.getElementById("nameB").textContent=caseB.value;
+
+  renderObject(document.getElementById("objA"),A);
+  renderObject(document.getElementById("objB"),B);
+  renderLines(document.getElementById("radial"),rA.radial_histogram,rB.radial_histogram);
+  renderLines(document.getElementById("fft"),rA.fft_magnitude_by_harmonic,rB.fft_magnitude_by_harmonic);
+  renderBands(document.getElementById("bands"),rA.band_fraction,rB.band_fraction);
+  renderWave();
+
+  const centroidShift=Math.hypot(B.centroid[0]-A.centroid[0],B.centroid[1]-A.centroid[1]);
+  const sameMass=Math.abs(A.mass-B.mass)<1e-12;
+  const ratioA=A.foreground_radius_to_grid_radius;
+  const ratioB=B.foreground_radius_to_grid_radius;
+  const pairKey=`${caseA.value}__VS__${caseB.value}`;
+  const pair=DATA.pairwise[pairKey] ? DATA.pairwise[pairKey][n] : null;
+
+  const rows=[
+    ["centroid shift",centroidShift.toFixed(4)],
+    ["same object mass?",sameMass?"YES":"NO"],
+    ["fg/grid ratio before",ratioA.toFixed(4)],
+    ["fg/grid ratio after",ratioB.toFixed(4)],
+    ["field exact equal?",pair?String(pair.exact_equal).toUpperCase():"n/a"],
+    ["field L2 diff",pair?pair.field_l2.toFixed(6):"n/a"],
+  ];
+  metrics.innerHTML="";
+  rows.forEach(([k,v])=>{
+    const d=document.createElement("div");d.className="metric";
+    d.innerHTML=`<span>${k}</span><b>${v}</b>`;metrics.appendChild(d);
+  });
+
+  let msg="";
+  if(sameMass && centroidShift<1e-9){
+    msg="<span class='big'>Same object, same centroid.</span><br>";
+    if(pair && !pair.exact_equal){
+      msg+="But the representation changed. That means the coordinate/support choice matters.";
+    }else if(pair && pair.exact_equal){
+      msg+="And the representation stayed identical under this normalization.";
+    }else{
+      msg+="Compare the plots to see whether the representation changed.";
+    }
+  }else if(!sameMass && centroidShift<1e-6){
+    msg="<span class='big'>Centroid stayed fixed, but object mass changed.</span><br>This is the concentric-layer test: same center does not imply same spectrum.";
+  }else{
+    msg="<span class='big'>The object geometry changed.</span><br>Use this case to inspect translation, scale, rotation, or asymmetric detail sensitivity.";
+  }
+  verdict.innerHTML=msg;
+}
+</script>
+</body>
+</html>

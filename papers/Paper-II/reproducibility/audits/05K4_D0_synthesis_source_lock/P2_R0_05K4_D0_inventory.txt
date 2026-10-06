@@ -1,0 +1,142 @@
+P2-R0-05K4-D0 — SYNTHESIS SOURCE INVENTORY
+====================================================================================================================
+
+05F_CROP_ONLY
+--------------------------------------------------------------------------------------------------------------------
+[001] b7f25496ff5fb25a8bf115153b696108ae2abaa84e245486c78cd515b4244ca4  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05F1_crop_only_materializer.py
+[002] e85d4733ae990b04311ac350f0fa3bea881bd795afdfa0ffb8c4a5eae833f823  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05F2_crop_vs_resampling_replay.py
+
+05G_SUPPORT_GEOMETRY
+--------------------------------------------------------------------------------------------------------------------
+[001] 8453a531ffb768cec547b9c081c7991fd32cae58270827286f4b6928fd736a8d  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05G1_frame_border_gradient_metrics.py
+[002] b217277162110f153d529d375e20a0542061ef59c21ea5d4b11fc8a104e2fe32  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05G2_mechanism_association_analysis.py
+
+05J_POPULATION_SUPPORT_ASSOCIATION
+--------------------------------------------------------------------------------------------------------------------
+[001] 35a1574f5dbdccbb866911ab4f801e8aaea9192218e150020a9e2f704634f149  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/2_R0_05J0_find_crop_band_metrics.py
+[002] 6dbb72f5b95f00552c931950cd700ac0d5066cda86d4fdfc44dff2057af6e2fa  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05J1_merge_key_diagnostic.py
+[003] 4c56cfb90105ebd7c024efbab6f8ff96b30f7122944fd20769eca0740c2cb8b7  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05J2_locate_v3_manifest.py
+[004] 292774ae390630ce9f32ffbddc1cefe01edb694a6f85d2794b0040206294867f  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05J_population_support_spectral_audit.py
+[005] ec8e034f6f62ba788c5cf7602b0f4376f8f7c467503da381a1e67f6d1eeb0893  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05J_population_support_spectral_audit_PATCHED.py
+[006] df58bf7b9621bfa023b3311dc391f99a3a2a9325a6c33f7c6162d4637b10a0d6  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05J_population_support_spectral_audit_V2.py
+[007] a4974b232fdb363cffadee99956413a8f887ada1237339c63934bac88ecc7b93  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05J_population_support_spectral_audit_V3.py
+
+05K2_B2_SENTINEL_TRAJECTORY
+--------------------------------------------------------------------------------------------------------------------
+[001] abdf0595c869cd514761cfcdb8733a42f6ec6bb878f97a0b268224f30bff5ea8  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K2_B2_sentinel_trajectory_analysis/P2_R0_05K2_B2_per_condition_trajectories.csv
+[002] 87a58f1c79c4d590945460dbaddeb39d7000b40b6d00348703e544bf78de7764  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K2_B2_sentinel_trajectory_analysis/P2_R0_05K2_B2_per_sentinel_summary.csv
+[003] 46383baa02a7c33c55e5ec65e32c38493cfd5e8e0f32df58cc19501a3a073f18  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K2_B2_sentinel_trajectory_analysis/P2_R0_05K2_B2_report.json
+[004] 2dd7cc1777a1206456be4a53fc36c589cd5a454114a2f11aee56d401724888d3  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K2_B2_sentinel_trajectory_analysis/P2_R0_05K2_B2_support_level_descriptive_summary.csv
+[005] 4d29a816558be93c500dfea41d380f3d782044a7b72c0cb2ca3fce4fc850d993  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K2_B2_sentinel_trajectory_analysis/SHA256SUMS.txt
+[006] 2ad70e00d0bb316ad19255963e5114e60e238f9bff5f85bf0165c37c6c387001  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K2_B2_sentinel_trajectory_analysis.py
+[007] abdf0595c869cd514761cfcdb8733a42f6ec6bb878f97a0b268224f30bff5ea8  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K2_B2_Sentinel_Trajectory_Analysis_v1_0/P2_R0_05K2_B2_per_condition_trajectories.csv
+[008] 87a58f1c79c4d590945460dbaddeb39d7000b40b6d00348703e544bf78de7764  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K2_B2_Sentinel_Trajectory_Analysis_v1_0/P2_R0_05K2_B2_per_sentinel_summary.csv
+[009] 46383baa02a7c33c55e5ec65e32c38493cfd5e8e0f32df58cc19501a3a073f18  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K2_B2_Sentinel_Trajectory_Analysis_v1_0/P2_R0_05K2_B2_report.json
+[010] 2ad70e00d0bb316ad19255963e5114e60e238f9bff5f85bf0165c37c6c387001  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K2_B2_Sentinel_Trajectory_Analysis_v1_0/P2_R0_05K2_B2_sentinel_trajectory_analysis.py
+[011] 2dd7cc1777a1206456be4a53fc36c589cd5a454114a2f11aee56d401724888d3  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K2_B2_Sentinel_Trajectory_Analysis_v1_0/P2_R0_05K2_B2_support_level_descriptive_summary.csv
+[012] 4597b8c1f035356596efecb1f9fe21e6e10a516892341c519c7ad31b6a1bceeb  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K2_B2_Sentinel_Trajectory_Analysis_v1_0/SHA256SUMS.txt
+
+05K3_D_CALIBRATION_TRAJECTORY
+--------------------------------------------------------------------------------------------------------------------
+[001] 6cbbcb8a91390c906d9d255e0d0aed953d891fcfd70ca3833fa4f6ca065522f1  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_A_calibration_manifest/P2_R0_05K3_A_calibration_manifest_230.csv
+[002] e4449476445096ec26979572968a93059c3c68be8bcfa821fac26566068e3c94  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_A_calibration_manifest/P2_R0_05K3_A_lexicographic_selection_check_230.csv
+[003] e2ccde916ece2657a24c79bc83fea3abfa92eac96c78926821365cc9ef05bb6d  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_A_calibration_manifest/P2_R0_05K3_A_report.json
+[004] a8095bb5918b9d379bc1e5aa0abc26e3e41bd673f289396702c475187b1e0da7  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_A_calibration_manifest/SHA256SUMS.txt
+[005] 3f1d913f70394abefd64eeb0a8a09f3cb194d723ee217b085b82abc053887ec9  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_B_calibration_support_materialization/P2_R0_05K3_B_integrity_1610.csv
+[006] 80e417df129dabc3cbab7ac57fcc44ef4341fa1ffc0e42373319f206bee2b7e7  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_B_calibration_support_materialization/P2_R0_05K3_B_report.json
+[007] db48641ae750cdf4daf9071fc518fe3fd03a7c5771e0dd4ffa4c528f5841d5db  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_B_calibration_support_materialization/P2_R0_05K3_B_support_level_summary.csv
+[008] 2ca00782f2ee2eedd43ad52f5be53c89b34331f6ba097d4d3e27c3e5b3c26eee  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_B_calibration_support_materialization/SHA256SUMS.txt
+[009] c3abd101d170c0f41e43df59f117e0c5b8a97156b611c76d8137462de4a098fc  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/P2_R0_05K3_C_execution_by_support_level.csv
+[010] 43bf4fe8bf4af073a15f362edd6597533172b72f891f4d17cb3694b5783a0960  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/P2_R0_05K3_C_intrinsic_band_fractions_1610.csv
+[011] 4fd9997a288e0f8cbef78a40053f2e5915d6f83feb65c861aa2d249709e95f70  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/P2_R0_05K3_C_intrinsic_geometry_1610.csv
+[012] 7dd1ce7f49ef43fdd6d1f9b8d3ae5d7232e17285058cf08201c83d0193b8485c  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/P2_R0_05K3_C_numerical_controls_1610.csv
+[013] d5eb9487796e8c29994a1a0f596817ae0995e144e9dbde073d68f370ec016c7e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/P2_R0_05K3_C_raster_band_fractions_1610.csv
+[014] c924de04ac0531054e79944b1e1e5c2c16fe441e4acb234ac24020c052855712  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/P2_R0_05K3_C_report.json
+[015] 77a3c71259a8f01a171453bf446722ebbc701c1283db00c5ae07fb2bc82d0862  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_C_calibration_descriptor_execution/SHA256SUMS.txt
+[016] 60fdf63ccdd7fbe2686914580759b4c2e0819a2ad5bf32171103681fad950573  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_D_calibration_trajectory_analysis/P2_R0_05K3_D_category_endpoint_summary_23.csv
+[017] 54c95bf4e9eef66aad9cf60b4b9348cce815b17e7eb27519ded56a1626d5e811  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_D_calibration_trajectory_analysis/P2_R0_05K3_D_per_case_summary_230.csv
+[018] bb5ce45f4f146941fd1fc3b7737ebe911692f5d7fa17d5a4abf7b6eec4b3e4e6  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_D_calibration_trajectory_analysis/P2_R0_05K3_D_per_condition_trajectories_1610.csv
+[019] 4ad144a58f16149c69374843e5bbd8197a9710b111296557b33fbcd42b6c8c8b  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_D_calibration_trajectory_analysis/P2_R0_05K3_D_report.json
+[020] ea313a995a241df94d8c7d81f6cc5ec06e8162177d2b3f654a59199845358546  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_D_calibration_trajectory_analysis/P2_R0_05K3_D_support_level_summary.csv
+[021] 49a9afce76438ad13d0575528a3e39e3f863eca3e3f3c2a6fe32ee4ce34f6b8a  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K3_D_calibration_trajectory_analysis/SHA256SUMS.txt
+[022] 48978b93ac325ce6226e5f192f515f288afbd8508939613f8a9410f081cac168  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K3_A_calibration_manifest.py
+[023] 96cba7d7743ff4d6818e059d6e21cd8f511e11c410d51f411ff369c8f17cccdc  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K3_A_calibration_manifest_v2.py
+[024] 3c2fc1bc380912452a6bef4ca14ed925616eb12a579daf95771341e1379cfd29  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K3_B_materialize_calibration_support_canvases.py
+[025] 4229ff262a0fc67e1338394db7ad0464f81c769fa06e97a491129c5ced363cf0  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K3_C_calibration_descriptor_execution.py
+[026] 131452f3d335de8be1c895d582da8302ca0c9a5f55805edd6907a7e106e3440f  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K3_D_calibration_trajectory_analysis.py
+[027] 6cbbcb8a91390c906d9d255e0d0aed953d891fcfd70ca3833fa4f6ca065522f1  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_A_Calibration_Manifest_v1_0/P2_R0_05K3_A_calibration_manifest_230.csv
+[028] 96cba7d7743ff4d6818e059d6e21cd8f511e11c410d51f411ff369c8f17cccdc  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_A_Calibration_Manifest_v1_0/P2_R0_05K3_A_calibration_manifest_v2.py
+[029] e4449476445096ec26979572968a93059c3c68be8bcfa821fac26566068e3c94  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_A_Calibration_Manifest_v1_0/P2_R0_05K3_A_lexicographic_selection_check_230.csv
+[030] e2ccde916ece2657a24c79bc83fea3abfa92eac96c78926821365cc9ef05bb6d  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_A_Calibration_Manifest_v1_0/P2_R0_05K3_A_report.json
+[031] 6124f072ec9409f86b051e3d58b4bfa962988738417f61d3d5a64435584706e8  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_A_Calibration_Manifest_v1_0/SHA256SUMS.txt
+[032] 3f1d913f70394abefd64eeb0a8a09f3cb194d723ee217b085b82abc053887ec9  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_B_Calibration_Support_Materialization_v1_0/P2_R0_05K3_B_integrity_1610.csv
+[033] 3c2fc1bc380912452a6bef4ca14ed925616eb12a579daf95771341e1379cfd29  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_B_Calibration_Support_Materialization_v1_0/P2_R0_05K3_B_materialize_calibration_support_canvases.py
+[034] 80e417df129dabc3cbab7ac57fcc44ef4341fa1ffc0e42373319f206bee2b7e7  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_B_Calibration_Support_Materialization_v1_0/P2_R0_05K3_B_report.json
+[035] db48641ae750cdf4daf9071fc518fe3fd03a7c5771e0dd4ffa4c528f5841d5db  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_B_Calibration_Support_Materialization_v1_0/P2_R0_05K3_B_support_level_summary.csv
+[036] 39f69b0b1ba2a4a8857a1816380db8ba77f6e27cd82b2f09e1a00857af2a2e79  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_B_Calibration_Support_Materialization_v1_0/SHA256SUMS.txt
+[037] 4229ff262a0fc67e1338394db7ad0464f81c769fa06e97a491129c5ced363cf0  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_calibration_descriptor_execution.py
+[038] c3abd101d170c0f41e43df59f117e0c5b8a97156b611c76d8137462de4a098fc  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_execution_by_support_level.csv
+[039] 43bf4fe8bf4af073a15f362edd6597533172b72f891f4d17cb3694b5783a0960  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_intrinsic_band_fractions_1610.csv
+[040] 4fd9997a288e0f8cbef78a40053f2e5915d6f83feb65c861aa2d249709e95f70  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_intrinsic_geometry_1610.csv
+[041] 7dd1ce7f49ef43fdd6d1f9b8d3ae5d7232e17285058cf08201c83d0193b8485c  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_numerical_controls_1610.csv
+[042] d5eb9487796e8c29994a1a0f596817ae0995e144e9dbde073d68f370ec016c7e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_raster_band_fractions_1610.csv
+[043] c924de04ac0531054e79944b1e1e5c2c16fe441e4acb234ac24020c052855712  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/P2_R0_05K3_C_report.json
+[044] 4c9c7962dd82b74fba89775f8e9a76257a191e2eac684c84d0a2763ee7204182  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_C_Calibration_Descriptor_Execution_v1_0/SHA256SUMS.txt
+[045] 131452f3d335de8be1c895d582da8302ca0c9a5f55805edd6907a7e106e3440f  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/P2_R0_05K3_D_calibration_trajectory_analysis.py
+[046] 60fdf63ccdd7fbe2686914580759b4c2e0819a2ad5bf32171103681fad950573  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/P2_R0_05K3_D_category_endpoint_summary_23.csv
+[047] 54c95bf4e9eef66aad9cf60b4b9348cce815b17e7eb27519ded56a1626d5e811  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/P2_R0_05K3_D_per_case_summary_230.csv
+[048] bb5ce45f4f146941fd1fc3b7737ebe911692f5d7fa17d5a4abf7b6eec4b3e4e6  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/P2_R0_05K3_D_per_condition_trajectories_1610.csv
+[049] 4ad144a58f16149c69374843e5bbd8197a9710b111296557b33fbcd42b6c8c8b  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/P2_R0_05K3_D_report.json
+[050] ea313a995a241df94d8c7d81f6cc5ec06e8162177d2b3f654a59199845358546  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/P2_R0_05K3_D_support_level_summary.csv
+[051] efb40019fa7e4b4a23163ca66537e2c0ad5b11807c89ac672e705ff2f3e4bc33  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K3_D_Calibration_Trajectory_Analysis_v1_0/SHA256SUMS.txt
+
+05K4_C_PRIMARY_INFERENCE
+--------------------------------------------------------------------------------------------------------------------
+[001] c8e4132ea8d70c5e3f80b387c250e203253d5fc529f8be4d7dc6bcf1dcd64dfe  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_A_primary_support_materialization/P2_R0_05K4_A_category_source_counts.csv
+[002] 235991a193f5164a3fed3b0f2074a192601f5148b6fcaddb8ea5dc81d2b4fa80  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_A_primary_support_materialization/P2_R0_05K4_A_integrity_16100.csv
+[003] 26d3e159b843a71e4b535e50eb28f1367ecd63235725e5bb3a454a4d845ab947  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_A_primary_support_materialization/P2_R0_05K4_A_report.json
+[004] 1d55b9dd2c73307cf7a9a8f7a4cec3834cdcab872155433686b5f49a6984402d  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_A_primary_support_materialization/P2_R0_05K4_A_support_level_summary.csv
+[005] c9925edaa6c4ed17b3ef9e0e9a3f8fbddc942eb1a3f464a66598c56748b00072  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_A_primary_support_materialization/SHA256SUMS.txt
+[006] 46c09f0c80a8557ac76cf208b117916144acba960c70b1d815dc1fbc26ed0272  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_execution_by_support_level.csv
+[007] 9c44242ea24eeef56f36e15552b4fe9e34c721d0ab8e893aecc6be8ae1a71253  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_intrinsic_band_fractions_16100.csv
+[008] 4e0620ded75b7ea042425feedd43a86dce1c61ee2c59a631a84b57e46234a28a  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_intrinsic_geometry_16100.csv
+[009] 4d589e7dbd6131caa457444e9428c75f24a2b9feaa771365dfcc8aa91f68f798  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_numerical_controls_16100.csv
+[010] ca96cbac776a9d7cf6466a98132c3817917b7720c5ab559be15f8bfe0ada531e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_raster_band_fractions_16100.csv
+[011] be3cb72f645dfc3e5b618da5755b510bb6a09a0e0aef73ec414266f3c856290e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_report.json
+[012] c2e1af0322498d0258ff189814affa49993b4f984b9dc8f5900e65371b871f67  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/P2_R0_05K4_B_s1_historical_replay.json
+[013] 5d26a026470f1ab5897272fbf74e75000942666158a81b010ce598ec72bf8f28  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_B_primary_descriptor_execution/SHA256SUMS.txt
+[014] 91f549289f95bc0beae723c66a2ed4d71169c63f4894200345376ac2d397dc41  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/P2_R0_05K4_C_category_endpoint_effects_23.csv
+[015] a378b36f457fced975967f75cfb229e9a6b8798fcafd649e93f97f948727bde7  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/P2_R0_05K4_C_exact_category_signflip_inference.csv
+[016] c2765a066d4d7a903a714fae23778c3e14791acbf1f0f8600a003ec2dcd58432  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/P2_R0_05K4_C_per_condition_trajectories_16100.csv
+[017] ee2993069e3a3b062e411dc9acbedda81039eb33aee3993a100908a12fe27e19  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/P2_R0_05K4_C_per_image_endpoint_summary_2300.csv
+[018] 9bd7a370176dd805681e377e3f2cdfcb3f06d6ea24c7619c735d26cad1a53e6b  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/P2_R0_05K4_C_report.json
+[019] f8bfc45ec6fd0f4a156b7e20db66bd476e3c19e2bdfe5ba91c2fdb98166b0b93  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/P2_R0_05K4_C_support_level_descriptive_summary.csv
+[020] fe40cf239f6b28aa5bcf75134fa9cc187e4be84742d4171af23472309869e3e3  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/05K4_C_primary_trajectory_inference/SHA256SUMS.txt
+[021] f1aa4ce0b1aa861d935eafd6fe24e6426f3bc1441933351f0cdd34aa73d06c2e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K4_A_primary_support_materialization.py
+[022] 03568ac265e81b3023fde10aa3a4017155ba4869804daf1d35025a0967c41f0a  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K4_B_primary_descriptor_execution.py
+[023] 0520fe0b1819b1d925c5a1ae8041593c6c5327c3a0fc0e1176f9742ac7035e76  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K4_C_primary_trajectory_inference.py
+[024] 046be7a7895dcf3ccb5333402e25c19f0d48daa26c31879fb1752d5c0b7d24e1  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/audits/P2_R0_05K4_D0_synthesis_source_lock.py
+[025] c8e4132ea8d70c5e3f80b387c250e203253d5fc529f8be4d7dc6bcf1dcd64dfe  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/P2_R0_05K4_A_category_source_counts.csv
+[026] 235991a193f5164a3fed3b0f2074a192601f5148b6fcaddb8ea5dc81d2b4fa80  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/P2_R0_05K4_A_integrity_16100.csv
+[027] f1aa4ce0b1aa861d935eafd6fe24e6426f3bc1441933351f0cdd34aa73d06c2e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/P2_R0_05K4_A_primary_support_materialization.py
+[028] 26d3e159b843a71e4b535e50eb28f1367ecd63235725e5bb3a454a4d845ab947  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/P2_R0_05K4_A_report.json
+[029] 1d55b9dd2c73307cf7a9a8f7a4cec3834cdcab872155433686b5f49a6984402d  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/P2_R0_05K4_A_support_level_summary.csv
+[030] 38e0ae45f636468b0c3023a8a071b1208619c16f31bf705859e9588edb99a560  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_A_Primary_Support_Materialization_v1_0/SHA256SUMS.txt
+[031] 46c09f0c80a8557ac76cf208b117916144acba960c70b1d815dc1fbc26ed0272  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_execution_by_support_level.csv
+[032] 9c44242ea24eeef56f36e15552b4fe9e34c721d0ab8e893aecc6be8ae1a71253  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_intrinsic_band_fractions_16100.csv
+[033] 4e0620ded75b7ea042425feedd43a86dce1c61ee2c59a631a84b57e46234a28a  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_intrinsic_geometry_16100.csv
+[034] 4d589e7dbd6131caa457444e9428c75f24a2b9feaa771365dfcc8aa91f68f798  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_numerical_controls_16100.csv
+[035] 03568ac265e81b3023fde10aa3a4017155ba4869804daf1d35025a0967c41f0a  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_primary_descriptor_execution.py
+[036] ca96cbac776a9d7cf6466a98132c3817917b7720c5ab559be15f8bfe0ada531e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_raster_band_fractions_16100.csv
+[037] be3cb72f645dfc3e5b618da5755b510bb6a09a0e0aef73ec414266f3c856290e  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_report.json
+[038] c2e1af0322498d0258ff189814affa49993b4f984b9dc8f5900e65371b871f67  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/P2_R0_05K4_B_s1_historical_replay.json
+[039] 976090a790448b78fe004831d3cbff9fdd2b1223770f5fcda63e701d1b2e00c0  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_B_Primary_Descriptor_Execution_v1_0/SHA256SUMS.txt
+[040] 91f549289f95bc0beae723c66a2ed4d71169c63f4894200345376ac2d397dc41  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_category_endpoint_effects_23.csv
+[041] a378b36f457fced975967f75cfb229e9a6b8798fcafd649e93f97f948727bde7  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_exact_category_signflip_inference.csv
+[042] c2765a066d4d7a903a714fae23778c3e14791acbf1f0f8600a003ec2dcd58432  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_per_condition_trajectories_16100.csv
+[043] ee2993069e3a3b062e411dc9acbedda81039eb33aee3993a100908a12fe27e19  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_per_image_endpoint_summary_2300.csv
+[044] 0520fe0b1819b1d925c5a1ae8041593c6c5327c3a0fc0e1176f9742ac7035e76  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_primary_trajectory_inference.py
+[045] 9bd7a370176dd805681e377e3f2cdfcb3f06d6ea24c7619c735d26cad1a53e6b  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_report.json
+[046] f8bfc45ec6fd0f4a156b7e20db66bd476e3c19e2bdfe5ba91c2fdb98166b0b93  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/P2_R0_05K4_C_support_level_descriptive_summary.csv
+[047] addae9d55d02a3a6eccfaeda7ed48990dc46e3fa4de83d3e428428a31ce95f08  /Users/nitikagupta/Research/WeaveAI/papers/Paper-II/reproducibility/frozen/05K4_C_Primary_Trajectory_Inference_v1_0/SHA256SUMS.txt
+

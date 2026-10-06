@@ -1,0 +1,403 @@
+P2-R0-05F2 VERIFIED D4 DEFINITIONS: PASS
+P2-R0-05A CLEAN PROVENANCE: PASS
+Rows: 2300
+Manifest SHA-256: 071ee7b6c535361951f9eb0044ff166c9a4d42b0ef55a3c0a72aab27af2af6a4
+Ordered pixel SHA-256: 30006ee3661f18b4cc3925c753c2ada6e3eb6ea7bf7f56326e5edf7cb7be5703
+Paper-II runtime SHA-256: 4e7d6ea942b3fd4b506c330f624178e154022683756e6edcffcf7aa65bd69f9f
+Paper-II runtime objects: 44
+
+P2-R0-05B RAW/CLEAN POPULATION BINDING: PASS
+Rows bound exactly: 2300
+RAW image_paths == CLEAN relative_path order: YES
+RAW image_categories == CLEAN path categories: YES
+category_labels == CLEAN path categories: True
+
+First 3 bound records:
+   0 | A-Line/1-1.tif | A-Line
+   1 | A-Line/1-10.tif | A-Line
+   2 | A-Line/1-2.tif | A-Line
+
+P2-R0-05C1 — reconstructing RAW geometry for implementation-equivalence check...
+RA14 geometry: processed 250/2300
+RA14 geometry: processed 500/2300
+RA14 geometry: processed 750/2300
+RA14 geometry: processed 1000/2300
+RA14 geometry: processed 1250/2300
+RA14 geometry: processed 1500/2300
+RA14 geometry: processed 1750/2300
+RA14 geometry: processed 2000/2300
+RA14 geometry: processed 2250/2300
+RA14 geometry: processed 2300/2300
+
+P2-R0-05C1 GEOMETRY EQUIVALENCE
+Shape: (2300, 72, 72)
+Max RAW mass error: 0.0
+Max RAW conditional normalization error: 4.440892098500626e-16
+Max difference vs frozen Paper-II field: 0
+Exact/tolerance agreement: True
+P2-R0-05C1 PAPER-II GEOMETRY IMPLEMENTATION: PASS
+
+P2-R0-05F2 VERIFIED RAW FOURIER: PASS
+
+P2-R0-05C2 — reconstructing CLEAN geometry...
+RA14 geometry: processed 250/2300
+RA14 geometry: processed 500/2300
+RA14 geometry: processed 750/2300
+RA14 geometry: processed 1000/2300
+RA14 geometry: processed 1250/2300
+RA14 geometry: processed 1500/2300
+RA14 geometry: processed 1750/2300
+RA14 geometry: processed 2000/2300
+RA14 geometry: processed 2250/2300
+RA14 geometry: processed 2300/2300
+
+P2-R0-05C2 CLEAN FOURIER VALIDATION
+Conditional shape: (2300, 72, 72)
+rFFT shape: (2300, 72, 37)
+Max mass error: 0.0
+Max conditional normalization error: 4.440892098500626e-16
+Non-empty shells: 127532 / 165600
+Conditional sum range on non-empty shells: [0.9999999999999997, 1.0000000000000004]
+Max |Im(k=36 Nyquist)|: 0
+Finite conditional field: True
+Finite Fourier field: True
+P2-R0-05C2 CLEAN RADIAL-FOURIER FIELD: PASS
+
+P2-R0-05D1 — FROZEN FOLD PACKAGE
+Path: /Users/nitikagupta/Desktop/PaperII_notebooks/CLO_SKET_FINAL_IDENTITY_FIGURES.pkl
+SHA-256: ae5bab5f16109adec0e768b6c2e24360b97999b2f82ff5760fecbc2389b27b0d
+ fold  train_rows  test_rows  train_ids  test_ids  identity_overlap  train_ids_per_category_min  train_ids_per_category_max  test_ids_per_category_min  test_ids_per_category_max
+    0        1839        461        184        46                 0                           8                           8                          2                          2
+    1        1840        460        184        46                 0                           8                           8                          2                          2
+    2        1841        459        184        46                 0                           8                           8                          2                          2
+    3        1840        460        184        46                 0                           8                           8                          2                          2
+    4        1840        460        184        46                 0                           8                           8                          2                          2
+
+P2-R0-05D1 FROZEN OUTER FOLDS: PASS
+Rows: 2300
+Garment identities: 230
+Categories: 23
+Folds: [0, 1, 2, 3, 4]
+Identity leakage: 0
+Test identities/category/fold: exactly 2
+Train identities/category/fold: exactly 8
+
+P2-R0-05F2 V1_TEXT_ONLY PROVENANCE: PASS
+Rows: 2300
+Manifest SHA-256: 434d27e6ad1bbf69af3c2ba25ee792fc8676c384990e9c4d900a8969e21e784f
+Ordered pixel SHA-256: cf7f9940dd5b1ef0a0c6f60c7b165c4bd1f4a9df20a2e1c75e2374cfe0bd79f7
+Population/order binding: PASS
+
+P2-R0-05F2 — reconstructing V1_TEXT_ONLY geometry...
+RA14 geometry: processed 250/2300
+RA14 geometry: processed 500/2300
+RA14 geometry: processed 750/2300
+RA14 geometry: processed 1000/2300
+RA14 geometry: processed 1250/2300
+RA14 geometry: processed 1500/2300
+RA14 geometry: processed 1750/2300
+RA14 geometry: processed 2000/2300
+RA14 geometry: processed 2250/2300
+RA14 geometry: processed 2300/2300
+
+P2-R0-05F2 V1_TEXT_ONLY FOURIER FIELD: PASS
+Conditional shape: (2300, 72, 72)
+rFFT shape: (2300, 72, 37)
+Max mass error: 0.0
+Max conditional normalization error: 4.440892098500626e-16
+Non-empty shells: 165363 / 165600
+Max |Im(k=36)|: 0.0
+
+P2-R0-05F2 V3_CROP_ONLY PROVENANCE: PASS
+Rows: 2300
+Manifest SHA-256: 19ab60c21c71de7918472142c36174ded9f8fae888eeb3320983ca2cc66a545e
+Ordered pixel SHA-256: e44e5137fe301935551efd7e4a42a3246812849bfb874359a8b913a94fd3658c
+Population/order binding: PASS
+
+P2-R0-05F2 — reconstructing V3_CROP_ONLY geometry...
+RA14 geometry: processed 250/2300
+RA14 geometry: processed 500/2300
+RA14 geometry: processed 750/2300
+RA14 geometry: processed 1000/2300
+RA14 geometry: processed 1250/2300
+RA14 geometry: processed 1500/2300
+RA14 geometry: processed 1750/2300
+RA14 geometry: processed 2000/2300
+RA14 geometry: processed 2250/2300
+RA14 geometry: processed 2300/2300
+
+P2-R0-05F2 V3_CROP_ONLY FOURIER FIELD: PASS
+Conditional shape: (2300, 72, 72)
+rFFT shape: (2300, 72, 37)
+Max mass error: 0.0
+Max conditional normalization error: 4.440892098500626e-16
+Non-empty shells: 165484 / 165600
+Max |Im(k=36)|: 0.0
+
+P2-R0-05F2 V2_LOCALIZE_ONLY PROVENANCE: PASS
+Rows: 2300
+Manifest SHA-256: 08d39bc98f113410850b80e30d8c38ed3515a22564cd0473c934f6cf2891e143
+Ordered pixel SHA-256: 9e9fb9d88b98d5225a5bf12e72b3bc0487f1b69116d4f42f1bda74445fb7ef5f
+Population/order binding: PASS
+
+P2-R0-05F2 — reconstructing V2_LOCALIZE_ONLY geometry...
+RA14 geometry: processed 250/2300
+RA14 geometry: processed 500/2300
+RA14 geometry: processed 750/2300
+RA14 geometry: processed 1000/2300
+RA14 geometry: processed 1250/2300
+RA14 geometry: processed 1500/2300
+RA14 geometry: processed 1750/2300
+RA14 geometry: processed 2000/2300
+RA14 geometry: processed 2250/2300
+RA14 geometry: processed 2300/2300
+
+P2-R0-05F2 V2_LOCALIZE_ONLY FOURIER FIELD: PASS
+Conditional shape: (2300, 72, 72)
+rFFT shape: (2300, 72, 37)
+Max mass error: 0.0
+Max conditional normalization error: 4.440892098500626e-16
+Non-empty shells: 127538 / 165600
+Max |Im(k=36)|: 0.0
+
+P2-R0-05D2/D4 — RAW CELL-13 SELECTION REPLAY
+ fold harmonic_band selected_representation  selected_radial_budget  train_full_mrr  train_selected_mrr  train_mrr_retention  train_reconstruction_energy_fraction
+    0       low_1_4                     dct                       4        0.431778            0.495661             1.147953                              0.650368
+    0      mid_5_12                 wavelet                       4        0.438794            0.435536             0.992575                              0.603179
+    0 highmid_13_24                 wavelet                       4        0.345647            0.416390             1.204668                              0.449756
+    0    high_25_36                 wavelet                       4        0.313650            0.398044             1.269072                              0.298555
+    1       low_1_4                     dct                       4        0.422158            0.487892             1.155710                              0.648171
+    1      mid_5_12                 wavelet                       4        0.439702            0.424601             0.965658                              0.601625
+    1 highmid_13_24                 wavelet                       4        0.347597            0.405038             1.165252                              0.448499
+    1    high_25_36                 wavelet                       4        0.314463            0.397505             1.264076                              0.298175
+    2       low_1_4                     dct                       4        0.412516            0.476908             1.156095                              0.649477
+    2      mid_5_12                 wavelet                       4        0.423436            0.417404             0.985755                              0.603123
+    2 highmid_13_24                 wavelet                       4        0.338101            0.395260             1.169059                              0.449622
+    2    high_25_36                 wavelet                       4        0.306650            0.380797             1.241797                              0.298260
+    3       low_1_4                     dct                       4        0.422782            0.485011             1.147189                              0.648788
+    3      mid_5_12                 wavelet                       4        0.432477            0.419816             0.970726                              0.602381
+    3 highmid_13_24                 wavelet                       4        0.355702            0.404772             1.137951                              0.449278
+    3    high_25_36                 wavelet                       4        0.319037            0.394230             1.235689                              0.298124
+    4       low_1_4                     dct                       4        0.429138            0.480912             1.120647                              0.651259
+    4      mid_5_12                 wavelet                       4        0.435492            0.418921             0.961948                              0.603694
+    4 highmid_13_24                 wavelet                       4        0.347523            0.400724             1.153085                              0.450254
+    4    high_25_36                 wavelet                       4        0.313811            0.389671             1.241737                              0.298450
+
+Selection stability:
+harmonic_band selected_representation  selected_radial_budget  size
+   high_25_36                 wavelet                       4     5
+highmid_13_24                 wavelet                       4     5
+      low_1_4                     dct                       4     5
+     mid_5_12                 wavelet                       4     5
+
+P2-R0-05D3/D4 — RAW CELL-13B INFERENTIAL REPLAY
+harmonic_band selected_representation  selected_radial_budget  selection_stability_folds  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  mean_category_effect  identity_level_median_difference  fraction_categories_positive  fraction_identities_positive  p_raw_one_sided  p_maxstat_FWER  FWER_supported_0.05
+      low_1_4                     dct                       4                          5                           0.059306          0.023295           0.108196              0.077262                          0.069419                      0.782609                      0.643478         0.000200        0.000200                 True
+     mid_5_12                 wavelet                       4                          5                           0.005984         -0.014164           0.060361              0.034446                          0.035416                      0.565217                      0.573913         0.335566        0.608939                False
+highmid_13_24                 wavelet                       4                          5                           0.010959         -0.003088           0.073320              0.050026                          0.044175                      0.652174                      0.591304         0.179982        0.487751                False
+   high_25_36                 wavelet                       4                          5                           0.039300          0.019130           0.091021              0.055989                          0.048226                      0.826087                      0.652174         0.002400        0.019698                 True
+
+P2-R0-05D2/D4 — V1_TEXT_ONLY CELL-13 SELECTION REPLAY
+ fold harmonic_band selected_representation  selected_radial_budget  train_full_mrr  train_selected_mrr  train_mrr_retention  train_reconstruction_energy_fraction
+    0       low_1_4                     dct                       4        0.452114            0.505533             1.118153                              0.654755
+    0      mid_5_12                 wavelet                       4        0.459787            0.448394             0.975220                              0.602458
+    0 highmid_13_24                 wavelet                       4        0.363381            0.421840             1.160873                              0.446635
+    0    high_25_36                 wavelet                       4        0.331314            0.402676             1.215393                              0.295843
+    1       low_1_4                     dct                       4        0.449493            0.499040             1.110227                              0.652756
+    1      mid_5_12                 wavelet                       4        0.449697            0.440104             0.978668                              0.600740
+    1 highmid_13_24                 wavelet                       4        0.361741            0.412056             1.139091                              0.445258
+    1    high_25_36                 wavelet                       4        0.322799            0.390604             1.210053                              0.294872
+    2       low_1_4                     dct                       4        0.430029            0.481213             1.119025                              0.653421
+    2      mid_5_12                 wavelet                       4        0.434700            0.432700             0.995399                              0.601909
+    2 highmid_13_24                 wavelet                       4        0.353697            0.405548             1.146598                              0.445922
+    2    high_25_36                 wavelet                       4        0.320900            0.384001             1.196638                              0.293988
+    3       low_1_4                     dct                       4        0.438344            0.489161             1.115928                              0.653619
+    3      mid_5_12                 wavelet                       4        0.454199            0.437170             0.962508                              0.601408
+    3 highmid_13_24                 wavelet                       4        0.370806            0.414424             1.117628                              0.446252
+    3    high_25_36                 wavelet                       4        0.331770            0.392118             1.181900                              0.295238
+    4       low_1_4                     dct                       4        0.447274            0.489251             1.093851                              0.655841
+    4      mid_5_12                 wavelet                       4        0.453533            0.436645             0.962764                              0.603460
+    4 highmid_13_24                 wavelet                       4        0.364242            0.413991             1.136584                              0.447505
+    4    high_25_36                 wavelet                       4        0.325582            0.386236             1.186295                              0.295505
+
+Selection stability:
+harmonic_band selected_representation  selected_radial_budget  size
+   high_25_36                 wavelet                       4     5
+highmid_13_24                 wavelet                       4     5
+      low_1_4                     dct                       4     5
+     mid_5_12                 wavelet                       4     5
+
+P2-R0-05D3/D4 — V1_TEXT_ONLY CELL-13B INFERENTIAL REPLAY
+harmonic_band selected_representation  selected_radial_budget  selection_stability_folds  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  mean_category_effect  identity_level_median_difference  fraction_categories_positive  fraction_identities_positive  p_raw_one_sided  p_maxstat_FWER  FWER_supported_0.05
+      low_1_4                     dct                       4                          5                           0.050243          0.026689           0.109519              0.078395                          0.069101                      0.782609                      0.630435         0.000400        0.000900                 True
+     mid_5_12                 wavelet                       4                          5                           0.011600         -0.010419           0.068804              0.042941                          0.035745                      0.608696                      0.586957         0.249475        0.522448                False
+highmid_13_24                 wavelet                       4                          5                           0.025746         -0.000638           0.086778              0.055254                          0.041550                      0.565217                      0.600000         0.018598        0.138786                False
+   high_25_36                 wavelet                       4                          5                           0.044716          0.008743           0.103110              0.060609                          0.059750                      0.782609                      0.604348         0.002800        0.005899                 True
+
+P2-R0-05D2/D4 — V3_CROP_ONLY CELL-13 SELECTION REPLAY
+ fold harmonic_band selected_representation  selected_radial_budget  train_full_mrr  train_selected_mrr  train_mrr_retention  train_reconstruction_energy_fraction
+    0       low_1_4                     dct                       4        0.795588            0.780267             0.980743                              0.682376
+    0      mid_5_12                     dct                       4        0.765694            0.762190             0.995424                              0.440600
+    0 highmid_13_24                 wavelet                       4        0.570604            0.558979             0.979627                              0.328559
+    0    high_25_36                 wavelet                       4        0.397007            0.427788             1.077534                              0.230458
+    1       low_1_4                     dct                       4        0.791288            0.774076             0.978249                              0.681153
+    1      mid_5_12                     dct                       4        0.768768            0.765209             0.995370                              0.438275
+    1 highmid_13_24                 wavelet                       4        0.567216            0.574061             1.012067                              0.328179
+    1    high_25_36                 wavelet                       4        0.399063            0.436973             1.094998                              0.231285
+    2       low_1_4                     dct                       4        0.765551            0.748451             0.977664                              0.681944
+    2      mid_5_12                     dct                       4        0.748290            0.744239             0.994586                              0.440617
+    2 highmid_13_24                 wavelet                       4        0.572258            0.559087             0.976983                              0.326362
+    2    high_25_36                 wavelet                       4        0.393318            0.426985             1.085597                              0.228449
+    3       low_1_4                     dct                       4        0.765593            0.759807             0.992442                              0.680241
+    3      mid_5_12                     dct                       4        0.749871            0.755056             1.006915                              0.437172
+    3 highmid_13_24                 wavelet                       4        0.555010            0.560302             1.009535                              0.325710
+    3    high_25_36                 wavelet                       4        0.391113            0.424210             1.084623                              0.226753
+    4       low_1_4                     dct                       4        0.775346            0.762642             0.983615                              0.682920
+    4      mid_5_12                     dct                       4        0.749742            0.757420             1.010242                              0.441830
+    4 highmid_13_24                 wavelet                       4        0.563279            0.548361             0.973515                              0.328663
+    4    high_25_36                 wavelet                       4        0.385861            0.423283             1.096984                              0.230933
+
+Selection stability:
+harmonic_band selected_representation  selected_radial_budget  size
+   high_25_36                 wavelet                       4     5
+highmid_13_24                 wavelet                       4     5
+      low_1_4                     dct                       4     5
+     mid_5_12                     dct                       4     5
+
+P2-R0-05D3/D4 — V3_CROP_ONLY CELL-13B INFERENTIAL REPLAY
+harmonic_band selected_representation  selected_radial_budget  selection_stability_folds  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  mean_category_effect  identity_level_median_difference  fraction_categories_positive  fraction_identities_positive  p_raw_one_sided  p_maxstat_FWER  FWER_supported_0.05
+      low_1_4                     dct                       4                          5                           0.105304          0.080709           0.121144              0.105487                          0.101628                      1.000000                      0.878261          0.00020        0.000200                 True
+     mid_5_12                     dct                       4                          5                           0.087685          0.064638           0.100440              0.083324                          0.079502                      0.956522                      0.852174          0.00030        0.005699                 True
+highmid_13_24                 wavelet                       4                          5                           0.033131          0.022342           0.055439              0.038424                          0.043385                      0.739130                      0.686957          0.00020        0.505349                False
+   high_25_36                 wavelet                       4                          5                           0.000157         -0.014644           0.019403              0.002981                         -0.002430                      0.521739                      0.482609          0.49985        0.855614                False
+
+P2-R0-05D2/D4 — V2_LOCALIZE_ONLY CELL-13 SELECTION REPLAY
+ fold harmonic_band selected_representation  selected_radial_budget  train_full_mrr  train_selected_mrr  train_mrr_retention  train_reconstruction_energy_fraction
+    0       low_1_4                     dct                       4        0.632599            0.731972             1.157086                              0.543877
+    0      mid_5_12       raw_interpolation                      36        0.553105            0.553078             0.999950                              0.846137
+    0 highmid_13_24                     dct                       4        0.539717            0.565380             1.047550                              0.163383
+    0    high_25_36                     dct                       4        0.416818            0.411359             0.986903                              0.116857
+    1       low_1_4       raw_interpolation                      24        0.536971            0.527228             0.981854                              0.850027
+    1      mid_5_12                     dct                       4        0.537850            0.522532             0.971519                              0.274548
+    1 highmid_13_24                 wavelet                      12        0.483272            0.463133             0.958328                              0.438721
+    1    high_25_36                     dct                       4        0.401062            0.388654             0.969060                              0.117716
+    2       low_1_4                     dct                       4        0.613516            0.711616             1.159899                              0.541348
+    2      mid_5_12                     dct                       4        0.642177            0.638443             0.994186                              0.274607
+    2 highmid_13_24                     dct                       4        0.502656            0.485291             0.965452                              0.160755
+    2    high_25_36                     dct                       4        0.420717            0.407061             0.967540                              0.114809
+    3       low_1_4                     dct                       4        0.579448            0.611431             1.055196                              0.541760
+    3      mid_5_12                 wavelet                       8        0.558040            0.556387             0.997039                              0.344712
+    3 highmid_13_24                     dct                       4        0.511983            0.490787             0.958601                              0.158779
+    3    high_25_36       raw_interpolation                      36        0.395192            0.393790             0.996454                              0.674264
+    4       low_1_4                     dct                       4        0.620347            0.719248             1.159427                              0.542100
+    4      mid_5_12                     dct                       4        0.625021            0.642625             1.028165                              0.274997
+    4 highmid_13_24       raw_interpolation                      18        0.469184            0.460313             0.981093                              0.406690
+    4    high_25_36                 wavelet                      12        0.385433            0.371130             0.962889                              0.323362
+
+Selection stability:
+harmonic_band selected_representation  selected_radial_budget  size
+   high_25_36                     dct                       4     3
+   high_25_36       raw_interpolation                      36     1
+   high_25_36                 wavelet                      12     1
+highmid_13_24                     dct                       4     3
+highmid_13_24       raw_interpolation                      18     1
+highmid_13_24                 wavelet                      12     1
+      low_1_4                     dct                       4     4
+      low_1_4       raw_interpolation                      24     1
+     mid_5_12                     dct                       4     3
+     mid_5_12       raw_interpolation                      36     1
+     mid_5_12                 wavelet                       8     1
+
+P2-R0-05D3/D4 — V2_LOCALIZE_ONLY CELL-13B INFERENTIAL REPLAY
+harmonic_band selected_representation  selected_radial_budget  selection_stability_folds  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  mean_category_effect  identity_level_median_difference  fraction_categories_positive  fraction_identities_positive  p_raw_one_sided  p_maxstat_FWER  FWER_supported_0.05
+      low_1_4                     dct                       4                          5                       1.075506e-01          0.071866           0.146547              0.121984                      1.026857e-01                      0.956522                      0.765217         0.000100        0.000100                 True
+     mid_5_12                     dct                       4                          5                       2.947091e-02          0.009538           0.077376              0.047529                      3.218180e-02                      0.782609                      0.613043         0.000400        0.423358                False
+highmid_13_24                     dct                       4                          5                       2.924388e-02         -0.004907           0.068642              0.028864                      3.084683e-02                      0.695652                      0.573913         0.018398        0.425657                False
+   high_25_36                     dct                       4                          5                      -4.825141e-08         -0.011573           0.033167              0.009791                     -1.109801e-07                      0.478261                      0.491304         0.586141        0.896710                False
+
+P2-R0-05D2/D4 — CLEAN CELL-13 SELECTION REPLAY
+ fold harmonic_band selected_representation  selected_radial_budget  train_full_mrr  train_selected_mrr  train_mrr_retention  train_reconstruction_energy_fraction
+    0       low_1_4                     dct                       4        0.633184            0.731003             1.154488                              0.543848
+    0      mid_5_12       raw_interpolation                      36        0.553069            0.552724             0.999376                              0.846175
+    0 highmid_13_24       raw_interpolation                      36        0.476727            0.474718             0.995786                              0.759499
+    0    high_25_36                     dct                       4        0.417394            0.408236             0.978057                              0.116958
+    1       low_1_4       raw_interpolation                      24        0.536456            0.527854             0.983964                              0.850058
+    1      mid_5_12                     dct                       4        0.535464            0.515631             0.962961                              0.274494
+    1 highmid_13_24       raw_interpolation                      36        0.469082            0.463841             0.988828                              0.760227
+    1    high_25_36                     dct                       4        0.402066            0.387456             0.963663                              0.117839
+    2       low_1_4                     dct                       4        0.612727            0.709241             1.157515                              0.541319
+    2      mid_5_12                     dct                       4        0.640970            0.638045             0.995437                              0.274615
+    2 highmid_13_24                     dct                       4        0.503406            0.486634             0.966683                              0.160843
+    2    high_25_36                     dct                       4        0.421562            0.407131             0.965766                              0.114821
+    3       low_1_4                     dct                       4        0.588512            0.643208             1.092940                              0.541738
+    3      mid_5_12                 wavelet                       8        0.548815            0.534615             0.974126                              0.344484
+    3 highmid_13_24                     dct                       4        0.508034            0.484781             0.954229                              0.158890
+    3    high_25_36       raw_interpolation                      36        0.396139            0.394701             0.996369                              0.674329
+    4       low_1_4                     dct                       4        0.621563            0.719632             1.157779                              0.542061
+    4      mid_5_12                     dct                       4        0.621012            0.639284             1.029423                              0.274942
+    4 highmid_13_24       raw_interpolation                      18        0.463069            0.454836             0.982221                              0.407190
+    4    high_25_36                 wavelet                      12        0.384639            0.369003             0.959349                              0.323619
+
+Selection stability:
+harmonic_band selected_representation  selected_radial_budget  size
+   high_25_36                     dct                       4     3
+   high_25_36       raw_interpolation                      36     1
+   high_25_36                 wavelet                      12     1
+highmid_13_24                     dct                       4     2
+highmid_13_24       raw_interpolation                      36     2
+highmid_13_24       raw_interpolation                      18     1
+      low_1_4                     dct                       4     4
+      low_1_4       raw_interpolation                      24     1
+     mid_5_12                     dct                       4     3
+     mid_5_12       raw_interpolation                      36     1
+     mid_5_12                 wavelet                       8     1
+
+P2-R0-05D3/D4 — CLEAN CELL-13B INFERENTIAL REPLAY
+harmonic_band selected_representation  selected_radial_budget  selection_stability_folds  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  mean_category_effect  identity_level_median_difference  fraction_categories_positive  fraction_identities_positive  p_raw_one_sided  p_maxstat_FWER  FWER_supported_0.05
+      low_1_4                     dct                       4                          5                           0.117726          0.075973           0.149271              0.124326                          0.113210                      0.956522                      0.769565         0.000100        0.000100                 True
+     mid_5_12                     dct                       4                          5                           0.040713          0.007761           0.072367              0.048959                          0.031663                      0.826087                      0.630435         0.001900        0.334067                False
+highmid_13_24       raw_interpolation                      36                          5                           0.000078         -0.000648           0.011902              0.005925                          0.000030                      0.521739                      0.504348         0.420358        0.908309                False
+   high_25_36                     dct                       4                          5                          -0.000105         -0.013570           0.030926              0.011385                          0.000021                      0.434783                      0.504348         0.675432        0.984602                False
+
+====================================================================================================================================
+P2-R0-05F2 — FIVE-WAY CROP-VS-RESAMPLING COMPARISON
+====================================================================================================================================
+         dataset harmonic_band selected_representation  selected_radial_budget  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  p_maxstat_FWER  FWER_supported_0.05
+             RAW       low_1_4                     dct                       4                       5.930645e-02          0.023295           0.108196        0.000200                 True
+    V1_TEXT_ONLY       low_1_4                     dct                       4                       5.024341e-02          0.026689           0.109519        0.000900                 True
+    V3_CROP_ONLY       low_1_4                     dct                       4                       1.053044e-01          0.080709           0.121144        0.000200                 True
+V2_LOCALIZE_ONLY       low_1_4                     dct                       4                       1.075506e-01          0.071866           0.146547        0.000100                 True
+           CLEAN       low_1_4                     dct                       4                       1.177261e-01          0.075973           0.149271        0.000100                 True
+             RAW      mid_5_12                 wavelet                       4                       5.983876e-03         -0.014164           0.060361        0.608939                False
+    V1_TEXT_ONLY      mid_5_12                 wavelet                       4                       1.160025e-02         -0.010419           0.068804        0.522448                False
+    V3_CROP_ONLY      mid_5_12                     dct                       4                       8.768525e-02          0.064638           0.100440        0.005699                 True
+V2_LOCALIZE_ONLY      mid_5_12                     dct                       4                       2.947091e-02          0.009538           0.077376        0.423358                False
+           CLEAN      mid_5_12                     dct                       4                       4.071349e-02          0.007761           0.072367        0.334067                False
+             RAW highmid_13_24                 wavelet                       4                       1.095892e-02         -0.003088           0.073320        0.487751                False
+    V1_TEXT_ONLY highmid_13_24                 wavelet                       4                       2.574648e-02         -0.000638           0.086778        0.138786                False
+    V3_CROP_ONLY highmid_13_24                 wavelet                       4                       3.313092e-02          0.022342           0.055439        0.505349                False
+V2_LOCALIZE_ONLY highmid_13_24                     dct                       4                       2.924388e-02         -0.004907           0.068642        0.425657                False
+           CLEAN highmid_13_24       raw_interpolation                      36                       7.849696e-05         -0.000648           0.011902        0.908309                False
+             RAW    high_25_36                 wavelet                       4                       3.929975e-02          0.019130           0.091021        0.019698                 True
+    V1_TEXT_ONLY    high_25_36                 wavelet                       4                       4.471626e-02          0.008743           0.103110        0.005899                 True
+    V3_CROP_ONLY    high_25_36                 wavelet                       4                       1.572217e-04         -0.014644           0.019403        0.855614                False
+V2_LOCALIZE_ONLY    high_25_36                     dct                       4                      -4.825141e-08         -0.011573           0.033167        0.896710                False
+           CLEAN    high_25_36                     dct                       4                      -1.046215e-04         -0.013570           0.030926        0.984602                False
+
+====================================================================================================================================
+P2-R0-05F2 — HIGH_25_36 CROP-VS-RESAMPLING DIAGNOSTIC
+====================================================================================================================================
+         dataset harmonic_band selected_representation  selected_radial_budget  observed_category_balanced_effect  bootstrap_ci_low  bootstrap_ci_high  p_maxstat_FWER  FWER_supported_0.05
+             RAW    high_25_36                 wavelet                       4                       3.929975e-02          0.019130           0.091021        0.019698                 True
+    V1_TEXT_ONLY    high_25_36                 wavelet                       4                       4.471626e-02          0.008743           0.103110        0.005899                 True
+    V3_CROP_ONLY    high_25_36                 wavelet                       4                       1.572217e-04         -0.014644           0.019403        0.855614                False
+V2_LOCALIZE_ONLY    high_25_36                     dct                       4                      -4.825141e-08         -0.011573           0.033167        0.896710                False
+           CLEAN    high_25_36                     dct                       4                      -1.046215e-04         -0.013570           0.030926        0.984602                False
+
+P2-R0-05F2 — HIGH-BAND EFFECT CHANGES
+TEXT_ONLY - RAW: 0.005416511203638084
+CROP_ONLY - RAW: -0.039142530431528634
+LOCALIZE_ONLY - CROP_ONLY: -0.00015726993533439436
+CLEAN - LOCALIZE_ONLY: -0.00010457326556180406
+
+P2-R0-05F2 CROP-VS-RESAMPLING REPLAY: COMPLETE

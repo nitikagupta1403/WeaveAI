@@ -1,0 +1,36 @@
+{
+  "analysis_boundary": {
+    "directional_hypotheses_tested": false,
+    "materiality_threshold_applied": false,
+    "mechanism_verdict": false,
+    "monotonicity_tested": false,
+    "population_inference": false
+  },
+  "calibration_cases": 230,
+  "conditions": 1610,
+  "input_integrity_sha256": "3f1d913f70394abefd64eeb0a8a09f3cb194d723ee217b085b82abc053887ec9",
+  "numerical_controls": {
+    "intrinsic_exact_band_conditions": 1610,
+    "intrinsic_exact_field_conditions": 1610,
+    "intrinsic_max_band_diff_from_s1": 0.0,
+    "intrinsic_max_field_diff_from_s1": 0.0,
+    "raster_max_band_diff_from_s1": 0.24240115709585008,
+    "raster_max_field_diff_from_s1": 1.0
+  },
+  "source_hashes": {
+    "H1": "1ce3c0dd7f34e75c806777bff9c5142814f179a0b6fef48f927fbfeb1b4d1642",
+    "I2": "802325ae23b3896bd0bf51bed49fd0bf5218583d73f76d1bae69f6f70e9fa3e3",
+    "RA14": "3b3dad8315616b4c8a0013cdcb4c3258b243b8fc2722b366ecc8a0e8743fdca9"
+  },
+  "stage": "P2_R0_05K3_C_CALIBRATION_DESCRIPTOR_EXECUTION",
+  "status": "COMPLETE_DESCRIPTOR_EXECUTION_ONLY",
+  "support_levels": [
+    1.0,
+    1.1,
+    1.25,
+    1.5,
+    2.0,
+    2.5,
+    3.0
+  ]
+}
